@@ -1,0 +1,45 @@
+﻿Title:
+Titeln på resource (obligatorisk)
+
+Version: 
+Versionen på resource
+
+Changed:
+Vad som har uppdaterats i versionen. Kan maximalt vara:
+[Title][ Key phrases][ Render pngs][ Previous][Next][Files][Text]
+Jämför strängar case sensitive. På första versionen är Changed alltid Null
+
+Note changed:
+En notering om uppdateringen. Är Null på första versionen.
+
+Added: 2018-10-21 16:06:00
+När resource skapades. Format YYYY-MM-DD HH:mm:ss, t.ex. 2018-10-21 16:06:00
+Added är lika på samtliga versioner.
+
+Updated:
+När aktuell version skapades. Samma format som för Added. Added och Updated är
+lika på första versionen.
+
+Key phrases: 
+En uppsättning “key phrases” för resource, t.ex: [JavaScript][Adhoc]
+Åtminstone en key phrase måste anges och tillhöra uppsättningen av
+tillåtna “key phrases” som finns i resource 1.
+
+Render pngs:
+En uppsättning png-filer som ska renderer då resource visas i browser. Ligger en fil i
+katalogen för resource behöver bara filnamnet anges, annars måste hela sökvägen
+vara med. T.ex:
+[Fil1.png][C:\Jonas\Datalogic solution Microsoft Partner.png][AnotherFile.png]
+
+Previous:
+Referens till en föregående resource
+
+Next:
+Referens till en nästa resource
+
+Files:
+En uppsättning filer associerade med resource. Ligger en fil I katalogen för resource
+behöver bara filnamnet anges, annars måste hela sökvägen vara med.
+
+Text:
+En text för resource

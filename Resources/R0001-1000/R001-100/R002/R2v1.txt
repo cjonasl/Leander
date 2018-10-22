@@ -1,0 +1,21 @@
+﻿Title: Test linq ForEach
+Version: 1
+Changed: Null
+Note changed: Null
+Added: 2018-10-21 19:12:47
+Updated: 2018-10-21 19:12:47
+Key phrases: [C#][Linq][Test]
+Render pngs: Null
+Previous: Null
+Next: Null
+Files: Null
+Text:
+List<Employee> list = Utility.ReturnListWithEmployees();
+
+list.ForEach(x => x.Note = x.Note + "ABC");
+
+foreach(var employee in list)
+{
+    Console.WriteLine(employee.Note);
+}
+

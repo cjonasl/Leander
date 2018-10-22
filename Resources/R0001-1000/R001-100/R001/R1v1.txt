@@ -1,0 +1,17 @@
+﻿Title: Key phrases
+Version: 1
+Changed: Null
+Note changed: Null
+Added: 2018-10-21 16:13:08
+Updated: 2018-10-21 16:13:08
+Key phrases: [Design Leander]
+Render pngs: Null
+Previous: Null
+Next: Null
+Files: [Explanation.txt]
+Text:
+C#
+Design Leander
+Linq
+Test
+
