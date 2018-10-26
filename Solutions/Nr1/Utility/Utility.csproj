@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Harmony\ReflectionHelpers.cs" />
     <Compile Include="Static utility\ArrayList.cs" />
     <Compile Include="Static utility\Employee.cs" />
     <Compile Include="Static utility\File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static utility\Sort.cs" />
+    <Compile Include="Utility classes\Bar.cs" />
     <Compile Include="Utility classes\Employee.cs" />
+    <Compile Include="Utility classes\Truck.cs" />
+    <Compile Include="Utility classes\Vehicle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

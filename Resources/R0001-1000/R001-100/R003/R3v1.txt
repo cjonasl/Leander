@@ -1,0 +1,15 @@
+﻿Title: Test reflection as part of bug #20181024.14
+Version: 1
+Changed: Null
+Note changed: Null
+Added: 2018-10-25 10:11:46
+Updated: 2018-10-25 10:11:46
+Key phrases: [C#][Reflection][Test]
+Render pngs: Null
+Previous: Null
+Next: Null
+Files: Null
+Text:
+Truck truck = new Truck(1, 1200, 300);
+Object obj1 = ReflectionHelpers.GetPropertyValue(truck, "Id");
+Console.WriteLine(string.Format("Vehicle Id = {0} and Truck Id = {1}, reflection value = {2}", truck.GetVehicleId(), truck.GetTruckId(), obj1.ToString()));

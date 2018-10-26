@@ -6,7 +6,7 @@ Versionen på resource
 
 Changed:
 Vad som har uppdaterats i versionen. Kan maximalt vara:
-[Title][ Key phrases][ Render pngs][ Previous][Next][Files][Text]
+[Title][ Key phrases][Render pngs][ Previous][Next][Files][Text]
 Jämför strängar case sensitive. På första versionen är Changed alltid Null
 
 Note changed:
