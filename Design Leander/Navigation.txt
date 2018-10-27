@@ -1,0 +1,16 @@
+En fil "Navigation.txt" som beskriver allt.
+
+Mappstruktur:
+
+Angular
+    AAA
+        Resource MenuName1, MenuName2, MenuName3
+        Orders
+            Xxx MenuName1, MenuName2, MenuName3
+            Yyy MenuName1, MenuName2, MenuName3
+            Zzz MenuName1, MenuName2, MenuName3, MenuName4
+    BBB
+    CCC
+    DDD
+
+

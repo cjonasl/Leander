@@ -1,0 +1,20 @@
+﻿Title: Key phrases
+Version: 3
+Changed: [Text]
+Note changed: Datalogic Solutions and Ticket added
+Added: 2018-10-21 16:13:08
+Updated: 2018-10-26 11:27:58
+Key phrases: [Design Leander]
+Render pngs: Null
+Previous: Null
+Next: Null
+Files: [Explanation.txt]
+Text:
+C#
+Datalogic Solutions 
+Design Leander
+Linq
+Reflection
+Test
+Ticket
+
