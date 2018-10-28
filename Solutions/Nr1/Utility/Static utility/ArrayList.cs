@@ -16,7 +16,7 @@ namespace Leander.Nr1
             }
         }
 
-        public static string ReturnCommaSeparatedStringOfIntegers(ArrayList v)
+        public static string ReturnItemsCommaSeparated(ArrayList v)
         {
             StringBuilder sb = new StringBuilder("");
 

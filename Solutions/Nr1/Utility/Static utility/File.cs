@@ -30,6 +30,57 @@ namespace Leander.Nr1
             return str;
         }
 
+        public static string ReturnFileContents(string fileNameFullPath, out string errorMessage)
+        {
+            errorMessage = null;
+
+            if (!File.Exists(fileNameFullPath))
+            {
+                errorMessage = string.Format("The following file does not exist as expected: {0}", fileNameFullPath);
+                return null;
+            }
+
+            if (!FileIsUTF8(fileNameFullPath))
+            {
+                errorMessage = string.Format("The following file is not in encoding UTF8 as expected: {0}", fileNameFullPath);
+                return null;
+            }
+
+            FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Open, FileAccess.Read);
+            StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8);
+            string str = streamReader.ReadToEnd();
+            streamReader.Close();
+            fileStream.Close();
+
+            if (str.Trim() == string.Empty)
+            {
+                errorMessage = string.Format("The following does not have contents: {0}", fileNameFullPath);
+                return null;
+            }
+
+            return str;
+        }
+
+        public static bool FileIsUTF8(string fileNameFullPath)
+        {
+            bool fileIsUTF8;
+
+            byte[] bom = new byte[4];
+            int n;
+
+            using (var file = new FileStream(fileNameFullPath, FileMode.Open, FileAccess.Read))
+            {
+                n = file.Read(bom, 0, 4);
+            }
+
+            if ((n >= 3) && (bom[0] == 0xef) && (bom[1] == 0xbb) && (bom[2] == 0xbf))
+                fileIsUTF8 = true;
+            else
+                fileIsUTF8 = false;
+
+            return fileIsUTF8;
+        }
+
         public static Encoding GetEncoding(string fileNameFullPath)
         {
             // Read the BOM
