@@ -50,6 +50,7 @@
     <Compile Include="Static utility\Sort.cs" />
     <Compile Include="Static utility\String.cs" />
     <Compile Include="Utility classes\Bar.cs" />
+    <Compile Include="Utility classes\ColumnDefinition.cs" />
     <Compile Include="Utility classes\Employee.cs" />
     <Compile Include="Utility classes\Truck.cs" />
     <Compile Include="Utility classes\Vehicle.cs" />

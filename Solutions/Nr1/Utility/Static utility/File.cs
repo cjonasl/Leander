@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,14 +40,10 @@ namespace Leander.Nr1
                 return null;
             }
 
-            if (!FileIsUTF8(fileNameFullPath))
-            {
-                errorMessage = string.Format("The following file is not in encoding UTF8 as expected: {0}", fileNameFullPath);
-                return null;
-            }
+            Encoding encoding = GetEncoding(fileNameFullPath);
 
             FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Open, FileAccess.Read);
-            StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8);
+            StreamReader streamReader = new StreamReader(fileStream, encoding);
             string str = streamReader.ReadToEnd();
             streamReader.Close();
             fileStream.Close();
@@ -123,6 +119,101 @@ namespace Leander.Nr1
             fileStream.Flush();
             streamWriter.Close();
             fileStream.Close();
+        }
+
+        public static string[] ReturnRowsInFile(string fileNameFullPath, out string errorMessage)
+        {
+            string fileContens = ReturnFileContents(fileNameFullPath, out errorMessage);
+
+            if (errorMessage == null)
+                return fileContens.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            else
+                return null;
+        }
+
+        public static bool AllFilesExist(string[] fileNamesFullPath, out string errorMessage)
+        {
+            bool allFilesExist = true; //Default
+            int i = 0, n = fileNamesFullPath.Length;
+
+            errorMessage = null;
+
+            while ((allFilesExist == true) && (i < n))
+            {
+                if (!File.Exists(fileNamesFullPath[i]))
+                {
+                    errorMessage = string.Format("The following file does not exist: {0}", fileNamesFullPath[i]);
+                    allFilesExist = false;
+                }
+                else
+                    i++;
+            }
+
+            return allFilesExist;
+        }
+
+        public static void PutContensInFilesInOneFile(string[] fileNamesFullPath, string fileNameFullPath, out string errorMessage)
+        {
+            int i = 0, n = fileNamesFullPath.Length;
+            StringBuilder sb = new StringBuilder();
+            FileInfo fi;
+
+            if (!File.Exists(fileNameFullPath))
+            {
+                errorMessage = string.Format("The following file does not exist: {0}", fileNameFullPath);
+                return;
+            }
+            else
+                errorMessage = null;
+
+            for (i = 0; i < n; i++)
+            {
+                fi = new FileInfo(fileNamesFullPath[i]);
+                sb.Append("/*File: " + fi.Name + "*/\r\n" + ReturnFileContents(fileNamesFullPath[i]) + "\r\n\r\n");
+            }
+
+            CreateNewFile(fileNameFullPath, sb.ToString().TrimEnd());
+        }
+
+        public static bool FileSuffixIsInSuffixArray(string fileNameFullPath, ArrayList suffix)
+        {
+            bool suffixIsInSuffixArray = false;
+            int i = 0, n = suffix.Count;
+            string s;
+
+            while ((!suffixIsInSuffixArray) && (i < n))
+            {
+                s = (string)suffix[i];
+
+                if (fileNameFullPath.ToLower().EndsWith(s))
+                    suffixIsInSuffixArray = true;
+                else
+                    i++;
+            }
+
+            return suffixIsInSuffixArray;
+        }
+
+        public static void GetFiles(string startDirectory, ArrayList fileNameFullPath, ArrayList suffix, bool includeSubFolders)
+        {
+            int i, n;
+            string[] v = Directory.GetFiles(startDirectory);
+
+            n = v.Length;
+
+            for(i = 0; i < n; i++)
+            {
+                if (FileSuffixIsInSuffixArray(v[i], suffix))
+                    fileNameFullPath.Add(v[i]);
+            }
+
+            if (includeSubFolders)
+            {
+                v = Directory.GetDirectories(startDirectory);
+
+                for (i = 0; i < v.Length; i++)
+                    GetFiles(v[i], fileNameFullPath, suffix, true);
+            }
         }
     }
 }

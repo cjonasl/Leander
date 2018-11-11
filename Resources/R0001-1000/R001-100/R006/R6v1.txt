@@ -1,0 +1,12 @@
+﻿Title: Validate changes in files in feature 20171122.15
+Version: 1
+Changed: Null
+Note changed: Null
+Added: 2018-11-05 ‏‎10:50:10
+Updated: 2018-11-05 ‏‎10:50:10
+Key phrases: [C#][Datalogic Solutions][Ticket]
+Render pngs: Null
+Previous: Null
+Next: Null
+Files: Null
+Text:

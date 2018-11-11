@@ -10,7 +10,8 @@ namespace Leander.Nr1
     {
         static void Main(string[] args)
         {
-            R4.Execute();
+            R6.Execute();
+            //R5.Execute(args[0], args[1]);
         }
     }
 }

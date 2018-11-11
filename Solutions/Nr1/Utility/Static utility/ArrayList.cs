@@ -34,5 +34,24 @@ namespace Leander.Nr1
 
             return sb.ToString();
         }
+
+        public static string ReturnItems(ArrayList v, string separator)
+        {
+            StringBuilder sb = new StringBuilder("");
+
+            for (int i = 0; i < v.Count; i++)
+            {
+                if (i == 0)
+                {
+                    sb.Append(v[i].ToString());
+                }
+                else
+                {
+                    sb.Append(separator + v[i].ToString());
+                }
+            }
+
+            return sb.ToString().Trim();
+        }
     }
 }

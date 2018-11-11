@@ -177,5 +177,54 @@ namespace Leander.Nr1
 
             return startIndex;
         }
+
+        public static int ReturnIndexForChar(int startIndex, string str, char c)
+        {
+            int returnValue = -1;
+            int i = startIndex;
+
+            while ((i < str.Length) && (returnValue == -1))
+            {
+                if (str[i] == c)
+                    returnValue = i;
+                else
+                    i++;
+            }
+
+            return returnValue;
+        }
+
+        public static void GetKeyValueOfAssignment(string expression, out string key, out string value)
+        {
+            string[] v = expression.Split('=');
+
+            if (v.Length != 2)
+                throw new Exception("Error in GetKeyValueOfAssignmen!");
+
+            key = v[0].Trim();
+            value = v[1].Trim();
+        }
+
+        public static string ReplaceCharWithAnotherCharWithinAString(string str, char from, char to)
+        {
+            char[] charArray = new char[str.Length];
+            bool isWithinAString = false;
+            int i;
+
+            for(i = 0; i < str.Length; i++)
+            {
+                if ((str[i] == from) && (isWithinAString))
+                    charArray[i] = to;
+                else
+                    charArray[i] = str[i];
+
+                if ((str[i] == '"') && (!isWithinAString))
+                    isWithinAString = true;
+                else if ((str[i] == '"') && (isWithinAString))
+                    isWithinAString = false;
+            }
+
+            return new string(charArray);
+        }
     }
 }
