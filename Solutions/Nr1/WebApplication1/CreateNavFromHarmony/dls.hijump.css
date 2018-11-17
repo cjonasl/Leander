@@ -1,0 +1,897 @@
+﻿.hand {
+    cursor: pointer;
+}
+
+/* Label overrides */
+label { display: inline; }
+.control-group label { display: block; }
+.control-group label.custom-file-input { display: inline; }
+.control-group label.timebox { display: inline; }
+div.text { display: inline-block;}
+.smaller-text { font-size: smaller;}
+
+/* We need to make add-on buttons be higher then labels as on small screens labels obstruct those buttons (#20171114.35) */
+.control-group .add-on {
+    position: relative;
+    z-index: 1;
+}
+
+/* Extra header functionality */
+.header .nav > li.dropdown.standard .dropdown-toggle
+{
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+.input-append label.timebox {
+   display: inline;
+}
+
+/* Layout */
+.right {
+    float: right;
+}
+
+.hijumpMetronicTab {
+    margin-top: 20px;
+}
+
+/* Top Menu Overrides */
+
+.app_title {
+    height: 40px;
+}
+
+.header .navbar.hor-menu {
+    float: right;
+}
+
+.header .hor-menu ul.nav li a {
+    font-size: inherit;
+}
+
+h1 .popover,
+h2 .popover,
+h3 .popover,
+h4 .popover {
+    font-size: 13px;
+    line-height: 20px;
+}
+
+/* hr overrides */
+hr {
+    margin-top: 0px;
+}
+
+/* This class is added to the headers of form areas when we do not want there to be any space beneath them */
+.formAreaNoSpaceBeneathTitle {
+    margin-bottom: 0px !important;
+    padding-bottom: 0px;
+}
+
+/* This class is added to the headers of form areas when we do not want there to be any space above them */
+.formAreaNoSpaceAboveTitle {
+    margin-top: 0px !important;
+    padding-top: 0px;
+}
+
+/* To be able to remove the space on a header that we know will be followed by a hr.
+   Since there is no way to target an element based on what follows it we do it manually.
+*/
+.headerFollowByHr {
+    margin-bottom: 0px;
+}
+
+/* jqGrid styles */
+
+.gridClass {
+    margin-bottom: 20px;
+}
+
+.gridClass .ui-widget-content {
+    border: 0px;
+}
+
+.gridClass .ui-jqgrid-hdiv {
+    border: 1px solid #ccc;
+    background: none;
+}
+
+.gridClass .ui-th-column {
+    background: none;
+    color: #000;
+    font-family: 'Open Sans';
+    font-size: 13px;
+}
+
+.gridClass .ui-jqgrid .ui-jqgrid-htable th div,
+.gridClass .ui-jqgrid .ui-jqgrid-htable th,
+.gridClass .ui-jqgrid .ui-jqgrid-pager
+{
+    height: auto;
+}
+
+.gridClass td.highlight-cell {
+    color: red !important;
+}
+
+.gridClass td.warning-cell {
+    color: darkorange !important;
+}
+
+.gridClass td.ok-cell {
+    color: darkgreen !important;
+}
+
+/* Copied the following from http://stackoverflow.com/a/5647523 */
+/* Sorts out grid size calculation problems SOMEHOW! */
+div.ui-jqgrid-view table.ui-jqgrid-btable
+{
+    border-style:none;
+    border-top-style:none;
+    border-collapse:separate;
+}
+div.ui-jqgrid-view table.ui-jqgrid-btable td
+{
+    border-left-style:none
+}
+div.ui-jqgrid-view table.ui-jqgrid-htable
+{
+    border-style:none;
+    border-top-style:none;
+    border-collapse:separate;
+}
+div.ui-jqgrid-view table.ui-jqgrid-btable th
+{
+    border-left-style:none
+}
+
+/* End copy */
+
+/* put the top and left borders around the table */
+.gridClass {
+     border-left: solid 1px #ccc;
+     padding-right: 17px; /* Without this padding on the right, the grids do not resize properly on page refresh if there is a vert scroll bar on the screen */
+}
+.ui-jqgrid .ui-jqgrid-htable { border-top: 1px solid #ccc !important; }
+
+.ui-th-column, .ui-jqgrid .ui-jqgrid-htable th.ui-th-column {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    background-color: #eee;
+}
+
+.ui-jqgrid .ui-jqgrid-htable th {
+    padding-top: 3px;
+    padding-bottom:  3px;
+}
+
+.ui-jqgrid table{
+    border-collapse: separate
+}
+
+/*.ui-jqgrid tr.jqgrow td*/
+
+.gridClass .ui-jqgrid table td{
+    font-weight:400;
+    font-size: 13px;
+    border-bottom: none;
+    color: #666;
+}
+
+.dlsGrid tr.notifications > td {
+    font-weight: 700;
+}
+
+.gridClass .ui-jqgrid .dlsNavPager {
+    background-image: none;
+    border-top: 1px solid #ccc;
+    background-color: white;
+}
+
+.gridClass .ui-jqgrid .dlsNavPager .ui-pg-table td {
+    font-weight: 500;
+}
+
+.gridClass .ui-jqgrid .dlsNavPager .ui-pg-table .ui-pg-input {
+    width: auto
+}
+
+.gridClass .ui-jqgrid-pager .ui-pager-control > .ui-pg-table  {
+    border-right: 1px solid #ccc !important;
+    border-bottom: 1px solid #ccc !important;
+    background: none;
+}
+
+.gridClass .ui-jqgrid .ui-jqgrid-view{
+    font-family: 'Open Sans';
+    font-size: 14px
+}
+
+.gridClass .ui-jqgrid tr.jqgrow td {
+    padding: 5px 5px;
+}
+
+.gridClass a {
+    text-decoration: underline
+}
+
+.customSetup .hijumpPortletBox .customSetup .form-actions {
+    background-color: inherit;
+    border-top: none;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.gridOverflowContainer {
+    overflow: auto;
+}
+
+/* Grid Button Column */
+
+.gridRowButton
+{
+    background-color: Transparent;
+    border: 0 solid #00972C;
+    color: #000;
+    cursor: pointer;
+    font-weight: 400;
+    margin-right: 3px;
+    text-decoration: underline;
+    line-height: 15px;
+}
+
+.gridRowImageButton
+{
+    color: #FFF;
+    cursor: pointer;
+    font-weight: 400;
+    margin-right: 3px;
+}
+
+.gridRowImageButton img
+{
+    max-height: 17px;
+}
+
+/* JQuery UI Tabs styling */
+
+.hijumpMetronicTab.ui-tabs li {
+    font-family: 'Open Sans';
+}
+
+.hijumpMetronicTab.ui-tabs li a, .hijump .ui-tabs li a:hover {
+    color: #555;
+    margin-right: 0px;
+}
+
+.hijumpMetronicTab.ui-tabs .ui-tabs-nav li:hover, .hijump .ui-tabs .ui-tabs-nav li a:hover {
+    background-color: white;
+    border-bottom: 0px;
+}
+
+.hijumpMetronicTab.ui-tabs .ui-tabs-nav li:hover {
+  margin-bottom: 1px;
+}
+
+.hijumpMetronicTab.ui-tabs li.ui-state-active
+{
+    margin-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    position: relative;
+    background-color: white;
+}
+
+.hijumpMetronicTab.ui-tabs li.ui-state-active a
+{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.hijumpMetronicTab.ui-tabs .ui-tabs-nav
+{
+    padding: 0;
+    border-color: #ddd;
+}
+
+.hijumpMetronicTab.ui-tabs .ui-tabs-panel {
+    border-width: 1px;
+    border-top: 0px;
+    border-color: #ddd;
+}
+
+/********** Form fixes */
+
+/* Not sure I like bootstrap forcing a bottom margin on all forms as we use lots of little ajax forms */
+form {
+    margin: 0;
+}
+
+.dls_form .control-group {
+    margin-bottom: 10px;
+}
+
+.dls_form .checkbox {
+    outline: none
+}
+
+/* This is to ensure that tooltips are aligned properly for checkboxes */
+.input-append label.checkbox {
+    display: inline-block;
+    margin-top: 6px;
+    margin-right: 10px;
+}
+
+.input-append label.timebox {
+    display: inline;
+}
+
+
+/* Labels that are used for the structure of checkboxes and radio buttons (not used to display text, just used to render them correctly)
+   need to have a width of auto to display correctly. */
+label.checkbox, label.radio {
+	width: auto;
+}
+
+.input-append .chzn-results {
+    font-size: 14px;
+}
+
+.input-append .radio {
+    float: left;
+}
+
+.input-append .radio.line {
+    float: none;
+}
+
+.radio input[type="radio"] {
+    margin-left: 0px;
+}
+
+/*********** Modal Window Fixes */
+
+.ui-dialog .ui-dialog-titlebar-close {
+    background: url("/hijump/Libraries/metronic/img/portlet-remove-icon.png") no-repeat scroll center center transparent;
+    opacity: 0.9;
+    filter: alpha(opacity=90);  /*ie8 support */
+    margin-right: 5px;
+    margin-top: -10px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close:focus {
+    outline: none;
+}
+
+.ui-error-dialog {
+    z-index: 10013 !important;
+}
+
+/* The datepicker widget is assigned a z-index based on the element on which it was called;
+   if we have a modal window with a datepicker in it, we need to ensure the datepicker
+   appears on top still by setting the parent element's z-index to be the same as the modal
+   window.
+ */
+.ui-front .hasDatepicker {
+    z-index:21001 !important; /* The default is 100. !important overrides the default. */
+}
+
+/*
+    The results of the autocomplete needs to be rendered on top of the datepicker.
+*/
+.ui-autocomplete.ui-front {
+    z-index:21002 !important; /* The default is 100. !important overrides the default. */
+}
+
+/* The DateTimePicker needs to have smaller selects */
+.ui-timepicker-select {
+    width: auto;
+    height: auto;
+    padding: 0px;
+    margin: 0px
+}
+
+/* Search panel styling */
+
+#searchpanel .gridborder {
+    max-width: none;
+}
+
+#searchpanel .tabbable-custom {
+    margin-bottom: 0px;
+}
+
+#pnl_find_tab {
+    margin-bottom: 10px;
+}
+
+.detail_pager {
+    display: none;
+    color: #666;
+    font-weight: 300;
+}
+
+.detail_pager .record_selector {
+    margin-top: 10px;
+	line-height: 20px;
+}
+
+.detail_pager .record_selector i {
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.detail_pager .entity_text
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+#searchpanel #entityText {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+#searchpanel .portlet.tabbable .portlet-body
+{
+    padding: 10px;
+}
+
+
+/*
+Have removed as we should use the standard metronic portlet buttons class
+#searchpanel .addButtons {
+    float: right;
+    margin-top: 10px;
+}*/
+
+#searchFooter
+{
+    margin-top: 10px;
+    display: none;
+}
+
+.portlet.box
+{
+    padding: 1px !important;
+}
+
+.filter_description
+{
+    min-height: inherit;
+    margin-top: -5px;
+    font-weight: bold;
+    float: right;
+}
+
+.form-actions.no-portlet {
+    border-top: none;
+    /*border-bottom: 1px solid #e5e5e5;  have removed, but might look better in. looks daft when followed by more forms */
+    background-color: inherit;
+    margin: 0px;
+}
+
+.portlet-body .tab-content > .form-actions, .portlet-body .tab-content > .tab-pane > .form-actions {
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: -10px;
+}
+
+/* A data entry form that is rendered without a portlet but inside another portlet needs some additional margin to the top and to the right */
+.portlet-body > .tab-content > .dataEntryFormWithoutPortlet {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* Fixes to tabbable portlet boxes */
+.hijumpPortletBox.portlet.box.tabbable .portlet-title {
+    border-bottom: none;
+    padding-top: 0px;
+}
+
+.hijumpPortletBox.portlet.box.tabbable .portlet-title .caption {
+    margin-top: 10px;
+}
+
+.hijumpPortletBox.portlet.box .portlet-title .tabbable.portlet-tabs{
+    margin-top: 0px;
+}
+
+.hijumpPortletBox.portlet.box .portlet-title .tabbable.portlet-tabs ul.nav.nav-tabs{
+    margin-bottom: 0px;
+    margin-right: 0px;
+    top: 4px;
+    overflow: visible;
+}
+
+.hijumpPortletBox.portlet.box .portlet-title .tabbable.portlet-tabs ul.nav.nav-tabs li a {
+    margin-top: 0px;
+}
+
+.portlet.tabbable > .portlet-title > .caption {
+	float: right;
+}
+
+.portlet.tabbable > .portlet-title > .caption i {
+	float: right;
+	margin-left: 10px;
+}
+
+/* hijumpAccordion */
+.hijumpAccordion > .portlet.box > .portlet-title.enabled {
+    cursor: pointer;
+}
+.hijumpAccordion > .portlet.box > .portlet-title > .caption {
+    float: left;
+}
+.hijumpAccordion > .portlet.box:not(:last-child) {
+    margin-bottom: 1px;
+}
+.hijumpAccordion > .portlet.box > .portlet-title > .tools {
+    margin-top: 8px;
+}
+.hijumpAccordion > .portlet.box > .portlet-body.nopadding > .tabbable-custom {
+    margin-bottom: 0px;
+}
+
+/* Fix to detail panel tabs */
+.nav > li > a:focus {
+    background-color: white !important;
+    border-color: white !important;
+}
+
+.hijumpTopMenu .nav > li > a:focus {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.hijumpTopMenu .nav > li.with-badge > a {
+    padding: 10px;
+}
+.hijumpTopMenu .nav > li.with-badge > a > i {
+    font-size: 18px;
+}
+
+/* To override when h1 has accidentally been used */
+.portlet-body h1 {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* Fix to make the breadcrumb work in IE8 as well. */
+.breadcrumb > li {
+    display: inline;
+}
+
+/* DropDownButton styling */
+.btn-group button.btn.hijumpActionButton.button.dropdown-toggle i {
+    margin-left: 10px;
+}
+
+.btn-group ul.dropdown-menu li {
+    padding: 5px;
+}
+
+/* Fix for Searchbox */
+.searchboxwrapper input[type="text"] {
+    padding: 0px !important;
+}
+
+.search_box i {
+    cursor: pointer;
+}
+
+/* Fix for SearchByDateRangeDropDown */
+.searchByDateRange input[type="text"]{
+    width: 135px;
+    padding: 0px !important;
+    height: auto !important;
+}
+
+
+.hidden {
+    display: none;
+}
+
+/* Portal styling */
+.portlet-title a:hover {
+    cursor: pointer !important;
+}
+
+/* Stylings for elements inside the action div of a portlet */
+
+/* No margin for the action by default */
+.portlet .portlet-title .actions{
+    margin: 0px;
+}
+
+.portlet .portlet-title .actions .btn-group {
+    margin-top: -3px;
+}
+
+/* Shrink the drop down */
+.portlet .portlet-title .actions select{
+    margin: 0px;
+    padding: 0px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+}
+
+/****** Buttons */
+
+/* Buttons are too large by default */
+.custom-file-input::before,
+.btn {
+    padding: 5px 9px;
+}
+
+/* Buttons in a button group needs some spacing between them */
+.custom-file-input::before,
+.btn {
+    margin-right: 5px;
+}
+
+/* Inline buttons need to use standard padding to fit input elements */
+.input-append .btn {
+    padding: 7px 12px;
+}
+
+.input-append .btn.icn-only {
+    font-size: 17px;
+}
+
+/* Inline buttons should indicate that you can click on them */
+.input-append .add-on {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Disabled add-on should not display pointer */
+.input-append .add-on.disabled {
+    cursor: default;
+}
+
+/* Tooltips and Help-block within an input-append should still have normal white space wrap */
+.input-append .tooltip, .input-append .help-block {
+    white-space: normal;
+}
+
+/* MultiLookup inputs used as a filter in a grid needs to have a font size or the text will not be visible */
+.input-append .mlValue td {
+    font-size: 13px;
+}
+
+/* Help Blocks that are inside input-append need to have a font size or you will not be able to see them */
+.input-append .help-block {
+    font-size: 14px;
+}
+
+/* Form elements */
+.time-box {
+    width: 40px !important;
+}
+
+/* Autocomplete needs to not have margin left when inside a span */
+.control-group .controls [class*="span"].autocompleteDiv {
+    margin-left: 0px;
+}
+
+/* Margin and Paddings */
+.margin-5 {
+    margin: 5px;
+}
+
+.margin-top-5 {
+    margin-top: 5px !important;
+}
+
+.margin-left-5 {
+    margin-left: 5px;
+}
+
+.margin-right-5 {
+    margin-right: 5px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-20 {
+    margin: 20px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-right-40 {
+    margin-right: 40px;
+}
+
+.padding-5 {
+    padding: 5px;
+}
+
+.padding-top-5 {
+    padding-top: 5px;
+}
+
+.padding-left-5 {
+    padding-left: 5px;
+}
+
+.padding-right-5 {
+    padding-right: 5px;
+}
+
+.padding-bottom-5 {
+    padding-bottom: 5px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.padding-top-10 {
+    padding-top: 10px;
+}
+
+.padding-left-10 {
+    padding-left: 10px;
+}
+
+.padding-right-10 {
+    padding-right: 10px;
+}
+
+.padding-bottom-10 {
+    padding-bottom: 10px;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+.padding-top-20 {
+    padding-top: 20px;
+}
+
+.padding-left-20 {
+    padding-left: 20px;
+}
+
+.padding-right-20 {
+    padding-right: 20px;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20px;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+/* Table Styling */
+
+/* In a condensed table the inputs should not have margins. */
+.table-condensed input {
+    margin: 0px;
+}
+
+/* In a condensed table the inputs should not have margins. */
+.table-condensed input {
+    margin: 0px;
+}
+
+/* Favourites formatting */
+.search-toolbar {
+    margin-top:5px;
+    margin-right: 20px;
+}
+
+.show-favourites, .add-remove-favourites, .follow-unfollow, .show-following, .show-notifications {
+    font-size: 25px;
+    color: #ff7f00;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.follow-unfollow {
+    font-size: 25px;
+    color: #ff7f00;
+    cursor: pointer;
+}
+
+.follow-unfollow.unfollow {
+    color: #666;
+}
+
+.favorite .btn {
+    margin-right: 0px;
+    padding-right: 5px;
+    background-color: transparent !important;
+    color: #666 !important;
+}
+
+
+/* BlockUI Message styling */
+.blockUI.blockMsg.blockPage{
+    padding: 0;
+    margin: 0;
+    width: 30%;
+    top: 40%;
+    left: 35%;
+    text-align: center;
+    color: #000;
+    border: 3px solid #aaa;
+    background-color: #fff;
+    cursor: wait;
+}
+
+/* Send an Email */
+.sendEmail {
+    font-size: 25px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Send an Email */
+.sendEmail {
+    font-size: 25px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.dls-toggler {
+    cursor: pointer;
+}
+/* Code lens code editor */
+.codeMirrorWrapper {
+    border: solid 1px #cccccc;
+}
+
+/* General */
+.clickable {
+    cursor: pointer;
+}

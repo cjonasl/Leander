@@ -1,0 +1,1059 @@
+﻿@media (max-width: 800px) {
+     #quick_create span { display: none; }
+     #view span { display: none; }
+     #profile span { display: none; }
+     #recent span { display: none; }
+}
+
+.showOnPrint {
+    display: none;
+}
+
+@media print
+{
+    .showOnPrint {
+        display: block;
+    }    
+}
+
+
+.search-box > .portlet-body {
+    overflow: auto;
+}
+
+/* General Styling */
+
+body {
+    direction: ltr;
+}
+
+#harmonyApp .btn.blue   
+{
+    background-color: #3498db;
+}
+
+.btn.icn-only {
+    background-color: transparent;
+}
+
+.btn.icn-only:hover {
+    background-color: transparent !important;
+}
+
+harmonyApp .btn-group .btn.blue.dropdown-toggle
+{
+    background-color: #3498db;
+}
+
+/****** Header */
+
+#harmonyApp .badge-info {
+    background-color: #ed4e2a;
+}
+
+#harmonyApp .hijumpTopMenu.header .navbar-inner  
+{
+    background-image: url("Jonas-logo.png") !important;
+    background-repeat: no-repeat;  
+    background-position-x: 10px;
+    background-position-y: 6px;
+    background-size: auto 28px;
+}
+
+/******** Do not show header underlines if in grey form area boxes ***/
+#harmonyApp .formborder .form-section {
+    border-bottom: 0px;
+}
+
+/* Sort out the spacing of the menu expander if the screen is small so it is at the top. Metronic assumes a black background */
+.navbar a.btn-navbar > img {
+	padding-right: 10px;
+	margin-bottom: 9px;
+	padding-top: 5px;
+}
+
+#harmonyApp h1, #harmonyApp h2, #harmonyApp h3 {
+    line-height: 30px;
+}
+
+/****** Portlets */
+#harmonyApp #pnl_find_tab .portlet-title .caption {
+	cursor: pointer;
+}
+
+#harmonyApp .portlet .item {
+     border-bottom: 1px solid #EAEAEA;
+     padding: 11px 10px;
+     margin-bottom: 0px;
+}
+
+#harmonyApp .portlet .line {
+     color: #4A6B82;
+     font-weight: bold;
+     font-size: 100%;
+     width: 100%;
+}
+
+#harmonyApp .portlet .line a {
+     color: #9A4444;
+     text-decoration: none;
+     padding-left: 20px;
+     text-align: right;
+}
+
+#harmonyApp .portlet .line .value {
+     float: right;
+}
+
+
+#harmonyApp .listOnlyPortlet .gridClass {
+    padding-right: 0px; /* Without this padding on the right, the grids do not resize properly on page refresh if there is a vert scroll bar on the screen. See the .gridClass styling in dls.hijump.css */
+}
+
+
+/* different colors for differnt types */
+#harmonyApp .portlet.box.area-operations .portlet-title {
+    background-color: #34495e !important;
+    border-bottom: 1px solid #34495e !important;
+}
+#harmonyApp .portlet.box.area-operations {    
+    background-color: #34495e !important;
+}
+#harmonyApp .portlet.box.area-sales .portlet-title {
+    background-color: #ef9812 !important;
+    border-bottom: 1px solid #ef9812 !important;
+}
+#harmonyApp .portlet.box.area-sales {    
+    background-color: #ef9812 !important;
+}#harmonyApp .portlet.box.area-finance .portlet-title {
+    background-color: #bc392b !important;
+    border-bottom: 1px solid #bc392b !important;
+}
+#harmonyApp .portlet.box.area-finance {    
+    background-color: #bc392b !important;
+}
+
+
+
+
+/* Header */
+
+#harmonyApp .hijumpTopMenu.header .nav li.dropdown .dropdown-toggle i {
+  color: #555 !important;
+}
+
+#harmonyApp .hijumpTopMenu.header .nav li.dropdown:hover .dropdown-toggle span {
+  color: #fff !important;
+}
+
+#harmonyApp .hijumpTopMenu.header .nav li.dropdown:hover .dropdown-toggle i {
+  color: #fff !important;
+}
+
+#harmonyApp .header .nav > li.dropdown.user .dropdown-toggle .username
+{
+    color: #555 !important;
+}
+
+#harmonyApp .hijumpTopMenu.header .nav li.dropdown:hover .dropdown-toggle .username
+{
+    color: #fff !important;
+}
+
+#harmonyApp .header .nav > li.dropdown.user .dropdown-toggle .username:hover
+{
+    color: #fff !important;
+}
+
+#harmonyApp .navbar-inverse .nav > li > a {
+    color: #555 !important;
+    font-size: 13px;  
+}
+
+#harmonyApp .navbar-inverse .nav > li > a:hover {
+    color: #fff !important;
+    font-size: 13px;  
+}
+
+#harmonyApp .navbar-inverse .nav > li > a > span {
+    margin-left: 5px;
+}
+
+#harmonyApp .widget .portlet-body {
+    overflow-x: auto;
+}
+
+/* Shrink Form Elements */
+#harmonyApp .dls_form input[disabled],
+#harmonyApp .dls_form input.disabled,
+#harmonyApp .dls_form input[readonly],
+#harmonyApp .dls_form select[disabled],
+#harmonyApp .dls_form select.disabled,
+#harmonyApp .dls_form select[readonly],
+#harmonyApp .lookup_label,
+#harmonyApp .lookup_label_nullable {
+    cursor: default;
+}
+
+#harmonyApp .control-group {
+    margin-bottom: 3px;
+}
+
+#harmonyApp input[class*="span"].m-wrap {
+    height: 30px !important;
+}
+
+#harmonyApp select.m-wrap, input[type="file"].m-wrap {
+    height: 30px !important;
+}
+
+#harmonyApp .input-append .add-on, .input-prepend .add-on {
+    height: 20px;
+}
+
+#harmonyApp .input-append .btn {
+    padding: 5px 9px;
+}
+
+/* Other form classes*/
+.preview-view .control-group label {
+    color: #999;
+    font-weight: 600;
+}
+
+.form-section .btn.icn-only {
+     color: #666;
+}
+
+.expand-form-area {
+    float: right;    
+    margin-right: 10px;
+}
+
+/* used to mark classes which are hidden by default, but shown by dls-toggler */
+.extended-info {
+    display: none;
+}
+
+/***** Search *******/
+#SiteSearchResults h4 {
+    margin-bottom: 1px;
+}
+
+.search-classic {
+    margin-bottom: 30px;
+    border-top: solid 1px #ddd;
+}
+
+.search-entry {
+    background-color: #f0f6fa;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/******* Specific Colours for Emphasis  *************/
+.warning {
+    color: red !important;
+}
+
+.info {
+    color: green !important;
+}
+
+/******************* Dashboard ******************/
+
+.dashboard-stat .details .number {
+    padding-top: 15px;
+}
+
+.dashboard-stat .visual {
+    height: 40px;
+}
+
+.home-actions .what a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.home-actions .when {
+    font-size: 11px;
+    font-style: italic;
+}
+
+.home-actions .linkIcon {
+    color: #3590C1;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.home-actions .iconSpace {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+/******************* Ticket details *********************/
+
+.linkbtn {
+    color: #3590c1;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ticket-form {
+    background-color: #eee;
+    margin-top: 10px;
+}
+
+.ticket-action-details {
+    border-top: 0px !important;    
+}
+
+
+.ticket-action-buttons-col {
+    width: 50px;
+    text-align: right !important;    
+}
+
+.ticket-action-buttons-col a {
+    margin-right: 0px !important;
+    padding: 0px !important;
+}
+
+/* small horizontal forms */
+
+
+
+.small-form .info-table th, .small-form .info-table td
+{
+    text-align: left;
+    font-size: 12px;
+}
+
+.small-form .info-table th
+{
+    font-weight: 600;
+    color: #999;
+}
+
+.small-form.form-horizontal .preview-view .text {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.small-form .control-group label {
+    font-weight: 600;
+    color: #999;
+    font-size: 13px;
+}
+
+.small-form.form-horizontal .control-label {
+    width: 100px;
+    padding-top: 0px;    
+}
+
+.small-form.form-horizontal .controls .text {
+    margin-top: 2px;
+    word-wrap: break-word;
+}
+
+.small-form.form-horizontal label .text {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.small-form .input-append .add-on {
+    padding: 4px 2px 2px 2px;
+}
+
+.small-form input {
+    height: 18px;
+    width: 170px !important;
+}
+
+.small-form select {
+    height: 28px;
+    width: 100%
+}
+
+.small-form select.with-add-on {    
+    width: 160px;
+}
+
+@media (min-width: 481px) {
+    .small-form.form-horizontal .controls {
+        margin-left: 110px;
+    }
+}
+
+.small-form .sub-heading {
+    font-weight: 600;
+    font-size: 13px;
+    color: #34495d;
+    border-bottom: solid 1px #ccc;
+    min-height: 25px;
+    margin-bottom: 5px;
+}
+
+.small-form .sub-sub-heading {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.small-form .sub-heading i {
+    float: right;
+}
+
+/* header info */
+
+.alert-red {
+    color: red;
+}
+
+.alert-amber {
+    color: orange;
+}
+
+.alert-green {
+    color: green;
+}
+
+.ticket-header-info .ticket-timeline .timeline-time {
+    font-weight: normal;    
+}
+
+.ticket-header-info .ticket-timeline .control-label {
+    width: 120px !important;
+}
+
+.ticket-header-info .ticket-timeline .controls {
+    margin-left: 130px !important;
+}
+
+.ticket-header-info  {
+    font-size: 13px;
+    padding: 5px;
+}
+
+.ticket-header-info i {
+    font-size: 14px;
+}
+
+.ticket-header-info .form-box .form-box-header .form-box-header-label {
+    color: #b94a48;
+    padding: 0px 0px 5px 0px;    
+}
+
+.ticket-header-info .form-box {
+    margin-top: 0px !important;
+    box-shadow: none !important;        
+}
+
+.ticket-header-info .small-form.form-horizontal .controls .text {
+    margin-top: 2px;
+}
+
+@media (min-width: 768px) {
+    #ticket-details-right-panel {
+        margin-left: 1% !important;
+        width: 75.5%;
+    }
+}
+
+#ticket-details-left-panel {    
+    padding-left: 5px;
+}
+
+/* right columns */
+.ticket-visibility {
+    font-style: italic;
+    text-align: center;    
+}
+
+.form-box {
+    margin-top: 10px !important;    
+    box-shadow: 3px 3px 8px 1px rgba(0, 0, 0, 0.23);
+    background-color: white;
+}
+
+.ticket-contact span.text {
+    overflow: hidden;
+}
+
+/* normal boxes */
+.form-box .form-box-header {    
+    border-bottom: 1px solid #DDD;
+}
+
+.form-box .form-box-header .form-box-header-label
+{
+    color: #34495d;
+    float: left;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 700;    
+}
+
+.form-box .form-box-header .form-box-header-icon
+{
+    float: right;
+    padding: 10px;
+}
+
+.form-box .form-box-header .form-box-header-icon .btn.icn-only {
+    padding: 0px;
+}
+
+/* This needs to be on a span not a row */
+.form-box .form-box-body {
+    padding: 10px;
+}
+
+.form-box-body .more {
+    float: right;
+    margin-right: 10px;    
+}
+
+.form-box .preview-view .controls .text {
+    font-weight: 600;
+}
+
+#lblddStandardResponsePrivate {
+    color: #da4a38;
+}
+
+#lblddStandardResponsePublic {
+    color: #1abb9b;
+}
+
+#ddStandardResponsePrivate, #ddStandardResponsePublic {
+    display: none;
+}
+
+.select-comment {
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+#descSection .body {
+    max-height: 300px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+#descSection .more {
+    color: #3590c1;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    display: none;        
+}
+
+#descSection .more:hover {
+    text-decoration: underline;
+}
+
+/* Comment trail overrides form ticket comments */
+
+#ticket-page .chats .message {
+    background-color: white !important;
+}
+
+#ticket-page .ticket-comments.chats li .message .more {
+    float: right;
+}
+
+#ticket-page .ticket-comments.chats li.out .message .arrow {
+    border-left-color: #1abb9b;
+}
+#ticket-page .ticket-comments.chats li.out .message {
+    border-right-color: #1abb9b;
+}
+#ticket-page .ticket-comments.chats li.in .message .arrow {
+    border-right-color: #da4a38;
+}
+#ticket-page .ticket-comments.chats li.in .message {
+    border-left-color: #da4a38;
+}
+
+#ticket-page .ticket-comments.chats li.out .message {
+    text-align: left;
+}
+
+#ticket-page .ticket-comments.chats li .message {
+    min-height: 80px;
+}
+
+#ticket-page .chats li .more {
+    display: none;
+}
+
+#ticket-page .chats li .more, .chats li .delComment {
+    color: #3590c1;
+    font-size: 13px;
+    font-weight: 400;    
+    cursor: pointer;
+}
+#ticket-page .chats li .more:hover {
+    text-decoration: underline;
+}
+
+#ticket-page .chats li .message .body {
+    max-height: 120px;
+    overflow: hidden;
+}
+
+#ticket-page .chats .body li {
+    margin: auto;
+    padding: initial;
+    list-style: inherit;    
+}
+
+.assign-me {
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.ui-widget-content a  {
+    text-decoration: underline;
+    color: #008000;
+}
+
+.ui-widget-content a i {
+    text-decoration: none;
+}
+
+#checklistOrder .iconbuttons span {
+    width: 20px;
+    height: 20px;
+   
+}
+#checklistOrder .iconbuttons span i {
+    color: rgb(68, 68, 68) !important;
+    cursor: pointer;
+}
+
+#checklistOrder .drag-me-only{
+    width:15px;
+}
+
+#checklistOrder .checklistItemDetail {
+    width: 100%;
+}
+
+#checklistOrder .checklistItemDetail td {
+    border-top-style: none;
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+#checklistOrder .checklistItemDetail .checklistItemDetailIcons {
+    padding-right: 0px;
+    white-space: nowrap;
+}
+
+#checklistOrder .checklistItemComplete {
+    background-color: rgb(238, 238, 238);
+}
+
+#checklistOrder .checklistItemDescription {
+    word-break: break-all;
+}
+
+#checklistOrder .checklistItemComplete .checklistItemDescription {
+    text-decoration: line-through;
+}
+
+/******************* Action/Events Dashboard  *********************/
+#dashboard-summary .dashboard-stat .details .number {
+    font-size: 28px;
+}
+#dashboard-summary .dashboard-stat .details .desc { font-size: 14px;}
+#dashboard-summary .dashboard-stat .visual { width: 20px;}
+#dashboard-summary .dashboard-stat .visual i { font-size: 25px;cursor: pointer;}
+#dashboard-summary .caption {min-height: 0}
+#dashboard-summary .dashboard-stat:hover { cursor: pointer; opacity: 0.8; }
+#dashboard-summary .input-append, .input-prepend { margin: 0;}
+/*#dashboard-summary a.primaryTagLink, #dashboard-summary a.editUrl { color: #222222; }*/
+
+.dashboard-stat { margin-bottom: 10px; }
+.dashboard-stat .details .number { padding-top: 15px; }
+.dashboard-stat .visual { height: 40px; }
+
+.home-actions .what a { text-decoration: underline; }
+.home-actions .when { font-size: 11px; font-style: italic; }
+
+.portlet { margin-bottom: 10px;}
+
+/*************** Full Calendar Overrides *********************/
+.fc-event-inner span {
+    font-size: 11px !important;
+}
+
+.portlet.calendar .fc-view-agendaDay .fc-event {
+    border: 1px solid;
+}
+
+.portlet.calendar .fc-content {
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Tables */
+#harmonyApp .drag-highlight {
+    background-color: #ebebeb;
+    color: #CF3A24;
+    font-style: italic;
+}
+
+.drag-highlight .link {
+    color: #CF3A24 !important;
+}
+
+#harmonyApp .borderless td {
+    border: none;
+}
+
+#harmonyApp .row-highlight {
+    background-color: #ebebeb;
+    font-style: italic;
+}
+
+/* TinyMCE Overrides */
+.mce-btn button {
+	padding: 2px 5px !important;
+}
+
+.mce-ico {
+	font-size: 13px !important;
+}
+
+
+/* Project Tiles */
+#harmonyApp .dashboard-stat.projecttasktile {
+    color: white;
+}
+
+#dashboard-summary .dashboard-stat.projecttasktile i {
+    font-size: 25px;
+    vertical-align: text-top;
+}
+
+#dashboard-summary .dashboard-stat.projecttasktile .heading {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-height: 52px;    
+}
+
+#dashboard-summary .dashboard-stat.projecttasktile td.title {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+}
+
+#dashboard-summary .dashboard-stat.projecttasktile td.icon {
+    width: 25px;
+    vertical-align: top;
+}
+
+#dashboard-summary .dashboard-stat.projecttasktile .details {
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    float: left;
+    font-size: 12px;
+}
+
+#dashboard-summary i.green {
+    color: #1abb9b;
+}
+
+#dashboard-summary i.yellow {
+    color: #ffb848;
+}
+
+#dashboard-summary i.red {
+    color: #bc0d0e;
+}
+
+#dashboard-summary i.large {
+    font-size: 34px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#dashboard-summary i.medium {
+    font-size: 24px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+.totalTr {
+    font-weight: 600;
+    background-color:#EEEEEE; 
+}
+
+/* Green */
+
+.task-green {
+    border: #d6e9c6 5px solid;
+    color: #468847;
+    background-color: white;
+}
+
+table.task-green, table.task-green a {
+    color: #468847 !important;
+}
+
+.task-green .totalTr {
+    background-color:#d6e9c6; 
+}        
+
+
+/* Amber */
+.task-amber {
+    border: #f5d89e 5px solid !important;
+    color: #8a6d3b !important;
+    background-color: white !important;
+}
+
+table.task-amber, table.task-amber a {
+    color: #8a6d3b !important;
+}
+
+.task-amber .totalTr {
+    background-color:#f5d89e; 
+}
+
+/* Red */
+
+.task-red {
+    border: #eed3d7 5px solid !important;
+    color: #b94a48 !important;
+    background-color: white !important;
+}
+
+table.task-red, table.task-red a {
+    color: #b94a48 !important;
+}
+
+.task-red .totalTr {
+    background-color:#eed3d7; 
+}
+        
+.task-box i.fa-btn {
+    margin-left: 5px !important;
+}
+        
+.task-box .progress {
+    height: 10px !important;
+    margin-bottom: 5px !important;
+}
+
+#dashboard-summary i.green {
+    color: #28B779;
+}
+
+#dashboard-summary i.yellow {
+    color: #ffb848;
+}
+
+#dashboard-summary i.red {
+    color: #bc0d0e;
+}
+
+#dashboard-summary i.large {
+    font-size: 34px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+ 
+/* Timesheets */
+#timesheet-div .table-advance thead tr th.dayofweek {
+    text-align: center;
+}
+#timesheet-div .table-advance thead tr th.day-0, #timesheet-div  .table-advance thead tr th.day-6 {
+    color: #999;
+    background-color: #eee;
+    border: 1px solid #eee;
+}
+#timesheet-div .table-advance thead tr:first-of-type th {
+    font-size: 12px;
+}
+#timesheet-div .table-advance th {
+    padding: 2px 4px;
+}
+#timesheet-div .table-advance thead tr:first-of-type th:first-of-type, #timesheet-div .table-advance thead tr:first-of-type th:last-of-type {
+    background-color: white;
+}
+
+/* Dashboard boards */
+
+#boardTabs_tabContent.tab-content {
+    overflow: auto;
+}
+
+#harmonyApp .boardColumn.portlet.box {
+    background-color: #fff !important;
+}
+
+#harmonyApp .portlet.box.boardColumn > .portlet-body {
+    background-color: #fff !important;
+    padding: 10px;
+}
+
+#harmonyApp .portlet.box.boardColumn > .portlet-title {
+    background-color: #FFF !important;
+    color: #FFF !important;
+}
+
+#harmonyApp .portlet.box.boardColumn > .portlet-title {
+    border: 1px solid !important;
+}
+
+#harmonyApp .portlet.box.boardColumn > .portlet-body {
+    border-left: 1px solid !important;
+    border-right: 1px solid !important;
+    border-bottom: 1px solid !important;
+}
+#harmonyApp .portlet.box.boardColumn.area-operations > .portlet-title {
+    background-color: #34495e !important;  
+    border-color: #34495e !important;  
+}
+
+#harmonyApp .portlet.box.boardColumn.area-operations > .portlet-body {
+    border-color: #34495e !important;  
+}
+
+#harmonyApp .portlet.box.boardColumn.area-sales > .portlet-title {
+    background-color: #ef9812 !important;  
+    border-color: #ef9812 !important;  
+}
+
+#harmonyApp .portlet.box.boardColumn.area-sales > .portlet-body {
+    border-color: #ef9812 !important;  
+}
+
+#harmonyApp .portlet.box.boardColumn.area-finance > .portlet-title {
+    background-color: #bc392b !important;  
+    border-color: #bc392b !important;  
+}
+
+#harmonyApp .portlet.box.boardColumn.area-finance > .portlet-body {
+    border-color: #bc392b !important;  
+}
+
+#harmonyApp .portlet.box.card {
+	border-radius: 7px !important;	
+    border: solid 2px #bdc3c7 !important;
+    background-color: #ebeff0 !important;
+    color: #000 !important;
+}
+
+#harmonyApp .portlet.box.card .portlet-title {
+    background-color: #ebeff0 !important;
+    border-bottom: 0px !important;
+    color: #000 !important;
+}
+
+#harmonyApp .pin-recent {
+    padding-top: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#harmonyApp .recent-submenu {
+    left: 100%;
+    margin-top: 0;
+    webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0; 
+    width: 250px;
+}
+
+#harmonyApp .recent-pinned {
+    display: flex;
+}
+
+#harmonyApp .recent-submenu li > a {
+    padding-left: 6px;
+    width: 85%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 13px;
+}
+
+/*Hide menu arrow*/ 
+#harmonyApp .dropdown-submenu > a:after {
+    display: none;
+}
+
+#harmonyApp .recent-group {
+    cursor: default !important;
+}
+
+#harmonyApp .dropdown-menu > li > a {
+    padding: 5px;
+}
+
+#harmonyApp .dropdown-menu .divider {
+    height: 1px;
+    margin: 1px 0px;
+}
+
+#harmonyApp li.recent-pinned > a {
+    cursor: pointer;
+    width: 95%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+#harmonyApp i.pin-recent {
+    display: none;
+    margin: 0;
+}
+
+#harmonyApp .recent-pinned > a:hover + i.pin-recent , #harmonyApp i.pin-recent:hover {
+    position: absolute;
+    display: inline-block;
+    width: 15px;
+    margin-left: -15px;
+    left: 100%;
+}
+
+#harmonyApp #recent > ul.dropdown-menu li > a > [class*="icon-"]:before {
+    padding-right: 5px;
+    width: 12px;
+}
+
+#harmonyApp #recent > ul.dropdown-menu {
+    max-width: 200px;
+}
+
+#harmonyApp .recent-clear {
+    float: right;
+    padding: 1px 0px 4px 0px;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+    color: #333;
+    text-decoration: none;
+    background-color: #eee;
+    background-image: -moz-linear-gradient(0, #eee, #eee);
+    background-image: -webkit-gradient(0, 0 0, 0 100%, from(#eee), to(#eee));
+    background-image: -webkit-linear-gradient(0, #eee, #eee);
+    background-image: -o-linear-gradient(0, #eee, #eee);
+    background-image: linear-gradient(0, #eee, #eee);
+    background-repeat: no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#eee', GradientType=0);
+}

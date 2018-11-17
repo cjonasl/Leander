@@ -45,11 +45,13 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests1\R7.cs" />
     <Compile Include="Tests1\R2.cs" />
     <Compile Include="Tests1\R3.cs" />
     <Compile Include="Tests1\R4.cs" />
     <Compile Include="Tests1\R5.cs" />
     <Compile Include="Tests1\R6.cs" />
+    <Compile Include="Tests1\R8.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

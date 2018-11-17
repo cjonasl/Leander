@@ -88,6 +88,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CreateNavFromHarmony\Blue.css" />
+    <Content Include="CreateNavFromHarmony\bootstrap-responsive.css" />
+    <Content Include="CreateNavFromHarmony\bootstrap.css" />
+    <Content Include="CreateNavFromHarmony\Browse.txt" />
+    <Content Include="CreateNavFromHarmony\dls.hijump.css" />
+    <Content Include="CreateNavFromHarmony\dls.hiJumpTheme.css" />
+    <Content Include="CreateNavFromHarmony\HarmonyTheme.css" />
+    <Content Include="CreateNavFromHarmony\Jonas-logo.png" />
+    <Content Include="CreateNavFromHarmony\Jonas.png" />
+    <Content Include="CreateNavFromHarmony\menu-toggler.png" />
+    <Content Include="CreateNavFromHarmony\Navigation.html" />
+    <Content Include="CreateNavFromHarmony\Orange.css" />
+    <Content Include="CreateNavFromHarmony\Red.css" />
+    <Content Include="CreateNavFromHarmony\Silver.css" />
+    <Content Include="CreateNavFromHarmony\style-metro.css" />
+    <Content Include="CreateNavFromHarmony\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>

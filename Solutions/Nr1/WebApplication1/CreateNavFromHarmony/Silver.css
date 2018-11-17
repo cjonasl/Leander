@@ -1,0 +1,22 @@
+﻿#harmonyApp .hijumpTopMenu.header .navbar-inner {
+    background-color: #e5e5e5 !important;
+}
+
+#harmonyApp .portlet.box .portlet-title {
+    background-color: #979696 !important;
+    border-bottom: 1px solid #979696 !important;
+}
+
+#harmonyApp .portlet.box {    
+    background-color: #979696 !important;
+}
+
+#harmonyApp .form-section {
+    border-bottom: 1px solid #979696
+}
+
+/****** Left menu */
+#harmonyApp .hijumpSidebarMenu.page-sidebar > ul > li.active > a {
+    background-color: #979696 !important;
+}
+

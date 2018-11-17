@@ -1,0 +1,12 @@
+﻿Title: Check linq expression in bug #20181002.18
+Version: 1
+Changed: Null
+Note changed: Null
+Added: 2018-11-13 ‏‎12:44:09
+Updated: 2018-11-13 ‏‎12:44:09
+Key phrases: [C#][Datalogic Solutions][Ticket]
+Render pngs: Null
+Previous: Null
+Next: Null
+Files: Null
+Text:

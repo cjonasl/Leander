@@ -1,0 +1,1076 @@
+﻿@media print
+  {
+    button {display:none !important;}       
+   .page-heading{display:none;}
+   .page-sidebar-menu{display:none;}
+   .btn-group{display:none;}
+   .row-fluid .span3{display:none;}
+   .row-fluid .span9{width:100%;height:100%;}
+   .portletLink{display:none;}
+   .portlet-title{display:none;}
+   .container-fluid .nav{display:none;}
+   .MsoNormalTable{display:none;}
+   .hijumpTopMenu .brand { display: none;}
+   .overviewheader{display:none;}   
+   .object-activity-summary { display: none;}
+         
+   #panelFavourites{display:none;}   
+  }
+  
+@media (max-width: 800px) {
+     .ui-jqgrid tr.jqgrow td { white-space: inherit;}
+}
+
+/* For small screens, do not fix the width of dialogs */
+@media only screen and (max-width: 480px) {
+    .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable.ui-resizable {
+        width: 100% !important;
+    }
+}
+
+/* For phones in portait. If you want to hide for phones in both portait and landscape use .hidden-phone */
+@media (max-width: 480px) {
+	.hidden-phone-portrait {
+		display: none !important;
+	}
+}
+
+/* Use to go full width on phones */
+@media (max-width: 767px) {
+  .span12-phone {
+    width: 91.48936170212765% !important;
+    *width: 91.43617021276594% !important;
+  }
+}
+
+body {
+    color: #444444 !important;
+    font-size: 14px;
+}
+
+/* Page Layout */
+.page-content {
+    padding-bottom: 20px;
+}
+
+.page-content .breadcrumb {
+    background-color: #fff;    
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 10px;
+    padding: 0px;
+}
+
+.page-content .breadcrumb a {
+    text-decoration: underline;
+}
+
+.object-alert {
+    margin-bottom: 5px;
+}
+
+/* These are for 3 col layouts */
+.three-cols {
+    text-align: center;
+}
+
+.three-cols .center-col {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+h2 small {
+    font-size: 12.5px;
+}
+
+
+/* Print Views */
+body.printable {
+    background-color: white !important;
+}
+
+/* Headings */
+.page-title {
+    margin: 10px 0px 15px 0px;
+    font-size: 24px;
+}
+
+/* Ajax loader */
+.ajax-loading {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/* Font sizes */
+h2 {
+    font-size: 17.5px;
+}
+
+
+/* Top Menu  */
+.hijumpTopMenu.header .brand 
+{
+	/*
+	override these in your theme to set a logo.
+
+    background-repeat: no-repeat;
+    height: 42px;
+    margin-left: 5px;
+    margin-top: 8px;
+	*/
+}
+
+.hijumpTopMenu.header .navbar-inner {
+  filter:none !important;
+  background-image: none !important;
+  background-color: #1f1f1f !important;
+  font-size: 13px;
+}
+
+.hijumpTopMenu.header .btn-navbar {  
+  background-color: #1f1f1f !important;
+} 
+
+.hijumpTopMenu.header .nav .dropdown-toggle:hover,
+.hijumpTopMenu.header .nav .link:hover, 
+.hijumpTopMenu.header .nav .dropdown.open .dropdown-toggle {
+  background-color: #3D3D3D !important;
+}
+
+.hijumpTopMenu.header .nav li.dropdown .dropdown-toggle i {
+  color: #808080 !important;
+}
+
+.hijumpTopMenu.header .hor-menu .dropdown-menu {
+    background-color: #1f1f1f !important;
+}
+
+/* Sidebar */
+/* Background of sidebar comes from body background */
+body { 
+  background-color:#3d3d3d !important;
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li > a {
+  border-top: 1px solid #595959 !important;
+  color: #fff !important;
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li:last-child > a {
+   border-bottom: 1px solid transparent !important;
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li a i {
+   color: #808080;
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li.open > a, 
+.hijumpSidebarMenu.page-sidebar > ul > li >a:hover, 
+.hijumpSidebarMenu.page-sidebar > ul > li:hover >a {  
+  background: #313131;
+}
+
+
+.hijumpSidebarMenu.page-sidebar > ul > li.active > a {
+  background-color: #bc392b !important;  
+  border-top-color: transparent !important;
+  color:#fff;
+}  
+
+.hijumpSidebarMenu.page-sidebar > ul > li.active > a i {
+  color:#fff;
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li > a.open {
+  background: #313131;
+}
+
+.hijumpSidebarMenu.page-sidebar ul > li > a > .arrow:before,
+.hijumpSidebarMenu.page-sidebar > ul > li > a > .arrow.open:before {  
+   color: #919091 !important;
+}
+
+.hijumpSidebarMenu.page-sidebar ul > li.active > a .arrow:before,
+.hijumpSidebarMenu.page-sidebar > ul > li.active > a .arrow.open:before {  
+   color: #fff !important;
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li > ul.sub-menu > li > a {
+  margin-left:0px;  
+  padding-left: 5px; 
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li > ul.sub-menu > li:first-child > a {
+  border-top: 0px !important;
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li > ul.sub-menu > li.active > a, 
+.hijumpSidebarMenu.page-sidebar > ul > li > ul.sub-menu > li > a:hover {
+  color: #fff !important;
+  background: #4b4b4b !important;  
+}
+
+.hijumpSidebarMenu.page-sidebar > ul > li > ul.sub-menu > li > a:hover {
+  background: #4b4b4b !important;
+}
+
+/***** FORMS */
+
+/* Lets tighten up the for heading spacing */
+.form-section {
+    margin: 5px 0px 15px 0px !important;
+    padding-bottom: 0px !important;
+}
+
+/* Provide a way to have more narrow horizontal forms*/
+.form-horizontal.narrow-form .control-label {
+    width: 60px;
+}
+    
+.control-group .alert {
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+.form-horizontal.narrow-form .controls {
+    margin-left: 80px;
+}
+/****** Buttons */
+
+.form .form-actions {
+    padding: 19px 20px 20px; /* We are not using metronic forms properly so dont bother padding out the form footer buttons */
+}
+
+.portlet.box .form .form-actions.top, .portlet.solid .form .form-actions.top
+{
+  margin-top: -10px !important;
+  margin-bottom: 10px  !important;
+  border-top: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.custom-file-input::before,
+.hijumpStandardButton {
+    background-color: #1abb9b;
+    color: white !important;
+    text-shadow: none;
+}
+
+.custom-file-input:hover:before,
+.hijumpStandardButton:hover,
+.hijumpStandardButton:focus,
+.hijumpStandardButton:active,
+.hijumpStandardButton.active,
+.hijumpStandardButton[disabled],
+.hijumpStandardButton.disabled {
+    background-color: #D8D8D8 !important;
+    color: #333 !important;    
+}
+
+/* Override jquery ui which is trying to set daft fonts on buttons */
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: "Segoe UI" !important;    
+}
+
+/* Make disabled paler than default bootstrap as hard to tell diff */
+.btn.disabled, .btn[disabled] {
+    opacity: 0.50;
+    filter: alpha(opacity=50);  /*ie8 support */
+}
+
+.hijumpActionButton {
+    background-color: #1abb9b !important;
+    color: white !important;
+    text-shadow: none;
+    /* font-size: 1em !important;  screws up dropdown button for some reason */
+}
+
+.hijumpActionButton:hover,
+.hijumpActionButton:focus,
+.hijumpActionButton:active,
+.hijumpActionButton.active,
+.hijumpActionButton[disabled],
+.hijumpActionButton.disabled {
+    background-color: #D8D8D8 !important;
+    color: #333 !important;    
+}
+
+.hijumpSaveButton {
+    background-color: #1abb9b;
+    color: white !important;
+    text-shadow: none;
+}
+
+.hijumpSaveButton:hover,
+.hijumpSaveButton:focus,
+.hijumpSaveButton:active,
+.hijumpSaveButton.active,
+.hijumpSaveButton[disabled],
+.hijumpSaveButton.disabled 
+{
+    background-color: #d8d8d8 !important;
+    color: #444 !important;
+}
+
+.hijumpSaveButton:hover .m-icon-white,
+.hijumpSaveButton:focus .m-icon-white,
+.hijumpSaveButton:active .m-icon-white,
+.hijumpSaveButton.active .m-icon-white,
+.hijumpSaveButton[disabled] .m-icon-white,
+.hijumpSaveButton.disabled .m-icon-white 
+{
+    background-image: url(../img/syncfusion-icons.png);
+}
+
+.hijumpCancelButton {
+    background-color: #D84A38;
+    color: white !important;
+    text-shadow: none;
+}
+
+.hijumpCancelButton:hover,
+.hijumpCancelButton:focus,
+.hijumpCancelButton:active,
+.hijumpCancelButton.active,
+.hijumpCancelButton[disabled],
+.hijumpCancelButton.disabled 
+{
+    background-color: #BB2413 !important;
+    color: #FFFFFF !important;
+}
+
+.btn.icn-only {
+    padding: 3px;
+}
+
+.btn.icn-only.noBackground {
+    background-color: transparent;
+}
+
+.btn.icn-only.noBackground:hover {
+    background-color: transparent !important;
+}
+
+/* Font Awesome icons used as buttons */
+.fa-btn {
+    cursor: pointer;
+}
+
+
+/* Panels */
+.hijumpPortletBox {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;    
+    border-color: -moz-use-text-color #bc392b #bc392b;
+    border-image: none;
+    border-right: 1px solid #B4CEF8;
+    border-style: none solid solid;
+    border-width: 0 0px 0px;
+    background-color: #bc392b !important;
+}
+
+.portlet.box > .portlet-title .caption i {
+    color: #FFF !important;
+}
+
+.portlet > .portlet-title .caption i {
+    font-size: 12px !important;
+    margin-top: 3px !important;
+}
+
+.portlet.contractable > .portlet-title {
+    cursor: pointer;
+}
+
+.portlet.contracted {
+    opacity: 0.4;
+}
+
+.portlet-title .caption {
+    font-size: 14px !important;
+    margin-bottom: 3px !important;
+    margin-right: 5px !important;
+}
+
+.portlet-tabs a,
+.portlet-tabs a:link {
+    color: #fff;
+    cursor: pointer;
+}
+
+.portlet-tabs li.active a {    
+    cursor: default;
+}
+
+.portlet-tabs a:hover {
+    color: #555555;
+}
+
+.dropdown.open .dropdown-toggle {
+    background-color: #ffffff;
+    color: #555555;
+}
+
+.nav > li.dropdown.open.active > a:hover {
+    background-color: #ffffff;
+    color: #555555;
+}
+
+.dropdown.open .dropdown-toggle {
+    background-color: #ffffff;
+    color: #555555;
+}
+
+.nav > li.dropdown.open.active > a:hover {
+    background-color: #ffffff;
+    color: #555555;
+}
+
+/* Border above tab */
+.hijumpPortletBox .tabbable-custom .nav-tabs > li.active {
+    border-top: 3px solid #bc392b;
+}
+
+.hijumpMetronicTab.ui-tabs li.ui-state-active{
+    border-top: 3px solid #bc392b;
+}
+
+/* Grid Styling */
+
+/* by default we hide the scroll bar. this stops it popping open then closing after page load */
+.ui-search-toolbar {
+    display: none;
+}
+
+/* For some reason the default jquery ui styling makes dialogs 300px wide. Lets set it back to 100% */
+.ui-jqdialog {
+    width: initial !important;
+}
+/* Edit Grid modal dialog layout index should be highter then other modal dialogues (10011) but not highter then datepicker which is 10060 */
+.ui-dialog.gridEditModal {
+  z-index: 10012 !important;
+}
+
+/*** Custom setup styling */
+.customSetupActionRow .btn {
+    font-size: 1em !important;
+    padding: 2px !important;
+    background: none !important;    
+    color: #333;
+    font-weight: 300;
+}
+
+.customSetupActionRow {
+    padding: 5px;
+    padding-right: 0px;
+}
+
+.gridClass .ui-jqgrid .ui-jqgrid-titlebar {
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 0px;
+    font-weight: normal;
+}
+
+.customSetup .customSetupActionRow {
+    margin-bottom: 0px;
+}
+
+.customSetup .portlet {
+    margin-top: 10px;
+}
+
+/* Grid Custom Setup Portlet box */
+.customSetup .hijumpPortletBox {
+    background-color: #1abb9b !important;
+    margin-bottom: 20px;
+}
+
+.customSetup .hijumpPortletBox .portlet-title {
+    color: white
+}
+.customSetup .op {
+    vertical-align: top;
+}
+
+/*** Main grid styling */
+.ui-jqgrid td textarea {
+    width: 92%;
+    margin: 0;
+}
+
+.gridClass .ui-jqgrid table td{
+    border-right-color: #DDDDDD;
+}
+
+.gridClass tr.ui-widget-content.jqgrow.ui-row-ltr td[aria-describedby="audit_Changes"] {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.gridClass tr.ui-widget-content.jqgrow.ui-row-ltr td{
+    background-color : #FFFFFF;
+    vertical-align: top;
+}
+
+.gridClass .ui-widget-content .ui-priority-secondary td {
+    background-color: #F8F8F8 !important;
+}
+
+.gridClass tr.ui-widget-content.jqgrow.ui-row-ltr.ui-state-highlight td,
+.gridClass tr.ui-widget-content.jqgrow.ui-row-ltr.ui-priority-secondary.ui-state-highlight.ui-state-hover > td {
+    background-color : #FFE6DD !important;
+}
+
+.gridClass tr.ui-widget-content.jqgrow.ui-row-ltr.ui-priority-secondary.ui-state-hover > td,
+.gridClass tr.ui-widget-content.jqgrow:hover > td {
+    background-color: #EBEBEB !important;
+}
+
+.gridClass .ui-priority-secondary, .gridClass .ui-widget-content .ui-priority-secondary {
+    opacity: 1;
+    filter: alpha(opacity=100);  /*ie8 support */
+}
+
+.gridClass a.gridlink i {
+    text-decoration: none !important;
+    color: #3590c1;
+    font-size: 13px;
+    font-weight: 400;    
+    cursor: pointer;
+}
+
+.gridClass td[role=gridcell] button.gridRowButton {
+    font-weight: 500;
+    color: #1abb9b;
+}
+
+/* If we are using uniform plugin, need to move checkboxes a bit */
+.dlsGrid div.checker > span {
+    margin-left: -5px;
+}
+
+.control-group .transparentAddOn {
+    background: transparent;
+    border: none;
+}
+
+
+/* DLS Lookup Styling */
+.dls_lookup input[type="text"]{
+    cursor: text !important;
+    background: none;
+}
+
+/* For some reason JQuery UI keeps removing the ui-state-active class 
+(which is a JQuery UI class) when you move the mouse after selecting an
+item. Because of this we need a custom class to style the currently 
+selected item. This way the selection will not be lost. */
+.dls_lookup_activeItem {
+    border: 1px solid black;
+}
+
+/**** Forms */
+
+/* Shrinking some of the big forms */
+
+textarea.m-wrap {
+    height: 60px !important;    
+}
+
+/* boxes are a bit too light as they are */
+input.m-wrap, select.m-wrap {
+    border-color: #b5b5b5 !important;
+}
+
+.uneditable-input, 
+input[type="text"].m-wrap, 
+input[type="password"].m-wrap, 
+input[type="datetime"].m-wrap, 
+input[type="datetime-local"].m-wrap, 
+input[type="date"].m-wrap, 
+input[type="month"].m-wrap, 
+input[type="time"].m-wrap, 
+input[type="week"].m-wrap, 
+input[type="number"].m-wrap, 
+input[type="email"].m-wrap, 
+input[type="url"].m-wrap, 
+input[type="search"].m-wrap, 
+input[type="tel"].m-wrap, 
+input[type="color"].m-wrap {
+    height: 20px !important;
+    padding: 4px 4px !important;
+}
+
+/* As we have overriden the padding as above, we need to re-add the left icon padding */
+.input-icon.left input {
+    padding-left: 33px !important;
+}
+
+/* You can add the alternate-rows class to something that contains several row-fluid.
+   Every other row will then use a different background color.
+ */
+.alternate-rows div.row-fluid:nth-child(even) {
+        background-color: #EBEBEB;
+}
+
+/* Table styling */
+.table-striped-alternate tbody > tr:nth-child(2n+1) > td, .table-striped-alternate tbody > tr:nth-child(2n+1) > th {
+    background-color: #ADACB2;
+}
+
+.table tr th.numeric, .table tr td.numeric {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.table tr.totalrow td, .table td.total-cell
+{    
+    border-top: 3px #DDD solid !important;
+}
+
+totalrow 
+
+.table.table-noborders tr td, .table.table-noborders tr th {
+    border-top: none;
+}
+
+.table tr th.non-numeric, .table tr td.non-numeric {
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* responsive table work around for bootstap 2
+   http://stackoverflow.com/questions/15176714/responsive-table-handling-in-twitter-bootstrap
+*/
+.table-responsive {
+    overflow-x: auto
+}
+
+/* Hyperlinks */
+
+table a, table div.link {
+    color: green;
+}
+
+.link
+{
+    color: green;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.link > i {
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+/* Timepicker */
+.time-picker {
+    width: 80px;
+}
+
+/* filter styles */
+
+.conditionalOp {
+	width: 100px;
+}
+.tooltip {
+    z-index: 9996 !important;
+    letter-spacing: 0;
+}
+
+/* div with more link styles */
+
+.divWithMore {
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.more {
+    color: #3590c1;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;    
+}
+
+.more:hover {
+	 text-decoration: underline;
+}
+
+
+
+/***
+DragDropUpload control css changes
+***/
+.dragdropuploader .ddu_handler {
+    border: 2px dotted #1abb9b;
+    width: 400px;
+    color: #92AAB0;
+    text-align: center;
+    vertical-align: middle;
+    padding: 4px;
+    margin: 0;
+    line-height: 1em;
+    font-size: 150%;
+}
+.dragdropuploader .ddu_handler.dragenter {
+    border-style: solid;
+}
+.dragdropuploader .statusbar {
+    border-top:1px solid #A9CCD1;
+    min-height:25px;
+    width:600px;
+    padding:10px 10px 0px 10px;
+    vertical-align:top;
+}
+.dragdropuploader .statusbar .progressBar {
+    width: 100px;
+    height: 22px;
+    border: 1px solid #ddd;
+    border-radius: 5px; 
+    overflow: hidden;
+    display:inline-block;
+    margin:0px 10px 5px 5px;
+    vertical-align:top;
+}
+.dragdropuploader .statusbar .progressBar div {
+    height: 100%;
+    color: #fff;
+    text-align: right;
+    line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+    width: 0;
+    background-color: #1abb9b; 
+    border-radius: 3px; 
+}
+.dragdropuploader .statusbar:nth-child(odd) {
+    background:#EBEFF0;
+}
+.dragdropuploader .statusbar .filename {
+    display:inline-block;
+    vertical-align:top;
+    width:250px;
+}
+.dragdropuploader .statusbar .filesize {
+    display:inline-block;
+    vertical-align:top;
+    color:#30693D;
+    width:100px;
+    margin-left:10px;
+    margin-right:5px;
+}
+.dragdropuploader .statusbar .abort {
+    background-color:#A8352F;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;display:inline-block;
+    color:#fff;
+    font-family:arial;font-size:13px;font-weight:normal;
+    padding:4px 15px;
+    cursor:pointer;
+    vertical-align:top
+}
+
+
+/**
+    Combobox styles (dls.combobox.js)
+    **/
+  .custom-combobox {
+    position: relative;
+    display: inline-block;
+  }
+  .custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+    border: 1px solid #cccccc;
+    width: 26px;
+    cursor: pointer;
+  }
+  .custom-combobox-input {
+    margin: 0;
+    padding: 4px 6px;
+  }
+  .custom-combobox .arrow {
+    background-image: url(/Content/dls/js/jquery/ui/images/ui-icons_222222_256x240.png);
+    background-position: -65px -16px;
+    display: block;
+    margin: 5px;
+    padding: 5px;
+  }
+  .custom-combobox + .popovers {
+      margin-left: 30px;
+  }
+  /* Fixing modal window input */
+  .ui-dialog-content input.span12, .ui-dialog-content textarea.span12, .ui-dialog-content .uneditable-input.span12 {
+    width: 90%;
+  }
+
+.ui-dialog input.span12, .ui-dialog textarea.span12, .ui-dialog .uneditable-input.span12 {
+    width: 90%; /* Popups fix for bootstrap-responsive.css:390 */
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  display: inline-block;
+  /*background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;*/
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+/* Board styles */
+
+@media only screen and (min-width: 800px) {
+    /* 
+    This style layout is stolen from Trello source. I have NO IDEA how it works.
+    Its purpose is to make the columns 100% height and have vertical scroll bars in them, and have a horizontal scroll bar to move across
+    Also it is dependent on some js in Board.ascx which alters height of board div so the horizontal scroll bar is in view
+*/
+    .board {
+        overflow-y: hidden;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .column-container {
+        width: 200px;
+        height: 92%;
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .column {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        position: relative;
+        white-space: normal;
+    }
+
+    .colhead {
+        flex: 0 0 auto;
+        -webkit-box-flex: 0;
+        position: relative;
+        min-height: 18px;
+    }
+
+    .colbody {
+        -webkit-box-flex: 1;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 4px;        
+    }
+
+    .board {
+        overflow: visible;
+        height: 800px;
+    }
+
+    .board .boardColumn {
+        margin-left: 3px;
+        width: 200px;
+    }
+
+    .board .subhead-container {
+        margin-right: 5px;
+        display: inline-block;
+        height: 100%;
+    }
+}
+
+/* on mobile, boards are shown below each other */
+@media only screen and (max-width: 800px) {
+
+    .board .subhead-container {
+        width: 90%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block;
+     }
+
+    .board .boardColumn {
+        width: 100% !important;
+    }
+}
+
+#boardTabs > ul > li {
+    font-size: 13px;
+}
+
+.board .subHeader {
+    font-size: 12px !important;
+    font-weight: 600;    
+    border-top: solid 1px #34495e;
+    padding: 5px;
+    color:#34495e;
+    background-color:#ffffff;
+    margin-bottom: 3px;
+}
+
+.boardColumn > .portlet-body {
+    padding: 5px 5px 0px 5px !important;
+}
+
+.boardColumn .portlet-title {
+    padding: 5px 5px 0px 5px !important;
+}
+
+.boardColumn > .portlet-title > .caption {
+    font-weight: 500;
+    min-height: 40px;
+}
+
+.boardColumn > .portlet-title > .caption em {
+    text-decoration: underline;
+    font-style: normal;
+}
+
+.col-buttons {
+    display:none;
+    position: absolute;
+    z-index: 100;
+    top: 25px;
+    background-color: #DDD;
+    color: #333;
+    padding: 3px;
+    left: 20px;
+    border: solid 1px #999;
+    cursor: pointer;
+}
+
+.portlet.box > .portlet-title .caption .col-buttons i
+{
+    color: #333 !important;
+}
+
+.board .portlet.contracted {
+    opacity: 1;
+}
+
+.board .boardColumn:first-child {
+    margin-left: 0px;
+}
+
+.board .portlet.boardColumn > .portlet-title > .caption {
+     font-size: 12px !important;
+     margin-right: 0px !important;
+     padding-right: 3px !important;
+
+}
+
+.board .portlet.boardColumn > .portlet-title > .caption i {
+     margin-top: 5px !important;
+}
+
+ .board .card .portlet-title .caption {
+     font-size: 11px !important;
+     float: none !important;
+     display: block !important;
+ }
+
+ .board .card {
+     margin-bottom: 5px !important;
+ }
+
+.board .portlet .portlet-body {
+     font-size: 12px !important;
+ }
+
+.board .card .portlet-body {
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    border-top: 2px solid rgb(204, 204, 204);
+}
+
+/* Dealing with scroll bars */
+.board .mCSB_inside > .mCSB_container {
+    margin-right: 15px;
+}
+
+.board .mCSB_scrollTools {
+    width: 8px !important;
+}
+
+.board .mCS-dark-thin.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background-color: rgba(107, 104, 104, 0.75) !important;
+}
+
+.board .mCS-dark-thin.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-dark-thin.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+    background-color: rgba(107, 104, 104, 0.75) !important;
+}
+
+.card .obj-info {
+    cursor: pointer;
+}
+
+.card .card-title-info {
+    border-bottom: 1px solid #888;
+}
+
+.card .card-title-info:last-child {
+    border-bottom: 0px;
+}
+
+.card .card-title-info:first-child {
+    font-weight: 600;
+}
+
+.card .card-buttons{
+    text-align: right;
+}
+
+.card .card-buttons i {
+    font-size: 20px;
+    color: #555555;
+}
+
+.card .board-label {
+    color: #999;
+}
+
+.coreObjBoardColumn .card .caption .card-title-info:first-child {    
+    cursor: pointer;
+}
+
+.portlet.box > .portlet-title .caption .card-title-info i
+{
+    color: #666 !important;
+    font-size: 15px !important;
+}
+
+/* on mobile there is no hover so show full text */
+@media only screen and (max-width: 800px) {
+    .card .card-title-info .tile-info-truncated {
+        display: none !important;
+    }
+
+    .card .card-title-info .tile-info-expanded {
+        display: inline-block !important;
+    }
+}
