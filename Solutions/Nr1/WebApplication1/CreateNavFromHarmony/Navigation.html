@@ -1,43 +1,45 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
   <title>Navigation</title>
-  <link href="bootstrap.css" rel="stylesheet" /> <!-- 26  -->
-  <link href="bootstrap-responsive.css" rel="stylesheet" /> <!-- 27 -->
-  <link href="style-metro.css" rel="stylesheet" /> <!-- 29  -->
-  <link href="style.css" rel="stylesheet" /> <!-- 31 -->
-  <link href="dls.hijump.css" rel="stylesheet" /> <!-- 51 -->
-  <link href="dls.hiJumpTheme.css" rel="stylesheet" /> <!-- 52 -->
-  <link href="font-awesome/css/font-awesome.css?-2097404688" rel="stylesheet" /> <!-- 124 -->
-  <link href="HarmonyTheme.css" rel="stylesheet" /> <!-- 140 -->
-  <link href="Red.css" rel="stylesheet" /> <!-- 213 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="bootstrap.css" rel="stylesheet" />
+  <link href="bootstrap-responsive.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+  <link href="style-responsive.css" rel="stylesheet" />
+  <link href="default.css" rel="stylesheet" />
+  <link href="dls.hijump.css" rel="stylesheet" />
+  <link href="dls.hiJumpTheme.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="HarmonyTheme.css" rel="stylesheet" />
+  <link href="Red.css" rel="stylesheet" />
+  <script src="jquery-1.8.3.js"></script>
+  <script src="bootstrap.min.js"></script>
 </head>
 <body id="harmonyApp" class="page-header-fixed no-inlinesvg">
   <div class="hijumpTopMenu header navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <a href="javascript:;" class="btn-navbar collapsed " data-toggle="collapse" data-target=".nav-collapse"><img src="menu-toggler.png" alt="" /></a>
 
-        <ul class="nav pull-right ">
+        <ul class="nav pull-right">
 
           <li class='link with-badge'>
             <a href='http://www.google.com' target='_blank' title='New Tab'>
-              <i class='icon-copy'></i>
-              <span class="badge badge-info"></span>
+              <i class='fas fa-copy'></i>
             </a>
           </li>
 
           <li class='dropdown standard'>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class='icon-magic'></i>
-              <span>Quick Create</span>
-              <i class="icon-angle-down"></i>
+              <i class='fas fa-magic'></i>
+              <span>Bookmarks</span>
+              <i class="fas fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu">
-              <li><a href='http://www.expressen.se'><i class='icon-building'></i>Expressen</a></li>
-              <li><a href='http://www.aftonbladet.se'><i class='icon-user'></i>Aftonbladet</a></li>
-              <li><a href='http://www.NWT.se'><i class='icon-wrench'></i>NWT</a></li>
+              <li><a href='http://www.aftonbladet.se' target='_blank'><i class='fas fa-user'></i>&nbsp;Aftonbladet</a></li>
+              <li><a href='http://www.expressen.se' target='_blank'><i class='fas fa-building'></i>&nbsp;Expressen</a></li>
+              <li><a href='http://www.NWT.se' target='_blank'><i class='fas fa-wrench'></i>&nbsp;NWT</a></li>
             </ul>
           </li>
 
@@ -45,20 +47,51 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src='Jonas.png' style='width:29px; height:29px;' />
               <span class='username'>Jonas Leander</span>
-              <i class="icon-angle-down"></i>
+              <i class="fas fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="https://babeljs.io"><i class='icon-key'></i>Babel</a></li>
-              <li><a href="https://www.tutorialspoint.com/csharp"><i class='icon-camera'></i>Tutorialpoint C#</a></li>
-              <li><a href="https://gojs.net/latest/index.html?gclid=EAIaIQobChMI6tuIl9OQ3QIV0xHTCh22TgIdEAEYASAAEgLT_fD_BwE"><i class='icon-print'></i>GOJS</a></li>
+              <li><a href="https://babeljs.io" target='_blank'><i class='fas fa-key'></i>Babel</a></li>
+              <li><a href="https://www.tutorialspoint.com/csharp" target='_blank'><i class='fas fa-camera'></i>Tutorialpoint C#</a></li>
+              <li><a href="https://gojs.net/latest/index.html?gclid=EAIaIQobChMI6tuIl9OQ3QIV0xHTCh22TgIdEAEYASAAEgLT_fD_BwE" target='_blank'><i class='fas fa-print'></i>GOJS</a></li>
               <li class='divider'></li>
-              <li><a href="http://structuremap.github.io"><i class='icon-book'></i>Structuremap</a></li>
+              <li><a href="http://structuremap.github.io" target='_blank'><i class='fas fa-book'></i>Structuremap</a></li>
               <li class='divider'></li>
-              <li><a href="http://nhibernate.info/doc/tutorials/first-nh-app/your-first-nhibernate-based-application"><i class='icon-magnet'></i>NHibernate</a></li>
+              <li><a href="http://nhibernate.info/doc/tutorials/first-nh-app/your-first-nhibernate-based-application" target='_blank'><i class='fas fa-magnet'></i>NHibernate</a></li>
             </ul>
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+
+  <div class="page-container row-fluid">
+    <div class='hijumpSidebarMenu page-sidebar nav-collapse collapse'>
+      <ul class='page-sidebar-menu'>
+        <li>
+          <a href="javascript:;">
+            <i class="fas fa-list-alt"></i>
+            <span class="title">Tasks</span>
+            <span class="arrow"></span>
+          </a>
+          <ul class="sub-menu">
+            <li>
+              <a href="javascript:;">
+                <i class="fas fa-time"></i>
+                <span class="title">My Time</span>
+                <span class="arrow"></span>
+              </a>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="http://www.aftonbladet.se"><span class="title">Aftonbladet</span></a>
+                  </li>
+                  <li>
+                    <a href="http://www.expressen.se"><span class="title">Expressen</span></a>
+                  </li>
+               </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </body>

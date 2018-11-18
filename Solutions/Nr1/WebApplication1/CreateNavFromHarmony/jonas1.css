@@ -1,0 +1,42 @@
+﻿body {
+    direction: ltr;
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    text-shadow: none !important;
+}
+
+#jonasApp .navbar-inner {
+    background-color: #e5e5e5 !important;
+    background-image: url("Jonaslogo1.png") !important;
+    background-repeat: no-repeat;  
+    background-position-x: 10px;
+    background-position-y: 6px;
+    background-size: auto 28px;
+    font-size: 13px;
+    width: 100%;
+    border: 0px;
+    padding: 0px;
+    box-shadow: none;
+    height: 42px;
+    border-radius: 0 !important;
+}
+
+#jonasApp .navbar-inverse .nav > li > a {
+    font-size: 13px;
+}
+
+.header .nav > li.dropdown.user .dropdown-toggle .username {
+    color: #ddd;
+}
+
+#jonasApp .navbar-inverse .nav > li > a > span {
+    margin-left: 5px;
+}
+
+#jonasApp .header .nav > li.dropdown.user .dropdown-toggle .username {
+    color: #555 !important;
+}
+
+
