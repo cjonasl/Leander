@@ -52,6 +52,7 @@
     <Compile Include="Tests1\R5.cs" />
     <Compile Include="Tests1\R6.cs" />
     <Compile Include="Tests1\R8.cs" />
+    <Compile Include="Tests1\R9.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
