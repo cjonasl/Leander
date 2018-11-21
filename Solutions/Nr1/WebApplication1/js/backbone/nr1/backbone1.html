@@ -8,7 +8,40 @@
   <script src="backbone.js"></script>
 </head>
 <body>
+  <button id="btn1" onclick="myFunction1(this, event)">Click1</button><br />
+  <button id="btn2">Click2</button>
 
+  <script>
+    window.jonas = new Object();
+    window.jonas.Book = Backbone.Model.extend(
+      {
+        currentPage: 1,
+        turnPage: function () { this.currentPage += 1; }
+      },
+      {
+        myPage: 2,
+        turnPage: function () { this.myPage += 1; }
+      });
 
+    window.jonas.book = new window.jonas.Book();
+
+    function myFunction1(par1, par2) {
+      alert(window.jonas.book.currentPage + " " + window.jonas.Book.myPage);
+      window.jonas.book.turnPage();
+      window.jonas.Book.turnPage();
+      console.log(par1);
+      console.log(par2);
+    }
+
+    $(document).ready(function () {
+      $("#btn2").click(function (par1, par2) {
+        alert(window.jonas.book.currentPage + " " + window.jonas.Book.myPage);
+        window.jonas.book.turnPage();
+        window.jonas.Book.turnPage();
+        console.log(par1);
+        console.log(par2);
+      });
+    });
+  </script>
 </body>
 </html>
