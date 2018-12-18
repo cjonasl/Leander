@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests1\R10.cs" />
     <Compile Include="Tests1\R7.cs" />
     <Compile Include="Tests1\R2.cs" />
     <Compile Include="Tests1\R3.cs" />
