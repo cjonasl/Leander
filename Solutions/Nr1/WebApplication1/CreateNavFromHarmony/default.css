@@ -114,13 +114,13 @@ ul.page-sidebar-menu > li.active > a .arrow.open:before {
   border-bottom: 1px solid #7d7d7d !important;
 }
 .page-sidebar .sidebar-search .submit {
-  background-image: url(../../img/search-icon.png);
+  background-image: url(search-icon.png);
 }
 /***
 Sidebar toggler
 ***/
 .sidebar-toggler {
-  background-image: url(../../img/sidebar-toggler.jpg);
+  background-image: url(sidebar-toggler.jpg);
   background-color: #242424;
 }
 /* search box bg color on expanded */

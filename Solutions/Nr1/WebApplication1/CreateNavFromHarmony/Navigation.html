@@ -69,6 +69,27 @@
     <div class='hijumpSidebarMenu page-sidebar nav-collapse collapse'>
       <ul class='page-sidebar-menu'>
         <li>
+          <div class="sidebar-toggler"></div>
+        </li>
+
+        <li>
+          <form class='sidebar-search' method="get" action='/Search/SiteSearch'>
+            <div class='input-box'>
+              <a href='javascript:;' class='remove'></a>
+              <input type='text' name='searchTerm' placeholder='Search...' />
+              <input type='button' class='submit' value=' ' />
+            </div>
+          </form>
+        </li>
+
+        <li id="tasksMenu" class="active">
+          <a href="/Finance/Tasks/Home">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="title">Dashboard</span>
+            <span class="selected"></span>
+          </a>
+        </li>
+        <li>
           <a href="javascript:;">
             <i class="fas fa-list-alt"></i>
             <span class="title">Tasks</span>
@@ -77,16 +98,22 @@
           <ul class="sub-menu">
             <li>
               <a href="javascript:;">
-                <i class="fas fa-time"></i>
+                <i class="fas fa-clock"></i>
                 <span class="title">My Time</span>
                 <span class="arrow"></span>
               </a>
               <ul class="sub-menu">
                 <li>
-                  <a href="http://www.aftonbladet.se"><span class="title">Aftonbladet</span></a>
+                  <a href="http://www.aftonbladet.se">
+                    <i class="fas fa-bell"></i>
+                    <span class="title">Aftonbladet</span>
+                  </a>
                 </li>
                 <li>
-                  <a href="http://www.expressen.se"><span class="title">Expressen</span></a>
+                  <a href="http://www.expressen.se">
+                    <i class="fas fa-atlas"></i>
+                    <span class="title">Expressen</span>
+                  </a>
                 </li>
               </ul>
             </li>

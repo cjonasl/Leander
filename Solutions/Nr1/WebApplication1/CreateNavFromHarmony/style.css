@@ -145,7 +145,7 @@ Close icon used for modal dialog and other UI element close buttons
   width: 9px;
   height: 9px;
   background-repeat: no-repeat !important;
-  background-image: url("../img/remove-icon-small.png") !important;
+  background-image: url("remove-icon-small.png") !important;
 }
 
 /***
@@ -596,37 +596,37 @@ ul.page-sidebar-menu > li.active > a .selected {
   display: block;
   width: 8px;
   height: 25px;
-  background-image: url("../img/sidebar-menu-arrow.png");
+  background-image: url("sidebar-menu-arrow.png");
   float: right;
   position: absolute;
   right:0px;
   top:8px;
 }
 
-.page-sidebar ul > li > a > .arrow:before {  
-   float: right;
-   margin-top: 1px;
-   margin-right: 5px;
-   display: inline;
-   font-size: 16px;
-   font-family: FontAwesome;
-   height: auto;
-   content: "\f104";
-   font-weight: 300;
-   text-shadow:none;
+.page-sidebar ul > li > a > .arrow:before {
+    float: right;
+    margin-top: 1px;
+    margin-right: 5px;
+    display: inline;
+    font-size: 16px;
+    font-family: Arial;
+    height: auto;
+    content: url("arrow-left.png");
+    font-weight: 300;
+    text-shadow: none;
 }
 
-ul.page-sidebar-menu > li > a > .arrow.open:before {   
-   float: right;
-   margin-top: 1px;
-   margin-right: 3px;
-   display: inline;
-   font-family: FontAwesome;
-   height: auto;
-   font-size: 16px;
-   content: "\f107";
-   font-weight: 300;
-   text-shadow:none;
+ul.page-sidebar-menu > li > a > .arrow.open:before {
+    float: right;
+    margin-top: 1px;
+    margin-right: 3px;
+    display: inline;
+    height: auto;
+    font-size: 16px;
+    font-family: Arial;
+    content: url("arrow-down.png");
+    font-weight: 300;
+    text-shadow: none;
 }
 
 /* bagin: sidebar menu badges */
@@ -700,30 +700,28 @@ ul.page-sidebar-menu > li > ul.sub-menu  > li ul.sub-menu {
   margin: 0px 0px 0px 0px;
 }
 
-ul.page-sidebar-menu > li > ul.sub-menu  li > a > .arrow:before   {  
-   float: right;
-   margin-top: 1px;
-   margin-right: 20px;
-   display: inline;
-   font-size: 16px;
-   font-family: FontAwesome;
-   height: auto;
-   content: "\f104";
-   font-weight: 300;
-   text-shadow:none;
+ul.page-sidebar-menu > li > ul.sub-menu li > a > .arrow:before {
+    float: right;
+    margin-top: 1px;
+    margin-right: 20px;
+    display: inline;
+    font-size: 16px;
+    height: auto;
+    content: url("arrow-left.png");
+    font-weight: 300;
+    text-shadow: none;
 }
 
-ul.page-sidebar-menu > li > ul.sub-menu  li > a > .arrow.open:before {   
-   float: right;
-   margin-top: 1px;
-   margin-right: 18px;
-   display: inline;
-   font-family: FontAwesome;
-   height: auto;
-   font-size: 16px;
-   content: "\f107";
-   font-weight: 300;
-   text-shadow:none;
+ul.page-sidebar-menu > li > ul.sub-menu li > a > .arrow.open:before {
+    float: right;
+    margin-top: 1px;
+    margin-right: 18px;
+    display: inline;
+    height: auto;
+    font-size: 16px;
+    content: url("arrow-down.png");
+    font-weight: 300;
+    text-shadow: none;
 }
 
 ul.page-sidebar-menu > li.active > ul.sub-menu > li.active ul.sub-menu {
@@ -2138,7 +2136,6 @@ Star rating
 }
 
 .rating span.star {
-  font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
   display: inline-block;
@@ -2364,7 +2361,6 @@ textarea.placeholder {
 .success .help-inline.ok:before {
   content: "\f00c";
   font-size: 16px;
-  font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
   display: inline-block;
@@ -2462,7 +2458,7 @@ Zoom icon overlay on images
 }
 
 .zoom .zoom-icon {
-  background-image:url("../img/overlay-icon.png");
+  background-image:url("overlay-icon.png");
   background-color: #222;
   background-repeat: no-repeat;
   background-position: 50%;
@@ -3349,7 +3345,6 @@ Tiles(new in v1.1.1)
 
 .tile.selected .check:after {  
   content: "";
-  font-family: FontAwesome;
   font-size: 13px;
   content: "\f00c";
   display: inline-block;
@@ -4889,7 +4884,6 @@ Horezantal Menu(new in v1.2)
    margin-left: 3px;
    display: inline;
    font-size: 16px;
-   font-family: FontAwesome;
    height: auto;
    content: "\f107";
    font-weight: 300;
@@ -4902,7 +4896,6 @@ Horezantal Menu(new in v1.2)
    margin-right: -5px;
    display: inline;
    font-size: 16px;
-   font-family: FontAwesome;
    height: auto;
    content: "\f105";
    font-weight: 300;
@@ -5433,11 +5426,11 @@ Datatables Plugin(in v1.3)
 }
 
 .dataTable .row-details.row-details-close {
-  background: url("../img/datatable-row-openclose.png") no-repeat 0 0;
+  background: url("datatable-row-openclose.png") no-repeat 0 0;
 }
 
 .dataTable .row-details.row-details-open {  
-  background: url("../img/datatable-row-openclose.png") no-repeat 0 -23px !important;
+  background: url("datatable-row-openclose.png") no-repeat 0 -23px !important;
 }
 
 .dataTable .details {
@@ -5593,11 +5586,11 @@ Datatables Plugin(in v1.3)
 }
 
 .dataTable .row-details.row-details-close {
-  background: url("../img/datatable-row-openclose.png") no-repeat 0 0;
+  background: url("datatable-row-openclose.png") no-repeat 0 0;
 }
 
 .dataTable .row-details.row-details-open {  
-  background: url("../img/datatable-row-openclose.png") no-repeat 0 -23px !important;
+  background: url("datatable-row-openclose.png") no-repeat 0 -23px !important;
 }
 
 .dataTable .details {
