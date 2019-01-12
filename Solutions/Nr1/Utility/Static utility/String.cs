@@ -148,7 +148,6 @@ namespace Leander.Nr1
             return words[0];
         }
 
-
         public static int ReturnStartIndex(string row, int rowNr, ArrayList allowAbleStartIndexes, out string errorMessage)
         {
             int i = 0, startIndex = -1;
@@ -225,6 +224,33 @@ namespace Leander.Nr1
             }
 
             return new string(charArray);
+        }
+
+        public static bool IsSearchTermUniqueInString(string str, string searchTerm, out int startIndexSearchTerm, out string errorMessage)
+        {
+            int index;
+
+            errorMessage = null; //Default
+
+            startIndexSearchTerm = str.IndexOf(searchTerm);
+
+            if (startIndexSearchTerm == -1)
+            {
+                errorMessage = string.Format("The following string was not found as expected:\r\n{0}", searchTerm);
+                return false;
+            }
+            else
+            {
+                index = str.IndexOf(searchTerm, startIndexSearchTerm + searchTerm.Length - 1);
+
+                if (index >= 0)
+                {
+                    errorMessage = string.Format("The following string was found more than once:\r\n{0}", searchTerm);
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

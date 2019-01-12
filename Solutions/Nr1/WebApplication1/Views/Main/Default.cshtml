@@ -1,0 +1,72 @@
+﻿@model WebApplication1.Models.Location
+
+  @{
+      Layout = string.Format("~/Views/Main/_Layout{0}.cshtml", Model.Page.ToString());
+  }
+
+  <div class="span12">
+  <div class="ui-corner-all">
+    <div class="row-fluid page-heading">
+      <div class="row-fluid">
+        <div class="pull-left">
+          <h3>
+            <i id="iIcon" class="fas fa-anchor"></i>
+            <span id="spanTitle" class="object-title">Title</span>
+          </h3>
+        </div>
+        <div class="pull-right">
+          <input id="inputCmd" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="margin-top: 10px; margin-right: 10px; width: 500px;" />
+          <button id="btnCmd" style="margin-top: -1px; margin-right: 40px; font-weight: bold;" onclick="window.jonas.executeCmd()">Run</button>
+          <img src="http://www.Nr1Web1.com/SearchResultOfResources.png" style="margin-right: 10px;" />
+          <img src="http://www.Nr1Web1.com/RenderResource.png" style="margin-right: 7px;" />
+        </div>
+      </div>
+    </div>
+    <div class='detail-content'>
+      <div class="portlet box hijumpPortletBox tabbable">
+        <div class="portlet-title">
+          <div class="tabbable portlet-tabs">
+            <ul class="nav nav-tabs detailPanelTabs">
+              <li id="liTab1"><a id="aTab1" class="portletLink" href="javascript: window.jonas.tabChanged(1)">Tab1</a></li>
+              <li id="liTab2"><a id="aTab2" class="portletLink" href="javascript: window.jonas.tabChanged(2)">Tab2</a></li>
+              <li id="liTab3"><a id="aTab3" class="portletLink" href="javascript: window.jonas.tabChanged(3)">Tab3</a></li>
+              <li id="liTab4"><a id="aTab4" class="portletLink" href="javascript: window.jonas.tabChanged(4)">Tab4</a></li>
+              <li id="liTab5"><a id="aTab5" class="portletLink" href="javascript: window.jonas.tabChanged(5)">Tab5</a></li>
+              <li id="liTab6"><a id="aTab6" class="portletLink" href="javascript: window.jonas.tabChanged(6)">Tab6</a></li>
+              <li id="liTab7"><a id="aTab7" class="portletLink" href="javascript: window.jonas.tabChanged(7)">Tab7</a></li>
+              <li id="liTab8"><a id="aTab8" class="portletLink" href="javascript: window.jonas.tabChanged(8)">Tab8</a></li>
+              <li id="liTab9"><a id="aTab9" class="portletLink" href="javascript: window.jonas.tabChanged(9)">Tab9</a></li>
+              <li id="liTab10"><a id="aTab10" class="portletLink" href="javascript: window.jonas.tabChanged(10)">Tab10</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="portlet-body">
+          <div id="tabContent" class="tab-content" style="min-height: 1000px;">
+
+            <!-- Default location -->
+            <div id="contentDivDefaultLocation" style="display: none;">
+              <button id="btnSave" disabled="disabled" class="btnSaveTextArea">Save</button><br />
+              <textarea id="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 100px; height: 25px;"></textarea>
+            </div>
+
+            <!-- Non default location-->
+            <div id="contentDivNonDefaultLocation" style="display: none;"></div>
+
+            <!-- Serach result resources -->
+            <div id="contentDivSerachResultResources" style="display: none;"></div>
+
+            <!-- Render of resource -->
+            <div id="contentDivRenderOfResource" style="display: none;"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+  $(document).ready(function () {
+    window.jonas.newLocation(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, false);
+  });
+  </script>

@@ -119,12 +119,36 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Command.cs" />
+    <Compile Include="Models\DataDefaultLocation.cs" />
+    <Compile Include="Models\IconTitle.cs" />
+    <Compile Include="Models\ResourcePresentationInSearch.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LocationExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutTopLevel.cshtml" />
+    <Content Include="Views\Main\Default.cshtml" />
+    <Content Include="Views\Main\_Layout1.cshtml" />
+    <Content Include="Views\Main\_Layout2.cshtml" />
+    <Content Include="Views\Main\_Layout3.cshtml" />
+    <Content Include="Views\Main\_Layout4.cshtml" />
+    <Content Include="Views\Main\_Layout5.cshtml" />
+    <Content Include="Views\Main\_Layout6.cshtml" />
+    <Content Include="Views\Main\_Layout7.cshtml" />
+    <Content Include="Views\Main\_Layout8.cshtml" />
+    <Content Include="Views\Main\_Layout9.cshtml" />
+    <Content Include="Views\Main\_Layout10.cshtml" />
+    <Content Include="Views\Main\_Layout11.cshtml" />
+    <Content Include="Views\Main\_Layout12.cshtml" />
+    <Content Include="Views\Main\_Layout13.cshtml" />
+    <Content Include="Views\Main\_Layout14.cshtml" />
+    <Content Include="Views\Main\_Layout15.cshtml" />
+    <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab1.cshtml" />
+    <Content Include="Views\Main\SearchResource.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -134,7 +158,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Icon\" />
+    <Folder Include="Tab\" />
+    <Folder Include="Text\" />
+    <Folder Include="Title\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility\Utility.csproj">

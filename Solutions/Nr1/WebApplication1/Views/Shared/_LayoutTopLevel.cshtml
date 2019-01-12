@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/bootstrap.css" rel="stylesheet" />
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/bootstrap-responsive.css" rel="stylesheet" />
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/style.css" rel="stylesheet" />
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/style-responsive.css" rel="stylesheet" />
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/default.css" rel="stylesheet" />
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/dls.hijump.css" rel="stylesheet" />
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/dls.hiJumpTheme.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/HarmonyTheme.css" rel="stylesheet" />
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/Red.css" rel="stylesheet" />
+  <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/jquery-1.8.3.js"></script>
+  <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/bootstrap.min.js"></script>
+  <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/app.js"></script>
+
+  <style>
+    textarea, textarea:focus {
+      border: 1px solid black;
+      font-family: 'Times New Roman';
+      font-size: large;
+      margin: 20px;
+      font-weight: 500;
+    }
+
+    .btnSaveTextArea {
+      margin-left: 20px; 
+      margin-top: 20px; 
+      font-family: Arial; 
+      font-size: larger;
+      font-weight:700;
+      background-color: green;
+      color: lightcyan;
+    }
+
+    #tableSearchResultResorces {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+      border-collapse: collapse !important;
+      width: 100% !important;
+    }
+
+      #tableSearchResultResorces td, #tableSearchResultResorces th {
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+      }
+
+      #tableSearchResultResorces tr:nth-child(even) {
+        background-color: #f2f2f2 !important;
+      }
+
+      #tableSearchResultResorces tr:hover {
+        background-color: #ddd !important;
+      }
+
+      #tableSearchResultResorces th {
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+        text-align: left !important;
+        background-color: #4CAF50 !important;
+        color: white !important;
+      }
+  </style>
+
+  <script>
+    window.jonas = new Object();
+
+    window.jonas.page = 0;
+    window.jonas.menu = 0;
+    window.jonas.sub1 = 0;
+    window.jonas.sub2 = 0;
+    window.jonas.tab = 0;
+    window.jonas.icon = "";
+    window.jonas.textAreaSaved = true;
+    window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, serachResultResources or renderOfResource
+
+    window.jonas.checkIconAndSetTitle = function(newIcon, newTitle) {
+      if (!$("#iIcon").hasClass(newIcon)) {
+        $("#iIcon").removeClass(window.jonas.icon);  //Remove old icon
+        $("#iIcon").addClass(newIcon); //Add new icon
+        window.jonas.icon = newIcon; //Update window.jonas.icon to new icon
+      }
+      $("#spanTitle").text(newTitle);
+    }
+
+    window.jonas.handleLeftMenuOnInitialPageLoad = function (menu, sub1, sub2) {
+      if (menu > 0) {
+        $("#liMenu" + menu).addClass("open");
+        $("#liMenu" + menu).addClass("active");
+        $("#spanMenu" + menu).addClass("open");
+        $("#ulMenu" + menu).css("display", "block");
+        $("#liMenu" + menu + "Sub" + sub1).addClass("open");
+        $("#liMenu" + menu + "Sub" + sub1).addClass("active");
+        $("#spanMenu" + menu + "Sub" + sub1).addClass("open");
+        $("#ulMenu" + menu + "Sub" + sub1).css("display", "block");
+        $("#liMenu" + menu + "Sub" + sub1 + "Sub" + sub2).addClass("active");
+
+      }
+      else {
+        $("#liDashboard").addClass("active");
+      }
+    }
+
+    window.jonas.updateCssDisplayForContentDivs = function (currentLocation, newLocation) {
+      var defaultLocation = $("#contentDivDefaultLocation");
+      var nonDefaultLocation = $("#contentDivNonDefaultLocation");
+      var serachResultResources = $("#contentDivSerachResultResources");
+      var renderOfResource = $("#contentDivRenderOfResource");
+
+      if ((newLocation !== "defaultLocation") && (defaultLocation.css("display") !== "none"))
+        defaultLocation.css("display", "none");
+
+      if ((newLocation === "defaultLocation") && (defaultLocation.css("display") !== "block"))
+        defaultLocation.css("display", "block");
+
+      if ((newLocation !== "nonDefaultLocation") && (nonDefaultLocation.css("display") !== "none"))
+        nonDefaultLocation.css("display", "none");
+
+      if ((newLocation === "nonDefaultLocation") && (nonDefaultLocation.css("display") !== "block"))
+        nonDefaultLocation.css("display", "block");
+
+      if ((newLocation !== "serachResultResources") && (serachResultResources.css("display") !== "none"))
+        serachResultResources.css("display", "none");
+
+      if ((newLocation === "serachResultResources") && (serachResultResources.css("display") !== "block"))
+        serachResultResources.css("display", "block");
+
+      if ((newLocation !== "renderOfResource") && (renderOfResource.css("display") !== "none"))
+        renderOfResource.css("display", "none");
+
+      if ((newLocation === "renderOfResource") && (renderOfResource.css("display") !== "block"))
+        renderOfResource.css("display", "block");
+
+      window.jonas.location = newLocation;
+    }
+
+    window.jonas.handleChangeLocationLeftMenu = function (page, menu, sub1, sub2, tabChanged) {
+
+      //Always go to tab1 when change location in left menu
+      if ((window.jonas.tab !== 1) && ((page !== window.jonas.page) || (menu !== window.jonas.menu) || (sub1 !== window.jonas.sub1) || (sub2 !== window.jonas.sub2))) {
+        $("#liTab" + window.jonas.tab).removeClass("active");
+        $("#liTab1").addClass("active");
+      }
+
+      if (!tabChanged) {
+        if (window.jonas.menu > 0) {
+          $("#liMenu" + window.jonas.menu).removeClass("active");
+          $("#liMenu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2).removeClass("active");
+        }
+        else {
+          $("#liDashboard").removeClass("active");
+        }
+
+        if (menu > 0) {
+          $("#liMenu" + menu).addClass("active");
+          $("#liMenu" + menu + "Sub" + sub1 + "Sub" + sub2).addClass("active");
+        }
+        else {
+          $("#liDashboard").addClass("active");
+        }
+      }
+    }
+
+    window.jonas.textAreaChange = function () {
+      $("#btnSave").prop("disabled", false);
+      $("#btnSave").css("background-color", "red");
+      window.jonas.textAreaSaved = false;
+      $(this).off("change");
+    }
+
+    window.jonas.handleTextAreaSave = function() {
+      var txtArea = $("#textarea");
+
+      var locationExtension = {
+        page: window.jonas.page,
+        menu: window.jonas.menu,
+        sub1: window.jonas.sub1,
+        sub2: window.jonas.sub2,
+        tab: window.jonas.tab,
+        width: txtArea.css("width"),
+        height: txtArea.css("height"),
+        text: txtArea.val().trim()
+      }
+
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/SaveTextArea",
+        data: locationExtension,
+        dataType: "json",
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) { alert("Result from server is: " + data); },
+        complete: function () {
+          $("#btnSave").prop("disabled", true);
+          $("#btnSave").css("background-color", "green");
+          window.jonas.textAreaSaved = true;
+          $("#textarea").on("change", window.jonas.textAreaChange);
+        }
+      });
+    }
+
+    window.jonas.tabChanged = function (tab) {
+      if (!window.jonas.textAreaSaved) {
+        alert("WATCH OUT!! textarea is not saved!!!");
+        return;
+      }
+
+      $("#liTab" + window.jonas.tab).removeClass("active");
+      $("#liTab" + tab).addClass("active");
+      window.jonas.newLocation(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, tab, true);
+    }
+
+    window.jonas.executeCmd = function () {
+      var availableCommands, command;
+
+      availableCommands = ["icon", "title", "menu", "sub1", "sub2", "tab"];
+
+      var v = $("#inputCmd").val().split(' ');
+
+      if (availableCommands.indexOf(v[0]) >= 0) {
+        command = {
+          page: window.jonas.page,
+          menu: window.jonas.menu,
+          sub1: window.jonas.sub1,
+          sub2: window.jonas.sub2,
+          tab: window.jonas.tab,
+          cmd: v[0],
+          val: v[1]
+        }
+
+        $.ajax({
+          url: "http://www.Nr1Web1.com/Main/ExecuteCommand",
+          data: command,
+          dataType: "json",
+          error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+          method: "post",
+          success: function (data) {
+            if (data !== "ok") {
+              alert(data);
+              return;
+            }
+
+            if (v[0] === "icon") {
+              $("#iIcon").removeClass(window.jonas.icon);
+              $("#iIcon").addClass(v[1]);
+              window.jonas.icon = v[1];
+            }
+            else if (v[0] === "title") {
+              $("#spanTitle").text(v[1]);
+            }
+            else if (v[0].substring(0, 3) === "tab") {
+              $("#aTab" + window.jonas.tab).text(v[1]);
+            }
+            else if ((v[0] === "menu") || (v[0] === "sub1") || (v[0] === "sub2")) {
+              var url = window.location = "http://www.Nr1Web1.com/Main/Default?page=" + window.jonas.page + "&menu=" + window.jonas.menu + "&sub1=" + window.jonas.sub1 + "&sub2=" + window.jonas.sub2 + "&tab=" + window.jonas.tab + "&cmdVisibility=visible";
+              window.open(url, "_self");
+            }
+
+            $("#inputCmd").val("");
+          }
+        });
+      }
+      else {
+        alert("The given command does not exist! Available commands are:\r\n" + availableCommands.join(", "));
+        return;
+      }
+    }
+
+    window.jonas.setTitleTextInBrowser = function (page, menu, sub1, sub2, tab, suffix) {
+      var titleTextInBrowser;
+
+      if ((menu > 0) && (tab > 0))
+        titleTextInBrowser = "Page" + page + " - Menu" + menu + " - Sub" + sub1 + " - Sub" + sub2 + " - Tab" + tab + suffix;
+      else if ((menu === 0) && (tab > 0))
+        titleTextInBrowser = "Page" + page + " - Dashboard - Tab" + tab + suffix;
+      else if ((menu > 0) && (tab === 0))
+        titleTextInBrowser = "Page" + page + " - Menu" + menu + " - Sub" + sub1 + " - Sub" + sub2 + suffix;
+      else
+        titleTextInBrowser = "Page" + page + " - Dashboard" + suffix;
+
+      $("title").text(titleTextInBrowser);
+    }
+
+    window.jonas.newLocation = function(page, menu, sub1, sub2, tab, tabChanged) {
+      var location;
+
+      // ----------- If it is a new page a full reload is needed to rerender left menu ----------------------
+      if ((window.jonas.location !== "initialRequest") && (page !== window.jonas.page)) {
+        window.location = "http://www.Nr1Web1.com/Main/Default?page=" + page + "&menu=0&sub1=0&sub2=0&tab=1";
+        return;
+      }
+      // ----------------------------------------------------------------------------------------------------
+
+      // ----- Initial request from browser -----
+      if (window.jonas.location === "initialRequest") {
+
+        window.jonas.handleLeftMenuOnInitialPageLoad(menu, sub1, sub2);
+        $("#liTab" + tab).addClass("active");
+        $("#textarea").on("change", window.jonas.textAreaChange);
+        $("#btnSave").on("click", function () { window.jonas.handleTextAreaSave(); });
+      }
+
+      // Check if textarea in a default location is saved
+      if (!window.jonas.textAreaSaved) {
+        alert("WATCH OUT!! textarea is not saved!!!");
+        return;
+      }
+
+      location = {
+        page: page,
+        menu: menu,
+        sub1: sub1,
+        sub2: sub2,
+        tab: tab,
+        newLocationByChangeOfTab: tabChanged
+      }
+
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/NewLocation",
+        data: location,
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+          if (typeof data === "object") { //Default location. Update icon, title, tab1-tab10 (if not new location by change of tab) and for textarea the text, width and height
+            var txtArea, i;
+
+            window.jonas.checkIconAndSetTitle(data.Icon, data.Title);
+
+            if (!tabChanged) {
+              for (i = 1; i <= 10; i++) {
+                if (data.Tab[i - 1] !== $("#aTab" + i).text())
+                  $("#aTab" + i).text(data.Tab[i - 1]);
+              }
+            }
+
+            txtArea = $("#textarea");
+            txtArea.val(data.Text);
+            txtArea.css("width", data.Width);
+            txtArea.css("height", data.Height);
+
+            window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (default location)");
+            window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "defaultLocation");      
+          }
+          else { //html back from server, i.e. a non-default location
+            $("#contentDivNonDefaultLocation").html(data);
+            window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (non-default location)");
+            window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "nonDefaultLocation");
+          }
+          window.jonas.handleChangeLocationLeftMenu(page, menu, sub1, sub2, tabChanged);
+
+          if ((window.jonas.location === "serachResultResources") || (window.jonas.location === "renderOfResource"))
+            $("#liTab" + tab).addClass("active");
+
+          window.jonas.page = page;
+          window.jonas.menu = menu;
+          window.jonas.sub1 = sub1;
+          window.jonas.sub2 = sub2;
+          window.jonas.tab = tab;
+        }
+      });
+    }
+
+    window.jonas.searchResources = function () {
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/SearchResource",
+        data: { searchTerm: $("#searchTerm").val() },
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+          $("#contentDivSerachResultResources").html(data);
+          window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Serach result resources)");
+          window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "serachResultResources");
+          $("#liTab" + window.jonas.tab).removeClass("active");
+          window.jonas.tab = 0;
+          window.jonas.checkIconAndSetTitle("fa-shuttle-van", "Search result for resources");
+          searchTerm: $("#searchTerm").val("");
+        }
+      });
+    }
+
+    window.jonas.renderResource = function (id) {
+      alert("Render resource " + id);
+    }
+
+  </script>
+</head>
+<body id="jonasApp" class="page-header-fixed no-inlinesvg">
+  <div class="hijumpTopMenu header navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <ul class="nav pull-right">
+          <li class='dropdown user'>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src='http://www.Nr1Web1.com/CreateNavFromHarmony/Jonas.png' style='width:29px; height:29px;' />
+              <span class='username'>Jonas Leander</span>
+              <i class="fas fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="javascript: window.jonas.newLocation(1, 0, 0, 0, 1, false)"><i class='fas fa-key'></i>&nbsp;&nbsp;Page1</a></li>
+              <li><a href="javascript: window.jonas.newLocation(2, 0, 0, 0, 1, false)"><i class='fas fa-camera'></i>&nbsp;&nbsp;Page2</a></li>
+              <li><a href="javascript: window.jonas.newLocation(3, 0, 0, 0, 1, false)"><i class='fas fa-print'></i>&nbsp;&nbsp;Page3</a></li>
+              <li><a href="javascript: window.jonas.newLocation(4, 0, 0, 0, 1, false)"><i class='fas fa-book'></i>&nbsp;&nbsp;Page4</a></li>
+              <li><a href="javascript: window.jonas.newLocation(5, 0, 0, 0, 1, false)"><i class='fas fa-magnet'></i>&nbsp;&nbsp;Page5</a></li>
+              <li><a href="javascript: window.jonas.newLocation(6, 0, 0, 0, 1, false)"><i class='fas fa-bed'></i>&nbsp;&nbsp;Page6</a></li>
+              <li><a href="javascript: window.jonas.newLocation(7, 0, 0, 0, 1, false)"><i class='fas fa-beer'></i>&nbsp;&nbsp;Page7</a></li>
+              <li><a href="javascript: window.jonas.newLocation(8, 0, 0, 0, 1, false)"><i class='fas fa-bell'></i>&nbsp;&nbsp;Page8</a></li>
+              <li><a href="javascript: window.jonas.newLocation(9, 0, 0, 0, 1, false)"><i class='fas fa-bus'></i>&nbsp;&nbsp;Page9</a></li>
+              <li><a href="javascript: window.jonas.newLocation(10, 0, 0, 0, 1, false)"><i class='fas fa-dice'></i>&nbsp;&nbsp;Page10</a></li>
+              <li><a href="javascript: window.jonas.newLocation(11, 0, 0, 0, 1, false)"><i class='fas fa-helicopter'></i>&nbsp;&nbsp;Page11</a></li>
+              <li><a href="javascript: window.jonas.newLocation(12, 0, 0, 0, 1, false)"><i class='fas fa-hotel'></i>&nbsp;&nbsp;Page12</a></li>
+              <li><a href="javascript: window.jonas.newLocation(13, 0, 0, 0, 1, false)"><i class='fas fa-kiss'></i>&nbsp;&nbsp;Page13</a></li>
+              <li><a href="javascript: window.jonas.newLocation(14, 0, 0, 0, 1, false)"><i class='fas fa-ship'></i>&nbsp;&nbsp;Page14</a></li>
+              <li><a href="javascript: window.jonas.newLocation(15, 0, 0, 0, 1, false)"><i class='fas fa-umbrella'></i>&nbsp;&nbsp;Page15</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  @RenderBody();
+
+  <script type="text/javascript">
+    $(function () {
+      App.init();
+    });
+
+  </script>
+</body>
+</html>
+

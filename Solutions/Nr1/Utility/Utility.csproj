@@ -7,7 +7,7 @@
     <ProjectGuid>{ED39ED60-C258-408A-9731-4DB9924F4B79}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Utility</RootNamespace>
+    <RootNamespace>Leander.Nr1</RootNamespace>
     <AssemblyName>Utility</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,6 +49,7 @@
     <Compile Include="Static utility\Print.cs" />
     <Compile Include="Static utility\Sort.cs" />
     <Compile Include="Static utility\String.cs" />
+    <Compile Include="Static utility\Validate.cs" />
     <Compile Include="Utility classes\Bar.cs" />
     <Compile Include="Utility classes\ColumnDefinition.cs" />
     <Compile Include="Utility classes\Employee.cs" />

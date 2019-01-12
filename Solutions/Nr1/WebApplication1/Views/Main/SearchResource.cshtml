@@ -1,0 +1,26 @@
+﻿@model List<WebApplication1.Models.ResourcePresentationInSearch>
+
+<h2 style="margin-left: 15px;">Search term:&nbsp;@ViewBag.SearchTerm</h2>
+
+<div style="margin: 10px;">
+
+  <table id="tableSearchResultResorces">
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Key words</th>
+      <th>Created</th>
+    </tr>
+
+    @foreach (WebApplication1.Models.ResourcePresentationInSearch r in Model)
+    {
+    <tr>
+      <td><a href="javascript: window.jonas.renderResource(@r.Id)">@r.Id</a></td>
+      <td>@r.Title</td>
+      <td>@r.KeyWords</td>
+      <td>@r.Created.ToString("yyyy-MM-dd HH:mm:ss")</td>
+    </tr>
+    }
+
+  </table>
+</div>

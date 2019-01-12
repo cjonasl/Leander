@@ -1,20 +1,20 @@
-﻿#harmonyApp .hijumpTopMenu.header .navbar-inner {
+﻿#jonasApp .hijumpTopMenu.header .navbar-inner {
     background-color: #e5e5e5 !important;
 }
 
-#harmonyApp .portlet.box .portlet-title {
+#jonasApp .portlet.box .portlet-title {
     background-color: #bc392b !important;
 }
 
-#harmonyApp .portlet.box {    
+#jonasApp .portlet.box {    
     background-color: #bc392b !important;
 }
 
-#harmonyApp .form-section {
+#jonasApp .form-section {
     border-bottom: 1px solid #bc392b;
 }
 
 /****** Left menu */
-#harmonyApp .hijumpSidebarMenu.page-sidebar > ul > li.active > a {
+#jonasApp .hijumpSidebarMenu.page-sidebar > ul > li.active > a {
     background-color: #bc392b !important;
 }

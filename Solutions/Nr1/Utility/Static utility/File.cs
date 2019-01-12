@@ -215,5 +215,23 @@ namespace Leander.Nr1
                     GetFiles(v[i], fileNameFullPath, suffix, true);
             }
         }
+
+        public static ArrayList ReturnRowsInFileInArrayList(string fileNameFullPath, out string errorMessage)
+        {
+            ArrayList arrayList = null;
+            string[] rows = ReturnRowsInFile(fileNameFullPath, out errorMessage);
+
+            if (errorMessage == null)
+            {
+                arrayList = new ArrayList();
+
+                for(int i = 0; i < rows.Length; i++)
+                {
+                    arrayList.Add(rows[i]);
+                }
+            }
+
+            return arrayList;
+        }
     }
 }

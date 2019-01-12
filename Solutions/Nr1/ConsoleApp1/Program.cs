@@ -10,10 +10,7 @@ namespace Leander.Nr1
     {
         static void Main(string[] args)
         {
-            R10.Execute(18 * 1024 * 1024, "C:\\tmp\\File18.txt");
-            R10.Execute(19 * 1024 * 1024, "C:\\tmp\\File19.txt");
-            R10.Execute(20 * 1024 * 1024, "C:\\tmp\\File20.txt");
-            R10.Execute(21 * 1024 * 1024, "C:\\tmp\\File21.txt");
+            R11.Execute();
         }
     }
 }
