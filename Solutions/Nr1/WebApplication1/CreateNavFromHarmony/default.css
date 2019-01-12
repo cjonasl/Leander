@@ -137,10 +137,10 @@ Sidebar toggler
 /***
 Horizontal Menu(new in v1.2)
 ***/
-/*search*/
+/*search
 .header .hor-menu .hor-menu-search-form-toggler.hide {
   background: #000000 url(../../img/hor-menu-search-close.png) no-repeat center;
-}
+}  Jonas put here*/
 .header .hor-menu .search-form {
   background: #000000;
 }

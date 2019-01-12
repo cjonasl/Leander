@@ -127,10 +127,17 @@ namespace WebApplication1.Controllers
             {
                 case "Page1Menu0Sub0Sub0Tab1":
                     return View("Page1Menu0Sub0Sub0Tab1", GetIconTitle(string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", 1, 0, 0, 0, 1)));
+                case "Page1Menu0Sub0Sub0Tab2":
+                    return View("Page1Menu0Sub0Sub0Tab2", GetIconTitle(string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", 1, 0, 0, 0, 2)));
                 default:
                     dataDefaultLocation = GetDataForNewLocation(location);
                     return Json(dataDefaultLocation, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult Page1Menu0Sub0Sub0Tab2()
+        {
+            return View();
         }
 
         private IconTitle GetIconTitle(string baseFileName)

@@ -4711,13 +4711,14 @@ jQuery UI Dialogs(new in v1.2.4)
   font-family: 'Open Sans', sans-serif;
 }
 
+/*
 .ui-dialog .ui-dialog-titlebar-close {
   outline: none !important;
   border: 0 !important;
   box-shadow: none;
   background: url(../img/hor-menu-search-close.png) no-repeat center;
   margin-top: -12px !important;
-}
+} Jonas comment out */
 
 .ui-dialog .ui-dialog-titlebar-close:hover {
   opacity: 0.8;
@@ -4928,9 +4929,10 @@ Horezantal Menu(new in v1.2)
   filter: alpha(opacity=80);
 }
 
+/*
 .header .hor-menu .hor-menu-search-form-toggler.hide {
    background: #101010 url(../img/hor-menu-search-close.png) no-repeat center;
-}
+} Jonas comment out */
 
 .header .hor-menu a.hor-menu-search-form-toggler-close {
   display: none;

@@ -352,7 +352,7 @@ label.checkbox, label.radio {
     margin-left: 0px;
 }
 
-/*********** Modal Window Fixes */
+/*********** Modal Window Fixes 
 
 .ui-dialog .ui-dialog-titlebar-close {
     background: url("/hijump/Libraries/metronic/img/portlet-remove-icon.png") no-repeat scroll center center transparent;
@@ -360,7 +360,7 @@ label.checkbox, label.radio {
     filter: alpha(opacity=90);  /*ie8 support */
     margin-right: 5px;
     margin-top: -10px;
-}
+} Jonas put here*/
 
 .ui-dialog .ui-dialog-titlebar-close:focus {
     outline: none;

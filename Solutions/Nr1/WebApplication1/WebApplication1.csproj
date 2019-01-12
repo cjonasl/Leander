@@ -122,9 +122,11 @@
     <Compile Include="Models\Command.cs" />
     <Compile Include="Models\DataDefaultLocation.cs" />
     <Compile Include="Models\IconTitle.cs" />
+    <Compile Include="Models\KeyWord.cs" />
     <Compile Include="Models\ResourcePresentationInSearch.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationExtension.cs" />
+    <Compile Include="Models\ResourcesType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +151,7 @@
     <Content Include="Views\Main\_Layout15.cshtml" />
     <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab1.cshtml" />
     <Content Include="Views\Main\SearchResource.cshtml" />
+    <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

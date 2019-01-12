@@ -1,45 +1,36 @@
-﻿Title:
-Titeln på resource (obligatorisk)
+﻿1. Varje resource har ett unikt id, ett heltal med start 1, dvs. 1, 2, 3, ...
 
-Version: 
-Versionen på resource
+2. Varje resource har en egen katalog, med namn enligt "R" + id, dvs. R1, R2, R3, ...
 
-Changed:
-Vad som har uppdaterats i versionen. Kan maximalt vara:
-[Title][ Key phrases][Render pngs][ Previous][Next][Files][Text]
-Jämför strängar case sensitive. På första versionen är Changed alltid Null
+3. I katalogen för resourcen måste en textfil ligga, i format UTF-8, som beskriver
+   resourcen och med namn enligt R + id och suffix ".txt", dvs. R1.txt, R2.txt, R3.txt, ...
 
-Note changed:
-En notering om uppdateringen. Är Null på första versionen.
+4. Katalogstrukturen för resourcernas katalog ska vara enligt:
 
-Added: 2018-10-21 16:06:00
-När resource skapades. Format YYYY-MM-DD HH:mm:ss, t.ex. 2018-10-21 16:06:00
-Added är lika på samtliga versioner.
+   C:\git_cjonasl\Leander\Resources
+                            R1-1000  --------> R1-100  -----------R1
+                            R1001-2000         R101-200           R2
+                            R2001-3000         R201-300           osv…
+                            osv…               osv…
 
-Updated:
-När aktuell version skapades. Samma format som för Added. Added och Updated är
-lika på första versionen.
+5. En resource är alltid antingen en "ThumbUpLocation" (vid renderingen av resourcen 
+   så går man bara till platsen i "Thumb up"), Html (en html-fil, som specifieras i
+   property "HtmlFile", renderas då i div "contentDivRenderOfResource" i Default.cshtml) 
+   eller "Self" (renderingen sker i  Default.cshtml i div "contentDivRenderOfResource"):
 
-Key phrases: 
-En uppsättning “key phrases” för resource, t.ex: [JavaScript][Adhoc]
-Åtminstone en key phrase måste anges och tillhöra uppsättningen av
-tillåtna “key phrases” som finns i resource 1.
+    public enum ResourcesType
+    {
+        ThumbUpLocation,
+        Html,
+        Self
+    }
 
-Render pngs:
-En uppsättning png-filer som ska renderer då resource visas i browser. Ligger en fil i
-katalogen för resource behöver bara filnamnet anges, annars måste hela sökvägen
-vara med. T.ex:
-[Fil1.png][C:\Jonas\Datalogic solution Microsoft Partner.png][AnotherFile.png]
+6. Förutom id har också varje resource en titel, en eller flera nyckelord, datum
+   och tid då den skapades, typ (ThumbUpLocation eller Self), föregående resource
+   (kan vara null) och nästa resource (kan vara null).
 
-Previous:
-Referens till en föregående resource
-
-Next:
-Referens till en nästa resource
-
-Files:
-En uppsättning filer associerade med resource. Ligger en fil I katalogen för resource
-behöver bara filnamnet anges, annars måste hela sökvägen vara med.
-
-Text:
-En text för resource
+7. Om en resource är av typ “Self” så kan man även associera en uppsättning filer
+   till resoursen i property ExternFiles. Om filen ligger i katalogen för resourcen
+   behöver den inte specifieras. Då resoursen renderas visas länkar för varje fil i
+   resoursens katalog samt för de externa filer som man har specificerat. Man kan
+   om man vill, i property FileOrder, ange i vilken ordning filerna ska visas.

@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Title</title>
+  <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/jquery-ui.css" rel="stylesheet" />
   <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/bootstrap.css" rel="stylesheet" />
   <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/bootstrap-responsive.css" rel="stylesheet" />
   <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/style.css" rel="stylesheet" />
@@ -14,7 +15,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/HarmonyTheme.css" rel="stylesheet" />
   <link href="http://www.Nr1Web1.com/CreateNavFromHarmony/Red.css" rel="stylesheet" />
-  <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/jquery-1.8.3.js"></script>
+  <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/jquery-1.12.4.js"></script>
+  <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/jquery-ui.js"></script>
   <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/bootstrap.min.js"></script>
   <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/app.js"></script>
 
@@ -37,26 +39,26 @@
       color: lightcyan;
     }
 
-    #tableSearchResultResorces {
+    #tableSearchResultResources {
       font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
       border-collapse: collapse !important;
       width: 100% !important;
     }
 
-      #tableSearchResultResorces td, #tableSearchResultResorces th {
+      #tableSearchResultResources td, #tableSearchResultResorces th {
         border: 1px solid #ddd !important;
         padding: 8px !important;
       }
 
-      #tableSearchResultResorces tr:nth-child(even) {
+      #tableSearchResultResources tr:nth-child(even) {
         background-color: #f2f2f2 !important;
       }
 
-      #tableSearchResultResorces tr:hover {
+      #tableSearchResultResources tr:hover {
         background-color: #ddd !important;
       }
 
-      #tableSearchResultResorces th {
+      #tableSearchResultResources th {
         padding-top: 12px !important;
         padding-bottom: 12px !important;
         text-align: left !important;
@@ -75,6 +77,7 @@
     window.jonas.tab = 0;
     window.jonas.icon = "";
     window.jonas.textAreaSaved = true;
+    window.jonas.resource = 0;
     window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, serachResultResources or renderOfResource
 
     window.jonas.checkIconAndSetTitle = function(newIcon, newTitle) {
@@ -283,9 +286,12 @@
       $("title").text(titleTextInBrowser);
     }
 
-    window.jonas.newLocation = function(page, menu, sub1, sub2, tab, tabChanged) {
+    window.jonas.newLocation = function (page, menu, sub1, sub2, tab, tabChanged) {
       var location;
 
+      if ((page === window.jonas.page) && (menu === window.jonas.menu) && (sub1 === window.jonas.sub1) && (sub2 === window.jonas.sub2) && (tab === window.jonas.tab))
+        return;
+      
       // ----------- If it is a new page a full reload is needed to rerender left menu ----------------------
       if ((window.jonas.location !== "initialRequest") && (page !== window.jonas.page)) {
         window.location = "http://www.Nr1Web1.com/Main/Default?page=" + page + "&menu=0&sub1=0&sub2=0&tab=1";
@@ -370,18 +376,65 @@
         method: "post",
         success: function (data) {
           $("#contentDivSerachResultResources").html(data);
-          window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Serach result resources)");
-          window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "serachResultResources");
-          $("#liTab" + window.jonas.tab).removeClass("active");
-          window.jonas.tab = 0;
-          window.jonas.checkIconAndSetTitle("fa-shuttle-van", "Search result for resources");
           searchTerm: $("#searchTerm").val("");
+          window.jonas.showLatestSearchResultOfResources();
         }
       });
     }
 
+    window.jonas.showLatestSearchResultOfResources = function() {
+      if (window.jonas.location === "serachResultResources")
+        return;
+
+      if (window.jonas.location !== "renderOfResource") {
+        $("#liTab" + window.jonas.tab).removeClass("active");
+        window.jonas.tab = 0;
+      }
+
+      window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Search result resources)");
+      window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "serachResultResources");
+      window.jonas.checkIconAndSetTitle("fa-shuttle-van", "Search result for resources");
+    }
+
+    window.jonas.showLastRenderOfResource = function() {
+      if (window.jonas.location === "renderOfResource")
+        return;
+
+      if (window.jonas.location !== "serachResultResources") {
+        $("#liTab" + window.jonas.tab).removeClass("active");
+        window.jonas.tab = 0;
+      }
+
+      window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Render of resource)");
+      window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "renderOfResource");
+      window.jonas.checkIconAndSetTitle("fa-book-reader", "Render of resource " + window.jonas.resource);
+    }
+
     window.jonas.renderResource = function (id) {
+      window.jonas.resource = id;
       alert("Render resource " + id);
+    }
+
+    window.jonas.openModal = function (id, title, width, height) {
+      var options, popup;
+
+      options = {
+        modal: true,
+        title: title,
+        position: { my: "center", at: "center", of: window },
+        zIndex: 800,
+        close: function () {
+          
+        },
+        minHeight: 0,
+        width: width,
+        height: height
+      };
+
+      popup = $('#' + id);
+      popup.dialog(options);
+      popup.dialog('open');
+      popup.show();
     }
 
   </script>
