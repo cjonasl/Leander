@@ -13,7 +13,7 @@ namespace Leander.Nr1
             bool returnValue;
             string errorMessage;
 
-            ArrayList v = ReturnRowsInFileInArrayList("C:\\git_cjonasl\\Leander\\Design Leander\\Font Awesome free icons__Without_fas.txt", out errorMessage);
+            ArrayList v = ReturnRowsInFileInArrayList("C:\\git_cjonasl\\Leander\\Design Leander\\Font Awesome free icons__Without_fasfa.txt", out errorMessage);
 
             if (v.IndexOf(icon) >= 0) 
                 returnValue = true;

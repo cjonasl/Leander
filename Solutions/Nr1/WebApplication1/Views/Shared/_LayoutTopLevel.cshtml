@@ -38,33 +38,6 @@
       background-color: green;
       color: lightcyan;
     }
-
-    #tableSearchResultResources {
-      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
-      border-collapse: collapse !important;
-      width: 100% !important;
-    }
-
-      #tableSearchResultResources td, #tableSearchResultResorces th {
-        border: 1px solid #ddd !important;
-        padding: 8px !important;
-      }
-
-      #tableSearchResultResources tr:nth-child(even) {
-        background-color: #f2f2f2 !important;
-      }
-
-      #tableSearchResultResources tr:hover {
-        background-color: #ddd !important;
-      }
-
-      #tableSearchResultResources th {
-        padding-top: 12px !important;
-        padding-bottom: 12px !important;
-        text-align: left !important;
-        background-color: #4CAF50 !important;
-        color: white !important;
-      }
   </style>
 
   <script>
@@ -81,12 +54,25 @@
     window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, serachResultResources or renderOfResource
 
     window.jonas.checkIconAndSetTitle = function(newIcon, newTitle) {
-      if (!$("#iIcon").hasClass(newIcon)) {
-        $("#iIcon").removeClass(window.jonas.icon);  //Remove old icon
-        $("#iIcon").addClass(newIcon); //Add new icon
+      if (!$("#iIcon").hasClass('fa-' + newIcon)) {
+        $("#iIcon").removeClass('fa-' + window.jonas.icon);  //Remove old icon
+        $("#iIcon").addClass('fa-' + newIcon); //Add new icon
         window.jonas.icon = newIcon; //Update window.jonas.icon to new icon
       }
       $("#spanTitle").text(newTitle);
+    }
+
+    window.jonas.setTabNames = function (tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10) {
+      $("#aTab1").text(tab1);
+      $("#aTab2").text(tab2);
+      $("#aTab3").text(tab3);
+      $("#aTab4").text(tab4);
+      $("#aTab5").text(tab5);
+      $("#aTab6").text(tab6);
+      $("#aTab7").text(tab7);
+      $("#aTab8").text(tab8);
+      $("#aTab9").text(tab9);
+      $("#aTab10").text(tab10);
     }
 
     window.jonas.handleLeftMenuOnInitialPageLoad = function (menu, sub1, sub2) {
@@ -216,59 +202,66 @@
     }
 
     window.jonas.executeCmd = function () {
-      var availableCommands, command;
+      var str, index, cmd, val, availableCommands, command;
+
+      str = $("#inputCmd").val().trim();
+      index = str.indexOf(" ");
+
+      if (index > 0) {
+        cmd = str.substring(0, index);
+        val = str.substring(index).trim();
+      }
+      else
+        cmd = "";
 
       availableCommands = ["icon", "title", "menu", "sub1", "sub2", "tab"];
 
-      var v = $("#inputCmd").val().split(' ');
-
-      if (availableCommands.indexOf(v[0]) >= 0) {
-        command = {
-          page: window.jonas.page,
-          menu: window.jonas.menu,
-          sub1: window.jonas.sub1,
-          sub2: window.jonas.sub2,
-          tab: window.jonas.tab,
-          cmd: v[0],
-          val: v[1]
-        }
-
-        $.ajax({
-          url: "http://www.Nr1Web1.com/Main/ExecuteCommand",
-          data: command,
-          dataType: "json",
-          error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
-          method: "post",
-          success: function (data) {
-            if (data !== "ok") {
-              alert(data);
-              return;
-            }
-
-            if (v[0] === "icon") {
-              $("#iIcon").removeClass(window.jonas.icon);
-              $("#iIcon").addClass(v[1]);
-              window.jonas.icon = v[1];
-            }
-            else if (v[0] === "title") {
-              $("#spanTitle").text(v[1]);
-            }
-            else if (v[0].substring(0, 3) === "tab") {
-              $("#aTab" + window.jonas.tab).text(v[1]);
-            }
-            else if ((v[0] === "menu") || (v[0] === "sub1") || (v[0] === "sub2")) {
-              var url = window.location = "http://www.Nr1Web1.com/Main/Default?page=" + window.jonas.page + "&menu=" + window.jonas.menu + "&sub1=" + window.jonas.sub1 + "&sub2=" + window.jonas.sub2 + "&tab=" + window.jonas.tab + "&cmdVisibility=visible";
-              window.open(url, "_self");
-            }
-
-            $("#inputCmd").val("");
-          }
-        });
-      }
-      else {
-        alert("The given command does not exist! Available commands are:\r\n" + availableCommands.join(", "));
+      if (availableCommands.indexOf(cmd) === -1) {
+        alert("Please give a command and a value, where command is one of following available:\r\n" + availableCommands.join(", "));
         return;
       }
+      
+      command = {
+        page: window.jonas.page,
+        menu: window.jonas.menu,
+        sub1: window.jonas.sub1,
+        sub2: window.jonas.sub2,
+        tab: window.jonas.tab,
+        cmd: cmd,
+        val: val
+      }
+
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/ExecuteCommand",
+        data: command,
+        dataType: "json",
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+          if (data !== "ok") {
+            alert(data);
+            return;
+          }
+
+          if (cmd === "icon") {
+            $("#iIcon").removeClass('fa-' + window.jonas.icon);
+            $("#iIcon").addClass('fa-' + val);
+            window.jonas.icon = val;
+          }
+          else if (cmd === "title") {
+            $("#spanTitle").text(val);
+          }
+          else if (cmd.substring(0, 3) === "tab") {
+            $("#aTab" + window.jonas.tab).text(val);
+          }
+          else if ((cmd === "menu") || (cmd === "sub1") || (cmd === "sub2")) {
+            var url = window.location = "http://www.Nr1Web1.com/Main/Default?page=" + window.jonas.page + "&menu=" + window.jonas.menu + "&sub1=" + window.jonas.sub1 + "&sub2=" + window.jonas.sub2 + "&tab=" + window.jonas.tab + "&cmdVisibility=visible";
+            window.open(url, "_self");
+          }
+
+          $("#inputCmd").val("");
+        }
+      });
     }
 
     window.jonas.setTitleTextInBrowser = function (page, menu, sub1, sub2, tab, suffix) {

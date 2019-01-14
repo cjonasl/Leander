@@ -69,11 +69,12 @@ namespace WebApplication1.Controllers
             bool stop;
             int i;
 
-            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
-
+            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}.txt", location.Page, location.Menu, location.Sub1, location.Sub2);
             icon = GetPageEntity(PageEntity.Icon, baseFileName);
             title = GetPageEntity(PageEntity.Title, baseFileName);
-            text = GetPageEntity(PageEntity.Text, baseFileName);
+
+            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
+            text = GetPageEntity(PageEntity.Text, baseFileName);         
 
             if (!string.IsNullOrEmpty(icon))
                 dataDefaultLocation.Icon = icon;
@@ -90,7 +91,8 @@ namespace WebApplication1.Controllers
 
             if ((location.NewLocationByChangeOfTab.HasValue) && (!location.NewLocationByChangeOfTab.Value)) //Not need to update the tabs
             {
-                tabNames = GetTabNames(string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab.txt", location.Page, location.Menu, location.Sub1, location.Sub2));
+                baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab", location.Page, location.Menu, location.Sub1, location.Sub2);
+                tabNames = GetTabNames(baseFileName);
                 stop = false;
                 i = 0;
                 while ((i < 10) && (!stop))
@@ -120,50 +122,76 @@ namespace WebApplication1.Controllers
         {
             string locationStr;
             DataDefaultLocation dataDefaultLocation;
+            ModelDataPageWithKeyWords modelDataPageWithKeyWords;
 
             locationStr = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
 
             switch (locationStr)
             {
                 case "Page1Menu0Sub0Sub0Tab1":
-                    return View("Page1Menu0Sub0Sub0Tab1", GetIconTitle(string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", 1, 0, 0, 0, 1)));
+                    return View("Page1Menu0Sub0Sub0Tab1", GetIconTitleTabs(location));
                 case "Page1Menu0Sub0Sub0Tab2":
-                    return View("Page1Menu0Sub0Sub0Tab2", GetIconTitle(string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", 1, 0, 0, 0, 2)));
+                    modelDataPageWithKeyWords = new ModelDataPageWithKeyWords();
+                    modelDataPageWithKeyWords.IconTitleTabs = GetIconTitleTabs(location);
+                    modelDataPageWithKeyWords.listWithKeyWords = KeyWordUtility.GetKeyWords();
+                    return View("Page1Menu0Sub0Sub0Tab2", modelDataPageWithKeyWords);
                 default:
                     dataDefaultLocation = GetDataForNewLocation(location);
                     return Json(dataDefaultLocation, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public ActionResult Page1Menu0Sub0Sub0Tab2()
+        private IconTitleTabs GetIconTitleTabs(Location location)
         {
-            return View();
-        }
+            string icon, title, baseFileName;
+            string[] tabNames;
+            bool stop;
+            int i;
+            IconTitleTabs iconTitleTabs;
 
-        private IconTitle GetIconTitle(string baseFileName)
-        {
-            string icon, title;
-            IconTitle iconTitle;
+            iconTitleTabs = new IconTitleTabs();
 
-            iconTitle = new IconTitle();
+            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}.txt", location.Page, location.Menu, location.Sub1, location.Sub2);
 
             icon = GetPageEntity(PageEntity.Icon, baseFileName);
             title = GetPageEntity(PageEntity.Title, baseFileName);
 
             if (!string.IsNullOrEmpty(icon))
-                iconTitle.Icon = icon;
+                iconTitleTabs.Icon = icon;
 
             if (!string.IsNullOrEmpty(title))
-                iconTitle.Title = title;
+                iconTitleTabs.Title = title;
 
-            return iconTitle;
+            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab", location.Page, location.Menu, location.Sub1, location.Sub2);
+            tabNames = GetTabNames(baseFileName);
+            stop = false;
+            i = 0;
+            while ((i < 10) && (!stop))
+            {
+                if (!string.IsNullOrEmpty(tabNames[i]))
+                {
+                    iconTitleTabs.Tab[i] = tabNames[i];
+                }
+                else
+                {
+                    stop = true;
+                }
+
+                i++;
+            }
+
+            return iconTitleTabs;
         }
 
         private void HandleSaveOfPageEntity(PageEntity pageEntity, int page, int menu, int sub1, int sub2, int tab, string fileContent)
         {
             string baseFileName, fileNameFullPathText;
 
-            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", page, menu, sub1, sub2, tab);
+            if ((pageEntity == PageEntity.Icon) || (pageEntity == PageEntity.Title)) //Same icon and title for all 10 tabs
+                baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}.txt", page, menu, sub1, sub2);
+            else
+                baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", page, menu, sub1, sub2, tab);
+
             fileNameFullPathText = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\{0}\\{1}", pageEntity.ToString(), baseFileName);
             Utility.CreateNewFile(fileNameFullPathText, fileContent);
         }

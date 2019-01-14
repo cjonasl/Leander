@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.IconTitle
+﻿@model WebApplication1.Models.IconTitleTabs
 
 
 <div style="margin: 10px; font-family: 'Times New Roman'; font-size: larger;">
@@ -25,5 +25,6 @@
 <script>
   $(document).ready(function () {
     window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.setTabNames('@Model.Tab[0]', '@Model.Tab[1]', '@Model.Tab[2]', '@Model.Tab[3]', '@Model.Tab[4]', '@Model.Tab[5]', '@Model.Tab[6]', '@Model.Tab[7]', '@Model.Tab[8]', '@Model.Tab[9]');
   });
 </script>

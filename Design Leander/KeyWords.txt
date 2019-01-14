@@ -1,0 +1,45 @@
+﻿1
+
+----- New property -----
+
+2019-01-01 12:06:23
+
+----- New property -----
+
+Information Thub up
+
+----- New property -----
+
+Olika fakta om hur applikationen "Thumb up" är implementerad
+
+---------- New key word ----------
+
+2
+
+----- New property -----
+
+2019-01-03 16:07:43
+
+----- New property -----
+
+JavaSctipt
+
+----- New property -----
+
+JavaScript-kod
+
+---------- New key word ----------
+
+3
+
+----- New property -----
+
+2019-01-10 19:16:08
+
+----- New property -----
+
+C#
+
+----- New property -----
+
+JavaScript-kod

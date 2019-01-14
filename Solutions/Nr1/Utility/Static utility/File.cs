@@ -19,6 +19,17 @@ namespace Leander.Nr1
             fileStream.Close();
         }
 
+        public static void AppendToFile(string fileNameFullPath, string contentsToAppend)
+        {
+            FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Append, FileAccess.Write);
+            StreamWriter streamWriter = new StreamWriter(fileStream, Encoding.UTF8);
+            streamWriter.Write(contentsToAppend);
+            streamWriter.Flush();
+            fileStream.Flush();
+            streamWriter.Close();
+            fileStream.Close();
+        }
+
         public static string ReturnFileContents(string fileNameFullPath)
         {
             FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Open, FileAccess.Read);

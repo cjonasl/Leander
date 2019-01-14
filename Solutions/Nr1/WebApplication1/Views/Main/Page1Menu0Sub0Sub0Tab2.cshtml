@@ -1,20 +1,92 @@
-﻿@model WebApplication1.Models.IconTitle
+﻿@model WebApplication1.Models.ModelDataPageWithKeyWords
+
+<style>
+  #tableKeyWords {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  #tableKeyWords td, #tableKeyWords th {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+  }
+
+  #tableKeyWords tr:nth-child(even) {
+    background-color: #f2f2f2 !important;
+  }
+
+  #tableKeyWords tr:hover {
+    background-color: #ddd !important;
+  }
+
+  #tableKeyWords th {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    text-align: left !important;
+    background-color: #4CAF50 !important;
+    color: white !important;
+  }
+</style>
 
 <div style="margin: 10px;">
-  <h2 style="margin-left: 15px;">Key words</h2>
+  <table id="tableKeyWords">
+    <tr>
+      <th>Id</th>
+      <th>Created</th>
+      <th>Key phrase</th>
+      <th>Note</th>
+      <th></th>
+    </tr>
 
-  <br />
+    @foreach (WebApplication1.Models.KeyWord keyWord in Model.listWithKeyWords)
+    {
+    <tr>
+      <td>@keyWord.Id</td>
+      <td>@keyWord.Created.Value.ToString("yyyy-MM-dd HH:mm:ss")</td>
+      <td>@keyWord.KeyPhrase</td>
+      <td>@keyWord.Note</td>
+      <td><a href="javascript: window.jonas.editKeyWord(@keyWord.Id, '@keyWord.Created.Value.ToString("yyyy-MM-dd HH:mm:ss")', '@keyWord.KeyPhrase', '@keyWord.Note')">Edit</a></td>
+    </tr>
+    }
+
+  </table>
   <button onclick="window.jonas.openModal('divKeyWord', 'New keyword', 800, 250)">Open modal</button>
 
-  <div id="divKeyWord" style="display: none;">
+  <div id="divNewKeyWord" style="display: none;">
     <table style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 25px !important;">
       <tr>
-        <td style="text-align: right !important;">Key phrase &nbsp;&nbsp;</td>
-        <td><input id="inputKeyPhrase" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
+        <td style="text-align: right !important;">Key phrase&nbsp;&nbsp;</td>
+        <td><input id="inputNewKeyPhrase" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
       </tr>
       <tr>
         <td style="text-align: right !important;">Note&nbsp;&nbsp;</td>
-        <td><input id="inputKeyNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
+        <td><input id="inputNewKeyNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
+      </tr>
+      <tr>
+        <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="alert('Key=' + $('#inputKeyPhrase').val() + ', Note=' + $('#inputKeyNote').val() );">Save</button></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="divEditKeyWord" style="display: none;">
+    <table style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 25px !important;">
+      <tr>
+        <td style="text-align: right !important;">Id&nbsp;&nbsp;</td>
+        <td id="tdKeyId">Id</td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;">Created&nbsp;&nbsp;</td>
+        <td id="tdKeyCreated">Created</td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;">Key phrase&nbsp;&nbsp;</td>
+        <td id="tdKeyPhrase"> </td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;">Note&nbsp;&nbsp;</td>
+        <td><input id="inputEditKeyNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
       </tr>
       <tr>
         <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="alert('Key=' + $('#inputKeyPhrase').val() + ', Note=' + $('#inputKeyNote').val() );">Save</button></td>
@@ -28,6 +100,7 @@
 
   <script>
   $(document).ready(function () {
-    window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.checkIconAndSetTitle('@Model.IconTitleTabs.Icon', '@Model.IconTitleTabs.Title');
+    window.jonas.setTabNames('@Model.IconTitleTabs.Tab[0]', '@Model.IconTitleTabs.Tab[1]', '@Model.IconTitleTabs.Tab[2]', '@Model.IconTitleTabs.Tab[3]', '@Model.IconTitleTabs.Tab[4]', '@Model.IconTitleTabs.Tab[5]', '@Model.IconTitleTabs.Tab[6]', '@Model.IconTitleTabs.Tab[7]', '@Model.IconTitleTabs.Tab[8]', '@Model.IconTitleTabs.Tab[9]');
   });
   </script>
