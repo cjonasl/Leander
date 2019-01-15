@@ -310,5 +310,31 @@ namespace WebApplication1.Controllers
 
             return View(list);
         }
+
+        public JsonResult AddKeyWord(KeyWord keyWord)
+        {
+            string errorMessage;
+            KeyWord newKeyWord;
+
+            newKeyWord = KeyWordUtility.AddKeyWord(keyWord, out errorMessage);
+
+            if (newKeyWord != null)
+                return Json(newKeyWord, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult EditKeyWord(KeyWord keyWord)
+        {
+            string errorMessage;
+            KeyWord newKeyWord;
+
+            newKeyWord = KeyWordUtility.EditKeyWord(keyWord, out errorMessage);
+
+            if (newKeyWord != null)
+                return Json(newKeyWord, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
     }
 }

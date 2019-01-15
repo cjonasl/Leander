@@ -1,25 +1,27 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text;
 using Leander.Nr1;
 
 namespace WebApplication1.Models
 {
     public class KeyWord
     {
-        public int Id { get; set; }
-        public DateTime? Created { get; set; }
-        public string KeyPhrase { get; set; }    
+        public int? Id { get; set; }
+        public string IdString { get; set; } //Needed when update a key word (to set id on the td)
+        public string Created { get; set; } //In format: yyyy-MM-dd HH:mm:ss
+        public string Phrase { get; set; }    
         public string Note { get; set; }
 
         public KeyWord() { }
 
-        public KeyWord(int id, DateTime created, string keyPhrase, string note)
+        public KeyWord(int id, string created, string phrase, string note)
         {
             this.Id = id;
+            this.IdString = string.Format("keyWord{0}", id.ToString());
             this.Created = created;
-            this.KeyPhrase = keyPhrase;
+            this.Phrase = phrase;
             this.Note = note;
         }
     }
@@ -30,29 +32,19 @@ namespace WebApplication1.Models
 
         private static string SerializeKeyWord(KeyWord keyWord)
         {
-            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}----- New property -----\r\n\r\n{2}", keyWord.Created.Value.ToString("yyyy-MM-dd HH:mm:ss"), keyWord.KeyPhrase, keyWord.Note);
+            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}", keyWord.Id.Value.ToString(), keyWord.Created, keyWord.Phrase, keyWord.Note);
         }
 
         private static KeyWord DeserializeKeyWord(string keyWord)
         {
             string[] v;
-            int id, year, month, day, hour, minute, second;
-            DateTime created;
-            string keyPhrase, note;
+            int id;
+            string created, keyPhrase, note;
 
             v = keyWord.Split(new string[] { "\r\n\r\n----- New property -----\r\n\r\n" }, StringSplitOptions.None);
 
             id = int.Parse(v[0]);
-
-            year = int.Parse(v[1].Substring(0, 4));
-            month = int.Parse(v[1].Substring(5, 2));
-            day = int.Parse(v[1].Substring(8, 2));
-            hour = int.Parse(v[1].Substring(11, 2));
-            minute = int.Parse(v[1].Substring(14, 2));
-            second = int.Parse(v[1].Substring(17, 2));
-
-            created = new DateTime(year, month, day, hour, minute, second);
-
+            created = v[1];
             keyPhrase = v[2];
             note = v[3];
 
@@ -66,35 +58,116 @@ namespace WebApplication1.Models
             int i;
 
             list = Utility.ReturnFileContents(_fileNameFullPathKeyWords).Split(new string[] { "\r\n\r\n---------- New key word ----------\r\n\r\n" }, StringSplitOptions.None);
-
+       
             listWithKeyWords = new List<KeyWord>();
 
-            for (i = 0; i < list.Length; i++)
+            if (!string.IsNullOrEmpty(list[0].Trim()))
             {
-                listWithKeyWords.Add(DeserializeKeyWord(list[i]));
+                for (i = 0; i < list.Length; i++)
+                {
+                    listWithKeyWords.Add(DeserializeKeyWord(list[i]));
+                }
             }
 
             return listWithKeyWords;
         }
 
-       public static void SaveNewKeyWord(string keyPhrase, string note)
-        {
-            int id;
-            KeyWord keyWord;
+       public static KeyWord AddKeyWord(KeyWord keyWord, out string errorMessage)
+       {
+            KeyWord newKeyWord = null;
             string keyWordSerialized, fileContents;
+            List<KeyWord> listWithKeyWords;
+            ArrayList arrayListWithPhrases;
+            int i;
 
-            fileContents = Utility.ReturnFileContents(_fileNameFullPathKeyWords);
+            try
+            {
+                errorMessage = null;
 
-            id = 1 + fileContents.Split(new string[] { "\r\n\r\n---------- New key word ----------\r\n\r\n" }, StringSplitOptions.None).Length;
+                listWithKeyWords = GetKeyWords();
 
-            keyWord = new KeyWord(id, DateTime.Now, keyPhrase, note);
-            keyWordSerialized = SerializeKeyWord(keyWord);
+                arrayListWithPhrases = new ArrayList();
 
-            if (string.IsNullOrEmpty(fileContents))
-                Utility.AppendToFile(_fileNameFullPathKeyWords, keyWordSerialized);
-            else
-                Utility.AppendToFile(_fileNameFullPathKeyWords, string.Format("\r\n\r\n---------- New key word ----------\r\n\r\n{0}", keyWordSerialized));
+                for (i = 0; i < listWithKeyWords.Count; i++)
+                {
+                    arrayListWithPhrases.Add(listWithKeyWords[i].Phrase.ToLower());
+                }
 
+                if (arrayListWithPhrases.IndexOf(keyWord.Phrase.ToLower()) >= 0)
+                {
+                    errorMessage = "The phrase exists already!";
+                    return null;
+                }
+
+                newKeyWord = new KeyWord(1 + arrayListWithPhrases.Count, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), keyWord.Phrase, keyWord.Note);
+                keyWordSerialized = SerializeKeyWord(newKeyWord);
+
+                fileContents = Utility.ReturnFileContents(_fileNameFullPathKeyWords);
+
+                if (string.IsNullOrEmpty(fileContents))
+                    Utility.AppendToFile(_fileNameFullPathKeyWords, keyWordSerialized);
+                else
+                    Utility.AppendToFile(_fileNameFullPathKeyWords, string.Format("\r\n\r\n---------- New key word ----------\r\n\r\n{0}", keyWordSerialized));
+            }
+            catch(Exception e)
+            {
+                errorMessage = string.Format("An Exception occured in method AddKeyWord! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return newKeyWord;
+        }
+
+        public static KeyWord EditKeyWord(KeyWord keyWord, out string errorMessage)
+        {
+            KeyWord newKeyWord = null;
+            bool foundKeyWord = false;
+            StringBuilder sb;
+            List<KeyWord> listWithKeyWords;
+            int i;
+
+            try
+            {
+                errorMessage = null;
+                listWithKeyWords = GetKeyWords();
+
+                if (keyWord.Id == listWithKeyWords[0].Id)
+                {
+                    listWithKeyWords[0].Note = keyWord.Note;
+                    foundKeyWord = true;
+                    newKeyWord = listWithKeyWords[0];
+                }
+
+                sb = new StringBuilder(SerializeKeyWord(listWithKeyWords[0]));
+
+                for (i = 1; i < listWithKeyWords.Count; i++)
+                {
+                    if (keyWord.Id == listWithKeyWords[i].Id)
+                    {                     
+                        listWithKeyWords[i].Note = keyWord.Note;
+                        foundKeyWord = true;
+                        newKeyWord = listWithKeyWords[i];
+                    }
+
+                    sb.Append(string.Format("\r\n\r\n---------- New key word ----------\r\n\r\n{0}", SerializeKeyWord(listWithKeyWords[i])));
+                }
+
+                if (!foundKeyWord)
+                {
+                    errorMessage = "Error! Can not find the key word!";
+                }
+                else
+                {
+                    Utility.CreateNewFile(_fileNameFullPathKeyWords, sb.ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("An Exception occured in method UpdateKeyWord! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return newKeyWord;
         }
     }
 }

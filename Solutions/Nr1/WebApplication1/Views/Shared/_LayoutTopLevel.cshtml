@@ -415,10 +415,6 @@
         modal: true,
         title: title,
         position: { my: "center", at: "center", of: window },
-        zIndex: 800,
-        close: function () {
-          
-        },
         minHeight: 0,
         width: width,
         height: height
@@ -428,6 +424,101 @@
       popup.dialog(options);
       popup.dialog('open');
       popup.show();
+    }
+
+    window.jonas.addKeyWord = function (phrase, note) {
+      var keyWord, newPhrase, newNote;
+
+      newPhrase = phrase.trim();
+      newNote = note.trim();
+
+      if (!newPhrase || !newNote) {
+        alert("Both a phrase and a note must be given!");
+        return;
+      }
+
+      keyWord = {
+        id: null,
+        idString: null,
+        created: null,
+        phrase: newPhrase,
+        note: newNote
+      }
+
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/AddKeyWord",
+        data: keyWord,
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+          var tmp, element = "<tr>";
+          if (typeof data === "object") { //Success. Insert the new key word in the table
+            $("#divNewKeyWord").dialog("close");
+            element += "<td>" + data.Id.toString() + "</td>";
+            element += ("<td>" + data.Created + "</td>");
+            element += ("<td>" + data.Phrase + "</td>");
+            element += ("<td id='" + data.IdString + "'>" + data.Note + "</td>");
+
+            tmp = "<td><a href=\"javascript: window.jonas.openModalToEditKeyWord('AAA', 'BBB', 'CCC')\">Edit</a></td></tr>";
+            tmp = tmp.replace("AAA", data.Id.toString());
+            tmp = tmp.replace("BBB", data.Created);
+            tmp = tmp.replace("CCC", data.Phrase);
+            element += tmp;
+
+            $("#tableKeyWords").append(element);
+            $('#inputNewPhrase').val('');
+            $('#inputNewNote').val('');
+          }
+          else {
+            alert(data); //Error occured
+          }
+        }
+      });
+    }
+
+    window.jonas.openModalToEditKeyWord = function (id, created, phrase) {
+      var note;
+      $("#inputId").val(id);
+      $("#inputCreated").val(created);
+      $("#inputPhrase").val(phrase);
+      note = $("#keyWord" + id).text();
+      $("#inputEditNote").val(note);
+      window.jonas.openModal("divEditKeyWord", "Edit key word", 800, 350);
+    }
+
+    window.jonas.editKeyWord = function (id, created, phrase, note) {
+      var keyWord, newNote;
+
+      newNote = note.trim();
+
+      if (!newNote) {
+        alert("Note must be given!");
+        return;
+      }
+
+      keyWord = {
+        id: id,
+        idString: 'keyWord' + id,
+        created: created,
+        phrase: phrase,
+        note: newNote
+      }
+
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/EditKeyWord",
+        data: keyWord,
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+          if (typeof data === "object") { //Update was successful
+            $("#divEditKeyWord").dialog("close");
+            $('#' + data.IdString).text(data.Note);
+          }
+          else {
+            alert(data); //Error occured
+          }
+        }
+      });
     }
 
   </script>
