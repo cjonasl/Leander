@@ -1,10 +1,10 @@
 ﻿@model WebApplication1.Models.Location
 
-  @{
-      Layout = string.Format("~/Views/Main/_Layout{0}.cshtml", Model.Page.ToString());
-  }
+@{
+  Layout = string.Format("~/Views/Main/_Layout{0}.cshtml", Model.Page.ToString());
+}
 
-  <div class="span12">
+<div class="span12">
   <div class="ui-corner-all">
     <div class="row-fluid page-heading">
       <div class="row-fluid">
@@ -17,7 +17,7 @@
         <div class="pull-right">
           <input id="inputCmd" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="margin-top: 10px; margin-right: 10px; width: 500px;" />
           <button id="btnCmd" style="margin-top: -1px; margin-right: 40px; font-weight: bold;" onclick="window.jonas.executeCmd()">Run</button>
-          <img src="http://www.Nr1Web1.com/SearchResultOfResources.png" style="margin-right: 10px;" onclick="window.jonas.showLatestSearchResultOfResources()"/>
+          <img src="http://www.Nr1Web1.com/SearchResultOfResources.png" style="margin-right: 10px;" onclick="window.jonas.showLatestSearchResultOfResources()" />
           <img src="http://www.Nr1Web1.com/RenderResource.png" style="margin-right: 7px;" onclick="window.jonas.showLastRenderOfResource()" />
         </div>
       </div>
@@ -53,7 +53,7 @@
             <div id="contentDivNonDefaultLocation" style="display: none;"></div>
 
             <!-- Serach result resources -->
-            <div id="contentDivSerachResultResources" style="display: none;"></div>
+            <div id="contentDivSearchResultResources" style="display: none;"></div>
 
             <!-- Render of resource -->
             <div id="contentDivRenderOfResource" style="display: none;"></div>
@@ -63,10 +63,25 @@
       </div>
     </div>
   </div>
-  </div>
+</div>
 
-  <script>
+<div id="dialogNewThumbUpLocationResource" style="display: none; background-color: #99ff99;">
+  <div style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 15px !important;">
+    <div>
+      <span style="text-align: right !important;">Title&nbsp;&nbsp;</span>
+      <input id="inputResourceTitleThumbUpLocation" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 700px !important; margin-top: 7px !important;" />
+    </div>  
+    <div>
+      <span style="text-align: right !important;">Note&nbsp;&nbsp;</span>
+      <input id="inputResourceNoteThumbUpLocation" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 700px !important; margin-top: 7px !important;" />
+    </div>
+    <div style="margin-top: 10px; margin-bottom: 5px; font-weight: bold;">Key words:</div>
+  </div>
+  <div id="divKeyWords" style="font-family: 'Times New Roman' !important;"></div>
+</div>
+
+<script>
   $(document).ready(function () {
     window.jonas.newLocation(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, false);
   });
-  </script>
+</script>

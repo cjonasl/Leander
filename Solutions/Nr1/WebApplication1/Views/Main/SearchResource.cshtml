@@ -29,26 +29,27 @@
   }
 </style>
 
-<h2 style="margin-left: 15px;">Search term:&nbsp;@ViewBag.SearchTerm</h2>
+<div style="margin-left: 20px; margin-top: 5px; margin-right: 20px;">
 
-<div style="margin: 10px;">
+  <h2 style="font-family: Arial; font-weight: bold; display: inline-block;">Search term:&nbsp;</h2>
+  <span style="font-family: 'Times New Roman'; font-size: larger;">@ViewBag.SearchTerm</span>
 
   <table id="tableSearchResultResources">
     <tr>
-      <th>Id</th>
-      <th>Title</th>
-      <th>Key words</th>
-      <th>Created</th>
+      <th>&nbsp;Id</th>
+      <th>&nbsp;Title</th>
+      <th>&nbsp;Key words</th>
+      <th>&nbsp;Created</th>
     </tr>
 
     @foreach (WebApplication1.Models.ResourcePresentationInSearch r in Model)
     {
-    <tr>
-      <td><a href="javascript: window.jonas.renderResource(@r.Id)">@r.Id</a></td>
-      <td>@r.Title</td>
-      <td>@r.KeyWords</td>
-      <td>@r.Created.ToString("yyyy-MM-dd HH:mm:ss")</td>
-    </tr>
+      <tr>
+        <td><a href="javascript: window.jonas.renderResource(@r.Id)">@r.Id</a></td>
+        <td title='@r.Title'>@r.Title</td>
+        <td title='@r.KeyWords'>@r.KeyWords</td>
+        <td>@r.Created.ToString("yyyy-MM-dd HH:mm:ss")</td>
+      </tr>
     }
 
   </table>

@@ -124,6 +124,7 @@
     <Compile Include="Models\IconTitleTabs.cs" />
     <Compile Include="Models\KeyWord.cs" />
     <Compile Include="Models\ModelDataPageWithKeyWords.cs" />
+    <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\ResourcePresentationInSearch.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationExtension.cs" />

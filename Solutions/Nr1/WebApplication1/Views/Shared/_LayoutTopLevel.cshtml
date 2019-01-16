@@ -38,6 +38,12 @@
       background-color: green;
       color: lightcyan;
     }
+
+    .spanKeyWord {
+      margin-left: 3px;
+      margin-right: 10px;
+      font-size:large;
+    }
   </style>
 
   <script>
@@ -51,7 +57,7 @@
     window.jonas.icon = "";
     window.jonas.textAreaSaved = true;
     window.jonas.resource = 0;
-    window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, serachResultResources or renderOfResource
+    window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, searchResultResources or renderOfResource
 
     window.jonas.checkIconAndSetTitle = function(newIcon, newTitle) {
       if (!$("#iIcon").hasClass('fa-' + newIcon)) {
@@ -96,7 +102,7 @@
     window.jonas.updateCssDisplayForContentDivs = function (currentLocation, newLocation) {
       var defaultLocation = $("#contentDivDefaultLocation");
       var nonDefaultLocation = $("#contentDivNonDefaultLocation");
-      var serachResultResources = $("#contentDivSerachResultResources");
+      var searchResultResources = $("#contentDivSearchResultResources");
       var renderOfResource = $("#contentDivRenderOfResource");
 
       if ((newLocation !== "defaultLocation") && (defaultLocation.css("display") !== "none"))
@@ -111,11 +117,11 @@
       if ((newLocation === "nonDefaultLocation") && (nonDefaultLocation.css("display") !== "block"))
         nonDefaultLocation.css("display", "block");
 
-      if ((newLocation !== "serachResultResources") && (serachResultResources.css("display") !== "none"))
-        serachResultResources.css("display", "none");
+      if ((newLocation !== "searchResultResources") && (searchResultResources.css("display") !== "none"))
+        searchResultResources.css("display", "none");
 
-      if ((newLocation === "serachResultResources") && (serachResultResources.css("display") !== "block"))
-        serachResultResources.css("display", "block");
+      if ((newLocation === "searchResultResources") && (searchResultResources.css("display") !== "block"))
+        searchResultResources.css("display", "block");
 
       if ((newLocation !== "renderOfResource") && (renderOfResource.css("display") !== "none"))
         renderOfResource.css("display", "none");
@@ -126,7 +132,7 @@
       window.jonas.location = newLocation;
     }
 
-    window.jonas.handleChangeLocationLeftMenu = function (page, menu, sub1, sub2, tabChanged) {
+    window.jonas.handleChangeLocation = function (page, menu, sub1, sub2, tabChanged) {
 
       //Always go to tab1 when change location in left menu
       if ((window.jonas.tab !== 1) && ((page !== window.jonas.page) || (menu !== window.jonas.menu) || (sub1 !== window.jonas.sub1) || (sub2 !== window.jonas.sub2))) {
@@ -136,7 +142,9 @@
 
       if (!tabChanged) {
         if (window.jonas.menu > 0) {
-          $("#liMenu" + window.jonas.menu).removeClass("active");
+          if (menu !== window.jonas.menu)
+            $("#liMenu" + window.jonas.menu).removeClass("active");
+
           $("#liMenu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2).removeClass("active");
         }
         else {
@@ -144,10 +152,13 @@
         }
 
         if (menu > 0) {
-          $("#liMenu" + menu).addClass("active");
+          if (!$("#liMenu" + menu).hasClass("active"))
+            $("#liMenu" + menu).addClass("active");
+
           $("#liMenu" + menu + "Sub" + sub1 + "Sub" + sub2).addClass("active");
         }
         else {
+          $("#spanMenu" + window.jonas.menu).trigger("click");
           $("#liDashboard").addClass("active");
         }
       }
@@ -202,23 +213,33 @@
     }
 
     window.jonas.executeCmd = function () {
-      var str, index, cmd, val, availableCommands, command;
+      var str, index, cmd, val, availableCommands, command, divKeyWords, i, j, total, n, a, b, c;
 
       str = $("#inputCmd").val().trim();
-      index = str.indexOf(" ");
 
-      if (index > 0) {
-        cmd = str.substring(0, index);
-        val = str.substring(index).trim();
+      if (str === "r") {
+        cmd = "r";
+        val = "0";
       }
-      else
-        cmd = "";
+      else {
+        index = str.indexOf(" ");
 
-      availableCommands = ["icon", "title", "menu", "sub1", "sub2", "tab"];
+        if (index > 0) {
+          cmd = str.substring(0, index);
+          val = str.substring(index).trim();
+        }
+        else
+          cmd = "";
 
-      if (availableCommands.indexOf(cmd) === -1) {
-        alert("Please give a command and a value, where command is one of following available:\r\n" + availableCommands.join(", "));
-        return;
+        availableCommands = ["icon", "title", "menu", "sub1", "sub2", "tab"];
+
+        if (availableCommands.indexOf(cmd) === -1) {
+          str = "The following commands are available:\r\nr: Open resource dialog\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
+          str += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\n";
+          str += "title {value}: Set title for current left menu location";
+          alert(str);
+          return;
+        }
       }
       
       command = {
@@ -238,7 +259,7 @@
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
-          if (data !== "ok") {
+          if ((typeof data === "string") && (data.substring(0, 5) === "ERROR")) {
             alert(data);
             return;
           }
@@ -257,6 +278,36 @@
           else if ((cmd === "menu") || (cmd === "sub1") || (cmd === "sub2")) {
             var url = window.location = "http://www.Nr1Web1.com/Main/Default?page=" + window.jonas.page + "&menu=" + window.jonas.menu + "&sub1=" + window.jonas.sub1 + "&sub2=" + window.jonas.sub2 + "&tab=" + window.jonas.tab + "&cmdVisibility=visible";
             window.open(url, "_self");
+          }
+          else if (cmd === "r") {
+            total = data.length;
+            n = data.length;
+
+            while ((n % 6) != 0)
+              n++;
+
+            a = n / 6;
+
+            divKeyWords = $("#divKeyWords");
+            divKeyWords.html("");
+
+            for (i = 0; i < a; i++) {
+              index = 6 * i;
+              str = "<div style='font-size: large;'><input id='keyWord" + data[index].Id + "' type='checkbox' style='margin-bottom: 5px;' />&nbsp;" + data[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+
+              for (j = 1; j <= 5; j++) {
+                if ((index + j) < total)
+                  str += "<input id='keyWord" + data[index + j].Id + "' type='checkbox' style='margin-bottom: 5px;' />&nbsp;" + data[index + j].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+                else
+                  break;
+              }
+
+              str += "</div>"
+
+              divKeyWords.append(str);
+            }
+
+            window.jonas.openModal("dialogNewThumbUpLocationResource", "New ThumbUpLocation resource", 800, 350);
           }
 
           $("#inputCmd").val("");
@@ -281,7 +332,7 @@
 
     window.jonas.newLocation = function (page, menu, sub1, sub2, tab, tabChanged) {
       var location;
-
+ 
       if ((page === window.jonas.page) && (menu === window.jonas.menu) && (sub1 === window.jonas.sub1) && (sub2 === window.jonas.sub2) && (tab === window.jonas.tab))
         return;
       
@@ -347,9 +398,10 @@
             window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (non-default location)");
             window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "nonDefaultLocation");
           }
-          window.jonas.handleChangeLocationLeftMenu(page, menu, sub1, sub2, tabChanged);
 
-          if ((window.jonas.location === "serachResultResources") || (window.jonas.location === "renderOfResource"))
+          window.jonas.handleChangeLocation(page, menu, sub1, sub2, tabChanged);
+
+          if ((window.jonas.location === "searchResultResources") || (window.jonas.location === "renderOfResource"))
             $("#liTab" + tab).addClass("active");
 
           window.jonas.page = page;
@@ -368,7 +420,7 @@
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
-          $("#contentDivSerachResultResources").html(data);
+          $("#contentDivSearchResultResources").html(data);
           searchTerm: $("#searchTerm").val("");
           window.jonas.showLatestSearchResultOfResources();
         }
@@ -376,7 +428,7 @@
     }
 
     window.jonas.showLatestSearchResultOfResources = function() {
-      if (window.jonas.location === "serachResultResources")
+      if (window.jonas.location === "searchResultResources")
         return;
 
       if (window.jonas.location !== "renderOfResource") {
@@ -385,22 +437,22 @@
       }
 
       window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Search result resources)");
-      window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "serachResultResources");
-      window.jonas.checkIconAndSetTitle("fa-shuttle-van", "Search result for resources");
+      window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "searchResultResources");
+      window.jonas.checkIconAndSetTitle("shuttle-van", "Search result for resources");
     }
 
     window.jonas.showLastRenderOfResource = function() {
       if (window.jonas.location === "renderOfResource")
         return;
 
-      if (window.jonas.location !== "serachResultResources") {
+      if (window.jonas.location !== "searchResultResources") {
         $("#liTab" + window.jonas.tab).removeClass("active");
         window.jonas.tab = 0;
       }
 
       window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Render of resource)");
       window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "renderOfResource");
-      window.jonas.checkIconAndSetTitle("fa-book-reader", "Render of resource " + window.jonas.resource);
+      window.jonas.checkIconAndSetTitle("book-reader", "Render of resource " + window.jonas.resource);
     }
 
     window.jonas.renderResource = function (id) {
@@ -453,7 +505,7 @@
         success: function (data) {
           var tmp, element = "<tr>";
           if (typeof data === "object") { //Success. Insert the new key word in the table
-            $("#divNewKeyWord").dialog("close");
+            $("#dialogNewKeyWord").dialog("close");
             element += "<td>" + data.Id.toString() + "</td>";
             element += ("<td>" + data.Created + "</td>");
             element += ("<td>" + data.Phrase + "</td>");
@@ -483,7 +535,7 @@
       $("#inputPhrase").val(phrase);
       note = $("#keyWord" + id).text();
       $("#inputEditNote").val(note);
-      window.jonas.openModal("divEditKeyWord", "Edit key word", 800, 350);
+      window.jonas.openModal("dialogEditKeyWord", "Edit key word", 800, 350);
     }
 
     window.jonas.editKeyWord = function (id, created, phrase, note) {
@@ -511,7 +563,7 @@
         method: "post",
         success: function (data) {
           if (typeof data === "object") { //Update was successful
-            $("#divEditKeyWord").dialog("close");
+            $("#dialogEditKeyWord").dialog("close");
             $('#' + data.IdString).text(data.Note);
           }
           else {

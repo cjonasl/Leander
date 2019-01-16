@@ -52,9 +52,9 @@
 
   </table>
 
-  <a href="javascript: window.jonas.openModal('divNewKeyWord', 'Add key word', 800, 250)">&nbsp;Add key word</a>
+  <a href="javascript: window.jonas.openModal('dialogNewKeyWord', 'Add key word', 800, 250)">&nbsp;Add key word</a>
 
-  <div id="divNewKeyWord" style="display: none; background-color: #99ff99;">
+  <div id="dialogNewKeyWord" style="display: none; background-color: #99ff99;">
     <table style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 25px !important;">
       <tr>
         <td style="text-align: right !important;">Key phrase&nbsp;&nbsp;</td>
@@ -64,6 +64,7 @@
         <td style="text-align: right !important;">Note&nbsp;&nbsp;</td>
         <td><input id="inputNewNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
       </tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
       <tr>
         <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="javascript: window.jonas.addKeyWord($('#inputNewPhrase').val(), $('#inputNewNote').val())">Save</button></td>
         <td></td>
@@ -71,7 +72,7 @@
     </table>
   </div>
 
-  <div id="divEditKeyWord" style="display: none; background-color: #99ff99;">
+  <div id="dialogEditKeyWord" style="display: none; background-color: #99ff99;">
     <table style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 25px !important;">
       <tr>
         <td style="text-align: right !important;">Id&nbsp;&nbsp;</td>
@@ -89,16 +90,14 @@
         <td style="text-align: right !important;">Note&nbsp;&nbsp;</td>
         <td><input id="inputEditNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
       </tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
       <tr>
         <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="javascript: window.jonas.editKeyWord($('#inputId').val(), $('#inputCreated').val(), $('#inputPhrase').val(), $('#inputEditNote').val())">Save</button></td>
         <td></td>
       </tr>
     </table>
   </div>
-
 </div>
-
-<div id="abcd"></div>
 
   <script>
   $(document).ready(function () {

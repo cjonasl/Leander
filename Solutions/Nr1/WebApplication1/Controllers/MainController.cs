@@ -266,10 +266,10 @@ namespace WebApplication1.Controllers
                     newfileContents = fileContents.Replace(searchTerm, newTerm);
                     Utility.CreateNewFile(fileNameFullPath, newfileContents);
                 }
-                else if ((command.Cmd == "icon") || (command.Cmd == "title") || (command.Cmd.Substring(0, 3) == "tab"))
+                else if ((command.Cmd == "icon") || (command.Cmd == "title") || ((command.Cmd.Length >= 4) && (command.Cmd.Substring(0, 3) == "tab")))
                 {
                     if ((command.Cmd == "icon") && !Utility.IconExists(command.Val))
-                        return Json("The icon does not exist!!" , JsonRequestBehavior.AllowGet);
+                        return Json("ERROR!! The icon does not exist!!", JsonRequestBehavior.AllowGet);
 
                     switch(command.Cmd)
                     {
@@ -286,10 +286,15 @@ namespace WebApplication1.Controllers
 
                     HandleSaveOfPageEntity(pageEntity, command.Page, command.Menu, command.Sub1, command.Sub2, command.Tab, command.Val);
                 }
+                else if (command.Cmd == "r")
+                {
+                    KeyWordShort[] arrayWithKeyWordShort = KeyWordUtility.ReturnArrayWithKeyWordShort();
+                    return Json(arrayWithKeyWordShort, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception e)
             {
-                return Json(string.Format("ERROR!! An Exception happened! e.Message:\r\n", e.Message), JsonRequestBehavior.AllowGet);
+                return Json(string.Format("ERROR!! An Exception happened! e.Message:\r\n{0}", e.Message), JsonRequestBehavior.AllowGet);
             }
 
             return Json("ok", JsonRequestBehavior.AllowGet);

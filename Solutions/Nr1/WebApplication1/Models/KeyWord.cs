@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Leander.Nr1;
 
@@ -23,6 +24,20 @@ namespace WebApplication1.Models
             this.Created = created;
             this.Phrase = phrase;
             this.Note = note;
+        }
+    }
+
+    public class KeyWordShort
+    {
+        public int Id { get; set; }
+        public string Phrase { get; set; }
+
+        public KeyWordShort() { }
+
+        public KeyWordShort(int id, string phrase)
+        {
+            this.Id = id;
+            this.Phrase = phrase;
         }
     }
 
@@ -168,6 +183,19 @@ namespace WebApplication1.Models
             }
 
             return newKeyWord;
+        }
+
+        public static KeyWordShort[] ReturnArrayWithKeyWordShort()
+        {
+            List<KeyWord> listWithKeyWords = GetKeyWords().OrderBy(x => x.Phrase).ToList();
+            KeyWordShort[] arrayWithKeyWordShort = new KeyWordShort[listWithKeyWords.Count];
+
+            for(int i = 0; i < listWithKeyWords.Count; i++)
+            {
+                arrayWithKeyWordShort[i] = new KeyWordShort(listWithKeyWords[i].Id.Value, listWithKeyWords[i].Phrase);
+            }
+
+            return arrayWithKeyWordShort;
         }
     }
 }
