@@ -115,6 +115,12 @@ namespace WebApplication1.Controllers
 
         public ViewResult Default(Location location)
         {
+            int nextResourceId;
+
+            nextResourceId = ResourceUtility.ReturnNextResourceId();
+ 
+            ViewBag.MaxResourceId = nextResourceId - 1;
+
             return View(location);
         }
 
@@ -297,18 +303,18 @@ namespace WebApplication1.Controllers
                 return Json(string.Format("ERROR!! An Exception happened! e.Message:\r\n{0}", e.Message), JsonRequestBehavior.AllowGet);
             }
 
-            return Json("ok", JsonRequestBehavior.AllowGet);
+            return Json("Success", JsonRequestBehavior.AllowGet);
         }
 
         public ViewResult SearchResource(string searchTerm)
         {
             List<ResourcePresentationInSearch> list = new List<ResourcePresentationInSearch>()
             {
-                new ResourcePresentationInSearch(10, "Jonas abc", "JavaScript, C#", new DateTime(2018, 9, 3, 2, 2, 2)),
-                new ResourcePresentationInSearch(5, "Karlstad heja", "music, adhoc, By a gift", new DateTime(2018, 10, 21, 20, 34, 55)),
-                new ResourcePresentationInSearch(8, "Bangkok next", "travel", new DateTime(2019, 1, 4, 15, 17, 53)),
-                new ResourcePresentationInSearch(6, "Work as consultant", "consultant, C#", new DateTime(2018, 2, 15, 23, 34, 35)),
-                new ResourcePresentationInSearch(22, "Leisure in USA", "Washington, tennis, jQuery", new DateTime(2018, 5, 5, 5, 2, 47))
+                new ResourcePresentationInSearch(10, ResourcesType.Html, new DateTime(2018, 9, 3, 2, 2, 2), "Jonas abc", "JavaScript, C#"),
+                new ResourcePresentationInSearch(5, ResourcesType.Html, new DateTime(2018, 10, 21, 20, 34, 55), "Karlstad heja", "music, adhoc, By a gift"),
+                new ResourcePresentationInSearch(8, ResourcesType.Html, new DateTime(2019, 1, 4, 15, 17, 53), "Bangkok next", "travel"),
+                new ResourcePresentationInSearch(6, ResourcesType.Html, new DateTime(2018, 2, 15, 23, 34, 35), "Work as consultant", "consultant, C#"),
+                new ResourcePresentationInSearch(22, ResourcesType.Html, new DateTime(2018, 5, 5, 5, 2, 47), "Leisure in USA", "Washington, tennis, jQuery")
             };
 
             ViewBag.SearchTerm = searchTerm;
@@ -340,6 +346,24 @@ namespace WebApplication1.Controllers
                 return Json(newKeyWord, JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult HandleResource(Resource resource)
+        {
+            string errorMessage;
+            Resource newResource = null;
+
+            if (resource.Id == 0)
+                newResource = ResourceUtility.AddResource(resource, out errorMessage);
+            else
+                ResourceUtility.UpdateResource(resource, out errorMessage);
+
+            if (errorMessage != null)
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+            else if (resource.Id == 0)
+                return Json(newResource, JsonRequestBehavior.AllowGet);
+            else
+                return Json("Success", JsonRequestBehavior.AllowGet);
         }
     }
 }

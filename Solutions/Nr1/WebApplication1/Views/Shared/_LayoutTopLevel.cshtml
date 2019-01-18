@@ -57,7 +57,9 @@
     window.jonas.icon = "";
     window.jonas.textAreaSaved = true;
     window.jonas.resource = 0;
+    window.jonas.maxResourceId = 0;
     window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, searchResultResources or renderOfResource
+    window.jonas.modalState = "";
 
     window.jonas.checkIconAndSetTitle = function(newIcon, newTitle) {
       if (!$("#iIcon").hasClass('fa-' + newIcon)) {
@@ -213,33 +215,24 @@
     }
 
     window.jonas.executeCmd = function () {
-      var str, index, cmd, val, availableCommands, command, divKeyWords, i, j, total, n, a, b, c;
+      var v, str, descriptionAvailableCommands, index, cmd, val, availableCommands, command, divKeyWords, i, j, total, n, a, b, c;
 
-      str = $("#inputCmd").val().trim();
+      descriptionAvailableCommands = "The following commands are available:\r\nr l: New/edit ThumbUpLocation resource\r\nr h: New Html resource\r\nr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
+      descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\ntitle {value}: Set title for current left menu location";
 
-      if (str === "r") {
-        cmd = "r";
-        val = "0";
+      availableCommands = ["r", "icon", "title", "menu", "sub1", "sub2", "tab"];
+
+      v = $("#inputCmd").val().trim().split(' ');
+
+      if (v.length === 2) {
+        cmd = v[0].trim();
+        val = v[1].trim();
+        index = availableCommands.indexOf(cmd);
       }
-      else {
-        index = str.indexOf(" ");
 
-        if (index > 0) {
-          cmd = str.substring(0, index);
-          val = str.substring(index).trim();
-        }
-        else
-          cmd = "";
-
-        availableCommands = ["icon", "title", "menu", "sub1", "sub2", "tab"];
-
-        if (availableCommands.indexOf(cmd) === -1) {
-          str = "The following commands are available:\r\nr: Open resource dialog\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
-          str += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\n";
-          str += "title {value}: Set title for current left menu location";
-          alert(str);
-          return;
-        }
+      if ((v.length !== 2) || ((v.length === 2) && (index === -1)) || ((v.length === 2) && (cmd === "r") && (val !== "l") && (val !== "h") && (val !== "s")))  {
+        alert("ERROR!! Incorrect given command!\r\n" + descriptionAvailableCommands);
+        return;
       }
       
       command = {
@@ -259,7 +252,7 @@
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
-          if ((typeof data === "string") && (data.substring(0, 5) === "ERROR")) {
+          if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
             alert(data);
             return;
           }
@@ -307,7 +300,25 @@
               divKeyWords.append(str);
             }
 
-            window.jonas.openModal("dialogNewThumbUpLocationResource", "New ThumbUpLocation resource", 800, 350);
+            if (val === "l") {        
+              $("#inputResourceResourcesType").val("ThumbUpLocation");
+              $("#tableResources").append("<tr id=\"trResourceThumbUpLocation\"><td style=\"text-align: right !important;\" title=\"Thumb up location\">Location&nbsp;&nbsp;</td><td><input id=\"inputResourceThumbUpLocation\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" readonly=\"readonly\" value=\"" + "Page" + window.jonas.page + "Menu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2 + "Tab" + window.jonas.tab + "\" /></td></tr>");
+              window.jonas.modalState = "ThumbUpLocation";
+              window.jonas.openModal("dialogResource", "New ThumbUpLocation resource", 1100, 620);
+            }
+            else if (val === "h") {
+              $("#inputResourceResourcesType").val("Html");             
+              $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Html file\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
+              window.jonas.modalState = "Html";
+              window.jonas.openModal("dialogResource", "New Html resource", 1100, 620);
+            }
+            else {
+              $("#inputResourceResourcesType").val("Self");
+              $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files full path (row separated)\">Files&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
+              $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
+              window.jonas.modalState = "Self";
+              window.jonas.openModal("dialogResource", "New Self resource", 1100, 620);
+            }
           }
 
           $("#inputCmd").val("");
@@ -469,7 +480,32 @@
         position: { my: "center", at: "center", of: window },
         minHeight: 0,
         width: width,
-        height: height
+        height: height,
+        close: function () {
+
+          if ((window.jonas.modalState === "ThumbUpLocation") || (window.jonas.modalState === "Html") || (window.jonas.modalState === "Self")) {
+            $("#inputResourceId").val("");
+            $("#inputResourceResourcesType").val("");
+            $("#inputResourceCreated").val("");
+            $("#inputResourceTitle").val("");
+            $("#inputResourceNote").val("");
+            $("#inputResourcePrevious").val("");
+            $("#inputResourceNext").val("");
+
+            if (window.jonas.modalState === "ThumbUpLocation") {
+              $("#trResourceThumbUpLocation").remove();
+            }
+            else if (window.jonas.modalState === "Html") {
+              $("#trResourceHtmlFile").remove();
+            }
+            else if (window.jonas.modalState === "Self") {
+              $("#trResourceFiles").remove();
+              $("#trResourceLinks").remove();
+            }
+          }
+
+          window.jonas.modalState = "";
+        }
       };
 
       popup = $('#' + id);
@@ -568,6 +604,141 @@
           }
           else {
             alert(data); //Error occured
+          }
+        }
+      });
+    }
+
+    window.jonas.handleResource = function () {
+      var id, resourcesType, created, title, note, previous, next, keyWords; //Same for all 3 resource types
+      var thumbUpLocation = ""; //Only type ThumbUpLocation
+      var htmlFile = ""; //Only type Html
+      var files = "", links = ""; //Only type Self
+      var newKeyWords, resource, i, roundNumber;
+
+      id = $("#inputResourceId").val();
+      resourcesType = $("#inputResourceResourcesType").val();
+      created = $("#inputResourceCreated").val();
+      title = $("#inputResourceTitle").val().trim();
+      note = $("#inputResourceNote").val().trim();
+      previous = $("#inputResourcePrevious").val();
+      next = $("#inputResourceNext").val();
+      keyWords = $("input[type='checkbox']:checked", "#divKeyWords");
+
+      if (window.jonas.modalState === "ThumbUpLocation") {
+        thumbUpLocation = $("#inputResourceThumbUpLocation").val().trim();
+      }
+
+      if (window.jonas.modalState === "Html") {
+        htmlFile = $("#inputResourceHtmlFile").val().trim();
+
+        if (!html) {
+          alert("A Html-file must be given!");
+          return;
+        }
+      }
+
+      if (window.jonas.modalState === "Self") {
+        files = $("#textareaResourceFiles").val().trim();
+        links = $("#textareaResourceLinks").val().trim();
+      }
+
+      if (!title) {
+        alert("Title must be given!");
+        return;
+      }
+
+      if (keyWords.length === 0) {
+        alert("At least one key word must be given!");
+        return;
+      }
+
+      if (!previous)
+        previous = 0;
+
+      if (!next)
+        next = 0;
+
+      //previous, next and id seem to be of type string even if "type=number" in the input-element
+      id = window.Number(id);
+      previous = window.Number(previous);
+      next = window.Number(next);
+
+      roundNumber = Math.round(previous);
+      if ((previous !== 0) && ((Math.round(previous) !== previous) || (previous < 1) || (previous > window.jonas.maxResourceId))) {
+        alert("Previous must be an integer in the range [1," + window.jonas.maxResourceId + "]!");
+        return;
+      }
+
+      roundNumber = Math.round(next);
+      if ((next !== 0) && ((Math.round(next) !== next) || (next < 1) || (next > window.jonas.maxResourceId))) {
+        alert("Next must be an integer in the range [1," + window.jonas.maxResourceId + "]!");
+        return;
+      }
+
+      if (id && (previous !== 0) && (previous === id)) {
+        alert("Previous can not point to itself!");
+        return;
+      }
+
+      if (id && (next !== 0) && (next === id)) {
+        alert("Next can not point to itself!");
+        return;
+      }
+
+      if ((previous !== 0) && (next !== 0) && (previous === next)) {
+        alert("Previous and Next can not point to same resource!");
+        return;
+      }
+
+      newKeyWords = "";
+
+      for (i = 0; i < keyWords.length; i++) {
+        if ((keyWords[i].checked) && (newKeyWords === "")) {
+          newKeyWords = keyWords[i].id.substring(7);
+        }
+        else if ((keyWords[i].checked) && (newKeyWords !== ""))  {    
+          newKeyWords += ("," + keyWords[i].id.substring(7));
+        }
+      }
+
+      if (!id)
+        id = 0;
+
+      resource = {
+        id: id,
+        resourcesType: resourcesType,
+        created: created,
+        title: title,
+        keyWords: newKeyWords,
+        note: note,
+        previousResource: previous,
+        nextResource: next,
+        thumbUpLocation: thumbUpLocation,
+        htmlFile: htmlFile,
+        files: files,
+        links: links
+      }
+
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/HandleResource",
+        data: resource,
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+
+          if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+            alert(data);
+            return;
+          }
+          else if (typeof data === "object") {
+            $("#inputResourceId").val(data.Id);
+            $("#inputResourceCreated").val(data.Created);
+            $("#dialogResource").dialog("option", "title", "Update " + data.ResourcesType + " resource");
+            window.jonas.maxResourceId++;
+          }
+          else {
+            alert("Update of the resource was successful!");
           }
         }
       });

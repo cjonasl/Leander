@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Harmony\ReflectionHelpers.cs" />
     <Compile Include="Static utility\ArrayList.cs" />
+    <Compile Include="Static utility\DateTime.cs" />
     <Compile Include="Static utility\Employee.cs" />
     <Compile Include="Static utility\File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

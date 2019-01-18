@@ -1,0 +1,29 @@
+﻿15
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+
+
+----- New property -----
+
+Jonas
+
+----- New property -----
+
+2
+
+----- New property -----
+
+Leander
+
+----- New property -----
+
+1
+
+----- New property -----
+
+2

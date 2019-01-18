@@ -15,10 +15,8 @@
           </h3>
         </div>
         <div class="pull-right">
-          <input id="inputCmd" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="margin-top: 10px; margin-right: 10px; width: 500px;" />
-          <button id="btnCmd" style="margin-top: -1px; margin-right: 40px; font-weight: bold;" onclick="window.jonas.executeCmd()">Run</button>
-          <img src="http://www.Nr1Web1.com/SearchResultOfResources.png" style="margin-right: 10px;" onclick="window.jonas.showLatestSearchResultOfResources()" />
-          <img src="http://www.Nr1Web1.com/RenderResource.png" style="margin-right: 7px;" onclick="window.jonas.showLastRenderOfResource()" />
+          <input id="inputCmd" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="margin-top: 10px !important; margin-right: 10px !important; width: 500px !important; font-family: 'Courier New' !important; font-weight: bold !important; font-size: medium !important;" />
+          <button id="btnCmd" style="margin-top: -1px; margin-right: 5px; font-weight: bold; font-size:large !important; font-family: 'Courier New'" onclick="window.jonas.executeCmd()">Run</button>
         </div>
       </div>
     </div>
@@ -65,23 +63,49 @@
   </div>
 </div>
 
-<div id="dialogNewThumbUpLocationResource" style="display: none; background-color: #99ff99;">
-  <div style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 15px !important;">
-    <div>
-      <span style="text-align: right !important;">Title&nbsp;&nbsp;</span>
-      <input id="inputResourceTitleThumbUpLocation" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 700px !important; margin-top: 7px !important;" />
-    </div>  
-    <div>
-      <span style="text-align: right !important;">Note&nbsp;&nbsp;</span>
-      <input id="inputResourceNoteThumbUpLocation" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 700px !important; margin-top: 7px !important;" />
-    </div>
-    <div style="margin-top: 10px; margin-bottom: 5px; font-weight: bold;">Key words:</div>
-  </div>
-  <div id="divKeyWords" style="font-family: 'Times New Roman' !important;"></div>
+<div id="dialogResource" style="display: none; background-color: #99ff99 !important; font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important;">
+
+  <table id="tableResources" style="margin-top: 15px !important;">
+    <tr>
+      <td style="text-align: right !important;" title="Id">Id&nbsp;&nbsp;</td>
+      <td><input id="inputResourceId" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important;" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: right !important;" title="Resources type">Type&nbsp;&nbsp;</td>
+      <td><input id="inputResourceResourcesType" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: right !important;" title="Created">Created&nbsp;&nbsp;</td>
+      <td><input id="inputResourceCreated" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: right !important;" title="Title">Title&nbsp;&nbsp;</td>
+      <td><input id="inputResourceTitle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: right !important;" title="Note">Note&nbsp;&nbsp;</td>
+      <td><input id="inputResourceNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: right !important;" title="Previous resource">Previous&nbsp;&nbsp;</td>
+      <td><input id="inputResourcePrevious" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important; margin-top: 7px !important;" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: right !important;" title="Next resource">Next&nbsp;&nbsp;</td>
+      <td><input id="inputResourceNext" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important; margin-top: 7px !important;" /></td>
+    </tr>
+  </table>
+
+  <div style="margin-top: 10px !important; margin-bottom: 5px !important;">Key words:</div>
+
+  <div id="divKeyWords" style="font-weight: normal !important; font-size: medium !important;"></div>
+
+  <button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important; margin-top: 30px;" onclick="window.jonas.handleResource()">Save</button>
 </div>
 
 <script>
   $(document).ready(function () {
     window.jonas.newLocation(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, false);
+    window.jonas.maxResourceId = @ViewBag.MaxResourceId;
   });
 </script>

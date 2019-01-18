@@ -87,8 +87,8 @@ namespace WebApplication1.Models
             return listWithKeyWords;
         }
 
-       public static KeyWord AddKeyWord(KeyWord keyWord, out string errorMessage)
-       {
+       public static KeyWord AddKeyWord(KeyWord keyWord, out string errorMessage) //keyWord not complete. newKeyWord will be complete
+        {
             KeyWord newKeyWord = null;
             string keyWordSerialized, fileContents;
             List<KeyWord> listWithKeyWords;
@@ -126,7 +126,7 @@ namespace WebApplication1.Models
             }
             catch(Exception e)
             {
-                errorMessage = string.Format("An Exception occured in method AddKeyWord! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method AddKeyWord! e.Message:\r\n{0}", e.Message);
                 return null;
             }
 
@@ -178,7 +178,7 @@ namespace WebApplication1.Models
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("An Exception occured in method UpdateKeyWord! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method UpdateKeyWord! e.Message:\r\n{0}", e.Message);
                 return null;
             }
 
@@ -196,6 +196,49 @@ namespace WebApplication1.Models
             }
 
             return arrayWithKeyWordShort;
+        }
+
+        public static string ReturnCommaSeparatedListWithKeyWords(string commaSeparatedListWithKeyWordId)
+        {
+            List<KeyWord> listWithKeyWords = GetKeyWords();
+            ArrayList id, keyWord;
+            StringBuilder sb;
+            string[] v;
+            int i, index1, index2;
+
+            id = new ArrayList();
+            keyWord = new ArrayList();
+
+            for (i = 0; i < listWithKeyWords.Count; i++)
+            {
+                id.Add(listWithKeyWords[i].Id.Value);
+                keyWord.Add(listWithKeyWords[i].Phrase);
+            }
+
+            v = commaSeparatedListWithKeyWordId.Split(',');
+            sb = new StringBuilder();
+
+            for (i = 0; i < v.Length; i++)
+            {
+                index1 = int.Parse(v[i]);
+                index2 = id.IndexOf(index1);
+
+                if (index2 == -1)
+                {
+                    throw new Exception(string.Format("ERROR!! Can not find KeyWord Id = {0} in method ReturnCommaSeparedListWithKeyWords!", index1.ToString()));
+                }
+
+                if (i == 0)
+                {
+                    sb.Append(keyWord[index2]);
+                }
+                else
+                {
+                    sb.Append(", " + keyWord[index2]);
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿19
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-01-17 20:36:19
+
+----- New property -----
+
+Jonas
+
+----- New property -----
+
+8
+
+----- New property -----
+
+En note is this
+
+----- New property -----
+
+1
+
+----- New property -----
+
+2
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----C:\AAA\Browse.txt----- New file -----C:\tmp\AAA.png
+
+----- New property -----https://www.expressen.se/###Expressen----- New link -----https://www.aftonbladet.se/###Aftonbladet----- New link -----https://www.nwt.se###NWT
