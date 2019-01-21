@@ -10,10 +10,12 @@ namespace WebApplication1.Models
         public string Icon { get; set; }
         public string Title { get; set; }
         public string[] Tab { get; set; }
-
         public string Text { get; set; }
         public string Width { get; set; }
         public string Height { get; set; }
+        public int PreviousResource { get; set; }
+        public int CurrentResource { get; set; }
+        public int NextResource { get; set; }
 
         public DataDefaultLocation()
         {
@@ -30,6 +32,29 @@ namespace WebApplication1.Models
             this.Text = "";
             this.Width = "250px";
             this.Height = "50px";
+            this.PreviousResource = 0;
+            this.CurrentResource = 0;
+            this.NextResource = 0;
+        }
+
+        public DataDefaultLocation(DocumentReadyDataForNonDefaultLocation data) //Everything for DataDefaultLocation is in DocumentReadyDataForNonDefaultLocation except Text, Width and Height
+        {
+            this.Icon = data.Icon;
+            this.Title = data.Title;
+
+            this.Tab = new string[10];
+
+            for (int i = 0; i < 10; i++)
+            {
+                this.Tab[i] = data.Tab[i];
+            }
+
+            this.Text = "";
+            this.Width = "250px";
+            this.Height = "50px";
+            this.PreviousResource = data.PreviousResource;
+            this.CurrentResource = data.CurrentResource;
+            this.NextResource = data.NextResource;
         }
     }
 }

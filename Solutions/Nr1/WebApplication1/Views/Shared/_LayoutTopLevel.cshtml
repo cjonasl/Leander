@@ -39,10 +39,8 @@
       color: lightcyan;
     }
 
-    .spanKeyWord {
-      margin-left: 3px;
-      margin-right: 10px;
-      font-size:large;
+    input[type=checkbox] {
+      transform: scale(1.3) !important;
     }
   </style>
 
@@ -56,8 +54,10 @@
     window.jonas.tab = 0;
     window.jonas.icon = "";
     window.jonas.textAreaSaved = true;
-    window.jonas.resource = 0;
     window.jonas.maxResourceId = 0;
+    window.jonas.previousResource = 0;
+    window.jonas.currentResource = 0;
+    window.jonas.nextResource = 0;
     window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, searchResultResources or renderOfResource
     window.jonas.modalState = "";
 
@@ -94,7 +94,6 @@
         $("#spanMenu" + menu + "Sub" + sub1).addClass("open");
         $("#ulMenu" + menu + "Sub" + sub1).css("display", "block");
         $("#liMenu" + menu + "Sub" + sub1 + "Sub" + sub2).addClass("active");
-
       }
       else {
         $("#liDashboard").addClass("active");
@@ -286,7 +285,7 @@
 
             for (i = 0; i < a; i++) {
               index = 6 * i;
-              str = "<div style='font-size: large;'><input id='keyWord" + data[index].Id + "' type='checkbox' style='margin-bottom: 5px;' />&nbsp;" + data[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+              str = "<div style='font-size: large !important;'><input id='keyWord" + data[index].Id + "' type='checkbox' style='margin-bottom: 5px;' />&nbsp;" + data[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
 
               for (j = 1; j <= 5; j++) {
                 if ((index + j) < total)
@@ -303,21 +302,18 @@
             if (val === "l") {        
               $("#inputResourceResourcesType").val("ThumbUpLocation");
               $("#tableResources").append("<tr id=\"trResourceThumbUpLocation\"><td style=\"text-align: right !important;\" title=\"Thumb up location\">Location&nbsp;&nbsp;</td><td><input id=\"inputResourceThumbUpLocation\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" readonly=\"readonly\" value=\"" + "Page" + window.jonas.page + "Menu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2 + "Tab" + window.jonas.tab + "\" /></td></tr>");
-              window.jonas.modalState = "ThumbUpLocation";
-              window.jonas.openModal("dialogResource", "New ThumbUpLocation resource", 1100, 620);
+              window.jonas.openModal("dialogResource", "New ThumbUpLocation resource", 1100, 620, "ThumbUpLocation");
             }
             else if (val === "h") {
               $("#inputResourceResourcesType").val("Html");             
               $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Html file\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
-              window.jonas.modalState = "Html";
-              window.jonas.openModal("dialogResource", "New Html resource", 1100, 620);
+              window.jonas.openModal("dialogResource", "New Html resource", 1100, 620, "Html");
             }
             else {
               $("#inputResourceResourcesType").val("Self");
               $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files full path (row separated)\">Files&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
               $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
-              window.jonas.modalState = "Self";
-              window.jonas.openModal("dialogResource", "New Self resource", 1100, 620);
+              window.jonas.openModal("dialogResource", "New Self resource", 1100, 620, "Self");
             }
           }
 
@@ -402,7 +398,8 @@
             txtArea.css("height", data.Height);
 
             window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (default location)");
-            window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "defaultLocation");      
+            window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "defaultLocation");
+            window.jonas.handlePreviousCurrentNextResource(data.PreviousResource, data.CurrentResource, data.NextResource);
           }
           else { //html back from server, i.e. a non-default location
             $("#contentDivNonDefaultLocation").html(data);
@@ -466,13 +463,10 @@
       window.jonas.checkIconAndSetTitle("book-reader", "Render of resource " + window.jonas.resource);
     }
 
-    window.jonas.renderResource = function (id) {
-      window.jonas.resource = id;
-      alert("Render resource " + id);
-    }
-
-    window.jonas.openModal = function (id, title, width, height) {
+    window.jonas.openModal = function (id, title, width, height, modalState) {
       var options, popup;
+
+      window.jonas.modalState = modalState;
 
       options = {
         modal: true,
@@ -494,6 +488,7 @@
 
             if (window.jonas.modalState === "ThumbUpLocation") {
               $("#trResourceThumbUpLocation").remove();
+              window.jonas.handlePreviousCurrentNextResource(window.jonas.previousResource, window.jonas.currentResource, window.jonas.nextResource);
             }
             else if (window.jonas.modalState === "Html") {
               $("#trResourceHtmlFile").remove();
@@ -502,6 +497,15 @@
               $("#trResourceFiles").remove();
               $("#trResourceLinks").remove();
             }
+          }
+          else if ((window.jonas.modalState === "AddKeyWord") || (window.jonas.modalState === "EditKeyWord")) {
+            $("#inputKeyWordId").val("");
+            $("#inputKeyWordCreated").val("");
+            $("#inputKeyWordPhrase").val("");
+            $("#inputKeyWordNote").val("");
+
+            if (window.jonas.modalState === "EditKeyWord")
+              $("#inputKeyWordPhrase").prop("readonly", false);
           }
 
           window.jonas.modalState = "";
@@ -514,7 +518,7 @@
       popup.show();
     }
 
-    window.jonas.addKeyWord = function (phrase, note) {
+    window.jonas.handleKeyWord = function (id, created, phrase, note) {
       var keyWord, newPhrase, newNote;
 
       newPhrase = phrase.trim();
@@ -526,22 +530,21 @@
       }
 
       keyWord = {
-        id: null,
+        id: id,
         idString: null,
-        created: null,
+        created: created,
         phrase: newPhrase,
         note: newNote
       }
 
       $.ajax({
-        url: "http://www.Nr1Web1.com/Main/AddKeyWord",
+        url: "http://www.Nr1Web1.com/Main/HandleKeyWord",
         data: keyWord,
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
           var tmp, element = "<tr>";
-          if (typeof data === "object") { //Success. Insert the new key word in the table
-            $("#dialogNewKeyWord").dialog("close");
+          if ((typeof data === "object") && (!id)) { //Success add new key word. Insert the new key word in the table
             element += "<td>" + data.Id.toString() + "</td>";
             element += ("<td>" + data.Created + "</td>");
             element += ("<td>" + data.Phrase + "</td>");
@@ -552,10 +555,17 @@
             tmp = tmp.replace("BBB", data.Created);
             tmp = tmp.replace("CCC", data.Phrase);
             element += tmp;
-
             $("#tableKeyWords").append(element);
-            $('#inputNewPhrase').val('');
-            $('#inputNewNote').val('');
+
+            $("#dialogKeyWord").dialog("option", "title", "Edit key word");      
+            $("#inputKeyWordId").val(data.Id.toString());
+            $("#inputKeyWordCreated").val(data.Created);
+            $("#inputKeyWordPhrase").prop("readonly", true);
+            window.jonas.modalState = "EditKeyWord";
+          }
+          else if ((typeof data === "object") && id) { //Update was successful
+            alert("Update was successful");
+            $('#' + data.IdString).text(data.Note);
           }
           else {
             alert(data); //Error occured
@@ -566,47 +576,13 @@
 
     window.jonas.openModalToEditKeyWord = function (id, created, phrase) {
       var note;
-      $("#inputId").val(id);
-      $("#inputCreated").val(created);
-      $("#inputPhrase").val(phrase);
+      $("#inputKeyWordId").val(id);
+      $("#inputKeyWordCreated").val(created);
+      $("#inputKeyWordPhrase").val(phrase);
       note = $("#keyWord" + id).text();
-      $("#inputEditNote").val(note);
-      window.jonas.openModal("dialogEditKeyWord", "Edit key word", 800, 350);
-    }
-
-    window.jonas.editKeyWord = function (id, created, phrase, note) {
-      var keyWord, newNote;
-
-      newNote = note.trim();
-
-      if (!newNote) {
-        alert("Note must be given!");
-        return;
-      }
-
-      keyWord = {
-        id: id,
-        idString: 'keyWord' + id,
-        created: created,
-        phrase: phrase,
-        note: newNote
-      }
-
-      $.ajax({
-        url: "http://www.Nr1Web1.com/Main/EditKeyWord",
-        data: keyWord,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
-        method: "post",
-        success: function (data) {
-          if (typeof data === "object") { //Update was successful
-            $("#dialogEditKeyWord").dialog("close");
-            $('#' + data.IdString).text(data.Note);
-          }
-          else {
-            alert(data); //Error occured
-          }
-        }
-      });
+      $("#inputKeyWordNote").val(note);
+      $("#inputKeyWordPhrase").prop("readonly", true);
+      window.jonas.openModal("dialogKeyWord", "Edit key word", 800, 350, "EditKeyWord");
     }
 
     window.jonas.handleResource = function () {
@@ -735,6 +711,13 @@
             $("#inputResourceId").val(data.Id);
             $("#inputResourceCreated").val(data.Created);
             $("#dialogResource").dialog("option", "title", "Update " + data.ResourcesType + " resource");
+
+            if (window.jonas.modalState === "ThumbUpLocation") {
+              window.jonas.previousResource = data.PreviousResource;
+              window.jonas.currentResource = Data.Id;
+              window.jonas.nextResource = data.NextResource;
+            }
+
             window.jonas.maxResourceId++;
           }
           else {
@@ -742,6 +725,42 @@
           }
         }
       });
+    }
+
+    window.jonas.handlePreviousCurrentNextResource = function (previous, current, next) {
+
+      if (($("#spanResourcePrevious").css("display") === "none") && (current !== 0)) {
+        $("#spanResourcePrevious").css("display", "inline");
+        $("#spanResourceCurrent").css("display", "inline");
+        $("#spanResourceNext").css("display", "inline");
+      }
+      else if (($("#spanResourcePrevious").css("display") === "inline") && (current === 0)) {
+        $("#spanResourcePrevious").css("display", "none");
+        $("#spanResourceCurrent").css("display", "none");
+        $("#spanResourceNext").css("display", "none");
+      }
+
+      if (current !== 0) {
+        $("#spanResourcePrevious").text("(R" + previous);
+        $("#spanResourceCurrent").text("R" + current);
+        $("#spanResourceNext").text("R" + next + ")");
+      }
+         
+      window.jonas.previousResource = previous;
+      window.jonas.currentResource = current;
+      window.jonas.nextResource = next;
+    }
+
+    window.jonas.renderResource = function(id) {
+
+    }
+
+    window.jonas.renderPreviousResource = function() {
+      window.jonas.renderResource(window.jonas.previousResource);
+    }
+
+    window.jonas.renderNextResource = function() {
+      window.jonas.renderResource(window.jonas.nextResource);
     }
 
   </script>

@@ -15,7 +15,8 @@ namespace WebApplication1.Controllers
         Text,
         Icon,
         Title,
-        Tab
+        Tab,
+        LocationResource
     }
 
 
@@ -61,58 +62,6 @@ namespace WebApplication1.Controllers
                 return null;         
         }
 
-        private DataDefaultLocation GetDataForNewLocation(Location location)
-        {
-            string baseFileName, icon, title, text;
-            DataDefaultLocation dataDefaultLocation = new DataDefaultLocation();
-            string[] tabNames;
-            bool stop;
-            int i;
-
-            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}.txt", location.Page, location.Menu, location.Sub1, location.Sub2);
-            icon = GetPageEntity(PageEntity.Icon, baseFileName);
-            title = GetPageEntity(PageEntity.Title, baseFileName);
-
-            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
-            text = GetPageEntity(PageEntity.Text, baseFileName);         
-
-            if (!string.IsNullOrEmpty(icon))
-                dataDefaultLocation.Icon = icon;
-
-            if (!string.IsNullOrEmpty(title))
-                dataDefaultLocation.Title = title;
-
-            if (!string.IsNullOrEmpty(text))
-            {
-                dataDefaultLocation.Width = text.Substring(0, 5).Trim();
-                dataDefaultLocation.Height = text.Substring(5, 5).Trim();
-                dataDefaultLocation.Text = text.Substring(10);
-            }
-
-            if ((location.NewLocationByChangeOfTab.HasValue) && (!location.NewLocationByChangeOfTab.Value)) //Not need to update the tabs
-            {
-                baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab", location.Page, location.Menu, location.Sub1, location.Sub2);
-                tabNames = GetTabNames(baseFileName);
-                stop = false;
-                i = 0;
-                while ((i < 10) && (!stop))
-                {
-                    if (!string.IsNullOrEmpty(tabNames[i]))
-                    {
-                        dataDefaultLocation.Tab[i] = tabNames[i];
-                    }
-                    else
-                    {
-                        stop = true;
-                    }
-
-                    i++;
-                }
-            }
-
-            return dataDefaultLocation;
-        }
-
         public ViewResult Default(Location location)
         {
             int nextResourceId;
@@ -124,38 +73,15 @@ namespace WebApplication1.Controllers
             return View(location);
         }
 
-        public ActionResult NewLocation(Location location)
+        private DocumentReadyDataForNonDefaultLocation GetDocumentReadyDataForNonDefaultLocation(Location location)
         {
-            string locationStr;
-            DataDefaultLocation dataDefaultLocation;
-            ModelDataPageWithKeyWords modelDataPageWithKeyWords;
-
-            locationStr = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
-
-            switch (locationStr)
-            {
-                case "Page1Menu0Sub0Sub0Tab1":
-                    return View("Page1Menu0Sub0Sub0Tab1", GetIconTitleTabs(location));
-                case "Page1Menu0Sub0Sub0Tab2":
-                    modelDataPageWithKeyWords = new ModelDataPageWithKeyWords();
-                    modelDataPageWithKeyWords.IconTitleTabs = GetIconTitleTabs(location);
-                    modelDataPageWithKeyWords.listWithKeyWords = KeyWordUtility.GetKeyWords();
-                    return View("Page1Menu0Sub0Sub0Tab2", modelDataPageWithKeyWords);
-                default:
-                    dataDefaultLocation = GetDataForNewLocation(location);
-                    return Json(dataDefaultLocation, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        private IconTitleTabs GetIconTitleTabs(Location location)
-        {
-            string icon, title, baseFileName;
-            string[] tabNames;
+            string icon, title, baseFileName, previousCurrentNextResource;
+            string[] tabNames, v;
             bool stop;
             int i;
-            IconTitleTabs iconTitleTabs;
+            DocumentReadyDataForNonDefaultLocation data;
 
-            iconTitleTabs = new IconTitleTabs();
+            data = new DocumentReadyDataForNonDefaultLocation();
 
             baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}.txt", location.Page, location.Menu, location.Sub1, location.Sub2);
 
@@ -163,10 +89,21 @@ namespace WebApplication1.Controllers
             title = GetPageEntity(PageEntity.Title, baseFileName);
 
             if (!string.IsNullOrEmpty(icon))
-                iconTitleTabs.Icon = icon;
+                data.Icon = icon;
 
             if (!string.IsNullOrEmpty(title))
-                iconTitleTabs.Title = title;
+                data.Title = title;
+
+            baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
+            previousCurrentNextResource = GetPageEntity(PageEntity.LocationResource, baseFileName);
+
+            if (!string.IsNullOrEmpty(previousCurrentNextResource))
+            {
+                v = previousCurrentNextResource.Split(' ');
+                data.PreviousResource = int.Parse(v[0]);
+                data.CurrentResource = int.Parse(v[1]);
+                data.NextResource = int.Parse(v[2]);
+            }
 
             baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab", location.Page, location.Menu, location.Sub1, location.Sub2);
             tabNames = GetTabNames(baseFileName);
@@ -176,7 +113,7 @@ namespace WebApplication1.Controllers
             {
                 if (!string.IsNullOrEmpty(tabNames[i]))
                 {
-                    iconTitleTabs.Tab[i] = tabNames[i];
+                    data.Tab[i] = tabNames[i];
                 }
                 else
                 {
@@ -186,20 +123,52 @@ namespace WebApplication1.Controllers
                 i++;
             }
 
-            return iconTitleTabs;
+            return data;
+        }
+
+        private DataDefaultLocation GetDefaultDataForNewLocation(Location location)
+        {
+            DocumentReadyDataForNonDefaultLocation data = GetDocumentReadyDataForNonDefaultLocation(location);
+            DataDefaultLocation dataDefaultLocation = new DataDefaultLocation(data);
+            string text = GetPageEntity(PageEntity.Text, string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab));
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                dataDefaultLocation.Width = text.Substring(0, 5).Trim();
+                dataDefaultLocation.Height = text.Substring(5, 5).Trim();
+                dataDefaultLocation.Text = text.Substring(10);
+            }
+
+            return dataDefaultLocation;
+        }
+
+        public ActionResult NewLocation(Location location)
+        {
+            string locationStr = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
+
+            switch (locationStr)
+            {
+                case "Page1Menu0Sub0Sub0Tab1":
+                    return View("Page1Menu0Sub0Sub0Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
+                case "Page1Menu0Sub0Sub0Tab2":
+                    ViewBag.LlistWithKeyWords = KeyWordUtility.GetKeyWords();
+                    return View("Page1Menu0Sub0Sub0Tab2", GetDocumentReadyDataForNonDefaultLocation(location));
+                default:
+                    return Json(GetDefaultDataForNewLocation(location), JsonRequestBehavior.AllowGet);
+            }
         }
 
         private void HandleSaveOfPageEntity(PageEntity pageEntity, int page, int menu, int sub1, int sub2, int tab, string fileContent)
         {
-            string baseFileName, fileNameFullPathText;
+            string baseFileName, fileNameFullPath;
 
             if ((pageEntity == PageEntity.Icon) || (pageEntity == PageEntity.Title)) //Same icon and title for all 10 tabs
                 baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}.txt", page, menu, sub1, sub2);
             else
                 baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", page, menu, sub1, sub2, tab);
 
-            fileNameFullPathText = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\{0}\\{1}", pageEntity.ToString(), baseFileName);
-            Utility.CreateNewFile(fileNameFullPathText, fileContent);
+            fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\{0}\\{1}", pageEntity.ToString(), baseFileName);
+            Utility.CreateNewFile(fileNameFullPath, fileContent);
         }
 
         [ValidateInput(false)]
@@ -322,25 +291,15 @@ namespace WebApplication1.Controllers
             return View(list);
         }
 
-        public JsonResult AddKeyWord(KeyWord keyWord)
+        public JsonResult HandleKeyWord(KeyWord keyWord)
         {
             string errorMessage;
             KeyWord newKeyWord;
 
-            newKeyWord = KeyWordUtility.AddKeyWord(keyWord, out errorMessage);
-
-            if (newKeyWord != null)
-                return Json(newKeyWord, JsonRequestBehavior.AllowGet);
+            if (keyWord.Id.HasValue)
+                newKeyWord = KeyWordUtility.EditKeyWord(keyWord, out errorMessage);
             else
-                return Json(errorMessage, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult EditKeyWord(KeyWord keyWord)
-        {
-            string errorMessage;
-            KeyWord newKeyWord;
-
-            newKeyWord = KeyWordUtility.EditKeyWord(keyWord, out errorMessage);
+                newKeyWord = KeyWordUtility.AddKeyWord(keyWord, out errorMessage);
 
             if (newKeyWord != null)
                 return Json(newKeyWord, JsonRequestBehavior.AllowGet);

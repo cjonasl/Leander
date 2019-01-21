@@ -250,6 +250,12 @@ namespace WebApplication1.Models
                     Utility.CreateNewFile(fileNameFullPath, resourceSerialized);
                     UpdateNextResourceId(nextResourceId);
                     ResourcePresentationInSearchUtility.AddResource(newResource);
+
+                    if (resource.ResourcesType == ResourcesType.ThumbUpLocation)
+                    {
+                        fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\LocationResource\\{0}.txt", resource.ThumbUpLocation);
+                        Utility.CreateNewFile(fileNameFullPath, string.Format("{0} {1} {2}", newResource.PreviousResource, newResource.Id, newResource.NextResource));
+                    }
                 }
             }
             catch(Exception e)
@@ -281,12 +287,51 @@ namespace WebApplication1.Models
                 resourceSerialized = SerializeResource(resource);
                 Utility.CreateNewFile(fileNameFullPath, resourceSerialized);
                 ResourcePresentationInSearchUtility.UpdateResource(resource);
+
+                if (resource.ResourcesType == ResourcesType.ThumbUpLocation)
+                {
+                    fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\LocationResource\\{0}.txt", resource.ThumbUpLocation);
+                    Utility.CreateNewFile(fileNameFullPath, string.Format("{0} {1} {2}", resource.PreviousResource, resource.Id, resource.NextResource));
+                }
             }
             catch (Exception e)
             {
                 errorMessage = string.Format("ERROR!! An Exception occured in method UpdateResource! e.Message:\r\n{0}", e.Message);
                 return;
             }
+        }
+
+        public static Location ReturnLocation(string thumbUpLocation)
+        {
+            int page, menu, sub1, sub2, tab;
+            int indexMenu, indexSub1, indexSub2, indexTab;
+
+            //Page???Menu???Sub???Sub???Tab???
+            indexMenu = thumbUpLocation.IndexOf("Menu", 4);
+            indexSub1 = thumbUpLocation.IndexOf("Sub", 4);
+            indexSub2 = thumbUpLocation.IndexOf("Sub", 3 + indexSub1);
+            indexTab = thumbUpLocation.IndexOf("Tab", 3 + indexSub2);
+
+            page = int.Parse(thumbUpLocation.Substring(0, indexMenu));
+            menu = int.Parse(thumbUpLocation.Substring(4 + indexMenu, indexSub1 - 4 - indexMenu));
+            sub1 = int.Parse(thumbUpLocation.Substring(3 + indexSub1, indexSub2 - 3 - indexSub1));
+            sub2 = int.Parse(thumbUpLocation.Substring(3 + indexSub2, indexTab - 3 - indexSub2));
+            tab = int.Parse(thumbUpLocation.Substring(3 + indexTab));
+
+            return new Location(page, menu, sub1, sub2, tab);
+        }
+ 
+        public static Resource ReturnResource(int id)
+        {
+            string resourceDirectory, fileNameFullPath, resourceSerialized;
+            Resource resourceDeserialized;
+
+            resourceDirectory = ReturnResourceDirectory(id);
+            fileNameFullPath = string.Format("{0}\\R{1}.txt", resourceDirectory, id.ToString());
+            resourceSerialized = Utility.ReturnFileContents(fileNameFullPath);
+            resourceDeserialized = DeserializeResource(resourceSerialized);
+
+            return resourceDeserialized;
         }
     }
 }

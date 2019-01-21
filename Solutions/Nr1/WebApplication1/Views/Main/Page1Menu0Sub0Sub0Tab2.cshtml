@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.ModelDataPageWithKeyWords
+﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
 
 <style>
   #tableKeyWords {
@@ -16,9 +16,9 @@
     background-color: #f2f2f2 !important;
   }
 
-  #tableKeyWords tr:hover {
-    background-color: #ddd !important;
-  }
+  #tableKeyWords tr:nth-child(odd) {
+      background-color: #ffffcc !important;
+    }
 
   #tableKeyWords th {
     padding-top: 12px !important;
@@ -39,7 +39,7 @@
       <th></th>
     </tr>
 
-    @foreach (WebApplication1.Models.KeyWord keyWord in Model.listWithKeyWords)
+    @foreach (WebApplication1.Models.KeyWord keyWord in (List <WebApplication1.Models.KeyWord>)ViewBag.LlistWithKeyWords)
     {
       <tr>
         <td>@keyWord.Id</td>
@@ -52,47 +52,29 @@
 
   </table>
 
-  <a href="javascript: window.jonas.openModal('dialogNewKeyWord', 'Add key word', 800, 250)">&nbsp;Add key word</a>
+  <a href="javascript: window.jonas.openModal('dialogKeyWord', 'Add key word', 800, 350, 'AddKeyWord')">&nbsp;Add key word</a>
 
-  <div id="dialogNewKeyWord" style="display: none; background-color: #99ff99;">
-    <table style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 25px !important;">
-      <tr>
-        <td style="text-align: right !important;">Key phrase&nbsp;&nbsp;</td>
-        <td><input id="inputNewPhrase" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
-      </tr>
-      <tr>
-        <td style="text-align: right !important;">Note&nbsp;&nbsp;</td>
-        <td><input id="inputNewNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
-      </tr>
-      <tr><td colspan="2">&nbsp;</td></tr>
-      <tr>
-        <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="window.jonas.addKeyWord($('#inputNewPhrase').val(), $('#inputNewNote').val())">Save</button></td>
-        <td></td>
-      </tr>
-    </table>
-  </div>
-
-  <div id="dialogEditKeyWord" style="display: none; background-color: #99ff99;">
+  <div id="dialogKeyWord" style="display: none; background-color: #99ff99;">
     <table style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 25px !important;">
       <tr>
         <td style="text-align: right !important;">Id&nbsp;&nbsp;</td>
-        <td><input id="inputId" type="text" style="width: 650px !important; margin-top: 7px !important;" readonly="readonly" /></td>
+        <td><input id="inputKeyWordId" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" readonly="readonly" /></td>
       </tr>
       <tr>
         <td style="text-align: right !important;">Created&nbsp;&nbsp;</td>
-        <td><input id="inputCreated" type="text" style="width: 650px !important; margin-top: 7px !important;" readonly="readonly" /></td>
+        <td><input id="inputKeyWordCreated" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" readonly="readonly" /></td>
       </tr>
       <tr>
         <td style="text-align: right !important;">Key phrase&nbsp;&nbsp;</td>
-        <td><input id="inputPhrase" type="text" style="width: 650px !important; margin-top: 7px !important;" readonly="readonly" /></td>
+        <td><input id="inputKeyWordPhrase" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
       </tr>
       <tr>
         <td style="text-align: right !important;">Note&nbsp;&nbsp;</td>
-        <td><input id="inputEditNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
+        <td><input id="inputKeyWordNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
       </tr>
       <tr><td colspan="2">&nbsp;</td></tr>
       <tr>
-        <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="window.jonas.editKeyWord($('#inputId').val(), $('#inputCreated').val(), $('#inputPhrase').val(), $('#inputEditNote').val())">Save</button></td>
+        <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="window.jonas.handleKeyWord ($('#inputKeyWordId').val(), $('#inputKeyWordCreated').val(), $('#inputKeyWordPhrase').val(), $('#inputKeyWordNote').val())">Save</button></td>
         <td></td>
       </tr>
     </table>
@@ -101,7 +83,8 @@
 
   <script>
   $(document).ready(function () {
-    window.jonas.checkIconAndSetTitle('@Model.IconTitleTabs.Icon', '@Model.IconTitleTabs.Title');
-    window.jonas.setTabNames('@Model.IconTitleTabs.Tab[0]', '@Model.IconTitleTabs.Tab[1]', '@Model.IconTitleTabs.Tab[2]', '@Model.IconTitleTabs.Tab[3]', '@Model.IconTitleTabs.Tab[4]', '@Model.IconTitleTabs.Tab[5]', '@Model.IconTitleTabs.Tab[6]', '@Model.IconTitleTabs.Tab[7]', '@Model.IconTitleTabs.Tab[8]', '@Model.IconTitleTabs.Tab[9]');
+    window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.setTabNames('@Model.Tab[0]', '@Model.Tab[1]', '@Model.Tab[2]', '@Model.Tab[3]', '@Model.Tab[4]', '@Model.Tab[5]', '@Model.Tab[6]', '@Model.Tab[7]', '@Model.Tab[8]', '@Model.Tab[9]');
+    window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
   });
   </script>
