@@ -46,8 +46,10 @@
 
             <!-- Default location -->
             <div id="contentDivDefaultLocation" style="display: none;">
-              <button id="btnSave" disabled="disabled" class="btnSaveTextArea">Save</button><br />
-              <textarea id="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 100px; height: 25px;"></textarea>
+              <button id="btnDefaultLocationSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaDefaultLocationSave()">Save</button>
+              <button id="btnDefaultLocationCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaDefaultLocationCancel()">Cancel</button>
+              <br />
+              <textarea id="textareaDefaultLocation" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 100px; height: 25px;"></textarea>
             </div>
 
             <!-- Non default location-->
@@ -103,7 +105,8 @@
 
   <div id="divKeyWords" style="font-weight: normal !important; font-size: medium !important;"></div>
 
-  <button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important; margin-top: 30px;" onclick="window.jonas.handleResource()">Save</button>
+  <button id="btnSaveResource" class="btnDefaultCss" disabled="disabled" onclick="window.jonas.SaveResource()">Save</button>
+  <button id="btnCancelResource" class="btnDefaultCss" disabled="disabled" onclick="window.jonas.CancelResource()">Cancel</button>
 </div>
 
 <script>

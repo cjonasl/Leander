@@ -261,10 +261,42 @@ namespace WebApplication1.Controllers
 
                     HandleSaveOfPageEntity(pageEntity, command.Page, command.Menu, command.Sub1, command.Sub2, command.Tab, command.Val);
                 }
-                else if (command.Cmd == "r")
+                else if ((command.Cmd == "nr") || (command.Cmd == "er")) //New resource or edit resource
                 {
-                    KeyWordShort[] arrayWithKeyWordShort = KeyWordUtility.ReturnArrayWithKeyWordShort();
-                    return Json(arrayWithKeyWordShort, JsonRequestBehavior.AllowGet);
+                    LoadResourceData loadResourceData = new LoadResourceData();
+
+                    loadResourceData.ArrayWithKeyWordShort = KeyWordUtility.ReturnArrayWithKeyWordShort();
+
+                    if (command.Cmd == "nr")
+                    {
+                        ResourcesType resourcesType;
+
+                        switch(command.Val)
+                        {
+                            case "ThumbUpLocation":
+                                resourcesType = ResourcesType.ThumbUpLocation;
+                                break;
+                            case "Html":
+                                resourcesType = ResourcesType.Html;
+                                break;
+                            case "Self":
+                                resourcesType = ResourcesType.Self;
+                                break;
+                            default:
+                                return Json("ERROR!! Incorrect ResourcesType!", JsonRequestBehavior.AllowGet);
+                        }
+
+                        loadResourceData.Resource = new Resource(0, resourcesType, "", "", "", "", 0, 0, "", "", "", "");
+                    }
+                    else
+                    {
+                        loadResourceData.Resource = ResourceUtility.ReturnResource(int.Parse(command.Val), out errorMessage);
+
+                        if (errorMessage != null)
+                            return Json(string.Format("ERROR!!\r\n", errorMessage), JsonRequestBehavior.AllowGet);
+                    }
+                   
+                    return Json(loadResourceData, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception e)

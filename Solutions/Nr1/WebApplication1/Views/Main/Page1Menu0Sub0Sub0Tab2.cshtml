@@ -52,7 +52,7 @@
 
   </table>
 
-  <a href="javascript: window.jonas.openModal('dialogKeyWord', 'Add key word', 800, 350, 'AddKeyWord')">&nbsp;Add key word</a>
+  <a href="javascript: window.jonas.openModalToAddKeyWord()">&nbsp;Add key word</a>
 
   <div id="dialogKeyWord" style="display: none; background-color: #99ff99;">
     <table style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-top: 25px !important;">
@@ -72,12 +72,9 @@
         <td style="text-align: right !important;">Note&nbsp;&nbsp;</td>
         <td><input id="inputKeyWordNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 650px !important; margin-top: 7px !important;" /></td>
       </tr>
-      <tr><td colspan="2">&nbsp;</td></tr>
-      <tr>
-        <td><button style="font-family: Arial !important; font-size: medium !important; font-weight: bolder !important;" onclick="window.jonas.handleKeyWord ($('#inputKeyWordId').val(), $('#inputKeyWordCreated').val(), $('#inputKeyWordPhrase').val(), $('#inputKeyWordNote').val())">Save</button></td>
-        <td></td>
-      </tr>
     </table>
+    <button id="btnSaveKeyWord" class="btnDefaultCss" disabled="disabled" onclick="window.jonas.SaveKeyWord($('#inputKeyWordId').val(), $('#inputKeyWordCreated').val(), $('#inputKeyWordPhrase').val(), $('#inputKeyWordNote').val())">Save</button>
+    <button id="btnCancelKeyWord" class="btnDefaultCss" disabled="disabled" onclick="window.jonas.CancelKeyWord()">Cancel</button>
   </div>
 </div>
 

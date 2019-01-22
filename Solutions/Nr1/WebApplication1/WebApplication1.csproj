@@ -123,6 +123,7 @@
     <Compile Include="Models\DataDefaultLocation.cs" />
     <Compile Include="Models\DocumentReadyDataForNonDefaultLocation.cs" />
     <Compile Include="Models\KeyWord.cs" />
+    <Compile Include="Models\LoadResourceData.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\ResourcePresentationInSearch.cs" />
     <Compile Include="Models\Location.cs" />

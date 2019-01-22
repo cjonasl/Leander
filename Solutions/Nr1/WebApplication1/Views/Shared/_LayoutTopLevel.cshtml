@@ -29,12 +29,13 @@
       font-weight: 500;
     }
 
-    .btnSaveTextArea {
+    .btnDefaultCss {
       margin-left: 20px; 
       margin-top: 20px; 
       font-family: Arial; 
       font-size: larger;
-      font-weight:700;
+      font-weight: 700;
+      font-size: small;
       background-color: green;
       color: lightcyan;
     }
@@ -53,14 +54,28 @@
     window.jonas.sub2 = 0;
     window.jonas.tab = 0;
     window.jonas.icon = "";
-    window.jonas.textAreaSaved = true;
     window.jonas.maxResourceId = 0;
     window.jonas.previousResource = 0;
     window.jonas.currentResource = 0;
     window.jonas.nextResource = 0;
     window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, searchResultResources or renderOfResource
     window.jonas.modalState = "";
-
+    window.jonas.textareaDefaultLocationWidth = 0;
+    window.jonas.textareaDefaultLocationHeight = 0;
+    window.jonas.eventHandlerTextareaDefaultLocation = 0; //0=Event handler (change and mouseup) not attached. 1=Event handler attached
+    window.jonas.keyWordPhrase = "";
+    window.jonas.keyWordNote = "";
+    window.jonas.resourceTitle = "";
+    window.jonas.resourceNote = "";
+    window.jonas.resourcePrevious = 0;
+    window.jonas.resourceNext = 0;
+    window.jonas.resourceNote = "";
+    window.jonas.resourceHtmlFile = "";
+    window.jonas.resourceFiles = "";
+    window.jonas.resourceLinks = "";
+    window.jonas.resourceKeyWords = ""; //Comma separated list with KeyWord Id:s
+    window.jonas.numberOfKeyWords = 0;
+    
     window.jonas.checkIconAndSetTitle = function(newIcon, newTitle) {
       if (!$("#iIcon").hasClass('fa-' + newIcon)) {
         $("#iIcon").removeClass('fa-' + window.jonas.icon);  //Remove old icon
@@ -81,6 +96,79 @@
       $("#aTab8").text(tab8);
       $("#aTab9").text(tab9);
       $("#aTab10").text(tab10);
+    }
+
+    window.jonas.updateKeyWordState = function(disabled, color) {
+      $("#btnSaveKeyWord").prop("disabled", disabled);
+      $("#btnSaveKeyWord").css("background-color", color);
+      $("#btnCancelKeyWord").prop("disabled", disabled);
+      $("#btnCancelKeyWord").css("background-color", color);
+      $(".ui-dialog-titlebar-close").prop("disabled", !disabled);
+
+      if (disabled) {
+        $("#inputKeyWordPhrase").on("change", function () { window.jonas.updateKeyWordState(false, "red"); });
+        $("#inputKeyWordNote").on("change", function () { window.jonas.updateKeyWordState(false, "red"); });
+      }
+      else {
+        $("#inputKeyWordPhrase").off("change");
+        $("#inputKeyWordNote").off("change");
+      }
+    }
+
+    window.jonas.updateResourceState = function (disabled, color) {
+      $("#btnSaveResource").prop("disabled", disabled);
+      $("#btnSaveResource").css("background-color", color);
+      $("#btnCancelResource").prop("disabled", disabled);
+      $("#btnCancelResource").css("background-color", color);
+      $(".ui-dialog-titlebar-close").prop("disabled", !disabled);
+
+      if (disabled) {
+        $("#inputResourceTitle").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+        $("#inputResourceNote").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+        $("#inputResourcePrevious").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+        $("#inputResourceNext").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+
+        if (window.jonas.modalState === "Html") {
+
+        }
+        else if (window.jonas.modalState === "Self") {
+
+        }
+      }
+      else {
+        $("#inputResourceTitle").off("change");
+        $("#inputResourceNote").off("change");
+        $("#inputResourcePrevious").off("change");
+        $("#inputResourceNext").off("change");
+
+        if (window.jonas.modalState === "Html") {
+
+        }
+        else if (window.jonas.modalState === "Self") {
+
+        }
+      }
+    }
+
+    window.jonas.registerNewTextAreaDefaultLocation = function (width, height, text) {
+      var textareaDefaultLocation;
+
+      $("#btnDefaultLocationSave").prop("disabled", true);
+      $("#btnDefaultLocationSave").css("background-color", "green");
+      $("#btnDefaultLocationCancel").prop("disabled", true);
+      $("#btnDefaultLocationCancel").css("background-color", "green");
+
+      textareaDefaultLocation = $("#textareaDefaultLocation");     
+      textareaDefaultLocation.css("width", width);
+      textareaDefaultLocation.css("height", height);
+      textareaDefaultLocation.val(text);
+
+      window.jonas.textareaDefaultLocationWidth = width;
+      window.jonas.textareaDefaultLocationHeight = height;
+
+      $("#textareaDefaultLocation").on("change", window.jonas.textAreaDefaultLocationChange);
+      $("#textareaDefaultLocation").on("mouseup", window.jonas.textAreaDefaultLocationResize);
+      window.jonas.eventHandlerTextareaDefaultLocation = 1;
     }
 
     window.jonas.handleLeftMenuOnInitialPageLoad = function (menu, sub1, sub2) {
@@ -165,15 +253,34 @@
       }
     }
 
-    window.jonas.textAreaChange = function () {
-      $("#btnSave").prop("disabled", false);
-      $("#btnSave").css("background-color", "red");
-      window.jonas.textAreaSaved = false;
-      $(this).off("change");
+    window.jonas.textAreaDefaultLocationChange = function () {
+      $("#btnDefaultLocationSave").prop("disabled", false);
+      $("#btnDefaultLocationSave").css("background-color", "red");
+      $("#btnDefaultLocationCancel").prop("disabled", false);
+      $("#btnDefaultLocationCancel").css("background-color", "red");
+      $("#textareaDefaultLocation").off("change");
+      $("#textareaDefaultLocation").off("mouseup");
+      window.jonas.eventHandlerTextareaDefaultLocation = 0;
     }
 
-    window.jonas.handleTextAreaSave = function() {
-      var txtArea = $("#textarea");
+    window.jonas.textAreaDefaultLocationResize = function () {
+      var textareaDefaultLocation, textAreaWidth, textAreaHeight;
+
+      textareaDefaultLocation = $("#textareaDefaultLocation");
+      textAreaWidth = textareaDefaultLocation.css("width");
+      textAreaHeight = textareaDefaultLocation.css("height");
+
+      if ((textAreaWidth !== window.jonas.textareaDefaultLocationWidth) || (textAreaHeight !== window.jonas.textareaDefaultLocationHeight))
+        window.jonas.textAreaDefaultLocationChange();
+    }
+
+    window.jonas.handleTextAreaDefaultLocationSave = function() {
+      var textareaDefaultLocation, textAreaWidth, textAreaHeight, textAreaText;
+
+      textareaDefaultLocation = $("#textareaDefaultLocation");
+      textAreaWidth = textareaDefaultLocation.css("width");
+      textAreaHeight = textareaDefaultLocation.css("height");
+      textAreaText = textareaDefaultLocation.val().trim()
 
       var locationExtension = {
         page: window.jonas.page,
@@ -181,9 +288,9 @@
         sub1: window.jonas.sub1,
         sub2: window.jonas.sub2,
         tab: window.jonas.tab,
-        width: txtArea.css("width"),
-        height: txtArea.css("height"),
-        text: txtArea.val().trim()
+        width: textAreaWidth,
+        height: textAreaHeight,
+        text: textAreaText
       }
 
       $.ajax({
@@ -194,16 +301,36 @@
         method: "post",
         success: function (data) { alert("Result from server is: " + data); },
         complete: function () {
-          $("#btnSave").prop("disabled", true);
-          $("#btnSave").css("background-color", "green");
-          window.jonas.textAreaSaved = true;
-          $("#textarea").on("change", window.jonas.textAreaChange);
+          window.jonas.registerNewTextAreaDefaultLocation(textAreaWidth, textAreaHeight, textAreaText);
+        }
+      });
+    }
+
+    window.jonas.handleTextAreaDefaultLocationCancel = function () {
+      var location;
+
+      location = {
+        page: window.jonas.page,
+        menu: window.jonas.menu,
+        sub1: window.jonas.sub1,
+        sub2: window.jonas.sub2,
+        tab: window.jonas.tab,
+        newLocationByChangeOfTab: false
+      }
+
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/NewLocation",
+        data: location,
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+          window.jonas.registerNewTextAreaDefaultLocation(data.Width, data.Height, data.Text);
         }
       });
     }
 
     window.jonas.tabChanged = function (tab) {
-      if (!window.jonas.textAreaSaved) {
+      if (!$("#btnDefaultLocationSave").prop("disabled")) {
         alert("WATCH OUT!! textarea is not saved!!!");
         return;
       }
@@ -213,13 +340,68 @@
       window.jonas.newLocation(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, tab, true);
     }
 
+    window.jonas.loadResource = function (data) {
+      var total, n, a, divKeyWords, i, j, index, str, eventHandler;
+
+      eventHandler = "window.jonas.updateResourceState(false, \"red\")";
+
+      total = data.ArrayWithKeyWordShort.length;
+      n = data.ArrayWithKeyWordShort.length;
+
+      while ((n % 6) != 0)
+        n++;
+
+      a = n / 6;
+
+      divKeyWords = $("#divKeyWords");
+      divKeyWords.html("");
+
+      for (i = 0; i < a; i++) {
+        index = 6 * i;
+        str = "<div style='font-size: large !important;'><input id='keyWord" + data.ArrayWithKeyWordShort[index].Id + "' type='checkbox' style='margin-bottom: 5px;' onchange='" + eventHandler + "' />&nbsp;" + data.ArrayWithKeyWordShort[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+
+        for (j = 1; j <= 5; j++) {
+          if ((index + j) < total)
+            str += "<input id='keyWord" + data.ArrayWithKeyWordShort[index + j].Id + "' type='checkbox' style='margin-bottom: 5px; onchange='" + eventHandler + "' />&nbsp;" + data.ArrayWithKeyWordShort[index + j].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+          else
+            break;
+        }
+
+        str += "</div>"
+
+        divKeyWords.append(str);
+      }
+
+      $("#inputResourceResourcesType").val(data.Resource.ResourcesType);
+
+      if (data.Resource.Id) {
+        $("#inputResourceId").val(data.Resource.Id);
+        $("#inputResourceCreated").val(data.Resource.Created);
+        $("#inputResourceTitle").val(data.Resource.Title);
+      }
+
+      if (data.Resource.ResourcesType === "ThumbUpLocation") {    
+        $("#tableResources").append("<tr id=\"trResourceThumbUpLocation\"><td style=\"text-align: right !important;\" title=\"Thumb up location\">Location&nbsp;&nbsp;</td><td><input id=\"inputResourceThumbUpLocation\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" readonly=\"readonly\" value=\"" + "Page" + window.jonas.page + "Menu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2 + "Tab" + window.jonas.tab + "\" /></td></tr>");
+        window.jonas.openModal("dialogResource", "New ThumbUpLocation resource", 1100, 620, "ThumbUpLocation");
+      }
+      else if (data.Resource.ResourcesType === "Html") {
+        $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Html file\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
+        window.jonas.openModal("dialogResource", "New Html resource", 1100, 620, "Html");
+      }
+      else {
+        $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files full path (row separated)\">Files&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
+        $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
+        window.jonas.openModal("dialogResource", "New Self resource", 1100, 620, "Self");
+      }
+    }
+
     window.jonas.executeCmd = function () {
       var v, str, descriptionAvailableCommands, index, cmd, val, availableCommands, command, divKeyWords, i, j, total, n, a, b, c;
 
-      descriptionAvailableCommands = "The following commands are available:\r\nr l: New/edit ThumbUpLocation resource\r\nr h: New Html resource\r\nr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
+      descriptionAvailableCommands = "The following commands are available:\r\nnr l: New ThumbUpLocation resource\r\nnr h: New Html resource\r\nnr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
       descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\ntitle {value}: Set title for current left menu location";
 
-      availableCommands = ["r", "icon", "title", "menu", "sub1", "sub2", "tab"];
+      availableCommands = ["nr", "er", "icon", "title", "menu", "sub1", "sub2", "tab"];
 
       v = $("#inputCmd").val().trim().split(' ');
 
@@ -229,9 +411,31 @@
         index = availableCommands.indexOf(cmd);
       }
 
-      if ((v.length !== 2) || ((v.length === 2) && (index === -1)) || ((v.length === 2) && (cmd === "r") && (val !== "l") && (val !== "h") && (val !== "s")))  {
+      if (
+        (v.length !== 2) ||
+        ((v.length === 2) && (index === -1)) ||
+        ((v.length === 2) && (cmd === "nr") && (val !== "l") && (val !== "h") && (val !== "s"))
+        ) {
         alert("ERROR!! Incorrect given command!\r\n" + descriptionAvailableCommands);
         return;
+      }
+
+      if (cmd === "nr") {
+        if (val === "l")
+          val = "ThumbUpLocation";
+        else if (val === "h")
+          val = "Html";
+        else
+          val = "Self";
+      }
+
+      if (cmd === "er") {
+        val = window.Number(val);
+
+        if (!val || (val < 1) || (val > window.jonas.maxResourceId)) {
+          alert("ERROR!! For command \"er\", the value must be an integer in the range [1" + window.jonas.maxResourceId + "]!");
+          return;
+        }
       }
       
       command = {
@@ -271,50 +475,8 @@
             var url = window.location = "http://www.Nr1Web1.com/Main/Default?page=" + window.jonas.page + "&menu=" + window.jonas.menu + "&sub1=" + window.jonas.sub1 + "&sub2=" + window.jonas.sub2 + "&tab=" + window.jonas.tab + "&cmdVisibility=visible";
             window.open(url, "_self");
           }
-          else if (cmd === "r") {
-            total = data.length;
-            n = data.length;
-
-            while ((n % 6) != 0)
-              n++;
-
-            a = n / 6;
-
-            divKeyWords = $("#divKeyWords");
-            divKeyWords.html("");
-
-            for (i = 0; i < a; i++) {
-              index = 6 * i;
-              str = "<div style='font-size: large !important;'><input id='keyWord" + data[index].Id + "' type='checkbox' style='margin-bottom: 5px;' />&nbsp;" + data[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
-
-              for (j = 1; j <= 5; j++) {
-                if ((index + j) < total)
-                  str += "<input id='keyWord" + data[index + j].Id + "' type='checkbox' style='margin-bottom: 5px;' />&nbsp;" + data[index + j].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
-                else
-                  break;
-              }
-
-              str += "</div>"
-
-              divKeyWords.append(str);
-            }
-
-            if (val === "l") {        
-              $("#inputResourceResourcesType").val("ThumbUpLocation");
-              $("#tableResources").append("<tr id=\"trResourceThumbUpLocation\"><td style=\"text-align: right !important;\" title=\"Thumb up location\">Location&nbsp;&nbsp;</td><td><input id=\"inputResourceThumbUpLocation\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" readonly=\"readonly\" value=\"" + "Page" + window.jonas.page + "Menu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2 + "Tab" + window.jonas.tab + "\" /></td></tr>");
-              window.jonas.openModal("dialogResource", "New ThumbUpLocation resource", 1100, 620, "ThumbUpLocation");
-            }
-            else if (val === "h") {
-              $("#inputResourceResourcesType").val("Html");             
-              $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Html file\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
-              window.jonas.openModal("dialogResource", "New Html resource", 1100, 620, "Html");
-            }
-            else {
-              $("#inputResourceResourcesType").val("Self");
-              $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files full path (row separated)\">Files&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
-              $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
-              window.jonas.openModal("dialogResource", "New Self resource", 1100, 620, "Self");
-            }
+          else if ((cmd === "nr") || (cmd === "er")){
+            window.jonas.loadResource(data);
           }
 
           $("#inputCmd").val("");
@@ -339,9 +501,15 @@
 
     window.jonas.newLocation = function (page, menu, sub1, sub2, tab, tabChanged) {
       var location;
- 
+
       if ((page === window.jonas.page) && (menu === window.jonas.menu) && (sub1 === window.jonas.sub1) && (sub2 === window.jonas.sub2) && (tab === window.jonas.tab))
         return;
+
+      if (window.jonas.eventHandlerTextareaDefaultLocation === 1) {
+        $("#textareaDefaultLocation").off("change");
+        $("#textareaDefaultLocation").off("mouseup");
+        window.jonas.eventHandlerTextareaDefaultLocation = 0;
+      }
       
       // ----------- If it is a new page a full reload is needed to rerender left menu ----------------------
       if ((window.jonas.location !== "initialRequest") && (page !== window.jonas.page)) {
@@ -352,15 +520,12 @@
 
       // ----- Initial request from browser -----
       if (window.jonas.location === "initialRequest") {
-
         window.jonas.handleLeftMenuOnInitialPageLoad(menu, sub1, sub2);
         $("#liTab" + tab).addClass("active");
-        $("#textarea").on("change", window.jonas.textAreaChange);
-        $("#btnSave").on("click", function () { window.jonas.handleTextAreaSave(); });
       }
 
       // Check if textarea in a default location is saved
-      if (!window.jonas.textAreaSaved) {
+      if (!$("#btnDefaultLocationSave").prop("disabled")) {
         alert("WATCH OUT!! textarea is not saved!!!");
         return;
       }
@@ -392,11 +557,7 @@
               }
             }
 
-            txtArea = $("#textarea");
-            txtArea.val(data.Text);
-            txtArea.css("width", data.Width);
-            txtArea.css("height", data.Height);
-
+            window.jonas.registerNewTextAreaDefaultLocation(data.Width, data.Height, data.Text);
             window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (default location)");
             window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "defaultLocation");
             window.jonas.handlePreviousCurrentNextResource(data.PreviousResource, data.CurrentResource, data.NextResource);
@@ -503,6 +664,8 @@
             $("#inputKeyWordCreated").val("");
             $("#inputKeyWordPhrase").val("");
             $("#inputKeyWordNote").val("");
+            $("#inputKeyWordPhrase").off("change");
+            $("#inputKeyWordNote").off("change");
 
             if (window.jonas.modalState === "EditKeyWord")
               $("#inputKeyWordPhrase").prop("readonly", false);
@@ -518,8 +681,8 @@
       popup.show();
     }
 
-    window.jonas.handleKeyWord = function (id, created, phrase, note) {
-      var keyWord, newPhrase, newNote;
+    window.jonas.SaveKeyWord = function (id, created, phrase, note) {
+      var keyWord, newPhrase, newNote, error = false;
 
       newPhrase = phrase.trim();
       newNote = note.trim();
@@ -570,8 +733,27 @@
           else {
             alert(data); //Error occured
           }
+
+          if (!error) {
+            window.jonas.keyWordPhrase = data.Phrase;
+            window.jonas.keyWordNote = data.Note;
+            window.jonas.updateKeyWordState(true, "green");
+          }
         }
       });
+    }
+
+    window.jonas.CancelKeyWord = function () {
+      $("#inputKeyWordPhrase").val(window.jonas.keyWordPhrase);
+      $("#inputKeyWordNote").val(window.jonas.keyWordNote);
+      window.jonas.updateKeyWordState(true, "green");
+    }
+
+    window.jonas.openModalToAddKeyWord = function () {
+      window.jonas.keyWordPhrase = "";
+      window.jonas.keyWordNote = "";
+      window.jonas.updateKeyWordState(true, "green");
+      window.jonas.openModal('dialogKeyWord', 'Add key word', 800, 350, 'AddKeyWord');
     }
 
     window.jonas.openModalToEditKeyWord = function (id, created, phrase) {
@@ -582,10 +764,13 @@
       note = $("#keyWord" + id).text();
       $("#inputKeyWordNote").val(note);
       $("#inputKeyWordPhrase").prop("readonly", true);
+      window.jonas.keyWordPhrase = phrase;
+      window.jonas.keyWordNote = note;
+      window.jonas.updateKeyWordState(true, "green");
       window.jonas.openModal("dialogKeyWord", "Edit key word", 800, 350, "EditKeyWord");
     }
 
-    window.jonas.handleResource = function () {
+    window.jonas.SaveResource = function () {
       var id, resourcesType, created, title, note, previous, next, keyWords; //Same for all 3 resource types
       var thumbUpLocation = ""; //Only type ThumbUpLocation
       var htmlFile = ""; //Only type Html

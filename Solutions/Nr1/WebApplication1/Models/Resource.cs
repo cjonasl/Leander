@@ -321,13 +321,22 @@ namespace WebApplication1.Models
             return new Location(page, menu, sub1, sub2, tab);
         }
  
-        public static Resource ReturnResource(int id)
+        public static Resource ReturnResource(int id, out string errorMessage)
         {
             string resourceDirectory, fileNameFullPath, resourceSerialized;
             Resource resourceDeserialized;
 
+            errorMessage = null;
+
             resourceDirectory = ReturnResourceDirectory(id);
             fileNameFullPath = string.Format("{0}\\R{1}.txt", resourceDirectory, id.ToString());
+
+            if (!File.Exists(fileNameFullPath))
+            {
+                errorMessage = string.Format("ERROR!! The resource R{0} does not exist!", id.ToString());
+                return null;
+            }
+
             resourceSerialized = Utility.ReturnFileContents(fileNameFullPath);
             resourceDeserialized = DeserializeResource(resourceSerialized);
 
