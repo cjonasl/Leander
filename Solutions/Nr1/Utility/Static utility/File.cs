@@ -163,7 +163,7 @@ namespace Leander.Nr1
             return allFilesExist;
         }
 
-        public static void PutContensInFilesInOneFile(string[] fileNamesFullPath, string fileNameFullPath, out string errorMessage)
+        public static void PutContentsInFilesInOneFile(string[] fileNamesFullPath, string fileNameFullPath, out string errorMessage)
         {
             int i = 0, n = fileNamesFullPath.Length;
             StringBuilder sb = new StringBuilder();

@@ -53,5 +53,51 @@ namespace Leander.Nr1
 
             return sb.ToString().Trim();
         }
+
+        public static bool PhrasesInArrayListAreAllPresentInCommaSeparatedListWithPhrases(ArrayList v, string commaSeparatedListWithPhrases)
+        {
+            string[] phrases;
+            ArrayList arrayListPhrases;
+            int i;
+            bool returnValue = true;
+
+            phrases = commaSeparatedListWithPhrases.Split(',');
+            arrayListPhrases = new ArrayList(phrases);
+
+            i = 0;
+
+            while ((i < v.Count) && returnValue)
+            {
+                if (arrayListPhrases.IndexOf(v[i]) == -1)
+                    returnValue = false;
+                else
+                    i++;
+            }
+
+            return returnValue;
+        }
+
+        public static bool AtLeastOnePhraseInArrayListIsPresentInCommaSeparatedListWithPhrases(ArrayList v, string commaSeparatedListWithPhrases)
+        {
+            string[] phrases;
+            ArrayList arrayListPhrases;
+            int i;
+            bool returnValue = false;
+
+            phrases = commaSeparatedListWithPhrases.Split(',');
+            arrayListPhrases = new ArrayList(phrases);
+
+            i = 0;
+
+            while ((i < v.Count) && !returnValue)
+            {
+                if (arrayListPhrases.IndexOf(v[i]) >= 0)
+                    returnValue = true;
+                else
+                    i++;
+            }
+
+            return returnValue;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 using System.IO;
 using System.Web;
 using System.Text;
@@ -309,37 +310,86 @@ namespace WebApplication1.Controllers
 
         public ViewResult SearchResource(string searchTerm)
         {
-            List<ResourcePresentationInSearch> list = new List<ResourcePresentationInSearch>()
-            {
-                new ResourcePresentationInSearch(10, ResourcesType.Html, new DateTime(2018, 9, 3, 2, 2, 2), "Jonas abc", "JavaScript, C#"),
-                new ResourcePresentationInSearch(5, ResourcesType.Html, new DateTime(2018, 10, 21, 20, 34, 55), "Karlstad heja", "music, adhoc, By a gift"),
-                new ResourcePresentationInSearch(8, ResourcesType.Html, new DateTime(2019, 1, 4, 15, 17, 53), "Bangkok next", "travel"),
-                new ResourcePresentationInSearch(6, ResourcesType.Html, new DateTime(2018, 2, 15, 23, 34, 35), "Work as consultant", "consultant, C#"),
-                new ResourcePresentationInSearch(22, ResourcesType.Html, new DateTime(2018, 5, 5, 5, 2, 47), "Leisure in USA", "Washington, tennis, jQuery")
-            };
+            int index1, index2;
+            string[] u;
+            ArrayList v;
+
+            List<ResourcePresentationInSearch> list = ResourcePresentationInSearchUtility.GetResources();
 
             ViewBag.SearchTerm = searchTerm;
+
+            if (searchTerm == "a asc")
+                return View(list);
+            else if (searchTerm == "a")
+                return View(list.OrderByDescending(x => x.Id).ToList());
+            else
+            {
+                index1 = searchTerm.IndexOf("ka(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.PhrasesInArrayListAreAllPresentInCommaSeparatedListWithPhrases(v, x.KeyWords)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("ko(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.AtLeastOnePhraseInArrayListIsPresentInCommaSeparatedListWithPhrases(v, x.KeyWords)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("ta(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.PhrasesInArrayListAreAllPresentInString(v, x.Title)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("to(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.AtLeastOnePhraseInArrayListIsPresentInString(v, x.Title)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("c(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 2 + index1);
+                    u = searchTerm.Substring(2 + index1, index2 - index1 - 2).Split(',');
+                    list = list.Where(x => Utility.DateTimeFulfillRequirement(u[0], u[1], x.Created)).ToList();
+                }
+            }
 
             return View(list);
         }
 
-        public JsonResult HandleKeyWord(KeyWord keyWord)
+        public JsonResult SaveKeyWord(KeyWord keyWord)
         {
             string errorMessage;
             KeyWord newKeyWord;
 
-            if (keyWord.Id.HasValue)
-                newKeyWord = KeyWordUtility.EditKeyWord(keyWord, out errorMessage);
-            else
+            if (!keyWord.Id.HasValue)
                 newKeyWord = KeyWordUtility.AddKeyWord(keyWord, out errorMessage);
+            else
+                newKeyWord = KeyWordUtility.EditKeyWord(keyWord, out errorMessage);
 
-            if (newKeyWord != null)
+            if (errorMessage == null)
                 return Json(newKeyWord, JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult HandleResource(Resource resource)
+        public JsonResult SaveResource(Resource resource)
         {
             string errorMessage;
             Resource newResource = null;
@@ -347,14 +397,12 @@ namespace WebApplication1.Controllers
             if (resource.Id == 0)
                 newResource = ResourceUtility.AddResource(resource, out errorMessage);
             else
-                ResourceUtility.UpdateResource(resource, out errorMessage);
+                newResource = ResourceUtility.EditResource(resource, out errorMessage);
 
-            if (errorMessage != null)
-                return Json(errorMessage, JsonRequestBehavior.AllowGet);
-            else if (resource.Id == 0)
-                return Json(newResource, JsonRequestBehavior.AllowGet);
+            if (errorMessage == null)
+                return Json(newResource, JsonRequestBehavior.AllowGet);        
             else
-                return Json("Success", JsonRequestBehavior.AllowGet);
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
     }
 }

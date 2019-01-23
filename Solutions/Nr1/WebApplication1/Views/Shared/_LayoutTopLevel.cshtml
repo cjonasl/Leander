@@ -66,14 +66,14 @@
     window.jonas.keyWordPhrase = "";
     window.jonas.keyWordNote = "";
     window.jonas.resourceTitle = "";
+    window.jonas.resourceKeyWords = "";
     window.jonas.resourceNote = "";
     window.jonas.resourcePrevious = 0;
     window.jonas.resourceNext = 0;
-    window.jonas.resourceNote = "";
+    window.jonas.resourceThumbUpLocation = "";
     window.jonas.resourceHtmlFile = "";
     window.jonas.resourceFiles = "";
     window.jonas.resourceLinks = "";
-    window.jonas.resourceKeyWords = ""; //Comma separated list with KeyWord Id:s
     window.jonas.numberOfKeyWords = 0;
     
     window.jonas.checkIconAndSetTitle = function(newIcon, newTitle) {
@@ -116,6 +116,8 @@
     }
 
     window.jonas.updateResourceState = function (disabled, color) {
+      var i;
+
       $("#btnSaveResource").prop("disabled", disabled);
       $("#btnSaveResource").css("background-color", color);
       $("#btnCancelResource").prop("disabled", disabled);
@@ -124,28 +126,46 @@
 
       if (disabled) {
         $("#inputResourceTitle").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+
+        for (i = 1; i <= window.jonas.numberOfKeyWords; i++) {
+          $("#keyWord" + i).on("change", function () { window.jonas.updateResourceState(false, "red"); });
+        }
+
         $("#inputResourceNote").on("change", function () { window.jonas.updateResourceState(false, "red"); });
         $("#inputResourcePrevious").on("change", function () { window.jonas.updateResourceState(false, "red"); });
         $("#inputResourceNext").on("change", function () { window.jonas.updateResourceState(false, "red"); });
 
-        if (window.jonas.modalState === "Html") {
-
+        if (window.jonas.modalState === "ThumbUpLocation") {
+          $("#inputResourceThumbUpLocation").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+        }
+        else if (window.jonas.modalState === "Html") {
+          $("#inputResourceHtmlFile").on("change", function () { window.jonas.updateResourceState(false, "red"); });
         }
         else if (window.jonas.modalState === "Self") {
-
+          $("#textareaResourceFiles").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+          $("#textareaResourceLinks").on("change", function () { window.jonas.updateResourceState(false, "red"); });
         }
       }
       else {
         $("#inputResourceTitle").off("change");
+
+        for (i = 1; i <= window.jonas.numberOfKeyWords; i++) {
+          $("#keyWord" + i).off("change");
+        }
+
         $("#inputResourceNote").off("change");
         $("#inputResourcePrevious").off("change");
         $("#inputResourceNext").off("change");
 
-        if (window.jonas.modalState === "Html") {
-
+        if (window.jonas.modalState === "ThumbUpLocation") {
+          $("#inputResourceThumbUpLocation").off("change");
+        }
+        else if (window.jonas.modalState === "Html") {
+          $("#inputResourceHtmlFile").off("change");
         }
         else if (window.jonas.modalState === "Self") {
-
+          $("#textareaResourceFiles").off("change");
+          $("#textareaResourceLinks").off("change");
         }
       }
     }
@@ -341,28 +361,48 @@
     }
 
     window.jonas.loadResource = function (data) {
-      var total, n, a, divKeyWords, i, j, index, str, eventHandler;
+      var total, n, a, divKeyWords, i, j, index, str, resourcesType, arrayListWithKeyWordIdsAsString, checked;
+      var numberOfCheckBoxesInOneRow;
 
-      eventHandler = "window.jonas.updateResourceState(false, \"red\")";
+      numberOfCheckBoxesInOneRow = 10;
 
       total = data.ArrayWithKeyWordShort.length;
-      n = data.ArrayWithKeyWordShort.length;
+      n = total;
+      window.jonas.numberOfKeyWords = total;
 
-      while ((n % 6) != 0)
+      while ((n % numberOfCheckBoxesInOneRow) != 0)
         n++;
 
-      a = n / 6;
+      a = n / numberOfCheckBoxesInOneRow;
 
       divKeyWords = $("#divKeyWords");
-      divKeyWords.html("");
+
+      arrayListWithKeyWordIdsAsString = data.Resource.KeyWords.split(",");
 
       for (i = 0; i < a; i++) {
-        index = 6 * i;
-        str = "<div style='font-size: large !important;'><input id='keyWord" + data.ArrayWithKeyWordShort[index].Id + "' type='checkbox' style='margin-bottom: 5px;' onchange='" + eventHandler + "' />&nbsp;" + data.ArrayWithKeyWordShort[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+        index = numberOfCheckBoxesInOneRow * i;
 
-        for (j = 1; j <= 5; j++) {
-          if ((index + j) < total)
-            str += "<input id='keyWord" + data.ArrayWithKeyWordShort[index + j].Id + "' type='checkbox' style='margin-bottom: 5px; onchange='" + eventHandler + "' />&nbsp;" + data.ArrayWithKeyWordShort[index + j].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+        if (arrayListWithKeyWordIdsAsString.indexOf(data.ArrayWithKeyWordShort[index].Id.toString()) >= 0) {
+          checked = " checked = 'checked'";
+        }
+        else {
+          checked = "";
+        }
+
+        str = "<div style='font-size: medium !important;'><input id='keyWord" + data.ArrayWithKeyWordShort[index].Id + "' type='checkbox' style='margin-bottom: 5px;'" + checked + " />&nbsp;" + data.ArrayWithKeyWordShort[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+
+        for (j = 1; j <= (numberOfCheckBoxesInOneRow - 1); j++) {
+          if ((index + j) < total) {
+
+            if (arrayListWithKeyWordIdsAsString.indexOf(data.ArrayWithKeyWordShort[index + j].Id.toString()) >= 0) {
+              checked = " checked = 'checked'";
+            }
+            else {
+              checked = "";
+            }
+
+            str += "<input id='keyWord" + data.ArrayWithKeyWordShort[index + j].Id + "' type='checkbox' style='margin-bottom: 5px;'" + checked + " />&nbsp;" + data.ArrayWithKeyWordShort[index + j].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+          }
           else
             break;
         }
@@ -372,38 +412,95 @@
         divKeyWords.append(str);
       }
 
-      $("#inputResourceResourcesType").val(data.Resource.ResourcesType);
+      if (data.Resource.ResourcesType === 0)
+        resourcesType = "ThumbUpLocation";
+      else if (data.Resource.ResourcesType === 1)
+        resourcesType = "Html";
+      else if (data.Resource.ResourcesType === 2)
+        resourcesType = "Self";
+
+      $("#inputResourceResourcesType").val(resourcesType);
 
       if (data.Resource.Id) {
         $("#inputResourceId").val(data.Resource.Id);
         $("#inputResourceCreated").val(data.Resource.Created);
         $("#inputResourceTitle").val(data.Resource.Title);
+        $("#inputResourceNote").val(data.Resource.Note == null ? "" : data.Resource.Note);
+        $("#inputResourcePrevious").val(data.Resource.PreviousResource === 0 ? "" : data.Resource.PreviousResource);
+        $("#inputResourceNext").val(data.Resource.NextResource === 0 ? "" : data.Resource.NextResource);
+
+        window.jonas.resourceTitle = data.Resource.Title;
+        window.jonas.resourceKeyWords = data.Resource.KeyWords;
+        window.jonas.resourceNote = data.Resource.Note == null ? "" : data.Resource.Note;
+        window.jonas.resourcePrevious = data.Resource.PreviousResource;
+        window.jonas.resourceNext = data.Resource.NextResource;
+      }
+      else {
+        window.jonas.resourceTitle = "";
+        window.jonas.resourceKeyWords = "";
+        window.jonas.resourceNote = "";
+        window.jonas.resourcePrevious = 0;
+        window.jonas.resourceNext = 0;
+        window.jonas.resourceThumbUpLocation = "";
+        window.jonas.resourceHtmlFile = "";
+        window.jonas.resourceFiles = "";
+        window.jonas.resourceLinks = "";
       }
 
-      if (data.Resource.ResourcesType === "ThumbUpLocation") {    
+      if (data.Resource.ResourcesType === "ThumbUpLocation") {
         $("#tableResources").append("<tr id=\"trResourceThumbUpLocation\"><td style=\"text-align: right !important;\" title=\"Thumb up location\">Location&nbsp;&nbsp;</td><td><input id=\"inputResourceThumbUpLocation\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" readonly=\"readonly\" value=\"" + "Page" + window.jonas.page + "Menu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2 + "Tab" + window.jonas.tab + "\" /></td></tr>");
-        window.jonas.openModal("dialogResource", "New ThumbUpLocation resource", 1100, 620, "ThumbUpLocation");
+        
+        if (data.Resource.Id) {
+          $("#inputResourceThumbUpLocation").val(data.Resource.ThumbUpLocation == null ? "" : data.Resource.ThumbUpLocation);
+          window.jonas.resourceThumbUpLocation = data.Resource.ThumbUpLocation == null ? "" : data.Resource.ThumbUpLocation;
+        }
       }
       else if (data.Resource.ResourcesType === "Html") {
         $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Html file\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
-        window.jonas.openModal("dialogResource", "New Html resource", 1100, 620, "Html");
+
+        if (data.Resource.Id) {
+          $("#inputResourceHtmlFile").val(data.Resource.HtmlFile == null ? "" : data.Resource.HtmlFile);
+          window.jonas.resourceHtmlFile = data.Resource.HtmlFile == null ? "" : data.Resource.HtmlFile;
+        }
       }
       else {
         $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files full path (row separated)\">Files&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
         $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
-        window.jonas.openModal("dialogResource", "New Self resource", 1100, 620, "Self");
+
+        if (data.Resource.Id) {
+          $("#textareaResourceFiles").val(data.Resource.Files == null ? "" : data.Resource.Files);
+          $("#textareaResourceLinks").val(data.Resource.Links == null ? "" : data.Resource.Links);
+          window.jonas.resourceFiles = data.Resource.Files == null ? "" : data.Resource.Files;
+          window.jonas.resourceLinks = data.Resource.Links == null ? "" : data.Resource.Links;
+        }
       }
+
+      if (data.Resource.Id)
+        str = "Edit ";
+      else
+        str = "New ";   
+
+      window.jonas.openModal("dialogResource", str + resourcesType + " resource", 1100, 620, resourcesType);
+      window.jonas.updateResourceState(true, "green");
     }
 
-    window.jonas.executeCmd = function () {
-      var v, str, descriptionAvailableCommands, index, cmd, val, availableCommands, command, divKeyWords, i, j, total, n, a, b, c;
+    window.jonas.executeCmd = function (str) { //If str has a value then window.jonas.executeCmd is called from SearchResource.cshtml
+      var v, descriptionAvailableCommands, index, cmd, val, availableCommands, command;
 
       descriptionAvailableCommands = "The following commands are available:\r\nnr l: New ThumbUpLocation resource\r\nnr h: New Html resource\r\nnr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
       descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\ntitle {value}: Set title for current left menu location";
 
+      if (!str)
+        str = $("#inputCmd").val().trim();
+
+      if (!str || (str === "?")) {
+        alert(descriptionAvailableCommands);
+        return;
+      }
+
       availableCommands = ["nr", "er", "icon", "title", "menu", "sub1", "sub2", "tab"];
 
-      v = $("#inputCmd").val().trim().split(' ');
+      v = str.split(' ');
 
       if (v.length === 2) {
         cmd = v[0].trim();
@@ -433,7 +530,7 @@
         val = window.Number(val);
 
         if (!val || (val < 1) || (val > window.jonas.maxResourceId)) {
-          alert("ERROR!! For command \"er\", the value must be an integer in the range [1" + window.jonas.maxResourceId + "]!");
+          alert("ERROR!! For command \"er\", the value must be an integer in the range [1, " + window.jonas.maxResourceId + "]!");
           return;
         }
       }
@@ -625,7 +722,7 @@
     }
 
     window.jonas.openModal = function (id, title, width, height, modalState) {
-      var options, popup;
+      var options, popup, i;
 
       window.jonas.modalState = modalState;
 
@@ -641,6 +738,7 @@
           if ((window.jonas.modalState === "ThumbUpLocation") || (window.jonas.modalState === "Html") || (window.jonas.modalState === "Self")) {
             $("#inputResourceId").val("");
             $("#inputResourceResourcesType").val("");
+            $("#divKeyWords").html("");
             $("#inputResourceCreated").val("");
             $("#inputResourceTitle").val("");
             $("#inputResourceNote").val("");
@@ -681,8 +779,8 @@
       popup.show();
     }
 
-    window.jonas.SaveKeyWord = function (id, created, phrase, note) {
-      var keyWord, newPhrase, newNote, error = false;
+    window.jonas.saveKeyWord = function (id, created, phrase, note) {
+      var keyWord, newPhrase, newNote;
 
       newPhrase = phrase.trim();
       newNote = note.trim();
@@ -701,7 +799,7 @@
       }
 
       $.ajax({
-        url: "http://www.Nr1Web1.com/Main/HandleKeyWord",
+        url: "http://www.Nr1Web1.com/Main/SaveKeyWord",
         data: keyWord,
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
@@ -732,18 +830,17 @@
           }
           else {
             alert(data); //Error occured
+            return;
           }
 
-          if (!error) {
-            window.jonas.keyWordPhrase = data.Phrase;
-            window.jonas.keyWordNote = data.Note;
-            window.jonas.updateKeyWordState(true, "green");
-          }
+          window.jonas.keyWordPhrase = data.Phrase;
+          window.jonas.keyWordNote = data.Note;
+          window.jonas.updateKeyWordState(true, "green");
         }
       });
     }
 
-    window.jonas.CancelKeyWord = function () {
+    window.jonas.cancelKeyWord = function () {
       $("#inputKeyWordPhrase").val(window.jonas.keyWordPhrase);
       $("#inputKeyWordNote").val(window.jonas.keyWordNote);
       window.jonas.updateKeyWordState(true, "green");
@@ -751,9 +848,9 @@
 
     window.jonas.openModalToAddKeyWord = function () {
       window.jonas.keyWordPhrase = "";
-      window.jonas.keyWordNote = "";
-      window.jonas.updateKeyWordState(true, "green");
+      window.jonas.keyWordNote = ""; 
       window.jonas.openModal('dialogKeyWord', 'Add key word', 800, 350, 'AddKeyWord');
+      window.jonas.updateKeyWordState(true, "green");
     }
 
     window.jonas.openModalToEditKeyWord = function (id, created, phrase) {
@@ -770,22 +867,22 @@
       window.jonas.openModal("dialogKeyWord", "Edit key word", 800, 350, "EditKeyWord");
     }
 
-    window.jonas.SaveResource = function () {
+    window.jonas.saveResource = function () {
       var id, resourcesType, created, title, note, previous, next, keyWords; //Same for all 3 resource types
       var thumbUpLocation = ""; //Only type ThumbUpLocation
       var htmlFile = ""; //Only type Html
       var files = "", links = ""; //Only type Self
-      var newKeyWords, resource, i, roundNumber;
+      var newKeyWords, resource, i;
 
       id = $("#inputResourceId").val();
       resourcesType = $("#inputResourceResourcesType").val();
       created = $("#inputResourceCreated").val();
       title = $("#inputResourceTitle").val().trim();
+      keyWords = $("input[type='checkbox']:checked", "#divKeyWords");
       note = $("#inputResourceNote").val().trim();
       previous = $("#inputResourcePrevious").val();
       next = $("#inputResourceNext").val();
-      keyWords = $("input[type='checkbox']:checked", "#divKeyWords");
-
+      
       if (window.jonas.modalState === "ThumbUpLocation") {
         thumbUpLocation = $("#inputResourceThumbUpLocation").val().trim();
       }
@@ -825,13 +922,11 @@
       previous = window.Number(previous);
       next = window.Number(next);
 
-      roundNumber = Math.round(previous);
       if ((previous !== 0) && ((Math.round(previous) !== previous) || (previous < 1) || (previous > window.jonas.maxResourceId))) {
         alert("Previous must be an integer in the range [1," + window.jonas.maxResourceId + "]!");
         return;
       }
 
-      roundNumber = Math.round(next);
       if ((next !== 0) && ((Math.round(next) !== next) || (next < 1) || (next > window.jonas.maxResourceId))) {
         alert("Next must be an integer in the range [1," + window.jonas.maxResourceId + "]!");
         return;
@@ -882,7 +977,7 @@
       }
 
       $.ajax({
-        url: "http://www.Nr1Web1.com/Main/HandleResource",
+        url: "http://www.Nr1Web1.com/Main/SaveResource",
         data: resource,
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
@@ -895,11 +990,19 @@
           else if (typeof data === "object") {
             $("#inputResourceId").val(data.Id);
             $("#inputResourceCreated").val(data.Created);
-            $("#dialogResource").dialog("option", "title", "Update " + data.ResourcesType + " resource");
+
+            if (data.ResourcesType === 0)
+              resourcesType = "ThumbUpLocation";
+            else if (data.ResourcesType === 1)
+              resourcesType = "Html";
+            else if (data.ResourcesType === 2)
+              resourcesType = "Self";
+
+            $("#dialogResource").dialog("option", "title", "Edit " + resourcesType + " resource");
 
             if (window.jonas.modalState === "ThumbUpLocation") {
               window.jonas.previousResource = data.PreviousResource;
-              window.jonas.currentResource = Data.Id;
+              window.jonas.currentResource = data.Id;
               window.jonas.nextResource = data.NextResource;
             }
 
@@ -908,8 +1011,57 @@
           else {
             alert("Update of the resource was successful!");
           }
+
+          window.jonas.resourceTitle = data.Title;
+          window.jonas.resourceKeyWords = data.KeyWords;
+          window.jonas.resourceNote = (data.Note == null ? "" : data.Note);
+          window.jonas.resourcePrevious = data.PreviousResource;
+          window.jonas.resourceNext = data.NextResource;
+          window.jonas.resourceThumbUpLocation = (data.ThumbUpLocation == null ? "" : data.ThumbUpLocation);
+          window.jonas.resourceHtmlFile = (data.HtmlFile == null ? "" : data.HtmlFile);
+          window.jonas.resourceFiles = (data.Files == null ? "" : data.Files);
+          window.jonas.resourceLinks = (data.Links == null ? "" : data.Links);
+
+          window.jonas.updateResourceState(true, "green");
         }
       });
+    }
+
+    window.jonas.cancelResource = function () {
+      var arrayListWithKeyWordIdsAsString, i, checkBoxElement, isChecked, id, index;
+
+      $("#inputResourceTitle").val(window.jonas.resourceTitle);
+
+      arrayListWithKeyWordIdsAsString = window.jonas.resourceKeyWords.split(",");
+
+      for (i = 1; i <= window.jonas.numberOfKeyWords; i++) {
+        checkBoxElement = $("#keyWord" + i);      
+        isChecked = checkBoxElement.prop("checked");
+        id = checkBoxElement.attr("id").substring(7);
+        index = arrayListWithKeyWordIdsAsString.indexOf(id);
+
+        if (isChecked && (index === -1))
+          checkBoxElement.prop("checked", false);
+        else if (!isChecked && (index >= 0))
+          checkBoxElement.prop("checked", true);     
+      }
+
+      $("#inputResourceNote").val(window.jonas.resourceNote);
+      $("#inputResourcePrevious").val(window.jonas.resourcePrevious === 0 ? "" : window.jonas.resourcePrevious);
+      $("#inputResourceNext").val(window.jonas.resourceNext === 0 ? "" : window.jonas.resourceNext);
+
+      if (window.jonas.modalState === "ThumbUpLocation") {
+        $("#inputResourceThumbUpLocation").val(window.jonas.resourceThumbUpLocation);
+      }
+      else if (window.jonas.modalState === "Html") {
+        $("#inputResourceHtmlFile").val(window.jonas.resourceHtmlFile);
+      }
+      else if (window.jonas.modalState === "Self") {
+        $("#textareaResourceFiles").val(window.jonas.resourceFiles);
+        $("#textareaResourceLinks").val(window.jonas.resourceLinks);
+      }
+
+      window.jonas.updateResourceState(true, "green");
     }
 
     window.jonas.handlePreviousCurrentNextResource = function (previous, current, next) {

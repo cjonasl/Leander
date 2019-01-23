@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Leander.Nr1
+﻿namespace Leander.Nr1
 {
     public static class R5
     {
@@ -27,7 +21,7 @@ namespace Leander.Nr1
                 return;
             }
 
-            Utility.PutContensInFilesInOneFile(fileNamesFullPath, fileNameFullPath2, out errorMessage);
+            Utility.PutContentsInFilesInOneFile(fileNamesFullPath, fileNameFullPath2, out errorMessage);
 
             if (errorMessage != null)
             {

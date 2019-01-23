@@ -1,0 +1,45 @@
+﻿1
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-01-22 17:58:02
+
+----- New property -----
+
+Specification of webbapplication "Thumb up"
+
+----- New property -----
+
+8
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

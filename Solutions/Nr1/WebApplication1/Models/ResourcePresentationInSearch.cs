@@ -101,7 +101,7 @@ namespace WebApplication1.Models
                 }
                 else
                 {
-                    sb.Append(string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", SerializeResource(listWithResources[0])));
+                    sb.Append(string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", SerializeResource(listWithResources[i])));
                 }
             }
 
@@ -119,9 +119,13 @@ namespace WebApplication1.Models
 
             resourcePresentationInSearch = new ResourcePresentationInSearch(resource.Id, resource.ResourcesType, created, resource.Title, commaSeparatedListWithKeyWords);
 
+
             serializedResource = SerializeResource(resourcePresentationInSearch);
 
-            Utility.AppendToFile(_fileNameFullPathToResources, serializedResource);
+            if (resource.Id > 1)
+                Utility.AppendToFile(_fileNameFullPathToResources, string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", serializedResource));
+            else
+                Utility.AppendToFile(_fileNameFullPathToResources, serializedResource);
         }
 
         public static void UpdateResource(Resource resource)

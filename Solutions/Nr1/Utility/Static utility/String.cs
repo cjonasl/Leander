@@ -252,5 +252,41 @@ namespace Leander.Nr1
 
             return true;
         }
+
+        public static bool PhrasesInArrayListAreAllPresentInString(ArrayList v, string str)
+        {
+            int i;
+            bool returnValue = true;
+
+            i = 0;
+
+            while ((i < v.Count) && returnValue)
+            {
+                if (str.IndexOf((string)v[i]) == -1)
+                    returnValue = false;
+                else
+                    i++;
+            }
+
+            return returnValue;
+        }
+
+        public static bool AtLeastOnePhraseInArrayListIsPresentInString(ArrayList v, string str)
+        {
+            int i;
+            bool returnValue = false;
+
+            i = 0;
+
+            while ((i < v.Count) && !returnValue)
+            {
+                if (str.IndexOf((string)v[i]) >= 0)
+                    returnValue = true;
+                else
+                    i++;
+            }
+
+            return returnValue;
+        }
     }
 }

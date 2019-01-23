@@ -1,0 +1,45 @@
+﻿8
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-01-22 20:40:14
+
+----- New property -----
+
+Test CultureInfo
+
+----- New property -----
+
+6,1,7
+
+----- New property -----
+
+null
+
+----- New property -----
+
+7
+
+----- New property -----
+
+10
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\Resources1\R8.cs
+
+----- New property -----
+
+null

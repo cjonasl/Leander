@@ -19,7 +19,7 @@
         </div>
         <div class="pull-right">
           <input id="inputCmd" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="margin-top: 10px !important; margin-right: 10px !important; width: 500px !important; font-family: 'Courier New' !important; font-weight: bold !important; font-size: medium !important;" />
-          <button id="btnCmd" style="margin-top: -1px; margin-right: 5px; font-weight: bold; font-size:large !important; font-family: 'Courier New'" onclick="window.jonas.executeCmd()">Run</button>
+          <button id="btnCmd" style="margin-top: -1px; margin-right: 5px; font-weight: bold; font-size:large !important; font-family: 'Courier New'" onclick="window.jonas.executeCmd(null)">Run</button>
         </div>
       </div>
     </div>
@@ -101,12 +101,12 @@
     </tr>
   </table>
 
-  <div style="margin-top: 10px !important; margin-bottom: 5px !important;">Key words:</div>
+  <div style="margin-top: 10px !important; margin-bottom: 10px !important;">Key words:</div>
 
   <div id="divKeyWords" style="font-weight: normal !important; font-size: medium !important;"></div>
 
-  <button id="btnSaveResource" class="btnDefaultCss" disabled="disabled" onclick="window.jonas.SaveResource()">Save</button>
-  <button id="btnCancelResource" class="btnDefaultCss" disabled="disabled" onclick="window.jonas.CancelResource()">Cancel</button>
+  <button id="btnSaveResource" class="btnDefaultCss" disabled="disabled" style="margin-left: -2px !important; font-size: smaller !important;" onclick="window.jonas.saveResource()">Save</button>
+  <button id="btnCancelResource" class="btnDefaultCss" disabled="disabled" style="margin-left: 10px !important; font-size: smaller !important;" onclick="window.jonas.cancelResource()">Cancel</button>
 </div>
 
 <script>

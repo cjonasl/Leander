@@ -86,11 +86,11 @@ Resources rörande Nordea
 
 ----- New property -----
 
-aaa
+Adhoc
 
 ----- New property -----
 
-gggg
+En resource som skapas i förbifarten för att kolla upp något
 
 ---------- New key word ----------
 
@@ -102,11 +102,11 @@ gggg
 
 ----- New property -----
 
-bbb
+Dls
 
 ----- New property -----
 
-nnnn
+En resource som skapades då jag arbetade på Datalogic Solutions
 
 ---------- New key word ----------
 
@@ -118,11 +118,11 @@ nnnn
 
 ----- New property -----
 
-cccc
+Thumb up
 
 ----- New property -----
 
-ccccc
+En resource rörande design av "Thumb up"
 
 ---------- New key word ----------
 
@@ -162,28 +162,12 @@ Resources rörande HTML
 
 ----- New property -----
 
-2019-01-18 19:48:57
+2019-01-22 21:51:16
 
 ----- New property -----
 
-Jonas
+HSBC
 
 ----- New property -----
 
-Jonas test
-
----------- New key word ----------
-
-12
-
------ New property -----
-
-2019-01-21 19:59:15
-
------ New property -----
-
-karlstad
-
------ New property -----
-
-hejsan
+Resources rörande HSBC

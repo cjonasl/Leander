@@ -1,0 +1,45 @@
+﻿11
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-01-22 20:52:42
+
+----- New property -----
+
+Create the 15 views _Layout1.cshtml - _Layout15.cshtml in "Thumb up"
+
+----- New property -----
+
+6,1,8
+
+----- New property -----
+
+Path to the 15 view is C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Views\Main
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\Resources1\R11.cs
+
+----- New property -----
+
+null

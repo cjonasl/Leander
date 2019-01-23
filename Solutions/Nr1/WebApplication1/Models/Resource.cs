@@ -116,6 +116,28 @@ namespace WebApplication1.Models
             return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New file -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")));
         }
 
+        public static Resource ReturnResource(int id, out string errorMessage)
+        {
+            string resourceDirectory, fileNameFullPath, resourceSerialized;
+            Resource resourceDeserialized;
+
+            errorMessage = null;
+
+            resourceDirectory = ReturnResourceDirectory(id);
+            fileNameFullPath = string.Format("{0}\\R{1}.txt", resourceDirectory, id.ToString());
+
+            if (!File.Exists(fileNameFullPath))
+            {
+                errorMessage = string.Format("ERROR!! The resource R{0} does not exist!", id.ToString());
+                return null;
+            }
+
+            resourceSerialized = Utility.ReturnFileContents(fileNameFullPath);
+            resourceDeserialized = DeserializeResource(resourceSerialized);
+
+            return resourceDeserialized;
+        }
+
         public static int ReturnNextResourceId()
         {
             return int.Parse(Utility.ReturnFileContents(_fileNameFullPathNextResourceId));
@@ -267,7 +289,7 @@ namespace WebApplication1.Models
             return newResource;
         }
 
-        public static void UpdateResource(Resource resource, out string errorMessage)
+        public static Resource EditResource(Resource resource, out string errorMessage)
         {
             string resourceSerialized, folder, fileNameFullPath;
 
@@ -281,7 +303,7 @@ namespace WebApplication1.Models
                 if (!File.Exists(fileNameFullPath))
                 {
                     errorMessage = string.Format("ERROR!! The file R{0}.txt does not exist as expected!", resource.Id.ToString());
-                    return;
+                    return null;
                 }
 
                 resourceSerialized = SerializeResource(resource);
@@ -297,8 +319,10 @@ namespace WebApplication1.Models
             catch (Exception e)
             {
                 errorMessage = string.Format("ERROR!! An Exception occured in method UpdateResource! e.Message:\r\n{0}", e.Message);
-                return;
+                return null;
             }
+
+            return ReturnResource(resource.Id, out errorMessage); //Return the newly updated resource
         }
 
         public static Location ReturnLocation(string thumbUpLocation)
@@ -320,27 +344,6 @@ namespace WebApplication1.Models
 
             return new Location(page, menu, sub1, sub2, tab);
         }
- 
-        public static Resource ReturnResource(int id, out string errorMessage)
-        {
-            string resourceDirectory, fileNameFullPath, resourceSerialized;
-            Resource resourceDeserialized;
 
-            errorMessage = null;
-
-            resourceDirectory = ReturnResourceDirectory(id);
-            fileNameFullPath = string.Format("{0}\\R{1}.txt", resourceDirectory, id.ToString());
-
-            if (!File.Exists(fileNameFullPath))
-            {
-                errorMessage = string.Format("ERROR!! The resource R{0} does not exist!", id.ToString());
-                return null;
-            }
-
-            resourceSerialized = Utility.ReturnFileContents(fileNameFullPath);
-            resourceDeserialized = DeserializeResource(resourceSerialized);
-
-            return resourceDeserialized;
-        }
     }
 }

@@ -234,7 +234,7 @@ namespace WebApplication1.Models
                 }
                 else
                 {
-                    sb.Append(", " + keyWord[index2]);
+                    sb.Append(string.Format(",{0}", keyWord[index2]));
                 }
             }
 

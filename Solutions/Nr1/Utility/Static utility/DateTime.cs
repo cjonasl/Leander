@@ -22,5 +22,37 @@ namespace Leander.Nr1
 
             return new DateTime(year, month, day, hour, minute, second);
         }
+
+        /// <summary>
+        /// Check if a DateTime is within limits.
+        /// </summary>
+        /// <param name="l">Lower as string yyyy-MM-dd HH:mm:ss or empty</param>
+        /// <param name="u">Upper as string yyyy-MM-dd HH:mm:ss or empty</param>
+        /// <param name="dateTime">DateTime to compare</param>
+        /// <returns>true if fulfill requirement otherwise false</returns>
+        public static bool DateTimeFulfillRequirement(string l, string u, DateTime dateTime)
+        {
+            DateTime lower, upper;
+
+            if (string.IsNullOrEmpty(l))
+            {
+                lower = DateTime.MinValue;
+            }
+            else
+            {
+                lower = ReturnDateTimeFromString(l);
+            }
+
+            if (string.IsNullOrEmpty(u))
+            {
+                upper = DateTime.MaxValue;
+            }
+            else
+            {
+                upper = ReturnDateTimeFromString(u);
+            }
+
+            return ((dateTime >= lower) && (dateTime <= upper));
+        }
     }
 }
