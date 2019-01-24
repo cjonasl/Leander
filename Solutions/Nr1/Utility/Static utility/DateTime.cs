@@ -24,35 +24,35 @@ namespace Leander.Nr1
         }
 
         /// <summary>
-        /// Check if a DateTime is within limits.
+        /// Check if a DateTime is within limits, i.e. dateTime is in [a, b]
         /// </summary>
-        /// <param name="l">Lower as string yyyy-MM-dd HH:mm:ss or empty</param>
-        /// <param name="u">Upper as string yyyy-MM-dd HH:mm:ss or empty</param>
+        /// <param name="a">After as string yyyy-MM-dd HH:mm:ss or empty</param>
+        /// <param name="b">Before as string yyyy-MM-dd HH:mm:ss or empty</param>
         /// <param name="dateTime">DateTime to compare</param>
         /// <returns>true if fulfill requirement otherwise false</returns>
-        public static bool DateTimeFulfillRequirement(string l, string u, DateTime dateTime)
+        public static bool DateTimeFulfillRequirement(string a, string b, DateTime dateTime)
         {
-            DateTime lower, upper;
+            DateTime after, before;
 
-            if (string.IsNullOrEmpty(l))
+            if (string.IsNullOrEmpty(a))
             {
-                lower = DateTime.MinValue;
+                after = DateTime.MinValue;
             }
             else
             {
-                lower = ReturnDateTimeFromString(l);
+                after = ReturnDateTimeFromString(a);
             }
 
-            if (string.IsNullOrEmpty(u))
+            if (string.IsNullOrEmpty(b))
             {
-                upper = DateTime.MaxValue;
+                before = DateTime.MaxValue;
             }
             else
             {
-                upper = ReturnDateTimeFromString(u);
+                before = ReturnDateTimeFromString(b);
             }
 
-            return ((dateTime >= lower) && (dateTime <= upper));
+            return ((dateTime >= after) && (dateTime <= before));
         }
     }
 }

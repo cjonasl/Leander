@@ -2,24 +2,41 @@
 
 
 <div style="margin: 10px; font-family: 'Times New Roman'; font-size: larger;">
-  <h2>Applikationen heter <i>Thumb up</i>. Den har 37650 platser där innehåll kan renderas</h2>
+  <h4 style="font-weight: bolder !important; margin-top: 20px; margin-bottom: 15px;">Enter key words/words in title/creation date comma separated (OBS not comma and then blank):</h4>
+  <input id="inputHelpSearch" type="text" style="width: 95%; font-family: 'Courier New' !important; font-size: small !important; font-weight: bold !important; margin-bottom: 15px;" />
+  <div style="font-family: Arial; font-size: larger !important; font-weight: bolder !important; margin-top: 7px;">
+    <button title="Key Word And (all phrases must be present in the resource)" onclick="window.jonas.appendSerachTerm('ka')" style="width: 50px;">ka</button>
+    <button title="Key Word Or (at least one of the phrases must be present in the resource)" onclick="window.jonas.appendSerachTerm('ko')" style="margin-left: 10px; width: 50px;">ko</button>
+    <button title="Title And (all words must be present in the title of the resource)" onclick="window.jonas.appendSerachTerm('ta')" style="margin-left: 10px; width: 50px;">ta</button>
+    <button title="Key Word Or (at least one of the words must be present in the title of the resource)" onclick="window.jonas.appendSerachTerm('to')" style="margin-left: 10px; width: 50px;">to</button>
+    <button title="Create (restriction when the resource was created. After and before. If no lower/upper restriction then leave blank. Formt: yyyy-MM-dd HH:dd:ss)" onclick="window.jonas.appendSerachTerm('c')" style="margin-left: 10px; width: 50px;">c</button>
+    <button title="Clear input textbox to top left" onclick="$('#searchTerm').val('')" style="margin-left: 10px; width: 50px;">clear</button>
+  </div>
+
+
+  <h3 style="font-weight: bolder; margin-top: 30px;">Help page to insert search terms</h3>
+
   <p>
-    15 stycken sidor. I varje sida:<br />
-    <ul>
-      <li>En “Dashboard” (hårdkodat namn som inte går att ändra) med 10 tabbar</li>
-      <li>Ett vänster menysystem med 10 menyer som för varje har 5 undermenyer som i sin tur har 5 undermenyer med 10 tabbar:</li>
+    You search for resources by enter search terms in search input textbox<br />
+    to top left and press magnifying glass. You can append many search terms<br />
+    by appending them blank separated, for example the following search for<br />
+    all resources that has key phrases "C#" and "Adhoc", and has "file" or<br />
+    "create" in the title:<br />
+    <span style="font-family: 'Courier New' !important; font-size: small !important; font-weight: bold !important; margin-bottom: 5px;">
+      ka(C#,Adhoc) to(file,create)
+    </span>
+    <br /><br />
+    To search for all resources created after 2019-01-10 12:06:45 (inclusive) and before<br />
+    2019-01-19 07:32:12 (inclusive) then do the following 3 steps:
+    <ul style="margin-bottom: 15px;">
+      <li>Enter "2019-01-10 12:06:45,2019-01-19 07:32:12" in the above textbox</li>
+      <li>Press button "c" (then "c(2019-01-10 12:06:45,2019-01-19 07:32:12)" will be entered in the top left textbox)</li>
+      <li>Press magnifying glass after top left textbox</li>
     </ul>
-    <br />
-    &nbsp;&nbsp;15 (sidor) * (10 (tabbar Dashboard) + 10 (menyer) * 5 (undermenyer) * 5 (undermenyer) * 10 (tabbar)) = 37650
+    If the is no lower restriction then instead enter ",2019-01-19 07:32:12" i.e first a comma and then the before date.<br />
+    If the is no upper restriction then instead enter "2019-01-10 12:06:45," i.e. first the after date and then a comma.
   </p>
-  <hr />
-  <p>
-    <h3>Anrop av applikationen</h3>
-    Applikationen aropas enligt:<br />
-    <input type="text" style="font-family: 'Courier New'; font-size: smaller; width: 700px; font-weight: bold;" value="http://www.nr1web1.com/Main/Default?page=AAA&menu=BBB&sub1=1CCCsub2=DDD&tab=EEE" /><br />
-    dvs. man anger värden till de 5 parametrarna <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">page</span>, <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">menu</span>, <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">sub1</span>, <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">sub2</span> och <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">tab</span>.
-  </p>
-  <a href="javascript: alert('Hej')">Expressen</a>
+
 </div>
 
 <script>

@@ -151,9 +151,10 @@
     <Content Include="Views\Main\_Layout13.cshtml" />
     <Content Include="Views\Main\_Layout14.cshtml" />
     <Content Include="Views\Main\_Layout15.cshtml" />
-    <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab1.cshtml" />
+    <Content Include="Views\Main\Page2Menu1Sub1Sub1Tab1.cshtml" />
     <Content Include="Views\Main\SearchResource.cshtml" />
     <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab2.cshtml" />
+    <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

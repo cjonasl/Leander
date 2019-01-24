@@ -324,26 +324,5 @@ namespace WebApplication1.Models
 
             return ReturnResource(resource.Id, out errorMessage); //Return the newly updated resource
         }
-
-        public static Location ReturnLocation(string thumbUpLocation)
-        {
-            int page, menu, sub1, sub2, tab;
-            int indexMenu, indexSub1, indexSub2, indexTab;
-
-            //Page???Menu???Sub???Sub???Tab???
-            indexMenu = thumbUpLocation.IndexOf("Menu", 4);
-            indexSub1 = thumbUpLocation.IndexOf("Sub", 4);
-            indexSub2 = thumbUpLocation.IndexOf("Sub", 3 + indexSub1);
-            indexTab = thumbUpLocation.IndexOf("Tab", 3 + indexSub2);
-
-            page = int.Parse(thumbUpLocation.Substring(0, indexMenu));
-            menu = int.Parse(thumbUpLocation.Substring(4 + indexMenu, indexSub1 - 4 - indexMenu));
-            sub1 = int.Parse(thumbUpLocation.Substring(3 + indexSub1, indexSub2 - 3 - indexSub1));
-            sub2 = int.Parse(thumbUpLocation.Substring(3 + indexSub2, indexTab - 3 - indexSub2));
-            tab = int.Parse(thumbUpLocation.Substring(3 + indexTab));
-
-            return new Location(page, menu, sub1, sub2, tab);
-        }
-
     }
 }

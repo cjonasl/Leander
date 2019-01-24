@@ -152,8 +152,10 @@ namespace WebApplication1.Controllers
                 case "Page1Menu0Sub0Sub0Tab1":
                     return View("Page1Menu0Sub0Sub0Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
                 case "Page1Menu0Sub0Sub0Tab2":
-                    ViewBag.LlistWithKeyWords = KeyWordUtility.GetKeyWords();
+                    ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                     return View("Page1Menu0Sub0Sub0Tab2", GetDocumentReadyDataForNonDefaultLocation(location));
+                case "Page2Menu1Sub1Sub1Tab1":
+                    return View("Page2Menu1Sub1Sub1Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
                 default:
                     return Json(GetDefaultDataForNewLocation(location), JsonRequestBehavior.AllowGet);
             }
@@ -197,11 +199,11 @@ namespace WebApplication1.Controllers
             {
                 if ((command.Cmd == "menu") || (command.Cmd == "sub1") || (command.Cmd == "sub2"))
                 {
-                    fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Views\\Shared\\_Layout{0}.cshtml", command.Page.ToString());
+                    fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Views\\Main\\_Layout{0}.cshtml", command.Page.ToString());
                     fileContents = Utility.ReturnFileContents(fileNameFullPath, out errorMessage);
 
                     if (errorMessage != null)
-                        return Json(string.Format("ERROR!!\r\n", errorMessage), JsonRequestBehavior.AllowGet);
+                        return Json(string.Format("ERROR!!\r\n{0}", errorMessage), JsonRequestBehavior.AllowGet);
 
                     switch(command.Cmd)
                     {
@@ -242,7 +244,7 @@ namespace WebApplication1.Controllers
                     newfileContents = fileContents.Replace(searchTerm, newTerm);
                     Utility.CreateNewFile(fileNameFullPath, newfileContents);
                 }
-                else if ((command.Cmd == "icon") || (command.Cmd == "title") || ((command.Cmd.Length >= 4) && (command.Cmd.Substring(0, 3) == "tab")))
+                else if ((command.Cmd == "icon") || (command.Cmd == "title") || ((command.Cmd.Length >= 3) && (command.Cmd.Substring(0, 3) == "tab")))
                 {
                     if ((command.Cmd == "icon") && !Utility.IconExists(command.Val))
                         return Json("ERROR!! The icon does not exist!!", JsonRequestBehavior.AllowGet);
@@ -401,6 +403,17 @@ namespace WebApplication1.Controllers
 
             if (errorMessage == null)
                 return Json(newResource, JsonRequestBehavior.AllowGet);        
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetResource(int id)
+        {
+            string errorMessage;
+            Resource resource = ResourceUtility.ReturnResource(id, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(resource, JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }

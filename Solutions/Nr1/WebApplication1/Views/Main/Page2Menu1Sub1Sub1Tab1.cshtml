@@ -1,0 +1,31 @@
+﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
+
+
+<div style="margin: 10px; font-family: 'Times New Roman'; font-size: larger;">
+  <h2>Applikationen heter <i>Thumb up</i>. Den har 37650 platser där innehåll kan renderas</h2>
+  <p>
+    15 stycken sidor. I varje sida:<br />
+    <ul>
+      <li>En “Dashboard” (hårdkodat namn som inte går att ändra) med 10 tabbar</li>
+      <li>Ett vänster menysystem med 10 menyer som för varje har 5 undermenyer som i sin tur har 5 undermenyer med 10 tabbar:</li>
+    </ul>
+    <br />
+    &nbsp;&nbsp;15 (sidor) * (10 (tabbar Dashboard) + 10 (menyer) * 5 (undermenyer) * 5 (undermenyer) * 10 (tabbar)) = 37650
+  </p>
+  <hr />
+  <p>
+    <h3>Anrop av applikationen</h3>
+    Applikationen aropas enligt:<br />
+    <input type="text" style="font-family: 'Courier New'; font-size: smaller; width: 700px; font-weight: bold;" value="http://www.nr1web1.com/Main/Default?page=AAA&menu=BBB&sub1=1CCCsub2=DDD&tab=EEE" /><br />
+    dvs. man anger värden till de 5 parametrarna <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">page</span>, <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">menu</span>, <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">sub1</span>, <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">sub2</span> och <span style="font-family: 'Courier New'; font-size: smaller; font-weight: bold;">tab</span>.
+  </p>
+  <a href="javascript: alert('Hej')">Expressen</a>
+</div>
+
+<script>
+  $(document).ready(function () {
+    window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.setTabNames('@Model.Tab[0]', '@Model.Tab[1]', '@Model.Tab[2]', '@Model.Tab[3]', '@Model.Tab[4]', '@Model.Tab[5]', '@Model.Tab[6]', '@Model.Tab[7]', '@Model.Tab[8]', '@Model.Tab[9]');
+    window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
+  });
+</script>

@@ -58,7 +58,7 @@
     window.jonas.previousResource = 0;
     window.jonas.currentResource = 0;
     window.jonas.nextResource = 0;
-    window.jonas.location = "initialRequest"; //initialRequest, defaultLocation, nonDefaultLocation, searchResultResources or renderOfResource
+    window.jonas.location = ""; //defaultLocation, nonDefaultLocation, searchResultResources or renderOfResource
     window.jonas.modalState = "";
     window.jonas.textareaDefaultLocationWidth = 0;
     window.jonas.textareaDefaultLocationHeight = 0;
@@ -83,6 +83,30 @@
         window.jonas.icon = newIcon; //Update window.jonas.icon to new icon
       }
       $("#spanTitle").text(newTitle);
+    }
+
+    window.jonas.handlePreviousCurrentNextResource = function (previous, current, next) {
+
+      if (($("#spanResourcePrevious").css("display") === "none") && (current !== 0)) {
+        $("#spanResourcePrevious").css("display", "inline");
+        $("#spanResourceCurrent").css("display", "inline");
+        $("#spanResourceNext").css("display", "inline");
+      }
+      else if (($("#spanResourcePrevious").css("display") === "inline") && (current === 0)) {
+        $("#spanResourcePrevious").css("display", "none");
+        $("#spanResourceCurrent").css("display", "none");
+        $("#spanResourceNext").css("display", "none");
+      }
+
+      if (current !== 0) {
+        $("#spanResourcePrevious").text("(R" + previous);
+        $("#spanResourceCurrent").text("R" + current);
+        $("#spanResourceNext").text("R" + next + ")");
+      }
+
+      window.jonas.previousResource = previous;
+      window.jonas.currentResource = current;
+      window.jonas.nextResource = next;
     }
 
     window.jonas.setTabNames = function (tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10) {
@@ -191,24 +215,59 @@
       window.jonas.eventHandlerTextareaDefaultLocation = 1;
     }
 
-    window.jonas.handleLeftMenuOnInitialPageLoad = function (menu, sub1, sub2) {
-      if (menu > 0) {
+    window.jonas.handleChangeLocation = function (menu, sub1, sub2, tab) {
+
+      if ((window.jonas.menu > 0) && (menu !== window.jonas.menu) && (window.jonas.page !== 0)) {
+        $("#liMenu" + window.jonas.menu).removeClass("open");
+        $("#liMenu" + window.jonas.menu).removeClass("active");
+        $("#spanMenu" + window.jonas.menu).removeClass("open");
+        $("#ulMenu" + window.jonas.menu).css("display", "none");
+      }
+      else if ((window.jonas.menu === 0) && (menu !== window.jonas.menu) && (window.jonas.page !== 0)) {
+        $("#liDashboard").removeClass("active");
+      }
+
+      if ((((window.jonas.menu > 0) && (menu !== window.jonas.menu)) || ((window.jonas.sub1 > 0) && (sub1 !== window.jonas.sub1))) && (window.jonas.page !== 0)) {
+        $("#liMenu" + window.jonas.menu + "Sub" + window.jonas.sub1).removeClass("open");
+        $("#liMenu" + window.jonas.menu + "Sub" + window.jonas.sub1).removeClass("active");
+        $("#spanMenu" + window.jonas.menu + "Sub" + window.jonas.sub1).removeClass("open");
+        $("#ulMenu" + window.jonas.menu + "Sub" + window.jonas.sub1).css("display", "none");
+      }
+
+      if ((menu > 0) && (menu !== window.jonas.menu)) {
         $("#liMenu" + menu).addClass("open");
         $("#liMenu" + menu).addClass("active");
         $("#spanMenu" + menu).addClass("open");
-        $("#ulMenu" + menu).css("display", "block");
+        $("#ulMenu" + menu).css("display", "block");  
+      }
+      else if (menu === 0) {
+        $("#liDashboard").addClass("active");
+      }
+
+      if (((menu > 0) && (menu !== window.jonas.menu)) || ((sub1 > 0) && (sub1 !== window.jonas.sub1))) {
         $("#liMenu" + menu + "Sub" + sub1).addClass("open");
         $("#liMenu" + menu + "Sub" + sub1).addClass("active");
         $("#spanMenu" + menu + "Sub" + sub1).addClass("open");
-        $("#ulMenu" + menu + "Sub" + sub1).css("display", "block");
+        $("#ulMenu" + menu + "Sub" + sub1).css("display", "block");  
+      }
+
+      if ((window.jonas.page !== 0) && (window.jonas.menu > 0))
+        $("#liMenu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2).removeClass("active");
+
+      if (menu > 0) {
         $("#liMenu" + menu + "Sub" + sub1 + "Sub" + sub2).addClass("active");
       }
-      else {
-        $("#liDashboard").addClass("active");
+
+      if ((window.jonas.tab > 0) && (tab !== window.jonas.tab)) {
+        $("#liTab" + window.jonas.tab).removeClass("active");
+      }
+
+      if (!$("#liTab" + tab).hasClass("active")) {
+        $("#liTab" + tab).addClass("active");
       }
     }
 
-    window.jonas.updateCssDisplayForContentDivs = function (currentLocation, newLocation) {
+    window.jonas.updateCssDisplayForContentDivs = function (newLocation) {
       var defaultLocation = $("#contentDivDefaultLocation");
       var nonDefaultLocation = $("#contentDivNonDefaultLocation");
       var searchResultResources = $("#contentDivSearchResultResources");
@@ -239,38 +298,6 @@
         renderOfResource.css("display", "block");
 
       window.jonas.location = newLocation;
-    }
-
-    window.jonas.handleChangeLocation = function (page, menu, sub1, sub2, tabChanged) {
-
-      //Always go to tab1 when change location in left menu
-      if ((window.jonas.tab !== 1) && ((page !== window.jonas.page) || (menu !== window.jonas.menu) || (sub1 !== window.jonas.sub1) || (sub2 !== window.jonas.sub2))) {
-        $("#liTab" + window.jonas.tab).removeClass("active");
-        $("#liTab1").addClass("active");
-      }
-
-      if (!tabChanged) {
-        if (window.jonas.menu > 0) {
-          if (menu !== window.jonas.menu)
-            $("#liMenu" + window.jonas.menu).removeClass("active");
-
-          $("#liMenu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2).removeClass("active");
-        }
-        else {
-          $("#liDashboard").removeClass("active");
-        }
-
-        if (menu > 0) {
-          if (!$("#liMenu" + menu).hasClass("active"))
-            $("#liMenu" + menu).addClass("active");
-
-          $("#liMenu" + menu + "Sub" + sub1 + "Sub" + sub2).addClass("active");
-        }
-        else {
-          $("#spanMenu" + window.jonas.menu).trigger("click");
-          $("#liDashboard").addClass("active");
-        }
-      }
     }
 
     window.jonas.textAreaDefaultLocationChange = function () {
@@ -355,8 +382,6 @@
         return;
       }
 
-      $("#liTab" + window.jonas.tab).removeClass("active");
-      $("#liTab" + tab).addClass("active");
       window.jonas.newLocation(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, tab, true);
     }
 
@@ -447,7 +472,7 @@
         window.jonas.resourceLinks = "";
       }
 
-      if (data.Resource.ResourcesType === "ThumbUpLocation") {
+      if (resourcesType === "ThumbUpLocation") {
         $("#tableResources").append("<tr id=\"trResourceThumbUpLocation\"><td style=\"text-align: right !important;\" title=\"Thumb up location\">Location&nbsp;&nbsp;</td><td><input id=\"inputResourceThumbUpLocation\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" readonly=\"readonly\" value=\"" + "Page" + window.jonas.page + "Menu" + window.jonas.menu + "Sub" + window.jonas.sub1 + "Sub" + window.jonas.sub2 + "Tab" + window.jonas.tab + "\" /></td></tr>");
         
         if (data.Resource.Id) {
@@ -455,7 +480,7 @@
           window.jonas.resourceThumbUpLocation = data.Resource.ThumbUpLocation == null ? "" : data.Resource.ThumbUpLocation;
         }
       }
-      else if (data.Resource.ResourcesType === "Html") {
+      else if (resourcesType === "Html") {
         $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Html file\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
 
         if (data.Resource.Id) {
@@ -485,7 +510,7 @@
     }
 
     window.jonas.executeCmd = function (str) { //If str has a value then window.jonas.executeCmd is called from SearchResource.cshtml
-      var v, descriptionAvailableCommands, index, cmd, val, availableCommands, command;
+      var descriptionAvailableCommands, index, cmd, val, availableCommands, command;
 
       descriptionAvailableCommands = "The following commands are available:\r\nnr l: New ThumbUpLocation resource\r\nnr h: New Html resource\r\nnr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
       descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\ntitle {value}: Set title for current left menu location";
@@ -494,25 +519,35 @@
         str = $("#inputCmd").val().trim();
 
       if (!str || (str === "?")) {
+        $("#inputCmd").val("");
         alert(descriptionAvailableCommands);
         return;
       }
-
-      availableCommands = ["nr", "er", "icon", "title", "menu", "sub1", "sub2", "tab"];
-
-      v = str.split(' ');
-
-      if (v.length === 2) {
-        cmd = v[0].trim();
-        val = v[1].trim();
-        index = availableCommands.indexOf(cmd);
+      else if (str === "s") {
+        $("#inputCmd").val("");
+        window.jonas.showLatestSearchResultOfResources();
+        return;
+      }
+      else if (str === "r") {
+        $("#inputCmd").val("");
+        window.jonas.showLastRenderOfResource();
+        return;
       }
 
-      if (
-        (v.length !== 2) ||
-        ((v.length === 2) && (index === -1)) ||
-        ((v.length === 2) && (cmd === "nr") && (val !== "l") && (val !== "h") && (val !== "s"))
-        ) {
+      availableCommands = ["nr", "er", "rr", "icon", "title", "menu", "sub1", "sub2", "tab"]; //nr=new resource, er=edit resource and rr=render resource
+
+      index = str.indexOf(" ");
+
+      if (index > 0) {
+        cmd = str.substring(0, index);
+        val = str.substring(index).trim();
+      }
+      else
+        cmd = "";
+
+      index = availableCommands.indexOf(cmd);
+
+      if ((index === -1) || ((cmd === "nr") && ((val !== "l") && (val !== "h") && (val !== "s")))) {
         alert("ERROR!! Incorrect given command!\r\n" + descriptionAvailableCommands);
         return;
       }
@@ -526,13 +561,18 @@
           val = "Self";
       }
 
-      if (cmd === "er") {
+      if ((cmd === "er") || (cmd === "rr")) {
         val = window.Number(val);
 
         if (!val || (val < 1) || (val > window.jonas.maxResourceId)) {
-          alert("ERROR!! For command \"er\", the value must be an integer in the range [1, " + window.jonas.maxResourceId + "]!");
+          alert("ERROR!! For command \"" + cmd + "\", the value must be an integer in the range [1, " + window.jonas.maxResourceId + "]!");
           return;
         }
+      }
+
+      if (cmd === "rr") {
+        window.jonas.renderResource(val);
+        return;
       }
       
       command = {
@@ -569,7 +609,7 @@
             $("#aTab" + window.jonas.tab).text(val);
           }
           else if ((cmd === "menu") || (cmd === "sub1") || (cmd === "sub2")) {
-            var url = window.location = "http://www.Nr1Web1.com/Main/Default?page=" + window.jonas.page + "&menu=" + window.jonas.menu + "&sub1=" + window.jonas.sub1 + "&sub2=" + window.jonas.sub2 + "&tab=" + window.jonas.tab + "&cmdVisibility=visible";
+            var url = window.location = "http://www.Nr1Web1.com/Main/Default?page=" + window.jonas.page + "&menu=" + window.jonas.menu + "&sub1=" + window.jonas.sub1 + "&sub2=" + window.jonas.sub2 + "&tab=" + window.jonas.tab;
             window.open(url, "_self");
           }
           else if ((cmd === "nr") || (cmd === "er")){
@@ -608,18 +648,12 @@
         window.jonas.eventHandlerTextareaDefaultLocation = 0;
       }
       
-      // ----------- If it is a new page a full reload is needed to rerender left menu ----------------------
-      if ((window.jonas.location !== "initialRequest") && (page !== window.jonas.page)) {
-        window.location = "http://www.Nr1Web1.com/Main/Default?page=" + page + "&menu=0&sub1=0&sub2=0&tab=1";
+      // ----------- If it is a new page a full reload is needed to rerender left menu --------------------------------------------------------------
+      if ((window.jonas.page > 0) && (page !== window.jonas.page)) {
+        window.location = "http://www.Nr1Web1.com/Main/Default?page=" + page + "&menu=" + menu + "&sub1=" + sub1 + "&sub2=" + sub2 + "&tab=" + tab;
         return;
       }
-      // ----------------------------------------------------------------------------------------------------
-
-      // ----- Initial request from browser -----
-      if (window.jonas.location === "initialRequest") {
-        window.jonas.handleLeftMenuOnInitialPageLoad(menu, sub1, sub2);
-        $("#liTab" + tab).addClass("active");
-      }
+      // --------------------------------------------------------------------------------------------------------------------------------------------
 
       // Check if textarea in a default location is saved
       if (!$("#btnDefaultLocationSave").prop("disabled")) {
@@ -643,7 +677,7 @@
         method: "post",
         success: function (data) {
           if (typeof data === "object") { //Default location. Update icon, title, tab1-tab10 (if not new location by change of tab) and for textarea the text, width and height
-            var txtArea, i;
+            var i;
 
             window.jonas.checkIconAndSetTitle(data.Icon, data.Title);
 
@@ -656,19 +690,16 @@
 
             window.jonas.registerNewTextAreaDefaultLocation(data.Width, data.Height, data.Text);
             window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (default location)");
-            window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "defaultLocation");
+            window.jonas.updateCssDisplayForContentDivs("defaultLocation");
             window.jonas.handlePreviousCurrentNextResource(data.PreviousResource, data.CurrentResource, data.NextResource);
           }
           else { //html back from server, i.e. a non-default location
             $("#contentDivNonDefaultLocation").html(data);
             window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (non-default location)");
-            window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "nonDefaultLocation");
+            window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
           }
 
-          window.jonas.handleChangeLocation(page, menu, sub1, sub2, tabChanged);
-
-          if ((window.jonas.location === "searchResultResources") || (window.jonas.location === "renderOfResource"))
-            $("#liTab" + tab).addClass("active");
+          window.jonas.handleChangeLocation(menu, sub1, sub2, tab);
 
           window.jonas.page = page;
           window.jonas.menu = menu;
@@ -703,7 +734,7 @@
       }
 
       window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Search result resources)");
-      window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "searchResultResources");
+      window.jonas.updateCssDisplayForContentDivs("searchResultResources");
       window.jonas.checkIconAndSetTitle("shuttle-van", "Search result for resources");
     }
 
@@ -717,7 +748,7 @@
       }
 
       window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Render of resource)");
-      window.jonas.updateCssDisplayForContentDivs(window.jonas.location, "renderOfResource");
+      window.jonas.updateCssDisplayForContentDivs("renderOfResource");
       window.jonas.checkIconAndSetTitle("book-reader", "Render of resource " + window.jonas.resource);
     }
 
@@ -1064,40 +1095,55 @@
       window.jonas.updateResourceState(true, "green");
     }
 
-    window.jonas.handlePreviousCurrentNextResource = function (previous, current, next) {
-
-      if (($("#spanResourcePrevious").css("display") === "none") && (current !== 0)) {
-        $("#spanResourcePrevious").css("display", "inline");
-        $("#spanResourceCurrent").css("display", "inline");
-        $("#spanResourceNext").css("display", "inline");
-      }
-      else if (($("#spanResourcePrevious").css("display") === "inline") && (current === 0)) {
-        $("#spanResourcePrevious").css("display", "none");
-        $("#spanResourceCurrent").css("display", "none");
-        $("#spanResourceNext").css("display", "none");
-      }
-
-      if (current !== 0) {
-        $("#spanResourcePrevious").text("(R" + previous);
-        $("#spanResourceCurrent").text("R" + current);
-        $("#spanResourceNext").text("R" + next + ")");
-      }
-         
-      window.jonas.previousResource = previous;
-      window.jonas.currentResource = current;
-      window.jonas.nextResource = next;
-    }
-
     window.jonas.renderResource = function(id) {
+      $.ajax({
+        url: "http://www.Nr1Web1.com/Main/GetResource",
+        data: { id: id },
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+          if (typeof data == "object") { //Success
 
+            if (data.ResourcesType === 0) { //ThumbUpLocation Page???Menu???Sub???Sub???Tab???
+              var indexMenu, indexSub1, indexSub2, indexTab;
+              var page, menu, sub1, sub2, tab;
+
+              indexMenu = data.ThumbUpLocation.indexOf("Menu", 4);
+              indexSub1 = data.ThumbUpLocation.indexOf("Sub", 4);
+              indexSub2 = data.ThumbUpLocation.indexOf("Sub", 3 + indexSub1);
+              indexTab = data.ThumbUpLocation.indexOf("Tab", 3 + indexSub2);
+
+              page = window.Number(data.ThumbUpLocation.substring(4, indexMenu));
+              menu = window.Number(data.ThumbUpLocation.substring(4 + indexMenu, indexSub1));
+              sub1 = window.Number(data.ThumbUpLocation.substring(3 + indexSub1, indexSub2));
+              sub2 = window.Number(data.ThumbUpLocation.substring(3 + indexSub2, indexTab));
+              tab = window.Number(data.ThumbUpLocation.substring(3 + indexTab));
+
+              window.jonas.newLocation(page, menu, sub1, sub2, tab, false);
+            }
+          }
+          else {
+             alert(data); //Error occured
+             return;
+           }
+        }
+      });
     }
 
-    window.jonas.renderPreviousResource = function() {
+    window.jonas.renderPreviousResource = function () {
       window.jonas.renderResource(window.jonas.previousResource);
     }
 
     window.jonas.renderNextResource = function() {
       window.jonas.renderResource(window.jonas.nextResource);
+    }
+
+    window.jonas.appendSerachTerm = function (cmd) {
+      var text;
+      text = $("#searchTerm").val();
+      text += (" " + cmd + "(" + $("#inputHelpSearch").val() + ")");
+      $("#searchTerm").val(text.trim());
+      $("#inputHelpSearch").val("");
     }
 
   </script>
