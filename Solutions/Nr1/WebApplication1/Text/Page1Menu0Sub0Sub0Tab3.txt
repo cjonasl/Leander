@@ -1,1 +1,1 @@
-﻿250px50px abc
+﻿250px 50px  abc

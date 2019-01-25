@@ -97,6 +97,7 @@
     <Content Include="CreateNavFromHarmony\HarmonyTheme.css" />
     <Content Include="CreateNavFromHarmony\Jonas-logo.png" />
     <Content Include="CreateNavFromHarmony\Jonas.png" />
+    <Content Include="CreateNavFromHarmony\jonas1.js" />
     <Content Include="CreateNavFromHarmony\menu-toggler.png" />
     <Content Include="CreateNavFromHarmony\Navigation.html" />
     <Content Include="CreateNavFromHarmony\Orange.css" />
@@ -122,6 +123,8 @@
     <Compile Include="Models\Command.cs" />
     <Compile Include="Models\DataDefaultLocation.cs" />
     <Compile Include="Models\DocumentReadyDataForNonDefaultLocation.cs" />
+    <Compile Include="Models\HtmlResourceFileTextAndTextareaDimension.cs" />
+    <Compile Include="Models\HtmlResourceIframeDimensionData.cs" />
     <Compile Include="Models\KeyWord.cs" />
     <Compile Include="Models\LoadResourceData.cs" />
     <Compile Include="Models\Resource.cs" />

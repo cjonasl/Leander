@@ -59,8 +59,17 @@
             <div id="contentDivSearchResultResources" style="display: none;"></div>
 
             <!-- Render of resource -->
-            <div id="contentDivRenderOfResource" style="display: none;"></div>
-
+            <div id="contentDivRenderOfResource" style="display: none;">
+              <div id="divRenderOfHtmlResource" style="display: none;">
+                <iframe id="iframeRenderOfHtmlResource" src=""></iframe><br />
+                <input id="inputWidthHeightIframe" type="text" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 10px !important; margin-right: 5px; width: 100px;" />
+                <button style="font-family: Arial; font-weight: bold; font-size: small;" onclick="window.jonas.saveIframeDimension()">Save</button>
+                <textarea id="textAreaRenderOfHtmlResource" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 10px !important;"></textarea>
+                <button id="btnRenderOfHtmlResourceSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaRenderOfHtmlResourceSave()">Save</button>
+                <button id="btnRenderOfHtmlResourceCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaRenderOfHtmlResourceCancel()">Cancel</button>
+              </div>
+              <div id="divRenderOfSelfResource" style="display: none;"></div>
+            </div>
           </div>
         </div>
       </div>

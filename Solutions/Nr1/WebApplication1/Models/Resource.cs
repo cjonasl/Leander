@@ -20,10 +20,12 @@ namespace WebApplication1.Models
         public string HtmlFile { get; set; } //The html-file (file name full path) when ResourcesType=Html, otherwise null
         public string Files { get; set; } //Files full path (separated with "----- New file -----" when serialized otherwise separated with \n) when ResourcesType=Self, otherwise null
         public string Links { get; set; } //Links (separated with "----- New link -----" when serialized otherwise separated with \n) when ResourcesType=Self, otherwise null. In a link "###" separate value of href-attribute and text to show for the link, for example https://www.expressen.se###Expressen will render like <a href="https://www.expressen.se">Expressen</a>
+        public int[] HtmlResourceIframeTextAreaDimensions { get; set; }//For ThumbUpLocation and Self always null. For Html resource the dimensions of iframe and textarea: (widthIframe, heightIframe, widthTextarea, heightTextArea)
+        public string Tmp { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
 
         public Resource() { }
 
-        public Resource(int id, 
+        public Resource(int id,
             ResourcesType resourcesType,
             string created,
             string title,
@@ -34,7 +36,8 @@ namespace WebApplication1.Models
             string thumbUpLocation,
             string htmlFile,
             string files,
-            string links)
+            string links,
+            int[] htmlResourceIframeTextAreaDimensions)
         {
             this.Id = id;
             this.ResourcesType = resourcesType;
@@ -48,12 +51,40 @@ namespace WebApplication1.Models
             this.HtmlFile = string.IsNullOrEmpty(htmlFile) ? null : htmlFile;
             this.Files = string.IsNullOrEmpty(files) ? null : files;
             this.Links = string.IsNullOrEmpty(links) ? null : links;
+            this.HtmlResourceIframeTextAreaDimensions = htmlResourceIframeTextAreaDimensions;
+            this.Tmp = null;
         }
     }  
 
     public static class ResourceUtility
     {
         private const string _fileNameFullPathNextResourceId = "C:\\git_cjonasl\\Leander\\Design Leander\\NextResourceId.txt";
+
+        private static string SerializeHtmlResourceIframeTextAreaDimensions(int[] v)
+        {
+            return string.Format("{0} {1} {2} {3}", v[0].ToString(), v[1].ToString(), v[2].ToString(), v[3].ToString());
+        }
+
+        private static int[] DeserializeHtmlResourceIframeTextAreaDimensions(string str)
+        {
+            string[] u;
+            int[] v;
+
+            if (str == "null")
+                return null;
+            else
+            {
+                u = str.Split(' ');
+                v = new int[4];
+
+                for(int i = 0; i < 4; i++)
+                {
+                    v[i] = int.Parse(u[i]);
+                }
+
+                return v;
+            }          
+        }
 
         public static string ReturnResourceDirectory(int id)
         {
@@ -90,7 +121,7 @@ namespace WebApplication1.Models
 
         private static string SerializeResource(Resource resource)
         {
-            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}\r\n\r\n----- New property -----\r\n\r\n{4}\r\n\r\n----- New property -----\r\n\r\n{5}\r\n\r\n----- New property -----\r\n\r\n{6}\r\n\r\n----- New property -----\r\n\r\n{7}\r\n\r\n----- New property -----\r\n\r\n{8}\r\n\r\n----- New property -----\r\n\r\n{9}\r\n\r\n----- New property -----\r\n\r\n{10}\r\n\r\n----- New property -----\r\n\r\n{11}", resource.Id.ToString(), resource.ResourcesType.ToString(), resource.Created, resource.Title, resource.KeyWords, (resource.Note ?? "null"), resource.PreviousResource.ToString(), resource.NextResource.ToString(), (resource.ThumbUpLocation ?? "null"), (resource.HtmlFile ?? "null"), (resource.Files == null ? "null" : resource.Files.Replace("\n", "----- New file -----")), (resource.Links == null ? "null" : resource.Links.Replace("\n", "----- New link -----")));
+            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}\r\n\r\n----- New property -----\r\n\r\n{4}\r\n\r\n----- New property -----\r\n\r\n{5}\r\n\r\n----- New property -----\r\n\r\n{6}\r\n\r\n----- New property -----\r\n\r\n{7}\r\n\r\n----- New property -----\r\n\r\n{8}\r\n\r\n----- New property -----\r\n\r\n{9}\r\n\r\n----- New property -----\r\n\r\n{10}\r\n\r\n----- New property -----\r\n\r\n{11}\r\n\r\n----- New property -----\r\n\r\n{11}", resource.Id.ToString(), resource.ResourcesType.ToString(), resource.Created, resource.Title, resource.KeyWords, (resource.Note ?? "null"), resource.PreviousResource.ToString(), resource.NextResource.ToString(), (resource.ThumbUpLocation ?? "null"), (resource.HtmlFile ?? "null"), (resource.Files == null ? "null" : resource.Files.Replace("\n", "----- New file -----")), (resource.Links == null ? "null" : resource.Links.Replace("\n", "----- New link -----")), (resource.HtmlResourceIframeTextAreaDimensions == null ? "null" : SerializeHtmlResourceIframeTextAreaDimensions(resource.HtmlResourceIframeTextAreaDimensions)));
         }
 
         private static Resource DeserializeResource(string resource)
@@ -113,10 +144,10 @@ namespace WebApplication1.Models
                     break;
             }
 
-            return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New file -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")));
+            return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New file -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")), DeserializeHtmlResourceIframeTextAreaDimensions(v[12]));
         }
 
-        public static Resource ReturnResource(int id, out string errorMessage)
+        public static Resource GetResource(int id, out string errorMessage)
         {
             string resourceDirectory, fileNameFullPath, resourceSerialized;
             Resource resourceDeserialized;
@@ -134,6 +165,11 @@ namespace WebApplication1.Models
 
             resourceSerialized = Utility.ReturnFileContents(fileNameFullPath);
             resourceDeserialized = DeserializeResource(resourceSerialized);
+
+            if (resourceDeserialized.ResourcesType == ResourcesType.Html)
+            {
+                resourceDeserialized.Tmp = Utility.ReturnFileContents(resourceDeserialized.HtmlFile);
+            }
 
             return resourceDeserialized;
         }
@@ -244,6 +280,7 @@ namespace WebApplication1.Models
             Resource newResource = null;
             int nextResourceId;
             string resourceSerialized, folder, fileNameFullPath;
+            int[] htmlResourceIframeTextAreaDimensions = null;
 
             errorMessage = null;
 
@@ -264,7 +301,18 @@ namespace WebApplication1.Models
 
                 if (errorMessage == null)
                 {
-                    newResource = new Resource(nextResourceId, resource.ResourcesType, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords, resource.Note, resource.PreviousResource, resource.NextResource, resource.ThumbUpLocation, resource.HtmlFile, resource.Files, resource.Links);
+                    if (resource.ResourcesType == ResourcesType.Html)
+                    {
+                        htmlResourceIframeTextAreaDimensions = new int[4];
+
+                        //Set default values
+                        htmlResourceIframeTextAreaDimensions[0] = 800;
+                        htmlResourceIframeTextAreaDimensions[1] = 400;
+                        htmlResourceIframeTextAreaDimensions[2] = 800;
+                        htmlResourceIframeTextAreaDimensions[3] = 400;
+                    }
+
+                    newResource = new Resource(nextResourceId, resource.ResourcesType, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords, resource.Note, resource.PreviousResource, resource.NextResource, resource.ThumbUpLocation, resource.HtmlFile, resource.Files, resource.Links, htmlResourceIframeTextAreaDimensions);
                     folder = ReturnResourceDirectory(nextResourceId);
                     Directory.CreateDirectory(folder);
                     fileNameFullPath = string.Format("{0}\\R{1}.txt", folder, nextResourceId.ToString());
@@ -318,11 +366,99 @@ namespace WebApplication1.Models
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("ERROR!! An Exception occured in method UpdateResource! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method EditResource! e.Message:\r\n{0}", e.Message);
                 return null;
             }
 
-            return ReturnResource(resource.Id, out errorMessage); //Return the newly updated resource
+            return GetResource(resource.Id, out errorMessage); //Return the newly updated resource
+        }
+
+        public static string GetFileTextForHtmlResource(int id, out string errorMessage)
+        {
+            Resource resource;
+            string fileText;
+
+            resource = GetResource(id, out errorMessage);
+
+            if (errorMessage != null)
+                return null;
+
+            if (resource.ResourcesType != ResourcesType.Html)
+            {
+                errorMessage = string.Format("ERROR!! The resource is of type '{0}' and not of type Html as expected!", resource.ResourcesType.ToString());
+                return null;
+            }
+
+            fileText = Utility.ReturnFileContents(resource.HtmlFile);
+
+            return fileText;
+        }
+
+        public static void UpdateFileTextForHtmlResource(int id, string fileText, out string errorMessage)
+        {
+            Resource resource;
+            
+            try
+            {
+                resource = GetResource(id, out errorMessage);
+
+                if (errorMessage != null)
+                    return;
+
+                if (resource.ResourcesType != ResourcesType.Html)
+                {
+                    errorMessage = string.Format("ERROR!! The resource is of type '{0}' and not of type Html as expected!", resource.ResourcesType.ToString());
+                    return;
+                }
+
+                Utility.CreateNewFile(resource.HtmlFile, fileText);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method UpdateFileTextForHtmlResource! e.Message:\r\n{0}", e.Message);
+                return;
+            }
+        }
+
+        public static void UpdateHtmlResourceDimension(int id, int width, int height, bool isIframe, out string errorMessage)
+        {
+            Resource resource;
+            int a, b;
+
+            try
+            {
+                resource = GetResource(id, out errorMessage);
+
+                if (errorMessage != null)
+                    return;
+
+                if (resource.ResourcesType != ResourcesType.Html)
+                {
+                    errorMessage = string.Format("ERROR!! The resource is of type '{0}' and not of type Html as expected!", resource.ResourcesType.ToString());
+                    return;
+                }
+
+                if (isIframe)
+                {
+                    a = 0;
+                    b = 1;
+                }
+                else
+                {
+                    a = 2;
+                    b = 3;
+                }
+
+                resource.HtmlResourceIframeTextAreaDimensions[a] = width;
+                resource.HtmlResourceIframeTextAreaDimensions[b] = height;
+
+                EditResource(resource, out errorMessage);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method UpdateHtmlResourceDimension! e.Message:\r\n{0}", e.Message);
+                return;
+            }
         }
     }
 }

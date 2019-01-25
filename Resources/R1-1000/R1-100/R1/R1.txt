@@ -43,3 +43,7 @@ null
 ----- New property -----
 
 null
+
+----- New property -----
+
+null

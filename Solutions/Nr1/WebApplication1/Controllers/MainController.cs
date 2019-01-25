@@ -135,9 +135,9 @@ namespace WebApplication1.Controllers
 
             if (!string.IsNullOrEmpty(text))
             {
-                dataDefaultLocation.Width = text.Substring(0, 5).Trim();
-                dataDefaultLocation.Height = text.Substring(5, 5).Trim();
-                dataDefaultLocation.Text = text.Substring(10);
+                dataDefaultLocation.Width = text.Substring(0, 6).Trim();
+                dataDefaultLocation.Height = text.Substring(6, 6).Trim();
+                dataDefaultLocation.Text = text.Substring(12);
             }
 
             return dataDefaultLocation;
@@ -145,19 +145,26 @@ namespace WebApplication1.Controllers
 
         public ActionResult NewLocation(Location location)
         {
-            string locationStr = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
-
-            switch (locationStr)
+            try
             {
-                case "Page1Menu0Sub0Sub0Tab1":
-                    return View("Page1Menu0Sub0Sub0Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
-                case "Page1Menu0Sub0Sub0Tab2":
-                    ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
-                    return View("Page1Menu0Sub0Sub0Tab2", GetDocumentReadyDataForNonDefaultLocation(location));
-                case "Page2Menu1Sub1Sub1Tab1":
-                    return View("Page2Menu1Sub1Sub1Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
-                default:
-                    return Json(GetDefaultDataForNewLocation(location), JsonRequestBehavior.AllowGet);
+                string locationStr = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
+
+                switch (locationStr)
+                {
+                    case "Page1Menu0Sub0Sub0Tab1":
+                        return View("Page1Menu0Sub0Sub0Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
+                    case "Page1Menu0Sub0Sub0Tab2":
+                        ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
+                        return View("Page1Menu0Sub0Sub0Tab2", GetDocumentReadyDataForNonDefaultLocation(location));
+                    case "Page2Menu1Sub1Sub1Tab1":
+                        return View("Page2Menu1Sub1Sub1Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
+                    default:
+                        return Json(GetDefaultDataForNewLocation(location), JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(string.Format("ERROR!! An Exception happened! e.Message:\r\n{0}", e.Message), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -179,14 +186,14 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                HandleSaveOfPageEntity(PageEntity.Text, locationExtension.Page, locationExtension.Menu, locationExtension.Sub1, locationExtension.Sub2, locationExtension.Tab, locationExtension.Width.PadRight(5) + locationExtension.Height.PadRight(5) + locationExtension.Text);
+                HandleSaveOfPageEntity(PageEntity.Text, locationExtension.Page, locationExtension.Menu, locationExtension.Sub1, locationExtension.Sub2, locationExtension.Tab, locationExtension.Width.PadRight(6) + locationExtension.Height.PadRight(6) + locationExtension.Text);
             }
             catch(Exception e)
             {
                 return Json(string.Format("ERROR!! An Exception happened! e.Message:\r\n", e.Message), JsonRequestBehavior.AllowGet);
             }
 
-            return Json("Text saved", JsonRequestBehavior.AllowGet);
+            return Json("Success", JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ExecuteCommand(Command command)
@@ -289,11 +296,11 @@ namespace WebApplication1.Controllers
                                 return Json("ERROR!! Incorrect ResourcesType!", JsonRequestBehavior.AllowGet);
                         }
 
-                        loadResourceData.Resource = new Resource(0, resourcesType, "", "", "", "", 0, 0, "", "", "", "");
+                        loadResourceData.Resource = new Resource(0, resourcesType, "", "", "", "", 0, 0, "", "", "", "", null);
                     }
                     else
                     {
-                        loadResourceData.Resource = ResourceUtility.ReturnResource(int.Parse(command.Val), out errorMessage);
+                        loadResourceData.Resource = ResourceUtility.GetResource(int.Parse(command.Val), out errorMessage);
 
                         if (errorMessage != null)
                             return Json(string.Format("ERROR!!\r\n", errorMessage), JsonRequestBehavior.AllowGet);
@@ -410,10 +417,57 @@ namespace WebApplication1.Controllers
         public JsonResult GetResource(int id)
         {
             string errorMessage;
-            Resource resource = ResourceUtility.ReturnResource(id, out errorMessage);
+            Resource resource = ResourceUtility.GetResource(id, out errorMessage);
 
             if (errorMessage == null)
                 return Json(resource, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetFileTextForHtmlResource(int id)
+        {
+            string fileText, errorMessage;
+                
+            fileText = ResourceUtility.GetFileTextForHtmlResource(id, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(fileText, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateFileTexAndTextareaDimensiontForHtmlResource(HtmlResourceFileTextAndTextareaDimension htmlResourceFileTextAndTextareaDimension)
+        {
+            string errorMessage = null;
+
+            if (htmlResourceFileTextAndTextareaDimension.Width > 0)
+            {
+                ResourceUtility.UpdateHtmlResourceDimension(htmlResourceFileTextAndTextareaDimension.Id, htmlResourceFileTextAndTextareaDimension.Width, htmlResourceFileTextAndTextareaDimension.Height, false, out errorMessage);
+            }
+
+            if (errorMessage != null)
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+
+            if (htmlResourceFileTextAndTextareaDimension.FileText != null)
+            {
+                ResourceUtility.UpdateFileTextForHtmlResource(htmlResourceFileTextAndTextareaDimension.Id, htmlResourceFileTextAndTextareaDimension.FileText, out errorMessage);
+            }
+
+            if (errorMessage == null)
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateHtmlResourceIframeDimension(HtmlResourceIframeDimensionData htmlResourceIframeDimensionData)
+        {
+            string errorMessage;
+
+            ResourceUtility.UpdateHtmlResourceDimension(htmlResourceIframeDimensionData.Id, htmlResourceIframeDimensionData.Width, htmlResourceIframeDimensionData.Height, true, out errorMessage);
+
+            if (errorMessage == null)
+                return Json("Success", JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
