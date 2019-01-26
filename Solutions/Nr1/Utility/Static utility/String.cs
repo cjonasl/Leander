@@ -288,5 +288,155 @@ namespace Leander.Nr1
 
             return returnValue;
         }
+
+        public static bool PhraseIsUniqueInString(string str, string phrase, int shouldBeAtIndexOrAfter, out int idx)
+        {
+            int index, startIndex;
+
+            idx = -1;
+
+            index = str.IndexOf(phrase);
+
+            if ((index == -1) || (index < shouldBeAtIndexOrAfter))
+                return false;
+
+            startIndex = index + phrase.Length;
+
+            if (str.Length > startIndex)
+            {
+                if (str.IndexOf(phrase, startIndex) > 0)
+                    return false;
+            }
+
+            idx = index;
+
+            return true;
+        }
+
+        public static string ReturnTextExceptFirstRow(string text, out string firstRow)
+        {
+            string fileContentsExceptFirstRow;
+            int index;
+
+            index = text.IndexOf("\r\n");
+
+            if ((index == -1) || (text.Length < (3 + index)))
+            {
+                firstRow = text;
+                fileContentsExceptFirstRow = "";
+            }
+            else
+            {
+                fileContentsExceptFirstRow = text.Substring(2 + index);
+                firstRow = text.Substring(0, 2 + index);
+            }
+
+            return fileContentsExceptFirstRow;
+        }
+
+        /// <summary>
+        /// Returns true if first row is correct, otherwise false
+        /// </summary>
+        public static bool CheckFirstRowInHtmlResource(string firstRow, bool isForIframe, out string firstRowTemplate, out int iFrameWidth, out int iFrameHeight, out int textareaWidth, out int textareaHeight, out string errorMessage)
+        {
+            int index1, index2, index3, index4;
+            string str1, str2, str3, str4, iframeDimension;
+            string[] v;
+
+            //First row should be for example: <!DOCTYPE html> <!-- iframe dimension: [200,300] textarea dimension: [400px,500px] -->
+
+            str1 = "<!DOCTYPE html> <!-- iframe dimension: [";
+            str2 = "] textarea dimension: [";
+            str3 = "px,";
+            str4 = "px] -->\r\n";
+
+            firstRowTemplate = null;
+            iFrameWidth = 0;
+            iFrameHeight = 0;
+            textareaWidth = 0;
+            textareaHeight = 0;
+            errorMessage = null;
+
+            //Error number 1
+            if (!PhraseIsUniqueInString(firstRow, str1, 0, out index1))
+            {
+                errorMessage = "ERROR!! Error number 1 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 2
+            if (!PhraseIsUniqueInString(firstRow, str2, index1 + str1.Length, out index2))
+            {
+                errorMessage = "ERROR!! Error number 2 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 3
+            if (!PhraseIsUniqueInString(firstRow, str3, index2 + str2.Length, out index3))
+            {
+                errorMessage = "ERROR!! Error number 3 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 4
+            if (!PhraseIsUniqueInString(firstRow, str4, index3 + str3.Length, out index4))
+            {
+                errorMessage = "ERROR!! Error number 4 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            iframeDimension = firstRow.Substring(str1.Length, index2 - str1.Length);
+
+            v = iframeDimension.Split(',');
+
+            //Error number 5
+            if (v.Length != 2)
+            {
+                errorMessage = "ERROR!! Error number 5 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 6
+            if (!int.TryParse(v[0], out iFrameWidth))
+            {
+                errorMessage = "ERROR!! Error number 6 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 7
+            if (!int.TryParse(v[1], out iFrameHeight))
+            {
+                errorMessage = "ERROR!! Error number 7 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 8
+            if ((iFrameWidth < 1) || (iFrameWidth > 10000) || (iFrameHeight < 1) || (iFrameHeight > 10000))
+            {
+                errorMessage = "ERROR!! Error number 8 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 9
+            if (!int.TryParse(firstRow.Substring(index2 + str2.Length, index3 - index2 - str2.Length), out textareaWidth))
+            {
+                errorMessage = "ERROR!! Error number 9 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            //Error number 10
+            if (!int.TryParse(firstRow.Substring(index3 + str3.Length, index4 - index3 - str3.Length), out textareaHeight))
+            {
+                errorMessage = "ERROR!! Error number 10 in method CheckFirstRowInHtmlResource";
+                return false;
+            }
+
+            if (isForIframe)
+                firstRowTemplate = string.Format("<!DOCTYPE html> <!-- iframe dimension: [#####REPLACE#####] textarea dimension: [{0}px,{1}px] -->\r\n", textareaWidth.ToString(), textareaHeight.ToString());
+            else
+                firstRowTemplate = string.Format("<!DOCTYPE html> <!-- iframe dimension: [{0},{1}] textarea dimension: [#####REPLACE#####] -->\r\n", iFrameWidth.ToString(), iFrameHeight.ToString());
+
+            return true;
+        }
     }
 }

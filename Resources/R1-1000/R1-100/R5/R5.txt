@@ -10,7 +10,7 @@ Self
 
 ----- New property -----
 
-Put contens in files in one file
+Put contents in files in one file
 
 ----- New property -----
 
@@ -39,10 +39,6 @@ null
 ----- New property -----
 
 C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\Resources1\R5.cs
-
------ New property -----
-
-null
 
 ----- New property -----
 

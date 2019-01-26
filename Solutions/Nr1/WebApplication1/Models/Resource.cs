@@ -20,8 +20,11 @@ namespace WebApplication1.Models
         public string HtmlFile { get; set; } //The html-file (file name full path) when ResourcesType=Html, otherwise null
         public string Files { get; set; } //Files full path (separated with "----- New file -----" when serialized otherwise separated with \n) when ResourcesType=Self, otherwise null
         public string Links { get; set; } //Links (separated with "----- New link -----" when serialized otherwise separated with \n) when ResourcesType=Self, otherwise null. In a link "###" separate value of href-attribute and text to show for the link, for example https://www.expressen.se###Expressen will render like <a href="https://www.expressen.se">Expressen</a>
-        public int[] HtmlResourceIframeTextAreaDimensions { get; set; }//For ThumbUpLocation and Self always null. For Html resource the dimensions of iframe and textarea: (widthIframe, heightIframe, widthTextarea, heightTextArea)
-        public string Tmp { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
+        public string HtmlFileText { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
+        public int WidthIframe { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
+        public int HeightIframe { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
+        public int WidthTextarea { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
+        public int HeightTextarea { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
 
         public Resource() { }
 
@@ -36,8 +39,7 @@ namespace WebApplication1.Models
             string thumbUpLocation,
             string htmlFile,
             string files,
-            string links,
-            int[] htmlResourceIframeTextAreaDimensions)
+            string links)
         {
             this.Id = id;
             this.ResourcesType = resourcesType;
@@ -51,39 +53,17 @@ namespace WebApplication1.Models
             this.HtmlFile = string.IsNullOrEmpty(htmlFile) ? null : htmlFile;
             this.Files = string.IsNullOrEmpty(files) ? null : files;
             this.Links = string.IsNullOrEmpty(links) ? null : links;
-            this.HtmlResourceIframeTextAreaDimensions = htmlResourceIframeTextAreaDimensions;
-            this.Tmp = null;
         }
     }  
 
     public static class ResourceUtility
     {
+        private const string _basePath = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\";
         private const string _fileNameFullPathNextResourceId = "C:\\git_cjonasl\\Leander\\Design Leander\\NextResourceId.txt";
 
         private static string SerializeHtmlResourceIframeTextAreaDimensions(int[] v)
         {
             return string.Format("{0} {1} {2} {3}", v[0].ToString(), v[1].ToString(), v[2].ToString(), v[3].ToString());
-        }
-
-        private static int[] DeserializeHtmlResourceIframeTextAreaDimensions(string str)
-        {
-            string[] u;
-            int[] v;
-
-            if (str == "null")
-                return null;
-            else
-            {
-                u = str.Split(' ');
-                v = new int[4];
-
-                for(int i = 0; i < 4; i++)
-                {
-                    v[i] = int.Parse(u[i]);
-                }
-
-                return v;
-            }          
         }
 
         public static string ReturnResourceDirectory(int id)
@@ -121,7 +101,7 @@ namespace WebApplication1.Models
 
         private static string SerializeResource(Resource resource)
         {
-            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}\r\n\r\n----- New property -----\r\n\r\n{4}\r\n\r\n----- New property -----\r\n\r\n{5}\r\n\r\n----- New property -----\r\n\r\n{6}\r\n\r\n----- New property -----\r\n\r\n{7}\r\n\r\n----- New property -----\r\n\r\n{8}\r\n\r\n----- New property -----\r\n\r\n{9}\r\n\r\n----- New property -----\r\n\r\n{10}\r\n\r\n----- New property -----\r\n\r\n{11}\r\n\r\n----- New property -----\r\n\r\n{11}", resource.Id.ToString(), resource.ResourcesType.ToString(), resource.Created, resource.Title, resource.KeyWords, (resource.Note ?? "null"), resource.PreviousResource.ToString(), resource.NextResource.ToString(), (resource.ThumbUpLocation ?? "null"), (resource.HtmlFile ?? "null"), (resource.Files == null ? "null" : resource.Files.Replace("\n", "----- New file -----")), (resource.Links == null ? "null" : resource.Links.Replace("\n", "----- New link -----")), (resource.HtmlResourceIframeTextAreaDimensions == null ? "null" : SerializeHtmlResourceIframeTextAreaDimensions(resource.HtmlResourceIframeTextAreaDimensions)));
+            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}\r\n\r\n----- New property -----\r\n\r\n{4}\r\n\r\n----- New property -----\r\n\r\n{5}\r\n\r\n----- New property -----\r\n\r\n{6}\r\n\r\n----- New property -----\r\n\r\n{7}\r\n\r\n----- New property -----\r\n\r\n{8}\r\n\r\n----- New property -----\r\n\r\n{9}\r\n\r\n----- New property -----\r\n\r\n{10}\r\n\r\n----- New property -----\r\n\r\n{11}\r\n\r\n----- New property -----\r\n\r\n{11}", resource.Id.ToString(), resource.ResourcesType.ToString(), resource.Created, resource.Title, resource.KeyWords, (resource.Note ?? "null"), resource.PreviousResource.ToString(), resource.NextResource.ToString(), (resource.ThumbUpLocation ?? "null"), (resource.HtmlFile ?? "null"), (resource.Files == null ? "null" : resource.Files.Replace("\n", "----- New file -----")), (resource.Links == null ? "null" : resource.Links.Replace("\n", "----- New link -----")));
         }
 
         private static Resource DeserializeResource(string resource)
@@ -144,13 +124,14 @@ namespace WebApplication1.Models
                     break;
             }
 
-            return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New file -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")), DeserializeHtmlResourceIframeTextAreaDimensions(v[12]));
+            return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New file -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")));
         }
 
         public static Resource GetResource(int id, out string errorMessage)
         {
-            string resourceDirectory, fileNameFullPath, resourceSerialized;
+            string resourceDirectory, firstRow, firstRowTemplate, fileNameFullPath, resourceSerialized;
             Resource resourceDeserialized;
+            int ifw, ifh, tw, th;
 
             errorMessage = null;
 
@@ -168,7 +149,20 @@ namespace WebApplication1.Models
 
             if (resourceDeserialized.ResourcesType == ResourcesType.Html)
             {
-                resourceDeserialized.Tmp = Utility.ReturnFileContents(resourceDeserialized.HtmlFile);
+                resourceDeserialized.HtmlFileText = Utility.ReturnFileContents(_basePath + resourceDeserialized.HtmlFile.Replace('/', '\\'));
+                Utility.ReturnTextExceptFirstRow(resourceDeserialized.HtmlFileText, out firstRow);
+                 
+                if (!Utility.CheckFirstRowInHtmlResource(firstRow, false, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
+                {
+                    return null;
+                }
+                else
+                {
+                    resourceDeserialized.WidthIframe = ifw;
+                    resourceDeserialized.HeightIframe = ifh;
+                    resourceDeserialized.WidthTextarea = tw;
+                    resourceDeserialized.HeightTextarea = th;
+                }
             }
 
             return resourceDeserialized;
@@ -185,9 +179,11 @@ namespace WebApplication1.Models
             Utility.CreateNewFile(_fileNameFullPathNextResourceId, nextResourceId.ToString());
         }
 
-        private static string CheckNextResourceId(int nextResourceId)
+        private static bool CheckNextResourceId(int nextResourceId, out string errorMessage)
         {
             string folder;
+
+            errorMessage = null;
 
             if (nextResourceId > 1)
             {
@@ -195,7 +191,8 @@ namespace WebApplication1.Models
 
                 if (!Directory.Exists(folder))
                 {
-                    return string.Format("ERROR!! Directory for previous resourse with Id = {0} does not exist as expected!", nextResourceId - 1);
+                    errorMessage = string.Format("ERROR!! Directory for previous resourse with Id = {0} does not exist as expected!", nextResourceId - 1);
+                    return false;
                 }
             }
 
@@ -203,29 +200,48 @@ namespace WebApplication1.Models
 
             if (Directory.Exists(folder))
             {
-                return string.Format("ERROR!! Directory for next resourse with Id = {0} exists already!", nextResourceId);
+                errorMessage = string.Format("ERROR!! Directory for next resourse with Id = {0} exists already!", nextResourceId);
+                return false;
             }
 
-            return null;
+            return true;
         }
 
-        private static string CheckHtmlFile(string htmlFile)
+        private static bool CheckHtmlFile(string htmlFile, out string errorMessage)
         {
-            if (!File.Exists(htmlFile))
+            string fileContents, fileNameFullPath;
+
+            errorMessage = null;
+
+            fileNameFullPath = _basePath + htmlFile.Replace('/', '\\');
+
+            if (!File.Exists(fileNameFullPath))
             {
-                return "ERROR!! The given Html-file does not exist!";
+                errorMessage = "ERROR!! The given Html-file does not exist!";
+                return false;
             }
             else
-                return null;
+            {
+                fileContents = Utility.ReturnFileContents(fileNameFullPath);
+
+                if (!fileContents.StartsWith("<!DOCTYPE html>"))
+                {
+                    errorMessage = "ERROR!! The given Html-file does not start with \"<!DOCTYPE html>\" as expected!";
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        private static string CheckFiles(string files)
+        private static bool CheckFiles(string files, out string errorMessage)
         {
+            errorMessage = null;
+
             if (string.IsNullOrEmpty(files))
-                return null;
+                return true;
 
             string[] v = files.Split('\n');
-            string errorMessage = null;
             int i, n = v.Length;
 
             i = 0;
@@ -242,18 +258,22 @@ namespace WebApplication1.Models
                 }
             }
 
-            return errorMessage;
+            if (errorMessage == null)
+                return true;
+            else
+                return false;
         }
 
-        private static string CheckLinks(string links)
+        private static bool CheckLinks(string links, out string errorMessage)
         {
+            errorMessage = null;
+
             if (string.IsNullOrEmpty(links))
-                return null;
+                return true;
 
             string[] u, v;
 
             u = links.Split('\n');
-            string errorMessage = null;
             int i, n = u.Length;
 
             i = 0;
@@ -272,60 +292,72 @@ namespace WebApplication1.Models
                 }
             }
 
-            return errorMessage;
+            if (errorMessage == null)
+                return true;
+            else
+                return false;
+        }
+
+        private static bool ValidateResource(Resource resource, out string errorMessage)
+        {
+            errorMessage = null;
+
+            if (resource.ResourcesType == ResourcesType.Html)
+            {
+                if (!CheckHtmlFile(resource.HtmlFile, out errorMessage))
+                    return false;
+            }
+
+            if (resource.ResourcesType == ResourcesType.Self)
+            {
+                if (!CheckFiles(resource.Files, out errorMessage))
+                    return false;
+
+                if (!CheckLinks(resource.Links, out errorMessage))
+                    return false;
+            }
+
+            return true;
         }
 
         public static Resource AddResource(Resource resource, out string errorMessage)  //resource not complete. newResource will be complete
         {
             Resource newResource = null;
             int nextResourceId;
-            string resourceSerialized, folder, fileNameFullPath;
-            int[] htmlResourceIframeTextAreaDimensions = null;
+            string resourceSerialized, folder, fileNameFullPath, fileText, textExceptFirstRow, firstRow;
 
             errorMessage = null;
 
             try
             {
                 nextResourceId = ReturnNextResourceId();
-                errorMessage = CheckNextResourceId(nextResourceId);
+
+                if (!CheckNextResourceId(nextResourceId, out errorMessage))
+                    return null;
+
+                if (!ValidateResource(resource, out errorMessage))
+                    return null;
 
                 if (resource.ResourcesType == ResourcesType.Html)
-                    errorMessage = CheckHtmlFile(resource.HtmlFile);
-                else if (resource.ResourcesType == ResourcesType.Self)
                 {
-                    errorMessage = CheckFiles(resource.Files);
-
-                    if (errorMessage == null)
-                        errorMessage = CheckLinks(resource.Links);
+                    fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile.Replace('/', '\\'));
+                    textExceptFirstRow = Utility.ReturnTextExceptFirstRow(fileText, out firstRow);
+                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), "<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->\r\n" + textExceptFirstRow);
                 }
 
-                if (errorMessage == null)
+                newResource = new Resource(nextResourceId, resource.ResourcesType, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords, resource.Note, resource.PreviousResource, resource.NextResource, resource.ThumbUpLocation, resource.HtmlFile, resource.Files, resource.Links);
+                folder = ReturnResourceDirectory(nextResourceId);
+                Directory.CreateDirectory(folder);
+                fileNameFullPath = string.Format("{0}\\R{1}.txt", folder, nextResourceId.ToString());
+                resourceSerialized = SerializeResource(newResource);
+                Utility.CreateNewFile(fileNameFullPath, resourceSerialized);
+                UpdateNextResourceId(nextResourceId);
+                ResourcePresentationInSearchUtility.AddResource(newResource);
+
+                if (resource.ResourcesType == ResourcesType.ThumbUpLocation)
                 {
-                    if (resource.ResourcesType == ResourcesType.Html)
-                    {
-                        htmlResourceIframeTextAreaDimensions = new int[4];
-
-                        //Set default values
-                        htmlResourceIframeTextAreaDimensions[0] = 800;
-                        htmlResourceIframeTextAreaDimensions[1] = 400;
-                        htmlResourceIframeTextAreaDimensions[2] = 800;
-                        htmlResourceIframeTextAreaDimensions[3] = 400;
-                    }
-
-                    newResource = new Resource(nextResourceId, resource.ResourcesType, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords, resource.Note, resource.PreviousResource, resource.NextResource, resource.ThumbUpLocation, resource.HtmlFile, resource.Files, resource.Links, htmlResourceIframeTextAreaDimensions);
-                    folder = ReturnResourceDirectory(nextResourceId);
-                    Directory.CreateDirectory(folder);
-                    fileNameFullPath = string.Format("{0}\\R{1}.txt", folder, nextResourceId.ToString());
-                    resourceSerialized = SerializeResource(newResource);
-                    Utility.CreateNewFile(fileNameFullPath, resourceSerialized);
-                    UpdateNextResourceId(nextResourceId);
-                    ResourcePresentationInSearchUtility.AddResource(newResource);
-
-                    if (resource.ResourcesType == ResourcesType.ThumbUpLocation)
-                    {
-                        fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\LocationResource\\{0}.txt", resource.ThumbUpLocation);
-                        Utility.CreateNewFile(fileNameFullPath, string.Format("{0} {1} {2}", newResource.PreviousResource, newResource.Id, newResource.NextResource));
-                    }
+                    fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\LocationResource\\{0}.txt", resource.ThumbUpLocation);
+                    Utility.CreateNewFile(fileNameFullPath, string.Format("{0} {1} {2}", newResource.PreviousResource, newResource.Id, newResource.NextResource));
                 }
             }
             catch(Exception e)
@@ -345,6 +377,9 @@ namespace WebApplication1.Models
 
             try
             {
+                if (!ValidateResource(resource, out errorMessage))
+                    return null;
+
                 folder = ReturnResourceDirectory(resource.Id);
                 fileNameFullPath = string.Format("{0}\\R{1}.txt", folder, resource.Id.ToString());
 
@@ -389,18 +424,20 @@ namespace WebApplication1.Models
                 return null;
             }
 
-            fileText = Utility.ReturnFileContents(resource.HtmlFile);
+            fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile.Replace('/', '\\'));
 
             return fileText;
         }
 
-        public static void UpdateFileTextForHtmlResource(int id, string fileText, out string errorMessage)
+        public static void UpdateFileTextAndTextareaDimensionForHtmlResource(WidthHeightTextData widthHeightTextData, out string errorMessage)
         {
             Resource resource;
-            
+            string textExceptFirstRow, firstRow, firstRowTemplate;
+            int ifw, ifh, tw, th;
+
             try
             {
-                resource = GetResource(id, out errorMessage);
+                resource = GetResource(widthHeightTextData.Id, out errorMessage);
 
                 if (errorMessage != null)
                     return;
@@ -411,7 +448,16 @@ namespace WebApplication1.Models
                     return;
                 }
 
-                Utility.CreateNewFile(resource.HtmlFile, fileText);
+                textExceptFirstRow = Utility.ReturnTextExceptFirstRow(widthHeightTextData.Text.Replace("\n", "\r\n"), out firstRow);
+
+                if (Utility.CheckFirstRowInHtmlResource(firstRow, false, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
+                {
+                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", widthHeightTextData.Width, widthHeightTextData.Height)) + textExceptFirstRow);
+                }
+                else //Error
+                {
+                    return;
+                }
             }
             catch (Exception e)
             {
@@ -420,10 +466,11 @@ namespace WebApplication1.Models
             }
         }
 
-        public static void UpdateHtmlResourceDimension(int id, int width, int height, bool isIframe, out string errorMessage)
+        public static void UpdateHtmlResourceIframeDimension(int id, int width, int height, out string errorMessage)
         {
             Resource resource;
-            int a, b;
+            string textExceptFirstRow, firstRow, fileText, firstRowTemplate;
+            int ifw, ifh, tw, th;
 
             try
             {
@@ -438,25 +485,21 @@ namespace WebApplication1.Models
                     return;
                 }
 
-                if (isIframe)
+                fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile.Replace('/', '\\'));
+                textExceptFirstRow = Utility.ReturnTextExceptFirstRow(fileText, out firstRow);
+                
+                if (Utility.CheckFirstRowInHtmlResource(firstRow, true, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
                 {
-                    a = 0;
-                    b = 1;
+                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", width.ToString(), height.ToString())) + textExceptFirstRow);
                 }
-                else
+                else //Error
                 {
-                    a = 2;
-                    b = 3;
+                    return;
                 }
-
-                resource.HtmlResourceIframeTextAreaDimensions[a] = width;
-                resource.HtmlResourceIframeTextAreaDimensions[b] = height;
-
-                EditResource(resource, out errorMessage);
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("ERROR!! An Exception occured in method UpdateHtmlResourceDimension! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method UpdateFileTextForHtmlResource! e.Message:\r\n{0}", e.Message);
                 return;
             }
         }

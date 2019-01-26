@@ -11,10 +11,10 @@
         <div class="pull-left">
           <h3>
             <i id="iIcon" class="fas fa-anchor"></i>
-            <span id="spanTitle" class="object-title">Title</span>&nbsp;&nbsp;
-            <span id="spanResourcePrevious" style="font-size: medium !important; font-weight: bold; position: relative; bottom: 3px; display: none;" onclick="window.jonas.renderPreviousResource()"></span>&nbsp;
-            <span id="spanResourceCurrent" style="font-size: medium !important;  font-weight: bold; position: relative; bottom: 3px; display: none;"></span>&nbsp;
-            <span id="spanResourceNext" style="font-size: medium !important; font-weight: bold; position: relative; bottom: 3px; display: none;" onclick="window.jonas.renderNextResource()"></span>
+            <span id="spanTitle" class="object-title">Title</span>&nbsp;
+            <span id="spanResourcePrevious" style="font-size: medium !important; font-weight: bold !important; position: relative !important; bottom: 2px !important; font-family: Arial !important; display: none;" onclick="window.jonas.renderPreviousResource()"></span>&nbsp;
+            <span id="spanResourceCurrent" style="font-size: medium !important;  font-weight: bold !important; position: relative !important; bottom: 2px !important; font-family: Arial !important; display: none;"></span>&nbsp;
+            <span id="spanResourceNext" style="font-size: medium !important; font-weight: bold !important; position: relative !important; bottom: 2px !important; font-family: Arial !important; display: none;" onclick="window.jonas.renderNextResource()"></span>
           </h3>
         </div>
         <div class="pull-right">
@@ -61,12 +61,12 @@
             <!-- Render of resource -->
             <div id="contentDivRenderOfResource" style="display: none;">
               <div id="divRenderOfHtmlResource" style="display: none;">
-                <iframe id="iframeRenderOfHtmlResource" src=""></iframe><br />
-                <input id="inputWidthHeightIframe" type="text" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 10px !important; margin-right: 5px; width: 100px;" />
-                <button style="font-family: Arial; font-weight: bold; font-size: small;" onclick="window.jonas.saveIframeDimension()">Save</button>
-                <textarea id="textAreaRenderOfHtmlResource" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 10px !important;"></textarea>
-                <button id="btnRenderOfHtmlResourceSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaRenderOfHtmlResourceSave()">Save</button>
-                <button id="btnRenderOfHtmlResourceCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaRenderOfHtmlResourceCancel()">Cancel</button>
+                <iframe id="iframeRenderOfHtmlResource" src="" style="margin-left: 15px !important; margin-top: 15px !important; margin-right: 15px !important;"></iframe><br />
+                <input id="inputWidthHeightIframe" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 10px !important; margin-left: 15px !important; margin-right: 5px; width: 100px;" />
+                <button style="font-family: Arial !important; font-weight: bold !important; font-size: small !important;" onclick="window.jonas.saveIframeDimension()">Save</button><br />
+                <textarea id="textAreaRenderOfHtmlResource" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 15px !important; margin-left: 15px !important; margin-right: 15px !important; margin-bottom: 0px !important;"></textarea><br />
+                <button id="btnRenderOfHtmlResourceSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaRenderOfHtmlResourceSave()" style="margin-top: 10px !important; margin-left: 15px !important;">Save</button>
+                <button id="btnRenderOfHtmlResourceCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.handleTextAreaRenderOfHtmlResourceCancel()" style="margin-top: 10px !important; margin-left: 5px !important;">Cancel</button>
               </div>
               <div id="divRenderOfSelfResource" style="display: none;"></div>
             </div>

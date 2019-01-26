@@ -168,12 +168,15 @@
     window.jonas.registerNewTextAreaDefaultLocation = function (width, height, text) {
       var btnSave, btnCancel, textarea;
 
+      btnSave = $("#btnDefaultLocationSave");
+      btnCancel = $("#btnDefaultLocationCancel");
+      textarea = $("#textareaDefaultLocation");
+
       btnSave.prop("disabled", true);
       btnSave.css("background-color", "green");
       btnCancel.prop("disabled", true);
       btnCancel.css("background-color", "green");
-
-      textarea = $("#textareaDefaultLocation");
+    
       textarea.css("width", width);
       textarea.css("height", height);
       textarea.val(text);
@@ -372,7 +375,7 @@
       window.jonas.newLocation(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, tab, true);
     }
 
-    window.jonas.loadResource = function (data) {
+    window.jonas.loadResourceInModalToEdit = function (data) {
       var total, n, a, divKeyWords, i, j, index, str, resourcesType, arrayListWithKeyWordIdsAsString, checked;
       var numberOfCheckBoxesInOneRow;
 
@@ -558,6 +561,7 @@
       }
 
       if (cmd === "rr") {
+        $("#inputCmd").val("");
         window.jonas.renderResource(val);
         return;
       }
@@ -599,7 +603,7 @@
             window.open(url, "_self");
           }
           else if ((cmd === "nr") || (cmd === "er")) {
-            window.jonas.loadResource(data);
+            window.jonas.loadResourceInModalToEdit(data);
           }
 
           $("#inputCmd").val("");
@@ -749,17 +753,15 @@
 
       window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Render of resource)");
       window.jonas.updateCssDisplayForContentDivs("renderOfResource");
-      window.jonas.checkIconAndSetTitle("book-reader", "Render of resource " + window.jonas.resource);
+      window.jonas.checkIconAndSetTitle("book-reader", "Render resource");
       window.jonas.handlePreviousCurrentNextResource(window.jonas.previousResourceInRenderOfResource, window.jonas.currentResourceInRenderOfResource, window.jonas.nextResourceInRenderOfResource);
 
       if ($("#divRenderOfHtmlResource").css("dispaly") === "block") {
         textarea = $("#textAreaRenderOfHtmlResource");
 
         textarea.on("change", window.jonas.textAreaRenderOfHtmlResourceChange);
-        window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource = 1;
-
         textarea.on("mouseup", window.jonas.textAreaRenderOfHtmlResourceResize);
-        window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource = 1;
+        window.jonas.eventHandlerTextareaRenderOfHtmlResource = 1;    
       }
     }
 
@@ -932,7 +934,7 @@
       if (window.jonas.modalState === "Html") {
         htmlFile = $("#inputResourceHtmlFile").val().trim();
 
-        if (!html) {
+        if (!htmlFile) {
           alert("A Html-file must be given!");
           return;
         }
@@ -1127,7 +1129,11 @@
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
-          if (typeof data == "object") { //Success
+          if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+            alert(data);
+            return;
+          }
+          else if (typeof data == "object") { //Success
 
             if (data.ResourcesType === 0) { //ThumbUpLocation Page???Menu???Sub???Sub???Tab???
               var indexMenu, indexSub1, indexSub2, indexTab;
@@ -1146,10 +1152,18 @@
 
               window.jonas.newLocation(page, menu, sub1, sub2, tab, false);
             }
+            else if (data.ResourcesType === 1) { //Html resource
+              window.jonas.registerNewRenderOfHtmlResource(data.PreviousResource, data.Id, data.NextResource, data.WidthIframe, data.HeightIframe, data.WidthTextarea, data.HeightTextarea, data.HtmlFile, data.HtmlFileText);
+            }
+            else {
+              alert("ERROR!! Unexpected resource type!");
+            }
+          }
+          else if (data.ResourcesType === 2) { //Self resource
+            var aaa = "todo";
           }
           else {
-            alert(data); //Error occured
-            return;
+            alert("ERROR!! Unexpected resource type!");
           }
         }
       });

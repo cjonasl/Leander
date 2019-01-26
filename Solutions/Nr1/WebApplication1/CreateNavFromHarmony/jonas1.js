@@ -32,8 +32,8 @@ window.jonas.resourceLinks = "";
 window.jonas.numberOfKeyWords = 0;
 window.jonas.textareaRenderOfHtmlResourceWidth = ""; //OBS: "px" after width so need to be a string
 window.jonas.textareaRenderOfHtmlResourceHeight = ""; //OBS: "px" after height so need to be a string
-window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource = 0;
-window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource = 0;
+window.jonas.htmlFileNameFullPath = ""; 
+window.jonas.eventHandlerTextareaRenderOfHtmlResource = 0;
 
 
 window.jonas.resetAfterSaveOrCancelOfTextareaForHtmlResource = function () {
@@ -47,16 +47,9 @@ window.jonas.resetAfterSaveOrCancelOfTextareaForHtmlResource = function () {
     btnCancel.css("background-color", "green");
 
     textarea = $("#textAreaRenderOfHtmlResource");
-
-    if (window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource === 0) {
-        textarea.on("change", window.jonas.textAreaRenderOfHtmlResourceChange);
-        window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource = 1;
-    }
-
-    if (window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource === 0) {
-        textarea.on("mouseup", window.jonas.textAreaRenderOfHtmlResourceResize);
-        window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource = 1;
-    }
+    textarea.on("change", window.jonas.textAreaRenderOfHtmlResourceChange);
+    textarea.on("mouseup", window.jonas.textAreaRenderOfHtmlResourceResize);
+    window.jonas.eventHandlerTextareaRenderOfHtmlResource = 1;
 };
 
 window.jonas.turnOffEventHandlersThatMightBeOn = function () {
@@ -66,14 +59,10 @@ window.jonas.turnOffEventHandlersThatMightBeOn = function () {
       window.jonas.eventHandlerTextareaDefaultLocation = 0;
   }
 
-  if (window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource === 1) {
-      $("#textareaDefaultLocation").off("change");
-      window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource = 0;
-  }
-
-  if (window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource === 1) {
-      $("#textareaDefaultLocation").off("mouseup");
-      window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource = 0;
+  if (window.jonas.eventHandlerTextareaRenderOfHtmlResource === 1) {
+      $("#textAreaRenderOfHtmlResource").off("change");
+      $("#textAreaRenderOfHtmlResource").off("mouseup");
+      window.jonas.eventHandlerTextareaRenderOfHtmlResource = 0;
   }
 };
 
@@ -91,10 +80,9 @@ window.jonas.textAreaRenderOfHtmlResourceChange = function () {
 
     textarea = $("#textAreaRenderOfHtmlResource");
     textarea.off("change");
-    window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource = 0;
-
-    if (window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource === 1)
-        window.jonas.setBackgroundRedAndSetDisabledToFalseForSaveAndCancelButtons($("#btnRenderOfHtmlResourceSave"), $("#btnRenderOfHtmlResourceCancel"));
+    textarea.off("mouseup");
+    window.jonas.eventHandlerTextareaRenderOfHtmlResource = 0;
+    window.jonas.setBackgroundRedAndSetDisabledToFalseForSaveAndCancelButtons($("#btnRenderOfHtmlResourceSave"), $("#btnRenderOfHtmlResourceCancel"));     
 };
 
 window.jonas.textAreaRenderOfHtmlResourceResize = function () {
@@ -104,16 +92,11 @@ window.jonas.textAreaRenderOfHtmlResourceResize = function () {
     width = textarea.css("width");
     height = textarea.css("height");
 
-    if (width !== textAreaWidth !== window.jonas.textareaRenderOfHtmlResourceWidth || height !== window.jonas.textareaRenderOfHtmlResourceHeight) {
-        textarea.off("mouseup");
-        window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource = 0;
-
-        if (window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource === 1)
-          window.jonas.setBackgroundRedAndSetDisabledToFalseForSaveAndCancelButtons($("#btnRenderOfHtmlResourceSave"), $("#btnRenderOfHtmlResourceCancel"));
-    }
+    if (width !== window.jonas.textareaRenderOfHtmlResourceWidth || height !== window.jonas.textareaRenderOfHtmlResourceHeight)
+      window.jonas.textAreaRenderOfHtmlResourceChange();
 };
 
-window.jonas.registerNewRenderOfHtmlResource = function (previousResource, currentResource, nextResource, widthIframe, heightIframe, widthTextarea, heightTextarea, text) {
+window.jonas.registerNewRenderOfHtmlResource = function (previousResource, currentResource, nextResource, widthIframe, heightIframe, widthTextarea, heightTextarea, htmlFile, htmlFileText) {
     var textarea, iframe, btnSave, btnCancel;
 
     window.jonas.previousResource = previousResource;
@@ -131,6 +114,9 @@ window.jonas.registerNewRenderOfHtmlResource = function (previousResource, curre
 
     iframe.prop("width", widthIframe);
     iframe.prop("height", heightIframe);
+    iframe.prop("src", "http://www.nr1web1.com/" + htmlFile);
+    $("#inputWidthHeightIframe").val(widthIframe.toString() + " " + heightIframe.toString());
+    window.jonas.htmlFileNameFullPath = htmlFile;
 
     btnSave.prop("disabled", true);
     btnSave.css("background-color", "green");
@@ -139,16 +125,24 @@ window.jonas.registerNewRenderOfHtmlResource = function (previousResource, curre
   
     textarea.css("width", widthTextarea + "px");
     textarea.css("height", heightTextarea + "px");
-    textarea.val(text);
+    textarea.val(htmlFileText);
 
-    window.jonas.textareaRenderOfHtmlResourceWidth = widthTextarea;
-    window.jonas.textareaRenderOfHtmlResourceHeight = heightTextarea;
+    window.jonas.textareaRenderOfHtmlResourceWidth = widthTextarea + "px";
+    window.jonas.textareaRenderOfHtmlResourceHeight = heightTextarea + "px";
 
     textarea.on("change", window.jonas.textAreaRenderOfHtmlResourceChange);
-    window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource = 1;
-
     textarea.on("mouseup", window.jonas.textAreaRenderOfHtmlResourceResize);
-    window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource = 1;
+    window.jonas.eventHandlerTextareaRenderOfHtmlResource = 1;
+
+    if (window.jonas.location !== "searchResultResources") {
+        $("#liTab" + window.jonas.tab).removeClass("active");
+        window.jonas.tab = 0;
+    }
+
+    window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Render of resource)");
+    window.jonas.updateCssDisplayForContentDivs("renderOfResource");
+    window.jonas.checkIconAndSetTitle("book-reader", "Render resource");
+    window.jonas.handlePreviousCurrentNextResource(window.jonas.previousResourceInRenderOfResource, window.jonas.currentResourceInRenderOfResource, window.jonas.nextResourceInRenderOfResource);
 
     if ($("#divRenderOfHtmlResource").css("display") === "none") {
         $("#divRenderOfHtmlResource").css("display", "block");
@@ -167,8 +161,9 @@ window.jonas.saveIframeDimension = function () {
         height = window.Number(v[1].trim());
     }
 
-    if (!width || !height || width < 50 || width > 1000 || height < 50 || height > 1000) {
-        alert("ERROR!! Width and height sholud be given blank separated and both in the range [50,1000], for example '300 500'.");
+    if (!width || !height || width < 50 || width > 10000 || height < 50 || height > 10000) {
+        alert("ERROR!! Width and height sholud be given blank separated and both in the range [50,10000], for example '300 500'.");
+        return;
     }
 
     htmlResourceIframeDimensionsData = {
@@ -196,33 +191,24 @@ window.jonas.saveIframeDimension = function () {
 };
 
 window.jonas.handleTextAreaRenderOfHtmlResourceSave = function () {
-    var textarea, str, htmlResourceFileTextAndTextareaDimension, fileText = null, index, width = 0, height = 0;
+    var textarea, width, height, widthHeightTextData, iframe;
 
     textarea = $("#textAreaRenderOfHtmlResource");
+    iframe = $("#iframeRenderOfHtmlResource");
 
-    if (window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource === 0)
-        fileText = textarea.val();
+    width = textarea.css("width");
+    height = textarea.css("height");
 
-    if (window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource === 0) {
-        str = textarea.css("width");
-        index = str.indexOf("px");
-        width = window.Number(str.substring(0, index));
-
-        str = textarea.css("height");
-        index = str.indexOf("px");
-        height = window.Number(str.substring(0, index));
-    }
-
-    htmlResourceFileTextAndTextareaDimension = {
+    widthHeightTextData = {
         id: window.jonas.currentResource,
-        fileText: fileText,
         width: width,
-        height: height
+        height: height,
+        text: textarea.val()
     };
 
     $.ajax({
-        url: "http://www.Nr1Web1.com/Main/UpdateFileTexAndTextareaDimensiontForHtmlResource",
-        data: htmlResourceFileTextAndTextareaDimension,
+        url: "http://www.Nr1Web1.com/Main/UpdateFileTextAndTextareaDimensionForHtmlResource",
+        data: widthHeightTextData,
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
@@ -231,6 +217,9 @@ window.jonas.handleTextAreaRenderOfHtmlResourceSave = function () {
                 return;
             }
             else {
+                iframe.prop("src", "http://www.nr1web1.com/" + window.jonas.htmlFileNameFullPath);
+                window.jonas.textareaRenderOfHtmlResourceWidth = width; 
+                window.jonas.textareaRenderOfHtmlResourceHeight = height;
                 window.jonas.resetAfterSaveOrCancelOfTextareaForHtmlResource();
                 alert("Textarea saved");
             }
@@ -239,32 +228,30 @@ window.jonas.handleTextAreaRenderOfHtmlResourceSave = function () {
 };
 
 window.jonas.handleTextAreaRenderOfHtmlResourceCancel = function () {
-    var textarea;
+    var textarea, iframe;
 
     textarea = $("#textAreaRenderOfHtmlResource");
+    iframe = $("#iframeRenderOfHtmlResource");
 
-    if (window.jonas.eventHandlerChangeTextareaRenderOfHtmlResource === 0) {
-        $.ajax({
-            url: "http://www.Nr1Web1.com/Main/GetFileTextForHtmlResource",
-            data: { id: window.jonas.currentResource},
-            error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
-            method: "post",
-            success: function (data) {
-                if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
-                    alert(data);
-                    return;
-                }
-                else {
-                    textarea.val(data);
-                }
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/GetFileTextForHtmlResource",
+        data: { id: window.jonas.currentResource},
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
             }
-        });
-    }
-
-    if (window.jonas.eventHandlerMouseupTextareaRenderOfHtmlResource === 0) {
-        textarea.css("width", window.jonas.textareaRenderOfHtmlResourceWidth);
-        textarea.css("height", window.jonas.textareaRenderOfHtmlResourceHeight);
-    }
+            else {
+                iframe.prop("src", "http://www.nr1web1.com/" + window.jonas.htmlFileNameFullPath);
+                textarea.val(data);
+            }
+        }
+    });
+   
+    textarea.css("width", window.jonas.textareaRenderOfHtmlResourceWidth);
+    textarea.css("height", window.jonas.textareaRenderOfHtmlResourceHeight);
 
     window.jonas.resetAfterSaveOrCancelOfTextareaForHtmlResource();
 };

@@ -255,3 +255,23 @@ Documentation Thumb up
 ----- New property -----
 
 Thumb up
+
+---------- New resource ----------
+
+14
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-01-25 17:09:59
+
+----- New property -----
+
+Object.create Object.prototype.constructor instanceof
+
+----- New property -----
+
+Adhoc,JavaScript

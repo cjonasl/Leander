@@ -20,7 +20,7 @@ namespace WebApplication1.Controllers
         LocationResource
     }
 
-
+    [ValidateInput(false)]
     public class MainController : Controller
     {
         private string[] GetTabNames(string baseFileName)
@@ -178,10 +178,9 @@ namespace WebApplication1.Controllers
                 baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", page, menu, sub1, sub2, tab);
 
             fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\{0}\\{1}", pageEntity.ToString(), baseFileName);
-            Utility.CreateNewFile(fileNameFullPath, fileContent);
+            Utility.CreateNewFile(fileNameFullPath, fileContent.Replace("\n", "\r\n"));
         }
 
-        [ValidateInput(false)]
         public JsonResult SaveTextArea(LocationExtension locationExtension)
         {
             try
@@ -296,7 +295,7 @@ namespace WebApplication1.Controllers
                                 return Json("ERROR!! Incorrect ResourcesType!", JsonRequestBehavior.AllowGet);
                         }
 
-                        loadResourceData.Resource = new Resource(0, resourcesType, "", "", "", "", 0, 0, "", "", "", "", null);
+                        loadResourceData.Resource = new Resource(0, resourcesType, "", "", "", "", 0, 0, "", "", "", "");
                     }
                     else
                     {
@@ -436,23 +435,12 @@ namespace WebApplication1.Controllers
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult UpdateFileTexAndTextareaDimensiontForHtmlResource(HtmlResourceFileTextAndTextareaDimension htmlResourceFileTextAndTextareaDimension)
+         
+        public JsonResult UpdateFileTextAndTextareaDimensionForHtmlResource(WidthHeightTextData widthHeightTextData)
         {
             string errorMessage = null;
 
-            if (htmlResourceFileTextAndTextareaDimension.Width > 0)
-            {
-                ResourceUtility.UpdateHtmlResourceDimension(htmlResourceFileTextAndTextareaDimension.Id, htmlResourceFileTextAndTextareaDimension.Width, htmlResourceFileTextAndTextareaDimension.Height, false, out errorMessage);
-            }
-
-            if (errorMessage != null)
-                return Json(errorMessage, JsonRequestBehavior.AllowGet);
-
-            if (htmlResourceFileTextAndTextareaDimension.FileText != null)
-            {
-                ResourceUtility.UpdateFileTextForHtmlResource(htmlResourceFileTextAndTextareaDimension.Id, htmlResourceFileTextAndTextareaDimension.FileText, out errorMessage);
-            }
+            ResourceUtility.UpdateFileTextAndTextareaDimensionForHtmlResource(widthHeightTextData, out errorMessage);
 
             if (errorMessage == null)
                 return Json("Success", JsonRequestBehavior.AllowGet);
@@ -464,7 +452,7 @@ namespace WebApplication1.Controllers
         {
             string errorMessage;
 
-            ResourceUtility.UpdateHtmlResourceDimension(htmlResourceIframeDimensionData.Id, htmlResourceIframeDimensionData.Width, htmlResourceIframeDimensionData.Height, true, out errorMessage);
+            ResourceUtility.UpdateHtmlResourceIframeDimension(htmlResourceIframeDimensionData.Id, htmlResourceIframeDimensionData.Width, htmlResourceIframeDimensionData.Height, out errorMessage);
 
             if (errorMessage == null)
                 return Json("Success", JsonRequestBehavior.AllowGet);

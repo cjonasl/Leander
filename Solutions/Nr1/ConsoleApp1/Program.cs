@@ -9,7 +9,7 @@ namespace Leander.Nr1
     class Program
     {
         static void Main(string[] args)
-        {
+        {        
             R8.Execute();
         }
     }

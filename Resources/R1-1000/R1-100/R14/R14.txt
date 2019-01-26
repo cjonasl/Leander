@@ -1,20 +1,20 @@
-﻿1
+﻿14
 
 ----- New property -----
 
-Self
+Html
 
 ----- New property -----
 
-2019-01-22 17:58:02
+2019-01-25 17:09:59
 
 ----- New property -----
 
-Specification of webbapplication "Thumb up"
+Object.create Object.prototype.constructor instanceof
 
 ----- New property -----
 
-8
+6,2
 
 ----- New property -----
 
@@ -31,6 +31,10 @@ null
 ----- New property -----
 
 null
+
+----- New property -----
+
+PureJavaScript/Nr1/js1.html
 
 ----- New property -----
 

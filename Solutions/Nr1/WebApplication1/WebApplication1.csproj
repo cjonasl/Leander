@@ -112,6 +112,7 @@
     <Content Include="js\backbone\nr1\Browse.txt" />
     <Content Include="js\backbone\nr1\jQuery.js" />
     <Content Include="js\backbone\nr1\underscore.js" />
+    <Content Include="PureJavaScript\Nr1\js1.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +133,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationExtension.cs" />
     <Compile Include="Models\ResourcesType.cs" />
+    <Compile Include="Models\WidthHeightTextData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
