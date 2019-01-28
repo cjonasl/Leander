@@ -44,6 +44,10 @@
     input[type=checkbox] {
       transform: scale(1.3) !important;
     }
+
+    #divRenderOfHtmlResource > a:link, #divRenderOfHtmlResource > a:visited, #divRenderOfHtmlResource > a:hover, #divRenderOfHtmlResource > a:active {
+      color: blue !important;
+    }
   </style>
 
   <script>
@@ -184,8 +188,8 @@
       window.jonas.textareaDefaultLocationWidth = width;
       window.jonas.textareaDefaultLocationHeight = height;
 
-      textarea.on("change", window.jonas.textAreaDefaultLocationChange);
-      textarea.on("mouseup", window.jonas.textAreaDefaultLocationResize);
+      textarea.on("change", window.jonas.textareaDefaultLocationChange);
+      textarea.on("mouseup", window.jonas.textareaDefaultLocationResize);
       window.jonas.eventHandlerTextareaDefaultLocation = 1;
     }
 
@@ -274,7 +278,7 @@
       window.jonas.location = newLocation;
     }
 
-    window.jonas.textAreaDefaultLocationChange = function () {
+    window.jonas.textareaDefaultLocationChange = function () {
       var textarea;
 
       textarea = $("#textareaDefaultLocation");
@@ -284,7 +288,7 @@
       window.jonas.setBackgroundRedAndSetDisabledToFalseForSaveAndCancelButtons($("#btnDefaultLocationSave"), $("#btnDefaultLocationCancel"));
     }
 
-    window.jonas.textAreaDefaultLocationResize = function () {
+    window.jonas.textareaDefaultLocationResize = function () {
       var textarea, width, height;
 
       textarea = $("#textareaDefaultLocation");
@@ -292,7 +296,7 @@
       height = textarea.css("height");
 
       if (width !== window.jonas.textareaDefaultLocationWidth || height !== window.jonas.textareaDefaultLocationHeight)
-        window.jonas.textAreaDefaultLocationChange();
+        window.jonas.textareaDefaultLocationChange();
     }
 
     window.jonas.handleTextAreaDefaultLocationSave = function () {
@@ -495,15 +499,18 @@
       else
         str = "New ";
 
-      window.jonas.openModal("dialogResource", str + resourcesType + " resource", 1100, 620, resourcesType);
+      window.jonas.openModal("#dialogResource", str + resourcesType + " resource", 1100, 620, resourcesType);
       window.jonas.updateResourceState(true, "green");
     }
 
     window.jonas.executeCmd = function (str) { //If str has a value then window.jonas.executeCmd is called from SearchResource.cshtml
-      var descriptionAvailableCommands, index, cmd, val, availableCommands, command;
+      var descriptionAvailableCommands, index, cmd, val, availableCommands, command, renderInNewTab = false;
 
-      descriptionAvailableCommands = "The following commands are available:\r\nnr l: New ThumbUpLocation resource\r\nnr h: New Html resource\r\nnr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
-      descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\ntitle {value}: Set title for current left menu location";
+      descriptionAvailableCommands = "The following commands are available:\r\ns: Show latest search result of resources\r\nr: Show last render of resource\r\n";
+      descriptionAvailableCommands += "nr l: New ThumbUpLocation resource\r\nnr h: New Html resource\r\nnr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
+      descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\ntitle {value}: Set title for current left menu location\r\n";
+      descriptionAvailableCommands += "er {value}: Edit resource\r\nrr: Render resource\r\nrrt: Render a Html resource in new tab";
+
 
       if (!str)
         str = $("#inputCmd").val().trim();
@@ -524,7 +531,7 @@
         return;
       }
 
-      availableCommands = ["nr", "er", "rr", "icon", "title", "menu", "sub1", "sub2", "tab"]; //nr=new resource, er=edit resource and rr=render resource
+      availableCommands = ["nr", "er", "rr", "rrt", "icon", "title", "menu", "sub1", "sub2", "tab"]; //nr=new resource, er=edit resource and rr=render resource
 
       index = str.indexOf(" ");
 
@@ -551,7 +558,19 @@
           val = "Self";
       }
 
-      if ((cmd === "er") || (cmd === "rr")) {
+      if ((cmd === "nr") && (val === "ThumbUpLocation")) {
+        if ((window.jonas.location === "searchResultResources") || (window.jonas.location === "renderOfResource")) {
+          alert("You can not create ThumbUpLocation resource in page for search result and page for render of resource!");
+          return;
+        }
+
+        if (window.jonas.currentResource !== 0) {
+          alert("This location is already associated with resource " + window.jonas.currentResource + "!");
+          return;
+        }  
+      }
+
+      if ((cmd === "er") || (cmd === "rr") || (cmd === "rrt")) {
         val = window.Number(val);
 
         if (!val || (val < 1) || (val > window.jonas.maxResourceId)) {
@@ -560,9 +579,14 @@
         }
       }
 
+      if (cmd === "rrt") {
+        cmd = "rr";
+        renderInNewTab = true;
+      }
+
       if (cmd === "rr") {
         $("#inputCmd").val("");
-        window.jonas.renderResource(val);
+        window.jonas.renderResource(val, renderInNewTab);
         return;
       }
 
@@ -757,10 +781,10 @@
       window.jonas.handlePreviousCurrentNextResource(window.jonas.previousResourceInRenderOfResource, window.jonas.currentResourceInRenderOfResource, window.jonas.nextResourceInRenderOfResource);
 
       if ($("#divRenderOfHtmlResource").css("dispaly") === "block") {
-        textarea = $("#textAreaRenderOfHtmlResource");
+        textarea = $("#textareaRenderOfHtmlResource");
 
-        textarea.on("change", window.jonas.textAreaRenderOfHtmlResourceChange);
-        textarea.on("mouseup", window.jonas.textAreaRenderOfHtmlResourceResize);
+        textarea.on("change", window.jonas.textareaRenderOfHtmlResourceChange);
+        textarea.on("mouseup", window.jonas.textareaRenderOfHtmlResourceResize);
         window.jonas.eventHandlerTextareaRenderOfHtmlResource = 1;    
       }
     }
@@ -774,12 +798,19 @@
         modal: true,
         title: title,
         position: { my: "center", at: "center", of: window },
-        minHeight: 0,
         width: width,
         height: height,
         close: function () {
-
           if ((window.jonas.modalState === "ThumbUpLocation") || (window.jonas.modalState === "Html") || (window.jonas.modalState === "Self")) {
+            $("#inputResourceTitle").off("change");
+
+            for (i = 1; i <= window.jonas.numberOfKeyWords; i++) {
+              $("#keyWord" + i).off("change");
+            }
+
+            $("#inputResourceNote").off("change");
+            $("#inputResourcePrevious").off("change");
+            $("#inputResourceNext").off("change");
             $("#inputResourceId").val("");
             $("#inputResourceResourcesType").val("");
             $("#divKeyWords").html("");
@@ -790,13 +821,17 @@
             $("#inputResourceNext").val("");
 
             if (window.jonas.modalState === "ThumbUpLocation") {
+              $("#inputResourceThumbUpLocation").on("change");
               $("#trResourceThumbUpLocation").remove();
               window.jonas.handlePreviousCurrentNextResource(window.jonas.previousResource, window.jonas.currentResource, window.jonas.nextResource);
             }
             else if (window.jonas.modalState === "Html") {
+              $("#inputResourceHtmlFile").off("change");
               $("#trResourceHtmlFile").remove();
             }
             else if (window.jonas.modalState === "Self") {
+              $("#textareaResourceFiles").off("change");
+              $("#textareaResourceLinks").off("change");
               $("#trResourceFiles").remove();
               $("#trResourceLinks").remove();
             }
@@ -812,12 +847,19 @@
             if (window.jonas.modalState === "EditKeyWord")
               $("#inputKeyWordPhrase").prop("readonly", false);
           }
+          else if (window.jonas.modalState === "EditArbitraryTextFile") {
+            $("#textareaEditArbitraryTextFile").off("change");
+            $("#textareaEditArbitraryTextFile").val("");
+          }
+          else {
+            alert("ERROR!! Incorrect modal state: " + window.jonas.modalState);
+          }
 
           window.jonas.modalState = "";
         }
       };
 
-      popup = $('#' + id);
+      popup = $(id);
       popup.dialog(options);
       popup.dialog('open');
       popup.show();
@@ -893,7 +935,7 @@
     window.jonas.openModalToAddKeyWord = function () {
       window.jonas.keyWordPhrase = "";
       window.jonas.keyWordNote = "";
-      window.jonas.openModal('dialogKeyWord', 'Add key word', 800, 350, 'AddKeyWord');
+      window.jonas.openModal('#dialogKeyWord', 'Add key word', 800, 350, 'AddKeyWord');
       window.jonas.updateKeyWordState(true, "green");
     }
 
@@ -908,7 +950,7 @@
       window.jonas.keyWordPhrase = phrase;
       window.jonas.keyWordNote = note;
       window.jonas.updateKeyWordState(true, "green");
-      window.jonas.openModal("dialogKeyWord", "Edit key word", 800, 350, "EditKeyWord");
+      window.jonas.openModal("#dialogKeyWord", "Edit key word", 800, 350, "EditKeyWord");
     }
 
     window.jonas.saveResource = function () {
@@ -1110,7 +1152,7 @@
       window.jonas.updateResourceState(true, "green");
     }
 
-    window.jonas.renderResource = function (id) {
+    window.jonas.renderResource = function (id, renderInNewTab) {
       if (!$("#btnDefaultLocationSave").prop("disabled")) {
         alert("WATCH OUT!! textarea is not saved!!!");
         return;
@@ -1134,8 +1176,10 @@
             return;
           }
           else if (typeof data == "object") { //Success
-
-            if (data.ResourcesType === 0) { //ThumbUpLocation Page???Menu???Sub???Sub???Tab???
+            if ((data.ResourcesType === 0 || data.ResourcesType === 2) && renderInNewTab) {
+              alert("Command rrt can only be usef for a Html resource!");
+            }
+            else if (data.ResourcesType === 0 && !renderInNewTab) { //ThumbUpLocation Page???Menu???Sub???Sub???Tab???
               var indexMenu, indexSub1, indexSub2, indexTab;
               var page, menu, sub1, sub2, tab;
 
@@ -1152,8 +1196,11 @@
 
               window.jonas.newLocation(page, menu, sub1, sub2, tab, false);
             }
-            else if (data.ResourcesType === 1) { //Html resource
+            else if (data.ResourcesType === 1 && !renderInNewTab) { //Html resource
               window.jonas.registerNewRenderOfHtmlResource(data.PreviousResource, data.Id, data.NextResource, data.WidthIframe, data.HeightIframe, data.WidthTextarea, data.HeightTextarea, data.HtmlFile, data.HtmlFileText);
+            }
+            else if (data.ResourcesType === 1 && renderInNewTab) {
+              window.open("http://www.nr1web1.com/" + data.HtmlFile, "_blank");
             }
             else {
               alert("ERROR!! Unexpected resource type!");
@@ -1170,11 +1217,11 @@
     }
 
     window.jonas.renderPreviousResource = function () {
-      window.jonas.renderResource(window.jonas.previousResource);
+      window.jonas.renderResource(window.jonas.previousResource, false);
     }
 
     window.jonas.renderNextResource = function () {
-      window.jonas.renderResource(window.jonas.nextResource);
+      window.jonas.renderResource(window.jonas.nextResource, false);
     }
 
     window.jonas.appendSerachTerm = function (cmd) {
@@ -1199,7 +1246,7 @@
               <i class="fas fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="javascript: window.jonas.newLocation(1, 0, 0, 0, 1, false)"><i class='fas fa-key'></i>&nbsp;&nbsp;Page1</a></li>
+              <li class="active"><a href="javascript: window.jonas.newLocation(1, 0, 0, 0, 1, false)"><i class='fas fa-key'></i>&nbsp;&nbsp;Page1</a></li>
               <li><a href="javascript: window.jonas.newLocation(2, 0, 0, 0, 1, false)"><i class='fas fa-camera'></i>&nbsp;&nbsp;Page2</a></li>
               <li><a href="javascript: window.jonas.newLocation(3, 0, 0, 0, 1, false)"><i class='fas fa-print'></i>&nbsp;&nbsp;Page3</a></li>
               <li><a href="javascript: window.jonas.newLocation(4, 0, 0, 0, 1, false)"><i class='fas fa-book'></i>&nbsp;&nbsp;Page4</a></li>

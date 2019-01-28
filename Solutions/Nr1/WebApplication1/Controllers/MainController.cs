@@ -307,6 +307,8 @@ namespace WebApplication1.Controllers
                    
                     return Json(loadResourceData, JsonRequestBehavior.AllowGet);
                 }
+                else
+                    return Json(string.Format("ERROR!! The command \"{0}\" is not supported", command.Cmd), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -424,11 +426,27 @@ namespace WebApplication1.Controllers
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetFileTextForHtmlResource(int id)
+        public JsonResult GetFileText(string str)
         {
-            string fileText, errorMessage;
-                
-            fileText = ResourceUtility.GetFileTextForHtmlResource(id, out errorMessage);
+            string fileText = null, errorMessage = null;
+            int id;
+
+            try
+            {
+                if (int.TryParse(str, out id))
+                    fileText = ResourceUtility.GetFileTextForHtmlResource(id, out errorMessage);
+                else
+                {
+                    if (!System.IO.File.Exists(str))
+                        errorMessage = string.Format("ERROR!! The file {0} does not exist!", str);
+                    else
+                        fileText = Utility.ReturnFileContents(str);
+                }
+            }
+            catch(Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method GetFileText! e.Message:\r\n{0}", e.Message);
+            }
 
             if (errorMessage == null)
                 return Json(fileText, JsonRequestBehavior.AllowGet);
@@ -436,11 +454,27 @@ namespace WebApplication1.Controllers
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
          
-        public JsonResult UpdateFileTextAndTextareaDimensionForHtmlResource(WidthHeightTextData widthHeightTextData)
+        public JsonResult SaveFileText(WidthHeightTextData widthHeightTextData)
         {
+            int id;
             string errorMessage = null;
 
-            ResourceUtility.UpdateFileTextAndTextareaDimensionForHtmlResource(widthHeightTextData, out errorMessage);
+            try
+            {
+                if (int.TryParse(widthHeightTextData.Str, out id))
+                    ResourceUtility.UpdateFileTextAndTextareaDimensionForHtmlResource(widthHeightTextData, out errorMessage);
+                else
+                {
+                    if (!System.IO.File.Exists(widthHeightTextData.Str))
+                        errorMessage = string.Format("ERROR!! The file {0} does not exist!", widthHeightTextData.Str);
+                    else
+                        Utility.CreateNewFile(widthHeightTextData.Str, widthHeightTextData.Text);
+                }
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method SaveFileText! e.Message:\r\n{0}", e.Message);
+            }
 
             if (errorMessage == null)
                 return Json("Success", JsonRequestBehavior.AllowGet);

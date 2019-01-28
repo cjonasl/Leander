@@ -7,7 +7,7 @@ namespace WebApplication1.Models
 {
     public class WidthHeightTextData
     {
-        public int Id { get; set; }
+        public string Str { get; set; } //Id for resource or file name full path for a file
         public string Width { get; set; } //Need to be of type string since "px" is appened after the height
         public string Height { get; set; } //Need to be of type string since "px" is appened after the height
         public string Text { get; set; }

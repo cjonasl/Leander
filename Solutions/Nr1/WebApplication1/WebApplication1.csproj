@@ -112,7 +112,7 @@
     <Content Include="js\backbone\nr1\Browse.txt" />
     <Content Include="js\backbone\nr1\jQuery.js" />
     <Content Include="js\backbone\nr1\underscore.js" />
-    <Content Include="PureJavaScript\Nr1\js1.html" />
+    <Content Include="PureJavaScript\Nr1\R14.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigation", "Navigation\Na
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonyEventing", "HarmonyEventing\HarmonyEventing.csproj", "{F23D2529-9442-4E22-B0A1-9CF90EC9819F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku", "Sudoku\Sudoku.csproj", "{9343B283-799E-46BD-B343-1F2770D843C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F23D2529-9442-4E22-B0A1-9CF90EC9819F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F23D2529-9442-4E22-B0A1-9CF90EC9819F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F23D2529-9442-4E22-B0A1-9CF90EC9819F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9343B283-799E-46BD-B343-1F2770D843C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9343B283-799E-46BD-B343-1F2770D843C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9343B283-799E-46BD-B343-1F2770D843C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9343B283-799E-46BD-B343-1F2770D843C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

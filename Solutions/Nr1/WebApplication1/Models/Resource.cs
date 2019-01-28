@@ -437,7 +437,7 @@ namespace WebApplication1.Models
 
             try
             {
-                resource = GetResource(widthHeightTextData.Id, out errorMessage);
+                resource = GetResource(int.Parse(widthHeightTextData.Str), out errorMessage);
 
                 if (errorMessage != null)
                     return;

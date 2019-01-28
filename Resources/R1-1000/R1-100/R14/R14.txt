@@ -34,7 +34,7 @@ null
 
 ----- New property -----
 
-PureJavaScript/Nr1/js1.html
+PureJavaScript/Nr1/R14.html
 
 ----- New property -----
 
