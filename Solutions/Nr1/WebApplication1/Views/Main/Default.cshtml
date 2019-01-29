@@ -69,6 +69,7 @@
                 <button id="btnRenderOfHtmlResourceSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaSave(window.jonas.currentResource, null, $('#btnRenderOfHtmlResourceSave'), $('#btnRenderOfHtmlResourceCancel'), $('#iframeRenderOfHtmlResource'), $('#textareaRenderOfHtmlResource'), 'RenderOfHtmlResource')" style="margin-top: 10px !important; margin-left: 15px !important;">Save</button>
                 <button id="btnRenderOfHtmlResourceCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaCancel(window.jonas.currentResource, null, $('#btnRenderOfHtmlResourceSave'), $('#btnRenderOfHtmlResourceCancel'), $('#iframeRenderOfHtmlResource'), $('#textareaRenderOfHtmlResource'), 'RenderOfHtmlResource')" style="margin-top: 10px !important; margin-left: 5px !important;">Cancel</button>
               </div>
+              <div id="divRenderOfSelfResource"></div>
           </div>
         </div>
       </div>
@@ -118,8 +119,8 @@
 </div>
 
 
-<div id="dialogEditArbitraryTextFile" style="display: none;">
-  <textarea id="textareaEditArbitraryTextFile" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 15px !important; margin-left: 15px !important; margin-right: 15px !important; margin-bottom: 0px !important; width: 750px; height: 350px;"></textarea><br />
+<div id="dialogEditArbitraryTextFile" style="display: none; background-color: #99ff99 !important;">
+  <textarea id="textareaEditArbitraryTextFile" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 15px !important; margin-left: 15px !important; margin-right: 15px !important; margin-bottom: 0px !important; width: 750px; height: 350px; background-color: white !important;"></textarea><br />
   <button id="btnEditArbitraryTextFileSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaSave(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 15px !important;">Save</button>
   <button id="btnEditArbitraryTextFileCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaCancel(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 5px !important;">Cancel</button>
 </div>

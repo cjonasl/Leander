@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using System.IO;
 using Leander.Nr1;
 
@@ -25,6 +25,13 @@ namespace WebApplication1.Models
         public int HeightIframe { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
         public int WidthTextarea { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
         public int HeightTextarea { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
+        public string KeyWordPhrases { get; set; } //A tmp property to store the key word phrases for a Self resource, comma separated (not serialized and deserialized)
+        public List<string> FileNamesShort { get; set; } //A tmp property to store file names for a Self resource (not serialized and deserialized)
+        public List<string> DirectoryNames { get; set; } //A tmp property to store directory names for a Self resource (not serialized and deserialized)
+        public List<string> FileCreationDate { get; set; } //A tmp property to store file creation date for the files for a Self resource (not serialized and deserialized)
+        public List<string> FileUpdatedDate { get; set; } //A tmp property to store file updated date for the files for a Self resource (not serialized and deserialized)
+        public List<string> Href { get; set; } //A tmp property to store href for the links for a Self resource (not serialized and deserialized)
+        public List<string> HrefText { get; set; } //A tmp property to store href text for the links for a Self resource (not serialized and deserialized)
 
         public Resource() { }
 
@@ -130,8 +137,10 @@ namespace WebApplication1.Models
         public static Resource GetResource(int id, out string errorMessage)
         {
             string resourceDirectory, firstRow, firstRowTemplate, fileNameFullPath, resourceSerialized;
+            string[] filesInResourceDirectory, u, v;
+            ArrayList tmp, fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate, href, hrefText;
             Resource resourceDeserialized;
-            int ifw, ifh, tw, th;
+            int i, j, index, ifw, ifh, tw, th;
 
             errorMessage = null;
 
@@ -162,6 +171,152 @@ namespace WebApplication1.Models
                     resourceDeserialized.HeightIframe = ifh;
                     resourceDeserialized.WidthTextarea = tw;
                     resourceDeserialized.HeightTextarea = th;
+                }
+            }
+            else if (resourceDeserialized.ResourcesType == ResourcesType.Self)
+            {
+                tmp = new ArrayList();
+                fileNamesShort = new ArrayList();
+                directoryNames = new ArrayList();
+                fileCreationDate = new ArrayList();
+                fileUpdatedDate = new ArrayList();
+                href = new ArrayList();
+                hrefText = new ArrayList();
+
+                resourceDeserialized.KeyWordPhrases = string.Format("({0})", KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(resourceDeserialized.KeyWords));
+
+                filesInResourceDirectory = Directory.GetFiles(resourceDirectory);
+
+                if ((filesInResourceDirectory.Length > 1) || !string.IsNullOrEmpty(resourceDeserialized.Files))
+                {
+                    resourceDeserialized.FileNamesShort = new List<string>();
+                    resourceDeserialized.DirectoryNames = new List<string>();
+                    resourceDeserialized.FileCreationDate = new List<string>();
+                    resourceDeserialized.FileUpdatedDate = new List<string>();
+                }
+                else
+                {
+                    resourceDeserialized.FileNamesShort = null;
+                    resourceDeserialized.DirectoryNames = null;
+                    resourceDeserialized.FileCreationDate = null;
+                    resourceDeserialized.FileUpdatedDate = null;
+                }
+
+                if (filesInResourceDirectory.Length > 1)
+                {
+                    for (i = 0; i < filesInResourceDirectory.Length; i++)
+                    {
+                        if ((new FileInfo(filesInResourceDirectory[i])).Name != string.Format("R{0}.txt", resourceDeserialized.Id))
+                        {
+                            tmp.Add(filesInResourceDirectory[i].Trim().ToLower());
+                            Utility.AddFileInfo(filesInResourceDirectory[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(resourceDeserialized.Files))
+                {
+                    u = resourceDeserialized.Files.Split('\n');
+
+                    for(i = 0; i < u.Length; i++)
+                    {
+                        if (System.IO.File.Exists(u[i]) && (tmp.IndexOf(u[i].Trim().ToLower()) == -1))
+                        {
+                            tmp.Add(u[i].Trim().ToLower());
+                            Utility.AddFileInfo(u[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                        }
+                        else
+                        {
+                            if (!System.IO.Directory.Exists(u[i]))
+                            {
+                                errorMessage = string.Format("ERROR!! A name, \"{0}\" is found in list of files/folders that is neither an existing file nor a directory!!", u[i]);
+                                return null;
+                            }
+                            else
+                            {
+                                v = Directory.GetFiles(u[i]);
+
+                                for (j = 0; j < v.Length; j++)
+                                {
+                                    if (System.IO.File.Exists(v[j]) && (tmp.IndexOf(v[j].Trim().ToLower()) == -1))
+                                    {
+                                        tmp.Add(v[j].Trim().ToLower());
+                                        Utility.AddFileInfo(v[j], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (KeyWordUtility.ResourceHasKeyWordId(resourceDeserialized.KeyWords, 12)) //It is a Task (KeyWordId = 12 is Task). Put "Task???.txt" and "To Test.txt" first if they exists
+                    {
+                        index = ReturnIndexForTaskFile(fileNamesShort);
+
+                        if (index >= 0)
+                        {
+                            resourceDeserialized.FileNamesShort.Add((string)fileNamesShort[index]);
+                            resourceDeserialized.DirectoryNames.Add("Folder: " + (string)directoryNames[index]);
+                            resourceDeserialized.FileCreationDate.Add((string)fileCreationDate[index]);
+                            resourceDeserialized.FileUpdatedDate.Add((string)fileUpdatedDate[index]);
+                            fileNamesShort.RemoveAt(index);
+                            directoryNames.RemoveAt(index);
+                            fileCreationDate.RemoveAt(index);
+                            fileUpdatedDate.RemoveAt(index);
+                        }
+
+                        index = ReturnIndexForToTestFile(fileNamesShort);
+
+                        if (index >= 0)
+                        {
+                            resourceDeserialized.FileNamesShort.Add((string)fileNamesShort[index]);
+                            resourceDeserialized.DirectoryNames.Add("Folder: " + (string)directoryNames[index]);
+                            resourceDeserialized.FileCreationDate.Add((string)fileCreationDate[index]);
+                            resourceDeserialized.FileUpdatedDate.Add((string)fileUpdatedDate[index]);
+                            fileNamesShort.RemoveAt(index);
+                            directoryNames.RemoveAt(index);
+                            fileCreationDate.RemoveAt(index);
+                            fileUpdatedDate.RemoveAt(index);
+                        }
+                    }
+
+                    Utility.Sort(fileNamesShort, directoryNames, fileCreationDate, fileCreationDate);
+
+                    for(i = 0; i < fileNamesShort.Count; i++)
+                    {
+                        resourceDeserialized.FileNamesShort.Add((string)fileNamesShort[i]);
+                        resourceDeserialized.DirectoryNames.Add("Folder: " + (string)directoryNames[i]);
+                        resourceDeserialized.FileCreationDate.Add((string)fileCreationDate[i]);
+                        resourceDeserialized.FileUpdatedDate.Add((string)fileUpdatedDate[i]);
+                    }          
+                }
+
+                if (!string.IsNullOrEmpty(resourceDeserialized.Links))
+                {
+                    resourceDeserialized.Href = new List<string>();
+                    resourceDeserialized.HrefText = new List<string>();
+
+                    u = resourceDeserialized.Links.Split('\n');
+
+                    for (i = 0; i < u.Length; i++)
+                    {
+                        v = u[i].Split(new string[] { "###" }, StringSplitOptions.None);
+
+                        if (v.Length != 2)
+                        {
+                            errorMessage = string.Format("ERROR!! Incorrect link found: {0}!", u[i]);
+                            return null;
+                        }
+                        else
+                        {
+                            resourceDeserialized.Href.Add(v[0]);
+                            resourceDeserialized.HrefText.Add(v[1]);
+                        }
+                    }
+                }
+                else
+                {
+                    resourceDeserialized.Href = null;
+                    resourceDeserialized.HrefText = null;
                 }
             }
 
@@ -248,9 +403,9 @@ namespace WebApplication1.Models
 
             while ((errorMessage == null) && (i < n))
             {
-                if (!File.Exists(v[i]))
+                if (!File.Exists(v[i]) && !Directory.Exists(v[i]))
                 {
-                    errorMessage = string.Format("ERROR!! File number {0} does not exist", i + 1 );
+                    errorMessage = string.Format("ERROR!! Row {0} for a file or folder is incorrect! The name is neither an existing file nor a directory!", i + 1 );
                 }
                 else
                 {
@@ -502,6 +657,58 @@ namespace WebApplication1.Models
                 errorMessage = string.Format("ERROR!! An Exception occured in method UpdateFileTextForHtmlResource! e.Message:\r\n{0}", e.Message);
                 return;
             }
+        }
+
+        public static int ReturnIndexForTaskFile(ArrayList fileNamesShort)
+        {
+            int index, i, test;
+            string fileNameShort, str;
+
+            index = -1;
+            i = 0;
+
+            while ((i < fileNamesShort.Count) && (index == -1))
+            {
+                fileNameShort = ((string)fileNamesShort[i]).Trim().ToLower();
+
+                if (fileNameShort.StartsWith("task") && fileNameShort.EndsWith(".txt"))
+                {
+                    str = fileNameShort.Substring(4, fileNameShort.Length - 8);
+
+                    if (int.TryParse(str, out test))
+                    {
+                        if ((test >= 1) && (test <= 100000))
+                        {
+                            index = i;
+                        }
+                    }
+                }
+
+                i++;
+            }
+
+            return index;
+        }
+
+        public static int ReturnIndexForToTestFile(ArrayList fileNamesShort)
+        {
+            int index, i;
+            string fileNameShort;
+
+            index = -1;
+            i = 0;
+
+            while ((i < fileNamesShort.Count) && (index == -1))
+            {
+                fileNameShort = ((string)fileNamesShort[i]).Trim().ToLower();
+
+                if (fileNameShort == "to test.txt")
+                    index = i;
+                else
+                    i++;
+            }
+
+            return index;
         }
     }
 }

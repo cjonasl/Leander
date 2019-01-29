@@ -415,15 +415,17 @@ namespace WebApplication1.Controllers
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetResource(int id)
+        public ActionResult GetResource(int id)
         {
             string errorMessage;
             Resource resource = ResourceUtility.GetResource(id, out errorMessage);
 
-            if (errorMessage == null)
+            if (errorMessage != null)
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+            else if (resource.ResourcesType != ResourcesType.Self)
                 return Json(resource, JsonRequestBehavior.AllowGet);
             else
-                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+                return View("SelfResource", resource);
         }
 
         public JsonResult GetFileText(string str)
@@ -492,6 +494,30 @@ namespace WebApplication1.Controllers
                 return Json("Success", JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public static string ReturnResourceTypeAsString(ResourcesType resourcesType)
+        {
+            return resourcesType == ResourcesType.ThumbUpLocation ? "Location" : resourcesType.ToString();
+        }
+
+        public static bool FileIsTextFile(string fileNameShort)
+        {
+            if (
+                fileNameShort.Trim().ToLower().EndsWith(".txt") ||
+                fileNameShort.Trim().ToLower().EndsWith(".js") ||
+                fileNameShort.Trim().ToLower().EndsWith(".cs") ||
+                fileNameShort.Trim().ToLower().EndsWith(".cshtml") ||
+                fileNameShort.Trim().ToLower().EndsWith(".css") ||
+                fileNameShort.Trim().ToLower().EndsWith(".html") ||
+                fileNameShort.Trim().ToLower().EndsWith(".aspx") ||
+                fileNameShort.Trim().ToLower().EndsWith(".ascx") ||
+                fileNameShort.Trim().ToLower().EndsWith(".xml") ||
+                fileNameShort.Trim().ToLower().EndsWith(".sql")
+              )
+                return true;
+            else
+                return false;
         }
     }
 }

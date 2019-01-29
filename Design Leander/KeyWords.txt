@@ -171,3 +171,19 @@ HSBC
 ----- New property -----
 
 Resources rörande HSBC
+
+---------- New key word ----------
+
+12
+
+----- New property -----
+
+2019-01-28 14:51:37
+
+----- New property -----
+
+Task
+
+----- New property -----
+
+A task to do for example a bug or a feature

@@ -244,5 +244,20 @@ namespace Leander.Nr1
 
             return arrayList;
         }
+
+        public static void AddFileInfo(string fileNameFullPath, ArrayList fileNamesShort, ArrayList directoryNames, ArrayList fileCreationDate, ArrayList fileUpdatedDate)
+        {
+            System.IO.FileInfo fi = new System.IO.FileInfo(fileNameFullPath);
+
+            string str1 = fi.Name;
+            string str2 = fi.DirectoryName;
+            string str3 = fi.CreationTime.ToString("yyyy-MM-dd HH:mm:ss");
+            string str4 = fi.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+            fileNamesShort.Add(str1);
+            directoryNames.Add(str2);
+            fileCreationDate.Add(str3);
+            fileUpdatedDate.Add(str4);
+        }
     }
 }

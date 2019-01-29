@@ -119,7 +119,6 @@ namespace WebApplication1.Models
 
             resourcePresentationInSearch = new ResourcePresentationInSearch(resource.Id, resource.ResourcesType, created, resource.Title, commaSeparatedListWithKeyWords);
 
-
             serializedResource = SerializeResource(resourcePresentationInSearch);
 
             if (resource.Id > 1)

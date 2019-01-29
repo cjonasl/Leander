@@ -8,21 +8,6 @@ namespace Leander.Nr1
 {
     public partial class Utility
     {
-        public static bool IsLower(string str1, string str2)
-        {
-            ArrayList v = new ArrayList();
-
-            v.Add(str1);
-            v.Add(str2);
-
-            v.Sort();
-
-            if (((string)v[0]) == str1)
-                return true;
-            else
-                return false;
-        }
-
         public static void Sort(ArrayList v1, ArrayList v2)
         {
             string tmp;
@@ -31,7 +16,7 @@ namespace Leander.Nr1
             {
                 for (int j = (i + 1); j < v1.Count; j++)
                 {
-                    if (IsLower((string)v1[j], (string)v1[i]))
+                    if (string.Compare((string)v1[j], (string)v1[i]) < 0)
                     {
                         tmp = (string)v1[j];
                         v1[j] = v1[i];
@@ -40,6 +25,62 @@ namespace Leander.Nr1
                         tmp = (string)v2[j];
                         v2[j] = v2[i];
                         v2[i] = tmp;
+                    }
+                }
+            }
+        }
+
+        public static void Sort(ArrayList v1, ArrayList v2, ArrayList v3)
+        {
+            string tmp;
+
+            for (int i = 0; i < (v1.Count - 1); i++)
+            {
+                for (int j = (i + 1); j < v1.Count; j++)
+                {
+                    if (string.Compare((string)v1[j], (string)v1[i]) < 0)
+                    {
+                        tmp = (string)v1[j];
+                        v1[j] = v1[i];
+                        v1[i] = tmp;
+
+                        tmp = (string)v2[j];
+                        v2[j] = v2[i];
+                        v2[i] = tmp;
+
+                        tmp = (string)v3[j];
+                        v3[j] = v3[i];
+                        v3[i] = tmp;
+                    }
+                }
+            }
+        }
+
+        public static void Sort(ArrayList v1, ArrayList v2, ArrayList v3, ArrayList v4)
+        {
+            string tmp;
+
+            for (int i = 0; i < (v1.Count - 1); i++)
+            {
+                for (int j = (i + 1); j < v1.Count; j++)
+                {
+                    if (string.Compare((string)v1[j], (string)v1[i]) < 0)
+                    {
+                        tmp = (string)v1[j];
+                        v1[j] = v1[i];
+                        v1[i] = tmp;
+
+                        tmp = (string)v2[j];
+                        v2[j] = v2[i];
+                        v2[i] = tmp;
+
+                        tmp = (string)v3[j];
+                        v3[j] = v3[i];
+                        v3[i] = tmp;
+
+                        tmp = (string)v4[j];
+                        v4[j] = v4[i];
+                        v4[i] = tmp;
                     }
                 }
             }

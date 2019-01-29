@@ -16,9 +16,9 @@
     background-color: #f2f2f2 !important;
   }
 
-  #tableSearchResultResources tr:nth-child(odd) {
-    background-color: #ffffcc !important;
-  }
+    #tableSearchResultResources tr:nth-child(odd) {
+      background-color: #ffffb3 !important;
+    }
 
   #tableSearchResultResources th {
     padding-top: 12px !important;
@@ -36,23 +36,25 @@
 
   <table id="tableSearchResultResources">
     <tr>
-      <th>&nbsp;Id</th>
-      <th>&nbsp;Title</th>
-      <th>&nbsp;Key words</th>
-      <th>&nbsp;Created</th>
-      <th></th>
+      <th style="width: 5% !important;">&nbsp;Id</th>
+      <th style="width: 8% !important;">&nbsp;Type</th>
+      <th style="width: 47% !important;">&nbsp;Title</th>
+      <th style="width: 20% !important;">&nbsp;Key words</th>
+      <th style="width: 15% !important;">&nbsp;Created</th>
+      <th style="width: 5% !important;"></th>
     </tr>
 
     @foreach (WebApplication1.Models.ResourcePresentationInSearch r in Model)
     {
-    <tr>
-      <td><a href="javascript: window.jonas.renderResource(@r.Id)">@r.Id</a></td>
-      <td title='@r.Title'>@r.Title</td>
-      <td title='@r.KeyWords'>@r.KeyWords</td>
-      <td>@r.Created.ToString("yyyy-MM-dd HH:mm:ss")</td>
-      <td><a href="javascript: window.jonas.executeCmd('er @r.Id')">Edit</a></td>
-    </tr>
-    }
+      <tr>
+        <td style="width: 5% !important;" title="@r.Id"><a href="javascript: window.jonas.renderResource(@r.Id)">@r.Id</a></td>
+        <td style="width: 8% !important;" title="@r.ResourcesType.ToString()">@WebApplication1.Controllers.MainController.ReturnResourceTypeAsString(r.ResourcesType)</td>
+        <td style="width: 47% !important;" title="@r.Title">@r.Title</td>
+        <td style="width: 20% !important;" title="@r.KeyWords">@r.KeyWords</td>
+        <td style="width: 15% !important;" title="@r.Created.ToString("yyyy-MM-dd HH:mm:ss")">@r.Created.ToString("yyyy-MM-dd HH:mm:ss")</td>
+        <td style="width: 5% !important;"><a href="javascript: window.jonas.executeCmd('er @r.Id')">Edit</a></td>
+      </tr>
+      }
 
-  </table>
+    </table>
 </div>

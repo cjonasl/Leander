@@ -1,0 +1,91 @@
+﻿@model WebApplication1.Models.Resource
+
+<style>
+  #tableFilesAssociatedToSelfResource {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+    #tableFilesAssociatedToSelfResource td, #tableFilesAssociatedToSelfResource th {
+      border: 1px solid #ddd !important;
+      padding: 8px !important;
+    }
+
+    #tableFilesAssociatedToSelfResource tr:nth-child(even) {
+      background-color: #f2f2f2 !important;
+    }
+
+    #tableFilesAssociatedToSelfResource tr:nth-child(odd) {
+      background-color: #ffffb3 !important;
+    }
+
+    #tableFilesAssociatedToSelfResource th {
+      padding-top: 12px !important;
+      padding-bottom: 12px !important;
+      text-align: left !important;
+      background-color: #4CAF50 !important;
+      color: white !important;
+    }
+</style>
+
+<div style="margin-left: 15px !important; margin-top: 5px !important; margin-right: 15px !important;">
+
+  <h2 style="font-family: Arial !important; font-weight: bold !important; display: inline-block !important;">@Model.Title&nbsp;@Model.KeyWordPhrases</h2>
+
+  @if (!string.IsNullOrEmpty(Model.Note))
+  {
+     <h2 style="font-family: Arial !important; font-weight: bold !important; display: inline-block !important;">&nbsp;&nbsp;&nbsp;Note:</h2>
+     <span title="@Model.Note" style="font-family: 'Times New Roman' !important; font-weight: normal !important; font-size: medium !important; margin-left: 3px !important;">@Model.Note</span>
+  }
+
+  @if (Model.FileNamesShort != null)
+  {
+    <table id="tableFilesAssociatedToSelfResource">
+      <tr>
+        <th style="width: 55% !important;">&nbsp;File name</th>
+        <th style="width: 20% !important;">&nbsp;Created</th>
+        <th style="width: 20% !important;">&nbsp;Updated</th>
+        <th style="width: 5% !important;"></th>
+      </tr>
+
+      @for (int i = 0; i < Model.FileNamesShort.Count; i++)
+      {
+        <tr>
+          <td style="width: 65% !important;" title="@Model.DirectoryNames[i]">@Model.FileNamesShort[i]</td>
+          <td style="width: 15% !important;" title="@Model.FileCreationDate[i]">@Model.FileCreationDate[i]</td>
+          <td style="width: 15% !important;" title="@Model.FileUpdatedDate[i]">@Model.FileUpdatedDate[i]</td>
+
+          @if (WebApplication1.Controllers.MainController.FileIsTextFile(Model.FileNamesShort[i]))
+          {
+            <td style="width: 5% !important;"><a href="javascript: window.jonas.editTextFile('@Model.DirectoryNames[i].Substring(8).Replace("\\", "\\\\")' + '\\' + '@Model.FileNamesShort[i].Replace("\\", "\\\\")')">Edit</a></td>
+          }
+          else
+          {
+            <td style="width: 5% !important;"></td>
+          }
+        </tr>
+      }
+    </table>
+  }
+
+  @if (Model.Href != null)
+  {
+      <div style="margin-top: 30px;">
+        <h2 style="font-family: Arial !important; font-weight: bold !important;">Links</h2>
+
+        <ul id="ulLinksSelfResource">
+          @for(int i = 0; i < Model.Href.Count; i++)
+          {
+              <li><a href="@Model.Href[i]" target="_blank">@Model.HrefText[i]</a></li>
+          }
+        </ul>
+      </div>
+  }
+</div>
+
+<script>
+  $(document).ready(function () {
+    window.jonas.registerNewRenderOfSelfResource(@Model.PreviousResource, @Model.Id, @Model.NextResource);
+  });
+</script>

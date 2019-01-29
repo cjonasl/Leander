@@ -45,11 +45,13 @@ window.jonas.resetAfterSaveOrCancelOfTextarea = function (btnSave, btnCancel, te
     btnCancel.css("background-color", "green");
   
     if (eventHandler === "RenderOfHtmlResource") {
+        textarea.on("change", window.jonas.textareaRenderOfHtmlResourceChange);
         textarea.on("mouseup", window.jonas.textareaRenderOfHtmlResourceResize);
         window.jonas.eventHandlerTextareaRenderOfHtmlResource = 1;
     }
     else if (eventHandler === "EditArbitraryTextFile") {
         $(".ui-dialog-titlebar-close").prop("disabled", false);
+        textarea.on("change", window.jonas.textareaEditArbitraryTextFileChange);
         window.jonas.eventHandlerTextareaEditArbitraryTextFile = 1;
     }
     else
@@ -104,21 +106,18 @@ window.jonas.textareaEditArbitraryTextFileChange = function () {
 };
 
 window.jonas.textareaRenderOfHtmlResourceResize = function () {
-    var width, height;
+    var textarea, width, height;
 
+    textarea = $("#textareaRenderOfHtmlResource");
     width = textarea.css("width");
     height = textarea.css("height");
 
     if (width !== window.jonas.textareaRenderOfHtmlResourceWidth || height !== window.jonas.textareaRenderOfHtmlResourceHeight)
-        window.jonas.textareaChange($("#btnRenderOfHtmlResourceSave"), $("#btnRenderOfHtmlResourceCancel"), $("#textareaRenderOfHtmlResource"), "RenderOfHtmlResource"); 
+        window.jonas.textareaChange($("#btnRenderOfHtmlResourceSave"), $("#btnRenderOfHtmlResourceCancel"), textarea, "RenderOfHtmlResource");
 };
 
 window.jonas.registerNewRenderOfHtmlResource = function (previousResource, currentResource, nextResource, widthIframe, heightIframe, widthTextarea, heightTextarea, htmlFile, htmlFileText) {
     var textarea, iframe;
-
-    window.jonas.previousResource = previousResource;
-    window.jonas.currentResource = currentResource;
-    window.jonas.nextResource = nextResource;
 
     window.jonas.previousResourceInRenderOfResource = previousResource;
     window.jonas.currentResourceInRenderOfResource = currentResource;
@@ -145,7 +144,7 @@ window.jonas.registerNewRenderOfHtmlResource = function (previousResource, curre
     textarea.on("mouseup", window.jonas.textareaRenderOfHtmlResourceResize);
     window.jonas.eventHandlerTextareaRenderOfHtmlResource = 1;
 
-    if (window.jonas.location !== "searchResultResources") {
+    if (window.jonas.tab !== 0) {
         $("#liTab" + window.jonas.tab).removeClass("active");
         window.jonas.tab = 0;
     }
@@ -156,8 +155,29 @@ window.jonas.registerNewRenderOfHtmlResource = function (previousResource, curre
     window.jonas.handlePreviousCurrentNextResource(window.jonas.previousResourceInRenderOfResource, window.jonas.currentResourceInRenderOfResource, window.jonas.nextResourceInRenderOfResource);
 
     if ($("#divRenderOfHtmlResource").css("display") === "none") {
-        $("#divRenderOfHtmlResource").css("display", "block");
         $("#divRenderOfSelfResource").css("display", "none");
+        $("#divRenderOfHtmlResource").css("display", "block");     
+    }
+};
+
+window.jonas.registerNewRenderOfSelfResource = function (previousResource, currentResource, nextResource) {
+    window.jonas.previousResourceInRenderOfResource = previousResource;
+    window.jonas.currentResourceInRenderOfResource = currentResource;
+    window.jonas.nextResourceInRenderOfResource = nextResource;
+
+    if (window.jonas.tab !== 0) {
+        $("#liTab" + window.jonas.tab).removeClass("active");
+        window.jonas.tab = 0;
+    }
+
+    window.jonas.setTitleTextInBrowser(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, 0, " (Render of resource)");
+    window.jonas.updateCssDisplayForContentDivs("renderOfResource");
+    window.jonas.checkIconAndSetTitle("book-reader", "Render resource");
+    window.jonas.handlePreviousCurrentNextResource(window.jonas.previousResourceInRenderOfResource, window.jonas.currentResourceInRenderOfResource, window.jonas.nextResourceInRenderOfResource);
+
+    if ($("#divRenderOfSelfResource").css("display") === "none") {
+        $("#divRenderOfHtmlResource").css("display", "none");
+        $("#divRenderOfSelfResource").css("display", "block"); 
     }
 };
 
@@ -304,7 +324,7 @@ window.jonas.editTextFile = function(fileNameFullPath) {
                 textarea.val(data);
                 textarea.on("change", window.jonas.textareaEditArbitraryTextFileChange);
                 window.jonas.eventHandlerTextareaEditArbitraryTextFile = 1;
-                window.jonas.openModal("#dialogEditArbitraryTextFile", fileNameFullPath, 900, 500, "EditArbitraryTextFile");
+                window.jonas.openModal("#dialogEditArbitraryTextFile", fileNameFullPath, 1200, 700, "EditArbitraryTextFile");
             }
         }
     });

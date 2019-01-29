@@ -160,6 +160,7 @@
     <Content Include="Views\Main\SearchResource.cshtml" />
     <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab2.cshtml" />
     <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab1.cshtml" />
+    <Content Include="Views\Main\SelfResource.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

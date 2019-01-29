@@ -9,8 +9,11 @@ namespace Leander.Nr1
     class Program
     {
         static void Main(string[] args)
-        {        
-            R8.Execute();
+        {
+            DateTime dateTime = DateTime.Now;
+            string str = Utility.ReturnDateTimeAsLongSwedishString(dateTime);
+
+            //R8.Execute();
         }
     }
 }

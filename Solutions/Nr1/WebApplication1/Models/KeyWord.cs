@@ -240,5 +240,30 @@ namespace WebApplication1.Models
 
             return sb.ToString();
         }
+
+        public static bool ResourceHasKeyWordId(string commaSeparatedListWithKeyWordId, int id)
+        {
+            string[] v;
+            int i;
+            bool returnValue = false; //Default
+
+            v = commaSeparatedListWithKeyWordId.Split(',');
+
+            i = 0;
+
+            while (i < v.Length && !returnValue)
+            {
+                if (id == (int.Parse(v[i])))
+                {
+                    returnValue = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+
+            return returnValue;
+        }
     }
 }

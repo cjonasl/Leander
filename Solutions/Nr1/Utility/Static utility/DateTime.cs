@@ -54,5 +54,62 @@ namespace Leander.Nr1
 
             return ((dateTime >= after) && (dateTime <= before));
         }
+
+        public static string ReturnDayOfWeekAsSwedishString(DayOfWeek dayOfWeek)
+        {
+            switch(dayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return "Måndag";
+                case DayOfWeek.Tuesday:
+                    return "Tisdag";
+                case DayOfWeek.Wednesday:
+                    return "Onsdag";
+                case DayOfWeek.Thursday:
+                    return "Torsdag";
+                case DayOfWeek.Friday:
+                    return "Fredag";
+                case DayOfWeek.Saturday:
+                    return "Lördag";
+                default:
+                    return "Söndag";
+            }
+        }
+
+        public static string ReturnMonthAsSwedishString(int month)
+        {
+            switch (month)
+            {
+                case 1:
+                    return "januari";
+                case 2:
+                    return "februari";
+                case 3:
+                    return "mars";
+                case 4:
+                    return "april";
+                case 5:
+                    return "maj";
+                case 6:
+                    return "juni";
+                case 7:
+                    return "juli";
+                case 8:
+                    return "augusti";
+                case 9:
+                    return "september";
+                case 10:
+                    return "oktober";
+                case 11:
+                    return "november";
+                default:
+                    return "december";
+            }
+        }
+
+        public static string ReturnDateTimeAsLongSwedishString(DateTime dt)
+        {
+            return string.Format("{0} den {1} {2} {3}", ReturnDayOfWeekAsSwedishString(dt.DayOfWeek), dt.Day.ToString(), ReturnMonthAsSwedishString(dt.Month), dt.Year.ToString());
+        }
     }
 }

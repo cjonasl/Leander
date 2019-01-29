@@ -48,6 +48,10 @@
     #divRenderOfHtmlResource > a:link, #divRenderOfHtmlResource > a:visited, #divRenderOfHtmlResource > a:hover, #divRenderOfHtmlResource > a:active {
       color: blue !important;
     }
+
+    #ulLinksSelfResource > a:link, #ulLinksSelfResource > a:visited, #ulLinksSelfResource > a:hover, #ulLinksSelfResource > a:active {
+      color: blue !important;
+    }
   </style>
 
   <script>
@@ -483,7 +487,7 @@
         }
       }
       else {
-        $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files full path (row separated)\">Files&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
+        $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files full path or a folder (row separated)\">Files&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
         $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
 
         if (data.Resource.Id) {
@@ -675,6 +679,10 @@
       }
       // --------------------------------------------------------------------------------------------------------------------------------------------
 
+      if (window.jonas.page === 0) {
+        $("#page" + page).addClass("active");
+      }
+
       location = {
         page: page,
         menu: menu,
@@ -754,7 +762,7 @@
       if (window.jonas.location === "searchResultResources")
         return;
 
-      if (window.jonas.location !== "renderOfResource") {
+      if (window.jonas.tab !== 0) {
         $("#liTab" + window.jonas.tab).removeClass("active");
         window.jonas.tab = 0;
       }
@@ -770,7 +778,7 @@
       if (window.jonas.location === "renderOfResource")
         return;
 
-      if (window.jonas.location !== "searchResultResources") {
+      if (window.jonas.tab !== 0) {
         $("#liTab" + window.jonas.tab).removeClass("active");
         window.jonas.tab = 0;
       }
@@ -850,6 +858,7 @@
           else if (window.jonas.modalState === "EditArbitraryTextFile") {
             $("#textareaEditArbitraryTextFile").off("change");
             $("#textareaEditArbitraryTextFile").val("");
+            window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile = "";
           }
           else {
             alert("ERROR!! Incorrect modal state: " + window.jonas.modalState);
@@ -1171,11 +1180,15 @@
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
-          if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
-            alert(data);
-            return;
+          if (typeof data === "string") {
+            if ((data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+              alert(data);
+              return;
+            } else { //Self resource
+              $("#divRenderOfSelfResource").html(data);
+            }
           }
-          else if (typeof data == "object") { //Success
+          else if (typeof data == "object") {
             if ((data.ResourcesType === 0 || data.ResourcesType === 2) && renderInNewTab) {
               alert("Command rrt can only be usef for a Html resource!");
             }
@@ -1205,12 +1218,6 @@
             else {
               alert("ERROR!! Unexpected resource type!");
             }
-          }
-          else if (data.ResourcesType === 2) { //Self resource
-            var aaa = "todo";
-          }
-          else {
-            alert("ERROR!! Unexpected resource type!");
           }
         }
       });
@@ -1246,21 +1253,21 @@
               <i class="fas fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu">
-              <li class="active"><a href="javascript: window.jonas.newLocation(1, 0, 0, 0, 1, false)"><i class='fas fa-key'></i>&nbsp;&nbsp;Page1</a></li>
-              <li><a href="javascript: window.jonas.newLocation(2, 0, 0, 0, 1, false)"><i class='fas fa-camera'></i>&nbsp;&nbsp;Page2</a></li>
-              <li><a href="javascript: window.jonas.newLocation(3, 0, 0, 0, 1, false)"><i class='fas fa-print'></i>&nbsp;&nbsp;Page3</a></li>
-              <li><a href="javascript: window.jonas.newLocation(4, 0, 0, 0, 1, false)"><i class='fas fa-book'></i>&nbsp;&nbsp;Page4</a></li>
-              <li><a href="javascript: window.jonas.newLocation(5, 0, 0, 0, 1, false)"><i class='fas fa-magnet'></i>&nbsp;&nbsp;Page5</a></li>
-              <li><a href="javascript: window.jonas.newLocation(6, 0, 0, 0, 1, false)"><i class='fas fa-bed'></i>&nbsp;&nbsp;Page6</a></li>
-              <li><a href="javascript: window.jonas.newLocation(7, 0, 0, 0, 1, false)"><i class='fas fa-beer'></i>&nbsp;&nbsp;Page7</a></li>
-              <li><a href="javascript: window.jonas.newLocation(8, 0, 0, 0, 1, false)"><i class='fas fa-bell'></i>&nbsp;&nbsp;Page8</a></li>
-              <li><a href="javascript: window.jonas.newLocation(9, 0, 0, 0, 1, false)"><i class='fas fa-bus'></i>&nbsp;&nbsp;Page9</a></li>
-              <li><a href="javascript: window.jonas.newLocation(10, 0, 0, 0, 1, false)"><i class='fas fa-dice'></i>&nbsp;&nbsp;Page10</a></li>
-              <li><a href="javascript: window.jonas.newLocation(11, 0, 0, 0, 1, false)"><i class='fas fa-helicopter'></i>&nbsp;&nbsp;Page11</a></li>
-              <li><a href="javascript: window.jonas.newLocation(12, 0, 0, 0, 1, false)"><i class='fas fa-hotel'></i>&nbsp;&nbsp;Page12</a></li>
-              <li><a href="javascript: window.jonas.newLocation(13, 0, 0, 0, 1, false)"><i class='fas fa-kiss'></i>&nbsp;&nbsp;Page13</a></li>
-              <li><a href="javascript: window.jonas.newLocation(14, 0, 0, 0, 1, false)"><i class='fas fa-ship'></i>&nbsp;&nbsp;Page14</a></li>
-              <li><a href="javascript: window.jonas.newLocation(15, 0, 0, 0, 1, false)"><i class='fas fa-umbrella'></i>&nbsp;&nbsp;Page15</a></li>
+              <li id="page1"><a href="javascript: window.jonas.newLocation(1, 0, 0, 0, 1, false)"><i class='fas fa-key'></i>&nbsp;&nbsp;Page1</a></li>
+              <li id="page2"><a href="javascript: window.jonas.newLocation(2, 0, 0, 0, 1, false)"><i class='fas fa-camera'></i>&nbsp;&nbsp;Page2</a></li>
+              <li id="page3"><a href="javascript: window.jonas.newLocation(3, 0, 0, 0, 1, false)"><i class='fas fa-print'></i>&nbsp;&nbsp;Page3</a></li>
+              <li id="page4"><a href="javascript: window.jonas.newLocation(4, 0, 0, 0, 1, false)"><i class='fas fa-book'></i>&nbsp;&nbsp;Page4</a></li>
+              <li id="page5"><a href="javascript: window.jonas.newLocation(5, 0, 0, 0, 1, false)"><i class='fas fa-magnet'></i>&nbsp;&nbsp;Page5</a></li>
+              <li id="page6"><a href="javascript: window.jonas.newLocation(6, 0, 0, 0, 1, false)"><i class='fas fa-bed'></i>&nbsp;&nbsp;Page6</a></li>
+              <li id="page7"><a href="javascript: window.jonas.newLocation(7, 0, 0, 0, 1, false)"><i class='fas fa-beer'></i>&nbsp;&nbsp;Page7</a></li>
+              <li id="page8"><a href="javascript: window.jonas.newLocation(8, 0, 0, 0, 1, false)"><i class='fas fa-bell'></i>&nbsp;&nbsp;Page8</a></li>
+              <li id="page9"><a href="javascript: window.jonas.newLocation(9, 0, 0, 0, 1, false)"><i class='fas fa-bus'></i>&nbsp;&nbsp;Page9</a></li>
+              <li id="page10"><a href="javascript: window.jonas.newLocation(10, 0, 0, 0, 1, false)"><i class='fas fa-dice'></i>&nbsp;&nbsp;Page10</a></li>
+              <li id="page11"><a href="javascript: window.jonas.newLocation(11, 0, 0, 0, 1, false)"><i class='fas fa-helicopter'></i>&nbsp;&nbsp;Page11</a></li>
+              <li id="page12"><a href="javascript: window.jonas.newLocation(12, 0, 0, 0, 1, false)"><i class='fas fa-hotel'></i>&nbsp;&nbsp;Page12</a></li>
+              <li id="page13"><a href="javascript: window.jonas.newLocation(13, 0, 0, 0, 1, false)"><i class='fas fa-kiss'></i>&nbsp;&nbsp;Page13</a></li>
+              <li id="page14"><a href="javascript: window.jonas.newLocation(14, 0, 0, 0, 1, false)"><i class='fas fa-ship'></i>&nbsp;&nbsp;Page14</a></li>
+              <li id="page15"><a href="javascript: window.jonas.newLocation(15, 0, 0, 0, 1, false)"><i class='fas fa-umbrella'></i>&nbsp;&nbsp;Page15</a></li>
             </ul>
           </li>
         </ul>

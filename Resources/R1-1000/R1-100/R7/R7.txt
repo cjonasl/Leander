@@ -10,7 +10,7 @@ Self
 
 ----- New property -----
 
-Solve bug work item depemdencies
+Solve bug work item dependencies
 
 ----- New property -----
 
@@ -39,6 +39,10 @@ null
 ----- New property -----
 
 C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\Resources1\R7.cs
+
+----- New property -----
+
+null
 
 ----- New property -----
 
