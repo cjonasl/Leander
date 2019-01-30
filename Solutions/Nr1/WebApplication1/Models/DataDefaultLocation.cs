@@ -46,7 +46,7 @@ namespace WebApplication1.Models
 
             for (int i = 0; i < 10; i++)
             {
-                this.Tab[i] = data.Tab[i];
+                this.Tab[i] = data.TabNames[i];
             }
 
             this.Text = "";

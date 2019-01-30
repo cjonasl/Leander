@@ -74,7 +74,7 @@ namespace WebApplication1.Controllers
             return View(location);
         }
 
-        private DocumentReadyDataForNonDefaultLocation GetDocumentReadyDataForNonDefaultLocation(Location location)
+        private DocumentReadyDataForNonDefaultLocation GetDocumentReadyDataForNonDefaultLocation(Location location, string cshtmlFile)
         {
             string icon, title, baseFileName, previousCurrentNextResource;
             string[] tabNames, v;
@@ -82,7 +82,7 @@ namespace WebApplication1.Controllers
             int i;
             DocumentReadyDataForNonDefaultLocation data;
 
-            data = new DocumentReadyDataForNonDefaultLocation();
+            data = new DocumentReadyDataForNonDefaultLocation(location, cshtmlFile);
 
             baseFileName = string.Format("Page{0}Menu{1}Sub{2}Sub{3}.txt", location.Page, location.Menu, location.Sub1, location.Sub2);
 
@@ -114,7 +114,7 @@ namespace WebApplication1.Controllers
             {
                 if (!string.IsNullOrEmpty(tabNames[i]))
                 {
-                    data.Tab[i] = tabNames[i];
+                    data.TabNames[i] = tabNames[i];
                 }
                 else
                 {
@@ -129,7 +129,7 @@ namespace WebApplication1.Controllers
 
         private DataDefaultLocation GetDefaultDataForNewLocation(Location location)
         {
-            DocumentReadyDataForNonDefaultLocation data = GetDocumentReadyDataForNonDefaultLocation(location);
+            DocumentReadyDataForNonDefaultLocation data = GetDocumentReadyDataForNonDefaultLocation(location, "");
             DataDefaultLocation dataDefaultLocation = new DataDefaultLocation(data);
             string text = GetPageEntity(PageEntity.Text, string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}.txt", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab));
 
@@ -152,12 +152,15 @@ namespace WebApplication1.Controllers
                 switch (locationStr)
                 {
                     case "Page1Menu0Sub0Sub0Tab1":
-                        return View("Page1Menu0Sub0Sub0Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
+                        return View("HelpSearchResources", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##HelpSearchResources.cshtml")); //## will be replaced by \ in  _LayoutTopLevel.cshtml (does not work if put \\)
                     case "Page1Menu0Sub0Sub0Tab2":
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
-                        return View("Page1Menu0Sub0Sub0Tab2", GetDocumentReadyDataForNonDefaultLocation(location));
+                        return View("AddEditKeyWords", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AddEditKeyWords.cshtml"));
+                    case "Page1Menu2Sub1Sub1Tab1":
+                        ViewBag.DiaryFolder = @"C:\git_cjonasl\Leander\Work\Employer";
+                        return View("DayDateDiary1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DayDateDiary1.cshtml"));
                     case "Page2Menu1Sub1Sub1Tab1":
-                        return View("Page2Menu1Sub1Sub1Tab1", GetDocumentReadyDataForNonDefaultLocation(location));
+                        return View("InfoThumbUp", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##InfoThumbUp.cshtml"));
                     default:
                         return Json(GetDefaultDataForNewLocation(location), JsonRequestBehavior.AllowGet);
                 }
@@ -197,7 +200,7 @@ namespace WebApplication1.Controllers
 
         public JsonResult ExecuteCommand(Command command)
         {
-            string fileNameFullPath, fileContents, newfileContents, searchTerm = "", newTerm = "", errorMessage;
+            string fileNameFullPath, fileContents, newfileContents, searchTerm = "", newTerm = "", message, errorMessage;
             int startIndexSearchTerm, index;
             PageEntity pageEntity;
 
@@ -307,6 +310,16 @@ namespace WebApplication1.Controllers
                    
                     return Json(loadResourceData, JsonRequestBehavior.AllowGet);
                 }
+                else if ((command.Cmd == "r") && (command.Val == "rg"))
+                {
+                    ResourcePresentationInSearchUtility.RegenerateResourceFile(out message);
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+                else if ((command.Cmd == "r") && (command.Val == "check"))
+                {
+                    ResourcePresentationInSearchUtility.CheckResourceFile(out message);
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
                 else
                     return Json(string.Format("ERROR!! The command \"{0}\" is not supported", command.Cmd), JsonRequestBehavior.AllowGet);
             }
@@ -324,7 +337,7 @@ namespace WebApplication1.Controllers
             string[] u;
             ArrayList v;
 
-            List<ResourcePresentationInSearch> list = ResourcePresentationInSearchUtility.GetResources();
+            List<ResourcePresentationInSearch> list = ResourcePresentationInSearchUtility.ReturnListWithAllResourcePresentationInSearch();
 
             ViewBag.SearchTerm = searchTerm;
 
@@ -518,6 +531,11 @@ namespace WebApplication1.Controllers
                 return true;
             else
                 return false;
+        }
+
+        public ViewResult Page1Menu2Sub1Sub1Tab1()
+        {
+            return View();
         }
     }
 }

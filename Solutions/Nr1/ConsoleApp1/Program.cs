@@ -10,8 +10,8 @@ namespace Leander.Nr1
     {
         static void Main(string[] args)
         {
-            DateTime dateTime = DateTime.Now;
-            string str = Utility.ReturnDateTimeAsLongSwedishString(dateTime);
+            System.IO.FileInfo fi = new System.IO.FileInfo("C:\\AAA\\abc.txt");
+            long aaa = fi.Length;
 
             //R8.Execute();
         }

@@ -123,6 +123,7 @@
     </Compile>
     <Compile Include="Models\Command.cs" />
     <Compile Include="Models\DataDefaultLocation.cs" />
+    <Compile Include="Models\DayDateDiaryBytesInDiary.cs" />
     <Compile Include="Models\DocumentReadyDataForNonDefaultLocation.cs" />
     <Compile Include="Models\HtmlResourceFileTextAndTextareaDimension.cs" />
     <Compile Include="Models\HtmlResourceIframeDimensionData.cs" />
@@ -156,11 +157,12 @@
     <Content Include="Views\Main\_Layout13.cshtml" />
     <Content Include="Views\Main\_Layout14.cshtml" />
     <Content Include="Views\Main\_Layout15.cshtml" />
-    <Content Include="Views\Main\Page2Menu1Sub1Sub1Tab1.cshtml" />
+    <Content Include="Views\Main\InfoThumbUp.cshtml" />
     <Content Include="Views\Main\SearchResource.cshtml" />
-    <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab2.cshtml" />
-    <Content Include="Views\Main\Page1Menu0Sub0Sub0Tab1.cshtml" />
+    <Content Include="Views\Main\AddEditKeyWords.cshtml" />
+    <Content Include="Views\Main\HelpSearchResources.cshtml" />
     <Content Include="Views\Main\SelfResource.cshtml" />
+    <Content Include="Views\Main\DayDateDiary1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

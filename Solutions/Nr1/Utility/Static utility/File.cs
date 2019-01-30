@@ -259,5 +259,19 @@ namespace Leander.Nr1
             fileCreationDate.Add(str3);
             fileUpdatedDate.Add(str4);
         }
+
+        public static long ReturnNumberOfBytesInFile(string fileNameFullPath, bool isTextFileUtf8)
+        {
+            long numberOfBytesInFile;
+
+            FileInfo fi = new FileInfo(fileNameFullPath);
+
+            numberOfBytesInFile = fi.Length;
+
+            if (isTextFileUtf8)
+                numberOfBytesInFile -= 3;  //Do not count the 3 initial bytes in the file to indicate that it is in format UTF-8
+
+            return numberOfBytesInFile;
+        }
     }
 }

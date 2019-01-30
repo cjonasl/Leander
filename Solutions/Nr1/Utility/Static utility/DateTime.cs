@@ -111,5 +111,34 @@ namespace Leander.Nr1
         {
             return string.Format("{0} den {1} {2} {3}", ReturnDayOfWeekAsSwedishString(dt.DayOfWeek), dt.Day.ToString(), ReturnMonthAsSwedishString(dt.Month), dt.Year.ToString());
         }
+
+        public static bool TryParse(string date, out DateTime dateTime) //Assume date is in format yyyy-MM-dd
+        {
+            int year, month, day;
+
+            dateTime = DateTime.MinValue;
+
+            if (date.Length != 10)
+                return false;
+            else if (!int.TryParse(date.Substring(0, 4), out year))
+                return false;
+            else if (!int.TryParse(date.Substring(5, 2), out month))
+                return false;
+            else if (!int.TryParse(date.Substring(8, 2), out day))
+                return false;
+            else
+            {
+                try
+                {
+                    dateTime = new DateTime(year, month, day);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

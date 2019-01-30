@@ -510,10 +510,26 @@
     window.jonas.executeCmd = function (str) { //If str has a value then window.jonas.executeCmd is called from SearchResource.cshtml
       var descriptionAvailableCommands, index, cmd, val, availableCommands, command, renderInNewTab = false;
 
-      descriptionAvailableCommands = "The following commands are available:\r\ns: Show latest search result of resources\r\nr: Show last render of resource\r\n";
-      descriptionAvailableCommands += "nr l: New ThumbUpLocation resource\r\nnr h: New Html resource\r\nnr s: New Self resource\r\nmenu {value}: Set text for current menu\r\nsub1 {value}: Set text for current sub1\r\n";
-      descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\ntab {value}: Set text for current tab\r\nicon {value}: Set icon for current left menu location\r\ntitle {value}: Set title for current left menu location\r\n";
-      descriptionAvailableCommands += "er {value}: Edit resource\r\nrr: Render resource\r\nrrt: Render a Html resource in new tab";
+      descriptionAvailableCommands = "The following commands are available:\r\n";
+      descriptionAvailableCommands += "s: Show latest search result of resources\r\n";
+      descriptionAvailableCommands += "r: Show last render of resource \r\n";
+      descriptionAvailableCommands += "nr l: New ThumbUpLocation resource\ \r\n";
+      descriptionAvailableCommands += "nr h: New Html resource \r\n";
+      descriptionAvailableCommands += "nr s: New Self resource\r\n";
+      descriptionAvailableCommands += "er l: Edit ThumbUpLocation resource\ \r\n";
+      descriptionAvailableCommands += "er h: Edit Html resource \r\n";
+      descriptionAvailableCommands += "er s: Edit Self resource\r\n";
+      descriptionAvailableCommands += "rr {value}: Render a resource\r\n";
+      descriptionAvailableCommands += "rrt {value}: Render a Html resource in new tab\r\n";
+      descriptionAvailableCommands += "r rg: Regenerate file Resource.txt\r\n";
+      descriptionAvailableCommands += "r check: Check file Resource.txt\r\n";
+      descriptionAvailableCommands += "menu {value}: Set text for current menu\r\n";
+      descriptionAvailableCommands += "sub1 {value}: Set text for current sub1\r\n";
+      descriptionAvailableCommands += "sub2 {value}: Set text for current sub2\r\n";
+      descriptionAvailableCommands += "tab {value}: Set text for current tab\r\n";
+      descriptionAvailableCommands += "icon {value}: Set icon for current left menu location\r\n";
+      descriptionAvailableCommands += "title {value}: Set title for current left menu location\r\n";
+      descriptionAvailableCommands += "\r\n";
 
 
       if (!str)
@@ -535,7 +551,7 @@
         return;
       }
 
-      availableCommands = ["nr", "er", "rr", "rrt", "icon", "title", "menu", "sub1", "sub2", "tab"]; //nr=new resource, er=edit resource and rr=render resource
+      availableCommands = ["nr", "er", "rr", "rrt", "r", "icon", "title", "menu", "sub1", "sub2", "tab"]; //nr=new resource, er=edit resource and rr=render resource
 
       index = str.indexOf(" ");
 
@@ -581,6 +597,11 @@
           alert("ERROR!! For command \"" + cmd + "\", the value must be an integer in the range [1, " + window.jonas.maxResourceId + "]!");
           return;
         }
+      }
+
+      if ((cmd === "r") && (val !== "rg") && (val !== "check")) {
+        alert("ERROR!! For command \"" + cmd + "\", the value must be rg (regenerate file Resource.txt) or check (check file Resource.txt)!");
+        return;
       }
 
       if (cmd === "rrt") {
@@ -633,6 +654,9 @@
           else if ((cmd === "nr") || (cmd === "er")) {
             window.jonas.loadResourceInModalToEdit(data);
           }
+          else if (cmd === "r") {
+            alert(data); //Show message of the result of regenerate file Resource.txt or check file Resource.txt
+          }
 
           $("#inputCmd").val("");
         }
@@ -640,7 +664,10 @@
     }
 
     window.jonas.setTitleTextInBrowser = function (page, menu, sub1, sub2, tab, suffix) {
+      console.log(suffix);
       var titleTextInBrowser;
+
+      suffix = suffix.replace(/##/g, "\\"); //Modifier g replaces all occurencies of ##, otherwise only one occurence will be replaced.
 
       if ((menu > 0) && (tab > 0))
         titleTextInBrowser = "Page" + page + " - Menu" + menu + " - Sub" + sub1 + " - Sub" + sub2 + " - Tab" + tab + suffix;
@@ -717,8 +744,6 @@
           }
           else { //html back from server, i.e. a non-default location
             $("#contentDivNonDefaultLocation").html(data);
-            window.jonas.setTitleTextInBrowser(page, menu, sub1, sub2, tab, " (non-default location)");
-            window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
           }
 
           window.jonas.handleChangeLocation(menu, sub1, sub2, tab);
@@ -1224,11 +1249,17 @@
     }
 
     window.jonas.renderPreviousResource = function () {
-      window.jonas.renderResource(window.jonas.previousResource, false);
+      if (window.jonas.previousResource === 0)
+        alert("The resource does not point to a previous resource!");
+      else
+        window.jonas.renderResource(window.jonas.previousResource, false);
     }
 
     window.jonas.renderNextResource = function () {
-      window.jonas.renderResource(window.jonas.nextResource, false);
+      if (window.jonas.nextResource === 0)
+        alert("The resource does not point to a next resource!");
+      else
+        window.jonas.renderResource(window.jonas.nextResource, false);
     }
 
     window.jonas.appendSerachTerm = function (cmd) {

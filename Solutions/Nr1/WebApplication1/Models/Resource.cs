@@ -183,7 +183,7 @@ namespace WebApplication1.Models
                 href = new ArrayList();
                 hrefText = new ArrayList();
 
-                resourceDeserialized.KeyWordPhrases = string.Format("({0})", KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(resourceDeserialized.KeyWords));
+                resourceDeserialized.KeyWordPhrases = string.Format("({0})", KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(resourceDeserialized.KeyWords).Replace(",", ", "));
 
                 filesInResourceDirectory = Directory.GetFiles(resourceDirectory);
 
@@ -709,6 +709,72 @@ namespace WebApplication1.Models
             }
 
             return index;
+        }
+
+        /// <summary>
+        /// Get a resource, but do not calculate tmp properties
+        /// </summary>
+        public static Resource GetResourceLight(int id, out string errorMessage)
+        {
+            string resourceDirectory, fileNameFullPath, resourceSerialized;
+            Resource resourceDeserialized;
+
+            try
+            {
+                errorMessage = null;
+
+                resourceDirectory = ReturnResourceDirectory(id);
+                fileNameFullPath = string.Format("{0}\\R{1}.txt", resourceDirectory, id.ToString());
+
+                if (!File.Exists(fileNameFullPath))
+                {
+                    errorMessage = string.Format("ERROR!! The resource R{0} does not exist!", id.ToString());
+                    return null;
+                }
+
+                resourceSerialized = Utility.ReturnFileContents(fileNameFullPath);
+                resourceDeserialized = DeserializeResource(resourceSerialized);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method GetResourceLight! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return resourceDeserialized;
+        }
+
+        public static List<Resource> ReturnListWithAllResources(out string errorMessage)
+        {
+            int numberOfResources, id;
+            List<Resource> listWithAllResources;
+            Resource resource;
+
+            try
+            {
+                errorMessage = null;
+                listWithAllResources = new List<Resource>();
+                numberOfResources = ReturnNextResourceId() - 1;
+
+                id = 1;
+
+                while ((id <= numberOfResources) && (errorMessage == null))
+                {
+                    resource = GetResourceLight(id, out errorMessage);
+
+                    if (errorMessage == null)
+                        listWithAllResources.Add(resource);
+                    
+                    id++;
+                }
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method ReturnListWithAllResources! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return listWithAllResources;
         }
     }
 }

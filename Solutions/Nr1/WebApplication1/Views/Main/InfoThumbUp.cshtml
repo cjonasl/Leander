@@ -25,7 +25,9 @@
 <script>
   $(document).ready(function () {
     window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
-    window.jonas.setTabNames('@Model.Tab[0]', '@Model.Tab[1]', '@Model.Tab[2]', '@Model.Tab[3]', '@Model.Tab[4]', '@Model.Tab[5]', '@Model.Tab[6]', '@Model.Tab[7]', '@Model.Tab[8]', '@Model.Tab[9]');
+    window.jonas.setTabNames('@Model.TabNames[0]', '@Model.TabNames[1]', '@Model.TabNames[2]', '@Model.TabNames[3]', '@Model.TabNames[4]', '@Model.TabNames[5]', '@Model.TabNames[6]', '@Model.TabNames[7]', '@Model.TabNames[8]', '@Model.TabNames[9]');
     window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
+    window.jonas.setTitleTextInBrowser(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, '@Model.CshtmlFile');
+    window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
   });
 </script>

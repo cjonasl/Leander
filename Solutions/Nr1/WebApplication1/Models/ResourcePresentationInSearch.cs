@@ -31,7 +31,7 @@ namespace WebApplication1.Models
     {
         private const string _fileNameFullPathToResources = "C:\\git_cjonasl\\Leander\\Design Leander\\Resources.txt";
 
-        private static string SerializeResource(ResourcePresentationInSearch resource)
+        private static string SerializeResourcePresentationInSearch(ResourcePresentationInSearch resource)
         {
             return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}\r\n\r\n----- New property -----\r\n\r\n{4}", resource.Id.ToString(), resource.ResourcesType.ToString(), resource.Created.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords);
         }
@@ -65,43 +65,43 @@ namespace WebApplication1.Models
             return new ResourcePresentationInSearch(id, resourcesType, created, v[3], v[4]);
         }
 
-        public static List<ResourcePresentationInSearch> GetResources()
+        public static List<ResourcePresentationInSearch> ReturnListWithAllResourcePresentationInSearch()
         {
             string[] list;
-            List<ResourcePresentationInSearch> listWithResources;
+            List<ResourcePresentationInSearch> listWithResourcePresentationInSearch;
             int i;
 
             list = Utility.ReturnFileContents(_fileNameFullPathToResources).Split(new string[] { "\r\n\r\n---------- New resource ----------\r\n\r\n" }, StringSplitOptions.None);
 
-            listWithResources = new List<ResourcePresentationInSearch>();
+            listWithResourcePresentationInSearch = new List<ResourcePresentationInSearch>();
 
             if (!string.IsNullOrEmpty(list[0].Trim()))
             {
                 for (i = 0; i < list.Length; i++)
                 {
-                    listWithResources.Add(DeserializeResource(list[i]));
+                    listWithResourcePresentationInSearch.Add(DeserializeResource(list[i]));
                 }
             }
 
-            return listWithResources;
+            return listWithResourcePresentationInSearch;
         }
 
-        public static void SaveListWithResources(List<ResourcePresentationInSearch> listWithResources)
+        public static void SaveListWithResourcePresentationInSearch(List<ResourcePresentationInSearch> listWithResourcePresentationInSearch)
         {
             int i;
             StringBuilder sb;
 
             sb = new StringBuilder();
 
-            for(i = 0; i < listWithResources.Count; i++)
+            for(i = 0; i < listWithResourcePresentationInSearch.Count; i++)
             {
                 if (i == 0)
                 {
-                    sb.Append(SerializeResource(listWithResources[0]));
+                    sb.Append(SerializeResourcePresentationInSearch(listWithResourcePresentationInSearch[0]));
                 }
                 else
                 {
-                    sb.Append(string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", SerializeResource(listWithResources[i])));
+                    sb.Append(string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", SerializeResourcePresentationInSearch(listWithResourcePresentationInSearch[i])));
                 }
             }
 
@@ -110,7 +110,7 @@ namespace WebApplication1.Models
 
         public static void AddResource(Resource resource)
         {
-            string commaSeparatedListWithKeyWords, serializedResource;
+            string commaSeparatedListWithKeyWords, serializedResourcePresentationInSearch;
             ResourcePresentationInSearch resourcePresentationInSearch;
             DateTime created;
 
@@ -118,32 +118,158 @@ namespace WebApplication1.Models
             commaSeparatedListWithKeyWords = KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(resource.KeyWords);
 
             resourcePresentationInSearch = new ResourcePresentationInSearch(resource.Id, resource.ResourcesType, created, resource.Title, commaSeparatedListWithKeyWords);
-
-            serializedResource = SerializeResource(resourcePresentationInSearch);
+            serializedResourcePresentationInSearch = SerializeResourcePresentationInSearch(resourcePresentationInSearch);
 
             if (resource.Id > 1)
-                Utility.AppendToFile(_fileNameFullPathToResources, string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", serializedResource));
+                Utility.AppendToFile(_fileNameFullPathToResources, string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", serializedResourcePresentationInSearch));
             else
-                Utility.AppendToFile(_fileNameFullPathToResources, serializedResource);
+                Utility.AppendToFile(_fileNameFullPathToResources, serializedResourcePresentationInSearch);
         }
 
         public static void UpdateResource(Resource resource)
         {
             string commaSeparatedListWithKeyWords;
-            ResourcePresentationInSearch resourcePresentationInSearch;
-            List<ResourcePresentationInSearch> listWithResources;
-            DateTime created;
+            bool updateOfResourceFileNeeded = false;
+            List<ResourcePresentationInSearch> listWithResourcePresentationInSearch;
 
-            created = Utility.ReturnDateTimeFromString(resource.Created);
             commaSeparatedListWithKeyWords = KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(resource.KeyWords);
 
-            resourcePresentationInSearch = new ResourcePresentationInSearch(resource.Id, resource.ResourcesType, created, resource.Title, commaSeparatedListWithKeyWords);
+            listWithResourcePresentationInSearch = ReturnListWithAllResourcePresentationInSearch();
 
-            listWithResources = GetResources();
+            if (listWithResourcePresentationInSearch[resource.Id - 1].KeyWords != commaSeparatedListWithKeyWords)
+            {
+                updateOfResourceFileNeeded = true;
+                listWithResourcePresentationInSearch[resource.Id - 1].KeyWords = commaSeparatedListWithKeyWords;
+            }
 
-            listWithResources[resource.Id - 1] = resourcePresentationInSearch;
+            if (listWithResourcePresentationInSearch[resource.Id - 1].Title != resource.Title)
+            {
+                updateOfResourceFileNeeded = true;
+                listWithResourcePresentationInSearch[resource.Id - 1].Title = resource.Title;
+            }
 
-            SaveListWithResources(listWithResources);
+            if (updateOfResourceFileNeeded)
+                SaveListWithResourcePresentationInSearch(listWithResourcePresentationInSearch);
+        }
+
+        public static void RegenerateResourceFile(out string message)
+        {
+            List<Resource> listWithAllResources;
+            ResourcePresentationInSearch resourcePresentationInSearch;
+            string commaSeparatedListWithKeyWords, serializedResourcePresentationInSearch, errorMessage;
+            DateTime created;
+            StringBuilder sb;
+            int i;
+
+            message = null;
+
+            try
+            {
+                listWithAllResources = ResourceUtility.ReturnListWithAllResources(out errorMessage);
+
+                if (errorMessage != null)
+                {
+                    message = errorMessage;
+                    return;
+                }
+
+                sb = new StringBuilder();
+
+                for(i = 0; i < listWithAllResources.Count; i++)
+                {
+                    created = Utility.ReturnDateTimeFromString(listWithAllResources[i].Created);
+                    commaSeparatedListWithKeyWords = KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(listWithAllResources[i].KeyWords);
+                    resourcePresentationInSearch = new ResourcePresentationInSearch(listWithAllResources[i].Id, listWithAllResources[i].ResourcesType, created, listWithAllResources[i].Title, commaSeparatedListWithKeyWords);
+                    serializedResourcePresentationInSearch = SerializeResourcePresentationInSearch(resourcePresentationInSearch);
+
+                    if (i > 0)
+                        sb.Append(string.Format("{0}{1}", "\r\n\r\n---------- New resource ----------\r\n\r\n", serializedResourcePresentationInSearch));
+                    else
+                        sb.Append(serializedResourcePresentationInSearch);
+                }
+
+                Utility.CreateNewFile(_fileNameFullPathToResources, sb.ToString());
+
+                message = string.Format("Resources.txt was successfully regenerated with {0} resources.", listWithAllResources.Count.ToString());
+            }
+            catch (Exception e)
+            {
+                message = string.Format("ERROR!! An Exception occured in method RegenerateResourceFile! e.Message:\r\n{0}", e.Message);
+                return;
+            }
+        }
+
+        public static void CheckResourceFile(out string message)
+        {
+            string commaSeparatedListWithKeyWords, errorMessage;
+            List<Resource> listWithAllResources;
+            List<ResourcePresentationInSearch> listWithResourcePresentationInSearch;
+            int id;
+
+            message = null;
+
+            try
+            {
+                listWithAllResources = ResourceUtility.ReturnListWithAllResources(out errorMessage);
+
+                if (errorMessage != null)
+                {
+                    message = errorMessage;
+                    return;
+                }
+
+                listWithResourcePresentationInSearch = ReturnListWithAllResourcePresentationInSearch();
+
+                if (listWithResourcePresentationInSearch.Count != listWithAllResources.Count)
+                {
+                    message = string.Format("Number of resource in Resources.txt, {0} resources, is not the same as the actual number of resources, {1} resources!", listWithResourcePresentationInSearch.Count.ToString(), listWithAllResources.Count.ToString());
+                    return;
+                }
+
+                id = 1;
+
+                while ((id <= listWithResourcePresentationInSearch.Count) && (message == null))
+                {
+                    if (listWithResourcePresentationInSearch[id - 1].Id != id)
+                    {
+                        message = string.Format("ResourcePresentationInSearch number {0} in file Resources.txt does not have id = {1} as expected", id.ToString(), id.ToString());
+                    }
+                    else if (listWithResourcePresentationInSearch[id - 1].ResourcesType != listWithAllResources[id - 1].ResourcesType)
+                    {
+                        message = string.Format("ResourcePresentationInSearch number {0} in file Resources.txt does not have resource type = {1} as expected", id.ToString(), listWithAllResources[id - 1].ResourcesType.ToString());
+                    }
+                    else if (listWithResourcePresentationInSearch[id - 1].Created.ToString("yyyy-MM-dd HH:mm:ss") != listWithAllResources[id - 1].Created)
+                    {
+                        message = string.Format("ResourcePresentationInSearch number {0} in file Resources.txt does not have created date = {1} as expected", id.ToString(), listWithAllResources[id - 1].Created);
+                    }
+                    else if (listWithResourcePresentationInSearch[id - 1].Title != listWithAllResources[id - 1].Title)
+                    {
+                        message = string.Format("ResourcePresentationInSearch number {0} in file Resources.txt does not have title = {1} as expected", id.ToString(), listWithAllResources[id - 1].Title);
+                    }
+
+                    if (message == null)
+                    {
+                        commaSeparatedListWithKeyWords = KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(listWithAllResources[id - 1].KeyWords);
+
+                        if (commaSeparatedListWithKeyWords != listWithResourcePresentationInSearch[id - 1].KeyWords)
+                        {
+                            message = string.Format("ResourcePresentationInSearch number {0} in file Resources.txt does not have key words = {1} as expected", id.ToString(), commaSeparatedListWithKeyWords);
+                        }
+                    }
+
+                    id++;
+                }
+
+                if (message == null)
+                {
+                    message = string.Format("All {0} ResourcePresentationInSearch in file Resources.txt are correct!", listWithResourcePresentationInSearch.Count.ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                message = string.Format("ERROR!! An Exception occured in method CheckResourceFile! e.Message:\r\n{0}", e.Message);
+                return;
+            }
         }
     }
 }
