@@ -134,7 +134,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationExtension.cs" />
     <Compile Include="Models\ResourcesType.cs" />
-    <Compile Include="Models\WidthHeightTextData.cs" />
+    <Compile Include="Models\SaveFileTextData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +162,7 @@
     <Content Include="Views\Main\AddEditKeyWords.cshtml" />
     <Content Include="Views\Main\HelpSearchResources.cshtml" />
     <Content Include="Views\Main\SelfResource.cshtml" />
-    <Content Include="Views\Main\DayDateDiary1.cshtml" />
+    <Content Include="Views\Main\DayDateDiaryBytesInDiary1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

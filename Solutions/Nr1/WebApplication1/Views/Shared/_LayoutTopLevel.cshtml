@@ -49,6 +49,10 @@
       color: blue !important;
     }
 
+    #divAddNewWorkDay > a:link, #divAddNewWorkDay > a:visited, #divAddNewWorkDay > a:hover, #divAddNewWorkDay > a:active {
+      color: blue !important;
+    }
+
     #ulLinksSelfResource > a:link, #ulLinksSelfResource > a:visited, #ulLinksSelfResource > a:hover, #ulLinksSelfResource > a:active {
       color: blue !important;
     }
@@ -664,7 +668,6 @@
     }
 
     window.jonas.setTitleTextInBrowser = function (page, menu, sub1, sub2, tab, suffix) {
-      console.log(suffix);
       var titleTextInBrowser;
 
       suffix = suffix.replace(/##/g, "\\"); //Modifier g replaces all occurencies of ##, otherwise only one occurence will be replaced.

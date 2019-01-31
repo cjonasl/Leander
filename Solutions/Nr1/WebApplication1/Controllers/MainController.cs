@@ -145,6 +145,9 @@ namespace WebApplication1.Controllers
 
         public ActionResult NewLocation(Location location)
         {
+            string errorMessage;
+            bool todaysDayIsInFile;
+
             try
             {
                 string locationStr = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
@@ -157,8 +160,11 @@ namespace WebApplication1.Controllers
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                         return View("AddEditKeyWords", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AddEditKeyWords.cshtml"));
                     case "Page1Menu2Sub1Sub1Tab1":
-                        ViewBag.DiaryFolder = @"C:\git_cjonasl\Leander\Work\Employer";
-                        return View("DayDateDiary1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DayDateDiary1.cshtml"));
+                        ViewBag.DiaryFolder = "C:##git_cjonasl##Leander##Work##Employer";
+                        ViewBag.ListWithDayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.ReturnListWithDayDateDiaryBytesInDiary(@"C:\git_cjonasl\Leander\Work\Employer", out todaysDayIsInFile, out errorMessage);
+                        ViewBag.TodaysDayIsInFile = todaysDayIsInFile;
+                        ViewBag.ErrorMessage = errorMessage;
+                        return View("DayDateDiaryBytesInDiary1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DayDateDiaryBytesInDiary1.cshtml"));
                     case "Page2Menu1Sub1Sub1Tab1":
                         return View("InfoThumbUp", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##InfoThumbUp.cshtml"));
                     default:
@@ -415,7 +421,7 @@ namespace WebApplication1.Controllers
         public JsonResult SaveResource(Resource resource)
         {
             string errorMessage;
-            Resource newResource = null;
+            Resource newResource;
 
             if (resource.Id == 0)
                 newResource = ResourceUtility.AddResource(resource, out errorMessage);
@@ -469,21 +475,21 @@ namespace WebApplication1.Controllers
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
          
-        public JsonResult SaveFileText(WidthHeightTextData widthHeightTextData)
+        public JsonResult SaveFileText(SaveFileTextData saveFileTextData)
         {
             int id;
             string errorMessage = null;
 
             try
             {
-                if (int.TryParse(widthHeightTextData.Str, out id))
-                    ResourceUtility.UpdateFileTextAndTextareaDimensionForHtmlResource(widthHeightTextData, out errorMessage);
+                if (int.TryParse(saveFileTextData.Str, out id))
+                    ResourceUtility.UpdateFileTextAndTextareaDimensionForHtmlResource(saveFileTextData, out errorMessage);
                 else
                 {
-                    if (!System.IO.File.Exists(widthHeightTextData.Str))
-                        errorMessage = string.Format("ERROR!! The file {0} does not exist!", widthHeightTextData.Str);
+                    if (!System.IO.File.Exists(saveFileTextData.Str))
+                        errorMessage = string.Format("ERROR!! The file {0} does not exist!", saveFileTextData.Str);
                     else
-                        Utility.CreateNewFile(widthHeightTextData.Str, widthHeightTextData.Text);
+                        Utility.CreateNewFile(saveFileTextData.Str, saveFileTextData.Text);
                 }
             }
             catch (Exception e)
@@ -533,9 +539,17 @@ namespace WebApplication1.Controllers
                 return false;
         }
 
-        public ViewResult Page1Menu2Sub1Sub1Tab1()
+        public JsonResult AddNewWorkDay(string diaryFolder)
         {
-            return View();
+            string errorMessage;
+            DayDateDiaryBytesInDiary dayDateDiaryBytesInDiary;
+
+            dayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.AddNewWorkDay(diaryFolder, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(dayDateDiaryBytesInDiary, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
     }
 }

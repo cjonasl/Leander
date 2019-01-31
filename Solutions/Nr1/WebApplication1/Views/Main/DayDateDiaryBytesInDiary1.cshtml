@@ -1,0 +1,92 @@
+﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
+
+<style>
+  #tableDayDateDiaryBytesInDiary {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+    #tableDayDateDiaryBytesInDiary td, #tableDayDateDiaryBytesInDiary th {
+      border: 1px solid #ddd !important;
+      padding: 8px !important;
+    }
+
+    #tableDayDateDiaryBytesInDiary tr:nth-child(even) {
+      background-color: #f2f2f2 !important;
+    }
+
+    #tableDayDateDiaryBytesInDiary tr:nth-child(odd) {
+      background-color: #ffffcc !important;
+    }
+
+    #tableDayDateDiaryBytesInDiary th {
+      padding-top: 12px !important;
+      padding-bottom: 12px !important;
+      text-align: left !important;
+      background-color: #4CAF50 !important;
+      color: white !important;
+    }
+</style>
+
+<div style="margin: 20px !important;">
+  @if (!ViewBag.TodaysDayIsInFile && (ViewBag.ListWithDayDateDiaryBytesInDiary != null))
+  {
+    <div id="divAddNewWorkDay" style="margin-left: 1px;"><a href="javascript: window.jonas.addNewWorkDay('@ViewBag.DiaryFolder')">Add new day</a></div>
+  }
+
+  @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+  {
+    <div style="font-family: Arial !important; color: red !important; margin-left: 1px !important; margin-top: 10px !important; margin-bottom: 10px !important;">@ViewBag.ErrorMessage</div>
+  }
+
+  @if (ViewBag.ListWithDayDateDiaryBytesInDiary != null)
+  {
+    string fileNameFullPath, idBytesInDiary;
+
+    <table id="tableDayDateDiaryBytesInDiary" style="margin-top: 10px;">
+      @{
+          string title = "The folder is: " + ViewBag.DiaryFolder;
+       }
+      <tr id="headerRowTableDayDateDiaryBytesInDiary">
+        <th title="Dag">Dag</th>
+        <th title="Datum">Datum</th>
+        <th title="@title">Dagbok</th>
+        <th title="Bytes i dagboksfilen">Bytes</th>
+      </tr>
+
+      @foreach (WebApplication1.Models.DayDateDiaryBytesInDiary dayDateDiaryBytesInDiary in (List<WebApplication1.Models.DayDateDiaryBytesInDiary>)ViewBag.ListWithDayDateDiaryBytesInDiary)
+      {
+
+        idBytesInDiary = "tdBytesInDiary" + dayDateDiaryBytesInDiary.Day.ToString();
+        fileNameFullPath = ViewBag.DiaryFolder + "##" + dayDateDiaryBytesInDiary.Diary;
+
+      <tr>
+        <td>@dayDateDiaryBytesInDiary.Day</td>
+        <td>@dayDateDiaryBytesInDiary.Date</td>
+
+        @if (dayDateDiaryBytesInDiary.BytesInDiary > 0)
+        {
+          <td><a href="javascript: window.jonas.openModalToEditDiaryDay('@fileNameFullPath', '@idBytesInDiary')">@dayDateDiaryBytesInDiary.Diary</a></td>
+        }
+        else
+        {
+            <td>@dayDateDiaryBytesInDiary</td>
+        }
+
+        <td id="@idBytesInDiary">@dayDateDiaryBytesInDiary.BytesInDiary</td>
+      </tr>
+      } 
+    </table>
+  }
+</div>
+
+<script>
+  $(document).ready(function () {
+    window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.setTabNames('@Model.TabNames[0]', '@Model.TabNames[1]', '@Model.TabNames[2]', '@Model.TabNames[3]', '@Model.TabNames[4]', '@Model.TabNames[5]', '@Model.TabNames[6]', '@Model.TabNames[7]', '@Model.TabNames[8]', '@Model.TabNames[9]');
+    window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
+    window.jonas.setTitleTextInBrowser(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, '@Model.CshtmlFile');
+    window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
+  });
+</script>

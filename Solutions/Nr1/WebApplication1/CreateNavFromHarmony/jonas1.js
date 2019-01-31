@@ -36,6 +36,8 @@ window.jonas.htmlFileNameFullPath = "";
 window.jonas.eventHandlerTextareaRenderOfHtmlResource = 0;
 window.jonas.eventHandlerTextareaEditArbitraryTextFile = 0;
 window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile = "";
+window.jonas.idBytesInDiary = "";
+window.jonas.saveFileTextFlag = 0;
 
 
 window.jonas.resetAfterSaveOrCancelOfTextarea = function (btnSave, btnCancel, textarea, eventHandler) {
@@ -222,7 +224,7 @@ window.jonas.saveIframeDimension = function () {
 };
 
 window.jonas.textareaSave = function (id, currentFileName, btnSave, btnCancel, iframe, textarea, eventHandler) {
-    var str, width, height, widthHeightTextData;
+    var str, width, height, saveFileTextData;
 
     if (id)
         str = window.jonas.currentResource.toString();
@@ -238,7 +240,7 @@ window.jonas.textareaSave = function (id, currentFileName, btnSave, btnCancel, i
         height = 0;
     }
 
-    widthHeightTextData = {
+    saveFileTextData = {
         str: str,
         width: width,
         height: height,
@@ -247,7 +249,7 @@ window.jonas.textareaSave = function (id, currentFileName, btnSave, btnCancel, i
 
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/SaveFileText",
-        data: widthHeightTextData,
+        data: saveFileTextData,
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
@@ -328,4 +330,39 @@ window.jonas.editTextFile = function(fileNameFullPath) {
             }
         }
     });
+};
+
+window.jonas.addNewWorkDay = function (diaryFolder) {
+    diaryFolder = diaryFolder.replace(/##/g, "\\");
+
+    var str;
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/AddNewWorkDay",
+        data: { diaryFolder: diaryFolder },
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
+            }
+            else { //Success, an object of type DayDateDiaryBytesInDiary expected back from server
+                str = "<a href=\"javascript: window.jonas.openModalToEditDiaryDay('AAAAA', 'BBBBB')\">" + data.Diary + "</a>";
+                str = str.replace("AAAAA", diaryFolder + "\\" + data.Diary);
+                str = str.replace("BBBBB", "tdBytesInDiary" + data.Day.toString());
+                $("#headerRowTableDayDateDiaryBytesInDiary").after("<tr><td>" + data.Day + "</td><td>" + data.Date + "</td><td>" + str + "</td><td>" + data.BytesInDiary + "</td></tr>");
+                $("#divAddNewWorkDay").hide();
+
+                if (data.WarningMessage)
+                    alert(data.WarningMessage);
+            }
+        }
+    });
+};
+
+window.jonas.openModalToEditDiaryDay = function (fileNameFullPath, idBytesInDiary) {
+    fileNameFullPath = fileNameFullPath.replace(/##/g, "\\");
+    window.jonas.idBytesInDiary = idBytesInDiary;
+    window.jonas.saveFileTextFlag = 1;
+
 };

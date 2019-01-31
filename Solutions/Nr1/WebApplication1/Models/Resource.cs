@@ -584,7 +584,7 @@ namespace WebApplication1.Models
             return fileText;
         }
 
-        public static void UpdateFileTextAndTextareaDimensionForHtmlResource(WidthHeightTextData widthHeightTextData, out string errorMessage)
+        public static void UpdateFileTextAndTextareaDimensionForHtmlResource(SaveFileTextData saveFileTextData, out string errorMessage)
         {
             Resource resource;
             string textExceptFirstRow, firstRow, firstRowTemplate;
@@ -592,7 +592,7 @@ namespace WebApplication1.Models
 
             try
             {
-                resource = GetResource(int.Parse(widthHeightTextData.Str), out errorMessage);
+                resource = GetResource(int.Parse(saveFileTextData.Str), out errorMessage);
 
                 if (errorMessage != null)
                     return;
@@ -603,11 +603,11 @@ namespace WebApplication1.Models
                     return;
                 }
 
-                textExceptFirstRow = Utility.ReturnTextExceptFirstRow(widthHeightTextData.Text.Replace("\n", "\r\n"), out firstRow);
+                textExceptFirstRow = Utility.ReturnTextExceptFirstRow(saveFileTextData.Text.Replace("\n", "\r\n"), out firstRow);
 
                 if (Utility.CheckFirstRowInHtmlResource(firstRow, false, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
                 {
-                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", widthHeightTextData.Width, widthHeightTextData.Height)) + textExceptFirstRow);
+                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", saveFileTextData.Width, saveFileTextData.Height)) + textExceptFirstRow);
                 }
                 else //Error
                 {
