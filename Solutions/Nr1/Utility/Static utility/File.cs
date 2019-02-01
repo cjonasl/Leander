@@ -273,5 +273,17 @@ namespace Leander.Nr1
 
             return numberOfBytesInFile;
         }
+
+        public static void DeleteAllFilesInDirectory(string directory)
+        {
+            string[] files;
+
+            files = Directory.GetFiles(directory);
+
+            foreach(string file in files)
+            {
+                File.Delete(file);
+            }
+        }
     }
 }

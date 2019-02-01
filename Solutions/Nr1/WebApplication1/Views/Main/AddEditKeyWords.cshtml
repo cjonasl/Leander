@@ -30,6 +30,11 @@
 </style>
 
 <div style="margin: 20px !important;">
+
+  @{
+      string idKeyWordNote;
+  }
+
   <table id="tableKeyWords" style="margin-bottom: 20px;">
     <tr>
       <th>Id</th>
@@ -39,13 +44,15 @@
       <th></th>
     </tr>
 
-    @foreach (WebApplication1.Models.KeyWord keyWord in (List <WebApplication1.Models.KeyWord>)ViewBag.ListWithKeyWords)
+    @foreach (WebApplication1.Models.KeyWord keyWord in (List<WebApplication1.Models.KeyWord>)ViewBag.ListWithKeyWords)
     {
+      idKeyWordNote = string.Format("keyWordNote{0}", keyWord.Id.ToString());
+
       <tr>
         <td>@keyWord.Id</td>
         <td>@keyWord.Created</td>
         <td>@keyWord.Phrase</td>
-        <td id='@keyWord.IdString'>@keyWord.Note</td>
+        <td id='@idKeyWordNote'>@keyWord.Note</td>
         <td><a href="javascript: window.jonas.openModalToEditKeyWord('@keyWord.Id', '@keyWord.Created', '@keyWord.Phrase')">Edit</a></td>
       </tr>
     }

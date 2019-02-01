@@ -32,6 +32,7 @@ namespace WebApplication1.Models
         public List<string> FileUpdatedDate { get; set; } //A tmp property to store file updated date for the files for a Self resource (not serialized and deserialized)
         public List<string> Href { get; set; } //A tmp property to store href for the links for a Self resource (not serialized and deserialized)
         public List<string> HrefText { get; set; } //A tmp property to store href text for the links for a Self resource (not serialized and deserialized)
+        public List<WebApplication1.Models.Image> ListWithImages { get; set; } //A tmp property to store images data for a Self resource (not serialized and deserialized)
 
         public Resource() { }
 
@@ -132,6 +133,37 @@ namespace WebApplication1.Models
             }
 
             return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New file -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")));
+        }
+
+        public static List<WebApplication1.Models.Image> ProcessImagesForASelfResource(List<string> fileNamesShort, List<string> directoryNames)
+        {
+            int i;
+            string fileNameFullPathFrom, fileNameFullPathTo;
+
+            List<WebApplication1.Models.Image> list;
+
+            Utility.DeleteAllFilesInDirectory(@"C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\tmp");
+
+            if (fileNamesShort == null)
+                return null;
+
+            list = new List<Image>();
+
+            for(i = 0; i < fileNamesShort.Count; i++)
+            {
+                if (fileNamesShort[i].Trim().ToLower().EndsWith(".png") || fileNamesShort[i].Trim().ToLower().EndsWith(".jpg"))
+                {
+                    fileNameFullPathFrom = string.Format("{0}\\{1}", directoryNames[i].Substring(8), fileNamesShort[i]);
+                    fileNameFullPathTo = string.Format("{0}{1}", "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\tmp\\", fileNamesShort[i]);
+                    File.Copy(fileNameFullPathFrom, fileNameFullPathTo);
+                    list.Add(new WebApplication1.Models.Image(string.Format("http://www.nr1web1.com/tmp/{0}", fileNamesShort[i]), fileNamesShort[i]));
+                }
+            }
+
+            if (list.Count == 0)
+                return null;
+            else
+                return list;
         }
 
         public static Resource GetResource(int id, out string errorMessage)
@@ -289,6 +321,8 @@ namespace WebApplication1.Models
                         resourceDeserialized.FileUpdatedDate.Add((string)fileUpdatedDate[i]);
                     }          
                 }
+
+                resourceDeserialized.ListWithImages = ProcessImagesForASelfResource(resourceDeserialized.FileNamesShort, resourceDeserialized.DirectoryNames);
 
                 if (!string.IsNullOrEmpty(resourceDeserialized.Links))
                 {

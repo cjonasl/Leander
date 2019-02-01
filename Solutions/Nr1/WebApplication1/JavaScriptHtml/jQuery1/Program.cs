@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Leander.Nr1
+namespace jQuery1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Utility.DeleteAllFilesInDirectory(@"C:\AbcJonas");
-            //R8.Execute();
         }
     }
 }

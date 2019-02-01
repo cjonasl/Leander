@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [250,75] textarea dimension: [986px,642px] -->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test JavaScript</title>
+</head>
+<body>
+  <button onclick="fkn1()">Click me</button>
+
+  <script>
+    fkn1 = function() {
+      var p1 = { aaa: 6 };
+      var p2 = Object.create(p1);
+      p2.bbb = 7;
+      var p3 = Object.create(p2);
+      p3.ccc = 9;
+
+      alert("Object.prototype.constructor=" + Object.prototype.constructor);
+      alert("typeof Object.prototype.constructor=" + (typeof Object.prototype.constructor));
+      alert("p1.constructor=" + p1.constructor);
+      alert("typeof p1.constructor=" + (typeof p1.constructor));
+      alert(p1.isPrototypeOf(p2));
+      alert(p3.constructor === Object.prototype.constructor);
+      alert(p3 instanceof Object.prototype.constructor);   
+    }
+  </script>
+</body>
+</html>

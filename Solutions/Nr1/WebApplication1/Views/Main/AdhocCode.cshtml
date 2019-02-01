@@ -1,0 +1,38 @@
+﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
+
+
+<div style="background-color: #99ff99 !important; font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; border: 1px solid black; margin: 15px;">
+
+  <table id="tableAdhocCode" style="margin-top: 8px; margin-left: 10px !important;">
+    <tr>
+      <td style="text-align: right !important;" title="Title">Title&nbsp;&nbsp;</td>
+      <td><input id="inputAdhocCodeTitle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 950px !important; margin-top: 7px !important;" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: right !important;" title="Note">Note&nbsp;&nbsp;</td>
+      <td><input id="inputAdhocCodeNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 950px !important; margin-top: 7px !important;" /></td>
+    </tr>
+  </table>
+
+  <div style="margin-top: 10px !important; margin-bottom: 10px !important; margin-left: 10px !important;">Key words:</div>
+  <div id="divAdhocCodeKeyWords" style="font-weight: normal !important; font-size: medium !important; margin-left: 12px !important;"></div>
+
+  <div style="margin-top: 10px !important; margin-bottom: 10px !important; margin-left: 10px !important;">Templates:</div>
+  <div id="divAdhocCodeTemplates" style="font-weight: normal !important; font-size: medium !important; margin-left: 12px !important;"></div>
+
+  <textarea id="textareaAdhocCode" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width: 1000px !important; height: 500px !important; margin-top: 20px !important; margin-left: 10px !important; font-family: 'Courier New' !important; font-size: medium !important; font-weight: bold !important; white-space: nowrap !important;"></textarea><br />
+
+  <button id="btnAdhocCodeRunAdhoc" style="margin-top: 5px !important; font-size: smaller !important; font-weight: bolder; margin-left: 10px !important; margin-bottom: 50px;" onclick="window.jonas.RunAdhoc()">Run</button>
+</div>
+
+<script>
+  $(document).ready(function () {
+    window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.setTabNames('@Model.TabNames[0]', '@Model.TabNames[1]', '@Model.TabNames[2]', '@Model.TabNames[3]', '@Model.TabNames[4]', '@Model.TabNames[5]', '@Model.TabNames[6]', '@Model.TabNames[7]', '@Model.TabNames[8]', '@Model.TabNames[9]');
+    window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
+    window.jonas.setTitleTextInBrowser(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, '@Model.CshtmlFile');
+    window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
+    window.jonas.FillDivAdhocCodeKeyWords();
+    window.jonas.FillDivAdhocCodeTemplates();
+  });
+</script>

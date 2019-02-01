@@ -1,1 +1,70 @@
-﻿368px 108px Jag heter Jonas Leander
+﻿997px 727px /*
+Id
+Name
+KeyWords (key word ids comma separated)
+TemplateFile (full path)
+ResourceFolder
+CurrentResourceFolder (1,2,3,... to make folders "ResourceFolder\Resource1", "ResourceFolder\Resource1",...
+MaxNumberOfFilesInFolder
+CsProj (the csproj where to insert the resource)
+Href (not for C#)
+*/
+1
+C#
+6,1
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab2.txt
+C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1
+1
+25
+C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\ConsoleApp1.csproj
+null
+----- New adhoc -----
+2
+html
+6,10
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab4.txt
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Html
+1
+25
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Html\Html.csproj
+JavaScriptHtml/Html
+----- New adhoc -----
+3
+js
+6,2
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab3.txt
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\PureJavaScript
+1
+25
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\PureJavaScript\PureJavaScript.csproj
+JavaScriptHtml/PureJavaScript
+----- New adhoc -----
+4
+jQuery1
+6,14
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab5.txt
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\jQuery1
+1
+25
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\jQuery1\jQuery1.csproj
+JavaScriptHtml/jQuery1
+----- New adhoc -----
+5
+underscore1
+6,15
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab6.txt
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Underscore1
+1
+25
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1\Underscore1.csproj
+JavaScriptHtml/Underscore1
+----- New adhoc -----
+6
+backbone1
+6,16
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab7.txt
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1
+1
+25
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1\Backbone1.csproj
+JavaScriptHtml/Backbone1

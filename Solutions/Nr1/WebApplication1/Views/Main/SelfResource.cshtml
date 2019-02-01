@@ -35,8 +35,8 @@
 
   @if (!string.IsNullOrEmpty(Model.Note))
   {
-     <h2 style="font-family: Arial !important; font-weight: bold !important; display: inline-block !important;">&nbsp;&nbsp;&nbsp;Note:</h2>
-     <span title="@Model.Note" style="font-family: 'Times New Roman' !important; font-weight: normal !important; font-size: medium !important; margin-left: 3px !important;">@Model.Note</span>
+    <h2 style="font-family: Arial !important; font-weight: bold !important; display: inline-block !important;">&nbsp;&nbsp;&nbsp;Note:</h2>
+    <span title="@Model.Note" style="font-family: 'Times New Roman' !important; font-weight: normal !important; font-size: medium !important; margin-left: 3px !important;">@Model.Note</span>
   }
 
   @if (Model.FileNamesShort != null)
@@ -71,16 +71,34 @@
 
   @if (Model.Href != null)
   {
-      <div style="margin-top: 30px;">
-        <h2 style="font-family: Arial !important; font-weight: bold !important;">Links</h2>
+    <div style="margin-top: 30px;">
+      <h2 style="font-family: Arial !important; font-weight: bold !important;">Links:</h2>
 
-        <ul id="ulLinksSelfResource">
-          @for(int i = 0; i < Model.Href.Count; i++)
-          {
-              <li><a href="@Model.Href[i]" target="_blank">@Model.HrefText[i]</a></li>
-          }
-        </ul>
-      </div>
+      <ul id="ulLinksSelfResource">
+        @for (int i = 0; i < Model.Href.Count; i++)
+        {
+          <li><a href="@Model.Href[i]" target="_blank">@Model.HrefText[i]</a></li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (Model.ListWithImages != null)
+  {
+    <div style="margin-top: 30px;">
+      <h2 style="font-family: Arial !important; font-weight: bold !important;">Images:</h2>
+
+      @for (int i = 0; i < Model.ListWithImages.Count; i++)
+      {
+        if (i > 0)
+        {
+          <hr style="margin-top: 20px !important; margin-bottom: 20px !important;" />
+        }
+
+        <div style="font-family: Arial !important; font-weight: bold !important; margin-bottom: 10px !important;">@Model.ListWithImages[i].Text</div>
+        <img src="@Model.ListWithImages[i].Src" />
+      }
+    </div>
   }
 </div>
 

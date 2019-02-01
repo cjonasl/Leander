@@ -42,7 +42,11 @@
     }
 
     input[type=checkbox] {
-      transform: scale(1.3) !important;
+      transform: scale(1.15) !important;
+    }
+
+    input[type=radio] {
+      transform: scale(1.15) !important;
     }
 
     #divRenderOfHtmlResource > a:link, #divRenderOfHtmlResource > a:visited, #divRenderOfHtmlResource > a:hover, #divRenderOfHtmlResource > a:active {
@@ -387,48 +391,25 @@
       window.jonas.newLocation(window.jonas.page, window.jonas.menu, window.jonas.sub1, window.jonas.sub2, tab, true);
     }
 
-    window.jonas.loadResourceInModalToEdit = function (data) {
-      var total, n, a, divKeyWords, i, j, index, str, resourcesType, arrayListWithKeyWordIdsAsString, checked;
-      var numberOfCheckBoxesInOneRow;
+    window.jonas.addCheckboxes = function (divCheckboxes, numberOfCheckboxesInOneRow, prefix, arrayWithCheckboxData) {
+      var n, a, i, j, index, total, str;
 
-      numberOfCheckBoxesInOneRow = 10;
-
-      total = data.ArrayWithKeyWordShort.length;
+      total = arrayWithCheckboxData.length;
       n = total;
-      window.jonas.numberOfKeyWords = total;
 
-      while ((n % numberOfCheckBoxesInOneRow) != 0)
+      while ((n % numberOfCheckboxesInOneRow) != 0)
         n++;
 
-      a = n / numberOfCheckBoxesInOneRow;
-
-      divKeyWords = $("#divKeyWords");
-
-      arrayListWithKeyWordIdsAsString = data.Resource.KeyWords.split(",");
+      a = n / numberOfCheckboxesInOneRow;
 
       for (i = 0; i < a; i++) {
-        index = numberOfCheckBoxesInOneRow * i;
+        index = numberOfCheckboxesInOneRow * i;
 
-        if (arrayListWithKeyWordIdsAsString.indexOf(data.ArrayWithKeyWordShort[index].Id.toString()) >= 0) {
-          checked = " checked = 'checked'";
-        }
-        else {
-          checked = "";
-        }
+        str = "<div style='font-size: medium !important;'><input id='" + prefix + arrayWithCheckboxData[index].Id + "' type='checkbox' style='margin-bottom: 8px;' />&nbsp;" + arrayWithCheckboxData[index].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
 
-        str = "<div style='font-size: medium !important;'><input id='keyWord" + data.ArrayWithKeyWordShort[index].Id + "' type='checkbox' style='margin-bottom: 5px;'" + checked + " />&nbsp;" + data.ArrayWithKeyWordShort[index].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
-
-        for (j = 1; j <= (numberOfCheckBoxesInOneRow - 1); j++) {
+        for (j = 1; j <= (numberOfCheckboxesInOneRow - 1); j++) {
           if ((index + j) < total) {
-
-            if (arrayListWithKeyWordIdsAsString.indexOf(data.ArrayWithKeyWordShort[index + j].Id.toString()) >= 0) {
-              checked = " checked = 'checked'";
-            }
-            else {
-              checked = "";
-            }
-
-            str += "<input id='keyWord" + data.ArrayWithKeyWordShort[index + j].Id + "' type='checkbox' style='margin-bottom: 5px;'" + checked + " />&nbsp;" + data.ArrayWithKeyWordShort[index + j].Phrase + "&nbsp;&nbsp;&nbsp;&nbsp;";
+            str += "<input id='" + prefix + arrayWithCheckboxData[index + j].Id + "' type='checkbox' style='margin-bottom: 8px;' />&nbsp;" + arrayWithCheckboxData[index + j].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
           }
           else
             break;
@@ -436,8 +417,64 @@
 
         str += "</div>"
 
-        divKeyWords.append(str);
+        divCheckboxes.append(str);
       }
+    }
+
+    window.jonas.addRadiobuttons = function (divRadiobuttons, numberOfRadiobuttonsInOneRow, prefix, name, eventHandler, arrayWithRadiobuttonData) {
+      var n, a, i, j, index, total, str;
+
+      total = arrayWithRadiobuttonData.length;
+      n = total;
+
+      while ((n % numberOfRadiobuttonsInOneRow) != 0)
+        n++;
+
+      a = n / numberOfRadiobuttonsInOneRow;
+
+      for (i = 0; i < a; i++) {
+        index = numberOfRadiobuttonsInOneRow * i;
+
+        str = "<div style='font-size: medium !important;'><input id='" + prefix + arrayWithRadiobuttonData[index].Id + "' type='radio' name='" + name + "' style='margin-bottom: 8px;' " + eventHandler + " />&nbsp;" + arrayWithRadiobuttonData[index].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
+
+        for (j = 1; j <= (numberOfRadiobuttonsInOneRow - 1); j++) {
+          if ((index + j) < total) {
+            str += "<input id='" + prefix + arrayWithRadiobuttonData[index + j].Id + "' type='radio' name='" + name + "' style='margin-bottom: 8px;' " + eventHandler + " />&nbsp;" + arrayWithRadiobuttonData[index + j].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
+          }
+          else
+            break;
+        }
+
+        str += "</div>"
+
+        divRadiobuttons.append(str);
+      }
+    }
+
+    window.jonas.updateCheckboxesCheckedStatus = function (divCheckboxes, lengthPrefix, arrayListWithKeyWordIds) {
+      var v, i, id, index, checked;
+
+      v = $("input[type='checkbox']", divCheckboxes);
+
+      for (i = 0; i < v.length; i++) {
+        id = $(v[i]).attr("id").substring(lengthPrefix);
+        checked = $(v[i]).prop("checked");
+        index = arrayListWithKeyWordIds.indexOf(id);
+
+        if (checked && (index === -1))
+          $(v[i]).prop("checked", false);
+        else if (!checked && (index >= 0))
+          $(v[i]).prop("checked", true);
+      }
+    }
+
+    window.jonas.loadAndOpenResourceModal = function (data) {
+      var str, resourcesType;
+
+      window.jonas.addCheckboxes($("#divKeyWords"), 10, "keyWord", data.ArrayWithKeyWords);
+      window.jonas.updateCheckboxesCheckedStatus($("#divKeyWords"), 7, data.Resource.KeyWords.split(","));
+
+      window.jonas.numberOfKeyWords = data.ArrayWithKeyWords.length;
 
       if (data.Resource.ResourcesType === 0)
         resourcesType = "ThumbUpLocation";
@@ -656,7 +693,7 @@
             window.open(url, "_self");
           }
           else if ((cmd === "nr") || (cmd === "er")) {
-            window.jonas.loadResourceInModalToEdit(data);
+            window.jonas.loadAndOpenResourceModal(data);
           }
           else if (cmd === "r") {
             alert(data); //Show message of the result of regenerate file Resource.txt or check file Resource.txt
@@ -915,7 +952,6 @@
 
       keyWord = {
         id: id,
-        idString: null,
         created: created,
         phrase: newPhrase,
         note: newNote
@@ -932,7 +968,7 @@
             element += "<td>" + data.Id.toString() + "</td>";
             element += ("<td>" + data.Created + "</td>");
             element += ("<td>" + data.Phrase + "</td>");
-            element += ("<td id='" + data.IdString + "'>" + data.Note + "</td>");
+            element += ("<td id='keyWordNote" + data.Id.toString() + "'>" + data.Note + "</td>");
 
             tmp = "<td><a href=\"javascript: window.jonas.openModalToEditKeyWord('AAA', 'BBB', 'CCC')\">Edit</a></td></tr>";
             tmp = tmp.replace("AAA", data.Id.toString());
@@ -949,7 +985,7 @@
           }
           else if ((typeof data === "object") && id) { //Update was successful
             alert("Update was successful");
-            $('#' + data.IdString).text(data.Note);
+            $('#keyWordNote' + data.Id.toString()).text(data.Note);
           }
           else {
             alert(data); //Error occured
@@ -981,7 +1017,7 @@
       $("#inputKeyWordId").val(id);
       $("#inputKeyWordCreated").val(created);
       $("#inputKeyWordPhrase").val(phrase);
-      note = $("#keyWord" + id).text();
+      note = $("#keyWordNote" + id).text();
       $("#inputKeyWordNote").val(note);
       $("#inputKeyWordPhrase").prop("readonly", true);
       window.jonas.keyWordPhrase = phrase;

@@ -365,4 +365,58 @@ window.jonas.openModalToEditDiaryDay = function (fileNameFullPath, idBytesInDiar
     window.jonas.idBytesInDiary = idBytesInDiary;
     window.jonas.saveFileTextFlag = 1;
 
+}; 
+
+window.jonas.FillDivAdhocCodeKeyWords = function () {
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/GetKeyWords",
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "get",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
+            }
+            else {
+                window.jonas.addCheckboxes($("#divAdhocCodeKeyWords"), 10, "adhocCodeKeyWord", data);
+            }
+        }
+    });
+};
+
+window.jonas.FillDivAdhocCodeTemplates = function () {
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/GetAdhocTemplates",
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "get",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
+            }
+            else {
+                window.jonas.addRadiobuttons($("#divAdhocCodeTemplates"), 10, "adhocCodeTemplate", "adhocCode", "onchange=window.jonas.getNewAdhocTemplate(this.id)", data);
+            }
+        }
+    });
+};
+
+window.jonas.getNewAdhocTemplate = function (id) {
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/GetNewAdhocTemplate",
+        data: { id: window.Number(id.substring(17)) },
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "get",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
+            }
+            else {
+                console.log(data);
+                window.jonas.updateCheckboxesCheckedStatus($("#divAdhocCodeKeyWords"), 16, data.KeyWords.split(","));
+                $("#textareaAdhocCode").val(data.Text);
+            }
+        }
+    });
 };

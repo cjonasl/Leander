@@ -121,13 +121,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdhocTemplate.cs" />
+    <Compile Include="Models\CheckboxData.cs" />
     <Compile Include="Models\Command.cs" />
     <Compile Include="Models\DataDefaultLocation.cs" />
     <Compile Include="Models\DayDateDiaryBytesInDiary.cs" />
     <Compile Include="Models\DocumentReadyDataForNonDefaultLocation.cs" />
     <Compile Include="Models\HtmlResourceFileTextAndTextareaDimension.cs" />
     <Compile Include="Models\HtmlResourceIframeDimensionData.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\KeyWord.cs" />
+    <Compile Include="Models\KeyWordsText.cs" />
     <Compile Include="Models\LoadResourceData.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\ResourcePresentationInSearch.cs" />
@@ -163,6 +167,7 @@
     <Content Include="Views\Main\HelpSearchResources.cshtml" />
     <Content Include="Views\Main\SelfResource.cshtml" />
     <Content Include="Views\Main\DayDateDiaryBytesInDiary1.cshtml" />
+    <Content Include="Views\Main\AdhocCode.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,6 +181,7 @@
     <Folder Include="Tab\" />
     <Folder Include="Text\" />
     <Folder Include="Title\" />
+    <Folder Include="tmp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility\Utility.csproj">

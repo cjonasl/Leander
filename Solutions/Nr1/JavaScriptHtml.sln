@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PureJavaScript", "WebApplication1\JavaScriptHtml\PureJavaScript\PureJavaScript.csproj", "{2CB1A67B-4267-4846-9D1D-055A0C519EFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Html", "WebApplication1\JavaScriptHtml\Html\Html.csproj", "{21DF9621-707C-4E3E-B7A8-2560A8C02BF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jQuery1", "WebApplication1\JavaScriptHtml\jQuery1\jQuery1.csproj", "{3EAA575B-1273-4704-9BE9-1F394B7CC204}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone1", "WebApplication1\JavaScriptHtml\Backbone1\Backbone1.csproj", "{F0E4DEC6-D664-4937-9DA9-36381B64E4D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Underscore1", "Underscore1\Underscore1.csproj", "{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CB1A67B-4267-4846-9D1D-055A0C519EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB1A67B-4267-4846-9D1D-055A0C519EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB1A67B-4267-4846-9D1D-055A0C519EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB1A67B-4267-4846-9D1D-055A0C519EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DF9621-707C-4E3E-B7A8-2560A8C02BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DF9621-707C-4E3E-B7A8-2560A8C02BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DF9621-707C-4E3E-B7A8-2560A8C02BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DF9621-707C-4E3E-B7A8-2560A8C02BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EAA575B-1273-4704-9BE9-1F394B7CC204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAA575B-1273-4704-9BE9-1F394B7CC204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAA575B-1273-4704-9BE9-1F394B7CC204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAA575B-1273-4704-9BE9-1F394B7CC204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0E4DEC6-D664-4937-9DA9-36381B64E4D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E4DEC6-D664-4937-9DA9-36381B64E4D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E4DEC6-D664-4937-9DA9-36381B64E4D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E4DEC6-D664-4937-9DA9-36381B64E4D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74167ECE-8309-4A07-BF5E-88070EB1DE4F}
+	EndGlobalSection
+EndGlobal

@@ -10,7 +10,6 @@ namespace WebApplication1.Models
     public class KeyWord
     {
         public int? Id { get; set; }
-        public string IdString { get; set; } //Needed when update a key word (to set id on the td)
         public string Created { get; set; } //In format: yyyy-MM-dd HH:mm:ss
         public string Phrase { get; set; }    
         public string Note { get; set; }
@@ -20,7 +19,6 @@ namespace WebApplication1.Models
         public KeyWord(int id, string created, string phrase, string note)
         {
             this.Id = id;
-            this.IdString = string.Format("keyWord{0}", id.ToString());
             this.Created = created;
             this.Phrase = phrase;
             this.Note = note;
@@ -185,17 +183,30 @@ namespace WebApplication1.Models
             return newKeyWord;
         }
 
-        public static KeyWordShort[] ReturnArrayWithKeyWordShort()
+        public static IdText[] ReturnArrayWithKeyWords(out string errorMessage)
         {
-            List<KeyWord> listWithKeyWords = GetKeyWords().OrderBy(x => x.Phrase).ToList();
-            KeyWordShort[] arrayWithKeyWordShort = new KeyWordShort[listWithKeyWords.Count];
+            List<KeyWord> listWithKeyWords;
+            IdText[] idText;
 
-            for(int i = 0; i < listWithKeyWords.Count; i++)
+            errorMessage = null;
+
+            try
             {
-                arrayWithKeyWordShort[i] = new KeyWordShort(listWithKeyWords[i].Id.Value, listWithKeyWords[i].Phrase);
+                listWithKeyWords = GetKeyWords().OrderBy(x => x.Phrase).ToList();
+                idText = new IdText[listWithKeyWords.Count];
+
+                for (int i = 0; i < listWithKeyWords.Count; i++)
+                {
+                    idText[i] = new IdText(listWithKeyWords[i].Id.Value, listWithKeyWords[i].Phrase);
+                }
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method ReturnArrayWithKeyWords! e.Message:\r\n{0}", e.Message);
+                return null;
             }
 
-            return arrayWithKeyWordShort;
+            return idText;
         }
 
         public static string ReturnCommaSeparatedListWithKeyWords(string commaSeparatedListWithKeyWordId)

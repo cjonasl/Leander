@@ -159,6 +159,9 @@ namespace WebApplication1.Controllers
                     case "Page1Menu0Sub0Sub0Tab2":
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                         return View("AddEditKeyWords", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AddEditKeyWords.cshtml"));
+                    case "Page1Menu0Sub0Sub0Tab3":
+                        ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
+                        return View("AdhocCode", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
                     case "Page1Menu2Sub1Sub1Tab1":
                         ViewBag.DiaryFolder = "C:##git_cjonasl##Leander##Work##Employer";
                         ViewBag.ListWithDayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.ReturnListWithDayDateDiaryBytesInDiary(@"C:\git_cjonasl\Leander\Work\Employer", out todaysDayIsInFile, out errorMessage);
@@ -283,7 +286,10 @@ namespace WebApplication1.Controllers
                 {
                     LoadResourceData loadResourceData = new LoadResourceData();
 
-                    loadResourceData.ArrayWithKeyWordShort = KeyWordUtility.ReturnArrayWithKeyWordShort();
+                    loadResourceData.ArrayWithKeyWords = KeyWordUtility.ReturnArrayWithKeyWords(out errorMessage);
+
+                    if (errorMessage != null)
+                        return Json(errorMessage, JsonRequestBehavior.AllowGet);
 
                     if (command.Cmd == "nr")
                     {
@@ -548,6 +554,45 @@ namespace WebApplication1.Controllers
 
             if (errorMessage == null)
                 return Json(dayDateDiaryBytesInDiary, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetKeyWords()
+        {
+            string errorMessage;
+            IdText[] keyWords;
+
+            keyWords = KeyWordUtility.ReturnArrayWithKeyWords(out errorMessage);
+
+            if (errorMessage == null)
+                return Json(keyWords, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAdhocTemplates()
+        {
+            string errorMessage;
+            IdText[] keyWords;
+
+            keyWords = AdhocTemplateUtility.ReturnArrayWithAdhocTemplates(out errorMessage);
+
+            if (errorMessage == null)
+                return Json(keyWords, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetNewAdhocTemplate(int id)
+        {
+            string errorMessage;
+            KeyWordsText keyWordsText;
+
+            keyWordsText = AdhocTemplateUtility.ReturnKeyWordTextForAdhocTemplate(id, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(keyWordsText, JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
