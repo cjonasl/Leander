@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
+using System.IO;
 using Leander.Nr1;
 
 namespace WebApplication1.Models
@@ -29,7 +30,7 @@ namespace WebApplication1.Models
 
     public static class DayDateDiaryBytesInDiaryUtility
     {
-        private const long _minNumberOfBytesInDiaryFileAccepted = 150;
+        private const long _minNumberOfBytesInDiaryFileAccepted = 250;
 
         private static string ReturnDiaryFileName(int day, DateTime date)
         {
@@ -98,8 +99,11 @@ namespace WebApplication1.Models
                     }
                     else
                     {
-                        if ((DateTime.Now.ToString("yyyy-MM-dd")) == columns[1])
+                        if (GetTodaysDate().ToString("yyyy-MM-dd") == columns[1])
                             todaysDayIsInFile = true;
+
+                        //if ((DateTime.Now.ToString("yyyy-MM-dd")) == columns[1])
+                        //todaysDayIsInFile = true;
                     }
                 }
 
@@ -137,6 +141,9 @@ namespace WebApplication1.Models
                     return string.Format("ERROR!! The following file does not exist as expected: {0}!", fileNameFullPath);
 
                 fileContents = Utility.ReturnFileContents(fileNameFullPath);
+
+                if (string.IsNullOrEmpty(fileContents))
+                    return null;
 
                 rows = fileContents.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 
@@ -254,8 +261,10 @@ namespace WebApplication1.Models
         {
             DateTime dt;
             StringBuilder sb;
+            string str;
             bool dateTodayIsAWeekendDate = false;
             bool foundNonWeekendDateNotRegistered = false;
+            int n;
 
             sb = new StringBuilder("");
 
@@ -271,21 +280,31 @@ namespace WebApplication1.Models
             }
 
             dt = lastDateInFile.AddDays(1.0);
-            sb.Append(string.Format("{0}OBS! These weekdays, i.e. not saturday or sunday, have not been registered as days in the diary:", string.IsNullOrEmpty(sb.ToString()) ? "" : " "));
+            sb.Append(string.Format("{0}OBS! #####REPLACE#####", string.IsNullOrEmpty(sb.ToString()) ? "" : " "));
+
+            n = 0;
 
             while (dt < dateToday)
             {
                 if ((dt.DayOfWeek != DayOfWeek.Saturday) && (dt.DayOfWeek != DayOfWeek.Sunday))
                 {
-                    sb.Append(string.Format("\r\n{0} ({1})", dt.ToString("yyyy-MM-dd"), dt.DayOfWeek.ToString()));
+                    sb.Append(string.Format("\r\n{0} ({1})", dt.ToString("yyyy-MM-dd"), dt.DayOfWeek.ToString().ToLower()));
                     foundNonWeekendDateNotRegistered = true;
+                    n++;
                 }
 
                 dt = dt.AddDays(1.0);
             }
 
+            str = sb.ToString();
+
+            if (n == 1)
+                str = str.Replace("#####REPLACE#####", "This weekday, i.e. not saturday or sunday, has not been registered as a day in the diary:");
+            else if (n > 1)
+                str = str.Replace("#####REPLACE#####", "These weekdays, i.e. not saturday or sunday, have not been registered as days in the diary:");
+
             if (dateTodayIsAWeekendDate || foundNonWeekendDateNotRegistered)
-                return sb.ToString();
+                return str;
             else
                 return null;
         }
@@ -314,7 +333,7 @@ namespace WebApplication1.Models
                     return null;
 
                 tmpDate = DateTime.Now;
-                dateToday = new DateTime(tmpDate.Year, tmpDate.Month, tmpDate.Day);
+                dateToday = GetTodaysDate(); //new DateTime(tmpDate.Year, tmpDate.Month, tmpDate.Day);
 
                 d = 1 + lastDayInFile;
                 dateStr = dateToday.ToString("yyyy-MM-dd");
@@ -353,6 +372,39 @@ namespace WebApplication1.Models
             Utility.CreateNewFile(fileNameFullPathDiaryFile, string.Format("Dag {0}:\r\n{1}", d.ToString(), dateTimeAsLongSwedishString));
             Utility.CreateNewFile(fileNameFullPathDayDateFile, string.Format("{0} {1}\r\n{2}", d.ToString(), dateStr, fileContents));
             return new DayDateDiaryBytesInDiary(d, dateTimeAsLongSwedishString, fileNameShort, Utility.ReturnNumberOfBytesInFile(fileNameFullPathDiaryFile, true), warningMessage);
+        }
+
+        public static BytesInDiaryWarningMessage GetBytesInDiaryWarningMessage(string diaryFileNameFullPath, out string errorMessage)
+        {
+            long bytesInDiary;
+            string warningMessage;
+            FileInfo fi;
+
+            try
+            {
+                errorMessage = null;
+                bytesInDiary = Utility.ReturnNumberOfBytesInFile(diaryFileNameFullPath, true);
+                fi = new FileInfo(diaryFileNameFullPath);
+                warningMessage = ReturnWarningMessage(fi.DirectoryName);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method GetBytesInDiaryWarningMessage! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return new BytesInDiaryWarningMessage(bytesInDiary, warningMessage);
+        }
+
+        /// <summary>
+        /// For test
+        /// </summary>
+        /// <returns></returns>
+        public static DateTime GetTodaysDate()
+        {
+            string str = Utility.ReturnFileContents(@"C:\AAA\abc.txt");
+            string[] v = str.Split(' ');
+            return new DateTime(int.Parse(v[0]), int.Parse(v[1]), int.Parse(v[2]));
         }
     }
 }

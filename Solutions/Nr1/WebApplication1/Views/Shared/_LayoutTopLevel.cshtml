@@ -22,6 +22,33 @@
   <script src="http://www.Nr1Web1.com/CreateNavFromHarmony/jonas1.js"></script>
 
   <style>
+    .defaultTableStyle {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+      border-collapse: collapse !important;
+      width: 100% !important;
+    }
+
+    .defaultTableStyle td, .defaultTableStyle th {
+      border: 1px solid #ddd !important;
+      padding: 8px !important;
+    }
+
+    .defaultTableStyle tr:nth-child(even) {
+      background-color: #f2f2f2 !important;
+    }
+
+    .defaultTableStyle tr:nth-child(odd) {
+      background-color: #ffffb3 !important;
+    }
+
+    .defaultTableStyle th {
+      padding-top: 12px !important;
+      padding-bottom: 12px !important;
+      text-align: left !important;
+      background-color: #4CAF50 !important;
+      color: white !important;
+    }
+
     textarea, textarea:focus {
       border: 1px solid black;
       font-family: 'Times New Roman';
@@ -49,16 +76,24 @@
       transform: scale(1.15) !important;
     }
 
-    #divRenderOfHtmlResource > a:link, #divRenderOfHtmlResource > a:visited, #divRenderOfHtmlResource > a:hover, #divRenderOfHtmlResource > a:active {
+    a.aBlue:link, a.aBlue:visited, a.aBlue:hover, a.aBlue:active {
       color: blue !important;
+      text-decoration: none !important;
     }
 
-    #divAddNewWorkDay > a:link, #divAddNewWorkDay > a:visited, #divAddNewWorkDay > a:hover, #divAddNewWorkDay > a:active {
-      color: blue !important;
+    a.aBlue:hover {
+      color: deeppink !important;
+      text-decoration: none !important;
     }
 
-    #ulLinksSelfResource > a:link, #ulLinksSelfResource > a:visited, #ulLinksSelfResource > a:hover, #ulLinksSelfResource > a:active {
-      color: blue !important;
+    a.aGreen:link, a.aGreen:visited, a.aGreen:active {
+      color: green !important;
+      text-decoration: none !important;
+    }
+
+    a.aGreen:hover {
+      color: deeppink !important;
+      text-decoration: none !important;
     }
   </style>
 
@@ -520,7 +555,7 @@
         }
       }
       else if (resourcesType === "Html") {
-        $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Html file\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
+        $("#tableResources").append("<tr id=\"trResourceHtmlFile\"><td style=\"text-align: right !important;\" title=\"Base folder is C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\JavaScriptHtml\\ so give path to file after that for example CSS\\Nr1\\R15.html\">Html file&nbsp;&nbsp;</td><td><input id=\"inputResourceHtmlFile\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; margin-top: 7px !important;\" /></td></tr>");
 
         if (data.Resource.Id) {
           $("#inputResourceHtmlFile").val(data.Resource.HtmlFile == null ? "" : data.Resource.HtmlFile);
@@ -924,6 +959,9 @@
             $("#textareaEditArbitraryTextFile").off("change");
             $("#textareaEditArbitraryTextFile").val("");
             window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile = "";
+
+            if (window.jonas.idTdBytesInDiary)
+              window.jonas.updateBytesInDiaryAndDiaerWarningMessage();
           }
           else {
             alert("ERROR!! Incorrect modal state: " + window.jonas.modalState);

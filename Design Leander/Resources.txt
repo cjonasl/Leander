@@ -275,3 +275,43 @@ Object.create Object.prototype.constructor instanceof
 ----- New property -----
 
 Adhoc,JavaScript
+
+---------- New resource ----------
+
+15
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-02-01 15:29:29
+
+----- New property -----
+
+li a:link a:visited a:hover a:active
+
+----- New property -----
+
+Adhoc,CSS
+
+---------- New resource ----------
+
+16
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-02-01 15:51:03
+
+----- New property -----
+
+Cascade !important
+
+----- New property -----
+
+Adhoc,CSS

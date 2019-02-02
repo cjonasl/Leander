@@ -38,7 +38,7 @@ null
 
 ----- New property -----
 
-C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\Resources1\R5.cs
+C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\Nr1\R5.cs
 
 ----- New property -----
 

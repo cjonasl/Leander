@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jQuery1", "WebApplication1\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone1", "WebApplication1\JavaScriptHtml\Backbone1\Backbone1.csproj", "{F0E4DEC6-D664-4937-9DA9-36381B64E4D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Underscore1", "Underscore1\Underscore1.csproj", "{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Underscore1", "WebApplication1\JavaScriptHtml\Underscore1\Underscore1.csproj", "{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSS", "WebApplication1\JavaScriptHtml\CSS\CSS.csproj", "{8801824F-4A4E-415D-A46F-620C763C17F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA7AD11A-8EB9-4F48-ABD2-ECDD1502457E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8801824F-4A4E-415D-A46F-620C763C17F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8801824F-4A4E-415D-A46F-620C763C17F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8801824F-4A4E-415D-A46F-620C763C17F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8801824F-4A4E-415D-A46F-620C763C17F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

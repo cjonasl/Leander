@@ -34,7 +34,7 @@ null
 
 ----- New property -----
 
-JavaScriptHtml/PureJavaScript/Resources1/R14.html
+PureJavaScript/Nr1/R14.html
 
 ----- New property -----
 

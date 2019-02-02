@@ -122,6 +122,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdhocTemplate.cs" />
+    <Compile Include="Models\BytesInDiaryWarningMessage.cs" />
     <Compile Include="Models\CheckboxData.cs" />
     <Compile Include="Models\Command.cs" />
     <Compile Include="Models\DataDefaultLocation.cs" />

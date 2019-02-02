@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Leander.Nr1
+namespace CSS
 {
     class Program
     {
         static void Main(string[] args)
         {
-            R17.Execute();
         }
     }
 }

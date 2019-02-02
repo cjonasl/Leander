@@ -30,6 +30,29 @@ namespace Leander.Nr1
             }
         }
 
+        public static void SortWrtLong(ArrayList v1, ArrayList v2, bool asc)
+        {
+            long tmpLong;
+            string tmpStr;
+
+            for (int i = 0; i < (v1.Count - 1); i++)
+            {
+                for (int j = (i + 1); j < v1.Count; j++)
+                {
+                    if ((asc && ((long)v1[i] > (long)v1[j])) || (!asc && ((long)v1[i] < (long)v1[j])))
+                    {
+                        tmpLong = (long)v1[j];
+                        v1[j] = v1[i];
+                        v1[i] = tmpLong;
+
+                        tmpStr = (string)v2[j];
+                        v2[j] = v2[i];
+                        v2[i] = tmpStr;
+                    }
+                }
+            }
+        }
+
         public static void Sort(ArrayList v1, ArrayList v2, ArrayList v3)
         {
             string tmp;

@@ -66,7 +66,7 @@ namespace WebApplication1.Models
 
     public static class ResourceUtility
     {
-        private const string _basePath = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\";
+        private const string _basePath = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\JavaScriptHtml\\";
         private const string _fileNameFullPathNextResourceId = "C:\\git_cjonasl\\Leander\\Design Leander\\NextResourceId.txt";
 
         private static string SerializeHtmlResourceIframeTextAreaDimensions(int[] v)
@@ -190,7 +190,7 @@ namespace WebApplication1.Models
 
             if (resourceDeserialized.ResourcesType == ResourcesType.Html)
             {
-                resourceDeserialized.HtmlFileText = Utility.ReturnFileContents(_basePath + resourceDeserialized.HtmlFile.Replace('/', '\\'));
+                resourceDeserialized.HtmlFileText = Utility.ReturnFileContents(_basePath + resourceDeserialized.HtmlFile);
                 Utility.ReturnTextExceptFirstRow(resourceDeserialized.HtmlFileText, out firstRow);
                  
                 if (!Utility.CheckFirstRowInHtmlResource(firstRow, false, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
@@ -402,7 +402,7 @@ namespace WebApplication1.Models
 
             errorMessage = null;
 
-            fileNameFullPath = _basePath + htmlFile.Replace('/', '\\');
+            fileNameFullPath = _basePath + htmlFile;
 
             if (!File.Exists(fileNameFullPath))
             {
@@ -529,9 +529,9 @@ namespace WebApplication1.Models
 
                 if (resource.ResourcesType == ResourcesType.Html)
                 {
-                    fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile.Replace('/', '\\'));
+                    fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile);
                     textExceptFirstRow = Utility.ReturnTextExceptFirstRow(fileText, out firstRow);
-                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), "<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->\r\n" + textExceptFirstRow);
+                    Utility.CreateNewFile(_basePath + resource.HtmlFile, "<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->\r\n" + textExceptFirstRow);
                 }
 
                 newResource = new Resource(nextResourceId, resource.ResourcesType, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords, resource.Note, resource.PreviousResource, resource.NextResource, resource.ThumbUpLocation, resource.HtmlFile, resource.Files, resource.Links);
@@ -613,7 +613,7 @@ namespace WebApplication1.Models
                 return null;
             }
 
-            fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile.Replace('/', '\\'));
+            fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile);
 
             return fileText;
         }
@@ -641,7 +641,7 @@ namespace WebApplication1.Models
 
                 if (Utility.CheckFirstRowInHtmlResource(firstRow, false, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
                 {
-                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", saveFileTextData.Width, saveFileTextData.Height)) + textExceptFirstRow);
+                    Utility.CreateNewFile(_basePath + resource.HtmlFile, firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", saveFileTextData.Width, saveFileTextData.Height)) + textExceptFirstRow);
                 }
                 else //Error
                 {
@@ -674,12 +674,12 @@ namespace WebApplication1.Models
                     return;
                 }
 
-                fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile.Replace('/', '\\'));
+                fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile);
                 textExceptFirstRow = Utility.ReturnTextExceptFirstRow(fileText, out firstRow);
                 
                 if (Utility.CheckFirstRowInHtmlResource(firstRow, true, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
                 {
-                    Utility.CreateNewFile(_basePath + resource.HtmlFile.Replace('/', '\\'), firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", width.ToString(), height.ToString())) + textExceptFirstRow);
+                    Utility.CreateNewFile(_basePath + resource.HtmlFile, firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", width.ToString(), height.ToString())) + textExceptFirstRow);
                 }
                 else //Error
                 {

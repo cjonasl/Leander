@@ -1,41 +1,12 @@
 ﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
 
-<style>
-  #tableKeyWords {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
-    border-collapse: collapse !important;
-    width: 100% !important;
-  }
-
-  #tableKeyWords td, #tableKeyWords th {
-    border: 1px solid #ddd !important;
-    padding: 8px !important;
-  }
-
-  #tableKeyWords tr:nth-child(even) {
-    background-color: #f2f2f2 !important;
-  }
-
-  #tableKeyWords tr:nth-child(odd) {
-      background-color: #ffffcc !important;
-    }
-
-  #tableKeyWords th {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
-    text-align: left !important;
-    background-color: #4CAF50 !important;
-    color: white !important;
-  }
-</style>
-
 <div style="margin: 20px !important;">
 
   @{
       string idKeyWordNote;
   }
 
-  <table id="tableKeyWords" style="margin-bottom: 20px;">
+  <table id="tableKeyWords" class="defaultTableStyle" style="margin-bottom: 20px !important;">
     <tr>
       <th>Id</th>
       <th>Created</th>

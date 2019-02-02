@@ -596,5 +596,18 @@ namespace WebApplication1.Controllers
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetBytesInDiaryWarningMessage(string diaryFileNameFullPath)
+        {
+            string errorMessage;
+            BytesInDiaryWarningMessage bytesInDiaryWarningMessage;
+
+            bytesInDiaryWarningMessage = DayDateDiaryBytesInDiaryUtility.GetBytesInDiaryWarningMessage(diaryFileNameFullPath, out errorMessage);
+            
+            if (errorMessage == null)
+                return Json(bytesInDiaryWarningMessage, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
     }
 }

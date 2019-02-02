@@ -1,53 +1,28 @@
 ﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
 
-<style>
-  #tableDayDateDiaryBytesInDiary {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important;
-    border-collapse: collapse !important;
-    width: 100% !important;
-  }
-
-    #tableDayDateDiaryBytesInDiary td, #tableDayDateDiaryBytesInDiary th {
-      border: 1px solid #ddd !important;
-      padding: 8px !important;
-    }
-
-    #tableDayDateDiaryBytesInDiary tr:nth-child(even) {
-      background-color: #f2f2f2 !important;
-    }
-
-    #tableDayDateDiaryBytesInDiary tr:nth-child(odd) {
-      background-color: #ffffcc !important;
-    }
-
-    #tableDayDateDiaryBytesInDiary th {
-      padding-top: 12px !important;
-      padding-bottom: 12px !important;
-      text-align: left !important;
-      background-color: #4CAF50 !important;
-      color: white !important;
-    }
-</style>
-
 <div style="margin: 20px !important;">
   @if (!ViewBag.TodaysDayIsInFile && (ViewBag.ListWithDayDateDiaryBytesInDiary != null))
   {
-    <div id="divAddNewWorkDay" style="margin-left: 1px;"><a href="javascript: window.jonas.addNewWorkDay('@ViewBag.DiaryFolder')">Add new day</a></div>
+    <div id="divAddNewWorkDay" style="margin-left: 1px;"><a class="aBlue" href="javascript: window.jonas.addNewWorkDay('@ViewBag.DiaryFolder')">Add new day</a></div>
   }
 
   @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
   {
-    <div style="font-family: Arial !important; color: red !important; margin-left: 1px !important; margin-top: 10px !important; margin-bottom: 10px !important;">@ViewBag.ErrorMessage</div>
+    <div id="warningMessageDayDateDiaryBytesInDiary" style="font-family: Arial !important; color: red !important; margin-left: 1px !important; margin-top: 10px !important; margin-bottom: 10px !important;">@ViewBag.ErrorMessage</div>
+  }
+  else
+  {
+    <div id="warningMessageDayDateDiaryBytesInDiary" style="font-family: Arial !important; color: red !important; margin-left: 1px !important; margin-top: 10px !important; margin-bottom: 10px !important; display: none !important;"></div>
   }
 
   @if (ViewBag.ListWithDayDateDiaryBytesInDiary != null)
   {
-    string fileNameFullPath, idBytesInDiary;
+    string fileNameFullPath, tdBytesInDiary;
 
-    <table id="tableDayDateDiaryBytesInDiary" style="margin-top: 10px;">
+    <table id="tableDayDateDiaryBytesInDiary" class="defaultTableStyle" style="margin-top: 10px !important;">
       @{
-          string title = "The folder is: " + ViewBag.DiaryFolder;
-       }
+        string title = "The folder is: " + ViewBag.DiaryFolder;
+      }
       <tr id="headerRowTableDayDateDiaryBytesInDiary">
         <th title="Dag">Dag</th>
         <th title="Datum">Datum</th>
@@ -58,25 +33,25 @@
       @foreach (WebApplication1.Models.DayDateDiaryBytesInDiary dayDateDiaryBytesInDiary in (List<WebApplication1.Models.DayDateDiaryBytesInDiary>)ViewBag.ListWithDayDateDiaryBytesInDiary)
       {
 
-        idBytesInDiary = "tdBytesInDiary" + dayDateDiaryBytesInDiary.Day.ToString();
+        tdBytesInDiary = "tdBytesInDiary" + dayDateDiaryBytesInDiary.Day.ToString();
         fileNameFullPath = ViewBag.DiaryFolder + "##" + dayDateDiaryBytesInDiary.Diary;
 
-      <tr>
-        <td>@dayDateDiaryBytesInDiary.Day</td>
-        <td>@dayDateDiaryBytesInDiary.Date</td>
+        <tr>
+          <td>@dayDateDiaryBytesInDiary.Day</td>
+          <td>@dayDateDiaryBytesInDiary.Date</td>
 
-        @if (dayDateDiaryBytesInDiary.BytesInDiary > 0)
-        {
-          <td><a href="javascript: window.jonas.openModalToEditDiaryDay('@fileNameFullPath', '@idBytesInDiary')">@dayDateDiaryBytesInDiary.Diary</a></td>
-        }
-        else
-        {
-            <td>@dayDateDiaryBytesInDiary</td>
-        }
+          @if (dayDateDiaryBytesInDiary.BytesInDiary > 0)
+          {
+            <td><a class="aGreen" href="javascript: window.jonas.openModalToEditDiaryDay('@fileNameFullPath', '@tdBytesInDiary')">@dayDateDiaryBytesInDiary.Diary</a></td>
+          }
+          else
+          {
+            <td>@dayDateDiaryBytesInDiary.Diary</td>
+          }
 
-        <td id="@idBytesInDiary">@dayDateDiaryBytesInDiary.BytesInDiary</td>
-      </tr>
-      } 
+          <td id="@tdBytesInDiary">@dayDateDiaryBytesInDiary.BytesInDiary</td>
+        </tr>
+      }
     </table>
   }
 </div>
