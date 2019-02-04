@@ -1147,11 +1147,11 @@
       newKeyWords = "";
 
       for (i = 0; i < keyWords.length; i++) {
-        if ((keyWords[i].checked) && (newKeyWords === "")) {
-          newKeyWords = keyWords[i].id.substring(7);
+        if (keyWords[i].checked && newKeyWords === "") {
+          newKeyWords = keyWords[i].id.substring(7); //7=Length of prefix keyWord
         }
-        else if ((keyWords[i].checked) && (newKeyWords !== "")) {
-          newKeyWords += ("," + keyWords[i].id.substring(7));
+        else if (keyWords[i].checked && newKeyWords !== "") {
+          newKeyWords += ("," + keyWords[i].id.substring(7)); //7=Length of prefix keyWord
         }
       }
 

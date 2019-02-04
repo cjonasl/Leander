@@ -439,7 +439,7 @@ namespace WebApplication1.Models
             {
                 if (!File.Exists(v[i]) && !Directory.Exists(v[i]))
                 {
-                    errorMessage = string.Format("ERROR!! Row {0} for a file or folder is incorrect! The name is neither an existing file nor a directory!", i + 1 );
+                    errorMessage = string.Format("ERROR!! Row {0}, {1}, for a file or folder is incorrect! The name is neither an existing file nor a directory!", i + 1, v[i]);
                 }
                 else
                 {

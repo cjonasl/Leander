@@ -99,10 +99,11 @@ namespace WebApplication1.Models
                     }
                     else
                     {
-                        if (GetTodaysDate().ToString("yyyy-MM-dd") == columns[1])
+                        if ((DateTime.Now.ToString("yyyy-MM-dd")) == columns[1])
                             todaysDayIsInFile = true;
 
-                        //if ((DateTime.Now.ToString("yyyy-MM-dd")) == columns[1])
+                        //For test:
+                        //if (GetTodaysDate().ToString("yyyy-MM-dd") == columns[1])
                         //todaysDayIsInFile = true;
                     }
                 }
@@ -333,7 +334,7 @@ namespace WebApplication1.Models
                     return null;
 
                 tmpDate = DateTime.Now;
-                dateToday = GetTodaysDate(); //new DateTime(tmpDate.Year, tmpDate.Month, tmpDate.Day);
+                dateToday = new DateTime(tmpDate.Year, tmpDate.Month, tmpDate.Day); //for test: dateToday = GetTodaysDate();
 
                 d = 1 + lastDayInFile;
                 dateStr = dateToday.ToString("yyyy-MM-dd");

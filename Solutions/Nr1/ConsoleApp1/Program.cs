@@ -10,7 +10,8 @@ namespace Leander.Nr1
     {
         static void Main(string[] args)
         {
-            R17.Execute();
+            Utility.CreateNewFile("C:\\AAA\\aaa.txt", Utility.SimulateMessage(3, 8, 60, 2, 12));
+            //R17.Execute();
         }
     }
 }

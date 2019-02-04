@@ -574,12 +574,12 @@ namespace WebApplication1.Controllers
         public JsonResult GetAdhocTemplates()
         {
             string errorMessage;
-            IdText[] keyWords;
+            IdText[] radioButtonsTemplates;
 
-            keyWords = AdhocTemplateUtility.ReturnArrayWithAdhocTemplates(out errorMessage);
+            radioButtonsTemplates = AdhocTemplateUtility.ReturnArrayWithIdText(out errorMessage);
 
             if (errorMessage == null)
-                return Json(keyWords, JsonRequestBehavior.AllowGet);
+                return Json(radioButtonsTemplates, JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
@@ -606,6 +606,19 @@ namespace WebApplication1.Controllers
             
             if (errorMessage == null)
                 return Json(bytesInDiaryWarningMessage, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AddAdhocResource(TemplateData templateData)
+        {
+            string errorMessage;
+            int ResourceId;
+
+            ResourceId = AdhocTemplateUtility.AddAdhocResource(templateData, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(ResourceId, JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }

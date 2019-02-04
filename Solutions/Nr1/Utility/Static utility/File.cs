@@ -285,5 +285,94 @@ namespace Leander.Nr1
                 File.Delete(file);
             }
         }
+
+        public static bool InsertNoneIncludeFileInCsProj(
+            int resourceId,  //Might maybe later be something else than a resource Id
+            string filePrefix, //When it is a resource filePrefix = "R"
+            string fileExtension, //When it is a resource fileExtension should be ".html"
+            string fileNameFullPathCjProjFile, 
+            string folderPrefix, 
+            int currentResourceFolderIndex, 
+            int maxNumberOfFilesInAFolder,
+            string resourceFolder,
+            string textForNonIncludeFileToCreate,
+            out int nextResourceFolderIndex, //Will be (1 + currentResourceFolderIndex) if number of files in current folder is maxNumberOfFilesInAFolder, otherwise nextResourceFolderIndex = currentResourceFolderIndex
+            out string errorMessage)
+        {
+            string folderNameFullPath, fileNameFullPath, tmpStr, str1, str2, str3, fileContents;
+            int index1, index2;
+            string[] files;
+
+            nextResourceFolderIndex = currentResourceFolderIndex;
+            errorMessage = null;
+
+            try
+            {
+                if (!File.Exists(fileNameFullPathCjProjFile))
+                {
+                    errorMessage = string.Format("ERROR in method InsertNoneIncludeFileInCsProj! The file {0} does not exist as expected!", fileNameFullPathCjProjFile);
+                    return false;
+                }
+
+                fileContents = Utility.ReturnFileContents(fileNameFullPathCjProjFile);
+                tmpStr = "  <ItemGroup>\r\n    <None Include=\"";
+                index1 = fileContents.IndexOf(tmpStr);
+
+                if (index1 == -1)
+                {
+                    errorMessage = string.Format("ERROR in method InsertNoneIncludeFileInCsProj! Can not find string \"{0}\" in the file {1} as expected!", tmpStr, fileNameFullPathCjProjFile);
+                    return false;
+                }
+
+                index2 = fileContents.IndexOf("\r\n", tmpStr.Length + index1);
+                str1 = fileContents.Substring(0, 2 + index2);
+                str3 = fileContents.Substring(2 + index2);
+
+                folderNameFullPath = string.Format("{0}\\{1}{2}", resourceFolder, folderPrefix, currentResourceFolderIndex);
+
+                if (!Directory.Exists(folderNameFullPath))
+                {
+                    errorMessage = string.Format("ERROR in method InsertNoneIncludeFileInCsProj! The folder {0} does not exist as expected!", folderNameFullPath);
+                    return false;
+                }
+
+                files = Directory.GetFiles(folderNameFullPath);
+
+                if (files.Length > maxNumberOfFilesInAFolder)
+                {
+                    errorMessage = string.Format("ERROR in method InsertNoneIncludeFileInCsProj! The folder {0} contains more files ({1}) files than allowed ({2}) files!", folderNameFullPath, files.Length.ToString(), maxNumberOfFilesInAFolder.ToString());
+                    return false;
+                }
+                else if (files.Length == maxNumberOfFilesInAFolder)
+                {
+                    nextResourceFolderIndex = 1 + currentResourceFolderIndex;
+                    folderNameFullPath = string.Format("{0}\\{1}{2}", resourceFolder, folderPrefix, nextResourceFolderIndex);
+                }
+
+                fileNameFullPath = string.Format("{0}\\{1}{2}{3}", folderNameFullPath, filePrefix, resourceId.ToString(), fileExtension);
+
+                if (File.Exists(fileNameFullPath))
+                {
+                    errorMessage = string.Format("ERROR in method InsertNoneIncludeFileInCsProj! The file {0} was about to be created, but it exist already, which was unexpected!", fileNameFullPath);
+                    return false;
+                }
+
+                if (!Directory.Exists(folderNameFullPath))
+                {
+                    Directory.CreateDirectory(folderNameFullPath);
+                }
+
+                Utility.CreateNewFile(fileNameFullPath, textForNonIncludeFileToCreate);
+                str2 = string.Format("    <None Include=\"{0}{1}\\{2}{3}{4}\" />\r\n", folderPrefix, nextResourceFolderIndex, filePrefix, resourceId.ToString(), fileExtension);
+                Utility.CreateNewFile(fileNameFullPathCjProjFile, str1 + str2 + str3);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method InsertNoneIncludeFileInCsProj! e.Message:\r\n{0}", e.Message);
+                return false;
+            }
+
+            return true;
+        }
     }
 }

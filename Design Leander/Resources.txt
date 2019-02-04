@@ -315,3 +315,43 @@ Cascade !important
 ----- New property -----
 
 Adhoc,CSS
+
+---------- New resource ----------
+
+17
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-02 21:43:27
+
+----- New property -----
+
+Test DayDateDiaryBytesInDiary
+
+----- New property -----
+
+Adhoc,C#,Test,Thumb up
+
+---------- New resource ----------
+
+18
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-02-02 23:23:29
+
+----- New property -----
+
+details summary
+
+----- New property -----
+
+Adhoc,HTML

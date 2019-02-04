@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Nr1\R18.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Nr1\" />

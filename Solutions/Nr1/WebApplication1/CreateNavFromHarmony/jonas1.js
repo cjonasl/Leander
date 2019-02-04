@@ -38,6 +38,7 @@ window.jonas.eventHandlerTextareaEditArbitraryTextFile = 0;
 window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile = "";
 window.jonas.idTdBytesInDiary = "";
 window.jonas.diaryFileNameFullPath = "";
+window.jonas.currentTemplateId = 0;
 
 
 window.jonas.resetAfterSaveOrCancelOfTextarea = function (btnSave, btnCancel, textarea, eventHandler) {
@@ -440,9 +441,13 @@ window.jonas.FillDivAdhocCodeTemplates = function () {
 };
 
 window.jonas.getNewAdhocTemplate = function (id) {
+    var currentTemplateId;
+
+    currentTemplateId = window.Number(id.substring(17));
+
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetNewAdhocTemplate",
-        data: { id: window.Number(id.substring(17)) },
+        data: { id: currentTemplateId }, //17=Length of prefix adhocCodeTemplate
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "get",
         success: function (data) {
@@ -453,6 +458,71 @@ window.jonas.getNewAdhocTemplate = function (id) {
             else {
                 window.jonas.updateCheckboxesCheckedStatus($("#divAdhocCodeKeyWords"), 16, data.KeyWords.split(","));
                 $("#textareaAdhocCode").val(data.Text);
+                window.jonas.currentTemplateId = currentTemplateId;
+            }
+        }
+    });
+};
+
+window.jonas.RunAdhoc = function () {
+    var title, keyWords, note, keyWordIdsCommaSeparated, codeText, templateData;
+
+    title = $("#inputAdhocCodeTitle").val().trim();
+    keyWords = $("input[type='checkbox']:checked", "#divAdhocCodeKeyWords");
+    note = $("#inputAdhocCodeNote").val().trim(); 
+    codeText = $("#textareaAdhocCode").val().trim();
+
+    if (!title) {
+        alert("Title must be given!");
+        return;
+    }
+
+    if (keyWords.length === 0) {
+        alert("At least one key word must be given!");
+        return;
+    }
+
+    keyWordIdsCommaSeparated = "";
+
+    for (i = 0; i < keyWords.length; i++) {
+        if (keyWords[i].checked && keyWordIdsCommaSeparated === "") {
+            keyWordIdsCommaSeparated = keyWords[i].id.substring(16); //16=Length of prefix adhocCodeKeyWord
+        }
+        else if (keyWords[i].checked && keyWordIdsCommaSeparated !== "") {
+            keyWordIdsCommaSeparated += ("," + keyWords[i].id.substring(16)); //16=Length of prefix adhocCodeKeyWord
+        }
+    }
+
+    templateData = {
+        id: window.jonas.currentTemplateId,
+        title: title,
+        keyWords: keyWordIdsCommaSeparated,
+        note: note,
+        codeText: codeText
+    };
+
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/AddAdhocResource",
+        data: { templateData: templateData },
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
+            }
+            else {
+                window.jonas.maxResourceId = data;
+
+                if (window.jonas.currentTemplateId === 1) {
+                    alert("Resource " + data + " was successfully created.");
+                    $("#inputAdhocCodeTitle").val("");
+                    $("#inputAdhocCodeNote").val();
+                    $("#textareaAdhocCode").val("");
+                }
+                else {
+                    window.jonas.renderResource(data, false);
+                }
             }
         }
     });

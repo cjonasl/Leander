@@ -140,6 +140,7 @@
     <Compile Include="Models\LocationExtension.cs" />
     <Compile Include="Models\ResourcesType.cs" />
     <Compile Include="Models\SaveFileTextData.cs" />
+    <Compile Include="Models\TemplateData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ TemplateFile (full path)
 ResourceFolder
 CurrentResourceFolder (1,2,3,... to make folders "ResourceFolder\Resource1", "ResourceFolder\Resource1",...
 MaxNumberOfFilesInFolder
-CsProj (the csproj where to insert the resource)
+CsProjFileFullPath (the csproj where to insert the resource)
 Href (not for C#)
 */
 1
@@ -27,7 +27,7 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Html
 1
 25
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Html\Html.csproj
-JavaScriptHtml/Html
+Html
 ----- New adhoc -----
 3
 css
@@ -37,7 +37,7 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\CSS
 1
 25
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\CSS\CSS.csproj
-JavaScriptHtml/CSS
+CSS
 ----- New adhoc -----
 4
 js
@@ -47,7 +47,7 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\PureJavaScri
 1
 25
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\PureJavaScript\PureJavaScript.csproj
-JavaScriptHtml/PureJavaScript
+PureJavaScript
 ----- New adhoc -----
 5
 jQuery1
@@ -57,7 +57,7 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\jQuery1
 1
 25
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\jQuery1\jQuery1.csproj
-JavaScriptHtml/jQuery1
+jQuery1
 ----- New adhoc -----
 6
 underscore1
@@ -67,7 +67,7 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Underscore1
 1
 25
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1\Underscore1.csproj
-JavaScriptHtml/Underscore1
+Underscore1
 ----- New adhoc -----
 7
 backbone1
@@ -77,4 +77,4 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1
 1
 25
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1\Backbone1.csproj
-JavaScriptHtml/Backbone1
+Backbone1
