@@ -8,43 +8,37 @@ namespace Leander.Nr1
 {
     public partial class Utility
     {
-        public static string SimulateWord(int minNumberOfChars, int maxNumberOfChars, int number)
+        public static Random random = new Random((int)(DateTime.Now.Ticks % 64765L));
+
+        public static string SimulateWord(int minNumberOfChars, int maxNumberOfChars)
         {
-            Random r;
-            int i, numberOfChars, n, seed;
+            int i, numberOfChars;
             char[] charArray;
 
-            seed = ((int)(DateTime.Now.Ticks % 64765L)) % number;
-
-            r = new Random(seed);
-            numberOfChars = r.Next(minNumberOfChars, 1 + maxNumberOfChars);
+            numberOfChars = random.Next(minNumberOfChars, 1 + maxNumberOfChars);
             charArray = new char[numberOfChars];
 
             for (i = 0; i < numberOfChars; i++)
             {
-                n = r.Next(97, 123);
-                charArray[i] = Convert.ToChar(n);
+                charArray[i] = Convert.ToChar(random.Next(97, 123));
             }
 
             return new string(charArray);
         }
 
-        public static string SimulateRow(int maxNumberOfCharsInRow, int minNumberOfCharsInWord, int maxNumberOfCharsInWord, int number)
+        public static string SimulateRow(int maxNumberOfCharsInRow, int minNumberOfCharsInWord, int maxNumberOfCharsInWord)
         {
             string word;
             StringBuilder sb = new StringBuilder("");
-            int n = 10;
 
             while(sb.ToString().Length < maxNumberOfCharsInRow)
             {
-                word = SimulateWord(minNumberOfCharsInWord, maxNumberOfCharsInWord, n + number);
+                word = SimulateWord(minNumberOfCharsInWord, maxNumberOfCharsInWord);
 
                 if (sb.ToString().Length == 0)
                     sb.Append(word);
                 else
                     sb.Append(" " + word);
-
-                n += 5;
             }
 
             return sb.ToString();
@@ -62,7 +56,7 @@ namespace Leander.Nr1
 
             for (i = 0; i < numberOfRows; i++)
             {
-                row = SimulateRow(maxNumberOfCharsInRow, minNumberOfCharsInWord, maxNumberOfCharsInWord, i + 8);
+                row = SimulateRow(maxNumberOfCharsInRow, minNumberOfCharsInWord, maxNumberOfCharsInWord);
 
                 if (i == 0)
                     sb.Append(row);

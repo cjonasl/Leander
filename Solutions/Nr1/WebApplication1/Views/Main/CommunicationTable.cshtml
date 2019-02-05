@@ -1,0 +1,20 @@
+﻿@model List<WebApplication1.Models.Communication>
+
+<table class="defaultTableStyle">
+  <tr>
+    <th style="width: 8% !important;">&nbsp;Id</th>
+    <th style="width: 15% !important;">&nbsp;Date</th>
+    <th style="width: 8% !important;">&nbsp;Sender</th>
+    <th style="width: 69% !important;">&nbsp;Message</th>
+  </tr>
+
+  @foreach (WebApplication1.Models.Communication com in Model)
+  {
+    <tr>
+      <td style="width: 8% !important;" title="@com.MessageId"><a href="javascript: window.jonas.openMessageForEdit('@com.MessageId')">@com.MessageId</a></td>
+      <td style="width: 15% !important;" title="@com.Date">@com.Date</td>
+      <td style="width: 8% !important;" title="@com.Sender">@com.Sender</td>
+      <td style="width: 69% !important;" title="@com.Message">@com.Message.Substring(0, 90)</td>
+    </tr>
+  }
+</table>

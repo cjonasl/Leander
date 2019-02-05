@@ -112,7 +112,6 @@
     <Content Include="js\backbone\nr1\Browse.txt" />
     <Content Include="js\backbone\nr1\jQuery.js" />
     <Content Include="js\backbone\nr1\underscore.js" />
-    <Content Include="PureJavaScript\Nr1\R14.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +124,7 @@
     <Compile Include="Models\BytesInDiaryWarningMessage.cs" />
     <Compile Include="Models\CheckboxData.cs" />
     <Compile Include="Models\Command.cs" />
+    <Compile Include="Models\CommunicationCounterparty.cs" />
     <Compile Include="Models\DataDefaultLocation.cs" />
     <Compile Include="Models\DayDateDiaryBytesInDiary.cs" />
     <Compile Include="Models\DocumentReadyDataForNonDefaultLocation.cs" />
@@ -134,6 +134,7 @@
     <Compile Include="Models\KeyWord.cs" />
     <Compile Include="Models\KeyWordsText.cs" />
     <Compile Include="Models\LoadResourceData.cs" />
+    <Compile Include="Models\Communication.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\ResourcePresentationInSearch.cs" />
     <Compile Include="Models\Location.cs" />
@@ -170,6 +171,8 @@
     <Content Include="Views\Main\SelfResource.cshtml" />
     <Content Include="Views\Main\DayDateDiaryBytesInDiary1.cshtml" />
     <Content Include="Views\Main\AdhocCode.cshtml" />
+    <Content Include="Views\Main\CommunicationTable.cshtml" />
+    <Content Include="Views\Main\Communication1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

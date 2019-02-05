@@ -1,0 +1,18 @@
+﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
+
+<div style="margin: 15px !important;">
+  <div style="margin-top: 10px !important; margin-bottom: 10px !important; margin-left: 4px !important; font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important;">Counterparties</div>
+  <div id="divCounterparties" style="font-weight: normal !important; font-size: medium !important; margin-left: 6px !important; font-family: 'Times New Roman' !important;"></div>
+  <div id="tableMessages" style="margin-top: 15px !important;"></div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.setTabNames('@Model.TabNames[0]', '@Model.TabNames[1]', '@Model.TabNames[2]', '@Model.TabNames[3]', '@Model.TabNames[4]', '@Model.TabNames[5]', '@Model.TabNames[6]', '@Model.TabNames[7]', '@Model.TabNames[8]', '@Model.TabNames[9]');
+    window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
+    window.jonas.setTitleTextInBrowser(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, '@Model.CshtmlFile');
+    window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
+    window.jonas.fillDivCounterparties('@ViewBag.FileNameFullPathToConfigFile');
+  });
+</script>

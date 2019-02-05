@@ -1,4 +1,4 @@
-﻿250px 50px  using System;
+﻿417px 281px using System;
 using System.Text;
 
 namespace Leander.Nr1

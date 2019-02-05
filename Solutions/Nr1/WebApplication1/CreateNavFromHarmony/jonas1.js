@@ -39,6 +39,8 @@ window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile = "";
 window.jonas.idTdBytesInDiary = "";
 window.jonas.diaryFileNameFullPath = "";
 window.jonas.currentTemplateId = 0;
+window.jonas.fileNameFullPathToConfigFileAdhocCode = "";
+window.jonas.fileNameFullPathToConfigFileCommunicationCounterparties = "";
 
 
 window.jonas.resetAfterSaveOrCancelOfTextarea = function (btnSave, btnCancel, textarea, eventHandler) {
@@ -406,7 +408,7 @@ window.jonas.updateBytesInDiaryAndDiaerWarningMessage = function () {
     });
 };
 
-window.jonas.FillDivAdhocCodeKeyWords = function () {
+window.jonas.fillDivAdhocCodeKeyWords = function () {
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetKeyWords",
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
@@ -423,11 +425,14 @@ window.jonas.FillDivAdhocCodeKeyWords = function () {
     });
 };
 
-window.jonas.FillDivAdhocCodeTemplates = function () {
+window.jonas.fillDivAdhocCodeTemplates = function (fileNameFullPathToConfigFileAdhocCode) {
+    window.jonas.fileNameFullPathToConfigFileAdhocCode = fileNameFullPathToConfigFileAdhocCode.replace(/##/g, "\\");
+
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetAdhocTemplates",
+        data: { fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileAdhocCode},
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
-        method: "get",
+        method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
                 alert(data);
@@ -447,7 +452,10 @@ window.jonas.getNewAdhocTemplate = function (id) {
 
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetNewAdhocTemplate",
-        data: { id: currentTemplateId }, //17=Length of prefix adhocCodeTemplate
+        data: {
+            fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileAdhocCode,
+            id: currentTemplateId
+        }, //17=Length of prefix adhocCodeTemplate
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "get",
         success: function (data) {
@@ -503,7 +511,10 @@ window.jonas.RunAdhoc = function () {
 
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/AddAdhocResource",
-        data: { templateData: templateData },
+        data: {
+            fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileAdhocCode,
+            templateData: templateData
+        },
         error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
         method: "post",
         success: function (data) {
@@ -523,6 +534,47 @@ window.jonas.RunAdhoc = function () {
                 else {
                     window.jonas.renderResource(data, false);
                 }
+            }
+        }
+    });
+};
+
+window.jonas.getNewCommunicationCounterparty = function (id) {
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/GetNewCommunicationCounterparty",
+        data: {
+            fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileCommunicationCounterparties,
+            id: window.Number(id.substring(25))
+        },
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
+            }
+            else {
+                $("#tableMessages").html(data);
+            }
+        }
+    });
+};
+
+window.jonas.fillDivCounterparties = function (fileNameFullPathToConfigFileCommunicationCounterparties) {
+    window.jonas.fileNameFullPathToConfigFileCommunicationCounterparties = fileNameFullPathToConfigFileCommunicationCounterparties.replace(/##/g, "\\");
+
+    $.ajax({
+        url: "http://www.Nr1Web1.com/Main/GetCommunicationCounterparties",
+        data: { fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileCommunicationCounterparties },
+        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        method: "post",
+        success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                alert(data);
+                return;
+            }
+            else {
+                window.jonas.addRadiobuttons($("#divCounterparties"), 10, "communicationCounterparty", "communicationCounterparty", "onchange=window.jonas.getNewCommunicationCounterparty(this.id)", data);
             }
         }
     });

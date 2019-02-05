@@ -32,7 +32,7 @@
     window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
     window.jonas.setTitleTextInBrowser(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, '@Model.CshtmlFile');
     window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
-    window.jonas.FillDivAdhocCodeKeyWords();
-    window.jonas.FillDivAdhocCodeTemplates();
+    window.jonas.fillDivAdhocCodeKeyWords();
+    window.jonas.fillDivAdhocCodeTemplates('@ViewBag.FileNameFullPathToConfigFile');
   });
 </script>

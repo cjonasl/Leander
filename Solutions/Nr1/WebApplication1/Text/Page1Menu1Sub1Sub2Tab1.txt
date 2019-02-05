@@ -1,0 +1,36 @@
+﻿973px 699px /*
+Id
+Name
+FileNameFullPath
+*/
+1
+AAA
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab3.txt
+----- New communication -----
+2
+BBB
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab4.txt
+----- New communication -----
+3
+CCC
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab5.txt
+----- New communication -----
+4
+DDD
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab6.txt
+----- New communication -----
+5
+EEE
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab7.txt
+----- New communication -----
+6
+FFF
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab8.txt
+----- New communication -----
+7
+GGG
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab9.txt
+----- New communication -----
+8
+HHH
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub2Tab9.txt

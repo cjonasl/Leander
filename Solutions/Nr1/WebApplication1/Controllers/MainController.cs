@@ -160,8 +160,12 @@ namespace WebApplication1.Controllers
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                         return View("AddEditKeyWords", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AddEditKeyWords.cshtml"));
                     case "Page1Menu0Sub0Sub0Tab3":
+                        ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub1Tab1.txt";
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                         return View("AdhocCode", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
+                    case "Page1Menu1Sub1Sub2Tab2":
+                        ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub2Tab1.txt";
+                        return View("Communication1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
                     case "Page1Menu2Sub1Sub1Tab1":
                         ViewBag.DiaryFolder = "C:##git_cjonasl##Leander##Work##Employer";
                         ViewBag.ListWithDayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.ReturnListWithDayDateDiaryBytesInDiary(@"C:\git_cjonasl\Leander\Work\Employer", out todaysDayIsInFile, out errorMessage);
@@ -232,7 +236,7 @@ namespace WebApplication1.Controllers
                             searchTerm = string.Format("<span class='title' data-location='Menu{0}Sub{1}'>", command.Menu.ToString(), command.Sub1.ToString());
                             break;
                         case "sub2":
-                            searchTerm = string.Format("<span class='title' data-location='Menu{0}Sub{1}Sub{2}'>", command.Menu.ToString(), command.Sub1.ToString(), command.Sub1.ToString());
+                            searchTerm = string.Format("<span class='title' data-location='Menu{0}Sub{1}Sub{2}'>", command.Menu.ToString(), command.Sub1.ToString(), command.Sub2.ToString());
                             break;
                     }
 
@@ -571,12 +575,12 @@ namespace WebApplication1.Controllers
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetAdhocTemplates()
+        public JsonResult GetAdhocTemplates(string fileNameFullPathToConfigFile)
         {
             string errorMessage;
             IdText[] radioButtonsTemplates;
 
-            radioButtonsTemplates = AdhocTemplateUtility.ReturnArrayWithIdText(out errorMessage);
+            radioButtonsTemplates = AdhocTemplateUtility.ReturnArrayWithIdText(fileNameFullPathToConfigFile, out errorMessage);
 
             if (errorMessage == null)
                 return Json(radioButtonsTemplates, JsonRequestBehavior.AllowGet);
@@ -584,12 +588,12 @@ namespace WebApplication1.Controllers
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetNewAdhocTemplate(int id)
+        public JsonResult GetNewAdhocTemplate(string fileNameFullPathToConfigFile, int id)
         {
             string errorMessage;
             KeyWordsText keyWordsText;
 
-            keyWordsText = AdhocTemplateUtility.ReturnKeyWordTextForAdhocTemplate(id, out errorMessage);
+            keyWordsText = AdhocTemplateUtility.ReturnKeyWordTextForAdhocTemplate(fileNameFullPathToConfigFile, id, out errorMessage);
 
             if (errorMessage == null)
                 return Json(keyWordsText, JsonRequestBehavior.AllowGet);
@@ -610,17 +614,47 @@ namespace WebApplication1.Controllers
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult AddAdhocResource(TemplateData templateData)
+        public JsonResult AddAdhocResource(string fileNameFullPathToConfigFile, TemplateData templateData)
         {
             string errorMessage;
             int ResourceId;
 
-            ResourceId = AdhocTemplateUtility.AddAdhocResource(templateData, out errorMessage);
+            ResourceId = AdhocTemplateUtility.AddAdhocResource(fileNameFullPathToConfigFile, templateData, out errorMessage);
 
             if (errorMessage == null)
                 return Json(ResourceId, JsonRequestBehavior.AllowGet);
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCommunicationCounterparties(string fileNameFullPathToConfigFile)
+        {
+            string errorMessage;
+            IdText[] radioButtonsCounterparties;
+
+            radioButtonsCounterparties = CommunicationCounterpartyUtility.ReturnArrayWithIdText(fileNameFullPathToConfigFile, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(radioButtonsCounterparties, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetNewCommunicationCounterparty(string fileNameFullPathToConfigFile, int id)
+        {
+            string fileNameFullPath, errorMessage;
+            List<WebApplication1.Models.Communication> listWithCommunication = null;
+
+            fileNameFullPath = CommunicationCounterpartyUtility.ReturnFileNameFullPathForCounterparty(fileNameFullPathToConfigFile, id, out errorMessage);
+
+            if (errorMessage == null)
+                listWithCommunication = WebApplication1.Models.CommunicationUtility.ReturnListWithCommunications(fileNameFullPath, out errorMessage);
+
+            if (errorMessage == null)
+                return View("CommunicationTable", listWithCommunication);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+            
         }
     }
 }

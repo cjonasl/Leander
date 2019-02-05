@@ -36,8 +36,6 @@ namespace WebApplication1.Models
 
     public static class AdhocTemplateUtility
     {
-        private const string _fileNameFullPathToConfigFile = @"C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab1.txt";
-
         private static AdhocTemplate DeserializeAdhocTemplate(string adhocTemplate)
         {
             string[] v = adhocTemplate.Split(new string[] { "\r\n" }, StringSplitOptions.None);
@@ -49,7 +47,7 @@ namespace WebApplication1.Models
             return string.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}\r\n{6}\r\n{7}\r\n{8}", adhocTemplate.Id.ToString(), adhocTemplate.Name, adhocTemplate.KeyWords, adhocTemplate.TemplateFile, adhocTemplate.ResourceFolder, adhocTemplate.CurrentResourceFolderIndex.ToString(), adhocTemplate.MaxNumberOfFilesInFolder.ToString(), adhocTemplate.CsProjFileFullPath, adhocTemplate.Href);
         }
 
-        public static List<AdhocTemplate> ReturnListWithAdhocTemplates(out string errorMessage)
+        public static List<AdhocTemplate> ReturnListWithAdhocTemplates(string fileNameFullPathToConfigFile, out string errorMessage)
         {
             List<AdhocTemplate> listWithAdhocTemplates;
             string fileContents;
@@ -61,7 +59,7 @@ namespace WebApplication1.Models
             {
                 errorMessage = null;
                 listWithAdhocTemplates = new List<AdhocTemplate>();
-                fileContents = Utility.ReturnFileContents(_fileNameFullPathToConfigFile);
+                fileContents = Utility.ReturnFileContents(fileNameFullPathToConfigFile);
                 index = fileContents.IndexOf("*/");
                 v = fileContents.Substring(4 + index).Split(new string[] { "\r\n----- New adhoc -----\r\n" }, StringSplitOptions.None);
 
@@ -79,7 +77,7 @@ namespace WebApplication1.Models
             return listWithAdhocTemplates;
         }
 
-        private static void SaveListWithAdhocTemplates(List<AdhocTemplate> listWithAdhocTemplates)
+        private static void SaveListWithAdhocTemplates(string fileNameFullPathToConfigFile, List<AdhocTemplate> listWithAdhocTemplates)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -91,10 +89,10 @@ namespace WebApplication1.Models
                     sb.Append(string.Format("\r\n----- New adhoc -----\r\n{0}", SerializeAdhocTemplate(listWithAdhocTemplates[i])));
             }
 
-            Utility.CreateNewFile(_fileNameFullPathToConfigFile, sb.ToString());
+            Utility.CreateNewFile(fileNameFullPathToConfigFile, sb.ToString());
         }
 
-        public static IdText[] ReturnArrayWithIdText(out string errorMessage)
+        public static IdText[] ReturnArrayWithIdText(string fileNameFullPathToConfigFile, out string errorMessage)
         {
             List<AdhocTemplate> listWithAdhocTemplates;
             IdText[] arrayWithIdText;
@@ -103,7 +101,7 @@ namespace WebApplication1.Models
 
             try
             {
-                listWithAdhocTemplates = ReturnListWithAdhocTemplates(out errorMessage);
+                listWithAdhocTemplates = ReturnListWithAdhocTemplates(fileNameFullPathToConfigFile, out errorMessage);
 
                 if (errorMessage != null)
                     return null;
@@ -117,14 +115,14 @@ namespace WebApplication1.Models
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("ERROR!! An Exception occured in method ReturnArrayWithIdText! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method AdhocTemplateUtility.ReturnArrayWithIdText! e.Message:\r\n{0}", e.Message);
                 return null;
             }
 
             return arrayWithIdText;
         }
 
-        public static KeyWordsText ReturnKeyWordTextForAdhocTemplate(int id, out string errorMessage)
+        public static KeyWordsText ReturnKeyWordTextForAdhocTemplate(string fileNameFullPathToConfigFile, int id, out string errorMessage)
         {
             List<AdhocTemplate> listWithAdhocTemplates;
             KeyWordsText keyWordText;
@@ -133,7 +131,7 @@ namespace WebApplication1.Models
 
             try
             {
-                listWithAdhocTemplates = ReturnListWithAdhocTemplates(out errorMessage);
+                listWithAdhocTemplates = ReturnListWithAdhocTemplates(fileNameFullPathToConfigFile, out errorMessage);
 
                 if (errorMessage != null)
                     return null;
@@ -149,7 +147,7 @@ namespace WebApplication1.Models
             return keyWordText;
         }
 
-        public static int AddAdhocResource(TemplateData templateData, out string errorMessage)
+        public static int AddAdhocResource(string fileNameFullPathToConfigFile, TemplateData templateData, out string errorMessage)
         {
             List<AdhocTemplate> listWithAdhocTemplates;
             Resource resource, newResource;
@@ -157,7 +155,7 @@ namespace WebApplication1.Models
             try
             {
                 errorMessage = null;
-                listWithAdhocTemplates = ReturnListWithAdhocTemplates(out errorMessage);
+                listWithAdhocTemplates = ReturnListWithAdhocTemplates(fileNameFullPathToConfigFile, out errorMessage);
 
                 if (errorMessage != null)
                     return -1;
@@ -203,7 +201,7 @@ namespace WebApplication1.Models
                 if (nextResourceFolderIndex != currentResourceFolderIndex)
                 {
                     listWithAdhocTemplates[templateData.Id - 1].CurrentResourceFolderIndex = nextResourceFolderIndex;
-                    SaveListWithAdhocTemplates(listWithAdhocTemplates);
+                    SaveListWithAdhocTemplates(fileNameFullPathToConfigFile, listWithAdhocTemplates);
                 }
 
                 int id = 0;

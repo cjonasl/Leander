@@ -54,6 +54,7 @@
     <Compile Include="Static utility\Validate.cs" />
     <Compile Include="Utility classes\Bar.cs" />
     <Compile Include="Utility classes\ColumnDefinition.cs" />
+    <Compile Include="Utility classes\Communication.cs" />
     <Compile Include="Utility classes\Employee.cs" />
     <Compile Include="Utility classes\Person.cs" />
     <Compile Include="Utility classes\Truck.cs" />
