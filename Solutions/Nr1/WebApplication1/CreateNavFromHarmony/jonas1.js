@@ -41,6 +41,9 @@ window.jonas.diaryFileNameFullPath = "";
 window.jonas.currentTemplateId = 0;
 window.jonas.fileNameFullPathToConfigFileAdhocCode = "";
 window.jonas.fileNameFullPathToConfigFileCommunicationCounterparties = "";
+window.jonas.fileNameFullPathToCurrentCommunication = "";
+window.jonas.currentNameCommunicationCounterparty = "";
+window.jonas.currentCommunicationMessageId = "";
 
 
 window.jonas.resetAfterSaveOrCancelOfTextarea = function (btnSave, btnCancel, textarea, eventHandler) {
@@ -213,7 +216,10 @@ window.jonas.saveIframeDimension = function () {
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/UpdateHtmlResourceIframeDimension",
         data: htmlResourceIframeDimensionsData,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -255,7 +261,10 @@ window.jonas.textareaSave = function (id, currentFileName, btnSave, btnCancel, i
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/SaveFileText",
         data: saveFileTextData,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -289,7 +298,10 @@ window.jonas.textareaCancel = function (id, currentFileName, btnSave, btnCancel,
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetFileText",
         data: { str: str},
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -319,7 +331,10 @@ window.jonas.editTextFile = function(fileNameFullPath) {
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetFileText",
         data: { str: fileNameFullPath },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -344,7 +359,10 @@ window.jonas.addNewWorkDay = function (diaryFolder) {
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/AddNewWorkDay",
         data: { diaryFolder: diaryFolder.replace(/##/g, "\\") },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -373,13 +391,16 @@ window.jonas.openModalToEditDiaryDay = function (diaryFileNameFullPath, idTdByte
     window.jonas.editTextFile(diaryFileNameFullPath);
 };
 
-window.jonas.updateBytesInDiaryAndDiaerWarningMessage = function () {
+window.jonas.updateBytesInDiaryAndDiaryWarningMessage = function () {
     var divWarningMessage;
 
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetBytesInDiaryWarningMessage",
         data: { diaryFileNameFullPath: window.jonas.diaryFileNameFullPath },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -411,7 +432,10 @@ window.jonas.updateBytesInDiaryAndDiaerWarningMessage = function () {
 window.jonas.fillDivAdhocCodeKeyWords = function () {
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetKeyWords",
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "get",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -431,7 +455,10 @@ window.jonas.fillDivAdhocCodeTemplates = function (fileNameFullPathToConfigFileA
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetAdhocTemplates",
         data: { fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileAdhocCode},
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -456,7 +483,10 @@ window.jonas.getNewAdhocTemplate = function (id) {
             fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileAdhocCode,
             id: currentTemplateId
         }, //17=Length of prefix adhocCodeTemplate
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "get",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -515,7 +545,10 @@ window.jonas.RunAdhoc = function () {
             fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileAdhocCode,
             templateData: templateData
         },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -539,14 +572,19 @@ window.jonas.RunAdhoc = function () {
     });
 };
 
-window.jonas.getNewCommunicationCounterparty = function (id) {
+window.jonas.getNewCommunicationCounterparty = function (id, name) {
+    window.jonas.currentNameCommunicationCounterparty = name;
+
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetNewCommunicationCounterparty",
         data: {
             fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileCommunicationCounterparties,
             id: window.Number(id.substring(25))
         },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -566,7 +604,10 @@ window.jonas.fillDivCounterparties = function (fileNameFullPathToConfigFileCommu
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetCommunicationCounterparties",
         data: { fileNameFullPathToConfigFile: window.jonas.fileNameFullPathToConfigFileCommunicationCounterparties },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+            $("#contentDivErrorMessage").html(data.responseText);
+            window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
             if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -574,8 +615,111 @@ window.jonas.fillDivCounterparties = function (fileNameFullPathToConfigFileCommu
                 return;
             }
             else {
-                window.jonas.addRadiobuttons($("#divCounterparties"), 10, "communicationCounterparty", "communicationCounterparty", "onchange=window.jonas.getNewCommunicationCounterparty(this.id)", data);
+                window.jonas.addRadiobuttons($("#divCounterparties"), 10, "communicationCounterparty", "communicationCounterparty", "onchange=\"window.jonas.getNewCommunicationCounterparty($(this).attr('id'), $(this).attr('data-label'))\"", data);
             }
         }
     });
+};
+
+window.jonas.openDialogToAddCommunicationMessage = function () {
+    $("#spanCurrentNameCommunicationCounterparty").text(window.jonas.currentNameCommunicationCounterparty);
+    window.jonas.openModal("#dialogCommunicationMessage", "New communication message", 700, 400, "NewCommunicationMessage");
+};
+
+window.jonas.openModalToEditCommunicationMessage = function (messageId) {
+    var message = $("#" + messageId + "Message").attr("title").replace(/-- New Row --/g, "\n");
+
+    window.jonas.currentCommunicationMessageId = messageId;
+    $("#textareaCommunicationMessage").val(message);
+    $("#btnDialogCommunicationMessage").text("Save");
+    $("#spanCurrentNameCommunicationCounterparty").text(window.jonas.currentNameCommunicationCounterparty);
+    window.jonas.openModal("#dialogCommunicationMessage", "Edit communication message", 700, 400, "EditCommunicationMessage");
+};
+
+window.jonas.handleCommunicationMessage = function () {
+    var message, str, tdSender, tdMessage;
+
+    message = $("#textareaCommunicationMessage").val().trim();
+
+    if (!message) {
+        alert("Nothing to save!");
+        return;
+    }
+
+    if (!window.jonas.currentCommunicationMessageId) { //Add
+        $.ajax({
+            url: "http://www.Nr1Web1.com/Main/InsertNewCommunicationMessage",
+            data: {
+                fileNameFullPath: window.jonas.fileNameFullPathToCurrentCommunication.replace(/##/g, "\\"),
+                communication: {
+                    messageId: null,
+                    date: null,
+                    sender: $("#inputMessageSenderJonas").prop("checked") ? "Jonas" : window.jonas.currentNameCommunicationCounterparty,
+                    message: message
+                }
+            },
+            error: function (data) {
+                $("#contentDivErrorMessage").html(data.responseText);
+                window.jonas.updateCssDisplayForContentDivs("errorMessage");
+            },
+            method: "post",
+            success: function (data) {
+                if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                    alert(data);
+                    return;
+                }
+                else {
+                    str = "<tr><td style=\"width: 8% !important;\" title=\"AAAAA\"><a href=\"javascript: window.jonas.openModalToEditCommunicationMessage('AAAAA')\">AAAAA</a></td>";
+                    str += "<td style=\"width: 15% !important;\" title=\"BBBBB\">BBBBB</td><td id='CCCCC' style=\"width: 8% !important;\" title=\"DDDDD\">DDDDD</td><td id=\"EEEEE\" style=\"width: 69% !important;\" title=\"FFFFF\">GGGGG</td></tr>";
+                    str = str.replace(/AAAAA/g, data.MessageId);
+                    str = str.replace(/BBBBB/g, data.Date);
+                    str = str.replace(/CCCCC/g, data.MessageId + "Sender");
+                    str = str.replace(/DDDDD/g, data.Sender);
+                    str = str.replace(/EEEEE/g, data.MessageId + "Message");
+                    str = str.replace(/FFFFF/g, data.Message);
+                    str = str.replace(/GGGGG/g, data.Message.length > 90 ? data.Message.substring(0, 90) : data.Message);
+                    $("#headerRowCommunicationTable").after(str);
+                    window.jonas.currentCommunicationMessageId = data.MessageId;
+                    $("#btnDialogCommunicationMessage").text("Save");
+                    window.jonas.modalState = "EditCommunicationMessage";
+                    $("#dialogCommunicationMessage").dialog("option", "title", "Edit communication message");
+                    alert("New message added successfully");
+                }
+            }
+        });
+    }
+    else {
+        $.ajax({
+            url: "http://www.Nr1Web1.com/Main/UpdateCommunicationMessage",
+            data: {
+                fileNameFullPath: window.jonas.fileNameFullPathToCurrentCommunication.replace(/##/g, "\\"),
+                communication: {
+                    messageId: window.jonas.currentCommunicationMessageId,
+                    date: null,
+                    sender: $("#inputMessageSenderJonas").prop("checked") ? "Jonas" : window.jonas.currentNameCommunicationCounterparty,
+                    message: message
+                }
+            },
+            error: function (data) {
+                $("#contentDivErrorMessage").html(data.responseText);
+                window.jonas.updateCssDisplayForContentDivs("errorMessage");
+            },
+            method: "post",
+            success: function (data) {
+                if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
+                    alert(data);
+                    return;
+                }
+                else {
+                    tdSender = $("#" + data.MessageId + "Sender");
+                    tdMessage = $("#" + data.MessageId + "Message");
+                    tdSender.prop("title", data.Sender);
+                    tdSender.text(data.Sender);
+                    tdMessage.prop("title", data.Message);
+                    tdMessage.text(data.Message.length > 90 ? data.Message.substring(0, 90) : data.Message);
+                    alert("Message updated successfully");
+                }
+            }
+        });
+    }
 };

@@ -651,10 +651,38 @@ namespace WebApplication1.Controllers
                 listWithCommunication = WebApplication1.Models.CommunicationUtility.ReturnListWithCommunications(fileNameFullPath, out errorMessage);
 
             if (errorMessage == null)
+            {
+                ViewBag.FileNameFullPath = fileNameFullPath.Replace("\\", "##");
                 return View("CommunicationTable", listWithCommunication);
+            }
             else
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
-            
+        }
+
+        public JsonResult InsertNewCommunicationMessage(string fileNameFullPath, WebApplication1.Models.Communication communication)
+        {
+            string errorMessage;
+            WebApplication1.Models.Communication newCommunication;
+
+            newCommunication = WebApplication1.Models.CommunicationUtility.InsertNewCommunicationMessage(fileNameFullPath, communication, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(newCommunication, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateCommunicationMessage(string fileNameFullPath, WebApplication1.Models.Communication communication)
+        {
+            string errorMessage;
+            WebApplication1.Models.Communication newCommunication;
+
+            newCommunication = WebApplication1.Models.CommunicationUtility.UpdateCommunicationMessage(fileNameFullPath, communication, out errorMessage);
+
+            if (errorMessage == null)
+                return Json(newCommunication, JsonRequestBehavior.AllowGet);
+            else
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -83,7 +83,7 @@ namespace Leander.Nr1
             return listWithCommunication;
         }
 
-        public static Communication InsertNewMessage(string fileNameFullPath, Communication communication, out string errorMessage)
+        public static Communication InsertNewCommunicationMessage(string fileNameFullPath, Communication communication, out string errorMessage)
         {
             string dimension, fileContents, date, messageId, serializedCommunication;
             int s1, s2;
@@ -131,14 +131,14 @@ namespace Leander.Nr1
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("ERROR!! An Exception occured in method InsertNewMessage! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method InsertNewCommunicationMessage! e.Message:\r\n{0}", e.Message);
                 return null;
             }
 
             return newCommunication;
         }
 
-        public static Communication InsertNewMessageTest(string fileNameFullPath, Communication communication, string d, out string errorMessage)
+        public static Communication InsertNewCommunicationMessageTest(string fileNameFullPath, Communication communication, string d, out string errorMessage)
         {
             string dimension, fileContents, date, messageId, serializedCommunication;
             int s1, s2;
@@ -184,7 +184,7 @@ namespace Leander.Nr1
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("ERROR!! An Exception occured in method InsertNewMessage! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method InsertNewCommunicationMessageTest! e.Message:\r\n{0}", e.Message);
                 return null;
             }
 

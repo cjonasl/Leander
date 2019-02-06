@@ -70,67 +70,72 @@
                 <button id="btnRenderOfHtmlResourceCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaCancel(window.jonas.currentResource, null, $('#btnRenderOfHtmlResourceSave'), $('#btnRenderOfHtmlResourceCancel'), $('#iframeRenderOfHtmlResource'), $('#textareaRenderOfHtmlResource'), 'RenderOfHtmlResource')" style="margin-top: 10px !important; margin-left: 5px !important;">Cancel</button>
               </div>
               <div id="divRenderOfSelfResource"></div>
+            </div>
+            <div id="contentDivErrorMessage" style="display: none;"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div id="dialogResource" style="display: none; background-color: #99ff99 !important; font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important;">
+  <div id="dialogResource" style="display: none; background-color: #99ff99 !important; font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important;">
 
-  <table id="tableResources" style="margin-top: 15px !important;">
-    <tr>
-      <td style="text-align: right !important;" title="Id">Id&nbsp;&nbsp;</td>
-      <td><input id="inputResourceId" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important;" readonly="readonly" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: right !important;" title="Resources type">Type&nbsp;&nbsp;</td>
-      <td><input id="inputResourceResourcesType" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" readonly="readonly" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: right !important;" title="Created">Created&nbsp;&nbsp;</td>
-      <td><input id="inputResourceCreated" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" readonly="readonly" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: right !important;" title="Title">Title&nbsp;&nbsp;</td>
-      <td><input id="inputResourceTitle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: right !important;" title="Note">Note&nbsp;&nbsp;</td>
-      <td><input id="inputResourceNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: right !important;" title="Previous resource">Previous&nbsp;&nbsp;</td>
-      <td><input id="inputResourcePrevious" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important; margin-top: 7px !important;" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: right !important;" title="Next resource">Next&nbsp;&nbsp;</td>
-      <td><input id="inputResourceNext" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important; margin-top: 7px !important;" /></td>
-    </tr>
-  </table>
+    <table id="tableResources" style="margin-top: 15px !important;">
+      <tr>
+        <td style="text-align: right !important;" title="Id">Id&nbsp;&nbsp;</td>
+        <td><input id="inputResourceId" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important;" readonly="readonly" /></td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;" title="Resources type">Type&nbsp;&nbsp;</td>
+        <td><input id="inputResourceResourcesType" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" readonly="readonly" /></td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;" title="Created">Created&nbsp;&nbsp;</td>
+        <td><input id="inputResourceCreated" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" readonly="readonly" /></td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;" title="Title">Title&nbsp;&nbsp;</td>
+        <td><input id="inputResourceTitle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" /></td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;" title="Note">Note&nbsp;&nbsp;</td>
+        <td><input id="inputResourceNote" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" style="width: 900px !important; margin-top: 7px !important;" /></td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;" title="Previous resource">Previous&nbsp;&nbsp;</td>
+        <td><input id="inputResourcePrevious" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important; margin-top: 7px !important;" /></td>
+      </tr>
+      <tr>
+        <td style="text-align: right !important;" title="Next resource">Next&nbsp;&nbsp;</td>
+        <td><input id="inputResourceNext" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="number" style="width: 900px !important; margin-top: 7px !important;" /></td>
+      </tr>
+    </table>
 
-  <div style="margin-top: 10px !important; margin-bottom: 10px !important;">Key words:</div>
+    <div style="margin-top: 10px !important; margin-bottom: 10px !important;">Key words:</div>
 
-  <div id="divKeyWords" style="font-weight: normal !important; font-size: medium !important;"></div>
+    <div id="divKeyWords" style="font-weight: normal !important; font-size: medium !important;"></div>
 
-  <button id="btnSaveResource" class="btnDefaultCss" disabled="disabled" style="margin-left: -2px !important; font-size: smaller !important;" onclick="window.jonas.saveResource()">Save</button>
-  <button id="btnCancelResource" class="btnDefaultCss" disabled="disabled" style="margin-left: 10px !important; font-size: smaller !important;" onclick="window.jonas.cancelResource()">Cancel</button>
-</div>
+    <button id="btnSaveResource" class="btnDefaultCss" disabled="disabled" style="margin-left: -2px !important; font-size: smaller !important;" onclick="window.jonas.saveResource()">Save</button>
+    <button id="btnCancelResource" class="btnDefaultCss" disabled="disabled" style="margin-left: 10px !important; font-size: smaller !important;" onclick="window.jonas.cancelResource()">Cancel</button>
+  </div>
 
+  <div id="dialogEditArbitraryTextFile" style="display: none; background-color: #99ff99 !important;">
+    <textarea id="textareaEditArbitraryTextFile" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: medium !important; margin-top: 15px !important; margin-left: 15px !important; margin-right: 15px !important; margin-bottom: 0px !important; width: 750px; height: 350px; background-color: white !important;"></textarea><br />
+    <button id="btnEditArbitraryTextFileSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaSave(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 15px !important;">Save</button>
+    <button id="btnEditArbitraryTextFileCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaCancel(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 5px !important;">Cancel</button>
+  </div>
 
-<div id="dialogEditArbitraryTextFile" style="display: none; background-color: #99ff99 !important;">
-  <textarea id="textareaEditArbitraryTextFile" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: medium !important; margin-top: 15px !important; margin-left: 15px !important; margin-right: 15px !important; margin-bottom: 0px !important; width: 750px; height: 350px; background-color: white !important;"></textarea><br />
-  <button id="btnEditArbitraryTextFileSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaSave(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 15px !important;">Save</button>
-  <button id="btnEditArbitraryTextFileCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaCancel(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 5px !important;">Cancel</button>
-</div>
+  <div id="dialogCommunicationMessage" style="display: none; background-color: #99ff99 !important;">
+    <div style="font-family: 'Times New Roman' !important; font-size: large !important; font-weight: bold !important; margin-bottom: 3px !important;">Sender:</div>
+    <input id="inputMessageSenderJonas" type="radio" name="messageSender" checked="checked" />&nbsp;<span style="position: relative; top: 4px; font-family: Arial !important; font-size: small !important; font-weight: bold;">Jonas</span>&nbsp;&nbsp;
+    <input id="inputMessageSenderCounterparty" type="radio" name="messageSender" />&nbsp;<span id="spanCurrentNameCommunicationCounterparty" style="position: relative; top: 4px; font-family: Arial !important; font-size: small !important; font-weight: bold;"></span><br />
+    <textarea id="textareaCommunicationMessage" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; margin-top: 20px !important; margin-bottom: 10px !important; width: 600px; height: 200px; background-color: white !important; margin-left: 0px;"></textarea><br />
+    <button id="btnDialogCommunicationMessage" style="font-family: Arial !important; font-size: medium; font-weight: bold;" onclick="window.jonas.handleCommunicationMessage()">Add</button>
+  </div>
 
-
-
-
-<script>
+  <script>
   $(document).ready(function () {
     window.jonas.newLocation(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, false);
     window.jonas.maxResourceId = @ViewBag.MaxResourceId;
   });
-</script>
+  </script>

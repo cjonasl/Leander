@@ -297,6 +297,7 @@
       var nonDefaultLocation = $("#contentDivNonDefaultLocation");
       var searchResultResources = $("#contentDivSearchResultResources");
       var renderOfResource = $("#contentDivRenderOfResource");
+      var errorMessage = $("#contentDivErrorMessage");
 
       if ((newLocation !== "defaultLocation") && (defaultLocation.css("display") !== "none"))
         defaultLocation.css("display", "none");
@@ -321,6 +322,12 @@
 
       if ((newLocation === "renderOfResource") && (renderOfResource.css("display") !== "block"))
         renderOfResource.css("display", "block");
+
+      if ((newLocation !== "errorMessage") && (errorMessage.css("display") !== "none"))
+        errorMessage.css("display", "none");
+
+      if ((newLocation === "errorMessage") && (errorMessage.css("display") !== "block"))
+        errorMessage.css("display", "block");
 
       window.jonas.location = newLocation;
     }
@@ -368,7 +375,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/SaveTextArea",
         data: locationExtension,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
           if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -398,7 +408,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/NewLocation",
         data: location,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
           if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -470,11 +483,11 @@
       for (i = 0; i < a; i++) {
         index = numberOfRadiobuttonsInOneRow * i;
 
-        str = "<div style='font-size: medium !important;'><input id='" + prefix + arrayWithRadiobuttonData[index].Id + "' type='radio' name='" + name + "' style='margin-bottom: 8px;' " + eventHandler + " />&nbsp;" + arrayWithRadiobuttonData[index].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
+        str = "<div style='font-size: medium !important;'><input id='" + prefix + arrayWithRadiobuttonData[index].Id + "' type='radio' name='" + name + "' data-label='" + arrayWithRadiobuttonData[index].Text + "' style='margin-bottom: 8px;' " + eventHandler + " />&nbsp;" + arrayWithRadiobuttonData[index].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
 
         for (j = 1; j <= (numberOfRadiobuttonsInOneRow - 1); j++) {
           if ((index + j) < total) {
-            str += "<input id='" + prefix + arrayWithRadiobuttonData[index + j].Id + "' type='radio' name='" + name + "' style='margin-bottom: 8px;' " + eventHandler + " />&nbsp;" + arrayWithRadiobuttonData[index + j].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
+            str += "<input id='" + prefix + arrayWithRadiobuttonData[index + j].Id + "' type='radio' name='" + name + "' data-label='" + arrayWithRadiobuttonData[index + j].Text + "' style='margin-bottom: 8px;' " + eventHandler + " />&nbsp;" + arrayWithRadiobuttonData[index + j].Text + "&nbsp;&nbsp;&nbsp;&nbsp;";
           }
           else
             break;
@@ -704,7 +717,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/ExecuteCommand",
         data: command,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
           if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "ERROR")) {
@@ -797,7 +813,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/NewLocation",
         data: location,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
           if (typeof data === "object") { //Default location. Update icon, title, tab1-tab10 (if not new location by change of tab) and for textarea the text, width and height
@@ -848,7 +867,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/SearchResource",
         data: { searchTerm: $("#searchTerm").val() },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
           $("#contentDivSearchResultResources").html(data);
@@ -961,7 +983,15 @@
             window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile = "";
 
             if (window.jonas.idTdBytesInDiary)
-              window.jonas.updateBytesInDiaryAndDiaerWarningMessage();
+              window.jonas.updateBytesInDiaryAndDiaryWarningMessage();
+          }
+          else if (window.jonas.modalState === "NewCommunicationMessage") {
+            $("#textareaCommunicationMessage").val("");
+          }
+          else if (window.jonas.modalState === "EditCommunicationMessage") {
+            $("#textareaCommunicationMessage").val("");
+            $("#btnDialogCommunicationMessage").text("Add");
+            window.jonas.currentCommunicationMessageId = "";
           }
           else {
             alert("ERROR!! Incorrect modal state: " + window.jonas.modalState);
@@ -998,7 +1028,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/SaveKeyWord",
         data: keyWord,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
           var tmp, element = "<tr>";
@@ -1178,7 +1211,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/SaveResource",
         data: resource,
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
 
@@ -1279,7 +1315,10 @@
       $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetResource",
         data: { id: id },
-        error: function (data) { alert("An error happened! Error message: " + data.responseText); console.log(data); },
+        error: function (data) {
+          $("#contentDivErrorMessage").html(data.responseText);
+          window.jonas.updateCssDisplayForContentDivs("errorMessage");
+        },
         method: "post",
         success: function (data) {
           if (typeof data === "string") {

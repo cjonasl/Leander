@@ -37,7 +37,7 @@ namespace WebApplication1.Models
 
         private static string SerializeCommunication(Communication communication)
         {
-            return string.Format("{0}-- New property --{1}-- New property --{2}-- New message --{3}", communication.MessageId, communication.Date, communication.Sender.ToString().ToLower(), communication.Message);
+            return string.Format("{0}-- New property --{1}-- New property --{2}-- New message --{3}", communication.MessageId, communication.Date, communication.Sender, communication.Message);
         }
 
         private static int ReturnNextPrefixSequenceNumber(string messageId)
@@ -69,11 +69,14 @@ namespace WebApplication1.Models
                 fileContents = Utility.ReturnFileContents(fileNameFullPath);
                 fileContents = fileContents.Length > 12 ? fileContents.Substring(12) : "";
 
-                v = fileContents.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-
-                for(int i = 0; i < v.Length; i++)
+                if (!string.IsNullOrEmpty(fileContents))
                 {
-                    listWithCommunication.Add(DeserializeCommunication(v[i]));
+                    v = fileContents.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+
+                    for (int i = 0; i < v.Length; i++)
+                    {
+                        listWithCommunication.Add(DeserializeCommunication(v[i]));
+                    }
                 }
             }
             catch (Exception e)
@@ -85,7 +88,7 @@ namespace WebApplication1.Models
             return listWithCommunication;
         }
 
-        public static Communication InsertNewMessage(string fileNameFullPath, Communication communication, out string errorMessage)
+        public static Communication InsertNewCommunicationMessage(string fileNameFullPath, Communication communication, out string errorMessage)
         {
             string dimension, fileContents, date, messageId, serializedCommunication;
             int s1, s2;
@@ -133,11 +136,96 @@ namespace WebApplication1.Models
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("ERROR!! An Exception occured in method InsertNewMessage! e.Message:\r\n{0}", e.Message);
+                errorMessage = string.Format("ERROR!! An Exception occured in method InsertNewCommunicationMessage! e.Message:\r\n{0}", e.Message);
                 return null;
             }
 
             return newCommunication;
+        }
+
+        public static Communication ReturnCommunication(string fileNameFullPath, string messageId, out string start, out string end, out string errorMessage)
+        {
+            Communication deserializedCommunication;
+            string fileContents, serializedCommunication;
+            int index1, index2;
+
+            errorMessage = null;
+            start = null;
+            end = null;
+
+            try
+            {
+                if (!System.IO.File.Exists(fileNameFullPath))
+                {
+                    errorMessage = string.Format("ERROR!! The following file does not exisat as expected: {0}", fileNameFullPath);
+                    return null;
+                }
+
+                fileContents = Utility.ReturnFileContents(fileNameFullPath);
+
+                index1 = fileContents.IndexOf(messageId);
+
+                if (index1 == -1)
+                {
+                    errorMessage = string.Format("ERROR!! Can not find messageId = \"{0}\" in file {1}", messageId, fileNameFullPath);
+                    return null;
+                }
+
+                start = fileContents.Substring(0, index1);
+
+                if (messageId.StartsWith("N000001D"))
+                {
+                    serializedCommunication = fileContents.Substring(index1);
+                    end = "";
+                }
+                else
+                {
+                    index2 = fileContents.IndexOf("\r\n", index1);
+                    serializedCommunication = fileContents.Substring(index1, index2 - index1);
+                    end = fileContents.Substring(2 + index2);
+                }
+
+                deserializedCommunication = DeserializeCommunication(serializedCommunication);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method ReturnCommunication! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return deserializedCommunication;
+        }
+
+        public static Communication UpdateCommunicationMessage(string fileNameFullPath, Communication communication, out string errorMessage)
+        {
+            string start, end, serializedCommunication;
+            Communication tmpCommunication;
+
+            errorMessage = null;
+
+            try
+            {
+                tmpCommunication = ReturnCommunication(fileNameFullPath, communication.MessageId, out start, out end, out errorMessage);
+
+                if (errorMessage != null)
+                    return null;
+
+                tmpCommunication.Sender = communication.Sender;
+                tmpCommunication.Message = communication.Message.Replace("\n", "-- New Row --");
+                serializedCommunication = SerializeCommunication(tmpCommunication);
+
+                if (!string.IsNullOrEmpty(end))
+                    serializedCommunication += "\r\n";
+
+                Utility.CreateNewFile(fileNameFullPath, start + serializedCommunication + end);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method UpdateCommunicationMessage! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return DeserializeCommunication(serializedCommunication);
         }
     }
 }

@@ -1,20 +1,36 @@
 ﻿@model List<WebApplication1.Models.Communication>
 
+<div style="margin-bottom: 10px !important; margin-left: 4px;"><a class="aBlue" href="javascript: window.jonas.openDialogToAddCommunicationMessage()">Add new message</a></div>
+
 <table class="defaultTableStyle">
-  <tr>
+  <tr id="headerRowCommunicationTable">
     <th style="width: 8% !important;">&nbsp;Id</th>
     <th style="width: 15% !important;">&nbsp;Date</th>
     <th style="width: 8% !important;">&nbsp;Sender</th>
     <th style="width: 69% !important;">&nbsp;Message</th>
   </tr>
 
+  @{
+      string idSender, idMessage, messageShort;
+  }
+
   @foreach (WebApplication1.Models.Communication com in Model)
   {
-    <tr>
-      <td style="width: 8% !important;" title="@com.MessageId"><a href="javascript: window.jonas.openMessageForEdit('@com.MessageId')">@com.MessageId</a></td>
+      idSender = com.MessageId + "Sender";
+      idMessage = com.MessageId + "Message";
+      messageShort = com.Message.Length > 90 ? com.Message.Substring(0, 90) : com.Message;
+
+      <tr>
+      <td style="width: 8% !important;" title="@com.MessageId"><a href="javascript: window.jonas.openModalToEditCommunicationMessage('@com.MessageId')">@com.MessageId</a></td>
       <td style="width: 15% !important;" title="@com.Date">@com.Date</td>
-      <td style="width: 8% !important;" title="@com.Sender">@com.Sender</td>
-      <td style="width: 69% !important;" title="@com.Message">@com.Message.Substring(0, 90)</td>
+      <td id="@idSender" style="width: 8% !important;" title="@com.Sender">@com.Sender</td>
+      <td id="@idMessage" style="width: 69% !important;" title="@com.Message">@messageShort</td>
     </tr>
   }
 </table>
+
+<script>
+  $(document).ready(function () {
+    window.jonas.fileNameFullPathToCurrentCommunication = "@ViewBag.FileNameFullPath";
+  });
+</script>

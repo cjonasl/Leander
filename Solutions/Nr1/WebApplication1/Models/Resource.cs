@@ -41,7 +41,7 @@ namespace WebApplication1.Models
             string created,
             string title,
             string keyWords,
-            string note, 
+            string note,
             int previousResource,
             int nextResource,
             string thumbUpLocation,
@@ -62,7 +62,7 @@ namespace WebApplication1.Models
             this.Files = string.IsNullOrEmpty(files) ? null : files;
             this.Links = string.IsNullOrEmpty(links) ? null : links;
         }
-    }  
+    }
 
     public static class ResourceUtility
     {
@@ -119,7 +119,7 @@ namespace WebApplication1.Models
 
             v = resource.Split(new string[] { "\r\n\r\n----- New property -----\r\n\r\n" }, StringSplitOptions.None);
 
-            switch(v[1])
+            switch (v[1])
             {
                 case "ThumbUpLocation":
                     resourcesType = ResourcesType.ThumbUpLocation;
@@ -149,7 +149,7 @@ namespace WebApplication1.Models
 
             list = new List<Image>();
 
-            for(i = 0; i < fileNamesShort.Count; i++)
+            for (i = 0; i < fileNamesShort.Count; i++)
             {
                 if (fileNamesShort[i].Trim().ToLower().EndsWith(".png") || fileNamesShort[i].Trim().ToLower().EndsWith(".jpg"))
                 {
@@ -192,7 +192,7 @@ namespace WebApplication1.Models
             {
                 resourceDeserialized.HtmlFileText = Utility.ReturnFileContents(_basePath + resourceDeserialized.HtmlFile);
                 Utility.ReturnTextExceptFirstRow(resourceDeserialized.HtmlFileText, out firstRow);
-                 
+
                 if (!Utility.CheckFirstRowInHtmlResource(firstRow, false, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
                 {
                     return null;
@@ -225,44 +225,35 @@ namespace WebApplication1.Models
                     resourceDeserialized.DirectoryNames = new List<string>();
                     resourceDeserialized.FileCreationDate = new List<string>();
                     resourceDeserialized.FileUpdatedDate = new List<string>();
-                }
-                else
-                {
-                    resourceDeserialized.FileNamesShort = null;
-                    resourceDeserialized.DirectoryNames = null;
-                    resourceDeserialized.FileCreationDate = null;
-                    resourceDeserialized.FileUpdatedDate = null;
-                }
 
-                if (filesInResourceDirectory.Length > 1)
-                {
-                    for (i = 0; i < filesInResourceDirectory.Length; i++)
+                    if (filesInResourceDirectory.Length > 1)
                     {
-                        if ((new FileInfo(filesInResourceDirectory[i])).Name != string.Format("R{0}.txt", resourceDeserialized.Id))
+                        for (i = 0; i < filesInResourceDirectory.Length; i++)
                         {
-                            tmp.Add(filesInResourceDirectory[i].Trim().ToLower());
-                            Utility.AddFileInfo(filesInResourceDirectory[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                            if ((new FileInfo(filesInResourceDirectory[i])).Name != string.Format("R{0}.txt", resourceDeserialized.Id))
+                            {
+                                tmp.Add(filesInResourceDirectory[i].Trim().ToLower());
+                                Utility.AddFileInfo(filesInResourceDirectory[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                            }
                         }
                     }
-                }
 
-                if (!string.IsNullOrEmpty(resourceDeserialized.Files))
-                {
-                    u = resourceDeserialized.Files.Split('\n');
-
-                    for(i = 0; i < u.Length; i++)
+                    if (!string.IsNullOrEmpty(resourceDeserialized.Files))
                     {
-                        if (System.IO.File.Exists(u[i]) && (tmp.IndexOf(u[i].Trim().ToLower()) == -1))
+                        u = resourceDeserialized.Files.Split('\n');
+
+                        for (i = 0; i < u.Length; i++)
                         {
-                            tmp.Add(u[i].Trim().ToLower());
-                            Utility.AddFileInfo(u[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
-                        }
-                        else
-                        {
-                            if (!System.IO.Directory.Exists(u[i]))
+                            if (!System.IO.File.Exists(u[i]) && !System.IO.Directory.Exists(u[i]))
                             {
                                 errorMessage = string.Format("ERROR!! A name, \"{0}\" is found in list of files/folders that is neither an existing file nor a directory!!", u[i]);
                                 return null;
+                            }
+
+                            if (System.IO.File.Exists(u[i]) && (tmp.IndexOf(u[i].Trim().ToLower()) == -1))
+                            {
+                                tmp.Add(u[i].Trim().ToLower());
+                                Utility.AddFileInfo(u[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
                             }
                             else
                             {
@@ -313,13 +304,20 @@ namespace WebApplication1.Models
 
                     Utility.Sort(fileNamesShort, directoryNames, fileCreationDate, fileCreationDate);
 
-                    for(i = 0; i < fileNamesShort.Count; i++)
+                    for (i = 0; i < fileNamesShort.Count; i++)
                     {
                         resourceDeserialized.FileNamesShort.Add((string)fileNamesShort[i]);
                         resourceDeserialized.DirectoryNames.Add("Folder: " + (string)directoryNames[i]);
                         resourceDeserialized.FileCreationDate.Add((string)fileCreationDate[i]);
                         resourceDeserialized.FileUpdatedDate.Add((string)fileUpdatedDate[i]);
-                    }          
+                    }
+                }
+                else
+                {
+                    resourceDeserialized.FileNamesShort = null;
+                    resourceDeserialized.DirectoryNames = null;
+                    resourceDeserialized.FileCreationDate = null;
+                    resourceDeserialized.FileUpdatedDate = null;
                 }
 
                 resourceDeserialized.ListWithImages = ProcessImagesForASelfResource(resourceDeserialized.FileNamesShort, resourceDeserialized.DirectoryNames);
@@ -549,7 +547,7 @@ namespace WebApplication1.Models
                     Utility.CreateNewFile(fileNameFullPath, string.Format("{0} {1} {2}", newResource.PreviousResource, newResource.Id, newResource.NextResource));
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 errorMessage = string.Format("ERROR!! An Exception occured in method AddResource! e.Message:\r\n{0}", e.Message);
                 return null;
@@ -676,7 +674,7 @@ namespace WebApplication1.Models
 
                 fileText = Utility.ReturnFileContents(_basePath + resource.HtmlFile);
                 textExceptFirstRow = Utility.ReturnTextExceptFirstRow(fileText, out firstRow);
-                
+
                 if (Utility.CheckFirstRowInHtmlResource(firstRow, true, out firstRowTemplate, out ifw, out ifh, out tw, out th, out errorMessage))
                 {
                     Utility.CreateNewFile(_basePath + resource.HtmlFile, firstRowTemplate.Replace("#####REPLACE#####", string.Format("{0},{1}", width.ToString(), height.ToString())) + textExceptFirstRow);
@@ -798,7 +796,7 @@ namespace WebApplication1.Models
 
                     if (errorMessage == null)
                         listWithAllResources.Add(resource);
-                    
+
                     id++;
                 }
             }
