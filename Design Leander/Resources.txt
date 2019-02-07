@@ -355,3 +355,23 @@ details summary
 ----- New property -----
 
 Adhoc,HTML
+
+---------- New resource ----------
+
+19
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-06 19:20:39
+
+----- New property -----
+
+Sign up Azure
+
+----- New property -----
+
+Admin,Azure

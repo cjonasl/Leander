@@ -688,7 +688,7 @@ window.jonas.handleCommunicationMessage = function () {
             }
         });
     }
-    else {
+    else { //Update
         $.ajax({
             url: "http://www.Nr1Web1.com/Main/UpdateCommunicationMessage",
             data: {

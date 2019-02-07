@@ -1,0 +1,91 @@
+﻿@model List<WebApplication1.Models.PersonInfo1>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AddressBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <style>
+    #persons {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+      #persons td, #persons th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #persons tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #persons th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      a:link, a:visited, a:hover, a:active {
+      color: blue !important;
+      text-decoration: none !important;
+      }
+  </style>
+</head>
+<body style="margin-left: 100px !important;">
+  <h2>Address book</h2>
+
+  <table id="persons">
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Action</th>
+    </tr>
+
+    @foreach (var person in Model)
+    {
+      <tr>
+        <td>@person.FirstName</td>
+        <td>@person.LastName</td>
+        <td>
+          <a href="javascript: window.jonas.show(@person.Id)">Show</a>&nbsp;
+          <a href="javascript: window.jonas.edit(@person.Id)">Edit</a>&nbsp;
+          <a href="javascript: window.jonas.delete(@person.Id)">Delete</a>
+        </td>
+      </tr>
+    }
+  </table>
+  <div style="margin-top: 20px !important; font-size: large;"><a href="javascript: window.jonas.add()">Add new</a></div>
+
+  <script>
+    $(document).ready(function () {
+      window.jonas = new Object();
+
+      window.jonas.add = function () {
+        alert("Add new");
+      }
+
+      window.jonas.show = function (id) {
+        alert("Show " + id);
+      }
+
+      window.jonas.edit = function (id) {
+        alert("Edit " + id);
+      }
+
+      window.jonas.delete = function (id) {
+        alert("Delete " + id);
+      }
+
+    });
+  </script>
+</body>
+</html>
+

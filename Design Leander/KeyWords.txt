@@ -251,3 +251,51 @@ backbone
 ----- New property -----
 
 Resources rörande backbone.js
+
+---------- New key word ----------
+
+17
+
+----- New property -----
+
+2019-02-06 18:36:39
+
+----- New property -----
+
+Admin
+
+----- New property -----
+
+For administration (email, telephone numbers etc.)
+
+---------- New key word ----------
+
+18
+
+----- New property -----
+
+2019-02-06 18:37:15
+
+----- New property -----
+
+CarlJonasLtd
+
+----- New property -----
+
+Resources regarding my company CarlJonasLtd
+
+---------- New key word ----------
+
+19
+
+----- New property -----
+
+2019-02-06 18:54:31
+
+----- New property -----
+
+Azure
+
+----- New property -----
+
+Resources regarding Azure

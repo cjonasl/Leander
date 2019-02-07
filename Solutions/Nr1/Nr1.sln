@@ -5,19 +5,7 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{0C6A9E3E-CEDC-4D94-AE00-44FD7A1B9761}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{D50C339D-DBC3-4EB8-9694-E5320C013967}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{ED39ED60-C258-408A-9731-4DB9924F4B79}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{016271D6-3683-4654-8C83-8A90A994F394}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jonas", "Jonas\Jonas.csproj", "{CA7C613C-C4B1-4BF4-8E7F-1624CF14D9DC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigation", "Navigation\Navigation.csproj", "{BAB32D99-9C4F-48DA-AAFD-9AD887D84629}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonyEventing", "HarmonyEventing\HarmonyEventing.csproj", "{F23D2529-9442-4E22-B0A1-9CF90EC9819F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku", "Sudoku\Sudoku.csproj", "{9343B283-799E-46BD-B343-1F2770D843C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,34 +17,10 @@ Global
 		{0C6A9E3E-CEDC-4D94-AE00-44FD7A1B9761}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C6A9E3E-CEDC-4D94-AE00-44FD7A1B9761}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C6A9E3E-CEDC-4D94-AE00-44FD7A1B9761}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D50C339D-DBC3-4EB8-9694-E5320C013967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D50C339D-DBC3-4EB8-9694-E5320C013967}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D50C339D-DBC3-4EB8-9694-E5320C013967}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D50C339D-DBC3-4EB8-9694-E5320C013967}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED39ED60-C258-408A-9731-4DB9924F4B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED39ED60-C258-408A-9731-4DB9924F4B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED39ED60-C258-408A-9731-4DB9924F4B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED39ED60-C258-408A-9731-4DB9924F4B79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{016271D6-3683-4654-8C83-8A90A994F394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{016271D6-3683-4654-8C83-8A90A994F394}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{016271D6-3683-4654-8C83-8A90A994F394}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{016271D6-3683-4654-8C83-8A90A994F394}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA7C613C-C4B1-4BF4-8E7F-1624CF14D9DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA7C613C-C4B1-4BF4-8E7F-1624CF14D9DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA7C613C-C4B1-4BF4-8E7F-1624CF14D9DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA7C613C-C4B1-4BF4-8E7F-1624CF14D9DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAB32D99-9C4F-48DA-AAFD-9AD887D84629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAB32D99-9C4F-48DA-AAFD-9AD887D84629}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAB32D99-9C4F-48DA-AAFD-9AD887D84629}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAB32D99-9C4F-48DA-AAFD-9AD887D84629}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F23D2529-9442-4E22-B0A1-9CF90EC9819F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F23D2529-9442-4E22-B0A1-9CF90EC9819F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F23D2529-9442-4E22-B0A1-9CF90EC9819F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F23D2529-9442-4E22-B0A1-9CF90EC9819F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9343B283-799E-46BD-B343-1F2770D843C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9343B283-799E-46BD-B343-1F2770D843C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9343B283-799E-46BD-B343-1F2770D843C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9343B283-799E-46BD-B343-1F2770D843C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,12 +20,12 @@
       idMessage = com.MessageId + "Message";
       messageShort = com.Message.Length > 90 ? com.Message.Substring(0, 90) : com.Message;
 
-      <tr>
-      <td style="width: 8% !important;" title="@com.MessageId"><a href="javascript: window.jonas.openModalToEditCommunicationMessage('@com.MessageId')">@com.MessageId</a></td>
-      <td style="width: 15% !important;" title="@com.Date">@com.Date</td>
-      <td id="@idSender" style="width: 8% !important;" title="@com.Sender">@com.Sender</td>
-      <td id="@idMessage" style="width: 69% !important;" title="@com.Message">@messageShort</td>
-    </tr>
+     <tr>
+        <td style="width: 8% !important;" title="@com.MessageId"><a href="javascript: window.jonas.openModalToEditCommunicationMessage('@com.MessageId')">@com.MessageId</a></td>
+        <td style="width: 15% !important;" title="@com.Date">@com.Date</td>
+        <td id="@idSender" style="width: 8% !important;" title="@com.Sender">@com.Sender</td>
+        <td id="@idMessage" style="width: 69% !important;" title="@com.Message">@messageShort</td>
+     </tr>
   }
 </table>
 

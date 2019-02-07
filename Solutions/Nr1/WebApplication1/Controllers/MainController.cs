@@ -172,7 +172,7 @@ namespace WebApplication1.Controllers
                         ViewBag.TodaysDayIsInFile = todaysDayIsInFile;
                         ViewBag.ErrorMessage = errorMessage;
                         return View("DayDateDiaryBytesInDiary1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DayDateDiaryBytesInDiary1.cshtml"));
-                    case "Page2Menu1Sub1Sub1Tab1":
+                    case "Page3Menu1Sub1Sub1Tab1":
                         return View("InfoThumbUp", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##InfoThumbUp.cshtml"));
                     default:
                         return Json(GetDefaultDataForNewLocation(location), JsonRequestBehavior.AllowGet);
@@ -241,7 +241,7 @@ namespace WebApplication1.Controllers
                     }
 
                     if (!Utility.IsSearchTermUniqueInString(fileContents, searchTerm, out startIndexSearchTerm, out errorMessage))
-                        return Json(string.Format("ERROR!!\r\n", errorMessage), JsonRequestBehavior.AllowGet);
+                        return Json(string.Format("ERROR!!\r\n{0}", errorMessage), JsonRequestBehavior.AllowGet);
 
                     index = fileContents.IndexOf("</span>", startIndexSearchTerm + searchTerm.Length - 1);
 
@@ -499,7 +499,7 @@ namespace WebApplication1.Controllers
                     if (!System.IO.File.Exists(saveFileTextData.Str))
                         errorMessage = string.Format("ERROR!! The file {0} does not exist!", saveFileTextData.Str);
                     else
-                        Utility.CreateNewFile(saveFileTextData.Str, saveFileTextData.Text);
+                        Utility.CreateNewFile(saveFileTextData.Str, saveFileTextData.Text.Replace("\n", "\r\n"));
                 }
             }
             catch (Exception e)
