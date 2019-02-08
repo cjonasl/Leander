@@ -122,7 +122,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\AddressBook1\GetAddressBook.cshtml" />
+    <Content Include="Views\AddressBook1\AddressBook.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

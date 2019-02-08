@@ -1,0 +1,345 @@
+﻿@model List<WebApplication1.Models.PersonInfo1>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Address book</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <style>
+    #persons {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+      #persons td, #persons th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #persons tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #persons th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      a:link, a:visited, a:hover, a:active {
+        color: blue !important;
+        text-decoration: none !important;
+      }
+  </style>
+</head>
+<body style="margin-left: 100px !important;">
+  <h2>Address book</h2>
+
+  <div id="errorMessage" style="display: none;"></div>
+
+  <table id="persons">
+    <tr id="tableHeaderRow">
+      <th style="width: 30%;">First name</th>
+      <th style="width: 45%;">Last name</th>
+      <th style="width: 25%;">Action</th>
+    </tr>
+
+    @{ 
+        string id;
+    }
+
+    @foreach (var person in Model)
+    {
+      id = "person" + person.Id;
+
+      <tr id="@id">
+        <td data-value="FirstName">@person.FirstName</td>
+        <td data-value="LastName">@person.LastName</td>
+        <td>
+          <a href="javascript: window.jonas.show(@person.Id)">Show</a>
+          <a href="javascript: window.jonas.edit(@person.Id)" style="margin-left: 4px;">Edit</a>
+          <a href="javascript: window.jonas.delete(@person.Id)" style="margin-left: 4px;">Delete</a>
+        </td>
+      </tr>
+    }
+  </table>
+  <div style="margin-top: 20px !important; font-size: large;"><a href="javascript: window.jonas.add()">Add new</a></div>
+
+
+  <div id="divDialog" style="display: none; background-color: lightgray;">
+    <table id="tablePersonInfo">
+      <tr><td style="font-weight: bold;">First name</td> <td><input id="inputFirstName" class="addEditMode" type="text" /><span id="spanFirstName" class="showMode"></span></td></tr>
+      <tr><td style="font-weight: bold;">Last name</td> <td><input id="inputLastName" class="addEditMode" type="text" /><span id="spanLastName" class="showMode"></span></td></tr>
+      <tr>
+        <td style="font-weight: bold;">Gender</td>
+        <td>
+          <input id="genderMale" name="gender" class="addEditMode" type="radio" checked="checked" data-value="Male" /><span class="addEditMode">&nbsp;Male</span>
+          <input id="genderFemale" name="gender" class="addEditMode" type="radio" data-value="Female" /><span class="addEditMode">&nbsp;Female</span>
+          <input id="genderOther" name="gender" class="addEditMode" type="radio" data-value="Other" /><span class="addEditMode">&nbsp;Other</span>
+          <span class="showMode" id="spanGender"></span>
+        </td>
+      </tr>
+      <tr><td style="font-weight: bold;">Date of birth</td> <td><input id="inputDateOfBirth" class="addEditMode" type="date" /><span id="spanDateOfBirth" class="showMode"></span></td></tr>
+      <tr><td style="font-weight: bold;">Phone</td> <td><input id="inputPhone" class="addEditMode" type="tel" /><span id="spanPhone" class="showMode"></span></td></tr>
+      <tr><td style="font-weight: bold;">Address</td> <td><input id="inputAddress" class="addEditMode" type="text" /><span id="spanAddress" class="showMode"></span></td></tr>
+      <tr><td style="font-weight: bold;">Town</td> <td><input id="inputTown" class="addEditMode" type="text" /><span id="spanTown" class="showMode"></span></td></tr>
+      <tr><td style="font-weight: bold;">Postcode</td> <td><input id="inputPostCode" class="addEditMode" /><span id="spanPostCode" class="showMode"></span></td></tr>
+      <tr>
+        <td style="font-weight: bold;">Country</td>
+        <td>
+          <select id="selectCountry" class="addEditMode">
+            <option selected="selected">United Kingdom</option>
+            <option>USA</option>
+            <option>France</option>
+            <option>Australia</option>
+            <option>Other</option>
+          </select>
+
+          <span id="spanCountry" class="showMode"></span>
+        </td>
+      </tr>
+      <tr><td style="font-weight: bold;">Is close friend</td> <td><input id="inputIsCloseFriend" class="addEditMode" type="checkbox" /><span id="spanIsCloseFriend" class="showMode"></span></td></tr>
+      <tr id="trBlank"><td colspan="2">&nbsp;</td></tr>
+      <tr id="trButton"><td colspan="2"><button onclick="window.jonas.handleSave()">Save</button></td></tr>
+    </table>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      window.jonas = new Object();
+
+      window.jonas.baseUrl = "http://www.Nr2Web1.com/AddressBook1/";
+      window.jonas.currentId = 0;
+      window.jonas.newPersonAdded = false;
+
+      window.jonas.openModal = function (title, width, height) {
+        var options, popup;
+
+        options = {
+          modal: true,
+          title: title,
+          position: { my: "center", at: "center", of: window },
+          width: width,
+          height: height,
+          close: function () {
+            if (window.jonas.newPersonAdded) {
+              window.jonas.newPersonAdded = false;
+              window.location = window.jonas.baseUrl + "GetAll";
+            }
+          }
+        }
+
+        popup = $("#divDialog");
+        popup.dialog(options);
+        popup.dialog('open');
+        popup.show();
+      }
+
+      window.jonas.setEditData = function (firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend) {
+        $("#inputFirstName").val(firstName);
+        $("#inputLastName").val(lastName);
+        $("#gender" + gender).prop("checked", true);
+        $("#inputDateOfBirth").val(dateOfBirth);
+        $("#inputPhone").val(phone);
+        $("#inputAddress").val(address);
+        $("#inputTown").val(town);
+        $("#inputPostCode").val(postCode);
+        $("#selectCountry").val(country);
+        $("#inputIsCloseFriend").prop("checked", isCloseFriend);
+      }
+
+      window.jonas.setSpanData = function (firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend) {
+        $("#spanFirstName").text(firstName);
+        $("#spanLastName").text(lastName);
+        $("#spanGender").text(gender);
+        $("#spanDateOfBirth").text(dateOfBirth);
+        $("#spanPhone").text(phone);
+        $("#spanAddress").text(address);
+        $("#spanTown").text(town);
+        $("#spanPostCode").text(postCode);
+        $("#spanCountry").text(country);
+        $("#spanIsCloseFriend").text(isCloseFriend);
+      }
+
+      window.jonas.add = function () {
+        window.jonas.setEditData("", "", "Male", "", "", "", "", "", "United Kingdom", false); //Set default data
+        $(".addEditMode").show();
+        $("#trBlank").show();
+        $("#trButton").show();
+        $(".showMode").hide();
+        window.jonas.currentId = 0;
+        window.jonas.openModal("Add new person", 400, 400);
+      }
+
+      window.jonas.show = function (id) {
+        $(".showMode").show();
+        $(".addEditMode").hide();
+        $("#trBlank").hide();
+        $("#trButton").hide();
+        
+        $.ajax({
+          url: window.jonas.baseUrl + "GetSingle",
+          data: { id: id },
+          error: function (data) {
+            $("#errorMessage").html(data.responseText);
+            $("#errorMessage").show();
+          },
+          method: "get",
+          success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "Error")) {
+              alert(data);
+              return;
+            }
+            else {
+              window.jonas.setSpanData(data.FirstName, data.LastName, data.Gender, data.DateOfBirth, data.Phone, data.Address, data.Town, data.PostCode, data.Country, data.IsCloseFriend);
+              window.jonas.openModal("Data for " + data.FirstName + " " + data.LastName, 400, 300);
+            }
+          }
+        });
+      }
+
+      window.jonas.edit = function (id) {
+        $(".addEditMode").show();
+        $("#trBlank").show();
+        $("#trButton").show();
+        $(".showMode").hide();
+
+        $.ajax({
+          url: window.jonas.baseUrl + "GetSingle",
+          data: { id: id },
+          error: function (data) {
+            $("#errorMessage").html(data.responseText);
+            $("#errorMessage").show();
+          },
+          method: "get",
+          success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "Error")) {
+              alert(data);
+              return;
+            }
+            else {
+              window.jonas.setEditData(data.FirstName, data.LastName, data.Gender, data.DateOfBirth, data.Phone, data.Address, data.Town, data.PostCode, data.Country, data.IsCloseFriend);
+              window.jonas.openModal("Edit " + data.FirstName + " " + data.LastName, 400, 400);
+              window.jonas.currentId = id;
+            }
+          }
+        });
+      }
+
+      window.jonas.delete = function (id) {
+        var firstName, lastName, answer;
+
+        firstName = $("td[data-value='FirstName']", $("#person" + id)).text();
+        lastName = $("td[data-value='LastName']", $("#person" + id)).text();
+
+        answer = window.confirm("Are you sure you want to delete " + firstName + " " + lastName + "?");
+
+        if (answer) {
+          $.ajax({
+            url: window.jonas.baseUrl + "Delete",
+            data: { id: id },
+            error: function (data) {
+              $("#errorMessage").html(data.responseText);
+              $("#errorMessage").show();
+            },
+            method: "get",
+            success: function (data) {
+              if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "Error")) {
+                alert(data);
+                return;
+              }
+              else {
+                $("#person" + id).remove();
+                alert(firstName + " " + lastName + " was deleted successfully");
+              }
+            }
+          });
+        }
+      }
+
+      window.jonas.handleSave = function() {
+        var str, mode, personInfo, firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend;
+
+        firstName = $("#inputFirstName").val().trim();
+        lastName = $("#inputLastName").val().trim();
+        gender = $("input[name='gender']:checked").attr("data-value");
+        dateOfBirth = $("#inputDateOfBirth").val();
+        phone = $("#inputPhone").val().trim();
+        address = $("#inputAddress").val().trim();
+        town = $("#inputTown").val().trim();
+        postCode = $("#inputPostCode").val().trim();
+        country = $("#selectCountry").val();
+        isCloseFriend = $("#inputIsCloseFriend").prop("checked");
+
+        if (!firstName || !lastName) {
+          alert("First name and last name are mandatory!");
+          return;
+        }
+
+        if (window.jonas.currentId === 0)
+          mode = "Add";
+        else
+          mode = "Update";
+
+        personInfo = {
+          id: window.jonas.currentId,
+          firstName: firstName,
+          lastName: lastName,
+          gender: gender,
+          dateOfBirth: dateOfBirth,
+          phone: phone,
+          address: address,
+          town: town,
+          postCode: postCode,
+          country: country,
+          isCloseFriend: isCloseFriend
+        }
+
+        $.ajax({
+          url: window.jonas.baseUrl + mode,
+          data: { person: personInfo },
+          error: function (data) {
+            $("#errorMessage").html(data.responseText);
+            $("#errorMessage").show();
+          },
+          method: "post",
+          success: function (data) {
+            if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "Error")) {
+              alert(data);
+              return;
+            }
+            else {
+              window.jonas.setSpanData(firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend);
+
+              $("#divDialog").dialog("option", "title", "Data for " + firstName + " " + lastName);
+              $("#divDialog").dialog("option", "height", 300);
+              $(".showMode").show();
+              $(".addEditMode").hide();
+              $("#trBlank").hide();
+              $("#trButton").hide();
+
+              if (mode === "Add") {
+                alert(firstName + " " + lastName + " added successfully");
+                window.jonas.newPersonAdded = true;
+              }
+              else {
+                $("td[data-value='FirstName']", $("#person" + window.jonas.currentId)).text(firstName);
+                $("td[data-value='LastName']", $("#person" + window.jonas.currentId)).text(lastName);
+                alert(firstName + " " + lastName + " updated successfully");
+              }
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+
