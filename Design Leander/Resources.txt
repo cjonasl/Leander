@@ -375,3 +375,43 @@ Sign up Azure
 ----- New property -----
 
 Admin,Azure
+
+---------- New resource ----------
+
+20
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-08 16:33:23
+
+----- New property -----
+
+AddressBook1
+
+----- New property -----
+
+App,C#,HTML,JavaScript,jQuery,MVC
+
+---------- New resource ----------
+
+21
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-08 17:18:46
+
+----- New property -----
+
+Implement log in. Password. Security
+
+----- New property -----
+
+C#

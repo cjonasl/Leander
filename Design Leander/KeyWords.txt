@@ -299,3 +299,35 @@ Azure
 ----- New property -----
 
 Resources regarding Azure
+
+---------- New key word ----------
+
+20
+
+----- New property -----
+
+2019-02-08 16:29:21
+
+----- New property -----
+
+App
+
+----- New property -----
+
+Ett fungerande program/applikation som jag oftast till största delen gjort själv
+
+---------- New key word ----------
+
+21
+
+----- New property -----
+
+2019-02-08 16:35:07
+
+----- New property -----
+
+MVC
+
+----- New property -----
+
+Resources rörande MVC

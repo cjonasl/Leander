@@ -1,0 +1,49 @@
+﻿21
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-08 17:18:46
+
+----- New property -----
+
+Implement log in. Password. Security
+
+----- New property -----
+
+1
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+https://www.ktlsolutions.com/how-tos/effective-password-hashing/###Implementation C#
+
+----- New property -----
+
+https://www.ktlsolutions.com/how-tos/effective-password-hashing/###Implementation C#

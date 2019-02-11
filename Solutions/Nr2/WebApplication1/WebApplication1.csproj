@@ -112,11 +112,15 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AddressBook1Controller.cs" />
+    <Compile Include="Controllers\AddressBookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonInfo.cs" />
     <Compile Include="Models\PersonInfo1.cs" />
     <Compile Include="Models\PersonInfo1Db.cs" />
+    <Compile Include="Models\PersonInfoDb.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +128,7 @@
     <None Include="packages.config" />
     <Content Include="Views\AddressBook1\AddressBook.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\AddressBook\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

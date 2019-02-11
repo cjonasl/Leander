@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Carl Jonas's Address Book</title>
+
+  <style>
+    a:link, a:visited, a:hover, a:active {
+      color: blue !important;
+      text-decoration: none !important;
+    }
+  </style>
+</head>
+<body style="margin-top: 10px; margin-left: 50px;">
+  <img src="http://www.nr2web1.com/AddressBook.png" style="position: relative; top: 10px;"/>
+  <div style="color: red; font-family: Arial; font-size: x-large; font-weight: bold; display:inline-block; margin-left: 10px; line-height: 35px;">Welcome to Carl Jonas's<br/>Address Book!</div>
+  <p style="font-family: 'Times New Roman'; font-size: large; color: forestgreen; margin-top: 15px;">
+    You can either choose to create an account and<br />
+    log in and have your own address book, or use the<br />
+    <a href="http://www.nr2web1.com/AddressBook/LoginAnonymous">anonymous</a>
+    one for a quick look and test.
+  </p>
+    <form method="post" action="http://www.nr2web1.com/AddressBook/Login" style="margin-top: 4px; margin-bottom: 15px;">
+      <table style="font-family: 'Times New Roman'; font-size: medium; color: black;">
+        <tr><td>User name</td><td><input type="text" name="name" /></td></tr>
+        <tr><td>Password</td><td><input type="password" name="password" /></td></tr>
+        <tr><td colspan="2"><input type="submit" value="Log in" /></td></tr>
+      </table>
+    </form>
+
+    <a href="window.jonas.createAccount()">Create account</a>
+</body>
+</html>
