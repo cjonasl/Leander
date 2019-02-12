@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication1.Models
+namespace AddressBook
 {
     public class PersonInfo
     {
-        public int Id { get; set; }
+        public int PersonId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
@@ -23,7 +23,7 @@ namespace WebApplication1.Models
 
         public PersonInfo
             (
-              int id,
+              int personId,
               string firstName,
               string lastName,
               string gender,
@@ -36,7 +36,7 @@ namespace WebApplication1.Models
               bool isCloseFriend
             )
         {
-            this.Id = id;
+            this.PersonId = personId;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Gender = gender;

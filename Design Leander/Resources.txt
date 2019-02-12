@@ -415,3 +415,23 @@ Implement log in. Password. Security
 ----- New property -----
 
 C#
+
+---------- New resource ----------
+
+22
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-02-11 20:47:37
+
+----- New property -----
+
+text-align
+
+----- New property -----
+
+Adhoc,HTML

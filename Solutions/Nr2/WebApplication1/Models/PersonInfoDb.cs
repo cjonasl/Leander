@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
-using System.Data;
-using System.Web;
 
-namespace WebApplication1.Models
+
+namespace AddressBook
 {
     public static class PersonInfoDb
     {
-        private const string connectionString = "Data Source=LAPTOP-I366KH96;Initial Catalog=JONAS;Integrated Security=True";
-
-        public static List<PersonInfo> GetAll(out string errorMessage)
+        public static List<PersonInfo> GetAll(int userId, out string errorMessage)
         {
             List<PersonInfo> list = null;
             errorMessage = null;
@@ -18,18 +16,19 @@ namespace WebApplication1.Models
             try
             {
                 list = new List<PersonInfo>();
-                SqlConnection conn = new SqlConnection(connectionString);
-                SqlCommand com = new SqlCommand("SELECT Id, FirstName, LastName FROM PersonInfo ORDER BY FirstName, LastName", conn);
 
-                conn.Open();
-                SqlDataReader reader = com.ExecuteReader();
-
-                while (reader.Read())
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
                 {
-                    list.Add(new PersonInfo(int.Parse(reader["Id"].ToString()), reader["FirstName"].ToString(), reader["LastName"].ToString()));
-                }
+                    SqlCommand com = new SqlCommand(string.Format("SELECT PersonId, FirstName, LastName FROM PersonInfo WHERE UserId = {0} ORDER BY FirstName, LastName", userId.ToString()), conn);
 
-                conn.Close();
+                    conn.Open();
+                    SqlDataReader reader = com.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        list.Add(new PersonInfo(int.Parse(reader["Id"].ToString()), reader["FirstName"].ToString(), reader["LastName"].ToString()));
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -40,14 +39,14 @@ namespace WebApplication1.Models
             return list;
         }
 
-        public static PersonInfo GetSingle(int id, out string errorMessage)
+        public static PersonInfo GetSingle(int userId, int personId, out string errorMessage)
         {
             errorMessage = null;
             PersonInfo perdonInfo = null;
 
             try
             {
-                string sqlQuery = "SELECT FirstName," +
+                string sqlQuery = string.Format("SELECT FirstName," +
                                           "LastName," +
                                           "Gender," +
                                           "DateOfBirth," +
@@ -57,25 +56,28 @@ namespace WebApplication1.Models
                                           "PostCode," +
                                           "Country," +
                                           "IsCloseFriend " +
-                                          "FROM PersonInfo WHERE Id = " + id.ToString();
+                                          "FROM PersonInfo WHERE UserId = {0} AND PersonId = {1}",
+                                          userId.ToString(), personId.ToString());
 
-                SqlConnection conn = new SqlConnection(connectionString);
-                SqlCommand com = new SqlCommand(sqlQuery, conn);
-                conn.Open();
-                SqlDataReader reader = com.ExecuteReader();
-                reader.Read();
-                perdonInfo = new PersonInfo(id,
-                                             reader["FirstName"].ToString(),
-                                             reader["LastName"].ToString(),
-                                             reader["Gender"].ToString(),
-                                             reader["DateOfBirth"].ToString(),
-                                             reader["Phone"].ToString(),
-                                             reader["Address"].ToString(),
-                                             reader["Town"].ToString(),
-                                             reader["PostCode"].ToString(),
-                                             reader["Country"].ToString(),
-                                             bool.Parse(reader["IsCloseFriend"].ToString()));
-                conn.Close();
+
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
+                {
+                    SqlCommand com = new SqlCommand(sqlQuery, conn);
+                    conn.Open();
+                    SqlDataReader reader = com.ExecuteReader();
+                    reader.Read();
+                    perdonInfo = new PersonInfo(personId,
+                                                 reader["FirstName"].ToString(),
+                                                 reader["LastName"].ToString(),
+                                                 reader["Gender"].ToString(),
+                                                 reader["DateOfBirth"].ToString(),
+                                                 reader["Phone"].ToString(),
+                                                 reader["Address"].ToString(),
+                                                 reader["Town"].ToString(),
+                                                 reader["PostCode"].ToString(),
+                                                 reader["Country"].ToString(),
+                                                 bool.Parse(reader["IsCloseFriend"].ToString()));
+                }
             }
             catch (Exception e)
             {
@@ -86,15 +88,17 @@ namespace WebApplication1.Models
             return perdonInfo;
         }
 
-        public static int Add(PersonInfo person, out string errorMessage)
+        public static int Add(int userId, PersonInfo person, out string errorMessage)
         {
             errorMessage = null;
-            int id;
+            int personId;
 
             try
             {
-                string sqlQuery = string.Format("INSERT INTO PersonInfo (FirstName, LastName, Gender, DateOfBirth, Phone, [Address], Town, PostCode, Country, IsCloseFriend) " +
-                                          "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', {9}) SELECT TOP 1 Id FROM PersonInfo1 ORDER BY Id desc",
+                string sqlQuery = string.Format("DECLARE @PersonId SELECT TOP 1 PersonId FROM PersonInfo WHERE UserId = {0} ORDER BY PersonId desc " +
+                                          "INSERT INTO PersonInfo(UserId, PersonId, FirstName, LastName, Gender, DateOfBirth, Phone, [Address], Town, PostCode, Country, IsCloseFriend) " +
+                                          "VALUES({0}, 1 + @PersonId, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', {10}) SELECT TOP 1 PersonId FROM PersonInfo WHERE UserId = {0} ORDER BY PersonId desc",
+                                          userId.ToString(),
                                           person.FirstName,
                                           person.LastName,
                                           person.Gender,
@@ -106,13 +110,12 @@ namespace WebApplication1.Models
                                           person.Country,
                                           person.IsCloseFriend ? 1 : 0);
 
-
-
-                SqlConnection conn = new SqlConnection(connectionString);
-                SqlCommand com = new SqlCommand(sqlQuery, conn);
-                conn.Open();
-                id = (int)com.ExecuteScalar();
-                conn.Close();
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
+                {
+                    SqlCommand com = new SqlCommand(sqlQuery, conn);
+                    conn.Open();
+                    personId = (int)com.ExecuteScalar();
+                }
             }
             catch (Exception e)
             {
@@ -120,10 +123,10 @@ namespace WebApplication1.Models
                 return -1;
             }
 
-            return id;
+            return personId;
         }
 
-        public static void Update(PersonInfo person, out string errorMessage)
+        public static void Update(int userId, PersonInfo person, out string errorMessage)
         {
             errorMessage = null;
 
@@ -139,7 +142,7 @@ namespace WebApplication1.Models
                                                      "Town = '{6}'," +
                                                      "PostCode = '{7}'," +
                                                      "Country = '{8}'," +
-                                                     "IsCloseFriend = {9} WHERE Id = {10}",
+                                                     "IsCloseFriend = {9} WHERE UserId = {10} AND PersonId = {11}",
                                           person.FirstName,
                                           person.LastName,
                                           person.Gender,
@@ -150,15 +153,15 @@ namespace WebApplication1.Models
                                           string.IsNullOrEmpty(person.PostCode) ? "" : person.PostCode,
                                           person.Country,
                                           person.IsCloseFriend ? 1 : 0,
-                                          person.Id);
+                                          userId.ToString(),
+                                          person.PersonId.ToString());
 
-
-
-                SqlConnection conn = new SqlConnection(connectionString);
-                SqlCommand com = new SqlCommand(sqlQuery, conn);
-                conn.Open();
-                com.ExecuteNonQuery();
-                conn.Close();
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
+                {
+                    SqlCommand com = new SqlCommand(sqlQuery, conn);
+                    conn.Open();
+                    com.ExecuteNonQuery();
+                }
             }
             catch (Exception e)
             {
@@ -167,18 +170,20 @@ namespace WebApplication1.Models
             }
         }
 
-        public static void Delete(int id, out string errorMessage)
+        public static void Delete(int userId, int personId, out string errorMessage)
         {
             errorMessage = null;
 
             try
             {
-                string sqlQuery = "DELETE FROM PersonInfo WHERE Id = " + id.ToString();
-                SqlConnection conn = new SqlConnection(connectionString);
-                SqlCommand com = new SqlCommand(sqlQuery, conn);
-                conn.Open();
-                com.ExecuteNonQuery();
-                conn.Close();
+                string sqlQuery = string.Format("DELETE FROM PersonInfo WHERE UserId = {0} AND PersonId = {1}", userId.ToString(), personId.ToString());
+
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
+                {
+                    SqlCommand com = new SqlCommand(sqlQuery, conn);
+                    conn.Open();
+                    com.ExecuteNonQuery();
+                }
             }
             catch (Exception e)
             {
