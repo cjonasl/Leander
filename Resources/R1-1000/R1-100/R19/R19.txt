@@ -43,7 +43,3 @@ null
 ----- New property -----
 
 https://portal.azure.com###Azure portal
-
------ New property -----
-
-https://portal.azure.com###Azure portal

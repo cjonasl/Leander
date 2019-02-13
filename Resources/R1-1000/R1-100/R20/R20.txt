@@ -43,7 +43,3 @@ null
 ----- New property -----
 
 http://www.nr2web1.com/AddressBook1/GetAll###AddressBook1
-
------ New property -----
-
-http://www.nr2web1.com/AddressBook1/GetAll###AddressBook1

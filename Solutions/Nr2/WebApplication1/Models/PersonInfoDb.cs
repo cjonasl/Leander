@@ -26,7 +26,7 @@ namespace AddressBook
 
                     while (reader.Read())
                     {
-                        list.Add(new PersonInfo(int.Parse(reader["Id"].ToString()), reader["FirstName"].ToString(), reader["LastName"].ToString()));
+                        list.Add(new PersonInfo(int.Parse(reader["PersonId"].ToString()), reader["FirstName"].ToString(), reader["LastName"].ToString()));
                     }
                 }
             }
@@ -95,9 +95,9 @@ namespace AddressBook
 
             try
             {
-                string sqlQuery = string.Format("DECLARE @PersonId SELECT TOP 1 PersonId FROM PersonInfo WHERE UserId = {0} ORDER BY PersonId desc " +
+                string sqlQuery = string.Format("DECLARE @PersonId int; SELECT TOP 1 @PersonId = PersonId FROM PersonInfo WHERE UserId = {0} ORDER BY PersonId desc " +
                                           "INSERT INTO PersonInfo(UserId, PersonId, FirstName, LastName, Gender, DateOfBirth, Phone, [Address], Town, PostCode, Country, IsCloseFriend) " +
-                                          "VALUES({0}, 1 + @PersonId, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', {10}) SELECT TOP 1 PersonId FROM PersonInfo WHERE UserId = {0} ORDER BY PersonId desc",
+                                          "VALUES({0}, 1 + ISNULL(@PersonId, 0), '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', {10}) SELECT TOP 1 PersonId FROM PersonInfo WHERE UserId = {0} ORDER BY PersonId desc",
                                           userId.ToString(),
                                           person.FirstName,
                                           person.LastName,

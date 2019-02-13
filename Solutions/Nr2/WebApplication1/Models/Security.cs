@@ -37,8 +37,10 @@ namespace AddressBook
                 hashedPassword = hash + salt;
 
                 string sqlQuery = string.Format("IF NOT EXISTS(SELECT 1 FROM [User] WHERE [Name] = '{0}') BEGIN " +
-                                                "INSERT INTO [User]([Name], [Password]) VALUES('{0}', '{1}') SELECT 1 END ELSE SELECT 0",
-                                                user.Name, hashedPassword);
+                                                "INSERT INTO [User]([Name], [Password], CreatedDate) VALUES('{0}', '{1}', '{2}') SELECT 1 END ELSE SELECT 0",
+                                                user.Name, 
+                                                hashedPassword,
+                                                DateTime.Now.ToString("yyyy-MM-dd"));
 
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
                 {
@@ -57,9 +59,10 @@ namespace AddressBook
             }
         }
 
-        public static void CheckUser(User user, out int userId, out bool correctUserName, out bool correctPassword, out string errorMessage)
+        public static void CheckUser(User user, out int userId, out DateTime createdDate, out bool correctUserName, out bool correctPassword, out string errorMessage)
         {        
             userId = 0;
+            createdDate = DateTime.MinValue;
             correctUserName = false;
             correctPassword = false;
             errorMessage = null;
@@ -70,7 +73,7 @@ namespace AddressBook
                 GenerateSaltedHash(user.Password, out hash, out salt);
                 hashedPassword = hash + salt;
 
-                string sqlQuery = string.Format("SELECT Id, Password FROM [User] WHERE [Name] = '{0}'", user.Name);
+                string sqlQuery = string.Format("SELECT Id, Password, CreatedDate FROM [User] WHERE [Name] = '{0}'", user.Name);
 
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
                 {
@@ -87,6 +90,7 @@ namespace AddressBook
                         correctUserName = true;
 
                     userId = int.Parse(reader["Id"].ToString());
+                    createdDate = (DateTime)reader["CreatedDate"];
                     string password = reader["Password"].ToString();
 
                     if (!VerifyPassword(user.Password, password.Substring(0, 344), password.Substring(344)))
@@ -112,8 +116,9 @@ namespace AddressBook
             try
             {
                 int userId;
+                DateTime createdDate;
                 bool correctUserName, correctPassword;
-                CheckUser(new User(userName, changePassword.OldPassword), out userId, out correctUserName, out correctPassword, out errorMessage);
+                CheckUser(new User(userName, changePassword.OldPassword, null), out userId, out createdDate, out correctUserName, out correctPassword, out errorMessage);
 
                 if (!correctPassword)
                 {

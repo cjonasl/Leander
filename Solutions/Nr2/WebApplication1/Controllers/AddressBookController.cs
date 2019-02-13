@@ -18,6 +18,11 @@ namespace AddressBook
             return User.Identity.Name.Split(new string[] { "---NewInfo---" }, StringSplitOptions.None)[1];
         }
 
+        private string GetCreatedDate()
+        {
+            return User.Identity.Name.Split(new string[] { "---NewInfo---" }, StringSplitOptions.None)[2];
+        }
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult LogIn()
@@ -25,22 +30,36 @@ namespace AddressBook
             ViewBag.ErrorMessage = "";
             ViewBag.CorrectUserName = true;
             ViewBag.CorrectPassword = true;
-            return View(new User("", ""));
+            return View(new User("", "", null));
+        }
+
+        [AllowAnonymous]
+        public ActionResult LogInAnonymous()
+        {
+            DateTime createdDate;
+            bool correctUserName, correctPassword;
+            string errorMessage;
+
+            Security.CheckUser(new User("Anonymous", "abc", null), out int userId, out createdDate, out correctUserName, out correctPassword, out errorMessage);
+            string authCookieUserName = string.Format("{0}---NewInfo---{1}---NewInfo---{2}", userId.ToString(), "Anonymous", createdDate.ToString("yyyy-MM-dd"));
+            FormsAuthentication.SetAuthCookie(authCookieUserName, false);
+            return RedirectToAction("GetAll");
         }
 
         [AllowAnonymous]
         [HttpPost]
         public ActionResult LogIn(User user)
         {
+            DateTime createdDate;
             bool correctUserName, correctPassword;
             string errorMessage;
 
-            Security.CheckUser(user, out int userId, out correctUserName, out correctPassword, out errorMessage);
+            Security.CheckUser(user, out int userId, out createdDate, out correctUserName, out correctPassword, out errorMessage);
 
             if (correctUserName && correctPassword)
             {
-                ViewBag.UserName = user.Name;
-                FormsAuthentication.SetAuthCookie(userId.ToString() + "---NewInfo---" + user.Name, false);
+                string authCookieUserName = string.Format("{0}---NewInfo---{1}---NewInfo---{2}", userId.ToString(), user.Name, createdDate.ToString("yyyy-MM-dd"));
+                FormsAuthentication.SetAuthCookie(authCookieUserName, false);
                 return RedirectToAction("GetAll");
             }
             else
@@ -70,13 +89,6 @@ namespace AddressBook
                 return Json(errorMessage, JsonRequestBehavior.AllowGet);
         }
 
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult LoginAnonymous()
-        {
-            return View();
-        }
-
         public ActionResult GetAll()
         {
             string errorMessage;
@@ -86,6 +98,7 @@ namespace AddressBook
             if (errorMessage == null)
             {
                 ViewBag.UserName = GetUserName();
+                ViewBag.CreatedDate = GetCreatedDate();
                 return View("AddressBook", list);
             }        
             else

@@ -13,7 +13,7 @@
     #persons {
       font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
       border-collapse: collapse;
-      width: 50%;
+      width: 100%;
     }
 
       #persons td, #persons th {
@@ -22,7 +22,11 @@
       }
 
       #persons tr:nth-child(even) {
-        background-color: #f2f2f2;
+        background-color: #ffffb7;
+      }
+
+      #persons tr:nth-child(odd) {
+        background-color: #ffffff;
       }
 
       #persons th {
@@ -39,27 +43,31 @@
       }
   </style>
 </head>
-<body style="margin-left: 30px; border: 1px solid black; background-color: cornsilk;">
-  <div style="max-width: 400px; text-align: right;">
-    <a href="javascript: window.addressbook.changePassword(0)">Change password</a>&nbsp;
-    <a href="javascript: window.addressbook.logOut()">Log out</a>
+<body style="margin-top: 20px; margin-left: 20px; max-width: 500px; border-top: 1px solid black; border-left: 1px solid black; padding-left: 20px; padding-top: 10px; background-color: #ebebe0;">
+  <div>
+    <span style="position: relative; left: -10px;">Logged in:&nbsp;<a href="javascript: window.addressbook.showCurrentLoggedInUser()">@ViewBag.UserName</a></span>
+    <a href="javascript: window.addressbook.changePassword(0)" style="position: relative; left: 165px;">Change password</a>&nbsp;&nbsp;
+    <a href="javascript: window.addressbook.logOut()" style="position: relative; left: 168px;">Log out</a>
   </div>
 
-  <h2>Address book, user @ViewBag.UserName</h2>
+  <img src="http://www.nr2web1.com/AddressBook.png" style="position: relative; top: 30px;" />
+  <span style="color: red; font-family: Arial; font-size: x-large; font-weight: bold; margin-left: 10px;">
+    Address Book!
+  </span>
 
   <div id="errorMessage" style="display: none;"></div>
 
   @if (Model.Count > 0)
   {
-    <table id="persons">
+    <table id="persons" style="margin-top: 50px;">
       <tr id="tableHeaderRow">
-        <th style="width: 30%;">First name</th>
-        <th style="width: 45%;">Last name</th>
-        <th style="width: 25%;">Action</th>
+        <th style="width: 27%;">First name</th>
+        <th style="width: 42%;">Last name</th>
+        <th style="width: 31%;">Action</th>
       </tr>
 
       @{
-          string personId;
+        string personId;
       }
 
       @foreach (var person in Model)
@@ -70,16 +78,20 @@
           <td data-value="FirstName">@person.FirstName</td>
           <td data-value="LastName">@person.LastName</td>
           <td>
-            <a href="javascript: window.addressbook.show(@person.PersonId)">Show</a>
-            <a href="javascript: window.addressbook.edit(@person.PersonId)" style="margin-left: 4px;">Edit</a>
-            <a href="javascript: window.addressbook.delete(@person.PersonId)" style="margin-left: 4px;">Delete</a>
+            <a href="javascript: window.addressbook.show(@person.PersonId)" style="font-size: small;">Show</a>
+            <a href="javascript: window.addressbook.edit(@person.PersonId)" style="margin-left: 4px; font-size: small;">Edit</a>
+            <a href="javascript: window.addressbook.delete(@person.PersonId)" style="margin-left: 4px; font-size: small;">Delete</a>
           </td>
         </tr>
       }
     </table>
-   }
 
-  <div style="margin-top: 20px !important; font-size: large;"><a href="javascript: window.addressbook.add()">Add new</a></div>
+    <div style="margin-top: 20px; margin-left: 3px; font-size: large;"><a href="javascript: window.addressbook.add()">Add new</a></div>
+  }
+  else
+  {
+    <div style="margin-top: 50px; font-size: large;"><a href="javascript: window.addressbook.add()">Add new</a></div>
+  }
 
   <div id="divDialogMain" style="display: none; background-color: lightgray;">
     <table id="tablePersonInfo">
@@ -114,8 +126,9 @@
         </td>
       </tr>
       <tr><td style="font-weight: bold;">Is close friend</td> <td><input id="inputIsCloseFriend" class="addEditMode" type="checkbox" /><span id="spanIsCloseFriend" class="showMode"></span></td></tr>
-      <tr id="trBlank"><td colspan="2">&nbsp;</td></tr>
-      <tr id="trButton"><td colspan="2"><button onclick="window.addressbook.handleSave()">Save</button></td></tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr class="addEditMode"><td colspan="2"><button onclick="window.addressbook.handleSave()">Save</button></td></tr>
+      <tr class="showMode"><td colspan="2"><button onclick="window.addressbook.closeMainDialog()">Close</button></td></tr>
     </table>
   </div>
 
@@ -127,8 +140,17 @@
     <table id="tableChangePassword" style="margin-top: 15px;">
       <tr><td style="font-weight: bold;">Old password</td> <td><input id="inputOldPassword" type="password" /></td></tr>
       <tr><td style="font-weight: bold;">New password</td> <td><input id="inputNewPassword" type="password" /></td></tr>
-      <tr id="trBlank"><td colspan="2">&nbsp;</td></tr>
-      <tr id="trButton"><td colspan="2"><button onclick="window.addressbook.changePassword(1)">Create</button></td></tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr><td colspan="2"><button onclick="window.addressbook.changePassword(1)">Change</button></td></tr>
+    </table>
+  </div>
+
+  <div id="divDialogCurrentLoggedInUser" style="display: none; background-color: lightgray;">
+    <table style="margin-top: 15px;">
+      <tr><td style="font-weight: bold;">User name</td><td>@ViewBag.UserName</td></tr>
+      <tr><td style="font-weight: bold;">Account created</td><td id="accountCreated"></td></tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr><td colspan="2"><button onclick="window.addressbook.closeDialogCurrentLoggedInUser()">Close</button></td></tr>
     </table>
   </div>
 
@@ -140,6 +162,49 @@
       window.addressbook.currentPersonId = 0;
       window.addressbook.newPersonAdded = false;
 
+      window.addressbook.ReturnLocaleDateString = function (dateString) { //dateString is in format yyyy-MM-dd
+        var year, month, day, date, localeDateString;
+
+        year = window.Number(dateString.substring(0, 4));
+        month = window.Number(dateString.substring(5, 7));
+        day = window.Number(dateString.substring(8, 10));
+        date = new Date(year, month - 1, day); //month goes from 0 to 11
+        localeDateString = date.toLocaleDateString();
+
+        return localeDateString;
+      }
+
+      window.addressbook.showCurrentLoggedInUser = function() {
+        var options, popup;
+
+        options = {
+          modal: true,
+          title: "Current logged in user",
+          position: { my: "center", at: "center", of: window },
+          width: 400,
+          height: 200,
+          close: function () {}
+        }
+
+        popup = $("#divDialogCurrentLoggedInUser");
+        popup.dialog(options);
+        popup.dialog('open');
+        popup.show();
+      }
+
+      window.addressbook.closeDialogCurrentLoggedInUser = function () {
+        $("#divDialogCurrentLoggedInUser").dialog("close");
+      }
+
+      window.addressbook.closeMainDialog = function() {
+        $('#divDialogMain').dialog('close')
+
+        if (window.addressbook.newPersonAdded) {
+          window.addressbook.newPersonAdded = false;
+          window.location = window.addressbook.baseUrl + "GetAll";
+        }
+      }
+
       window.addressbook.openModal = function (title, width, height) {
         var options, popup;
 
@@ -149,12 +214,7 @@
           position: { my: "center", at: "center", of: window },
           width: width,
           height: height,
-          close: function () {
-            if (window.addressbook.newPersonAdded) {
-              window.addressbook.newPersonAdded = false;
-              window.location = window.addressbook.baseUrl + "GetAll";
-            }
-          }
+          close: function () { window.addressbook.closeMainDialog(); }
         }
 
         popup = $("#divDialogMain");
@@ -177,18 +237,10 @@
       }
 
       window.addressbook.setSpanData = function (firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend) {
-        var year, month, day, date;
-
-        //dateOfBirth should always be a date string in format yyyy-MM-dd
-        year = window.Number(dateOfBirth.substring(0, 4));
-        month = window.Number(dateOfBirth.substring(5, 7));
-        day = window.Number(dateOfBirth.substring(8, 10));
-        date = new Date(year, month - 1, day); //month goes from 0 to 11
-
         $("#spanFirstName").text(firstName);
         $("#spanLastName").text(lastName);
         $("#spanGender").text(gender);
-        $("#spanDateOfBirth").text(date.toLocaleDateString());
+        $("#spanDateOfBirth").text(window.addressbook.ReturnLocaleDateString(dateOfBirth));
         $("#spanPhone").text(phone);
         $("#spanAddress").text(address);
         $("#spanTown").text(town);
@@ -200,8 +252,6 @@
       window.addressbook.add = function () {
         window.addressbook.setEditData("", "", "Male", "", "", "", "", "", "United Kingdom", false); //Set default data
         $(".addEditMode").show();
-        $("#trBlank").show();
-        $("#trButton").show();
         $(".showMode").hide();
         window.addressbook.currentPersonId = 0;
         window.addressbook.openModal("Add new person", 400, 400);
@@ -210,8 +260,6 @@
       window.addressbook.show = function (personId) {
         $(".showMode").show();
         $(".addEditMode").hide();
-        $("#trBlank").hide();
-        $("#trButton").hide();
 
         $.ajax({
           url: window.addressbook.baseUrl + "GetSingle",
@@ -228,7 +276,7 @@
             }
             else {
               window.addressbook.setSpanData(data.FirstName, data.LastName, data.Gender, data.DateOfBirth, data.Phone, data.Address, data.Town, data.PostCode, data.Country, data.IsCloseFriend);
-              window.addressbook.openModal("Data for " + data.FirstName + " " + data.LastName, 400, 300);
+              window.addressbook.openModal("Data for " + data.FirstName + " " + data.LastName, 400, 350);
             }
           }
         });
@@ -236,8 +284,6 @@
 
       window.addressbook.edit = function (personId) {
         $(".addEditMode").show();
-        $("#trBlank").show();
-        $("#trButton").show();
         $(".showMode").hide();
 
         $.ajax({
@@ -285,7 +331,7 @@
                 return;
               }
               else {
-                $("#person" + id).remove();
+                $("#person" + personId).remove();
                 alert(firstName + " " + lastName + " was deleted successfully");
               }
             }
@@ -294,7 +340,7 @@
       }
 
       window.addressbook.handleSave = function () {
-        var mode, personInfo, firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend;
+        var mode, personInfo, firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend, title;
 
         firstName = $("#inputFirstName").val().trim();
         lastName = $("#inputLastName").val().trim();
@@ -347,21 +393,19 @@
             else {
               window.addressbook.setSpanData(firstName, lastName, gender, dateOfBirth, phone, address, town, postCode, country, isCloseFriend);
 
-              $("#divDialogMain").dialog("option", "title", "Data for " + firstName + " " + lastName);
-              $("#divDialogMain").dialog("option", "height", 300);
+              title = (mode === "Add") ? (firstName + " " + lastName + " added successfully") : firstName + " " + lastName + " updated successfully";
+
+              $("#divDialogMain").dialog("option", "title", title);
+              $("#divDialogMain").dialog("option", "height", 350);
               $(".showMode").show();
               $(".addEditMode").hide();
-              $("#trBlank").hide();
-              $("#trButton").hide();
 
               if (mode === "Add") {
-                alert(firstName + " " + lastName + " added successfully");
                 window.addressbook.newPersonAdded = true;
               }
               else {
                 $("td[data-value='FirstName']", $("#person" + window.addressbook.currentPersonId)).text(firstName);
                 $("td[data-value='LastName']", $("#person" + window.addressbook.currentPersonId)).text(lastName);
-                alert(firstName + " " + lastName + " updated successfully");
               }
             }
           }
@@ -373,6 +417,8 @@
           $("#divInfo").hide();
           $("#tableChangePassword").show();
         }
+
+        $("#divDialogChangePassword").dialog("close");
       }
 
       window.addressbook.changePassword = function (n) {
@@ -422,7 +468,7 @@
               }
               else {
                 $("#tableChangePassword").hide();
-                $("#divInfo").show();             
+                $("#divInfo").show();
               }
             }
           });
@@ -432,6 +478,8 @@
       window.addressbook.logOut = function () {
         window.location = window.addressbook.baseUrl + "LogOut";
       }
+
+      $("#accountCreated").text(window.addressbook.ReturnLocaleDateString('@ViewBag.CreatedDate'));
     });
   </script>
 </body>

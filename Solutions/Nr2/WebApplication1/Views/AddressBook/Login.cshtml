@@ -17,15 +17,15 @@
     }
   </style>
 </head>
-<body style="margin-top: 10px; margin-left: 50px;">
+<body style="margin-top: 10px; margin-left: 50px; max-width: 500px; border-top: 1px solid black; border-left: 1px solid black; padding: 20px; background-color: #ebebe0;">
   <img src="http://www.nr2web1.com/AddressBook.png" style="position: relative; top: 10px;" />
-  <div style="color: red; font-family: Arial; font-size: x-large; font-weight: bold; display:inline-block; margin-left: 10px; line-height: 35px;">
+  <div style="color: red; font-family: Arial; font-size: x-large; font-weight: bold; display: inline-block; margin-left: 10px; line-height: 35px;">
     Welcome to Carl Jonas's<br />Address Book!
   </div>
   <p style="font-family: 'Times New Roman'; font-size: large; color: forestgreen; margin-top: 15px;">
     You can either choose to create an account and<br />
     log in and have your own address book, or use the<br />
-    <a href="http://www.nr2web1.com/AddressBook/LoginAnonymous">anonymous</a>
+    <a href="http://www.nr2web1.com/AddressBook/LogInAnonymous">anonymous</a>
     one for a quick look and test.
   </p>
   <form method="post" action="http://www.nr2web1.com/AddressBook/Login" style="margin-top: 4px; margin-bottom: 15px;">
@@ -43,7 +43,7 @@
   <a href="javascript: window.addressBook.createAccount(0)">Create account</a>
 
   <div id="divDialog" style="display: none; background-color: lightgray;">
-    <div id="divInfo" style="display: none; margin-top: 30px; max-width: 200px;">
+    <div id="divInfo" style="display: none; margin-top: 30px; max-width: 300px;">
       You can now log in with your user name&nbsp;
       <span id="spanUserName" style="font-style: italic;"></span><br />
       <button style="margin-top: 30px;" onclick="window.addressBook.closeDialog()">Close</button>
@@ -108,7 +108,7 @@
 
           $.ajax({
             url: window.addressBook.baseUrl + "CreateNewAccount",
-            data: { name: userName, password: password },
+            data: { name: userName, password: password, createdDate: null },
             error: function (data) {
               $("#errorMessage").html(data.responseText);
               $("#errorMessage").show();

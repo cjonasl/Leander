@@ -43,7 +43,3 @@ null
 ----- New property -----
 
 https://www.ktlsolutions.com/how-tos/effective-password-hashing/###Implementation C#
-
------ New property -----
-
-https://www.ktlsolutions.com/how-tos/effective-password-hashing/###Implementation C#

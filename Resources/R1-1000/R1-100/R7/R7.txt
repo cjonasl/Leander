@@ -43,7 +43,3 @@ C:\git_cjonasl\Leander\Solutions\Nr1\ConsoleApp1\Nr1\R7.cs
 ----- New property -----
 
 null
-
------ New property -----
-
-null
