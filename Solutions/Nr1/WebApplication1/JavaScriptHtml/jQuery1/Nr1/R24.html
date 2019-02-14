@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test jQuery</title>
+
+  <style>
+   .startInteger {
+      color: mediumvioletred;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" />&nbsp;
+  <input type="text" /><br />
+  <button onclick="jonas()">Click1</button><br />
+  <button onclick="daniel()">Click2</button><br />
+  <button onclick="sara()">Click3</button><br />
+  <button onclick="nang()">Click4</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+  jonas = function() {
+    $("input").attr("data-startinteger", "1");
+  }
+
+  daniel = function() {
+    $("input[data-startinteger='1']").addClass("startInteger");
+  }
+
+  sara = function() {
+    $("input[data-startinteger='1']").removeAttr("data-startinteger");
+  }
+
+  nang = function() {
+    var n = $("input[data-startinteger='1']").length;
+    alert(n);
+  }
+  </script>
+</body>
+</html>

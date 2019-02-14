@@ -1,0 +1,49 @@
+﻿23
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-13 17:00:04
+
+----- New property -----
+
+TABLE PublishedApplication and RequestToApplication
+
+----- New property -----
+
+20,4
+
+----- New property -----
+
+Tables for my published applications and to log requests
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

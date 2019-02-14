@@ -27,6 +27,8 @@ namespace AddressBook
         [HttpGet]
         public ActionResult LogIn()
         {
+            RequestToApplicationUtility.LogRequest("LogIn:&nbsp;", this.Request.Headers);
+
             ViewBag.ErrorMessage = "";
             ViewBag.CorrectUserName = true;
             ViewBag.CorrectPassword = true;
@@ -36,11 +38,13 @@ namespace AddressBook
         [AllowAnonymous]
         public ActionResult LogInAnonymous()
         {
+            RequestToApplicationUtility.LogRequest("LogInAnonymous:&nbsp;", this.Request.Headers);
+
             DateTime createdDate;
             bool correctUserName, correctPassword;
             string errorMessage;
 
-            Security.CheckUser(new User("Anonymous", "abc", null), out int userId, out createdDate, out correctUserName, out correctPassword, out errorMessage);
+            Security.CheckUser(new User("Anonymous", "password", null), out int userId, out createdDate, out correctUserName, out correctPassword, out errorMessage);
             string authCookieUserName = string.Format("{0}---NewInfo---{1}---NewInfo---{2}", userId.ToString(), "Anonymous", createdDate.ToString("yyyy-MM-dd"));
             FormsAuthentication.SetAuthCookie(authCookieUserName, false);
             return RedirectToAction("GetAll");
@@ -91,6 +95,8 @@ namespace AddressBook
 
         public ActionResult GetAll()
         {
+            RequestToApplicationUtility.LogRequest("GetAll:&nbsp;", this.Request.Headers);
+
             string errorMessage;
 
             List<PersonInfo> list = PersonInfoDb.GetAll(GetUserId(), out errorMessage);
@@ -157,7 +163,7 @@ namespace AddressBook
         {
             string errorMessage;
 
-            Security.ChangePassword(GetUserName(), changePassword, out errorMessage);
+            Security.ChangePassword(GetUserName(), changePassword, true, out errorMessage);
 
             if (errorMessage == null)
                 return Json("Success", JsonRequestBehavior.AllowGet);

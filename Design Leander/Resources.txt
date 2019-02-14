@@ -435,3 +435,43 @@ text-align
 ----- New property -----
 
 Adhoc,HTML
+
+---------- New resource ----------
+
+23
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-13 17:00:04
+
+----- New property -----
+
+TABLE PublishedApplication and RequestToApplication
+
+----- New property -----
+
+App,T-SQL
+
+---------- New resource ----------
+
+24
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-02-14 00:47:03
+
+----- New property -----
+
+attr removeAttr
+
+----- New property -----
+
+Adhoc,jQuery

@@ -162,14 +162,16 @@
       window.addressbook.currentPersonId = 0;
       window.addressbook.newPersonAdded = false;
 
-      window.addressbook.ReturnLocaleDateString = function (dateString) { //dateString is in format yyyy-MM-dd
-        var year, month, day, date, localeDateString;
+      window.addressbook.ReturnLocaleDateString = function (dateString) { //If given, i.e. not empty, dateString is in format yyyy-MM-dd
+        var year, month, day, date, localeDateString = "";
 
-        year = window.Number(dateString.substring(0, 4));
-        month = window.Number(dateString.substring(5, 7));
-        day = window.Number(dateString.substring(8, 10));
-        date = new Date(year, month - 1, day); //month goes from 0 to 11
-        localeDateString = date.toLocaleDateString();
+        if (dateString) {
+          year = window.Number(dateString.substring(0, 4));
+          month = window.Number(dateString.substring(5, 7));
+          day = window.Number(dateString.substring(8, 10));
+          date = new Date(year, month - 1, day); //month goes from 0 to 11
+          localeDateString = date.toLocaleDateString();
+        }
 
         return localeDateString;
       }

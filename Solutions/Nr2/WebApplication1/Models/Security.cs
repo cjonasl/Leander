@@ -69,6 +69,18 @@ namespace AddressBook
 
             try
             {
+                if (string.IsNullOrEmpty(user.Name))
+                {
+                    errorMessage = string.Format("An user name is not given!");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(user.Password))
+                {
+                    errorMessage = string.Format("A password is not given!");
+                    return;
+                }
+
                 string hash, salt, hashedPassword;
                 GenerateSaltedHash(user.Password, out hash, out salt);
                 hashedPassword = hash + salt;
@@ -83,7 +95,7 @@ namespace AddressBook
 
                     if (!reader.Read())
                     {
-                        errorMessage = "The user name does not exist!";
+                        errorMessage = string.Format("The user name \"{0}\" does not exist!", user.Name);
                         return;
                     }
                     else
@@ -109,35 +121,43 @@ namespace AddressBook
             }
         }
 
-        public static void ChangePassword(string userName, ChangePassword changePassword, out string errorMessage)
+        public static void ChangePassword(string userName, ChangePassword changePassword, bool checkUser, out string errorMessage)
         {
             errorMessage = null;
 
             try
             {
-                int userId;
-                DateTime createdDate;
-                bool correctUserName, correctPassword;
-                CheckUser(new User(userName, changePassword.OldPassword, null), out userId, out createdDate, out correctUserName, out correctPassword, out errorMessage);
-
-                if (!correctPassword)
+                if (checkUser)
                 {
-                    errorMessage = "Error! The given old password is incorrect!";
-                    return;
+                    int userId;
+                    DateTime createdDate;
+                    bool correctUserName, correctPassword;
+
+                    CheckUser(new User(userName, changePassword.OldPassword, null), out userId, out createdDate, out correctUserName, out correctPassword, out errorMessage);
+
+                    if (!correctPassword)
+                    {
+                        errorMessage = "Error! The given old password is incorrect!";
+                        return;
+                    }
                 }
 
                 string hash, salt, hashedPassword;
                 GenerateSaltedHash(changePassword.NewPassword, out hash, out salt);
                 hashedPassword = hash + salt;
 
-                string sqlQuery = string.Format("UPDATE [User] SET Password = '{0}' WHERE Id = {1}", hashedPassword, userId.ToString());
+                string sqlQuery = string.Format("UPDATE [User] SET Password = '{0}' WHERE [Name] = '{1}'; SELECT @@ROWCOUNT", hashedPassword, userName);
 
+                int numberOfUpdates;
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbAddressBook"].ConnectionString))
                 {
                     SqlCommand com = new SqlCommand(sqlQuery, conn);
                     conn.Open();
-                    com.ExecuteNonQuery();
+                    numberOfUpdates = (int)com.ExecuteScalar();
                 }
+
+                if (numberOfUpdates != 1)
+                    errorMessage = "Error! The password not updated correctly!";
             }
             catch (Exception e)
             {

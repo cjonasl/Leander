@@ -19,7 +19,7 @@ namespace Sudoku
 
         static void Main(string[] args)
         {
-            int[][] sudokuBoardCertainty, sudokuBoardTmp, sudokuBoardFinal;
+            int[][] sudokuBoardCertainty, sudokuBoardTmp, sudokuBoardBestSoFar;
             int numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInFinalSudoku, numberOfSimulations, numberOfCandidates, candidate, i, row, column, square, index;
             FileStream fileStream;
             StreamReader streamReader;
@@ -48,7 +48,7 @@ namespace Sudoku
             _squareToCellMapper = ReturnSquareToCellMapper();
             sudokuBoardCertainty = ReturnTwoDimensionalDataStructure(9, 9);
             sudokuBoardTmp = ReturnTwoDimensionalDataStructure(9, 9);
-            sudokuBoardFinal = ReturnTwoDimensionalDataStructure(9, 9);
+            sudokuBoardBestSoFar = ReturnTwoDimensionalDataStructure(9, 9);
 
             if (!TryToInitSudokuBoard(sudokuBoardString, sudokuBoardCertainty, out errorMessage))
             {
@@ -89,7 +89,7 @@ namespace Sudoku
                     if (numberOfSimulations == 0 && _numberOfCandidates == 0)
                     {
                         numberOfCellsSetInFinalSudoku = 81 - _cellsRemainToSet.Count;
-                        CopySudokuBoard(sudokuBoardTmp, sudokuBoardFinal);
+                        CopySudokuBoard(sudokuBoardTmp, sudokuBoardBestSoFar);
                         break;
                     }
 
@@ -110,7 +110,7 @@ namespace Sudoku
                         if ((81 - _cellsRemainToSet.Count) > numberOfCellsSetInFinalSudoku)
                         {
                             numberOfCellsSetInFinalSudoku = 81 - _cellsRemainToSet.Count;
-                            CopySudokuBoard(sudokuBoardTmp, sudokuBoardFinal);
+                            CopySudokuBoard(sudokuBoardTmp, sudokuBoardBestSoFar);
                         }
 
                         CopySudokuBoard(sudokuBoardCertainty, sudokuBoardTmp);
@@ -190,7 +190,7 @@ namespace Sudoku
             else if (_cellsRemainToSet.Count == 0 && numberOfSimulations > 0) //Sudoku after simulation
                 sudokuBoardString = ReturnSudokuBoardsAsString(sudokuBoardTmp);
             else
-                sudokuBoardString = ReturnSudokuBoardsAsString(sudokuBoardFinal); //Sudoku only partially solved
+                sudokuBoardString = ReturnSudokuBoardsAsString(sudokuBoardBestSoFar); //Sudoku only partially solved
 
             fi = new FileInfo(args[0]);
             fileNameFullPath = string.Format("{0}\\Result.txt", fi.DirectoryName);

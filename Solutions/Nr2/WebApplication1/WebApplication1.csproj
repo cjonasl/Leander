@@ -113,6 +113,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AddressBook1Controller.cs" />
     <Compile Include="Controllers\AddressBookController.cs" />
+    <Compile Include="Controllers\AddressBookDebugController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -132,6 +133,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\AddressBook\Login.cshtml" />
     <Content Include="Views\AddressBook\AddressBook.cshtml" />
+    <Content Include="Views\AddressBookDebug\dfFdfnifElowi0690776A46344E2A87DD7560B0D14F1Aninohug.cshtml" />
+    <Content Include="Views\AddressBookDebug\Ujf56hg462A903895757B4D52B5AE355B77458A37jdij99dkddd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
