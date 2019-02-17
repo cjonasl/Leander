@@ -252,7 +252,7 @@ namespace SudokuDebugVersion
             }
 
             _candidates = ReturnThreeDimensionalDataStructure(9, 9, 10);
-            InitCandidateStructure(sudokuBoardCertainty);
+            CalculateCandidateStructure(sudokuBoardCertainty);
             numberOfCellsSetInInputSudokuBoard = 81 - _cellsRemainToSet.Count;
             numberOfSimulations = 0;
             _random = new Random((int)(DateTime.Now.Ticks % 64765L));
@@ -314,7 +314,7 @@ namespace SudokuDebugVersion
                         }
 
                         CopySudokuBoard(sudokuBoardCertainty, sudokuBoardTmp);
-                        InitCandidateStructure(sudokuBoardTmp);
+                        CalculateCandidateStructure(sudokuBoardTmp);
                         numberOfSimulations++;
                     }
 
@@ -596,7 +596,7 @@ namespace SudokuDebugVersion
             return true;
         }
 
-        private static void InitCandidateStructure(int[][] sudokuBoard)
+        private static void CalculateCandidateStructure(int[][] sudokuBoard)
         {
             int row, column, square, number, n;
 
