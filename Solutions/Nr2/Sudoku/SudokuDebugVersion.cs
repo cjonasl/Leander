@@ -161,7 +161,7 @@ namespace SudokuDebugVersion
                     {
                         for(i = 0; i < n; i++)
                         {
-                            str = "----------- Can set cell:";
+                            str = "-----------> Can set cell:";
 
                             aloneCandidateIncell = (n == 1) ? true : false;
                             if (aloneCandidateIncell)
@@ -179,7 +179,7 @@ namespace SudokuDebugVersion
                             if (aloneCandidateInSquare)
                                 str += (" " + "Square");
 
-                            sb.Append(string.Format("({0}, {1}, {2}, {3})", _candidates[row - 1][column - 1][1 + i].ToString(), aloneCandidateIncell.ToString().ToLower(), aloneCandidateInRow.ToString().ToLower(), aloneCandidateInColumn.ToString().ToLower(), aloneCandidateInSquare.ToString().ToLower()));
+                            sb.Append(string.Format("({0}, {1}, {2}, {3}, {4})", _candidates[row - 1][column - 1][1 + i].ToString(), aloneCandidateIncell.ToString().ToLower(), aloneCandidateInRow.ToString().ToLower(), aloneCandidateInColumn.ToString().ToLower(), aloneCandidateInSquare.ToString().ToLower()));
 
                             if (aloneCandidateIncell || aloneCandidateInRow || aloneCandidateInColumn || aloneCandidateInSquare)
                                 sb.Append(string.Format(" {0}\r\n", str));
@@ -202,7 +202,7 @@ namespace SudokuDebugVersion
         public static void SolveSudoku(string[] args)
         {
             int[][] sudokuBoardCertainty, sudokuBoardTmp, sudokuBoardBestSoFar;
-            int numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, numberOfSimulations, numberOfCandidates, candidate, i, row, column, square, index;
+            int numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, numberOfSimulations, candidate, row, column, index;
             FileStream fileStream;
             StreamReader streamReader;
             StreamWriter streamWriter;
@@ -228,7 +228,7 @@ namespace SudokuDebugVersion
 
             fileStream = new FileStream(args[0], FileMode.Open, FileAccess.Read);
             streamReader = new StreamReader(fileStream, Encoding.ASCII);
-            sudokuBoardString = streamReader.ReadToEnd();
+            sudokuBoardString = streamReader.ReadToEnd().Trim();
             streamReader.Close();
             fileStream.Close();
 
@@ -303,7 +303,7 @@ namespace SudokuDebugVersion
 
                         DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardTmp, debugTmpStr, row, column, candidate, _cellsRemainToSet, true, debugResult);
 
-                        SetNewCell(sudokuBoardTmp, row, column, candidate, -1);
+                        SetNewCellAndUpdateStructure(sudokuBoardTmp, row, column, candidate, -1);
                     }
                     else
                     {
@@ -326,33 +326,8 @@ namespace SudokuDebugVersion
                     
                 row = ((int[])_cellsRemainToSet[index])[0];
                 column = ((int[])_cellsRemainToSet[index])[1];
-                square = ReturnSquare(row, column);
 
-                candidate = 0;
-                numberOfCandidates = _candidates[row - 1][column - 1][0];
-
-                if (numberOfCandidates == 1)
-                {
-                    candidate = _candidates[row - 1][column - 1][1]; //Alone candidate in cell
-                }
-                else if (numberOfCandidates > 1)
-                {
-                    i = 0;
-
-                    while (i < numberOfCandidates && candidate == 0)
-                    {
-                        if (NumberIsAloneCandidateInRow(row, _candidates[row - 1][column - 1][1 + i]))
-                            candidate = _candidates[row - 1][column - 1][1 + i];
-                        else if (NumberIsAloneCandidateInColumn(column, _candidates[row - 1][column - 1][1 + i]))
-                            candidate = _candidates[row - 1][column - 1][1 + i];
-                        else if (NumberIsAloneCandidateInSquare(square, _candidates[row - 1][column - 1][1 + i]))
-                            candidate = _candidates[row - 1][column - 1][1 + i];
-                        else                 
-                            i++;
-                    }
-                }
-
-                if (candidate != 0)
+                if (CanSetCell(row, column, out candidate))
                 {
                     if (numberOfSimulations == 0)
                         DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardCertainty, DebugHelpReturnMessage(row, column, candidate, false), row, column, candidate, _cellsRemainToSet, false, debugResult);
@@ -360,9 +335,9 @@ namespace SudokuDebugVersion
                         DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardTmp, DebugHelpReturnMessage(row, column, candidate, false), row, column, candidate, _cellsRemainToSet, false, debugResult);
 
                     if (numberOfSimulations == 0)
-                        SetNewCell(sudokuBoardCertainty, row, column, candidate, index);
+                        SetNewCellAndUpdateStructure(sudokuBoardCertainty, row, column, candidate, index);
                     else
-                        SetNewCell(sudokuBoardTmp, row, column, candidate, index);
+                        SetNewCellAndUpdateStructure(sudokuBoardTmp, row, column, candidate, index);
 
                     index = 0;              
                 }
@@ -401,6 +376,38 @@ namespace SudokuDebugVersion
         private static int ReturnSquare(int row, int column)
         {
             return 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
+        }
+
+        private static bool CanSetCell(int row, int column, out int candidate)
+        {
+            int i, square, numberOfCandidates;
+
+            candidate = 0;
+            square = ReturnSquare(row, column);
+            numberOfCandidates = _candidates[row - 1][column - 1][0];
+
+            if (numberOfCandidates == 1)
+            {
+                candidate = _candidates[row - 1][column - 1][1]; //Alone candidate in cell
+            }
+            else if (numberOfCandidates > 1)
+            {
+                i = 0;
+
+                while (i < numberOfCandidates && candidate == 0)
+                {
+                    if (NumberIsAloneCandidateInRow(row, _candidates[row - 1][column - 1][1 + i]))
+                        candidate = _candidates[row - 1][column - 1][1 + i];
+                    else if (NumberIsAloneCandidateInColumn(column, _candidates[row - 1][column - 1][1 + i]))
+                        candidate = _candidates[row - 1][column - 1][1 + i];
+                    else if (NumberIsAloneCandidateInSquare(square, _candidates[row - 1][column - 1][1 + i]))
+                        candidate = _candidates[row - 1][column - 1][1 + i];
+                    else
+                        i++;
+                }
+            }
+
+            return (candidate != 0) ? true : false;
         }
 
         private static int[][] ReturnTwoDimensionalDataStructure(int m, int n)
@@ -782,7 +789,7 @@ namespace SudokuDebugVersion
             }
         }
 
-        private static void SetNewCell(int[][] sudokuBoard, int row, int column, int candidate, int index)
+        private static void SetNewCellAndUpdateStructure(int[][] sudokuBoard, int row, int column, int candidate, int index)
         {
             int i, r, c;
 
