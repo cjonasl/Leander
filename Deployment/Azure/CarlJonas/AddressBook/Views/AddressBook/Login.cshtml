@@ -1,0 +1,156 @@
+﻿@model AddressBook.User
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Carl Jonas's Address Book</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <style>
+    a:link, a:visited, a:hover, a:active {
+      color: blue !important;
+      text-decoration: none !important;
+    }
+  </style>
+</head>
+<body style="margin-top: 10px; margin-left: 50px; max-width: 500px; border-top: 1px solid black; border-left: 1px solid black; padding: 20px; background-color: #ebebe0;">
+  <img src="http://www.addressbook.com/Images/AddressBook.png" style="position: relative; top: 10px;" />
+  <div style="color: red; font-family: Arial; font-size: x-large; font-weight: bold; display: inline-block; margin-left: 10px; line-height: 35px;">
+    Welcome to Carl Jonas's<br />Address Book!
+  </div>
+  <p style="font-family: 'Times New Roman'; font-size: large; color: forestgreen; margin-top: 15px;">
+    You can either choose to create an account and<br />
+    log in and have your own address book, or use the<br />
+    <a href="http://www.addressbook.com/AddressBook/LogInAnonymous">anonymous</a>
+    one for a quick look and test.
+  </p>
+  <form method="post" action="http://www.addressbook.com/AddressBook/Login" style="margin-top: 4px; margin-bottom: 15px;">
+    <table style="font-family: 'Times New Roman'; font-size: medium; color: black;">
+      <tr><td>User name</td><td><input id="inputUserName" type="text" name="name" value="@Model.Name" /></td></tr>
+      <tr><td>Password</td><td><input id="inputPassword" type="password" name="password" /></td></tr>
+      <tr><td colspan="2"><input type="submit" value="Log in" /></td></tr>
+    </table>
+  </form>
+
+  <div id="divIncorrectLogin" style="margin-top: 10px; margin-bottom: 10px; font-family: Arial; font-weight: bold; color: red; display: none;">@ViewBag.ErrorMessage</div>
+
+  <div id="errorMessage" style="display: none;"></div>
+
+  <a href="javascript: window.addressBook.createAccount(0)">Create account</a>
+
+  <div id="divDialog" style="display: none; background-color: lightgray;">
+    <div id="divInfo" style="display: none; margin-top: 30px; max-width: 300px;">
+      You can now log in with your user name&nbsp;
+      <span id="spanUserName" style="font-style: italic;"></span><br />
+      <button style="margin-top: 30px;" onclick="window.addressBook.closeDialog()">Close</button>
+    </div>
+    <table id="tableUserNamePassword" style="margin-top: 15px;">
+      <tr><td style="font-weight: bold;">User name</td> <td><input id="inputNewUserName" type="text" /></td></tr>
+      <tr><td style="font-weight: bold;">Password</td> <td><input id="inputNewUserPassword" type="password" /></td></tr>
+      <tr id="trBlank"><td colspan="2">&nbsp;</td></tr>
+      <tr id="trButton"><td colspan="2"><button onclick="window.addressBook.createAccount(1)">Create</button></td></tr>
+    </table>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      window.addressBook = new Object();
+      window.addressBook.baseUrl = "http://www.addressbook.com/AddressBook/";
+      window.addressBook.newUserName = "";
+
+      window.addressBook.closeDialog = function (n) {
+        if (window.addressBook.newUserName) {
+          $("#divInfo").hide();
+          $("#tableUserNamePassword").show();
+          $("#inputUserName").val(window.addressBook.newUserName);
+          window.addressBook.newUserName = "";
+        }
+
+        $("#inputNewUserName").val("");
+        $("#inputNewUserPassword").val("");
+        $("#divDialog").dialog("close");
+      }
+
+      window.addressBook.createAccount = function (n) {
+        var popup, userName, password;
+
+        if (n === 0) {
+          options = {
+            modal: true,
+            title: "Create new account",
+            position: { my: "center", at: "center", of: window },
+            width: 400,
+            height: 200,
+            close: function () { window.addressBook.closeDialog(); }
+          }
+
+          popup = $("#divDialog");
+          popup.dialog(options);
+          popup.dialog('open');
+          popup.show();
+        } else {
+          userName = $("#inputNewUserName").val().trim();
+          password = $("#inputNewUserPassword").val().trim();
+
+          if (!userName) {
+            alert("User name is not given!");
+            return;
+          }
+
+          if (!password) {
+            alert("Password is not given!");
+            return;
+          }
+
+          $.ajax({
+            url: window.addressBook.baseUrl + "CreateNewAccount",
+            data: { name: userName, password: password, createdDate: null },
+            error: function (data) {
+              $("#errorMessage").html(data.responseText);
+              $("#errorMessage").show();
+            },
+            method: "post",
+            success: function (data) {
+              console.log(data);
+              if ((typeof data === "string") && (data.length >= 5) && (data.substring(0, 5) === "Error")) {
+                alert(data);
+                return;
+              }
+              else {
+                $("#divDialog").dialog("option", "title", "Account was created successfully");
+                $("#spanUserName").text(userName);
+                $("#tableUserNamePassword").hide();
+                $("#divInfo").show();
+                window.addressBook.newUserName = userName;
+              }
+            }
+          });
+        }
+      }
+
+      window.addressBook.handlerIncorrectUserName = function () {
+        $("#divIncorrectLogin").hide();
+        $("#inputUserName").off("change");
+      }
+
+      window.addressBook.handlerIncorrectPassword = function () {
+        $("#divIncorrectLogin").hide();
+        $("#inputPassword").off("change");
+      }
+
+      if (!@ViewBag.CorrectUserName.ToString().ToLower() || !@ViewBag.CorrectPassword.ToString().ToLower()) {
+        $("#divIncorrectLogin").show();
+
+        if (!@ViewBag.CorrectUserName.ToString().ToLower())
+          $("#inputUserName").on("change", window.addressBook.handlerIncorrectUserName);
+        else if (!@ViewBag.CorrectPassword.ToString().ToLower())
+          $("#inputPassword").on("change", window.addressBook.handlerIncorrectPassword);
+      }
+    });
+  </script>
+</body>
+</html>
