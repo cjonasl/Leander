@@ -40,6 +40,16 @@
       background-color: #4CAF50;
       color: white;
     }
+
+    #candidateTable {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+    }
+
+      #candidateTable td, #candidateTable th {
+        border: 1px solid black;
+        padding: 8px;
+      }
   </style>
 </head>
 <body style="margin-top: 5px; margin-left: 25px;">
@@ -259,5 +269,137 @@
     implementation in C#:
   </p>
   <img src="http://www.carljonas.com/Images/CanSetCell.png" style="position: relative; left: -3px; top: 2px;" />
+  <h4>2.5 Update structure</h4>
+  <p>
+    When a new number is placed in a cell in the sudoku board afterwards <i>sudokuBoard</i>, <i>candidates</i><br />
+    and <i>cellsRemainToBeSet</i> need to be updated.
+  </p>
+  <h4>2.5.1 Update <i>sudokuBoard</i></h4>
+  <p>If a new number <i>n</i> is placed in cell [<i>r</i>, <i>c</i>] then</p>
+  <ul>
+    <li><span style="font-family: 'Courier New'">sudokuBoard[r - 1, c - 1] = 0</span>&nbsp;&nbsp;before update</li>
+    <li><span style="font-family: 'Courier New'">sudokuBoard[r - 1, c - 1] = n</span>&nbsp;&nbsp;after update</li>
+  </ul>
+  <h4>2.5.2 Update <i>candidates</i></h4>
+  <p>
+    If a new number <i>n</i> is placed in row = <i>r</i>, column = <i>c</i> and square = <i>s</i>, then number <i>n</i><br />
+    is removed as a candidate in all cells in row = <i>r</i>, all cells in column = <i>c</i> and all cells<br />
+    in square = <i>s</i>.
+  </p>
+  <img src="http://www.carljonas.com/Images/UpdateCandidateStructure.png" style="position: relative; left: -4px; top: 2px;" />
+  <p>
+    In the above sudoku board it is possible to set number 8 in row 1 and column 2 since 8 is<br />
+    alone possible in cell. You need to look at candidate structure for a possible update (if cell<br />
+    contains candidate number 8) in all cells in row 1, column 2 and square 1 that are not already<br />
+    set, plus also the cell that is set (set it to -1 to indicate that the cell is set):
+  </p>
+  <table id="candidateTable">
+    <thead>
+      <tr>
+        <th>Row</th>
+        <th>Column</th>
+        <th>Candidates before</th>
+        <th>Candidates after</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>2, 6, 8</td>
+        <td>2, 6</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>8</td>
+        <td>candidates[0, 1, 0] = -1</td>
+        <td>The cell that was set</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>5</td>
+        <td>2, 8, 9</td>
+        <td>2, 9</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>6</td>
+        <td>4, 6</td>
+        <td>4, 6</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>7</td>
+        <td>2, 4, 7, 8</td>
+        <td>2, 4, 7</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>9</td>
+        <td>4, 6, 7, 8, 9</td>
+        <td>4, 6, 7, 9</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>1</td>
+        <td>2, 6, 8</td>
+        <td>2, 6</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>1</td>
+        <td>4, 7, 8, 9</td>
+        <td>4, 7, 9</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>1</td>
+        <td>3, 7, 8, 9</td>
+        <td>3, 7, 9</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>1</td>
+        <td>2, 3, 7, 8, 9</td>
+        <td>2, 3, 7, 9</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>1</td>
+        <td>2, 3, 7</td>
+        <td>2, 3, 7</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>1</td>
+        <td>2, 3, 4, 7, 8</td>
+        <td>2, 3, 4, 7</td>
+        <td>8 removed</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+        <td>2, 5, 8</td>
+        <td>2, 5</td>
+        <td>8 removed</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4>2.5.3 Update <i>cellsRemainToBeSet</i></h4>
+  <p>The cell that was set is simply removed from the list <i>cellsRemainToBeSet</i>.</p>
+  <img src="http://www.carljonas.com/Images/SimulationFlow1.png" style="position: relative; left: -4px; top: 2px;" /><br />
+  <img src="http://www.carljonas.com/Images/SimulationFlow2.png" style="position: relative; left: 20px; top: -15px;" />
 </body>
 </html>
