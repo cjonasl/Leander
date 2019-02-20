@@ -7,14 +7,14 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C46CC2E2-C0A7-4D4F-B299-32B8389573CC}</ProjectGuid>
+    <ProjectGuid>{720333B4-76A1-4CED-81B6-23A021F83650}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebApplication1</RootNamespace>
-    <AssemblyName>WebApplication1</AssemblyName>
+    <RootNamespace>AddressBook</RootNamespace>
+    <AssemblyName>AddressBook</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -88,50 +88,67 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Images\AddressBook.png" />
+    <None Include="Images\AloneCandidateInCell.png" />
+    <None Include="Images\AloneCandidatePossibleInColumn.png" />
+    <None Include="Images\AloneCandidatePossibleInRow.png" />
+    <None Include="Images\AloneCandidatePossibleInSquare.png" />
+    <None Include="Images\CalculationOfCandidateStructureInJavaScript.png" />
+    <None Include="Images\CandidatesForSomeCells.png" />
+    <None Include="Images\CanSetCell.png" />
+    <None Include="Images\CompleteSudokuBoard.png" />
+    <None Include="Images\NonValidSudokuBoard.png" />
+    <None Include="Images\returnNumberOfOccurenciesOfNumberInSquare.png" />
+    <None Include="Images\ReturnSquare.png" />
+    <None Include="Images\SudokuAlgorithmFirstVersion.png" />
+    <None Include="Images\SudokuBoard.png" />
+    <None Include="Images\ValidSudokuBoard.png" />
+    <Content Include="js\sudoku.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Deployment\SudokuCsharp.zip" />
+    <Content Include="Deployment\SudokuJavaScript.zip" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AddressBook1Controller.cs" />
     <Compile Include="Controllers\AddressBookController.cs" />
     <Compile Include="Controllers\AddressBookDebugController.cs" />
+    <Compile Include="Controllers\SudokuController.cs" />
+    <Compile Include="Controllers\SudokuDebugController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePassword.cs" />
-    <Compile Include="Models\Security.cs" />
     <Compile Include="Models\PersonInfo.cs" />
-    <Compile Include="Models\PersonInfo1.cs" />
-    <Compile Include="Models\PersonInfo1Db.cs" />
     <Compile Include="Models\PersonInfoDb.cs" />
+    <Compile Include="Models\RequestToApplication.cs" />
+    <Compile Include="Models\Security.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="Deployment\AddressBook.zip" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Views\AddressBook1\AddressBook.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\AddressBook\Login.cshtml" />
     <Content Include="Views\AddressBook\AddressBook.cshtml" />
+    <Content Include="Views\AddressBook\Login.cshtml" />
     <Content Include="Views\AddressBookDebug\dfFdfnifElowi0690776A46344E2A87DD7560B0D14F1Aninohug.cshtml" />
     <Content Include="Views\AddressBookDebug\Ujf56hg462A903895757B4D52B5AE355B77458A37jdij99dkddd.cshtml" />
+    <Content Include="Views\Sudoku\Solve.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Sudoku\Description.cshtml" />
+    <Content Include="Views\SudokuDebug\Jkm78Hjjk6E84B7ACCF9E47418AB8B6D781D6C20Cmfewi9fvu7d.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -141,7 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -156,9 +172,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54333</DevelopmentServerPort>
+          <DevelopmentServerPort>54167</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://www.Nr2Web1.com</IISUrl>
+          <IISUrl>http://localhost:54167/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

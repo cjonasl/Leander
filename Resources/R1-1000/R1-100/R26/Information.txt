@@ -1,0 +1,84 @@
+﻿Programmet är skrivet i projekt:
+C:\git_cjonasl\Leander\Solutions\Nr2\Sudoku\Sudoku.csproj
+
+Programmet anropas enligt: Sudoku.exe 0 [namn på textfil, med hel sökväg, med sudoku som ska lösas] 
+(om första argumentet istället är 1 så körs icke debug-versionen)
+OBS: Om indatafilen läggs i samma katalog som Sudoku.exe så verkar det som att sökvägen inte
+behöver vara med (det går bra ändå), dvs. det räcker då med filnamnet.
+
+I indatafilen ska det alltid finnas exakt 9 rader och 9 kolumner med
+siffrorna 0-9, där 0 indikerar att cellen inte är satt, t.ex:
+
+9 0 1 4 5 0 0 0 0
+0 0 5 0 0 0 6 0 0
+0 3 0 0 0 6 0 4 0
+0 0 6 0 9 0 0 0 7
+2 0 0 0 0 0 0 0 9
+7 0 0 0 2 0 3 0 0
+0 1 0 6 0 0 0 8 0
+0 0 8 0 0 0 5 0 0
+0 0 0 0 3 8 9 0 2
+
+Resultatet av körningen av programmet presenteras i en fil "Result.txt"
+som läggs i samma katalog som indatafilen.
+
+I debug-versionen så skapas också en katalog, "SudokuyyyyMMddHHmmss", med
+debug-information. Algoritmen ligger i en slinga och tittar på celler i en
+lista, där cellerna i listan ännu inte är satta. Varje gång det är möjligt
+att sätta ett nummer i en cell eller att man slumpar ett nummer så skrivs
+en rad ut i filen "SudokuyyyyMMddHHmmss/Result.txt", samt så skapas också
+en hel egen fil för händelsen:
+fileNameFullPath = string.Format("{0}\\N{1}NSimulations{2}Index{3}NRemainToSet{4}NCandidates{5}.txt", debugFolder, debugIteration.ToString().PadLeft(3, '0'), numberOfSimulations.ToString(), index.ToString(), numberOfCellsRemainToSet.ToString(), numberOfCandidates.ToString());
+
+Antal rader i "SudokuyyyyMMddHHmmss/Result.txt" ska alltså vara lika med
+antal filer i katalog "SudokuyyyyMMddHHmmss" - 1 (dvs. minus "Result.txt")
+
+I filen "SudokuyyyyMMddHHmmss/Result.txt" skrivs 11 saker ut:
+
+1. Iteration:
+Ett löpnummer 1, 2, 3,... i vilken gång slingan körs
+
+2. NumberOfSimulations:
+är 0 så har ingen simulering gjorts. Om den är 1 så är man 
+på första försöket att lösa sudokut med simulering tillåten.
+Om den är 2 så har man försökt lösa sudokuet med simulering
+tillåten en gång, men misslyckats och gått tillbaka till
+sudokut med säkra satta nummer och föräker en andra gång osv.
+
+3. CellsRemainToSet
+Antalet celler som återstår att sätta innan cellen är satt i
+iterationen, dvs. om sudokut är löst så är den 1 på sista
+raden i "SudokuyyyyMMddHHmmss/Result.txt".
+NumberOfItemsInCellsRemainToSet = Antal celler i listan
+
+4. Index:
+Index i listan. Om cellen sattes utan simulering så är
+index >= 0 och index < CellsRemainToSet.
+Vid simulering gäller: index == CellsRemainToSet
+
+5. NumberOfCandidates:
+Totala antalet kandidater i alla celler som inte är satta. Tas ifrån "private static int _numberOfCandidates".
+(ska vara samma som NumberOfCandidatesCalculated1 och NumberOfCandidatesCalculated2)
+
+6. NumberOfCandidatesCalculated1:
+Totala antalet kandidater i alla celler som inte är satta. Beräknas utifrån "private static int _numberOfCandidates;"
+(ska vara samma som NumberOfCandidates och NumberOfCandidatesCalculated2)
+
+7. NumberOfCandidatesCalculated2
+Totala antalet kandidater i alla celler som inte är satta. Beräknas utifrån aktuellt sudokuBoard.
+(ska vara samma som NumberOfCandidates och NumberOfCandidatesCalculated1)
+
+8. Row:
+Raden som sattes i iterationen
+
+9. Column:
+Kolumnen som sattes i iterationen
+
+10. Candidate
+Nummer (kandidaten) som sattes i iterationen
+
+11. CandidateWasSimulatedResult:
+"Certainty" om numret sattes med säkerhet, annars "Simulation".
+
+I filerna "SudokuyyyyMMddHHmmss" får man dessutom information om kandidaterna
+för varje cell som inte är satt.

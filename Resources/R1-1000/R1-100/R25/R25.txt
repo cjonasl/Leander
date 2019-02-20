@@ -1,0 +1,49 @@
+﻿25
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-19 18:03:11
+
+----- New property -----
+
+AddressBook1
+
+----- New property -----
+
+20,1,10,2,14,21
+
+----- New property -----
+
+Andra versionen av AddressBook. Med inloggning och authentication.
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+http://www.addressbook.com/AddressBook/LogIn###AddressBook2
+
+----- New property -----
+
+http://www.addressbook.com/AddressBook/LogIn###AddressBook2

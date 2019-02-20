@@ -1,0 +1,52 @@
+﻿@model List<CarlJonas.RequestToApplication>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Requests to site</title>
+
+  <style>
+    table {
+      border-collapse: collapse;
+      font-family: Arial;
+      min-width: 10000px;
+    }
+
+    th {
+      border: 1px solid black;
+      padding: 5px;
+      text-align: left;
+    }
+
+    td {
+      border: 1px solid black;
+      padding: 5px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Requests to my site</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date and time of request (UTC)</th>
+        <th>Header (name value pairs)</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var request in Model)
+      {
+        <tr>
+          <td>@request.DateTimeUTC</td>
+          <td>@request.RequestHeader</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</body>
+</html>

@@ -475,3 +475,103 @@ attr removeAttr
 ----- New property -----
 
 Adhoc,jQuery
+
+---------- New resource ----------
+
+25
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-19 18:03:11
+
+----- New property -----
+
+AddressBook1
+
+----- New property -----
+
+App,C#,HTML,JavaScript,jQuery,MVC
+
+---------- New resource ----------
+
+26
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-19 19:06:47
+
+----- New property -----
+
+Sudoku debug version C#
+
+----- New property -----
+
+App,C#
+
+---------- New resource ----------
+
+27
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-19 22:12:29
+
+----- New property -----
+
+Sudoku C#
+
+----- New property -----
+
+App,C#
+
+---------- New resource ----------
+
+28
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-19 23:23:58
+
+----- New property -----
+
+Sudoku
+
+----- New property -----
+
+App,HTML,JavaScript
+
+---------- New resource ----------
+
+29
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-20 01:36:11
+
+----- New property -----
+
+Sudoku
+
+----- New property -----
+
+App,HTML,JavaScript

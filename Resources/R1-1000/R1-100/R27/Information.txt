@@ -1,0 +1,23 @@
+Programmet är skrivet i projekt:
+C:\git_cjonasl\Leander\Solutions\Nr2\Sudoku\Sudoku.csproj
+
+Programmet anropas enligt: Sudoku.exe 1 [namn på textfil, med hel sökväg, med sudoku som ska lösas] 
+(om första argumentet istället är 0 så körs icke debug-versionen)
+OBS: Om indatafilen läggs i samma katalog som Sudoku.exe så verkar det som att sökvägen inte
+behöver vara med (det går bra ändå), dvs. det räcker då med filnamnet.
+
+I indatafilen ska det alltid finnas exakt 9 rader och 9 kolumner med
+siffrorna 0-9, där 0 indikerar att cellen inte är satt, t.ex:
+
+9 0 1 4 5 0 0 0 0
+0 0 5 0 0 0 6 0 0
+0 3 0 0 0 6 0 4 0
+0 0 6 0 9 0 0 0 7
+2 0 0 0 0 0 0 0 9
+7 0 0 0 2 0 3 0 0
+0 1 0 6 0 0 0 8 0
+0 0 8 0 0 0 5 0 0
+0 0 0 0 3 8 9 0 2
+
+Resultatet av körningen av programmet presenteras i en fil "Result.txt"
+som läggs i samma katalog som indatafilen.

@@ -1,0 +1,4 @@
+OBS: For database run first script "AddressBook.sql" and then "Add debug info.sql"
+
+How to get some debug info, change password and requests to site look at
+C:\Published applications\AddressBook.txt

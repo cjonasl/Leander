@@ -1,0 +1,49 @@
+﻿29
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-20 01:36:11
+
+----- New property -----
+
+Sudoku
+
+----- New property -----
+
+20,10,2
+
+----- New property -----
+
+With logging of requests to site and description
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+http://www.carljonas.com/Sudoku/Solve###Sudoku
+
+----- New property -----
+
+http://www.carljonas.com/Sudoku/Solve###Sudoku

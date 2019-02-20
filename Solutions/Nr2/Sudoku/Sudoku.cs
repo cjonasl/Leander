@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Text;
 
-namespace SudokuDebugVersion
+namespace Sudoku
 {
     public static class Sudoku
     {
@@ -15,188 +15,6 @@ namespace SudokuDebugVersion
         private static int _numberOfCandidates;
         private static ArrayList _cellsRemainToSet; //List with two-tuples of int
 
-        private static void DebugCreateNewFile(string fileNameFullPath, string fileContent)
-        {
-            FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);
-            StreamWriter streamWriter = new StreamWriter(fileStream, Encoding.UTF8);
-            streamWriter.Write(fileContent);
-            streamWriter.Flush();
-            fileStream.Flush();
-            streamWriter.Close();
-            fileStream.Close();
-        }
-
-        private static int DebugReturnNumberOfCandidates(int[][][] candidates)
-        {
-            int i, j, n = 0;
-
-            for (i = 0; i < 9; i++)
-            {
-                for (j = 0; j < 9; j++)
-                {
-                    if (candidates[i][j][0] > 0)
-                        n += candidates[i][j][0];
-                }
-            }
-
-            return n;
-        }
-
-        private static int DebugReturnNumberOfCandidates(int[][] sudokuBoard)
-        {
-            int row, column, square, number, n = 0;
-
-            for (row = 1; row <= 9; row++)
-            {
-                for (column = 1; column <= 9; column++)
-                {
-                    square = ReturnSquare(row, column);
-
-                    if (sudokuBoard[row - 1][column - 1] == 0)
-                    {
-                        for (number = 1; number <= 9; number++)
-                        {
-                            if (
-                                (ReturnNumberOfOccurenciesOfNumberInRow(sudokuBoard, row, number) == 0) &&
-                                (ReturnNumberOfOccurenciesOfNumberInColumn(sudokuBoard, column, number) == 0) &&
-                                (ReturnNumberOfOccurenciesOfNumberInSquare(sudokuBoard, square, number) == 0)
-                                )
-                            {
-                                n++;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return n;
-        }
-
-        private static string DebugHelpReturnMessage(int row, int column, int candidate, bool wasSimulated)
-        {
-            if (wasSimulated)
-                return string.Format("Candidate {0} was set in cell [{1}, {2}] with simulation", candidate.ToString(), row.ToString(), column.ToString());
-            else
-                return string.Format("Candidate {0} was set in cell [{1}, {2}] with certainty", candidate.ToString(), row.ToString(), column.ToString());
-        }
-
-        private static string ReturnOneLineDebugInfo(int iteration, int[][] sudokuBoard, int numberOfSimulations, int index, int numberOfCandidates, ArrayList cellsRemainToSet, int[][][] candidates, int row, int column, int candidate, bool candidateWasSimulated)
-        {
-            string iterationStr = iteration.ToString().PadLeft(3, '0');
-            string numberOfSimulationsStr = numberOfSimulations.ToString();
-            string cellsRemainToSetStr = cellsRemainToSet.Count.ToString().PadLeft(2, '0');
-            string indexStr = index.ToString().PadLeft(2, '0');
-            string numberOfCandidatesStr = numberOfCandidates.ToString().PadLeft(3, '0');
-            string numberOfCandidatesCalculated1 = DebugReturnNumberOfCandidates(candidates).ToString().PadLeft(3, '0');
-            string numberOfCandidatesCalculated2 = DebugReturnNumberOfCandidates(sudokuBoard).ToString().PadLeft(3, '0');
-            string rowStr = row.ToString();
-            string columnStr = column.ToString();
-            string candidateStr = candidate.ToString();
-            string candidateWasSimulatedStr = candidateWasSimulated.ToString();
-            string indicatorStr;
-
-            if (row != 0 && !candidateWasSimulated)
-                indicatorStr = "Certainty ";
-            else if (row != 0 && candidateWasSimulated)
-                indicatorStr = "Simulation";
-            else
-                indicatorStr = "CanNotset ";
-
-            string str = string.Format("[{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}]",
-                iterationStr,
-                numberOfSimulationsStr,
-                cellsRemainToSetStr,
-                indexStr,
-                numberOfCandidatesStr,
-                numberOfCandidatesCalculated1,
-                numberOfCandidatesCalculated2,
-                rowStr,
-                columnStr,
-                candidateStr,
-                indicatorStr
-                );
-
-            return str;
-        }
-
-        private static void DebugRegisterResult(int debugIteration, int numberOfSimulations, int index, int numberOfCellsRemainToSet, int numberOfCandidates, string debugFolder, int[][] sudokuBoard, string result, int r, int c, int candidate, ArrayList cellsRemainToSet, bool candidateWasSimulated, StringBuilder debugResult) 
-        {
-            string fileNameFullPath, str;
-            StringBuilder sb;
-            int row, column, square, i, n;
-            bool aloneCandidateIncell, aloneCandidateInRow, aloneCandidateInColumn, aloneCandidateInSquare;
-
-            fileNameFullPath = string.Format("{0}\\N{1}NSimulations{2}Index{3}NRemainToSet{4}NCandidates{5}.txt", debugFolder, debugIteration.ToString().PadLeft(3, '0'), numberOfSimulations.ToString(), index.ToString(), numberOfCellsRemainToSet.ToString(), numberOfCandidates.ToString());
-
-            sb = new StringBuilder();
-
-            sb.Append(string.Format("Iteration: {0}\r\n", debugIteration.ToString()));
-            sb.Append(string.Format("Number of simulations: {0}\r\n", numberOfSimulations.ToString()));
-            sb.Append(string.Format("Index: {0}\r\n", index.ToString()));
-            sb.Append(string.Format("Number of cells remain to set: {0}\r\n", numberOfCellsRemainToSet.ToString()));
-            sb.Append(string.Format("Number of candidates: {0}\r\n\r\n", numberOfCandidates.ToString()));
-            sb.Append(string.Format("Sudoku board:\r\n{0}", ReturnSudokuBoardsAsString(sudokuBoard)));
-            sb.Append("\r\n\r\nCandidates:\r\n\r\n");
-
-            for(row = 1; row <= 9; row++)
-            {
-                for (column = 1; column <= 9; column++)
-                {
-                    aloneCandidateInRow = false;
-                    aloneCandidateInColumn = false;
-                    aloneCandidateInSquare = false;
-
-                    square = ReturnSquare(row, column);
-                    sb.Append(string.Format("[{0}, {1}, {2}, {3}]", row.ToString(), column.ToString(), square.ToString(), _candidates[row - 1][column - 1][0].ToString()));
-
-                    n = _candidates[row - 1][column - 1][0];
-
-                    if (n == 0)
-                        sb.Append("----------- OBS!! Cell not set and no candidates!!!! -----------\r\n");
-                    else
-                        sb.Append("\r\n");
-
-                    if (n > 0)
-                    {
-                        for(i = 0; i < n; i++)
-                        {
-                            str = "-----------> Can set cell:";
-
-                            aloneCandidateIncell = (n == 1) ? true : false;
-                            if (aloneCandidateIncell)
-                                str += (" " + "Alone");
-
-                            aloneCandidateInRow = NumberIsAloneCandidateInRow(row, _candidates[row - 1][column - 1][1 + i]);
-                            if (aloneCandidateInRow)
-                                str += (" " + "Row");
-
-                            aloneCandidateInColumn = NumberIsAloneCandidateInColumn(column, _candidates[row - 1][column - 1][1 + i]);
-                            if (aloneCandidateInColumn)
-                                str += (" " + "Column");
-
-                            aloneCandidateInSquare = NumberIsAloneCandidateInSquare(square, _candidates[row - 1][column - 1][1 + i]);
-                            if (aloneCandidateInSquare)
-                                str += (" " + "Square");
-
-                            sb.Append(string.Format("({0}, {1}, {2}, {3}, {4})", _candidates[row - 1][column - 1][1 + i].ToString(), aloneCandidateIncell.ToString().ToLower(), aloneCandidateInRow.ToString().ToLower(), aloneCandidateInColumn.ToString().ToLower(), aloneCandidateInSquare.ToString().ToLower()));
-
-                            if (aloneCandidateIncell || aloneCandidateInRow || aloneCandidateInColumn || aloneCandidateInSquare)
-                                sb.Append(string.Format(" {0}\r\n", str));
-                            else
-                                sb.Append("\r\n");
-                        }
-                    }
-
-                    sb.Append("\r\n");
-                }
-            }
-
-            sb.Append(string.Format("\r\nResult: {0}", result));
-            DebugCreateNewFile(fileNameFullPath, sb.ToString());
-
-            debugResult.Append(ReturnOneLineDebugInfo(debugIteration, sudokuBoard, numberOfSimulations, index, numberOfCandidates, cellsRemainToSet, _candidates, r, c, candidate, candidateWasSimulated));
-            debugResult.Append("\r\n");
-        }
 
         public static void Solve(string[] args)
         {
@@ -206,9 +24,7 @@ namespace SudokuDebugVersion
             StreamReader streamReader;
             StreamWriter streamWriter;
             FileInfo fi;
-            string inputFolder, debugFolder, debugStr, debugTmpStr, errorMessage, sudokuBoardString, message, fileNameFullPath;
-            int debugIteration;
-            StringBuilder debugResult = new StringBuilder("[Iteration, NumberOfSimulations, CellsRemainToSet, Index, NumberOfCandidates, NumberOfCandidatesCalculated1, NumberOfCandidatesCalculated2, Row, Column, Candidate, CandidateWasSimulated, Result]\r\n");
+            string inputFolder, errorMessage, sudokuBoardString, message, fileNameFullPath;
 
             if (args.Length == 0)
             {
@@ -222,8 +38,6 @@ namespace SudokuDebugVersion
             }
 
             inputFolder = (new FileInfo(args[0])).DirectoryName;
-            debugFolder = string.Format("{0}\\Sudoku{1}.txt", inputFolder, DateTime.Now.ToString("yyyyMMddHHmmss"));
-            Directory.CreateDirectory(debugFolder);
 
             fileStream = new FileStream(args[0], FileMode.Open, FileAccess.Read);
             streamReader = new StreamReader(fileStream, Encoding.ASCII);
@@ -238,14 +52,12 @@ namespace SudokuDebugVersion
 
             if (!TryToInitSudokuBoard(sudokuBoardString, sudokuBoardCertainty, out errorMessage))
             {
-                DebugCreateNewFile(debugFolder + "\\Result.txt", string.Format("The given input file is incorrect! {0}", errorMessage));
                 Console.WriteLine(string.Format("The given input file is incorrect! {0}", errorMessage));            
                 return;
             }
 
             if (!ValidateSudokuRule(sudokuBoardCertainty, out errorMessage))
             {
-                DebugCreateNewFile(debugFolder + "\\Result.txt", string.Format("The given input file is incorrect! {0}", errorMessage));
                 Console.WriteLine(string.Format("The given input file is incorrect! {0}", errorMessage));
                 return;
             }
@@ -257,19 +69,14 @@ namespace SudokuDebugVersion
             _random = new Random((int)(DateTime.Now.Ticks % 64765L));
             numberOfCellsSetInBestSoFar = 0;
             index = 0;
-            debugIteration = 0;
 
             if (_cellsRemainToSet.Count == 0)
             {
-                DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardCertainty, "The sudoku is solved already", 0, 0, 0, _cellsRemainToSet, false, debugResult);
-
                 Console.WriteLine("The sudoku is solved already.");
                 return;
             }
             else if (_numberOfCandidates == 0)
             {
-                DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardCertainty, "Not possible to add any number to the sudoku", 0, 0, 0, _cellsRemainToSet, false, debugResult);
-
                 Console.WriteLine("Not possible to add any number to the sudoku.");
                 return;
             }
@@ -280,8 +87,6 @@ namespace SudokuDebugVersion
                 {
                     if (numberOfSimulations == 0 && _numberOfCandidates == 0)
                     {
-                        DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardCertainty, "All cells set with certainty and after that no more candidates", 0, 0, 0, _cellsRemainToSet, false, debugResult);
-
                         numberOfCellsSetInBestSoFar = 81 - _cellsRemainToSet.Count;
                         CopySudokuBoard(sudokuBoardCertainty, sudokuBoardBestSoFar);
                         break;
@@ -295,12 +100,7 @@ namespace SudokuDebugVersion
 
                     if (_numberOfCandidates > 0)
                     {
-                        SimulateOneCandidateDebugVersion(out row, out column, out candidate, out debugStr);
-
-                        debugTmpStr = DebugHelpReturnMessage(row, column, candidate, true) + debugStr;
-
-                        DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardTmp, debugTmpStr, row, column, candidate, _cellsRemainToSet, true, debugResult);
-
+                        SimulateOneCandidate(out row, out column, out candidate);
                         SetNewCellAndUpdateStructure(sudokuBoardTmp, row, column, candidate, -1);
                     }
                     else
@@ -327,11 +127,6 @@ namespace SudokuDebugVersion
 
                 if (CanSetCell(row, column, out candidate))
                 {
-                    if (numberOfSimulations == 0)
-                        DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardCertainty, DebugHelpReturnMessage(row, column, candidate, false), row, column, candidate, _cellsRemainToSet, false, debugResult);
-                    else
-                        DebugRegisterResult(++debugIteration, numberOfSimulations, index, _cellsRemainToSet.Count, _numberOfCandidates, debugFolder, sudokuBoardTmp, DebugHelpReturnMessage(row, column, candidate, false), row, column, candidate, _cellsRemainToSet, false, debugResult);
-
                     if (numberOfSimulations == 0)
                         SetNewCellAndUpdateStructure(sudokuBoardCertainty, row, column, candidate, index);
                     else
@@ -367,8 +162,6 @@ namespace SudokuDebugVersion
             fileStream.Close();
 
             Console.WriteLine(message);
-
-            DebugCreateNewFile(debugFolder + "\\Result.txt", debugResult.ToString().TrimEnd());
         }
 
         private static int ReturnSquare(int row, int column)
@@ -824,13 +617,12 @@ namespace SudokuDebugVersion
             }
         }
 
-        private static void SimulateOneCandidateDebugVersion(out int row, out int column, out int candidate, out string debugStr)
+        private static void SimulateOneCandidate(out int row, out int column, out int candidate)
         {
-            int r, c, n, index, minNumberOfCandidates = 9;
+            int r, c, index, minNumberOfCandidates = 9;
             ArrayList v;
-            StringBuilder sb = new StringBuilder();
 
-            for (r = 1; r <= 9; r++)
+            for(r = 1; r <= 9; r++)
             {
                 for (c = 1; c <= 9; c++)
                 {
@@ -839,30 +631,14 @@ namespace SudokuDebugVersion
                 }
             }
 
-            sb.Append(string.Format(". Min number of candidates: {0}, ###REPLACE### cells: ", minNumberOfCandidates.ToString()));
-
             v = new ArrayList();
 
-            n = 0;
             for (r = 1; r <= 9; r++)
             {
                 for (c = 1; c <= 9; c++)
                 {
                     if (_candidates[r - 1][c - 1][0] == minNumberOfCandidates)
-                    {
                         v.Add(new int[] { r, c });
-
-                        if (n == 0)
-                        {
-                            sb.Append(string.Format("[{0}, {1}]", r.ToString(), c.ToString()));
-                        }
-                        else
-                        {
-                            sb.Append(string.Format(", [{0}, {1}]", r.ToString(), c.ToString()));
-                        }
-
-                        n++;
-                    }
                 }
             }
 
@@ -871,8 +647,8 @@ namespace SudokuDebugVersion
             column = ((int[])v[index])[1];
             index = _random.Next(0, minNumberOfCandidates);
             candidate = _candidates[row - 1][column - 1][1 + index];
-            debugStr = sb.ToString().Replace("###REPLACE###", v.Count.ToString());
         }
+
 
         private static string ReturnSudokuBoardsAsString(int[][] sudokuBoard)
         {

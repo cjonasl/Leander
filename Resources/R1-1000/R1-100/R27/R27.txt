@@ -1,0 +1,49 @@
+﻿27
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-02-19 22:12:29
+
+----- New property -----
+
+Sudoku C#
+
+----- New property -----
+
+20,1
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Solutions\Nr2\Sudoku\bin\Debug\Sudoku.bat
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

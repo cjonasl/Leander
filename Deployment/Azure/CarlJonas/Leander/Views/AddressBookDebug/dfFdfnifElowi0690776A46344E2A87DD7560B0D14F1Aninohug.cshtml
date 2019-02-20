@@ -1,0 +1,80 @@
+﻿@model List<AddressBook.DebugInfo>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Debug info</title>
+
+  <style>
+    #debugTable {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+      #debugTable td, #debugTable th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #debugTable tr:nth-child(even) {
+        background-color: #ffffb7;
+      }
+
+      #debugTable tr:nth-child(odd) {
+        background-color: #ffffff;
+      }
+
+      #debugTable th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
+  </style>
+</head>
+<body style="margin: 10px;">
+  <table id="debugTable">
+    <tr>
+      <th>UserId</th>
+      <th>Name</th>
+      <th>CreatedDate</th>
+      <th>PersonId</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Gender</th>
+      <th>DateOfBirth</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Town</th>
+      <th>PostCode</th>
+      <th>Country</th>
+      <th>IsCloseFriend</th>
+    </tr>
+  @foreach (var debugInfo in Model)
+  {
+    <tr>
+      <td>@debugInfo.Id</td>
+      <td>@debugInfo.Name</td>
+      <td>@debugInfo.CreatedDate</td>
+      <td>@debugInfo.PersonId</td>
+      <td>@debugInfo.FirstName</td>
+      <td>@debugInfo.LastName</td>
+      <td>@debugInfo.Gender</td>
+      <td>@debugInfo.DateOfBirth</td>
+      <td>@debugInfo.Phone</td>
+      <td>@debugInfo.Address</td>
+      <td>@debugInfo.Town</td>
+      <td>@debugInfo.PostCode</td>
+      <td>@debugInfo.Country</td>
+      <td>@debugInfo.IsCloseFriend.ToString().ToLower()</td>
+    </tr>
+  }
+  </table>
+
+  <div style="margin-top: 50px; font-family: Arial; color: red; font-weight: bold; max-width: 400px;">@ViewBag.ErrorMessage</div>
+</body>
+</html>
