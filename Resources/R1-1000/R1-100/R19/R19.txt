@@ -42,4 +42,8 @@ null
 
 ----- New property -----
 
-https://portal.azure.com###Azure portal
+https://portal.azure.com###Azure portal----- New link -----https://docs.microsoft.com/en-gb/azure/app-service/app-service-web-get-started-dotnet###Documentation
+
+----- New property -----
+
+https://portal.azure.com###Azure portal----- New link -----https://docs.microsoft.com/en-gb/azure/app-service/app-service-web-get-started-dotnet###Documentation
