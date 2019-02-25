@@ -2,8 +2,8 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <title>Description of Carl Jonas's sudoku algorithm</title>
+  <meta charset="utf-8" />
+  <title>Description of Carl Jonas's sudoku algorithm</title>
   <style>
     h1, h3 {
       font-family: Arial;
@@ -24,22 +24,22 @@
       width: 100%;
     }
 
-    #outcomeTable td, #outcomeTable th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
+      #outcomeTable td, #outcomeTable th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
 
-    #outcomeTable tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
+      #outcomeTable tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
 
-    #outcomeTable th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: left;
-      background-color: #4CAF50;
-      color: white;
-    }
+      #outcomeTable th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
 
     #candidateTable {
       font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -67,7 +67,7 @@
     </ul>
   </p>
   <h3 style="margin-bottom: 0px; margin-top: 25px;">Sudoku board:</h3>
-  <img src="http://www.carljonas.com/Images/SudokuBoard.png" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/SudokuBoard.png" />
   <h4>1.2 Some observations</h4>
   <ul style="line-height: 30px;">
     <li style="line-height: normal;">
@@ -91,15 +91,15 @@
   <p>
     A sudoku board is <i>valid</i> if <i>sudoku rule</i> is fulfilled.
   </p>
-  <img src="http://www.carljonas.com/Images/ValidSudokuBoard.png" style="position: relative; left: -3px;" />
-  <img src="http://www.carljonas.com/Images/NonValidSudokuBoard.png" style="position: relative; top: 9px;" /><br />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/ValidSudokuBoard.png" style="position: relative; left: -3px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/NonValidSudokuBoard.png" style="position: relative; top: 9px;" /><br />
   <h4>1.6 Complete or solved sudoku board</h4>
   <p>
     In a complete or solved sudoku board there is <i>exactly one</i> integer n<br />
     in each row, column and square for n = 1, 2,...,9. This also implies<br />that all
     81 cells in the sudoku board are filled with an integer.
   </p>
-  <img src="http://www.carljonas.com/Images/CompleteSudokuBoard.png" style="position: relative; left: -3px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/CompleteSudokuBoard.png" style="position: relative; left: -3px;" />
   <h4>1.7 The aim of the algorithm</h4>
   <p>
     The user is suppose to enter some start integers in the sudoku board
@@ -171,7 +171,7 @@
     A <i>candidate</i> to a <i>not</i> set cell is a number in {1, 2, 3, 4, 5, 6, 7, 8, 9} that may be placed in the cell<br /> <i>without violate sudoku rule</i>.
     There might be more than one candidate for a not set cell.
   </p>
-  <img src="http://www.carljonas.com/Images/CandidatesForSomeCells.png" style="position: relative; left: -22px; top: -5px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/CandidatesForSomeCells.png" style="position: relative; left: -22px; top: -5px;" />
   <h4>2.2.1 Total number of candidates</h4>
   <p>
     The algorithm keeps track of total number of candidates, i.e. the sum of all candidates
@@ -205,8 +205,8 @@
     <li>returnNumberOfOccurenciesOfNumberInColumn(sudokuBoard, column, number) --> n</li>
     <li>returnNumberOfOccurenciesOfNumberInSquare(sudokuBoard, square, number) --> n</li>
   </ul>
-  <img src="http://www.carljonas.com/Images/ReturnSquare.png" style="position: relative; left: -2px; top: 10px;" /><br /><br /><br />
-  <img src="http://www.carljonas.com/Images/returnNumberOfOccurenciesOfNumberInSquare.png" style="position: relative; left: -2px; top: 10px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/ReturnSquare.png" style="position: relative; left: -2px; top: 10px;" /><br /><br /><br />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/returnNumberOfOccurenciesOfNumberInSquare.png" style="position: relative; left: -2px; top: 10px;" />
   <h4>2.2.4 Calculation of candidate structure</h4>
   <p>
     With the 4 help functions in section 2.2.3 it is a straightforward task to calculate the<br />
@@ -214,7 +214,7 @@
     return 0. The candidate structure is important. The algorithm makes decisions how<br />
     to proceed based on that structure together with sudokuBoard structure.
   </p>
-  <img src="http://www.carljonas.com/Images/CalculationOfCandidateStructureInJavaScript.png" style="position: relative; left: -5px; top: 5px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/CalculationOfCandidateStructureInJavaScript.png" style="position: relative; left: -5px; top: 5px;" />
   <h4>2.3 List with cells that remain to be set</h4>
   <p>
     The algorithm gets first a list with cells, i.e. a list with two-tuples of integers representing row and<br />
@@ -223,10 +223,10 @@
     can be set then the cell is set and structure of sudokuBoard and candidates are updated and the <br />
     algorithm goes back to first cell in the list (if it was not possible to set first cell in the list this might<br />
     be the case after update of structure so that is why the algorithm always go back to first cell in list<br />
-    after a new cell has been set). We are now ready to present a first version of Carl Jonas's sudoku<br />
-    algorithm on a upper level (details will be added later).
+    after a new cell has been set). I am now ready to present a first version of Carl Jonas's sudoku<br />
+    algorithm on a upper level. Here is the source code in JavaScript:
   </p>
-  <img src="http://www.carljonas.com/Images/SudokuAlgorithmFirstVersion.png" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/SudokuAlgorithmFirstVersion.png" />
   <h4>2.4 To decide if a cell can be set</h4>
   <p>
     In this section I describe how the algorithm decides if a cell can be set, i.e. an implementation of<br />
@@ -242,25 +242,25 @@
   </p>
   <h4>2.4.1 Alone candidate in cell</h4>
   <p>If there is only one candidate for a cell then that candidate must be in cell. There is no other option.</p>
-  <img src="http://www.carljonas.com/Images/AloneCandidateInCell.png" style="position: relative; left: -3px; top: 8px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/AloneCandidateInCell.png" style="position: relative; left: -3px; top: 8px;" />
   <h4>2.4.2 Alone candidate possible in row</h4>
   <p>
     If a cell has a candidate and there is no other cell in the row with this candidate number<br />
     then the algorithm can conclude that this candidate must be in cell.
   </p>
-  <img src="http://www.carljonas.com/Images/AloneCandidatePossibleInRow.png" style="position: relative; left: -3px; top: 8px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/AloneCandidatePossibleInRow.png" style="position: relative; left: -3px; top: 8px;" />
   <h4>2.4.3 Alone candidate possible in column</h4>
   <p>
     Alone candidate possible in column is similar to row-version except that it is with respect<br />
     to a column instead of a row.
   </p>
-  <img src="http://www.carljonas.com/Images/AloneCandidatePossibleInColumn.png" style="position: relative; left: -3px; top: 8px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/AloneCandidatePossibleInColumn.png" style="position: relative; left: -3px; top: 8px;" />
   <h4>2.4.4 Alone candidate possible in column</h4>
   <p>
     Alone candidate possible in square is similar to row- and column-version except that it is with<br />
     respect to a square instead of a row or column.
   </p>
-  <img src="http://www.carljonas.com/Images/AloneCandidatePossibleInSquare.png" style="position: relative; left: -3px; top: 8px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/AloneCandidatePossibleInSquare.png" style="position: relative; left: -3px; top: 8px;" />
   <h4>2.4.5 Implementation of function <i>CanSetCell</i></h4>
   <p>
     3 help functions, <i>NumberIsAloneCandidateInRow</i>, <i>NumberIsAloneCandidateInColumn</i> and <br />
@@ -268,7 +268,7 @@
     row, column and square. It is then straightforward to implement <i>CanSetCell</i> and here is the<br />
     implementation in C#:
   </p>
-  <img src="http://www.carljonas.com/Images/CanSetCell.png" style="position: relative; left: -3px; top: 2px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/CanSetCell.png" style="position: relative; left: -3px; top: 2px;" />
   <h4>2.5 Update structure</h4>
   <p>
     When a new number is placed in a cell in the sudoku board afterwards <i>sudokuBoard</i>, <i>candidates</i><br />
@@ -286,7 +286,7 @@
     is removed as a candidate in all cells in row = <i>r</i>, all cells in column = <i>c</i> and all cells<br />
     in square = <i>s</i>.
   </p>
-  <img src="http://www.carljonas.com/Images/UpdateCandidateStructure.png" style="position: relative; left: -4px; top: 2px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/UpdateCandidateStructure.png" style="position: relative; left: -4px; top: 2px;" />
   <p>
     In the above sudoku board it is possible to set number 8 in row 1 and column 2 since 8 is<br />
     alone possible in cell. You need to look at candidate structure for a possible update (if cell<br />
@@ -399,7 +399,46 @@
   </table>
   <h4>2.5.3 Update <i>cellsRemainToBeSet</i></h4>
   <p>The cell that was set is simply removed from the list <i>cellsRemainToBeSet</i>.</p>
-  <img src="http://www.carljonas.com/Images/SimulationFlow1.png" style="position: relative; left: -4px; top: 2px;" /><br />
-  <img src="http://www.carljonas.com/Images/SimulationFlow2.png" style="position: relative; left: 20px; top: -15px;" />
+  <h4>2.6 Simulation</h4>
+  <p>
+    The algorithm presented in section 2.3 solves easy and medium levels sudokus, but
+    not the harder ones.<br />For harder sudokus you will come to a point where the
+    algorithm has gone through all cells in the list<br /> <i>cellsRemainToBeSet</i> but it
+    was not possible to set any number with the conditions in section 2.4. An<br />
+    error will then happen in first line after the while clause (see below)
+    since the index is then equal to<br /> cellsRemainToBeSet.length, which is outside
+    the allowable range [0, cellsRemainToBeSet.length-1]:
+  </p>
+  <img src="https://leander20190225060235.azurewebsites.net/Images/NeedToSimulate.png" style="position: relative; left: 1px; top: 7px;" />
+  <div style="position: relative; top: 15px;">
+    <p>
+      The algorithm solves the error by introducing a check whether index=cellsRemainToBeSet.length and
+      if so<br />randomly select one cell among the cells that have <i>minimum</i> number of candidates, and then
+      in this cell<br />randomly select one of the candidates. It is a 4 step process:
+    </p>
+    <ul>
+      <li>Step 1: Go through all cells that remain to be set and decide min number of candidates</li>
+      <li>Step 2: Put all cells that have min number of candidates in a list</li>
+      <li>Step 3: Randomly select one cell in the list with cells that have min number of candidates</li>
+      <li>Step 4: Randomly select one candidate in the cell that was randomly selected in step 3</li>
+    </ul>
+    <br />
+    Implementation of the simulation in C#:
+  </div>
+  <img src="https://leander20190225060235.azurewebsites.net/Images/SimulateOneCandidate.png" style="position: relative; left: -1px; top: 35px;" /><br /><br /><br /><br />
+  <p>Simulation added to the algorithm:</p>
+  <img src="https://leander20190225060235.azurewebsites.net/Images/SudokuAlgorithmSecondVersion.png" style="position: relative; left: -1px; top: -2px;" />
+  <h4>2.7 Last complexity</h4>
+  <p>
+    The last complexity in the algorithm is <i>repeated simulation</i> if needed. It turns out that if you are<br />
+    lucky with the randomness of the selected candidates the algorithm can solve the sudoku, and if<br />
+    not lucky the algorithm solves it only partially so you need to give the algorithm several attempts.<br />
+    First add as many numbers as possible with <i>certainty</i>, i.e. with the 4 conditions in section 2.4, and<br />
+    then from there let the algorithm simulate several times if needed (up to 10 times) to try to solve<br />
+    the sudoku:
+  </p>
+  <img src="https://leander20190225060235.azurewebsites.net/Images/SimulationFlow1.png" style="position: relative; left: -4px; top: 2px;" /><br />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/SimulationFlow2.png" style="position: relative; left: 20px; top: -15px;" />
 </body>
+
 </html>

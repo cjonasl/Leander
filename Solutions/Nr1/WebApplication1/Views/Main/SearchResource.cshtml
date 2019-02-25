@@ -21,7 +21,7 @@
         <td style="width: 5% !important;" title="@r.Id"><a href="javascript: window.jonas.renderResource(@r.Id)">@r.Id</a></td>
         <td style="width: 8% !important;" title="@r.ResourcesType.ToString()">@WebApplication1.Controllers.MainController.ReturnResourceTypeAsString(r.ResourcesType)</td>
         <td style="width: 47% !important;" title="@r.Title">@r.Title</td>
-        <td style="width: 20% !important;" title="@r.KeyWords">@r.KeyWords</td>
+        <td style="width: 20% !important;" title="@r.KeyWords">@r.KeyWords.Replace(",", ", ")</td>
         <td style="width: 15% !important;" title="@r.Created.ToString("yyyy-MM-dd HH:mm:ss")">@r.Created.ToString("yyyy-MM-dd HH:mm:ss")</td>
         <td style="width: 5% !important;"><a href="javascript: window.jonas.executeCmd('er @r.Id')">Edit</a></td>
       </tr>

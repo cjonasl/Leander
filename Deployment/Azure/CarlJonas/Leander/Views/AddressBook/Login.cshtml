@@ -18,17 +18,17 @@
   </style>
 </head>
 <body style="margin-top: 10px; margin-left: 50px; max-width: 500px; border-top: 1px solid black; border-left: 1px solid black; padding: 20px; background-color: #ebebe0;">
-  <img src="http://www.carljonas.com/Images/AddressBook.png" style="position: relative; top: 10px;" />
+  <img src="https://leander20190225060235.azurewebsites.net/Images/AddressBook.png" style="position: relative; top: 10px;" />
   <div style="color: red; font-family: Arial; font-size: x-large; font-weight: bold; display: inline-block; margin-left: 10px; line-height: 35px;">
     Welcome to Carl Jonas's<br />Address Book!
   </div>
   <p style="font-family: 'Times New Roman'; font-size: large; color: forestgreen; margin-top: 15px;">
     You can either choose to create an account and<br />
     log in and have your own address book, or use the<br />
-    <a href="http://www.carljonas.com/AddressBook/LogInAnonymous">anonymous</a>
+    <a href="https://leander20190225060235.azurewebsites.net/AddressBook/LogInAnonymous">anonymous</a>
     one for a quick look and test.
   </p>
-  <form method="post" action="http://www.carljonas.com/AddressBook/Login" style="margin-top: 4px; margin-bottom: 15px;">
+  <form method="post" action="https://leander20190225060235.azurewebsites.net/AddressBook/Login" style="margin-top: 4px; margin-bottom: 15px;">
     <table style="font-family: 'Times New Roman'; font-size: medium; color: black;">
       <tr><td>User name</td><td><input id="inputUserName" type="text" name="name" value="@Model.Name" /></td></tr>
       <tr><td>Password</td><td><input id="inputPassword" type="password" name="password" /></td></tr>
@@ -41,7 +41,7 @@
   <div id="errorMessage" style="display: none;"></div>
 
   <a href="javascript: window.addressBook.createAccount(0)">Create account</a><br />
-  <a style="position: relative; top: 20px;" href="http://www.carljonas.com/AddressBook/DownloadSourceCodeForApp">Download source code for this app</a>
+  <a style="position: relative; top: 20px;" href="https://leander20190225060235.azurewebsites.net/AddressBook/DownloadSourceCodeForApp">Download source code for this app</a>
 
   <div id="divDialog" style="display: none; background-color: lightgray;">
     <div id="divInfo" style="display: none; margin-top: 30px; max-width: 300px;">
@@ -60,7 +60,7 @@
   <script>
     $(document).ready(function () {
       window.addressBook = new Object();
-      window.addressBook.baseUrl = "http://www.carljonas.com/AddressBook/";
+      window.addressBook.baseUrl = "https://leander20190225060235.azurewebsites.net/AddressBook/";
       window.addressBook.newUserName = "";
 
       window.addressBook.closeDialog = function (n) {

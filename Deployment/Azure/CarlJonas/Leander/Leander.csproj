@@ -111,6 +111,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Deployment\SudokuCsharp.zip" />
     <Content Include="Deployment\SudokuJavaScript.zip" />
+    <None Include="Properties\PublishProfiles\Leander20190225060235 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

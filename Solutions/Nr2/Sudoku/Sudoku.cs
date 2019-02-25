@@ -620,9 +620,10 @@ namespace Sudoku
         private static void SimulateOneCandidate(out int row, out int column, out int candidate)
         {
             int r, c, index, minNumberOfCandidates = 9;
-            ArrayList v;
+            ArrayList v = new ArrayList();
 
-            for(r = 1; r <= 9; r++)
+            //Step 1: Go through all cells that remain to be set and decide min number of candidates
+            for (r = 1; r <= 9; r++)
             {
                 for (c = 1; c <= 9; c++)
                 {
@@ -631,8 +632,7 @@ namespace Sudoku
                 }
             }
 
-            v = new ArrayList();
-
+            //Step 2: Put all cells that have min number of candidates in a list
             for (r = 1; r <= 9; r++)
             {
                 for (c = 1; c <= 9; c++)
@@ -642,9 +642,12 @@ namespace Sudoku
                 }
             }
 
+            //Step 3: Randomly select one cell in the list with cells that have min number of candidates
             index = _random.Next(0, v.Count);
             row = ((int[])v[index])[0];
             column = ((int[])v[index])[1];
+
+            //Step 4: Randomly select one candidate in the cell that was randomly selected in step 3
             index = _random.Next(0, minNumberOfCandidates);
             candidate = _candidates[row - 1][column - 1][1 + index];
         }
