@@ -19,6 +19,25 @@ namespace Leander.Nr1
             fileStream.Close();
         }
 
+        public static void CreateNewFile(string fileNameFullPath, ArrayList v)
+        {
+            FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);
+            StreamWriter streamWriter = new StreamWriter(fileStream, Encoding.UTF8);
+            
+            for(int i = 0; i < v.Count; i++)
+            {
+                if (i == (v.Count - 1))
+                    streamWriter.Write(v[i].ToString());
+                else
+                    streamWriter.WriteLine(v[i].ToString());
+            }
+
+            streamWriter.Flush();
+            fileStream.Flush();
+            streamWriter.Close();
+            fileStream.Close();
+        }
+
         public static void AppendToFile(string fileNameFullPath, string contentsToAppend)
         {
             FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Append, FileAccess.Write);
@@ -214,8 +233,8 @@ namespace Leander.Nr1
 
             for(i = 0; i < n; i++)
             {
-                if (FileSuffixIsInSuffixArray(v[i], suffix))
-                    fileNameFullPath.Add(v[i]);
+                if ((FileSuffixIsInSuffixArray(v[i].Trim(), suffix)) && (fileNameFullPath.IndexOf(v[i].Trim()) == -1))
+                    fileNameFullPath.Add(v[i].Trim());
             }
 
             if (includeSubFolders)
@@ -373,6 +392,126 @@ namespace Leander.Nr1
             }
 
             return true;
+        }
+
+        public static bool FileNameFullPathContainsExcludePattern(string fileNameFullPath, ArrayList excludePattern)
+        {
+            bool suffixIsInSuffixArray = false;
+            int i = 0, n = excludePattern.Count;
+            string s;
+
+            while ((!suffixIsInSuffixArray) && (i < n))
+            {
+                s = (string)excludePattern[i];
+
+                if (fileNameFullPath.IndexOf(s) >= 0)
+                    suffixIsInSuffixArray = true;
+                else
+                    i++;
+            }
+
+            return suffixIsInSuffixArray;
+        }
+
+        /// <summary>
+        /// config is a row separated string with configuration
+        /// 0FileNameFullPath: Include that file
+        /// 1FileNameFullPath: Exclude that file
+        /// 2DirectoryNameFullPath: Include all files in directory and sub directories
+        /// 3DirectoryNameFullPath: Include all files in directory but not in sub directories
+        /// 4FileNamePattern: Exclude file if fileNameFullPath.indexof(FileNamePattern) >= 0
+        /// </summary>
+        public static ArrayList ReturnFiles(string config, ArrayList suffix, out string errorMessage)
+        {
+            errorMessage = null;
+            ArrayList returnArrayList = new ArrayList();
+            
+            try
+            {
+                string[] commands = config.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                char command;
+                string fileNameFullPath;
+                int i;
+                ArrayList include = new ArrayList();
+                ArrayList exclude = new ArrayList();
+                ArrayList excludePattern = new ArrayList();
+
+                for (i = 0; i < commands.Length; i++)
+                {
+                    command = commands[i][0];
+
+                    switch (command)
+                    {
+                        case '0':
+                            if (!File.Exists(commands[i].Substring(1).Trim()))
+                            {
+                                errorMessage = string.Format("Error in method ReturnFiles! The following file does not exist: {0}", commands[i].Substring(1).Trim());
+                                return null;
+                            }
+                            else if (include.IndexOf(commands[i].Substring(1).Trim()) == -1)
+                            {
+                                include.Add(commands[i].Substring(1).Trim());
+                            }
+                        break;
+                        case '1':
+                            if (!File.Exists(commands[i].Substring(1).Trim()))
+                            {
+                                errorMessage = string.Format("Error in method ReturnFiles! The following file does not exist: {0}", commands[i].Substring(1).Trim());
+                                return null;
+                            }
+                            else if (exclude.IndexOf(commands[i].Substring(1).Trim()) == -1)
+                            {
+                                exclude.Add(commands[i].Substring(1).Trim());
+                            }
+                            break;
+                        case '2':
+                            if (!Directory.Exists(commands[i].Substring(1).Trim()))
+                            {
+                                errorMessage = string.Format("Error in method ReturnFiles! The following directory does not exist: {0}", commands[i].Substring(1).Trim());
+                                return null;
+                            }
+                            else
+                                GetFiles(commands[i].Substring(1).Trim(), include, suffix, true);
+                            break;
+                        case '3':
+                            if (!Directory.Exists(commands[i].Substring(1).Trim()))
+                            {
+                                errorMessage = string.Format("Error in method ReturnFiles! The following directory does not exist: {0}", commands[i].Substring(1).Trim());
+                                return null;
+                            }
+                            else
+                                GetFiles(commands[i].Substring(1).Trim(), include, suffix, false);
+                            break;
+                        case '4':
+                            if (excludePattern.IndexOf(commands[i].Substring(1).Trim()) == -1)
+                            {
+                                excludePattern.Add(commands[i].Substring(1).Trim());
+                            }
+                            break;
+                        default:
+                            errorMessage = string.Format("Error in method ReturnFiles! Incorrect command: {0}", command.ToString());
+                            return null;
+                    }
+                }
+
+                for(i = 0; i < include.Count; i++)
+                {
+                    fileNameFullPath = (string)include[i];
+                    if (exclude.IndexOf(fileNameFullPath) == -1 && !FileNameFullPathContainsExcludePattern(fileNameFullPath, excludePattern))
+                    {
+                        returnArrayList.Add(fileNameFullPath);
+                    }
+                }
+
+                
+            }
+            catch(Exception e)
+            {
+                errorMessage = string.Format("Error in method ReturnFiles! e.Message = {0}", e.Message);
+                return null;
+            }
+
+            return returnArrayList;
         }
     }
 }

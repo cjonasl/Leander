@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{87F49D1E-0EDF-46B3-8DCB-625D0355D40D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertWriteStatements", "InsertWriteStatements\InsertWriteStatements.csproj", "{CDBA8714-F1BE-486C-8B81-292FF12F1A61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{87F49D1E-0EDF-46B3-8DCB-625D0355D40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F49D1E-0EDF-46B3-8DCB-625D0355D40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87F49D1E-0EDF-46B3-8DCB-625D0355D40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDBA8714-F1BE-486C-8B81-292FF12F1A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDBA8714-F1BE-486C-8B81-292FF12F1A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDBA8714-F1BE-486C-8B81-292FF12F1A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDBA8714-F1BE-486C-8B81-292FF12F1A61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,35 @@
+﻿Det är tänkt att man skapar en katalog “C:\InsertWriteStatements” och i denna katalogen
+lägger man det körbara programmet “InsertWriteStatements.exe”. I katalogen “C:\InsertWriteStatements”
+har man sedan en katalog för varje konfigurering (insättning av “write statements” i filer).
+
+I varje konfigureringskatalog ska det sedan finnas:
+1. En fil "Config.txt" i UTF-8 format med konfigurering (se nedan)
+2. En fil "MovedFiles.txt" i UTF-8 format med flyttade filer eller tom fil om "State" = "FilesNotMoved"
+3. En fil "Log.txt" i UTF-8 format med loggning
+4. En fil "State.txt" i UTF-8 format med "State" ("FilesNotMoved" eller "FilesMoved")
+
+
+Exempel innehåll i filen Config.txt:
+---------------------------------------------------------------------------------------
+Suffix: aspx, ascx, cs
+Files
+0C:\C:\Code\Application\Harmony.Core\DomainModel\Bases\States\StateChange.cs
+0C:\Code\Application\Harmony.Core\Repositories\HarmonyRepository.cs
+1C:\Code\Application\Harmony.Web\Views\Customer\GetKnowledgeBaseArticles.aspx
+1C:\Code\Application\Harmony.Web\Views\Authentication\AuthenticationComplete.aspx
+1C:\Code\Application\Harmony.Web\Views\Projects\Invoices.aspx
+2C:\Code\Application\Harmony.Web\Views
+3C:\Code\Application\Harmony.Service
+4Address
+4ExternalUser
+End Files
+FolderMap: C:\Code\ ##### C:\CodeTmp
+---------------------------------------------------------------------------------------
+
+Se metod: public ArrayList ReturnFiles(string config, ArrayList suffix, out string errorMessage) i filen File.cs i Utility-projektet
+0FileNameFullPath: Include that file
+1FileNameFullPath: Exclude that file
+2DirectoryNameFullPath: Include all files in directory and sub directories
+3DirectoryNameFullPath: Include all files in directory but not in sub directories
+4FileNamePattern: Exclude file if fileNameFullPath.indexof(FileNamePattern) >= 0
+
