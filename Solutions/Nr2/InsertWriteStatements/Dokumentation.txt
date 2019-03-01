@@ -23,7 +23,7 @@ Files
 4Address
 4ExternalUser
 End Files
-FolderMap: C:\Code\ ##### C:\CodeTmp
+FolderMap: C:\Code ##### C:\CodeTmp
 ---------------------------------------------------------------------------------------
 
 Se metod: public ArrayList ReturnFiles(string config, ArrayList suffix, out string errorMessage) i filen File.cs i Utility-projektet

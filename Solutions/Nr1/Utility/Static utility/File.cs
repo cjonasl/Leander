@@ -19,6 +19,17 @@ namespace Leander.Nr1
             fileStream.Close();
         }
 
+        public static void CreateNewFile(string fileNameFullPath, string fileContent, Encoding encoding)
+        {
+            FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);
+            StreamWriter streamWriter = new StreamWriter(fileStream, encoding);
+            streamWriter.Write(fileContent);
+            streamWriter.Flush();
+            fileStream.Flush();
+            streamWriter.Close();
+            fileStream.Close();
+        }
+
         public static void CreateNewFile(string fileNameFullPath, ArrayList v)
         {
             FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);
@@ -53,6 +64,18 @@ namespace Leander.Nr1
         {
             FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Open, FileAccess.Read);
             StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8);
+            string str = streamReader.ReadToEnd();
+            streamReader.Close();
+            fileStream.Close();
+
+            return str;
+        }
+
+        public static string ReturnFileContents(string fileNameFullPath, out Encoding encoding)
+        {
+            encoding = GetEncoding(fileNameFullPath);
+            FileStream fileStream = new FileStream(fileNameFullPath, FileMode.Open, FileAccess.Read);
+            StreamReader streamReader = new StreamReader(fileStream, encoding);
             string str = streamReader.ReadToEnd();
             streamReader.Close();
             fileStream.Close();
@@ -501,9 +524,7 @@ namespace Leander.Nr1
                     {
                         returnArrayList.Add(fileNameFullPath);
                     }
-                }
-
-                
+                }              
             }
             catch(Exception e)
             {

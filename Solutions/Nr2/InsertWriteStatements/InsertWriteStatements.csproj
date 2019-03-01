@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AscxFile.cs" />
+    <Compile Include="AspxFile.cs" />
+    <Compile Include="CsFile.cs" />
+    <Compile Include="CshtmlFile.cs" />
+    <Compile Include="JsFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

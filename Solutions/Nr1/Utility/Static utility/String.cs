@@ -438,5 +438,87 @@ namespace Leander.Nr1
 
             return true;
         }
+
+        public static string InsertText(string text, string textToInsert, int insertIndex)
+        {
+            return text.Substring(0, insertIndex) + textToInsert + text.Substring(insertIndex);
+        }
+
+        public static int ReturnIndex(string text, bool searchBackward, int startIndex, string pattern, int numberOfOccurenciesOfPattern)
+        {
+            int index, n, occurenciesOfPattern, length;
+
+            index = startIndex;
+
+            n = searchBackward ? -1 : 1;
+            occurenciesOfPattern = 0;
+            length = pattern.Length;
+
+            while (index >= 0 && index < text.Length && occurenciesOfPattern < numberOfOccurenciesOfPattern)
+            {
+                if (text.Substring(index, length) == pattern)
+                    occurenciesOfPattern++;
+
+                if (occurenciesOfPattern < numberOfOccurenciesOfPattern)
+                    index = index + n;
+            }
+
+            if (occurenciesOfPattern == numberOfOccurenciesOfPattern)
+                return index;
+            else
+                return -1;
+        }
+
+        public static int ReturnMatchingIndex(string text, bool searchBackward, int startIndex, char matchingChar)
+        {
+            int index = startIndex;
+            char c = text[startIndex];
+            Stack stack = new Stack();
+            int n = searchBackward ? -1 : 1;
+
+            stack.Push(c);
+            index = index + n;
+
+            while (index >= 0 && index < text.Length && stack.Count > 0)
+            {
+                if (text[index] == c)
+                    stack.Push(c);
+                else if (text[index] == matchingChar)
+                    stack.Pop();
+
+                if (stack.Count > 0)
+                    index = index + n;
+            }
+
+            if (stack.Count == 0)
+                return index;
+            else
+                return -1;
+        }
+
+        public static char? ReturnNextNonWhiteSpaceChar(string text, bool searchBackward, int startIndex, out int idx)
+        {
+            int index, n;
+            char? c = null;
+
+            idx = -1;
+
+            index = startIndex;
+
+            n = searchBackward ? -1 : 1;
+
+            while (index >= 0 && index < text.Length && c == null)
+            {
+                if (!char.IsWhiteSpace(text[index]))
+                {
+                    c = text[index];
+                    idx = index;
+                }
+                else
+                    index = index + n;
+            }
+
+            return c;
+        }
     }
 }
