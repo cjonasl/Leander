@@ -39,13 +39,13 @@
       </tr>
     </thead>
     <tbody>
-        @foreach (var request in Model)
-        {
-          <tr>
-            <td>@request.DateTimeUTC</td>
-            <td>@request.RequestHeader</td>
-          </tr>
-        }
+      @foreach (var request in Model)
+      {
+        <tr>
+          <td>@request.DateTimeUTC</td>
+          <td>@request.RequestHeader</td>
+        </tr>
+      }
     </tbody>
   </table>
 </body>

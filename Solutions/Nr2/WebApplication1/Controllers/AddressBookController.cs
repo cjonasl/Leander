@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
+using CarlJonas;
 
 namespace AddressBook
 {
@@ -27,7 +28,7 @@ namespace AddressBook
         [HttpGet]
         public ActionResult LogIn()
         {
-            RequestToApplicationUtility.LogRequest("LogIn:&nbsp;", this.Request.Headers);
+            RequestToApplicationUtility.LogRequest(1, "LogIn:&nbsp;", this.Request.Headers);
 
             ViewBag.ErrorMessage = "";
             ViewBag.CorrectUserName = true;
@@ -38,7 +39,7 @@ namespace AddressBook
         [AllowAnonymous]
         public ActionResult LogInAnonymous()
         {
-            RequestToApplicationUtility.LogRequest("LogInAnonymous:&nbsp;", this.Request.Headers);
+            RequestToApplicationUtility.LogRequest(1, "LogInAnonymous:&nbsp;", this.Request.Headers);
 
             DateTime createdDate;
             bool correctUserName, correctPassword;
@@ -95,7 +96,7 @@ namespace AddressBook
 
         public ActionResult GetAll()
         {
-            RequestToApplicationUtility.LogRequest("GetAll:&nbsp;", this.Request.Headers);
+            RequestToApplicationUtility.LogRequest(1, string.Format("GetAll (user {0}):&nbsp;", GetUserName()), this.Request.Headers);
 
             string errorMessage;
 
@@ -175,6 +176,13 @@ namespace AddressBook
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("LogIn");
+        }
+
+        [AllowAnonymous]
+        public FileResult DownloadSourceCodeForApp()
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("~/Deployment/AddressBook.zip"));
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Zip, "AddressBook.zip");
         }
     }
 }

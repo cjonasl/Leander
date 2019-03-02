@@ -88,12 +88,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Deployment\AddressBook.zip" />
+    <Content Include="Deployment\SudokuCsharp.zip" />
+    <Content Include="Deployment\SudokuJavaScript.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Images\AddressBook.png" />
+    <Content Include="Images\AloneCandidateInCell.png" />
+    <Content Include="Images\AloneCandidatePossibleInColumn.png" />
+    <Content Include="Images\AloneCandidatePossibleInRow.png" />
+    <Content Include="Images\AloneCandidatePossibleInSquare.png" />
+    <Content Include="Images\CalculationOfCandidateStructureInJavaScript.png" />
+    <Content Include="Images\CandidatesForSomeCells.png" />
+    <Content Include="Images\CanSetCell.png" />
+    <Content Include="Images\CompleteSudokuBoard.png" />
+    <Content Include="Images\NeedToSimulate.png" />
+    <Content Include="Images\NonValidSudokuBoard.png" />
+    <Content Include="Images\returnNumberOfOccurenciesOfNumberInSquare.png" />
+    <Content Include="Images\ReturnSquare.png" />
+    <Content Include="Images\SimulateOneCandidate.png" />
+    <Content Include="Images\SimulationFlow1.png" />
+    <Content Include="Images\SimulationFlow2.png" />
+    <Content Include="Images\SudokuAlgorithmFirstVersion.png" />
+    <Content Include="Images\SudokuAlgorithmSecondVersion.png" />
+    <Content Include="Images\SudokuBoard.png" />
+    <Content Include="Images\UpdateCandidateStructure.png" />
+    <Content Include="Images\ValidSudokuBoard.png" />
+    <Content Include="js\sudoku.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -111,10 +137,13 @@
     <Compile Include="Controllers\AddressBook1Controller.cs" />
     <Compile Include="Controllers\AddressBookController.cs" />
     <Compile Include="Controllers\AddressBookDebugController.cs" />
+    <Compile Include="Controllers\SudokuController.cs" />
+    <Compile Include="Controllers\SudokuDebugController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\RequestToApplication.cs" />
     <Compile Include="Models\Security.cs" />
     <Compile Include="Models\PersonInfo.cs" />
     <Compile Include="Models\PersonInfo1.cs" />
@@ -132,6 +161,9 @@
     <Content Include="Views\AddressBook\AddressBook.cshtml" />
     <Content Include="Views\AddressBookDebug\dfFdfnifElowi0690776A46344E2A87DD7560B0D14F1Aninohug.cshtml" />
     <Content Include="Views\AddressBookDebug\Ujf56hg462A903895757B4D52B5AE355B77458A37jdij99dkddd.cshtml" />
+    <Content Include="Views\Sudoku\Description.cshtml" />
+    <Content Include="Views\Sudoku\Solve.cshtml" />
+    <Content Include="Views\SudokuDebug\Jkm78Hjjk6E84B7ACCF9E47418AB8B6D781D6C20Cmfewi9fvu7d.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -141,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
