@@ -10,7 +10,7 @@ Self
 
 ----- New property -----
 
-AddressBook1
+AddressBook 2nd version local installation
 
 ----- New property -----
 
@@ -42,8 +42,8 @@ null
 
 ----- New property -----
 
-http://www.addressbook.com/AddressBook/LogIn###AddressBook2
+http://www.nr2web1.com/AddressBook/LogIn###AddressBook 2nd version
 
 ----- New property -----
 
-http://www.addressbook.com/AddressBook/LogIn###AddressBook2
+http://www.nr2web1.com/AddressBook/LogIn###AddressBook 2nd version

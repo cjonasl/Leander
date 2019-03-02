@@ -10,7 +10,7 @@ Self
 
 ----- New property -----
 
-Sudoku
+Sudoku html Azure installation
 
 ----- New property -----
 
@@ -18,7 +18,7 @@ Sudoku
 
 ----- New property -----
 
-With logging of requests to site and description
+null
 
 ----- New property -----
 
@@ -42,8 +42,8 @@ null
 
 ----- New property -----
 
-http://www.carljonas.com/Sudoku/Solve###Sudoku
+https://leander20190225060235.azurewebsites.net/Sudoku/Solve###Solve sudoku----- New link -----https://leander20190225060235.azurewebsites.net/Sudoku/Description###Description of the algorithm
 
 ----- New property -----
 
-http://www.carljonas.com/Sudoku/Solve###Sudoku
+https://leander20190225060235.azurewebsites.net/Sudoku/Solve###Solve sudoku----- New link -----https://leander20190225060235.azurewebsites.net/Sudoku/Description###Description of the algorithm

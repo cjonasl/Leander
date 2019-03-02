@@ -14,7 +14,7 @@ InsertWriteStatements
 
 ----- New property -----
 
-1,22
+19,1,22
 
 ----- New property -----
 

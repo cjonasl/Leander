@@ -390,7 +390,7 @@ Self
 
 ----- New property -----
 
-AddressBook1
+AddressBook first version
 
 ----- New property -----
 
@@ -490,7 +490,7 @@ Self
 
 ----- New property -----
 
-AddressBook1
+AddressBook 2nd version local installation
 
 ----- New property -----
 
@@ -550,7 +550,7 @@ Self
 
 ----- New property -----
 
-Sudoku
+Sudoku html local installation
 
 ----- New property -----
 
@@ -570,7 +570,7 @@ Self
 
 ----- New property -----
 
-Sudoku
+Sudoku html Azure installation
 
 ----- New property -----
 
@@ -594,4 +594,24 @@ InsertWriteStatements
 
 ----- New property -----
 
-C#,Utility program
+Azure,C#,Utility program
+
+---------- New resource ----------
+
+31
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-02 12:47:46
+
+----- New property -----
+
+AddressBook 2nd version Azure installation
+
+----- New property -----
+
+App,Azure,C#,HTML,JavaScript,jQuery,MVC

@@ -1,4 +1,4 @@
-﻿20
+﻿31
 
 ----- New property -----
 
@@ -6,23 +6,19 @@ Self
 
 ----- New property -----
 
-2019-02-08 16:33:23
+2019-03-02 12:47:46
 
 ----- New property -----
 
-AddressBook first version
+AddressBook 2nd version Azure installation
 
 ----- New property -----
 
-20,1,10,2,14,21
+20,19,1,10,2,14,21
 
 ----- New property -----
 
-Första versionen av AddressBook. Utan inloggning och authentication.
-
------ New property -----
-
-0
+Andra versionen av AddressBook. Med inloggning och authentication.
 
 ----- New property -----
 
@@ -30,7 +26,7 @@ Första versionen av AddressBook. Utan inloggning och authentication.
 
 ----- New property -----
 
-null
+0
 
 ----- New property -----
 
@@ -42,8 +38,12 @@ null
 
 ----- New property -----
 
-http://www.nr2web1.com/AddressBook1/GetAll###AddressBook first version
+null
 
 ----- New property -----
 
-http://www.nr2web1.com/AddressBook1/GetAll###AddressBook first version
+https://leander20190225060235.azurewebsites.net/AddressBook/LogIn###AddressBook 2nd version
+
+----- New property -----
+
+https://leander20190225060235.azurewebsites.net/AddressBook/LogIn###AddressBook 2nd version

@@ -10,7 +10,7 @@ Self
 
 ----- New property -----
 
-Sudoku
+Sudoku html local installation
 
 ----- New property -----
 
@@ -18,7 +18,7 @@ Sudoku
 
 ----- New property -----
 
-No logging of requests to site and description
+null
 
 ----- New property -----
 
@@ -42,8 +42,8 @@ null
 
 ----- New property -----
 
-http://www.sudoku.com/sudoku.html###Sudoku
+http://www.nr2web1.com/Sudoku/Solve###Solve sudoku----- New link -----http://www.nr2web1.com/Sudoku/Description###Description of the algorithm
 
 ----- New property -----
 
-http://www.sudoku.com/sudoku.html###Sudoku
+http://www.nr2web1.com/Sudoku/Solve###Solve sudoku----- New link -----http://www.nr2web1.com/Sudoku/Description###Description of the algorithm
