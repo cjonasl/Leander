@@ -1,0 +1,49 @@
+﻿30
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-01 18:08:58
+
+----- New property -----
+
+InsertWriteStatements
+
+----- New property -----
+
+1,22
+
+----- New property -----
+
+Made in project C:\git_cjonasl\Leander\Solutions\Nr2\InsertWriteStatements\InsertWriteStatements.csproj
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Solutions\Nr2\InsertWriteStatements\Dokumentation.txt
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

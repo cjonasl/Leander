@@ -53,7 +53,16 @@ namespace InsertWriteStatements
                                 {
                                     str1 = fileContents.Substring(idx3, idx2 - idx3);
 
-                                    if ((str1.IndexOf(" if ") == -1) && (str1.IndexOf(" while ") == -1) && (str1.IndexOf(" foreach ") == -1) && (str1.IndexOf(" do ") == -1))
+                                    if (
+                                        (str1.IndexOf(" if ") == -1) &&
+                                        (str1.IndexOf(" while ") == -1) &&
+                                        (str1.IndexOf(" foreach ") == -1) &&
+                                        (str1.IndexOf(" do ") == -1) &&
+                                        (str1.Trim() != "if") &&
+                                        (str1.Trim() != "while") &&
+                                        (str1.Trim() != "foreach") &&
+                                        (str1.Trim() != "do")
+                                        )
                                     {
                                         str2 = string.Format(_formatString, fileName, str1.Trim(), fileNameFullPath.Replace("\\", "\\\\"));
                                         fileContents = Utility.InsertText(fileContents, str2, index + 1);

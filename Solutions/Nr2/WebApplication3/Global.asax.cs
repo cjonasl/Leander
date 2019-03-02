@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace WebApplication2
+namespace WebApplication3
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -17,12 +17,12 @@ namespace WebApplication2
 
         protected void Application_BeginRequest()
         {
-            CarlJonasLeander.ApplicationBeginRequest(HttpContext.Current.Response, this.Context);
+
         }
 
         protected void Application_EndRequest()
         {
-            CarlJonasLeander.ApplicationEndRequest(HttpContext.Current.Request, this.Context);
+
         }
     }
 }

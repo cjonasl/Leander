@@ -1,8 +1,58 @@
 ﻿Det är tänkt att man skapar en katalog “C:\InsertWriteStatements” och i denna katalogen
 lägger man det körbara programmet “InsertWriteStatements.exe”. I katalogen “C:\InsertWriteStatements”
 har man sedan en katalog för varje konfigurering (insättning av “write statements” i filer).
+Parameter till programmet är hel sökväg till konfigureringskatalogen. Programmet tittar i
+filen "State.txt" huruvida det ska flyttas originalfiler till temporär plats (det står då
+FilesNotMoved i filen "State.txt") eller flytta tillbaka originalfiler (det står då FilesMoved
+i filen "State.txt").
 
-I varje konfigureringskatalog ska det sedan finnas:
+------------Flöde vid flyttning av originalfiler till temporär plats ------------------------------
+Steg 1:
+En katalog "Errors" skapas i konfigureringskatalogen för utskrift av undandagsfel som
+inträffar då "write statements" ska sättas in i filer uppdelat på de filtyper som
+stöds:
+aspxError1, aspxError2, aspxError3,...
+ascxError1, ascxError2, ascxError3,...
+cshtmlError1, cshtmlError2, cshtmlError3,...
+jsError1, jsError2, jsError3,...
+csError1, csError2, csError3,...
+
+Om "Errors" katalogen redan finns så töms den istället på innehåll.
+
+Steg 2:
+Filer som ska hanteras läggs in i en lista av metoden Utility.ReturnFiles utifrån information i "Config.txt".
+
+Steg 3:
+Listan med filer (hel sökväg) skrivs ut i filen {konfigureringskatalog}\MovedFiles.txt
+
+Steg 4:
+Originalfilerna (de filer som i steg 2 togs fram av metoden Utility.ReturnFiles) flyttas till
+en temporär plats.
+
+Steg 5:
+En kopia av de flyttade filerna kopieras tillbaka till originalplatsen.
+
+Steg 6:
+"Write statements" sätts in i varje kopiafil i originalplatsen. Om ett undantagsfel
+inträffar så skrivs e.Message ut i en fil i "Errors" katalogen.
+
+Steg 7:
+Om inget undantagsfel inträffade i steg 5 så tas "Errors" katalogen bort, annars
+behålls den.
+---------------------------------------------------------------------------------------------------
+
+
+------------Flöde vid Återställning ---------------------------------------------------------------
+
+Steg 1:
+Kopiafilerna i originalplatsen tas bort (dessa finns i filen {konfigureringskatalog}\MovedFiles.txt)
+
+Steg 2:
+Originalfilerna som ligger på temporär plats flyttas tillbaka
+---------------------------------------------------------------------------------------------------
+
+
+I varje konfigureringskatalog ska det finnas:
 1. En fil "Config.txt" i UTF-8 format med konfigurering (se nedan)
 2. En fil "MovedFiles.txt" i UTF-8 format med flyttade filer eller tom fil om "State" = "FilesNotMoved"
 3. En fil "Log.txt" i UTF-8 format med loggning
@@ -33,3 +83,5 @@ Se metod: public ArrayList ReturnFiles(string config, ArrayList suffix, out stri
 3DirectoryNameFullPath: Include all files in directory but not in sub directories
 4FileNamePattern: Exclude file if fileNameFullPath.indexof(FileNamePattern) >= 0
 
+Första versionen av "InsertWriteStatements" gjordes då jag arbetade på "Datalogic Solutions"
+och finns i projekt: H:\Solutions\Nr8\InsertWriteStatements\InsertWriteStatements.csproj

@@ -575,3 +575,23 @@ Sudoku
 ----- New property -----
 
 App,HTML,JavaScript
+
+---------- New resource ----------
+
+30
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-01 18:08:58
+
+----- New property -----
+
+InsertWriteStatements
+
+----- New property -----
+
+C#,Utility program
