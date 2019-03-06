@@ -1,4 +1,4 @@
-﻿30
+﻿32
 
 ----- New property -----
 
@@ -6,11 +6,11 @@ Self
 
 ----- New property -----
 
-2019-03-01 18:08:58
+2019-03-05 19:35:43
 
 ----- New property -----
 
-InsertWriteStatements
+LogRequestResponse
 
 ----- New property -----
 
@@ -18,7 +18,7 @@ InsertWriteStatements
 
 ----- New property -----
 
-Made in project InsertWriteStatements.csproj
+Made in project LogRequestResponse.csproj
 
 ----- New property -----
 
@@ -38,7 +38,7 @@ null
 
 ----- New property -----
 
-C:\git_cjonasl\Leander\Solutions\Nr2\InsertWriteStatements\Dokumentation.txt
+C:\git_cjonasl\Leander\Solutions\Nr2\LogRequestResponse\Dokumentation.txt
 
 ----- New property -----
 

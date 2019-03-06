@@ -14,7 +14,7 @@ namespace InsertWriteStatements
 
         public CsFile(string folder)
         {
-            string tmp = "global::System.IO.File.AppendAllText(\"#####REPLACE#####\\\\Log.txt\", \"[{0}] [{1}] [{2}]\", global::System.Text.Encoding.UTF8);";
+            string tmp = "global::System.IO.File.AppendAllText(\"#####REPLACE#####\\\\Log.txt\", \"[{0}] [{1}] [{2}]\\r\\n\", global::System.Text.Encoding.UTF8);";
             _formatString = tmp.Replace("#####REPLACE#####", folder.Replace("\\", "\\\\"));
             this._folder = folder;
             this._errors = 0;
@@ -54,14 +54,14 @@ namespace InsertWriteStatements
                                     str1 = fileContents.Substring(idx3, idx2 - idx3);
 
                                     if (
-                                        (str1.IndexOf(" if ") == -1) &&
-                                        (str1.IndexOf(" while ") == -1) &&
-                                        (str1.IndexOf(" foreach ") == -1) &&
-                                        (str1.IndexOf(" do ") == -1) &&
                                         (str1.Trim() != "if") &&
                                         (str1.Trim() != "while") &&
                                         (str1.Trim() != "foreach") &&
-                                        (str1.Trim() != "do")
+                                        (str1.Trim() != "do") &&
+                                        (str1.Trim() != "for") &&
+                                        (str1.Trim() != "using") &&
+                                        (str1.Trim() != "this") &&
+                                        (str1.Trim() != "catch")
                                         )
                                     {
                                         str2 = string.Format(_formatString, fileName, str1.Trim(), fileNameFullPath.Replace("\\", "\\\\"));

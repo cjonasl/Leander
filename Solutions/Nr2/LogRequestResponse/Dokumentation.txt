@@ -1,0 +1,68 @@
+﻿Programmet är skrivet i projekt C:\git_cjonasl\Leander\Solutions\Nr2\LogRequestResponse\LogRequestResponse.csproj
+
+Det är tänkt att man skapar en katalog "C:\LogRequestResponse" och i denna katalogen
+lägger man det körbara programmet "LogRequestResponse.exe" ("Utility.dll" behövs också)
+I katalogen "C:\LogRequestResponse"" har man sedan en katalog för varje konfigurering
+(loggning av request och response). Parameter till programmet är hel sökväg till
+konfigureringskatalogen. Programmet tittar i filen "State.txt" huruvida man ska flytta
+original "Global.asax.cs" till temporär plats (det står då LogCodeNotAdded i filen "State.txt" 
+och temporär plats blir konfigureringskatalogen) och sedan skapa en temporär "Global.asax.cs"
+som loggar request och response, eller om man ska återställa (det står då LogCodeAddedToGlobalAsaxCs
+i filen "State.txt" och vid återställning så raderas den temporära "Global.asax.cs" och
+originalfilen flyttas tillbaka).
+
+I varje konfigureringskatalog ska det finnas:
+1. En fil "Config.txt" i UTF-8 format med konfigurering (tre rader, se nedan)
+2. En fil "State.txt" i UTF-8 format med "State" ("LogCodeNotAdded" eller "LogCodeAddedToGlobalAsaxCs")
+3. En fil "Leander.cs" (ligger i katalog C:\git_cjonasl\Leander\Solutions\Nr2\WebApplication2)
+   I filen "Leander.cs" måste man ändra första parameter till FileStream på rad 105 så att den för en
+   konfigureringskatalog XXXXX är: "C:\\LogRequestResponse\\XXXXX\\RequestResponse\\RR"
+4. En fil "ShowFiles.exe", skriven i projekt "C:\git_cjonasl\Ynomrah.Web\ShowFiles\ShowFiles.csproj",
+   för visning av RequestResponse-filerna.
+
+Det måste finnas en katalog "C:\\LogRequestResponse\\XXXXX\\RequestResponse" där
+RequestResponse-filerna läggs.
+
+Config.txt:
+Rad 1: Hel sökväg till "Global.asax.cs" som ska analyseras
+Rad 2: konfigureringskatalogen
+Rad 3: Konfigurering för "ShowFiles.exe": 12 heltal blank separerade:
+Main form x-position
+Main form y-position
+Main form bredd
+Main form höjd
+Listbox x-position
+Listbox y-position
+Listbox bredd
+Listbox höjd
+Textbox x-position
+Textbox form y-position
+Textbox form bredd
+Textbox höjd
+
+Exempel Config.txt:
+--------------------------------------------------------------------
+C:\git_cjonasl\Leander\Solutions\Nr2\WebApplication1\Global.asax.cs
+C:\LogRequestResponse\AddressBook
+-6 0 1377 735 12 50 127 626 170 50 1150 626
+--------------------------------------------------------------------
+
+I "ListBox" ligger ett tal för varje RequestResponse-fil
+När man klickar på dessa visas RequestResponse-filen i Textbox
+
+Det finns en refresh-knapp i Main form och då man klickar på
+den läses alla filer i katalogen "C:\LogRequestResponse\XXXXX\RequestResponse"
+in och sorteras efter då de skapades och Listbox uppdateras och de filer som
+skapades senast läggs först. En del filer är nya, en del samma och en del är
+borttagna och detta visas i en Messagebox. Max 50 filer. De filer efter 50
+sorterat efter då de skapades tas bort i katalogen "C:\\LogRequestResponse\\XXXXX\\RequestResponse"
+med "File.Delete".
+
+Original "Global.asax.cs" uppdateras för att kunna skriva ut RequestResponse-filer,
+dels med innehållet i "Leander.cs" (två klasser "CarlJonasLeanderOutputFilterStream"
+och "CarlJonasLeander") samt innsättning av en rad i "Application_BeginRequest()"
+och en rad i "Application_EndRequest()". "Application_BeginRequest()" och 
+"Application_EndRequest()" behöver inte existera. Finns de inte så skapas de.
+Det enda som krävs är att ett namespace finns i Original "Global.asax.cs".
+För varje request skapas en fil och läggs i katalogen "C:\\LogRequestResponse\\XXXXX\\RequestResponse".
+Filnamnen är: C:\LogRequestResponse\XXXXX\LogRequestResponse\\RR" + System.Guid.NewGuid().ToString().Replace("-", "") + ".txt"

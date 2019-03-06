@@ -16,7 +16,7 @@ namespace InsertWriteStatements
             string configFolderFullPath, fileNameFullPath, fileContents, fileConfig, folderOriginal, folderTmp, state, errorsDirectory, s, errorMessage;
             string[] stringArray;
             ArrayList suffix, files;
-            int i, index1, index2, numberOfErrors = 0;
+            int i, index1, index2, numberOfErrors = 0, n = 0;
             bool success = false;
             int[] v = new int[] { 0, 0, 0, 0, 0}; //aspx, ascx, js, cshtml, cs
             AspxFile aspxFile;
@@ -273,7 +273,8 @@ namespace InsertWriteStatements
                         if (!success)
                             numberOfErrors++;
 
-                        Console.Write(string.Format("\rHandle file {0} of {1}", i.ToString(), files.Count.ToString()));
+                        n++;
+                        Console.Write(string.Format("\rHandle file {0} of {1}", n.ToString(), files.Count.ToString()));
                     }
 
                     Console.WriteLine();
@@ -301,6 +302,7 @@ namespace InsertWriteStatements
 
                     fileNameFullPath = configFolderFullPath + "\\State.txt";
                     Utility.CreateNewFile(fileNameFullPath, "FilesMoved");
+                    Console.ReadKey();
                 }
                 else
                 {

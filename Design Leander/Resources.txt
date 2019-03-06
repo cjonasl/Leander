@@ -594,7 +594,7 @@ InsertWriteStatements
 
 ----- New property -----
 
-Azure,C#,Utility program
+C#,Utility program
 
 ---------- New resource ----------
 
@@ -615,3 +615,23 @@ AddressBook 2nd version Azure installation
 ----- New property -----
 
 App,Azure,C#,HTML,JavaScript,jQuery,MVC
+
+---------- New resource ----------
+
+32
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-05 19:35:43
+
+----- New property -----
+
+LogRequestResponse
+
+----- New property -----
+
+C#,Utility program

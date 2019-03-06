@@ -128,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AddressBookController.cs" />
     <Compile Include="Controllers\AddressBookDebugController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SudokuController.cs" />
     <Compile Include="Controllers\SudokuDebugController.cs" />
     <Compile Include="Global.asax.cs">
@@ -156,6 +157,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Sudoku\Description.cshtml" />
     <Content Include="Views\SudokuDebug\Jkm78Hjjk6E84B7ACCF9E47418AB8B6D781D6C20Cmfewi9fvu7d.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

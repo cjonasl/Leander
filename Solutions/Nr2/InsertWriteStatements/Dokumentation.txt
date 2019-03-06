@@ -1,10 +1,13 @@
-﻿Det är tänkt att man skapar en katalog “C:\InsertWriteStatements” och i denna katalogen
-lägger man det körbara programmet “InsertWriteStatements.exe”. I katalogen “C:\InsertWriteStatements”
-har man sedan en katalog för varje konfigurering (insättning av “write statements” i filer).
-Parameter till programmet är hel sökväg till konfigureringskatalogen. Programmet tittar i
-filen "State.txt" huruvida det ska flyttas originalfiler till temporär plats (det står då
-FilesNotMoved i filen "State.txt") eller flytta tillbaka originalfiler (det står då FilesMoved
-i filen "State.txt").
+﻿Programmet är skrivet i projekt C:\git_cjonasl\Leander\Solutions\Nr2\InsertWriteStatements\InsertWriteStatements.csproj
+Programmet stöder 5 filtyper: aspx, ascx, cshtml, js och cs
+
+Det är tänkt att man skapar en katalog "C:\InsertWriteStatements" och i denna katalogen
+lägger man det körbara programmet "InsertWriteStatements.exe" ("Utility.dll" behövs också).
+I katalogen "C:\InsertWriteStatements" har man sedan en katalog för varje konfigurering
+(insättning av "write statements" i filer). Parameter till programmet är hel sökväg till 
+konfigureringskatalogen. Programmet tittar i filen "State.txt" huruvida det ska flyttas
+originalfiler till temporär plats (det står då FilesNotMoved i filen "State.txt") eller
+flytta tillbaka originalfiler (det står då FilesMoved i filen "State.txt").
 
 ------------Flöde vid flyttning av originalfiler till temporär plats ------------------------------
 Steg 1:

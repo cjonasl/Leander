@@ -14,7 +14,7 @@ namespace InsertWriteStatements
 
         public CshtmlFile(string folder)
         {
-            string tmp = "global::System.IO.File.AppendAllText(\"#####REPLACE#####\\\\Log.txt\", \"[{0}] [{1}]\", global::System.Text.Encoding.UTF8); //CarlJonasLeander";
+            string tmp = "global::System.IO.File.AppendAllText(\"#####REPLACE#####\\\\Log.txt\", \"[{0}] [{1}]\\r\\n\", global::System.Text.Encoding.UTF8);";
             _formatString = tmp.Replace("#####REPLACE#####", folder.Replace("\\", "\\\\"));
             this._folder = folder;
             this._errors = 0;
@@ -29,7 +29,7 @@ namespace InsertWriteStatements
             {
                 fileContents = Utility.ReturnFileContents(fileNameFullPath, out encoding);
                 fileName = fileNameFullPath.Substring(1 + fileNameFullPath.LastIndexOf('\\'));
-                newFileContent = fileContents + "\r\n@" + string.Format(_formatString, fileName, fileNameFullPath.Replace("\\", "\\\\"));
+                newFileContent = fileContents + "\r\n@{\r\n//CarlJonasLeander\r\n" + string.Format(_formatString, fileName, fileNameFullPath.Replace("\\", "\\\\")) + "\r\n }";
                 Utility.CreateNewFile(fileNameFullPath, newFileContent, encoding);
             }
             catch (Exception e)

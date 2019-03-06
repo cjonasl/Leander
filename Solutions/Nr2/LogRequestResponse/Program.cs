@@ -67,7 +67,7 @@ namespace LogRequestResponse
                 fileNameFullPath = configFolderFullPath + "\\State.txt";
                 state = Utility.ReturnFileContents(fileNameFullPath);
 
-                if (state != "LogCodeAddedToGlobalAsaxCs" && state != "LogCodeNotAdded")
+                if (state != "LogCodeNotAdded" && state != "LogCodeAddedToGlobalAsaxCs")
                 {
                     Console.WriteLine(string.Format("Incorrect value, \"{0}\", of state in the file {1}! It should be \"LogCodeAddedToGlobalAsaxCs\" or \"LogCodeNotAdded\"", state, fileNameFullPath));
                     Console.ReadKey();
@@ -301,11 +301,6 @@ namespace LogRequestResponse
                     {
                         if (!int.TryParse(w[i], out n))
                             foundErrorOnRow3 = true;
-                        else
-                        {
-                            if (n < 0)
-                                foundErrorOnRow3 = true;
-                        }
 
                         i++;
                     }
