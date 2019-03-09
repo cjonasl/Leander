@@ -635,3 +635,63 @@ LogRequestResponse
 ----- New property -----
 
 C#,Utility program
+
+---------- New resource ----------
+
+33
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-08 19:44:02
+
+----- New property -----
+
+CreateTriggers
+
+----- New property -----
+
+C#,Utility program
+
+---------- New resource ----------
+
+34
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-09 11:30:47
+
+----- New property -----
+
+Udemy
+
+----- New property -----
+
+Course
+
+---------- New resource ----------
+
+35
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-09 11:33:23
+
+----- New property -----
+
+Buy course backbone and nodesj from Udemy 2018-11-15
+
+----- New property -----
+
+Course

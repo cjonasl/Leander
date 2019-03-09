@@ -18,7 +18,7 @@ namespace WebApplication1.Models
         public int NextResource { get; set; }
         public string ThumbUpLocation { get; set; } //The location, Page???Menu???Sub???Sub???Tab???, when ResourcesType=ThumbUpLocation, otherwise null
         public string HtmlFile { get; set; } //The html-file (file name full path) when ResourcesType=Html, otherwise null
-        public string Files { get; set; } //Files full path (separated with "----- New file -----" when serialized otherwise separated with \n) when ResourcesType=Self, otherwise null
+        public string FilesFolders { get; set; } //Files/Folders full path (separated with "----- New filefolder -----" when serialized otherwise separated with \n) when ResourcesType=Self, otherwise null
         public string Links { get; set; } //Links (separated with "----- New link -----" when serialized otherwise separated with \n) when ResourcesType=Self, otherwise null. In a link "###" separate value of href-attribute and text to show for the link, for example https://www.expressen.se###Expressen will render like <a href="https://www.expressen.se">Expressen</a>
         public string HtmlFileText { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
         public int WidthIframe { get; set; } //A tmp property to store the source code for the html-file when ResourcesType = Html and when send Resource to the client (not serialized and deserialized)
@@ -59,7 +59,7 @@ namespace WebApplication1.Models
             this.NextResource = nextResource;
             this.ThumbUpLocation = string.IsNullOrEmpty(thumbUpLocation) ? null : thumbUpLocation;
             this.HtmlFile = string.IsNullOrEmpty(htmlFile) ? null : htmlFile;
-            this.Files = string.IsNullOrEmpty(files) ? null : files;
+            this.FilesFolders = string.IsNullOrEmpty(files) ? null : files;
             this.Links = string.IsNullOrEmpty(links) ? null : links;
         }
     }
@@ -109,7 +109,7 @@ namespace WebApplication1.Models
 
         private static string SerializeResource(Resource resource)
         {
-            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}\r\n\r\n----- New property -----\r\n\r\n{4}\r\n\r\n----- New property -----\r\n\r\n{5}\r\n\r\n----- New property -----\r\n\r\n{6}\r\n\r\n----- New property -----\r\n\r\n{7}\r\n\r\n----- New property -----\r\n\r\n{8}\r\n\r\n----- New property -----\r\n\r\n{9}\r\n\r\n----- New property -----\r\n\r\n{10}\r\n\r\n----- New property -----\r\n\r\n{11}", resource.Id.ToString(), resource.ResourcesType.ToString(), resource.Created, resource.Title, resource.KeyWords, (resource.Note ?? "null"), resource.PreviousResource.ToString(), resource.NextResource.ToString(), (resource.ThumbUpLocation ?? "null"), (resource.HtmlFile ?? "null"), (resource.Files == null ? "null" : resource.Files.Replace("\n", "----- New file -----")), (resource.Links == null ? "null" : resource.Links.Replace("\n", "----- New link -----")));
+            return string.Format("{0}\r\n\r\n----- New property -----\r\n\r\n{1}\r\n\r\n----- New property -----\r\n\r\n{2}\r\n\r\n----- New property -----\r\n\r\n{3}\r\n\r\n----- New property -----\r\n\r\n{4}\r\n\r\n----- New property -----\r\n\r\n{5}\r\n\r\n----- New property -----\r\n\r\n{6}\r\n\r\n----- New property -----\r\n\r\n{7}\r\n\r\n----- New property -----\r\n\r\n{8}\r\n\r\n----- New property -----\r\n\r\n{9}\r\n\r\n----- New property -----\r\n\r\n{10}\r\n\r\n----- New property -----\r\n\r\n{11}", resource.Id.ToString(), resource.ResourcesType.ToString(), resource.Created, resource.Title, resource.KeyWords, (resource.Note ?? "null"), resource.PreviousResource.ToString(), resource.NextResource.ToString(), (resource.ThumbUpLocation ?? "null"), (resource.HtmlFile ?? "null"), (resource.FilesFolders == null ? "null" : resource.FilesFolders.Replace("\n", "----- New filefolder -----")), (resource.Links == null ? "null" : resource.Links.Replace("\n", "----- New link -----")));
         }
 
         private static Resource DeserializeResource(string resource)
@@ -132,7 +132,7 @@ namespace WebApplication1.Models
                     break;
             }
 
-            return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New file -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")));
+            return new Resource(int.Parse(v[0]), resourcesType, v[2], v[3], v[4], (v[5] == "null" ? null : v[5]), int.Parse(v[6]), int.Parse(v[7]), (v[8] == "null" ? null : v[8]), (v[9] == "null" ? null : v[9]), (v[10] == "null" ? null : v[10].Replace("----- New filefolder -----", "\n")), (v[11] == "null" ? null : v[11].Replace("----- New link -----", "\n")));
         }
 
         public static List<WebApplication1.Models.Image> ProcessImagesForASelfResource(List<string> fileNamesShort, List<string> directoryNames)
@@ -166,10 +166,47 @@ namespace WebApplication1.Models
                 return list;
         }
 
+        private static string[] GetFilesInResourceDirectoryOrInFoldersInResourceDirectory(string resourceDirectory)
+        {
+            string[] f, d, v;
+            ArrayList arrayList;
+            int i;
+
+            f = Directory.GetFiles(resourceDirectory);
+            d = Directory.GetDirectories(resourceDirectory);
+
+            arrayList = new ArrayList();
+
+            if (f.Length > 0)
+                arrayList.AddRange(f);
+
+            for(i = 0; i < d.Length; i++)
+            {
+                f = Directory.GetFiles(d[i]);
+
+                if (f.Length > 0)
+                    arrayList.AddRange(f);
+            }
+
+            if (arrayList.Count == 0)
+                return new string[0];
+            else
+            {
+                v = new string[arrayList.Count];
+
+                for(i = 0; i < arrayList.Count; i++)
+                {
+                    v[i] = (string)arrayList[i];
+                }
+            }
+
+            return v;
+        }
+
         public static Resource GetResource(int id, out string errorMessage)
         {
             string resourceDirectory, firstRow, firstRowTemplate, fileNameFullPath, resourceSerialized;
-            string[] filesInResourceDirectory, u, v;
+            string[] filesInResourceDirectoryOrInFoldersInResourceDirectory, u, v;
             ArrayList tmp, fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate, href, hrefText;
             Resource resourceDeserialized;
             int i, j, index, ifw, ifh, tw, th;
@@ -217,30 +254,30 @@ namespace WebApplication1.Models
 
                 resourceDeserialized.KeyWordPhrases = string.Format("({0})", KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(resourceDeserialized.KeyWords).Replace(",", ", "));
 
-                filesInResourceDirectory = Directory.GetFiles(resourceDirectory);
+                filesInResourceDirectoryOrInFoldersInResourceDirectory = GetFilesInResourceDirectoryOrInFoldersInResourceDirectory(resourceDirectory);
 
-                if ((filesInResourceDirectory.Length > 1) || !string.IsNullOrEmpty(resourceDeserialized.Files))
+                if ((filesInResourceDirectoryOrInFoldersInResourceDirectory.Length > 1) || !string.IsNullOrEmpty(resourceDeserialized.FilesFolders))
                 {
                     resourceDeserialized.FileNamesShort = new List<string>();
                     resourceDeserialized.DirectoryNames = new List<string>();
                     resourceDeserialized.FileCreationDate = new List<string>();
                     resourceDeserialized.FileUpdatedDate = new List<string>();
 
-                    if (filesInResourceDirectory.Length > 1)
+                    if (filesInResourceDirectoryOrInFoldersInResourceDirectory.Length > 1)
                     {
-                        for (i = 0; i < filesInResourceDirectory.Length; i++)
+                        for (i = 0; i < filesInResourceDirectoryOrInFoldersInResourceDirectory.Length; i++)
                         {
-                            if ((new FileInfo(filesInResourceDirectory[i])).Name != string.Format("R{0}.txt", resourceDeserialized.Id))
+                            if ((new FileInfo(filesInResourceDirectoryOrInFoldersInResourceDirectory[i])).Name != string.Format("R{0}.txt", resourceDeserialized.Id))
                             {
-                                tmp.Add(filesInResourceDirectory[i].Trim().ToLower());
-                                Utility.AddFileInfo(filesInResourceDirectory[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                                tmp.Add(filesInResourceDirectoryOrInFoldersInResourceDirectory[i].Trim().ToLower());
+                                Utility.AddFileInfo(filesInResourceDirectoryOrInFoldersInResourceDirectory[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
                             }
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(resourceDeserialized.Files))
+                    if (!string.IsNullOrEmpty(resourceDeserialized.FilesFolders))
                     {
-                        u = resourceDeserialized.Files.Split('\n');
+                        u = resourceDeserialized.FilesFolders.Split('\n');
 
                         for (i = 0; i < u.Length; i++)
                         {
@@ -497,7 +534,7 @@ namespace WebApplication1.Models
 
             if (resource.ResourcesType == ResourcesType.Self)
             {
-                if (!CheckFiles(resource.Files, out errorMessage))
+                if (!CheckFiles(resource.FilesFolders, out errorMessage))
                     return false;
 
                 if (!CheckLinks(resource.Links, out errorMessage))
@@ -532,7 +569,7 @@ namespace WebApplication1.Models
                     Utility.CreateNewFile(_basePath + resource.HtmlFile, "<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->\r\n" + textExceptFirstRow);
                 }
 
-                newResource = new Resource(nextResourceId, resource.ResourcesType, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords, resource.Note, resource.PreviousResource, resource.NextResource, resource.ThumbUpLocation, resource.HtmlFile, resource.Files, resource.Links);
+                newResource = new Resource(nextResourceId, resource.ResourcesType, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), resource.Title, resource.KeyWords, resource.Note, resource.PreviousResource, resource.NextResource, resource.ThumbUpLocation, resource.HtmlFile, resource.FilesFolders, resource.Links);
                 folder = ReturnResourceDirectory(nextResourceId);
                 Directory.CreateDirectory(folder);
                 fileNameFullPath = string.Format("{0}\\R{1}.txt", folder, nextResourceId.ToString());

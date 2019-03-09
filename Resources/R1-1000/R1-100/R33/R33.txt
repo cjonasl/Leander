@@ -1,0 +1,45 @@
+﻿33
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-08 19:44:02
+
+----- New property -----
+
+CreateTriggers
+
+----- New property -----
+
+1,22
+
+----- New property -----
+
+Made in project CreateTriggers.csproj
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Solutions\Nr2\CreateTriggers\Dokumentation.txt
+
+----- New property -----
+
+null

@@ -120,7 +120,18 @@
   </div>
 
   <div id="dialogEditArbitraryTextFile" style="display: none; background-color: #99ff99 !important;">
-    <textarea id="textareaEditArbitraryTextFile" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: medium !important; margin-top: 15px !important; margin-left: 15px !important; margin-right: 15px !important; margin-bottom: 0px !important; width: 750px; height: 350px; background-color: white !important;"></textarea><br />
+    <table style="margin-bottom: 10px !important; position: relative !important; left: 14px !important; top: 14px !important">
+      <tr>
+        <td style="font-family: Arial !important; font-weight: bold !important; font-size: large; position: relative !important; top: -5px !important;">File name&nbsp;</td>
+        <td><input id="fileNameDialogEditArbitraryTextFile" type="text" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; background-color: white !important; width: 900px !important; cursor: pointer !important;" readonly="readonly" /></td>
+      </tr>
+      <tr>
+        <td style="font-family: Arial !important; font-weight: bold !important; font-size: large; position: relative !important; top: -5px !important;">Folder&nbsp;</td>
+        <td><input id="inFolderDialogEditArbitraryTextFile" type="text" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: small !important; background-color: white !important; width: 900px !important; cursor: pointer !important;" readonly="readonly" /></td>
+      </tr>
+    </table>
+     
+    <textarea id="textareaEditArbitraryTextFile" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="font-family: 'Courier New' !important; font-weight: bold !important; font-size: medium !important; margin-top: 15px !important; margin-left: 15px !important; margin-right: 15px !important; margin-bottom: 0px !important; width: 1000px; height: 450px; background-color: white !important; white-space: nowrap !important;"></textarea><br />
     <button id="btnEditArbitraryTextFileSave" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaSave(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 15px !important;">Save</button>
     <button id="btnEditArbitraryTextFileCancel" disabled="disabled" class="btnDefaultCss" onclick="window.jonas.textareaCancel(null, window.jonas.currentFileNameFullPathInTextareaEditArbitraryTextFile, $('#btnEditArbitraryTextFileSave'), $('#btnEditArbitraryTextFileCancel'), null, $('#textareaEditArbitraryTextFile'), 'EditArbitraryTextFile')" style="margin-top: 10px !important; margin-left: 5px !important;">Cancel</button>
   </div>

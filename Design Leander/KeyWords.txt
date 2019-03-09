@@ -347,3 +347,19 @@ Utility program
 ----- New property -----
 
 Ett hjälpprogram som jag oftast gjort själv
+
+---------- New key word ----------
+
+23
+
+----- New property -----
+
+2019-03-09 11:28:45
+
+----- New property -----
+
+Course
+
+----- New property -----
+
+Resources rörande kurser, utbildningsföretag etc.

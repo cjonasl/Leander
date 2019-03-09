@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogRequestResponse", "LogRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication3", "WebApplication3\WebApplication3.csproj", "{B4DAF732-6B1E-4D2D-8267-9A2BE5ADE10A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateTriggers", "CreateTriggers\CreateTriggers.csproj", "{B1E18D48-33DF-4E52-B994-7380B15D6EF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{B4DAF732-6B1E-4D2D-8267-9A2BE5ADE10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4DAF732-6B1E-4D2D-8267-9A2BE5ADE10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4DAF732-6B1E-4D2D-8267-9A2BE5ADE10A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E18D48-33DF-4E52-B994-7380B15D6EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E18D48-33DF-4E52-B994-7380B15D6EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E18D48-33DF-4E52-B994-7380B15D6EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E18D48-33DF-4E52-B994-7380B15D6EF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

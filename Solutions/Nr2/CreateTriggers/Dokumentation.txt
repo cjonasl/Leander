@@ -1,0 +1,20 @@
+﻿Programmet är skrivet i projekt C:\git_cjonasl\Leander\Solutions\Nr2\CreateTriggers\CreateTriggers.csproj
+Ursprungsprogrammet är skrivet i projekt H:\Solutions\Nr13\ConsoleApp1\ConsoleApp1.csproj
+
+Det är tänkt att man skapar en katalog "C:\CreateTriggers" och i denna katalogen
+lägger man det körbara programmet "CreateTriggers.exe" ("Utility.dll" behövs också).
+I katalogen "C:\CreateTriggers" har man sedan en katalog för varje konfigurering.
+Parameter till programmet är först connection string, och sedan filnamn (med hel
+sökväg) till fil med tabeller som ska exkluderas (måste anges både med schemanamn
+och tabellnamn, [schemaname].[tablename]), men 2:a parametern behöver inte anges
+och gör man inte det så tas samtliga tabeller med i databasen. Programmet pendlar
+mellan två lägen:
+
+1. Triggrar installerade på databasen
+2. Triggrar inte installerade på databasen
+
+Programmet lägger in INSERT, UPDATE och DELETE i tabellen JonasLeander och finns inte
+tabellen JonasLeander så går man från 1 till 2, dvs. tabellen JonasLeander och triggrar
+skapas (förutom eventuella tabeller som ska exkluderas), annars om tabellen JonasLeander
+finns så går man från 2 till 1, dvs. tabellen JonasLeander och triggrar tas bort. Prefixet
+på triggrarna är "trCarlJonas" så man kan urskilja från övriga triggrar i databasen.

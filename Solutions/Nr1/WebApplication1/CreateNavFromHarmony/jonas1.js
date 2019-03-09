@@ -326,7 +326,11 @@ window.jonas.textareaCancel = function (id, currentFileName, btnSave, btnCancel,
 };
 
 window.jonas.editTextFile = function(fileNameFullPath) {
-    var textarea;
+    var textarea, index, fileName, directory;
+
+    index = fileNameFullPath.lastIndexOf("\\");
+    directory = fileNameFullPath.substring(0, index);
+    fileName = fileNameFullPath.substring(1 + index);
 
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/GetFileText",
@@ -348,6 +352,8 @@ window.jonas.editTextFile = function(fileNameFullPath) {
                 textarea.on("change", window.jonas.textareaEditArbitraryTextFileChange);
                 window.jonas.eventHandlerTextareaEditArbitraryTextFile = 1;
                 window.jonas.openModal("#dialogEditArbitraryTextFile", fileNameFullPath, 1200, 700, "EditArbitraryTextFile");
+                $("#fileNameDialogEditArbitraryTextFile").val(fileName);
+                $("#inFolderDialogEditArbitraryTextFile").val(directory);
             }
         }
     });

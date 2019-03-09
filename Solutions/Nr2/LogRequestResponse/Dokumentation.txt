@@ -1,8 +1,8 @@
 ﻿Programmet är skrivet i projekt C:\git_cjonasl\Leander\Solutions\Nr2\LogRequestResponse\LogRequestResponse.csproj
 
 Det är tänkt att man skapar en katalog "C:\LogRequestResponse" och i denna katalogen
-lägger man det körbara programmet "LogRequestResponse.exe" ("Utility.dll" behövs också)
-I katalogen "C:\LogRequestResponse"" har man sedan en katalog för varje konfigurering
+lägger man det körbara programmet "LogRequestResponse.exe" ("Utility.dll" behövs också).
+I katalogen "C:\LogRequestResponse" har man sedan en katalog för varje konfigurering
 (loggning av request och response). Parameter till programmet är hel sökväg till
 konfigureringskatalogen. Programmet tittar i filen "State.txt" huruvida man ska flytta
 original "Global.asax.cs" till temporär plats (det står då LogCodeNotAdded i filen "State.txt" 
