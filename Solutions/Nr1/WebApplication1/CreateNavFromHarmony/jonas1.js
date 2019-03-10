@@ -27,7 +27,7 @@ window.jonas.resourcePrevious = 0;
 window.jonas.resourceNext = 0;
 window.jonas.resourceThumbUpLocation = "";
 window.jonas.resourceHtmlFile = "";
-window.jonas.resourceFiles = "";
+window.jonas.resourceFilesFolders = "";
 window.jonas.resourceLinks = "";
 window.jonas.numberOfKeyWords = 0;
 window.jonas.textareaRenderOfHtmlResourceWidth = ""; //OBS: "px" after width so need to be a string
@@ -728,4 +728,10 @@ window.jonas.handleCommunicationMessage = function () {
             }
         });
     }
+};
+
+window.jonas.showFileNameAndInFolder = function (fileName, inFolder) {
+    window.jonas.openModal("#dialogShowFileNameAndInFile", fileName + "\\" + inFolder, 1200, 220, "ShowFileNameAndInFile");
+    $("#fileNameDialogShowFileNameAndInFile").val(fileName);
+    $("#inFolderDialogShowFileNameAndInFile").val(inFolder);
 };

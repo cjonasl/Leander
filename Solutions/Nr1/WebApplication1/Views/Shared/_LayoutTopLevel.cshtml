@@ -188,7 +188,7 @@
           $("#inputResourceHtmlFile").on("change", function () { window.jonas.updateResourceState(false, "red"); });
         }
         else if (window.jonas.modalState === "Self") {
-          $("#textareaResourceFiles").on("change", function () { window.jonas.updateResourceState(false, "red"); });
+          $("#textareaResourceFilesFolders").on("change", function () { window.jonas.updateResourceState(false, "red"); });
           $("#textareaResourceLinks").on("change", function () { window.jonas.updateResourceState(false, "red"); });
         }
       }
@@ -210,7 +210,7 @@
           $("#inputResourceHtmlFile").off("change");
         }
         else if (window.jonas.modalState === "Self") {
-          $("#textareaResourceFiles").off("change");
+          $("#textareaResourceFilesFolders").off("change");
           $("#textareaResourceLinks").off("change");
         }
       }
@@ -555,7 +555,7 @@
         window.jonas.resourceNext = 0;
         window.jonas.resourceThumbUpLocation = "";
         window.jonas.resourceHtmlFile = "";
-        window.jonas.resourceFiles = "";
+        window.jonas.resourceFilesFolders = "";
         window.jonas.resourceLinks = "";
       }
 
@@ -576,13 +576,13 @@
         }
       }
       else {
-        $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files/Folders full path (row separated)\">Fi/Fo&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFiles\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
+        $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files/Folders full path (row separated)\">Fi/Fo&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFilesFolders\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
         $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
 
         if (data.Resource.Id) {
-          $("#textareaResourceFiles").val(data.Resource.Files == null ? "" : data.Resource.Files);
+          $("#textareaResourceFilesFolders").val(data.Resource.Files == null ? "" : data.Resource.FilesFolders);
           $("#textareaResourceLinks").val(data.Resource.Links == null ? "" : data.Resource.Links);
-          window.jonas.resourceFiles = data.Resource.Files == null ? "" : data.Resource.Files;
+          window.jonas.resourceFilesFolders = data.Resource.FilesFolders == null ? "" : data.Resource.FilesFolders;
           window.jonas.resourceLinks = data.Resource.Links == null ? "" : data.Resource.Links;
         }
       }
@@ -961,7 +961,7 @@
               $("#trResourceHtmlFile").remove();
             }
             else if (window.jonas.modalState === "Self") {
-              $("#textareaResourceFiles").off("change");
+              $("#textareaResourceFilesFolders").off("change");
               $("#textareaResourceLinks").off("change");
               $("#trResourceFiles").remove();
               $("#trResourceLinks").remove();
@@ -993,6 +993,10 @@
             $("#textareaCommunicationMessage").val("");
             $("#btnDialogCommunicationMessage").text("Add");
             window.jonas.currentCommunicationMessageId = "";
+          }
+          else if (window.jonas.modalState === "ShowFileNameAndInFile") {
+            $("#fileNameDialogShowFileNameAndInFile").val("");
+            $("#inFolderDialogShowFileNameAndInFile").val("");
           }
           else {
             alert("ERROR!! Incorrect modal state: " + window.jonas.modalState);
@@ -1102,7 +1106,7 @@
       var id, resourcesType, created, title, note, previous, next, keyWords; //Same for all 3 resource types
       var thumbUpLocation = ""; //Only type ThumbUpLocation
       var htmlFile = ""; //Only type Html
-      var files = "", links = ""; //Only type Self
+      var filesFolders = "", links = ""; //Only type Self
       var newKeyWords, resource, i;
 
       id = $("#inputResourceId").val();
@@ -1128,7 +1132,7 @@
       }
 
       if (window.jonas.modalState === "Self") {
-        files = $("#textareaResourceFiles").val().trim();
+        filesFolders = $("#textareaResourceFilesFolders").val().trim();
         links = $("#textareaResourceLinks").val().trim();
       }
 
@@ -1203,7 +1207,7 @@
         nextResource: next,
         thumbUpLocation: thumbUpLocation,
         htmlFile: htmlFile,
-        files: files,
+        filesFolders: filesFolders,
         links: links,
         htmlResourceIframeTextAreaDimensions: null,
         tmp: ""
@@ -1255,7 +1259,7 @@
           window.jonas.resourceNext = data.NextResource;
           window.jonas.resourceThumbUpLocation = (data.ThumbUpLocation == null ? "" : data.ThumbUpLocation);
           window.jonas.resourceHtmlFile = (data.HtmlFile == null ? "" : data.HtmlFile);
-          window.jonas.resourceFiles = (data.Files == null ? "" : data.Files);
+          window.jonas.resourceFilesFolders = (data.FilesFolders == null ? "" : data.FilesFolders);
           window.jonas.resourceLinks = (data.Links == null ? "" : data.Links);
 
           window.jonas.updateResourceState(true, "green");
@@ -1293,7 +1297,7 @@
         $("#inputResourceHtmlFile").val(window.jonas.resourceHtmlFile);
       }
       else if (window.jonas.modalState === "Self") {
-        $("#textareaResourceFiles").val(window.jonas.resourceFiles);
+        $("#textareaResourceFilesFolders").val(window.jonas.resourceFilesFolders);
         $("#textareaResourceLinks").val(window.jonas.resourceLinks);
       }
 

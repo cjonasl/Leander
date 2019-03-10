@@ -287,10 +287,13 @@ namespace WebApplication1.Models
                                 return null;
                             }
 
-                            if (System.IO.File.Exists(u[i]) && (tmp.IndexOf(u[i].Trim().ToLower()) == -1))
+                            if (System.IO.File.Exists(u[i]))
                             {
-                                tmp.Add(u[i].Trim().ToLower());
-                                Utility.AddFileInfo(u[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                                if ((tmp.IndexOf(u[i].Trim().ToLower()) == -1))
+                                {
+                                    tmp.Add(u[i].Trim().ToLower());
+                                    Utility.AddFileInfo(u[i], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);
+                                }
                             }
                             else
                             {

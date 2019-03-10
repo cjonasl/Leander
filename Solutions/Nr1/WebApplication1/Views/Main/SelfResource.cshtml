@@ -28,7 +28,7 @@
         }
         else
         {
-          <td title="@Model.DirectoryNames[i]" style="width: 60% !important;">@Model.FileNamesShort[i]</td>
+          <td title="@Model.DirectoryNames[i]" style="width: 60% !important;"><a class="aGreen" href="javascript: window.jonas.showFileNameAndInFolder('@Model.DirectoryNames[i].Substring(8).Replace("\\", "\\\\")', '@Model.FileNamesShort[i].Replace("\\", "\\\\")')">@Model.FileNamesShort[i]</a></td>
         }
         <td style="width: 20% !important;" title="@Model.FileCreationDate[i]">@Model.FileCreationDate[i]</td>
         <td style="width: 20% !important;" title="@Model.FileUpdatedDate[i]">@Model.FileUpdatedDate[i]</td>
