@@ -147,19 +147,32 @@ namespace WebApplication1.Controllers
         {
             string errorMessage;
             bool todaysDayIsInFile;
+            List<ThumbUpLocationInfo> list;
 
             try
             {
                 string locationStr = string.Format("Page{0}Menu{1}Sub{2}Sub{3}Tab{4}", location.Page, location.Menu, location.Sub1, location.Sub2, location.Tab);
 
+                //Start switch non-default locations
                 switch (locationStr)
                 {
+                    //## will be replaced by \ in  _LayoutTopLevel.cshtml (does not work if put \\)
                     case "Page1Menu0Sub0Sub0Tab1":
-                        return View("HelpSearchResources", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##HelpSearchResources.cshtml")); //## will be replaced by \ in  _LayoutTopLevel.cshtml (does not work if put \\)
+                        list = ThumbUpLocationInfoUtility.GetLocations(true, out errorMessage);
+                        ViewBag.ListWithThumbUpLocationInfo = list;
+                        ViewBag.ErrorMessage = errorMessage;
+                        return View("Locations", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DefaultLocations.cshtml"));
                     case "Page1Menu0Sub0Sub0Tab2":
+                        list = ThumbUpLocationInfoUtility.GetLocations(false, out errorMessage);
+                        ViewBag.ListWithThumbUpLocationInfo = list;
+                        ViewBag.ErrorMessage = errorMessage;
+                        return View("Locations", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##NonDefaultLocations.cshtml"));
+                    case "Page1Menu0Sub0Sub0Tab3":
+                        return View("HelpSearchResources", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##HelpSearchResources.cshtml"));
+                    case "Page1Menu0Sub0Sub0Tab4":
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                         return View("AddEditKeyWords", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AddEditKeyWords.cshtml"));
-                    case "Page1Menu0Sub0Sub0Tab3":
+                    case "Page1Menu0Sub0Sub0Tab5":
                         ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub1Tab1.txt";
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                         return View("AdhocCode", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
@@ -177,6 +190,7 @@ namespace WebApplication1.Controllers
                     default:
                         return Json(GetDefaultDataForNewLocation(location), JsonRequestBehavior.AllowGet);
                 }
+                //End switch non-default locations
             }
             catch (Exception e)
             {

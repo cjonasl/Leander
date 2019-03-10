@@ -1,0 +1,45 @@
+﻿50
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-10 22:51:56
+
+----- New property -----
+
+Plats för att spara meddelanden med kommunikationspart EEE
+
+----- New property -----
+
+8
+
+----- New property -----
+
+Riktig kommunikationspart inte satt ännu
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+Page1Menu1Sub1Sub2Tab7
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

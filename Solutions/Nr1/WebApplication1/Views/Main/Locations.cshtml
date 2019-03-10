@@ -1,0 +1,49 @@
+﻿@model WebApplication1.Models.DocumentReadyDataForNonDefaultLocation
+
+<div style="margin-left: 15px !important; margin-top: 5px !important; margin-right: 15px !important;">
+
+  @if (ViewBag.ErrorMessage == null)
+  {
+    List<WebApplication1.Models.ThumbUpLocationInfo> list = (List<WebApplication1.Models.ThumbUpLocationInfo>)ViewBag.ListWithThumbUpLocationInfo;
+
+    <h2 style="font-family: Arial !important; font-weight: bold !important; display: inline-block !important;"> Number of locations:&nbsp;</h2>
+    <span style="font-family: 'Times New Roman' !important; font-size: larger !important; position: relative !important; top: -1px !important;">@list.Count</span>
+
+    <table id="tableSearchResultResources" class="defaultTableStyle">
+      <tr>
+        <th style="width: 6% !important;">&nbsp;Id</th>
+        <th style="width: 17% !important;">&nbsp;Location</th>
+        <th style="width: 17% !important;">&nbsp;Location alias</th>
+        <th style="width: 30% !important;">&nbsp;Title</th>
+        <th style="width: 30% !important;">&nbsp;Note</th>
+      </tr>
+
+      @foreach (WebApplication1.Models.ThumbUpLocationInfo l in (List<WebApplication1.Models.ThumbUpLocationInfo>)ViewBag.ListWithThumbUpLocationInfo)
+      {
+        <tr>
+          <td style="width: 6% !important;" title="@l.Id"><a href="javascript: window.jonas.renderResource(@l.Id)">@l.Id</a></td>
+          <td style="width: 17% !important;" title="@l.Location">@l.Location</td>
+          <td style="width: 17% !important;" title="@l.LocationAlias">@l.LocationAlias</td>
+          <td style="width: 30% !important;" title="@l.Title">@l.Title</td>
+          <td style="width: 30% !important;" title="@l.Note">@l.Note</td>
+        </tr>
+      }
+
+    </table>
+  }
+  else
+  {
+    <h3 style="font-family: Arial !important; color: red !important">@ViewBag.ErrorMessage</h3>
+  }
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    window.jonas.checkIconAndSetTitle('@Model.Icon', '@Model.Title');
+    window.jonas.setTabNames('@Model.TabNames[0]', '@Model.TabNames[1]', '@Model.TabNames[2]', '@Model.TabNames[3]', '@Model.TabNames[4]', '@Model.TabNames[5]', '@Model.TabNames[6]', '@Model.TabNames[7]', '@Model.TabNames[8]', '@Model.TabNames[9]');
+    window.jonas.handlePreviousCurrentNextResource(@Model.PreviousResource, @Model.CurrentResource, @Model.NextResource);
+    window.jonas.setTitleTextInBrowser(@Model.Page, @Model.Menu, @Model.Sub1, @Model.Sub2, @Model.Tab, '@Model.CshtmlFile');
+    window.jonas.updateCssDisplayForContentDivs("nonDefaultLocation");
+  });
+</script>

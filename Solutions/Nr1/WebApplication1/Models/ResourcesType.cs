@@ -9,6 +9,7 @@ namespace WebApplication1.Models
     {
         ThumbUpLocation,
         Html,
-        Self
+        Self,
+        All
     }
 }

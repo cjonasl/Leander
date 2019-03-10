@@ -1,0 +1,45 @@
+﻿44
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-10 22:43:53
+
+----- New property -----
+
+Config communication
+
+----- New property -----
+
+8
+
+----- New property -----
+
+Konfigurering av vilka jag kommunicerar med
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+Page1Menu1Sub1Sub2Tab1
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

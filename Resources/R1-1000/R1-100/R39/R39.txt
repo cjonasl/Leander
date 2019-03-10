@@ -1,0 +1,45 @@
+﻿39
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-10 22:37:00
+
+----- New property -----
+
+Config Adhoc code
+
+----- New property -----
+
+8
+
+----- New property -----
+
+Konfigurering vilka programmeringsspråk som stöds
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+Page1Menu1Sub1Sub1Tab1
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

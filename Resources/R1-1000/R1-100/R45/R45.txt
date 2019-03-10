@@ -1,0 +1,45 @@
+﻿45
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-10 22:46:47
+
+----- New property -----
+
+Show messages communication
+
+----- New property -----
+
+8
+
+----- New property -----
+
+Man kan växla kommunikationsmotpart med radioknappar
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+Page1Menu1Sub1Sub2Tab2
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

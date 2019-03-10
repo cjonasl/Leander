@@ -1,0 +1,45 @@
+﻿52
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-10 22:52:43
+
+----- New property -----
+
+Plats för att spara meddelanden med kommunikationspart GGG
+
+----- New property -----
+
+8
+
+----- New property -----
+
+Riktig kommunikationspart inte satt ännu
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+Page1Menu1Sub1Sub2Tab9
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

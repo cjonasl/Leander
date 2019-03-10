@@ -1,0 +1,45 @@
+﻿38
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-10 22:34:31
+
+----- New property -----
+
+Adhoc code
+
+----- New property -----
+
+8
+
+----- New property -----
+
+Plats för att snabbt skapa kod i C#, JavaScript m.m.
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+Page1Menu0Sub0Sub0Tab5
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

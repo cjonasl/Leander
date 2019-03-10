@@ -68,6 +68,8 @@ namespace WebApplication1.Models
     {
         private const string _basePath = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\JavaScriptHtml\\";
         private const string _fileNameFullPathNextResourceId = "C:\\git_cjonasl\\Leander\\Design Leander\\NextResourceId.txt";
+        private const string _fileNameFullPathMainController = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Controllers";
+        private const string _folderTextForDefaultLocatiions = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Text";
 
         private static string SerializeHtmlResourceIframeTextAreaDimensions(int[] v)
         {
@@ -816,7 +818,7 @@ namespace WebApplication1.Models
             return resourceDeserialized;
         }
 
-        public static List<Resource> ReturnListWithAllResources(out string errorMessage)
+        public static List<Resource> ReturnListWithResources(ResourcesType resourcesType, out string errorMessage)
         {
             int numberOfResources, id;
             List<Resource> listWithAllResources;
@@ -834,7 +836,7 @@ namespace WebApplication1.Models
                 {
                     resource = GetResourceLight(id, out errorMessage);
 
-                    if (errorMessage == null)
+                    if ((errorMessage == null) && (resourcesType == ResourcesType.All || resource.ResourcesType == resourcesType))
                         listWithAllResources.Add(resource);
 
                     id++;
@@ -847,6 +849,156 @@ namespace WebApplication1.Models
             }
 
             return listWithAllResources;
+        }
+
+        private static string[] GetNonDefaultLocations(out string errorMessage)
+        {
+            string[] v = null;
+
+            errorMessage = null;
+
+            try
+            {
+                int index1, index2, i;
+                string fileContents, str;
+                ArrayList arrayList;
+
+                if (System.IO.File.Exists(_fileNameFullPathMainController))
+                {
+                    errorMessage = string.Format("ERROR!! The following file does not exist as expected: {0}", _fileNameFullPathMainController);
+                    return null;
+                }
+
+                fileContents = Utility.ReturnFileContents(_fileNameFullPathMainController);
+
+                index1 = fileContents.IndexOf("Start switch non-default locations");
+
+                if (index1 == -1)
+                {
+                    errorMessage = string.Format("ERROR!! The string \"Start switch non-default locations\" does not exist in the file \"{0}\" as expected!", _fileNameFullPathMainController);
+                    return null;
+                }
+
+                index2 = fileContents.IndexOf("End switch non-default locations");
+
+                if (index2 == -1)
+                {
+                    errorMessage = string.Format("ERROR!! The string \"End switch non-default locations\" does not exist in the file \"{0}\" as expected!", _fileNameFullPathMainController);
+                    return null;
+                }
+
+                str = fileContents.Substring(index1, index2 - index1);
+
+                arrayList = new ArrayList();
+
+                index1 = str.IndexOf(" case ");
+
+                while (index1 >= 0)
+                {
+                    if (str[index1 + 6] != '"')
+                    {
+                        errorMessage = "ERROR!! A \" not found after a case-statement in MainController.NewLocation!";
+                        return null;
+                    }
+
+                    index2 = str.IndexOf('"', index1 + 7);
+
+                    if (index2 == -1)
+                    {
+                        errorMessage = "ERROR!! A \" not found after a case-statement in MainController.NewLocation!";
+                        return null;
+                    }
+
+                    arrayList.Add(str.Substring(index1 + 7, index2 - index1 - 7));
+
+                    index1 = str.IndexOf(" case ", index2);
+                }
+
+                v = new string[arrayList.Count];
+
+                for(i = 0; i < arrayList.Count; i++)
+                {
+                    v[i] = (string)arrayList[i];
+                }
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method GetNonDefaultLocations! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return v;
+        }
+
+        public static ArrayList ReturnActualLocations(bool isDefaultLocation, out string errorMessage, out ArrayList sortAliasDefaultLocations)
+        {
+            errorMessage = null;
+            sortAliasDefaultLocations = new ArrayList();
+            ArrayList arrayList = new ArrayList();
+
+            try
+            {
+                string locationName, locationNameSortAlias;
+                int index1, index2;
+                string[] v;
+
+                if (isDefaultLocation)
+                    v = Directory.GetFiles(_folderTextForDefaultLocatiions);
+                else
+                    v = GetNonDefaultLocations(out errorMessage);
+
+                if (!string.IsNullOrEmpty(errorMessage))
+                    return null;
+
+                for (int i = 0; i < v.Length; i++)
+                {
+                    if (isDefaultLocation)
+                    {
+                        index1 = v[i].LastIndexOf("\\");
+                        index2 = v[i].Length - 4;
+
+                        if (!v[i].EndsWith(".txt"))
+                        {
+                            errorMessage = string.Format("ERROR!! The method \"ReturnActualDefaultLocatioins\" found that the following file does not end with\".txt\" as expected: {0}", v[i]);
+                            return null;
+                        }
+
+                        locationName = v[i].Substring(1 + index1, index2 - index1 - 1);
+                    }
+                    else
+                        locationName = v[i];
+
+                    if (!LocationUtility.LocationNameIsCorrect(locationName, out locationNameSortAlias, out errorMessage))
+                        return null;
+
+                    arrayList.Add(locationName);
+                    sortAliasDefaultLocations.Add(locationNameSortAlias);
+                }
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method ReturnActualLocations! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return arrayList;
+        }
+
+        public static string ReturnLocationAlias(string locationName, out string errorMessage)
+        {
+            errorMessage = null;
+
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method ReturnLocationAlias! e.Message: {0}", e.Message);
+                return null;
+            }
+
+            return "";
         }
     }
 }

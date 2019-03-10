@@ -165,7 +165,7 @@ namespace WebApplication1.Models
 
             try
             {
-                listWithAllResources = ResourceUtility.ReturnListWithAllResources(out errorMessage);
+                listWithAllResources = ResourceUtility.ReturnListWithResources(ResourcesType.All, out errorMessage);
 
                 if (errorMessage != null)
                 {
@@ -210,7 +210,7 @@ namespace WebApplication1.Models
 
             try
             {
-                listWithAllResources = ResourceUtility.ReturnListWithAllResources(out errorMessage);
+                listWithAllResources = ResourceUtility.ReturnListWithResources(ResourcesType.All, out errorMessage);
 
                 if (errorMessage != null)
                 {
