@@ -1,0 +1,45 @@
+﻿57
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-11 15:59:29
+
+----- New property -----
+
+CompareFileNamesInTwoFolders
+
+----- New property -----
+
+1,22
+
+----- New property -----
+
+Made in project CompareFileNamesInTwoFolders.csproj
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Solutions\Nr2\CompareFileNamesInTwoFolders\Dokumentation.txt
+
+----- New property -----
+
+null

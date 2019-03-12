@@ -30,7 +30,7 @@ null
 
 ----- New property -----
 
-Page2Menu1Sub1Sub1Tab1
+Page3Menu1Sub1Sub1Tab1
 
 ----- New property -----
 

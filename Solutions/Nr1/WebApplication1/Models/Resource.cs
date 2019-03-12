@@ -68,8 +68,8 @@ namespace WebApplication1.Models
     {
         private const string _basePath = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\JavaScriptHtml\\";
         private const string _fileNameFullPathNextResourceId = "C:\\git_cjonasl\\Leander\\Design Leander\\NextResourceId.txt";
-        private const string _fileNameFullPathMainController = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Controllers";
-        private const string _folderTextForDefaultLocatiions = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Text";
+        private const string _fileNameFullPathMainController = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Controllers\\MainController.cs";
+        private const string _folderTextForDefaultLocations = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Text";
 
         private static string SerializeHtmlResourceIframeTextAreaDimensions(int[] v)
         {
@@ -863,7 +863,7 @@ namespace WebApplication1.Models
                 string fileContents, str;
                 ArrayList arrayList;
 
-                if (System.IO.File.Exists(_fileNameFullPathMainController))
+                if (!System.IO.File.Exists(_fileNameFullPathMainController))
                 {
                     errorMessage = string.Format("ERROR!! The following file does not exist as expected: {0}", _fileNameFullPathMainController);
                     return null;
@@ -943,7 +943,7 @@ namespace WebApplication1.Models
                 string[] v;
 
                 if (isDefaultLocation)
-                    v = Directory.GetFiles(_folderTextForDefaultLocatiions);
+                    v = Directory.GetFiles(_folderTextForDefaultLocations);
                 else
                     v = GetNonDefaultLocations(out errorMessage);
 
@@ -987,10 +987,90 @@ namespace WebApplication1.Models
         public static string ReturnLocationAlias(string locationName, out string errorMessage)
         {
             errorMessage = null;
+            string alias;
+            
 
             try
             {
+                string page, menu, sub1, sub2, tab, locName;
+                string fileNameFullPath, searchString, nextSearchString, endSearchString, strInFile;
+                Location location = LocationUtility.ReturnLocation(locationName, out errorMessage);
 
+                if (!string.IsNullOrEmpty(errorMessage))
+                    return null;
+
+                //--------------- Page ----------------
+                fileNameFullPath = "C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Views\\Shared\\_LayoutTopLevel.cshtml";
+                searchString = string.Format("<li id=\"page{0}\"><a href=\"javascript: window.jonas.newLocation({0}, 0, 0, 0, 1, false)\">", location.Page.ToString());
+                nextSearchString = "&nbsp;&nbsp;";
+                endSearchString = "</a></li>";
+
+                if (!Utility.GetStringInFile(fileNameFullPath, searchString, nextSearchString, endSearchString, out page, out errorMessage))
+                    return null;
+
+                //--------------- Menu ----------------
+                if (location.Menu != 0)
+                {
+                    fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Views\\Main\\_Layout{0}.cshtml", location.Page.ToString());
+                    searchString = string.Format("<span class='title' data-location='Menu{0}'", location.Menu.ToString());
+                    nextSearchString = ">";
+                    endSearchString = "</span>";
+
+                    if (!Utility.GetStringInFile(fileNameFullPath, searchString, nextSearchString, endSearchString, out menu, out errorMessage))
+                        return null;
+                }
+                else
+                    menu = "0";
+
+                //--------------- Sub1 ----------------
+                if (location.Sub1 != 0)
+                {
+                    fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Views\\Main\\_Layout{0}.cshtml", location.Page.ToString());
+                    searchString = string.Format("<span class='title' data-location='Menu{0}Sub{1}'", location.Menu.ToString(), location.Sub1.ToString());
+                    nextSearchString = ">";
+                    endSearchString = "</span>";
+
+                    if (!Utility.GetStringInFile(fileNameFullPath, searchString, nextSearchString, endSearchString, out sub1, out errorMessage))
+                        return null;
+                }
+                else
+                    sub1 = "0";
+
+                //--------------- Sub2 ----------------
+                if (location.Sub2 != 0)
+                {
+                    fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Views\\Main\\_Layout{0}.cshtml", location.Page.ToString());
+                    searchString = string.Format("<span class='title' data-location='Menu{0}Sub{1}Sub{2}'", location.Menu.ToString(), location.Sub1.ToString(), location.Sub2.ToString());
+                    nextSearchString = ">";
+                    endSearchString = "</span>";
+
+                    if (!Utility.GetStringInFile(fileNameFullPath, searchString, nextSearchString, endSearchString, out sub2, out errorMessage))
+                        return null;
+                }
+                else
+                    sub2 = "0";
+
+                //--------------- Tab ----------------
+                fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Solutions\\Nr1\\WebApplication1\\Tab\\{0}.txt", locationName);
+
+                if (System.IO.File.Exists(fileNameFullPath))
+                {
+                    tab = Utility.ReturnFileContents(fileNameFullPath);
+                }
+                else
+                    tab = string.Format("Tab{0}", location.Tab.ToString());
+
+                if (menu == "0")
+                    alias = string.Format("{0}-Dashboard-{1}", page, tab);
+                else
+                {
+                    locName = string.Format("{0}{1}{2}{3}{4}", page, menu, sub1, sub2, tab);
+
+                    if (locationName == locName)
+                        alias = ""; //Do not return an alias name if it is same as default
+                    else
+                        alias = string.Format("{0}-{1}-{2}-{3}-{4}", page, menu, sub1, sub2, tab);
+                }
             }
             catch (Exception e)
             {
@@ -998,7 +1078,7 @@ namespace WebApplication1.Models
                 return null;
             }
 
-            return "";
+            return alias;
         }
     }
 }

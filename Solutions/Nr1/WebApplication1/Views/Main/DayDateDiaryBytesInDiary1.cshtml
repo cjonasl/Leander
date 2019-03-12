@@ -3,7 +3,7 @@
 <div style="margin: 20px !important;">
   @if (!ViewBag.TodaysDayIsInFile && (ViewBag.ListWithDayDateDiaryBytesInDiary != null))
   {
-    <div id="divAddNewWorkDay" style="margin-left: 1px;"><a class="aBlue" href="javascript: window.jonas.addNewWorkDay('@ViewBag.DiaryFolder')">Add new day</a></div>
+    <div id="divAddNewWorkDay" style="margin-left: 1px;"><a class="aBlue" href="javascript: window.jonas.addNewWorkDay('@ViewBag.WorkFolder')">Add new day</a></div>
   }
 
   @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -21,7 +21,7 @@
 
     <table id="tableDayDateDiaryBytesInDiary" class="defaultTableStyle" style="margin-top: 10px !important;">
       @{
-        string title = "The folder is: " + ViewBag.DiaryFolder;
+        string title = "The folder is: " + ((string)ViewBag.WorkFolder).Replace("##", "\\") + "\\Diary";
       }
       <tr id="headerRowTableDayDateDiaryBytesInDiary">
         <th title="Dag">Dag</th>
@@ -34,7 +34,7 @@
       {
 
         tdBytesInDiary = "tdBytesInDiary" + dayDateDiaryBytesInDiary.Day.ToString();
-        fileNameFullPath = ViewBag.DiaryFolder + "##" + dayDateDiaryBytesInDiary.Diary;
+        fileNameFullPath = ViewBag.WorkFolder + "##Diary##" + dayDateDiaryBytesInDiary.Diary;
 
         <tr>
           <td>@dayDateDiaryBytesInDiary.Day</td>

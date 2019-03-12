@@ -359,12 +359,12 @@ window.jonas.editTextFile = function(fileNameFullPath) {
     });
 };
 
-window.jonas.addNewWorkDay = function (diaryFolder) {
+window.jonas.addNewWorkDay = function (workFolder) {
     var str, id;
 
     $.ajax({
         url: "http://www.Nr1Web1.com/Main/AddNewWorkDay",
-        data: { diaryFolder: diaryFolder.replace(/##/g, "\\") },
+        data: { workFolder: workFolder.replace(/##/g, "\\") },
         error: function (data) {
             $("#contentDivErrorMessage").html(data.responseText);
             window.jonas.updateCssDisplayForContentDivs("errorMessage");
@@ -377,7 +377,7 @@ window.jonas.addNewWorkDay = function (diaryFolder) {
             }
             else { //Success, an object of type DayDateDiaryBytesInDiary expected back from server
                 str = "<a class='aGreen' href=\"javascript: window.jonas.openModalToEditDiaryDay('AAAAA', 'BBBBB')\">" + data.Diary + "</a>";
-                str = str.replace("AAAAA", diaryFolder + "##" + data.Diary);
+                str = str.replace("AAAAA", workFolder + "##Diary##" + data.Diary);
                 id = "tdBytesInDiary" + data.Day.toString();
                 str = str.replace("BBBBB", id);
                 $("#headerRowTableDayDateDiaryBytesInDiary").after("<tr><td>" + data.Day + "</td><td>" + data.Date + "</td><td>" + str + "</td><td id='" + id + "'>" + data.BytesInDiary + "</td></tr>");

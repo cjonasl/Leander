@@ -125,7 +125,7 @@ namespace WebApplication1.Models
                 return false;
         }
 
-        public static string ReturnWarningMessage(string diaryFolder)
+        public static string ReturnWarningMessage(string workFolder)
         {
             string fileNameFullPath, fileContents, warningMessage;
             string[] rows, columns;
@@ -136,7 +136,7 @@ namespace WebApplication1.Models
             {
                 warningMessage = null;
 
-                fileNameFullPath = string.Format("{0}\\DayDate.txt", diaryFolder);
+                fileNameFullPath = string.Format("{0}\\DayDate.txt", workFolder);
 
                 if (!System.IO.File.Exists(fileNameFullPath))
                     return string.Format("ERROR!! The following file does not exist as expected: {0}!", fileNameFullPath);
@@ -154,7 +154,7 @@ namespace WebApplication1.Models
                 while ((i < n) && (warningMessage == null))
                 {
                     columns = rows[n - 1 - i].Split(' ');
-                    fileNameFullPath = string.Format("{0}\\Day{1}Date{2}{3}{4}.txt", diaryFolder, columns[0].PadLeft(4, '0'), columns[1].Substring(2, 2), columns[1].Substring(5, 2), columns[1].Substring(8, 2));
+                    fileNameFullPath = string.Format("{0}\\Diary\\Day{1}Date{2}{3}{4}.txt", workFolder, columns[0].PadLeft(4, '0'), columns[1].Substring(2, 2), columns[1].Substring(5, 2), columns[1].Substring(8, 2));
 
                     if (!System.IO.File.Exists(fileNameFullPath))
                         warningMessage = string.Format("The diary file \"{0}\" for day {1} does not exist!", fileNameFullPath, columns[0]);
@@ -180,7 +180,7 @@ namespace WebApplication1.Models
             return warningMessage;
         }
 
-        public static List<DayDateDiaryBytesInDiary> ReturnListWithDayDateDiaryBytesInDiary(string diaryFolder, out bool todaysDayIsInFile, out string errorMessage)
+        public static List<DayDateDiaryBytesInDiary> ReturnListWithDayDateDiaryBytesInDiary(string workFolder, out bool todaysDayIsInFile, out string errorMessage)
         {
             string fileNameFullPath;
             ArrayList day, date;
@@ -192,7 +192,7 @@ namespace WebApplication1.Models
 
             try
             {
-                fileNameFullPath = string.Format("{0}\\DayDate.txt", diaryFolder);
+                fileNameFullPath = string.Format("{0}\\DayDate.txt", workFolder);
 
                 if (!System.IO.File.Exists(fileNameFullPath))
                 {
@@ -207,10 +207,10 @@ namespace WebApplication1.Models
 
                 for (i = 0; i < day.Count; i++)
                 {
-                    listWithDayDateDiaryBytesInDiary.Add(new DayDateDiaryBytesInDiary((int)day[i], Utility.ReturnDateTimeAsLongSwedishString((DateTime)date[i]), ReturnDiaryFileName((int)day[i], (DateTime)date[i]), ReturnNumberOfBytesInFile(diaryFolder, (int)day[i], (DateTime)date[i]), null));
+                    listWithDayDateDiaryBytesInDiary.Add(new DayDateDiaryBytesInDiary((int)day[i], Utility.ReturnDateTimeAsLongSwedishString((DateTime)date[i]), ReturnDiaryFileName((int)day[i], (DateTime)date[i]), ReturnNumberOfBytesInFile(workFolder + "\\Diary", (int)day[i], (DateTime)date[i]), null));
                 }
 
-                errorMessage = ReturnWarningMessage(diaryFolder);
+                errorMessage = ReturnWarningMessage(workFolder);
             }
             catch (Exception e)
             {
@@ -310,7 +310,7 @@ namespace WebApplication1.Models
                 return null;
         }
 
-        public static DayDateDiaryBytesInDiary AddNewWorkDay(string diaryFolder, out string errorMessage)
+        public static DayDateDiaryBytesInDiary AddNewWorkDay(string workFolder, out string errorMessage)
         {
             string fileNameFullPathDayDateFile, fileNameFullPathDiaryFile, dateTimeAsLongSwedishString, fileNameShort, fileContents, dateStr, warningMessage;
             int lastDayInFile, d;
@@ -320,7 +320,7 @@ namespace WebApplication1.Models
 
             try
             {
-                fileNameFullPathDayDateFile = string.Format("{0}\\DayDate.txt", diaryFolder);
+                fileNameFullPathDayDateFile = string.Format("{0}\\DayDate.txt", workFolder);
 
                 if (!System.IO.File.Exists(fileNameFullPathDayDateFile))
                 {
@@ -339,7 +339,7 @@ namespace WebApplication1.Models
                 d = 1 + lastDayInFile;
                 dateStr = dateToday.ToString("yyyy-MM-dd");
                 fileNameShort = string.Format("Day{0}Date{1}{2}{3}.txt", d.ToString().PadLeft(4, '0'), dateStr.Substring(2, 2), dateStr.Substring(5, 2), dateStr.Substring(8, 2));
-                fileNameFullPathDiaryFile = string.Format("{0}\\{1}", diaryFolder, fileNameShort);
+                fileNameFullPathDiaryFile = string.Format("{0}\\Diary\\{1}", workFolder, fileNameShort);
                 dateTimeAsLongSwedishString = Utility.ReturnDateTimeAsLongSwedishString(dateToday);
 
                 if (string.IsNullOrEmpty(fileContents))

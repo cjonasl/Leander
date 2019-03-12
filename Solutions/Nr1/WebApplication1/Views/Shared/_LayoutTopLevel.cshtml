@@ -576,11 +576,11 @@
         }
       }
       else {
-        $("#tableResources").append("<tr id=\"trResourceFiles\"><td style=\"text-align: right !important;\" title=\"Files/Folders full path (row separated)\">Fi/Fo&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFilesFolders\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
+        $("#tableResources").append("<tr id=\"trResourceFilesFolders\"><td style=\"text-align: right !important;\" title=\"Files/Folders full path (row separated)\">Fi/Fo&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceFilesFolders\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
         $("#tableResources").append("<tr id=\"trResourceLinks\"><td style=\"text-align: right !important;\" title=\"Links (row separated) and ###  between value of href-attribute and text to show for link\">Links&nbsp;&nbsp;</td><td><textarea id=\"textareaResourceLinks\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\" style=\"width: 900px !important; height: 100px !important; margin-top: 7px !important; margin-left: 0px !important; font-size: small !important;\"></textarea></td></tr>");
 
         if (data.Resource.Id) {
-          $("#textareaResourceFilesFolders").val(data.Resource.Files == null ? "" : data.Resource.FilesFolders);
+          $("#textareaResourceFilesFolders").val(data.Resource.FilesFolders == null ? "" : data.Resource.FilesFolders);
           $("#textareaResourceLinks").val(data.Resource.Links == null ? "" : data.Resource.Links);
           window.jonas.resourceFilesFolders = data.Resource.FilesFolders == null ? "" : data.Resource.FilesFolders;
           window.jonas.resourceLinks = data.Resource.Links == null ? "" : data.Resource.Links;
@@ -618,6 +618,7 @@
       descriptionAvailableCommands += "tab {value}: Set text for current tab\r\n";
       descriptionAvailableCommands += "icon {value}: Set icon for current left menu location\r\n";
       descriptionAvailableCommands += "title {value}: Set title for current left menu location\r\n";
+      descriptionAvailableCommands += "task {shortName} {title}: Creates a task for a work\r\n";
       descriptionAvailableCommands += "\r\n";
 
 
@@ -640,7 +641,7 @@
         return;
       }
 
-      availableCommands = ["nr", "er", "rr", "rrt", "r", "icon", "title", "menu", "sub1", "sub2", "tab"]; //nr=new resource, er=edit resource and rr=render resource
+      availableCommands = ["nr", "er", "rr", "rrt", "r", "icon", "title", "menu", "sub1", "sub2", "tab", "task"]; //nr=new resource, er=edit resource and rr=render resource
 
       index = str.indexOf(" ");
 
@@ -704,6 +705,15 @@
         return;
       }
 
+      if (cmd === "task") {
+        index = str.indexOf(" ");
+
+        if (index === -1) {
+          alert("The task command must contain shortName and title as parameters!");
+          return;
+        }
+      }
+
       command = {
         page: window.jonas.page,
         menu: window.jonas.menu,
@@ -746,8 +756,8 @@
           else if ((cmd === "nr") || (cmd === "er")) {
             window.jonas.loadAndOpenResourceModal(data);
           }
-          else if (cmd === "r") {
-            alert(data); //Show message of the result of regenerate file Resource.txt or check file Resource.txt
+          else if (cmd === "r" || cmd=== "task") {
+            alert(data); //Show message of the result of regenerate file Resource.txt or check file Resource.txt or create a task
           }
 
           $("#inputCmd").val("");
@@ -963,7 +973,7 @@
             else if (window.jonas.modalState === "Self") {
               $("#textareaResourceFilesFolders").off("change");
               $("#textareaResourceLinks").off("change");
-              $("#trResourceFiles").remove();
+              $("#trResourceFilesFolders").remove();
               $("#trResourceLinks").remove();
             }
           }

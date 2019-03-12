@@ -1,0 +1,16 @@
+﻿1020px744px /*
+FullName
+ShortName
+Folder
+*/
+Employer
+emp
+C:\git_cjonasl\Leander\Work\Employer
+----- New work -----
+Work1
+wk1
+C:\git_cjonasl\Leander\Work\Work1
+----- New work -----
+Work2
+wk2
+C:\git_cjonasl\Leander\Work\Work2

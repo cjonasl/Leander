@@ -11,21 +11,21 @@
 
     <table id="tableSearchResultResources" class="defaultTableStyle">
       <tr>
-        <th style="width: 6% !important;">&nbsp;Id</th>
-        <th style="width: 17% !important;">&nbsp;Location</th>
-        <th style="width: 17% !important;">&nbsp;Location alias</th>
-        <th style="width: 30% !important;">&nbsp;Title</th>
-        <th style="width: 30% !important;">&nbsp;Note</th>
+        <th style="width: 4% !important;">&nbsp;Id</th>
+        <th style="width: 18% !important;">&nbsp;Location</th>
+        <th style="width: 28% !important;">&nbsp;Location alias</th>
+        <th style="width: 25% !important;">&nbsp;Title</th>
+        <th style="width: 25% !important;">&nbsp;Note</th>
       </tr>
 
       @foreach (WebApplication1.Models.ThumbUpLocationInfo l in (List<WebApplication1.Models.ThumbUpLocationInfo>)ViewBag.ListWithThumbUpLocationInfo)
       {
         <tr>
-          <td style="width: 6% !important;" title="@l.Id"><a href="javascript: window.jonas.renderResource(@l.Id)">@l.Id</a></td>
-          <td style="width: 17% !important;" title="@l.Location">@l.Location</td>
-          <td style="width: 17% !important;" title="@l.LocationAlias">@l.LocationAlias</td>
-          <td style="width: 30% !important;" title="@l.Title">@l.Title</td>
-          <td style="width: 30% !important;" title="@l.Note">@l.Note</td>
+          <td style="width: 4% !important;" title="@l.Id"><a href="javascript: window.jonas.renderResource(@l.Id)">@l.Id</a></td>
+          <td style="width: 18% !important;" title="@l.Location">@l.Location</td>
+          <td style="width: 28% !important;" title="@l.LocationAlias">@l.LocationAlias</td>
+          <td style="width: 25% !important;" title="@l.Title">@l.Title</td>
+          <td style="width: 25% !important;" title="@l.Note">@l.Note</td>
         </tr>
       }
 

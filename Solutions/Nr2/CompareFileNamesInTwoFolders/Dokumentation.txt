@@ -1,0 +1,29 @@
+﻿Programmet är skrivet i projekt C:\git_cjonasl\Leander\Solutions\Nr2\CompareFileNamesInTwoFolders\CompareFileNamesInTwoFolders.csproj
+
+Programmet har två obligatoriska parametrar, de två katalogerna (med hel sökväg), där filnamnen
+ska jämföras (jämförelsen sker non case sensitive, men utskrift av resultatet sker enligt
+vad filnamnen är)
+
+---------- Resultatet skrivs ut i console-fönstret: -----------------
+
+Dir1: {Katalog 1 med hel sökväg}
+Dir2: {Katalog 2 med hel sökväg}
+Total number of files: ??
+In both: ??
+In Dir1, but not in Dir2: ??
+In Dir2, but not in Dir1: ??
+
+Files in Dir1, but not in Dir2:
+{Utskrift av filnamn, en per rad, som finns i Dir1, men inte i Dir2}
+
+Files in Dir2, but not in Dir1:
+{Utskrift av filnamn, en per rad, som finns i Dir2, men inte i Dir1}
+
+Files in both:
+{Filnamn som finns i bådat katalogerna}
+---------------------------------------------------------------------
+
+Samt också i tre filer som läggs i samma katalog där exe-filen ligger (CompareFileNamesInTwoFolders.exe):
+FilesInDir1ButNotInDir2.txt
+FilesInDir2ButNotInDir1.txt
+FilesInBoth.txt

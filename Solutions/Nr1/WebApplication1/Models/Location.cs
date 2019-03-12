@@ -142,5 +142,37 @@ namespace WebApplication1.Models
 
             return true;
         }
+
+        public static Location ReturnLocation(string locationName, out string errorMessage)
+        {
+            Location location = null;
+
+            errorMessage = null;
+
+            try //PageAMenuBSubCSubDTabE
+            {
+                int index1, index2, index3, index4, page, menu, sub1, sub2, tab;
+
+                index1 = locationName.IndexOf("Menu", 5);
+                index2 = locationName.IndexOf("Sub", 5 + index1);
+                index3 = locationName.IndexOf("Sub", 4 + index2);
+                index4 = locationName.IndexOf("Tab", 4 + index3);
+
+                page = int.Parse(locationName.Substring(4, index1 - 4));
+                menu = int.Parse(locationName.Substring(4 + index1, index2 - index1 - 4));
+                sub1 = int.Parse(locationName.Substring(3 + index2, index3 - index2 - 3));
+                sub2 = int.Parse(locationName.Substring(3 + index3, index4 - index3 - 3));
+                tab = int.Parse(locationName.Substring(3 + index4, locationName.Length - index4 - 3));
+
+                location = new Location(page, menu, sub1, sub2, tab);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method ReturnLocation! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return location;
+        }
     }
 }

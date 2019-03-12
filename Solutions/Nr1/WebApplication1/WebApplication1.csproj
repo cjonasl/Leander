@@ -143,6 +143,7 @@
     <Compile Include="Models\SaveFileTextData.cs" />
     <Compile Include="Models\TemplateData.cs" />
     <Compile Include="Models\ThumbUpLocationInfo.cs" />
+    <Compile Include="Models\Work.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

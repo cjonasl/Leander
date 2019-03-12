@@ -2,9 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
-using System.IO;
-using System.Web;
-using System.Text;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using Leander.Nr1;
@@ -180,7 +177,7 @@ namespace WebApplication1.Controllers
                         ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub2Tab1.txt";
                         return View("Communication1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
                     case "Page1Menu2Sub1Sub1Tab1":
-                        ViewBag.DiaryFolder = "C:##git_cjonasl##Leander##Work##Employer";
+                        ViewBag.WorkFolder = "C:##git_cjonasl##Leander##Work##Employer";
                         ViewBag.ListWithDayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.ReturnListWithDayDateDiaryBytesInDiary(@"C:\git_cjonasl\Leander\Work\Employer", out todaysDayIsInFile, out errorMessage);
                         ViewBag.TodaysDayIsInFile = todaysDayIsInFile;
                         ViewBag.ErrorMessage = errorMessage;
@@ -273,7 +270,7 @@ namespace WebApplication1.Controllers
                             newTerm = string.Format("<span class='title' data-location='Menu{0}Sub{1}'>{2}</span>", command.Menu.ToString(), command.Sub1.ToString(), command.Val);
                             break;
                         case "sub2":
-                            newTerm = string.Format("<span class='title' data-location='Menu{0}Sub{1}Sub{2}'>{3}</span>", command.Menu.ToString(), command.Sub1.ToString(), command.Sub1.ToString(), command.Val);
+                            newTerm = string.Format("<span class='title' data-location='Menu{0}Sub{1}Sub{2}'>{3}</span>", command.Menu.ToString(), command.Sub1.ToString(), command.Sub2.ToString(), command.Val);
                             break;
                     }
 
@@ -348,6 +345,11 @@ namespace WebApplication1.Controllers
                 else if ((command.Cmd == "r") && (command.Val == "check"))
                 {
                     ResourcePresentationInSearchUtility.CheckResourceFile(out message);
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+                else if (command.Cmd == "task")
+                {
+                    WorkUtility.CreateTask(command.Val, out message);
                     return Json(message, JsonRequestBehavior.AllowGet);
                 }
                 else
@@ -563,12 +565,12 @@ namespace WebApplication1.Controllers
                 return false;
         }
 
-        public JsonResult AddNewWorkDay(string diaryFolder)
+        public JsonResult AddNewWorkDay(string workFolder)
         {
             string errorMessage;
             DayDateDiaryBytesInDiary dayDateDiaryBytesInDiary;
 
-            dayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.AddNewWorkDay(diaryFolder, out errorMessage);
+            dayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.AddNewWorkDay(workFolder, out errorMessage);
 
             if (errorMessage == null)
                 return Json(dayDateDiaryBytesInDiary, JsonRequestBehavior.AllowGet);

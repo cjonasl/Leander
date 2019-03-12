@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication3", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateTriggers", "CreateTriggers\CreateTriggers.csproj", "{B1E18D48-33DF-4E52-B994-7380B15D6EF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompareFileNamesInTwoFolders", "CompareFileNamesInTwoFolders\CompareFileNamesInTwoFolders.csproj", "{52BDFB52-2224-47BB-84CA-FFC8063D78B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{B1E18D48-33DF-4E52-B994-7380B15D6EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1E18D48-33DF-4E52-B994-7380B15D6EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1E18D48-33DF-4E52-B994-7380B15D6EF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52BDFB52-2224-47BB-84CA-FFC8063D78B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52BDFB52-2224-47BB-84CA-FFC8063D78B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52BDFB52-2224-47BB-84CA-FFC8063D78B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52BDFB52-2224-47BB-84CA-FFC8063D78B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

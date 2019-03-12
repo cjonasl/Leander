@@ -520,5 +520,58 @@ namespace Leander.Nr1
 
             return c;
         }
+
+        public static bool GetStringInFile(string fileNameFullPath, string searchString, string nextSearchString, string endSearchString, out string strInFile, out string errorMessage)
+        {
+            int index1, index2, index3;
+            string fileContents;
+
+            errorMessage = null;
+            strInFile = null;
+
+            try
+            {
+                if (!System.IO.File.Exists(fileNameFullPath))
+                {
+                    errorMessage = string.Format("Error in method Utility.ReturnStringInFile! The following file does not exist: {0}", fileNameFullPath);
+                    return false;
+                }
+
+                fileContents = ReturnFileContents(fileNameFullPath);
+
+                index1 = fileContents.IndexOf(searchString);
+
+                if (index1 == -1)
+                {
+                    errorMessage = string.Format("Error in method Utility.ReturnStringInFile! Can not find the following searchString in file {0}: {1}", fileNameFullPath, searchString);
+                    return false;
+                }
+
+                index2 = fileContents.IndexOf(nextSearchString, index1 + searchString.Length);
+
+                if (index2 == -1)
+                {
+                    errorMessage = string.Format("Error in method Utility.ReturnStringInFile! Can not find the following nextSearchString in file {0}: {1}", fileNameFullPath, nextSearchString);
+                    return false;
+                }
+
+                index3 = fileContents.IndexOf(endSearchString, index2 + nextSearchString.Length);
+
+                if (index3 == -1)
+                {
+                    errorMessage = string.Format("Error in method Utility.ReturnStringInFile! Can not find the following endSearchString in file {0}: {1}", fileNameFullPath, nextSearchString);
+                    return false;
+                }
+
+                strInFile = fileContents.Substring(index2 + nextSearchString.Length, index3 - index2 - nextSearchString.Length).Trim();
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method Utility.ReturnStringInFile! e.Message:\r\n{0}", e.Message);
+                return false;
+            }
+
+            return true;
+        }
     }
 }
