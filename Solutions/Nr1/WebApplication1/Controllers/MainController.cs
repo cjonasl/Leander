@@ -142,9 +142,8 @@ namespace WebApplication1.Controllers
 
         public ActionResult NewLocation(Location location)
         {
-            string errorMessage;
+            string errorMessage, searchTerm;
             bool todaysDayIsInFile;
-            List<ThumbUpLocationInfo> list;
 
             try
             {
@@ -155,15 +154,13 @@ namespace WebApplication1.Controllers
                 {
                     //## will be replaced by \ in  _LayoutTopLevel.cshtml (does not work if put \\)
                     case "Page1Menu0Sub0Sub0Tab1":
-                        list = ThumbUpLocationInfoUtility.GetLocations(true, out errorMessage);
-                        ViewBag.ListWithThumbUpLocationInfo = list;
+                        ViewBag.ListWithThumbUpLocationInfo = ThumbUpLocationInfoUtility.GetLocations(true, out errorMessage);
                         ViewBag.ErrorMessage = errorMessage;
-                        return View("Locations", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DefaultLocations.cshtml"));
+                        return View("Locations", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##Locations.cshtml"));
                     case "Page1Menu0Sub0Sub0Tab2":
-                        list = ThumbUpLocationInfoUtility.GetLocations(false, out errorMessage);
-                        ViewBag.ListWithThumbUpLocationInfo = list;
+                        ViewBag.ListWithThumbUpLocationInfo = ThumbUpLocationInfoUtility.GetLocations(false, out errorMessage);
                         ViewBag.ErrorMessage = errorMessage;
-                        return View("Locations", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##NonDefaultLocations.cshtml"));
+                        return View("Locations", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##Locations.cshtml"));
                     case "Page1Menu0Sub0Sub0Tab3":
                         return View("HelpSearchResources", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##HelpSearchResources.cshtml"));
                     case "Page1Menu0Sub0Sub0Tab4":
@@ -175,13 +172,23 @@ namespace WebApplication1.Controllers
                         return View("AdhocCode", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
                     case "Page1Menu1Sub1Sub2Tab2":
                         ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub2Tab1.txt";
-                        return View("Communication1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
+                        return View("Communication1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##Communication1.cshtml"));
                     case "Page1Menu2Sub1Sub1Tab1":
                         ViewBag.WorkFolder = "C:##git_cjonasl##Leander##Work##Employer";
                         ViewBag.ListWithDayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.ReturnListWithDayDateDiaryBytesInDiary(@"C:\git_cjonasl\Leander\Work\Employer", out todaysDayIsInFile, out errorMessage);
                         ViewBag.TodaysDayIsInFile = todaysDayIsInFile;
                         ViewBag.ErrorMessage = errorMessage;
                         return View("DayDateDiaryBytesInDiary1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DayDateDiaryBytesInDiary1.cshtml"));
+                    case "Page1Menu3Sub1Sub1Tab1":
+                        searchTerm = "ka(Thumb up)";
+                        ViewBag.List = ResourcePresentationInSearchUtility.GetResourcePresentationInSearchList(searchTerm);
+                        ViewBag.SearchTerm = searchTerm;
+                        return View("ConstantResourceSearch", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##ConstantResourceSearch.cshtml"));
+                    case "Page1Menu3Sub1Sub1Tab2":
+                        searchTerm = "ka(C#)";
+                        ViewBag.List = ResourcePresentationInSearchUtility.GetResourcePresentationInSearchList(searchTerm);
+                        ViewBag.SearchTerm = searchTerm;
+                        return View("ConstantResourceSearch", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##ConstantResourceSearch.cshtml"));
                     case "Page3Menu1Sub1Sub1Tab1":
                         return View("InfoThumbUp", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##InfoThumbUp.cshtml"));
                     default:
@@ -365,66 +372,8 @@ namespace WebApplication1.Controllers
 
         public ViewResult SearchResource(string searchTerm)
         {
-            int index1, index2;
-            string[] u;
-            ArrayList v;
-
-            List<ResourcePresentationInSearch> list = ResourcePresentationInSearchUtility.ReturnListWithAllResourcePresentationInSearch();
-
+            List<ResourcePresentationInSearch> list = ResourcePresentationInSearchUtility.GetResourcePresentationInSearchList(searchTerm);
             ViewBag.SearchTerm = searchTerm;
-
-            if (searchTerm == "a asc")
-                return View(list);
-            else if (searchTerm == "a")
-                return View(list.OrderByDescending(x => x.Id).ToList());
-            else
-            {
-                index1 = searchTerm.IndexOf("ka(");
-
-                if (index1 >= 0)
-                {
-                    index2 = searchTerm.IndexOf(')', 3 + index1);
-                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
-                    list = list.Where(x => Utility.PhrasesInArrayListAreAllPresentInCommaSeparatedListWithPhrases(v, x.KeyWords)).ToList();
-                }
-
-                index1 = searchTerm.IndexOf("ko(");
-
-                if (index1 >= 0)
-                {
-                    index2 = searchTerm.IndexOf(')', 3 + index1);
-                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
-                    list = list.Where(x => Utility.AtLeastOnePhraseInArrayListIsPresentInCommaSeparatedListWithPhrases(v, x.KeyWords)).ToList();
-                }
-
-                index1 = searchTerm.IndexOf("ta(");
-
-                if (index1 >= 0)
-                {
-                    index2 = searchTerm.IndexOf(')', 3 + index1);
-                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
-                    list = list.Where(x => Utility.PhrasesInArrayListAreAllPresentInString(v, x.Title)).ToList();
-                }
-
-                index1 = searchTerm.IndexOf("to(");
-
-                if (index1 >= 0)
-                {
-                    index2 = searchTerm.IndexOf(')', 3 + index1);
-                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
-                    list = list.Where(x => Utility.AtLeastOnePhraseInArrayListIsPresentInString(v, x.Title)).ToList();
-                }
-
-                index1 = searchTerm.IndexOf("c(");
-
-                if (index1 >= 0)
-                {
-                    index2 = searchTerm.IndexOf(')', 2 + index1);
-                    u = searchTerm.Substring(2 + index1, index2 - index1 - 2).Split(',');
-                    list = list.Where(x => Utility.DateTimeFulfillRequirement(u[0], u[1], x.Created)).ToList();
-                }
-            }
-
             return View(list);
         }
 

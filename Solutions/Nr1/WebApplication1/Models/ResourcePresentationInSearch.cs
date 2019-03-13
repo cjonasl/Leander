@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -270,6 +271,69 @@ namespace WebApplication1.Models
                 message = string.Format("ERROR!! An Exception occured in method CheckResourceFile! e.Message:\r\n{0}", e.Message);
                 return;
             }
+        }
+
+        public static List<ResourcePresentationInSearch> GetResourcePresentationInSearchList(string searchTerm)
+        {
+            int index1, index2;
+            string[] u;
+            ArrayList v;
+
+            List<ResourcePresentationInSearch> list = ResourcePresentationInSearchUtility.ReturnListWithAllResourcePresentationInSearch();
+
+            if (searchTerm == "a asc")
+                return list;
+            else if (searchTerm == "a")
+                return list.OrderByDescending(x => x.Id).ToList();
+            else
+            {
+                index1 = searchTerm.IndexOf("ka(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.PhrasesInArrayListAreAllPresentInCommaSeparatedListWithPhrases(v, x.KeyWords)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("ko(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.AtLeastOnePhraseInArrayListIsPresentInCommaSeparatedListWithPhrases(v, x.KeyWords)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("ta(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.PhrasesInArrayListAreAllPresentInString(v, x.Title)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("to(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 3 + index1);
+                    v = new ArrayList(searchTerm.Substring(3 + index1, index2 - index1 - 3).Split(','));
+                    list = list.Where(x => Utility.AtLeastOnePhraseInArrayListIsPresentInString(v, x.Title)).ToList();
+                }
+
+                index1 = searchTerm.IndexOf("c(");
+
+                if (index1 >= 0)
+                {
+                    index2 = searchTerm.IndexOf(')', 2 + index1);
+                    u = searchTerm.Substring(2 + index1, index2 - index1 - 2).Split(',');
+                    list = list.Where(x => Utility.DateTimeFulfillRequirement(u[0], u[1], x.Created)).ToList();
+                }
+            }
+
+            return list.OrderByDescending(x => x.Id).ToList();
         }
     }
 }
