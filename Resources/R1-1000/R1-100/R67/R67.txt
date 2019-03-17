@@ -1,0 +1,45 @@
+﻿67
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-16 00:18:39
+
+----- New property -----
+
+Insert into multiple rows
+
+----- New property -----
+
+4
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\T-SQL\Insert into multiple rows.txt
+
+----- New property -----
+
+null

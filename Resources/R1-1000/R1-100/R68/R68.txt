@@ -1,0 +1,45 @@
+﻿68
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-16 16:36:37
+
+----- New property -----
+
+Interfaces can contain events, indexers, methods, and properties
+
+----- New property -----
+
+1
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\C#\Interfaces can contain events, indexers, methods, and properties.png
+
+----- New property -----
+
+null

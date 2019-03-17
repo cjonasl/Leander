@@ -1,0 +1,7 @@
+﻿CREATE TABLE AAA
+(
+  abc int NULL
+)
+
+INSERT INTO AAA(abc)
+VALUES (6), (7), (8);

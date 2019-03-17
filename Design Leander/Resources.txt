@@ -1295,3 +1295,63 @@ Constant search Thumb up
 ----- New property -----
 
 Thumb up
+
+---------- New resource ----------
+
+66
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-14 00:10:45
+
+----- New property -----
+
+Learn resources
+
+----- New property -----
+
+Course
+
+---------- New resource ----------
+
+67
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-16 00:18:39
+
+----- New property -----
+
+Insert into multiple rows
+
+----- New property -----
+
+T-SQL
+
+---------- New resource ----------
+
+68
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-16 16:36:37
+
+----- New property -----
+
+Interfaces can contain events, indexers, methods, and properties
+
+----- New property -----
+
+C#
