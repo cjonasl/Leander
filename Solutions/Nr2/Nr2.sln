@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateTriggers", "CreateTri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompareFileNamesInTwoFolders", "CompareFileNamesInTwoFolders\CompareFileNamesInTwoFolders.csproj", "{52BDFB52-2224-47BB-84CA-FFC8063D78B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular2", "Angular2\Angular2.csproj", "{2FDFECA4-8880-4A7B-BB77-A4C721AE0207}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{52BDFB52-2224-47BB-84CA-FFC8063D78B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52BDFB52-2224-47BB-84CA-FFC8063D78B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52BDFB52-2224-47BB-84CA-FFC8063D78B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FDFECA4-8880-4A7B-BB77-A4C721AE0207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDFECA4-8880-4A7B-BB77-A4C721AE0207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDFECA4-8880-4A7B-BB77-A4C721AE0207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDFECA4-8880-4A7B-BB77-A4C721AE0207}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

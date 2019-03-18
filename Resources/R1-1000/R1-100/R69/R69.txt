@@ -1,0 +1,45 @@
+﻿69
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-17 15:43:47
+
+----- New property -----
+
+How to setup an Angular 2 and TypeScript project with Visual Studio 2017
+
+----- New property -----
+
+25,3,24
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+https://adrientorris.github.io/aspnet-core/how-setup-angular-2-typescript-project-visual-studio-2017.html###Setup

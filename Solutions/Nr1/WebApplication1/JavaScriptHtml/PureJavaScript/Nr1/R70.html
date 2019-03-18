@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test js</title>
+</head>
+<body>
+
+<button onClick="aaa()">Click</button>
+
+<script>
+  function aaa() {
+    var obj = {Paris: 5, London: 7, Berlin: 4}
+    var str1 = "";
+    var str2 = "";
+    var t;
+
+    for(var p in obj) {
+       t = " (type = " + typeof p + ")";
+       str1 += (p + t + " ");
+
+       t = " (type = " + typeof obj[p] + ")";
+       str2 += (obj[p] + t + " ");
+    }
+    alert(str1);
+    alert(str2);
+  }
+</script>
+</body>
+</html>

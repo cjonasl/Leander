@@ -363,3 +363,51 @@ Course
 ----- New property -----
 
 Resources rörande kurser, utbildningsföretag etc.
+
+---------- New key word ----------
+
+24
+
+----- New property -----
+
+2019-03-17 15:40:39
+
+----- New property -----
+
+Visual Studio
+
+----- New property -----
+
+Resources rörande Visual Studio
+
+---------- New key word ----------
+
+25
+
+----- New property -----
+
+2019-03-17 15:42:30
+
+----- New property -----
+
+Angular
+
+----- New property -----
+
+Resources rörande Angular
+
+---------- New key word ----------
+
+26
+
+----- New property -----
+
+2019-03-17 23:58:20
+
+----- New property -----
+
+Design patterns
+
+----- New property -----
+
+Resources rörande design patterns

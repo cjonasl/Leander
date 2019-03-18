@@ -1,0 +1,45 @@
+﻿71
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-18 00:00:21
+
+----- New property -----
+
+Dependency Inversion Principle
+
+----- New property -----
+
+26
+
+----- New property -----
+
+Good youtube video
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+https://www.youtube.com/watch?v=2mHq-EF50m8###Dependency Inversion Principle

@@ -1355,3 +1355,63 @@ Interfaces can contain events, indexers, methods, and properties
 ----- New property -----
 
 C#
+
+---------- New resource ----------
+
+69
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-17 15:43:47
+
+----- New property -----
+
+How to setup an Angular 2 and TypeScript project with Visual Studio 2017
+
+----- New property -----
+
+Angular,TypeScript,Visual Studio
+
+---------- New resource ----------
+
+70
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-17 22:05:48
+
+----- New property -----
+
+Properties JavaScript
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+71
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-18 00:00:21
+
+----- New property -----
+
+Dependency Inversion Principle
+
+----- New property -----
+
+Design patterns
