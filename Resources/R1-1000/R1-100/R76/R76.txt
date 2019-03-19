@@ -1,0 +1,45 @@
+﻿76
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-18 22:55:13
+
+----- New property -----
+
+JavaScript undefined
+
+----- New property -----
+
+6,2
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+PureJavaScript\Nr1\R76.html
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

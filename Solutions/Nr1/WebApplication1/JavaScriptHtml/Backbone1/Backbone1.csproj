@@ -50,7 +50,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources1\" />
+    <Folder Include="Nr1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="js\nr1\backbone.js" />
+    <Content Include="js\nr1\backbone1.html" />
+    <Content Include="js\nr1\Browse.txt" />
+    <Content Include="js\nr1\Information.txt" />
+    <Content Include="js\nr1\jQuery.js" />
+    <Content Include="js\nr1\underscore.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

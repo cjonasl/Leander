@@ -1,4 +1,4 @@
-﻿997px 727px /*
+﻿1036px880px /*
 Id
 Name
 KeyWords (key word ids comma separated)
@@ -66,7 +66,7 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab7
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Underscore1
 1
 25
-C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1\Underscore1.csproj
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Underscore1\Underscore1.csproj
 Underscore1
 ----- New adhoc -----
 7

@@ -1,4 +1,4 @@
-﻿618px 356px <!DOCTYPE html>
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,7 +14,12 @@
 
   <script>
   function myFunction() {
+    var aaa = null;
+    var b1 = (aaa == null);
+    var b2 = (aaa === null);
+    var str = typeof aaa;
 
+    alert(b1 + " " + b2 + " " + str);
   }
   </script>
 </body>

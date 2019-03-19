@@ -1,4 +1,4 @@
-﻿618px 356px <!DOCTYPE html>
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,14 +7,22 @@
   <meta http-equiv='cache-control' content='no-cache'>
   <meta http-equiv='expires' content='0'>
   <meta http-equiv='pragma' content='no-cache'>
-  <title>Test js</title>
+  <title>Test jQuery</title>
+  <!-- <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery1.12.4.js"></script> -->
+  <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery3.3.1.js"></script>
 </head>
 <body>
   <button onClick="myFunction()">Click</button><br />
+  <ul>
+    <li>Paris</li>
+    <li>London</li>
+    <li>Berlin</li>
+  </ul>
 
   <script>
   function myFunction() {
-
+   var aaa = $("li");
+   alert(aaa.length);
   }
   </script>
 </body>

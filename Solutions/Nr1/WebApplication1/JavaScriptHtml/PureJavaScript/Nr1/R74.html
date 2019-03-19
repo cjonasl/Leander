@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test js</title>
+</head>
+<body>
+  <button onClick="myFunction()">Click</button><br />
+
+  <script>
+  function myFunction() {
+    var obj1 = window.Object.getOwnPropertyDescriptor({aaa: 1, bbb: "Hej"}, "aaa");
+    var obj2 = window.Object.getOwnPropertyDescriptor({aaa: 1, bbb: "Hej"}, "abc");
+    var obj3 = window.Object.getOwnPropertyDescriptor({aaa: 1, bbb: function(x) {return 2*x;} }, "bbb");
+    var obj4 = window.Object.getOwnPropertyDescriptor({aaa: {hejsan: 1, berlin: "abc"}, bbb: "Hej"}, "aaa");
+
+    var aaa = { get jonas() { return 5;} };
+    var bbb = { aaa: 1, set jonas(value) {this.aaa = value;} }
+
+    var obj5 = window.Object.getOwnPropertyDescriptor(aaa, "jonas");
+    var obj6 = window.Object.getOwnPropertyDescriptor(bbb, "jonas");
+
+    alert(aaa.jonas);
+
+    bbb.jonas = 6;
+    alert(bbb.aaa);
+
+    alert(obj3.value(3));
+    alert(typeof obj5.get);
+    alert(typeof obj6.set);
+
+    console.log(obj1);
+    console.log(obj2);
+    console.log(obj3);
+    console.log(obj4);
+    console.log(obj5);
+    console.log(obj6);
+  }
+  </script>
+</body>
+</html>

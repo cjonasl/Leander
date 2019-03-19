@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [957px,342px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test js</title>
+</head>
+<body>
+  <button onClick="myFunction()">Click</button><br />
+
+  <script>
+  function Book(title) {
+    this.title = title;
+  }
+
+  function myFunction() {
+    var v = [1, 2, 3];
+    var str1 = typeof v;
+    var obj = {};
+    var str2 = v.toString();
+    var str3 = obj.toString();
+    var str4 = window.Object.prototype.toString.call(v);
+    var d = new Date();
+    var str5 = window.Object.prototype.toString.call(d);
+    var f = function() {};
+    var str6 = window.Object.prototype.toString.call(f);
+    var str7 = typeof f;
+
+    var book = new Book("Jonas programmer");
+    var str8 = window.Object.prototype.toString.call(book);
+    var str9 = book.title;
+
+    alert(str1 + "\r\n" + str2 + "\r\n" + str3 + "\r\n" + str4 + "\r\n" + str5 + "\r\n" + str6 + "\r\n" + str7 + "\r\n"  + str8 + "\r\n" + str9);
+  }
+  </script>
+</body>
+</html>

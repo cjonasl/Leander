@@ -48,10 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Nr1\R73.html" />
     <None Include="Nr1\R24.html" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Nr1\" />
+    <Content Include="js\jQuery1.12.4.js" />
+    <Content Include="js\jQuery3.3.1.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

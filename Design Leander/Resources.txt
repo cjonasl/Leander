@@ -1415,3 +1415,123 @@ Dependency Inversion Principle
 ----- New property -----
 
 Design patterns
+
+---------- New resource ----------
+
+72
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-18 17:50:18
+
+----- New property -----
+
+find
+
+----- New property -----
+
+Adhoc,underscore
+
+---------- New resource ----------
+
+73
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-18 18:00:29
+
+----- New property -----
+
+length
+
+----- New property -----
+
+Adhoc,jQuery
+
+---------- New resource ----------
+
+74
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-18 21:51:32
+
+----- New property -----
+
+getOwnPropertyDescriptor
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+75
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-18 22:51:53
+
+----- New property -----
+
+JavaScript null
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+76
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-18 22:55:13
+
+----- New property -----
+
+JavaScript undefined
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+77
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-18 23:01:57
+
+----- New property -----
+
+JavaScript typeof
+
+----- New property -----
+
+Adhoc,JavaScript

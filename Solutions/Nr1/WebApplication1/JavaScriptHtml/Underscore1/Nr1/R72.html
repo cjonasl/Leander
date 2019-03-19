@@ -1,4 +1,4 @@
-﻿985px 381px <!DOCTYPE html>
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
 <html>
 <head>
   <meta charset="utf-8" />
@@ -10,6 +10,11 @@
   <button id="btn1" onclick="myFunction1()">Click</button>
   <script>
   function myFunction1() {
+    var v1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var v2 = _.find(v1, function(value, index, array) {
+          return (((value % 5) + 5) === 9);
+     });
+    alert(v2);
   }
   </script>
 </body>

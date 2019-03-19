@@ -1,4 +1,4 @@
-﻿720px 388px <!DOCTYPE html>
+﻿992px 515px <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,8 +8,21 @@
   <meta http-equiv='expires' content='0'>
   <meta http-equiv='pragma' content='no-cache'>
   <title>Test jQuery</title>
+  <!-- <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery1.12.4.js"></script> -->
+  <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery3.3.1.js"></script>
 </head>
 <body>
+  <button onClick="myFunction()">Click</button><br />
+  <ul>
+    <li>Paris</li>
+    <li>London</li>
+    <li>Berlin</li>
+  </ul>
 
+  <script>
+  function myFunction() {
+
+  }
+  </script>
 </body>
 </html>
