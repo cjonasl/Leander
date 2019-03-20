@@ -1,5 +1,9 @@
 ﻿window.Jonas = new window.Object();
 
+window.Jonas.HierarchyStack = [];
+window.Jonas.TmpCurrentIndex = 0;
+window.Jonas.TmpObjectArray = [];
+
 window.Jonas.ReturnPropertyDescriptorAsString = function (obj, prop) {
     var propertyDescriptorObject = window.Object.getOwnPropertyDescriptor(obj, prop);
     var arrayOfOwnPropertyNames = window.Object.getOwnPropertyNames(propertyDescriptorObject);
@@ -36,7 +40,7 @@ window.Jonas.ReturnPropertyDescriptorAsString = function (obj, prop) {
     s += "}";
 
     return s;
-}
+};
 
 window.Jonas.ReturnArrayWithDistinctOwnPropertyNamesAndSorted = function (obj) {
     var array1, array2, numberOfElements, i, str;
@@ -52,26 +56,23 @@ window.Jonas.ReturnArrayWithDistinctOwnPropertyNamesAndSorted = function (obj) {
         if (array1.indexOf(str) === i) {
             array2.push(str);
         }
-        else
-        {
+        else {
             alert("OBS, dubbla properties av \"" + str + "\"!!!");
         }
     }
 
     return array2;
-}
+};
 
-window.Jonas.IsPropertyOverridden = function(propertyName, currentLevel, arrayWithArraysWithOwnDistinctPropertyNames)
-{
-    var returnValue, i, j, numberOfLevels, tmpArray, numberOfOwnDistinctPropertiesInCurrentLevel, i; //deafult
+window.Jonas.IsPropertyOverridden = function (propertyName, currentLevel, arrayWithArraysWithOwnDistinctPropertyNames) {
+    var returnValue, i, j, numberOfLevels, tmpArray, numberOfOwnDistinctPropertiesInCurrentLevel;
 
     numberOfLevels = arrayWithArraysWithOwnDistinctPropertyNames.length;
     returnValue = false;
 
     i = currentLevel;
 
-    while ((!returnValue) && (i < numberOfLevels))
-    {
+    while ((!returnValue) && (i < numberOfLevels)) {
         tmpArray = arrayWithArraysWithOwnDistinctPropertyNames[i];
         numberOfOwnDistinctPropertiesInCurrentLevel = tmpArray.length;
 
@@ -79,12 +80,10 @@ window.Jonas.IsPropertyOverridden = function(propertyName, currentLevel, arrayWi
 
         while ((!returnValue) && (j < numberOfOwnDistinctPropertiesInCurrentLevel)) {
 
-            if (propertyName === tmpArray[j])
-            {
+            if (propertyName === tmpArray[j]) {
                 returnValue = true;
             }
-            else
-            {
+            else {
                 j++;
             }
         }
@@ -93,7 +92,7 @@ window.Jonas.IsPropertyOverridden = function(propertyName, currentLevel, arrayWi
     }
 
     return returnValue;
-}
+};
 
 window.Jonas.ShowPropertiesForSpecificLevel = function (arrayWithObjectsToAnalyze, i, arrayWithArraysWithOwnDistinctPropertyNames) {
     var j, type, theClass, obj, level, propertyName, numberOfOwnDistinctPropertyNames, propertyValue, finalString, listElement, propertyIsOverridden, tmpArray;
@@ -111,19 +110,17 @@ window.Jonas.ShowPropertiesForSpecificLevel = function (arrayWithObjectsToAnalyz
     textNode = document.createTextNode("Level " + level.toString() + ", class: " + window.Object.prototype.toString.call(arrayWithObjectsToAnalyze[i]).slice(8, -1) + ", number of own distinct properties: " + numberOfOwnDistinctPropertyNames.toString());
     spanElement.appendChild(textNode);
 
-    paragraphElement.appendChild(spanElement)
+    paragraphElement.appendChild(spanElement);
     paragraphElement.appendChild(window.document.createElement('br'));
 
     for (j = 0; j < numberOfOwnDistinctPropertyNames; j++) {
         propertyName = arrayWithArraysWithOwnDistinctPropertyNames[i][j];
 
-        if (window.Jonas.IsPropertyOverridden(propertyName, level, arrayWithArraysWithOwnDistinctPropertyNames))
-        {
+        if (window.Jonas.IsPropertyOverridden(propertyName, level, arrayWithArraysWithOwnDistinctPropertyNames)) {
             obj = arrayWithObjectsToAnalyze[i];
             propertyIsOverridden = true;
         }
-        else
-        {
+        else {
             obj = arrayWithObjectsToAnalyze[arrayWithObjectsToAnalyze.length - 1];
             propertyIsOverridden = false;
         }
@@ -136,21 +133,17 @@ window.Jonas.ShowPropertiesForSpecificLevel = function (arrayWithObjectsToAnalyz
                 type = typeof obj[propertyName];
             }
 
-            if ((type === "null") || (type === "undefined"))
-            {
+            if ((type === "null") || (type === "undefined")) {
                 finalString = propertyName + ": " + type + ", (" + type + ", property descriptor: " + window.Jonas.ReturnPropertyDescriptorAsString(arrayWithObjectsToAnalyze[i], propertyName) + ")";
             }
-            else if ((type === "string") || (type === "number") || (type === "boolean") || (type === "object") || (type === "function"))
-            {
+            else if ((type === "string") || (type === "number") || (type === "boolean") || (type === "object") || (type === "function")) {
                 theClass = window.Object.prototype.toString.call(obj[propertyName]).slice(8, -1);
 
-                if ((type === "string") || (type === "number") || (type === "boolean"))
-                {
+                if ((type === "string") || (type === "number") || (type === "boolean")) {
                     propertyValue = obj[propertyName].toString();
                     finalString = propertyName + ": " + propertyValue + " (" + theClass + ", property descriptor: " + window.Jonas.ReturnPropertyDescriptorAsString(arrayWithObjectsToAnalyze[i], propertyName) + ")";
                 }
-                else
-                {
+                else {
                     if (theClass !== "Array") {
                         tmpArray = window.Jonas.ReturnArrayWithDistinctOwnPropertyNamesAndSorted(obj[propertyName]);
                     }
@@ -159,17 +152,15 @@ window.Jonas.ShowPropertiesForSpecificLevel = function (arrayWithObjectsToAnalyz
                         finalString = propertyName + ": object (Array, length = " + obj[propertyName].length.toString() + ", property descriptor: " + window.Jonas.ReturnPropertyDescriptorAsString(arrayWithObjectsToAnalyze[i], propertyName) + ")";
                     }
                     else if (theClass === "Function") {
-                    
-                        finalString = propertyName + ": function (Function, number of arguments = " + obj[propertyName].length.toString() + ", property descriptor: " + window.Jonas.ReturnPropertyDescriptorAsString(arrayWithObjectsToAnalyze[i], propertyName) + ", own properties " + tmpArray.length.toString() + " stycken [" + tmpArray .join(", ") + "])";
+
+                        finalString = propertyName + ": function (Function, number of arguments = " + obj[propertyName].length.toString() + ", property descriptor: " + window.Jonas.ReturnPropertyDescriptorAsString(arrayWithObjectsToAnalyze[i], propertyName) + ", own properties " + tmpArray.length.toString() + " stycken [" + tmpArray.join(", ") + "])";
                     }
-                    else
-                    {
+                    else {
                         finalString = propertyName + ": object (" + theClass + ", property descriptor: " + window.Jonas.ReturnPropertyDescriptorAsString(arrayWithObjectsToAnalyze[i], propertyName) + ", own properties " + tmpArray.length.toString() + " stycken [" + tmpArray.join(", ") + "])";
                     }
                 }
             }
-            else
-            {
+            else {
                 finalString = propertyName + ": TYPEN ÄR INTE string, number, boolean, undefined, object eller function SOM FÖRVÄNTAT UTAN \"" + type + "\"!!!";
             }
         }
@@ -179,8 +170,7 @@ window.Jonas.ShowPropertiesForSpecificLevel = function (arrayWithObjectsToAnalyz
 
         listElement = window.document.createElement('li');
 
-        if (propertyIsOverridden)
-        {
+        if (propertyIsOverridden) {
             listElement.setAttribute("style", "color: red");
         }
 
@@ -190,7 +180,7 @@ window.Jonas.ShowPropertiesForSpecificLevel = function (arrayWithObjectsToAnalyz
 
     paragraphElement.appendChild(unorderedListElement);
     window.Jonas.elementWhereToPlaceInfo.appendChild(paragraphElement);
-}
+};
 
 window.Jonas.ShowPropertyInfoForObject = function (obj, objDescription, elementWhereToPlaceInfo) {
     var headerElement, headerTextElement, arrayWithObjectsToAnalyze, numberOfLevels;
@@ -217,15 +207,14 @@ window.Jonas.ShowPropertyInfoForObject = function (obj, objDescription, elementW
     numberOfLevels = arrayWithObjectsToAnalyze.length;
     arrayWithArraysWithOwnDistinctPropertyNames = [];
 
-    for (i = 0; i < numberOfLevels; i++)
-    {
+    for (i = 0; i < numberOfLevels; i++) {
         arrayWithArraysWithOwnDistinctPropertyNames.push(window.Jonas.ReturnArrayWithDistinctOwnPropertyNamesAndSorted(arrayWithObjectsToAnalyze[i]));
     }
 
     for (i = 0; i < numberOfLevels; i++) {
         window.Jonas.ShowPropertiesForSpecificLevel(arrayWithObjectsToAnalyze, i, arrayWithArraysWithOwnDistinctPropertyNames);
     }
-}
+};
 
 window.Jonas.ReturnPropertiesForSpecificLevel = function (arrayWithObjectsToAnalyze, i, arrayWithArraysWithOwnDistinctPropertyNames) {
     var j, type, theClass, obj, level, propertyName, numberOfOwnDistinctPropertyNames, propertyValue, finalString, propertyIsOverridden, tmpArray, returnString;
@@ -329,7 +318,7 @@ window.Jonas.ReturnPropertyInfoForObject = function (obj, objDescription) {
     }
 
     return returnString;
-}
+};
 
 window.Jonas.ReturnArrayWithKeys = function (v) {
     var u = [];
@@ -346,7 +335,7 @@ window.Jonas.ReturnArrayWithKeys = function (v) {
     }
 
     return u;
-}
+};
 
 window.Jonas.ReturnArrayWithValues = function (v) {
     var u = [];
@@ -363,7 +352,7 @@ window.Jonas.ReturnArrayWithValues = function (v) {
     }
 
     return u;
-}
+};
 
 window.Jonas.ReturnInfoAboutObjectOrArrayAsString = function (v) {
     var str, arrayWithKeys, arrayWithValues;
@@ -394,7 +383,7 @@ window.Jonas.ReturnInfoAboutObjectOrArrayAsString = function (v) {
         arrayWithKeys = window.Jonas.ReturnArrayWithKeys(v);
         arrayWithValues = window.Jonas.ReturnArrayWithValues(v);
 
-        for (var i = 0; i < (arrayWithValues.length - 1) ; i++) {
+        for (var i = 0; i < (arrayWithValues.length - 1); i++) {
             if (arrayWithValues[i] === undefined) {
                 str += (arrayWithKeys[i] + "undefined, ");
             }
@@ -440,7 +429,7 @@ window.Jonas.ReturnInfoAboutObjectOrArrayAsString = function (v) {
     }
 
     return str;
-}
+};
 
 //Take only properties where the value is of type number, string or boolean
 window.Jonas.ReturnTableWrtOwnAndNotOwnPropertiesAndEnumerableAndNotEnumerable = function (obj) {
@@ -455,10 +444,10 @@ window.Jonas.ReturnTableWrtOwnAndNotOwnPropertiesAndEnumerableAndNotEnumerable =
     }
 
     var p = Object.getPrototypeOf(obj);
-    var ownPropertyNames, i, str, s1, s2, s3, s4;
+    var ownPropertyNames, str, s1, s2, s3, s4;
 
-    while (p != null) {
-        var ownPropertyNames = Object.getOwnPropertyNames(p);
+    while (p !== null) {
+        ownPropertyNames = Object.getOwnPropertyNames(p);
 
         for (i = 0; i < ownPropertyNames.length; i++) {
             if (v.indexOf(ownPropertyNames[i]) === -1) {
@@ -517,9 +506,9 @@ window.Jonas.ReturnTableWrtOwnAndNotOwnPropertiesAndEnumerableAndNotEnumerable =
     str += "<tr style='border: 1px solid black; border-collapse: collapse;'><td style='border: 1px solid black; border-collapse: collapse;'><b>Yes</b></td><td style='border: 1px solid black; border-collapse: collapse;'>" + s3 + "</td><td style='border: 1px solid black; border-collapse: collapse;'>" + s4 + "</td></tr></table>";
 
     return str;
-}
+};
 
-window.Jonas.returnIntegerRandomNumber = function(minIncluded, maxExcluded) {
+window.Jonas.returnIntegerRandomNumber = function (minIncluded, maxExcluded) {
     var n = minIncluded + Math.round(Math.random() * (maxExcluded - minIncluded));
 
     if (n === maxExcluded) {
@@ -527,7 +516,7 @@ window.Jonas.returnIntegerRandomNumber = function(minIncluded, maxExcluded) {
     }
 
     return n;
-}
+};
 
 window.Jonas.ReturnSample = function (totalSize, sampleSize) {
     var v = [], sample = [];
@@ -544,7 +533,7 @@ window.Jonas.ReturnSample = function (totalSize, sampleSize) {
     }
 
     return sample;
-}
+};
 
 window.Jonas.ReturnIdsCommaseparatedFromElementsInjQueryObject = function (obj) {
     var id, n, str;
@@ -574,4 +563,303 @@ window.Jonas.ReturnIdsCommaseparatedFromElementsInjQueryObject = function (obj) 
     }
 
     return str;
-}
+};
+
+window.Jonas.ReturnPropertyType = function(obj, prop) {
+    var pd, propertyType; //Default
+
+    propertyType = "Error";
+
+    try {
+        pd = Object.getOwnPropertyDescriptor(obj[prop]);
+
+        if (obj[prop] === null)
+            propertyType = "null";
+        else if (obj[prop] === undefined)
+            propertyType = "undefined";
+        else if (pd.get) {
+            propertyType = "get";
+
+            if (pd.set) {
+                propertyType += " set";
+            }
+        }
+        else if (pd.set)
+            propertyType = "set";
+        else {
+            propertyType = typeof obj[prop];
+
+            if (propertyType === "object") {
+                propertyType = Object.prototype.toString.call(obj[prop]);
+            }
+         }
+    }
+    catch{
+        propertyType = "Error";
+    }
+
+    return propertyType;
+};
+
+//Return empty string for all types except string, number and boolean
+window.Jonas.ReturnPropertyValue = function (propertyType, obj, prop) {
+    var propertyValue;
+
+    propertyValue = "Error"; //Default
+
+    try {
+        if (propertyType === "string" || propertyType === "number" || propertyType === "boolean")
+            propertyValue = obj[prop];
+        else
+            propertyValue = "";
+    }
+    catch {
+        propertyValue = "Error";
+    }
+
+    return propertyValue;
+};
+
+window.Jonas.ReturnWritableEnumerableConfigurable = function (propertyType, obj, prop) {
+    var pd, configurable, enumerable, writable;
+
+    try {
+        pd = Object.getOwnPropertyDescriptor(obj[prop]);
+
+        configurable = pd.configurable.toString();
+        enumerable = pd.enumerable.toString();
+
+        if (propertyType === "get" || propertyType === "set" || propertyType === "get set")
+            writable = "";
+        else
+            writable = pd.writable.toString();
+    }
+    catch {
+        configurable = "Error";    
+        enumerable = "Error";
+        writable = "Error";
+    }
+
+    return {
+        configurable: configurable,
+        enumerable: enumerable,
+        writable: writable
+    };
+};
+
+window.Jonas.ReturnNumberOfOwnPropertiesAsString = function (obj, prop) {
+    var numberOfOwnProperties, propertyType;
+
+    numberOfOwnProperties = "Error";
+
+    try {
+        propertyType = typeof obj[prop];
+
+        if (propertyType === "object" || propertyType === "function")
+            numberOfOwnProperties = Object.getOwnPropertyNames(obj[prop]).length.toString();
+        else
+            numberOfOwnProperties = "";
+    }
+    catch {
+        numberOfOwnProperties = "Error";
+    }
+
+    return numberOfOwnProperties;
+};
+
+//Assume u is an array of arrays with string
+window.Jonas.ReturnArrayWithDistinctStrings = function (u) {
+    var i, j, v;
+
+    v = [];
+
+    for (i = 0; i < u.length; i++) {
+        for (j = 0; j < u[i].length; j++) {
+            if (v.indexOf(u[i][j] === -1))
+                v.push(u[i][j]);
+        }
+    }
+
+    return v;
+};
+
+window.Jonas.ReturnTable = function (obj, level, name, propertyNamesSorted, propertyNamesAbove, propertyNamesBelow) {
+    var template, i, n, tmpStr, str, nnumber, nstring, nboolean, nfunction, nobject, nnull, nundefined, nget, nset, ngetset;
+    var propertyType, propertyValue;
+    var writableEnumerableConfigurable;
+    var numberOfOwnPropertiesAsString;
+    var s1, s2, s3, s4, s5, s6, s7, s8, s9;
+    var isFunctionOrObject;
+
+    nnumber = 0;
+    nstring = 0;
+    nboolean = 0;
+    nfunction = 0;
+    nobject = 0;
+    nnull = 0;
+    nundefined = 0;
+    nget = 0;
+    nset = 0;
+    ngetset = 0;
+
+    template = "<tr><td style='width: 22%;'>###PropertyName###</td><td style='width: 18%;'>###Type###</td><td style='width: 18%;'>###Value###</td><td style='width: 7%;'>###Configurable###</td><td style='width: 7%;'>###Enumerable###</td><td style='width: 7%;'>###Writable###</td><td style='width: 7%;'>###IsAbove###</td><td style='width: 7%;'>###IsBelow###</td>td style='width: 7%;'>###NumberOfProperties###</td></tr>";
+
+    str = "<table class='defaultTableStyle'><thead><tr><th style='width: 22%;'>&nbsp;Property name</th><th style='width: 18%;'>&nbsp;Type</th><th style='width: 18%;'>&nbsp;Value</th><th style='width: 7%;'>&nbsp;Configurable</th><th style='width: 7%;'>&nbsp;Enumerable</th><th style='width: 7%;'>&nbsp;Writable</th><th style='width: 7%;'>&nbsp;Is above</th><th style='width: 7%;'>&nbsp;Is below</th><th style='width: 7%;'>&nbsp;Num properties</th></tr></thead>";
+    str += "<tbody>";
+
+    n = propertyNamesSorted.length;
+
+    for (i = 0; i < n; i++) {
+        isFunctionOrObject = false;
+
+        s1 = template.replace("###PropertyName###", propertyNamesSorted[i]);
+
+        propertyType = window.Jonas.ReturnPropertyType(obj, propertyNamesSorted[i]);
+
+        switch (propertyType) {
+            case "number":
+                nnumber++;
+                break;
+            case "string":
+                nstring++;
+                break;
+            case "boolean":
+                nboolean++;
+                break;
+            case "function":
+                nfunction++;
+                isFunctionOrObject = true;
+                break;
+            case "null":
+                nnull++;
+                break;
+            case "undefined":
+                nundefined++;
+                break;
+            case "get":
+                nget++;
+                break;
+            case "set":
+                nset++;
+                break;
+            case "get set":
+                ngetset++;
+                break;
+            default:
+                nobject++;
+                isFunctionOrObject = true;
+                break;
+        }
+
+        if (isFunctionOrObject)
+            tmpStr = "<a href='javascript: window.Jonas.ShowObjectHierarchy(null, '" + window.Jonas.TmpCurrentIndex.toString() + ", '" + propertyNamesSorted[i] + "')'>" + propertyType + "</a>";
+        else
+            tmpStr = propertyType;
+
+        s2 = s1.replace("###Type###", tmpStr);
+
+        if (isFunctionOrObject) {
+            window.Jonas.TmpObjectArray.push(obj[propertyNamesSorted[i]]);
+            window.Jonas.TmpCurrentIndex++;
+        }      
+
+        propertyValue = window.Jonas.ReturnPropertyValue(propertyType, obj, propertyNamesSorted[i]);
+        s3 = s2.replace("###Value###", propertyValue);
+
+        writableEnumerableConfigurable = window.Jonas.ReturnWritableEnumerableConfigurable(propertyType, obj, propertyNamesSorted[i]);
+        s4 = s3.replace("###Configurable###", writableEnumerableConfigurable.configurable);
+
+        s5 = s4.replace("###Enumerable###", writableEnumerableConfigurable.enumerable);
+        s6 = s5.replace("###Writable###", writableEnumerableConfigurable.writable);
+
+        if (propertyNamesAbove.indexOf(propertyNamesSorted[i]) >= 0)
+            tmpStr = "Yes";
+        else
+            tmpStr = "No";
+
+        s7 = s6.replace("###IsAbove###", tmpStr);
+
+        if (propertyNamesBelow.indexOf(propertyNamesSorted[i]) >= 0)
+            tmpStr = "Yes";
+        else
+            tmpStr = "No";
+
+        s8 = s7.replace("###IsBelow###", tmpStr);
+
+        numberOfOwnPropertiesAsString = window.Jonas.ReturnNumberOfOwnPropertiesAsString(obj, propertyNamesSorted[i]);
+        s9 = s8.replace("###NumberOfProperties###", numberOfOwnPropertiesAsString);
+
+        str += s9;
+    }
+
+    str += "</tbody></table></p>";
+
+    propertyType = Object.prototype.toString.call(obj);
+
+    tmpStr = "<p><h3>Level " + level.toString() + (name === null ? "" : (", " + name)) + ", " + propertyType + ", " + propertyNamesSorted.length.toString() + " own properties (" + nnumber.toString() + " number " + nstring.toString() + " string " + nboolean.toString() + " boolean " + nfunction.toString() + " function " + nobject.toString() + " object " + nnull.toString() + " null " + nundefined.toString() + " undefined " + nget.toString() + " get " + nset.toString() + " set " + ngetset.toString() + " get set)</h3>";
+
+    return tmpStr + str;
+};
+
+window.Jonas.ShowObjectHierarchy = function (obj, index, name) {
+    var targetDiv, arrayWithObjectsToAnalyze, numberOfLevels, arrayWithArraysWithOwnDistinctPropertyNames;
+    var propertyNamesAbove, propertyNamesBelow, n, v, i, j, str;
+
+    targetDiv = $("#divShowObjectHierarch");
+    targetDiv.empty();
+
+    if (obj === null) {
+        obj = window.Jonas.TmpObjectArray[index];
+        window.Jonas.HierarchyStack.push(obj);
+    }
+
+    arrayWithObjectsToAnalyze = [];
+    window.Jonas.TmpCurrentIndex = 0;
+    window.Jonas.TmpObjectArray = [];
+
+    while (obj !== null) {
+        arrayWithObjectsToAnalyze.push(obj);
+        obj = window.Object.getPrototypeOf(obj);
+    }
+
+    arrayWithObjectsToAnalyze.reverse();
+    numberOfLevels = arrayWithObjectsToAnalyze.length;
+    arrayWithArraysWithOwnDistinctPropertyNames = [];
+
+    for (i = 0; i < numberOfLevels; i++) {
+        arrayWithArraysWithOwnDistinctPropertyNames.push(window.Object.getOwnPropertyNames(arrayWithObjectsToAnalyze[i]).sort());
+    }
+
+    for (i = 0; i < numberOfLevels; i++) {
+
+        if (i === 0) {
+            propertyNamesAbove = [];
+        }
+        else {
+            v = [];
+
+            for (j = 0; j < i; j++)
+                v.push(arrayWithObjectsToAnalyze[j]);
+
+            propertyNamesAbove = window.Jonas.ReturnArrayWithDistinctStrings(v);
+        }
+
+        if (i === numberOfLevels - 1) {
+            n = name;
+            propertyNamesBelow = [];
+        }
+        else {
+            n = null;
+
+            v = [];
+
+            for (j = i + 1; j < numberOfLevels; j++)
+                v.push(arrayWithObjectsToAnalyze[j]);
+
+            propertyNamesBelow = window.Jonas.ReturnArrayWithDistinctStrings(v);
+        }
+
+        str = window.Jonas.ReturnTable(arrayWithObjectsToAnalyze[i], i + 1, n, arrayWithArraysWithOwnDistinctPropertyNames[i], propertyNamesAbove, propertyNamesBelow);
+        $("#divShowObjectHierarchy").append(str);
+    }
+};

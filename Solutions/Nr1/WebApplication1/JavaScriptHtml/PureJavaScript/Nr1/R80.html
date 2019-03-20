@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test js</title>
+</head>
+<body>
+  <button onClick="myFunction()">Click</button><br />
+
+  <script>
+  function myFunction() {
+    var aaa = {};
+    Object.defineProperties(aaa, {
+      x: {value: 1, writeable: false, enumerable: true, configurable: true},
+      y: {value: 1, writeable: true, enumerable: false, configurable: true}});
+
+    aaa.z = function() { return 5; };
+    aaa.abc = {hejsan: 4, paris: "aaa"};
+ 
+    var z = Object.getOwnPropertyNames(aaa);
+
+    alert(Object.prototype.toString.call(z));
+    alert(z);
+    alert(typeof z[0]);
+  }
+  </script> 
+</body>
+</html>

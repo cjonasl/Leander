@@ -1,0 +1,45 @@
+﻿81
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 18:14:33
+
+----- New property -----
+
+JavaScript properties and prototype
+
+----- New property -----
+
+6,2
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+PureJavaScript\Nr1\R81.html
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

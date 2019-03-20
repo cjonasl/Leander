@@ -1,4 +1,4 @@
-﻿898px 473px <!DOCTYPE html>
+﻿887px 493px <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,14 +8,23 @@
   <meta http-equiv='expires' content='0'>
   <meta http-equiv='pragma' content='no-cache'>
   <title>Test js</title>
+  <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery3.3.1.js"></script>
   <script src="http://www.nr1web1.com/JavaScriptHtml/Shared/jonas.js"></script>
 </head>
 <body>
   <button onClick="myFunction()">Click</button><br />
+  <div id="#divShowObjectHierarch"></div>
 
   <script>
   function myFunction() {
-
+    var aaa = {a: 1, b: "Berlin", c: true};
+    var bbb = Object.create(aaa); 
+    bbb.b = "Paris";
+    var ccc = Object.create(bbb);
+    ccc.b = "London";
+    window.Jonas.HierarchyStack.push(ccc);
+    window.Jonas.TmpCurrentIndex = 1;
+    window.Jonas.ShowObjectHierarchy(ccc, null, "Test");
   }
   </script>
 </body>

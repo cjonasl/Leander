@@ -1,0 +1,45 @@
+﻿78
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 13:57:37
+
+----- New property -----
+
+JavaScript function
+
+----- New property -----
+
+6,2
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+PureJavaScript\Nr1\R78.html
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

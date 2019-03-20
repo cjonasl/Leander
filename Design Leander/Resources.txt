@@ -1535,3 +1535,143 @@ JavaScript typeof
 ----- New property -----
 
 Adhoc,JavaScript
+
+---------- New resource ----------
+
+78
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 13:57:37
+
+----- New property -----
+
+JavaScript function
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+79
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 15:45:04
+
+----- New property -----
+
+Object.defineProperty
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+80
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 16:36:47
+
+----- New property -----
+
+getOwnPropertyNames
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+81
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 18:14:33
+
+----- New property -----
+
+JavaScript properties and prototype
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+82
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 20:59:59
+
+----- New property -----
+
+JavaScript Array sort
+
+----- New property -----
+
+Adhoc,JavaScript
+
+---------- New resource ----------
+
+83
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-03-20 00:51:15
+
+----- New property -----
+
+Template Adhoc code html
+
+----- New property -----
+
+HTML,Thumb up
+
+---------- New resource ----------
+
+84
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-20 01:02:06
+
+----- New property -----
+
+Test ShowObjectHierarchy
+
+----- New property -----
+
+Adhoc,JavaScript

@@ -1,0 +1,45 @@
+﻿80
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 16:36:47
+
+----- New property -----
+
+getOwnPropertyNames
+
+----- New property -----
+
+6,2
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+PureJavaScript\Nr1\R80.html
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

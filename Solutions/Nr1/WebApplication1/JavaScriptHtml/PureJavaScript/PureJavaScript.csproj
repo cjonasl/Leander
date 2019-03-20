@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Nr1\R84.html" />
+    <None Include="Nr1\R82.html" />
+    <None Include="Nr1\R81.html" />
+    <None Include="Nr1\R80.html" />
+    <None Include="Nr1\R79.html" />
+    <None Include="Nr1\R78.html" />
     <None Include="Nr1\R77.html" />
     <None Include="Nr1\R76.html" />
     <None Include="Nr1\R75.html" />

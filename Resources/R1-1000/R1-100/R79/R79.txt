@@ -1,0 +1,45 @@
+﻿79
+
+----- New property -----
+
+Html
+
+----- New property -----
+
+2019-03-19 15:45:04
+
+----- New property -----
+
+Object.defineProperty
+
+----- New property -----
+
+6,2
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+PureJavaScript\Nr1\R79.html
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

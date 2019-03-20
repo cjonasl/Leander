@@ -1,4 +1,4 @@
-﻿898px 473px <!DOCTYPE html>
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,10 +12,16 @@
 </head>
 <body>
   <button onClick="myFunction()">Click</button><br />
+  <div id="jonasDiv"></div>
 
   <script>
   function myFunction() {
-
+    var aaa = {a: 1, b: "Berlin", c: true};
+    var bbb = Object.create(aaa); 
+    bbb.b = "Paris";
+    var ccc = Object.create(bbb);
+    ccc.b = "London";
+    window.Jonas.ShowPropertyInfoForObject(ccc, "Test", document.getElementById("jonasDiv"));
   }
   </script>
 </body>

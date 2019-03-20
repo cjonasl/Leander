@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test js</title>
+</head>
+<body>
+  <button onClick="myFunction()">Click</button><br />
+
+  <script>
+
+  function daniel(a, b, c) {
+     return this.x + this.y + a + b + c;
+  }
+
+  function jonas(x, y) {
+    alert(arguments[0] + " " + arguments[1]);
+    alert(arguments);
+    alert(typeof arguments);
+    var d = new Date();
+    alert(window.Object.prototype.toString.call(arguments));
+    return x + y;
+  }
+
+  function myFunction() {
+    var z = jonas(1, 2);
+    alert("Function jonas has " + jonas.length + " parameters");
+    alert(daniel(1, 2, 3));
+    alert("daniel.call = " + daniel.call({x: 5, y: 6}, 1, 2, 3));
+    alert("daniel.apply = " + daniel.apply({x: 5, y: 6}, [1, 2, 3]));
+  }
+  </script>
+</body>
+</html>

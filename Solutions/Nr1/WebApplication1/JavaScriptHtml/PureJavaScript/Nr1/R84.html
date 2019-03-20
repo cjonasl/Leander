@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test js</title>
+  <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery3.3.1.js"></script>
+  <script src="http://www.nr1web1.com/JavaScriptHtml/Shared/jonas.js"></script>
+</head>
+<body>
+  <button onClick="myFunction()">Click</button><br /><br />
+  <div id="divShowObjectHierarchy"></div>
+
+  <script>
+  function myFunction() {
+    var aaa = {a: 1, b: "Berlin", c: true};
+    var bbb = Object.create(aaa); 
+    bbb.b = "Paris";
+    var ccc = Object.create(bbb);
+    ccc.b = "London";
+    window.Jonas.HierarchyStack.push(ccc);
+    window.Jonas.TmpCurrentIndex = 1;
+    window.Jonas.ShowObjectHierarchy(ccc, null, "Test");
+  }
+  </script>
+</body>
+</html>

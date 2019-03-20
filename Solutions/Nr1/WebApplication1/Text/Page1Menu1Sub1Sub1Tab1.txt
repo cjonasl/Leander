@@ -1,4 +1,4 @@
-﻿1036px880px /*
+﻿1049px954px /*
 Id
 Name
 KeyWords (key word ids comma separated)
@@ -40,7 +40,7 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\CSS\CSS.cspr
 CSS
 ----- New adhoc -----
 4
-js
+js1
 6,2
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab5.txt
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\PureJavaScript
@@ -78,3 +78,13 @@ C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1
 25
 C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\Backbone1\Backbone1.csproj
 Backbone1
+----- New adhoc -----
+8
+js2
+6,2
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\Text\Page1Menu1Sub1Sub1Tab9.txt
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\PureJavaScript
+1
+25
+C:\git_cjonasl\Leander\Solutions\Nr1\WebApplication1\JavaScriptHtml\PureJavaScript\PureJavaScript.csproj
+PureJavaScript
