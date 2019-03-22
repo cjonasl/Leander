@@ -10,21 +10,26 @@
   <title>Test js</title>
   <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery3.3.1.js"></script>
   <script src="http://www.nr1web1.com/JavaScriptHtml/Shared/jonas.js"></script>
+  <link href="http://www.nr1web1.com/JavaScriptHtml/Shared/StyleSheet1.css" rel="stylesheet" />
 </head>
 <body>
   <button onClick="myFunction()">Click</button><br /><br />
   <div id="divShowObjectHierarchy"></div>
 
   <script>
-  function myFunction() {
-    var aaa = {a: 1, b: "Berlin", c: true};
+    function myFunction() {
+      var str;
+    /*var aaa = {a: 1, b: "Berlin", c: true};
     var bbb = Object.create(aaa); 
     bbb.b = "Paris";
     var ccc = Object.create(bbb);
     ccc.b = "London";
     window.Jonas.HierarchyStack.push(ccc);
     window.Jonas.TmpCurrentIndex = 1;
-    window.Jonas.ShowObjectHierarchy(ccc, null, "Test");
+    window.Jonas.ShowObjectHierarchy(ccc, null, "Test");*/
+
+    var u = window.Jonas.ReturnArrayWithDistinctStrings([[1, 2, 3], [2, 3, 4], [4, 5, 6]]);
+    alert(u);
   }
   </script>
 </body>

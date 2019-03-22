@@ -571,21 +571,16 @@ window.Jonas.ReturnPropertyType = function(obj, prop) {
     propertyType = "Error";
 
     try {
-        pd = Object.getOwnPropertyDescriptor(obj[prop]);
+        pd = Object.getOwnPropertyDescriptor(obj, prop);
 
-        if (obj[prop] === null)
+        if (pd.get)
+            propertyType = "get";
+        else if (pd.set)
+            propertyType = "set";
+        else if (obj[prop] === null)
             propertyType = "null";
         else if (obj[prop] === undefined)
             propertyType = "undefined";
-        else if (pd.get) {
-            propertyType = "get";
-
-            if (pd.set) {
-                propertyType += " set";
-            }
-        }
-        else if (pd.set)
-            propertyType = "set";
         else {
             propertyType = typeof obj[prop];
 
@@ -594,8 +589,8 @@ window.Jonas.ReturnPropertyType = function(obj, prop) {
             }
          }
     }
-    catch{
-        propertyType = "Error";
+    catch (err) {
+        propertyType = err.toString();
     }
 
     return propertyType;
@@ -624,12 +619,12 @@ window.Jonas.ReturnWritableEnumerableConfigurable = function (propertyType, obj,
     var pd, configurable, enumerable, writable;
 
     try {
-        pd = Object.getOwnPropertyDescriptor(obj[prop]);
+        pd = Object.getOwnPropertyDescriptor(obj, prop);
 
         configurable = pd.configurable.toString();
         enumerable = pd.enumerable.toString();
 
-        if (propertyType === "get" || propertyType === "set" || propertyType === "get set")
+        if (propertyType === "get" || propertyType === "set")
             writable = "";
         else
             writable = pd.writable.toString();
@@ -675,7 +670,7 @@ window.Jonas.ReturnArrayWithDistinctStrings = function (u) {
 
     for (i = 0; i < u.length; i++) {
         for (j = 0; j < u[i].length; j++) {
-            if (v.indexOf(u[i][j] === -1))
+            if (v.indexOf(u[i][j]) === -1)
                 v.push(u[i][j]);
         }
     }
@@ -684,7 +679,7 @@ window.Jonas.ReturnArrayWithDistinctStrings = function (u) {
 };
 
 window.Jonas.ReturnTable = function (obj, level, name, propertyNamesSorted, propertyNamesAbove, propertyNamesBelow) {
-    var template, i, n, tmpStr, str, nnumber, nstring, nboolean, nfunction, nobject, nnull, nundefined, nget, nset, ngetset;
+    var template, i, n, tmpStr, str, nnumber, nstring, nboolean, nfunction, nobject, nnull, nundefined, nget, nset, numpar;
     var propertyType, propertyValue;
     var writableEnumerableConfigurable;
     var numberOfOwnPropertiesAsString;
@@ -700,15 +695,34 @@ window.Jonas.ReturnTable = function (obj, level, name, propertyNamesSorted, prop
     nundefined = 0;
     nget = 0;
     nset = 0;
-    ngetset = 0;
 
-    template = "<tr><td style='width: 22%;'>###PropertyName###</td><td style='width: 18%;'>###Type###</td><td style='width: 18%;'>###Value###</td><td style='width: 7%;'>###Configurable###</td><td style='width: 7%;'>###Enumerable###</td><td style='width: 7%;'>###Writable###</td><td style='width: 7%;'>###IsAbove###</td><td style='width: 7%;'>###IsBelow###</td>td style='width: 7%;'>###NumberOfProperties###</td></tr>";
+    template = "<tr><td style='width: 22%;' title='###PropertyName###'>###PropertyName###</td>";
+    template += "<td style ='width: 18%;' title='###DataType###'>###DataType###</td>";
+    template += "<td style='width: 18%;' title='###Value###'>###Value###</td>";
+    template += "<td style='width: 6%;' title='###Configurable###'>###Configurable###</td>";
+    template += "<td style='width: 6%;' title='###Enumerable###'>###Enumerable###</td>";
+    template += "<td style='width: 6%;' title='###Writable###'>###Writable###</td>";
+    template += "<td style='width: 6%;' title='###IsAbove###'>###IsAbove###</td>";
+    template += "<td style='width: 6%;' title='###IsBelow###'>###IsBelow###</td>";
+    template += "<td style ='width: 6%;' title='###NumberOfProperties###'>###NumberOfProperties###</td>";
+    template += "<td style ='width: 6%;' title='###NumberOfParameters###'>###NumberOfParameters###</td></tr>";
 
-    str = "<table class='defaultTableStyle'><thead><tr><th style='width: 22%;'>&nbsp;Property name</th><th style='width: 18%;'>&nbsp;Type</th><th style='width: 18%;'>&nbsp;Value</th><th style='width: 7%;'>&nbsp;Configurable</th><th style='width: 7%;'>&nbsp;Enumerable</th><th style='width: 7%;'>&nbsp;Writable</th><th style='width: 7%;'>&nbsp;Is above</th><th style='width: 7%;'>&nbsp;Is below</th><th style='width: 7%;'>&nbsp;Num properties</th></tr></thead>";
+    str = "<table class='defaultTableStyle'><thead>";
+    str += "<tr><th style='width: 22%;' title='Property name'>Property name</th>";
+    str += "<th style='width: 18%;' title='Data type'>Data type</th>";
+    str += "<th style='width: 18%;' title='Value'>Value</th>";
+    str += "<th style='width: 6%;' title='Configurable'>Configurable</th>";
+    str += "<th style='width: 6%;' title='Enumerable'>Enumerable</th>";
+    str += "<th style='width: 6%;' title='Writable'>Writable</th>";
+    str += "<th style='width: 6%;' title='Is above'>Is above</th>";
+    str += "<th style='width: 6%;' title='Is below'>Is below</th>";
+    str += "<th style='width: 6%;' title='Num properties'>Num properties</th>";
+    str += "<th style='width: 6%;' title='Num parameters'>Num parameters</th>";
+    str += "</tr></thead> ";
     str += "<tbody>";
 
     n = propertyNamesSorted.length;
-
+ 
     for (i = 0; i < n; i++) {
         isFunctionOrObject = false;
 
@@ -742,12 +756,15 @@ window.Jonas.ReturnTable = function (obj, level, name, propertyNamesSorted, prop
             case "set":
                 nset++;
                 break;
-            case "get set":
-                ngetset++;
-                break;
             default:
-                nobject++;
-                isFunctionOrObject = true;
+                if (propertyType.indexOf("[object ") >= 0) {
+                    nobject++;
+                    isFunctionOrObject = true;
+                }
+                else {
+                    alert("ERROR!! Incorrect type: " + propertyType);
+                    return "";
+                }
                 break;
         }
 
@@ -756,7 +773,7 @@ window.Jonas.ReturnTable = function (obj, level, name, propertyNamesSorted, prop
         else
             tmpStr = propertyType;
 
-        s2 = s1.replace("###Type###", tmpStr);
+        s2 = s1.replace("###DataType###", tmpStr);
 
         if (isFunctionOrObject) {
             window.Jonas.TmpObjectArray.push(obj[propertyNamesSorted[i]]);
@@ -796,7 +813,9 @@ window.Jonas.ReturnTable = function (obj, level, name, propertyNamesSorted, prop
 
     propertyType = Object.prototype.toString.call(obj);
 
-    tmpStr = "<p><h3>Level " + level.toString() + (name === null ? "" : (", " + name)) + ", " + propertyType + ", " + propertyNamesSorted.length.toString() + " own properties (" + nnumber.toString() + " number " + nstring.toString() + " string " + nboolean.toString() + " boolean " + nfunction.toString() + " function " + nobject.toString() + " object " + nnull.toString() + " null " + nundefined.toString() + " undefined " + nget.toString() + " get " + nset.toString() + " set " + ngetset.toString() + " get set)</h3>";
+    numpar = propertyType === "function" ? " (Number of parameters: " + obj.length.toString() + ")" : "";
+
+    tmpStr = "<p><h3>Level " + level.toString() + (name === null ? "" : (", " + name)) + ", " + propertyType + numpar + ", " + propertyNamesSorted.length.toString() + " own properties (" + nnumber.toString() + " number, " + nstring.toString() + " string, " + nboolean.toString() + " boolean, " + nfunction.toString() + " function, " + nobject.toString() + " object, " + nnull.toString() + " null, " + nundefined.toString() + " undefined, " + nget.toString() + " get, " + nset.toString() + " set)</h3>";
 
     return tmpStr + str;
 };

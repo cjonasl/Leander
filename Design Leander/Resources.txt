@@ -1675,3 +1675,23 @@ Test ShowObjectHierarchy
 ----- New property -----
 
 Adhoc,JavaScript
+
+---------- New resource ----------
+
+85
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-21 19:56:53
+
+----- New property -----
+
+.NET Core vs .NET Framework - What's the difference?
+
+----- New property -----
+
+.NET,Course
