@@ -1,0 +1,45 @@
+﻿92
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-07 18:11:43
+
+----- New property -----
+
+Git repository Leander
+
+----- New property -----
+
+28
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Git\Remote repositories Leander nr1.png----- New filefolder -----C:\git_cjonasl\Leander\Git\Remote repositories Leander nr2.png
+
+----- New property -----
+
+null

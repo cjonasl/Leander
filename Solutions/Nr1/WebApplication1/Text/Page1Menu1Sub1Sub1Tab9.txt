@@ -13,7 +13,7 @@
 </head>
 <body>
   <button onClick="myFunction()">Click</button><br />
-  <div id="#divShowObjectHierarch"></div>
+  <div id="#divShowObjectHierarchy"></div>
 
   <script>
   function myFunction() {

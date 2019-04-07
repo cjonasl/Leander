@@ -1,0 +1,45 @@
+﻿91
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-07 18:10:35
+
+----- New property -----
+
+Download git repository
+
+----- New property -----
+
+28
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Git\Download git repository.txt
+
+----- New property -----
+
+null

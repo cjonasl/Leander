@@ -1795,3 +1795,43 @@ prototype
 ----- New property -----
 
 Adhoc,JavaScript
+
+---------- New resource ----------
+
+91
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-07 18:10:35
+
+----- New property -----
+
+Download git repository
+
+----- New property -----
+
+Git
+
+---------- New resource ----------
+
+92
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-07 18:11:43
+
+----- New property -----
+
+Git repository Leander
+
+----- New property -----
+
+Git

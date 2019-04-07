@@ -1,0 +1,21 @@
+﻿Download git repository:
+Step 1: Create the directory where you want to have the git repository, for example "git_cjonasl"
+Step 2: Open "Git Extensions"
+Step 3: Select command "Create new repository"
+Step 4: Browse to the directory, for example "C:\MyGitRepo"
+step 5: Keep the default radiobutton "Personal repository"
+Step 6: Press "Create"
+Step 7: Choose command: Repository --> Remote repositories...
+Step 8: Press button "New"
+Step 9: Write "origin" for "Name" and the remote repository, for example 
+        "https://github.com/cjonasl/Leander.git" for Url and press
+        "Save changes" and then "Close".
+Step 10: Choose arrow down and then "Fetch all"
+Step 11: Choose master --> Checkout branch...
+Step 12: Change radiobutton to "Remote branch"
+Step 13: Select "origin/master" in the dropdown list
+Step 14: Press button "Checkout"
+
+
+
+https://github.com/cjonasl/Leander.git

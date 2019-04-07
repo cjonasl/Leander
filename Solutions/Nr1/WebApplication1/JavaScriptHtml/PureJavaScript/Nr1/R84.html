@@ -13,24 +13,33 @@
   <link href="http://www.nr1web1.com/JavaScriptHtml/Shared/StyleSheet1.css" rel="stylesheet" />
 </head>
 <body>
-  <button onClick="myFunction()">Click</button><br /><br />
+  <button id="btnBack" onclick="Back()" disabled="disabled">Back</button>&nbsp;&nbsp;<span id="spanNObjInList" style="font-weight:bolder;"></span><br />
   <div id="divShowObjectHierarchy"></div>
 
   <script>
-    function myFunction() {
-      var str;
-    /*var aaa = {a: 1, b: "Berlin", c: true};
-    var bbb = Object.create(aaa); 
-    bbb.b = "Paris";
-    var ccc = Object.create(bbb);
-    ccc.b = "London";
-    window.Jonas.HierarchyStack.push(ccc);
-    window.Jonas.TmpCurrentIndex = 1;
-    window.Jonas.ShowObjectHierarchy(ccc, null, "Test");*/
+    function Back() {
+      var obj = window.Jonas.HierarchyStack.pop();
+      var name = window.Jonas.HierarchyStackName.pop();
+      var l = window.Jonas.HierarchyStack.length;
 
-    var u = window.Jonas.ReturnArrayWithDistinctStrings([[1, 2, 3], [2, 3, 4], [4, 5, 6]]);
-    alert(u);
-  }
+      if (l === 0) {
+        $("#btnBack").prop("disabled", false);
+        $("#spanNObjInList").text("");
+      }
+      else
+        $("#spanNObjInList").text(l.toString());
+
+      window.Jonas.ShowObjectHierarchy(obj, null, name);
+    };
+
+    $(document).ready(function () {
+      var aaa = { a: 1, b: "Berlin", c: true };
+      var bbb = Object.create(aaa);
+      bbb.b = "Paris";
+      var ccc = Object.create(bbb);
+      ccc.b = "London";
+      window.Jonas.ShowObjectHierarchy(ccc, null, "Test");
+    });
   </script>
 </body>
 </html>
