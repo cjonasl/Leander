@@ -1,0 +1,45 @@
+﻿86
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-26 22:43:07
+
+----- New property -----
+
+Passport, pass Jonas valid to 9 May 2021
+
+----- New property -----
+
+17
+
+----- New property -----
+
+Scan of passport
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

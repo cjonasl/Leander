@@ -170,6 +170,8 @@ namespace WebApplication1.Controllers
                         ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub1Tab1.txt";
                         ViewBag.ListWithKeyWords = KeyWordUtility.GetKeyWords();
                         return View("AdhocCode", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##AdhocCode.cshtml"));
+                    case "Page1Menu0Sub0Sub0Tab7":
+                        return View("Links", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##Links.cshtml"));
                     case "Page1Menu1Sub1Sub2Tab2":
                         ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub2Tab1.txt";
                         return View("Communication1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##Communication1.cshtml"));

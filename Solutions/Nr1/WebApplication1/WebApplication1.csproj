@@ -177,6 +177,7 @@
     <Content Include="Views\Main\Communication1.cshtml" />
     <Content Include="Views\Main\Locations.cshtml" />
     <Content Include="Views\Main\ConstantResourceSearch.cshtml" />
+    <Content Include="Views\Main\Links.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

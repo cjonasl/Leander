@@ -1,0 +1,27 @@
+﻿@model string
+
+<h3>@Model</h3>
+
+<b>RenderPartial usa</b>
+@{Html.RenderPartial(partialViewName: "Tennis", model: "USA"); } <br />
+
+<b>Partial Australia</b>
+@Html.Partial(partialViewName: "Tennis", model: "Australia") <br />
+
+<b>RenderAction France</b>
+@{Html.RenderAction(actionName: "Tennis", routeValues: new { country = "France" }); } <br />
+
+<b>Action Norway</b>
+@Html.Action(actionName: "Tennis", routeValues: new { country = "Norway" })
+
+<b>Person: Jonas Leander</b><br />
+
+@Html.Action(actionName: "Badminton", routeValues: new { FirstName = "Jonas", LastName = "Leander" })
+
+@section Trad {
+  <p>Jag ar ett trad</p>
+}
+
+@section Blomma {
+  <p>Jag ar en blomma</p>
+}

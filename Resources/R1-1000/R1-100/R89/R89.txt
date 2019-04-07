@@ -1,0 +1,45 @@
+﻿89
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-28 18:15:24
+
+----- New property -----
+
+Register domain name, names.co.uk.txt
+
+----- New property -----
+
+18
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\CarlJonasLtd\names.co.uk.txt
+
+----- New property -----
+
+null

@@ -1,0 +1,45 @@
+﻿87
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-03-28 18:05:15
+
+----- New property -----
+
+CarlJonasLtd
+
+----- New property -----
+
+18
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\CarlJonasLtd
+
+----- New property -----
+
+null
