@@ -1,0 +1,13 @@
+﻿Dag 1:
+Måndag den 1 april 2019
+Jag hälsade på mina kolleger och jag fick en arbetsplats i
+ett rum tillsammans med två andra personer, bl.a en indiska
+vid namn Vijay som hjälpte mig en hel del under dagen. Hon
+berättade att hon kom till London 2008 och har arbetat på
+Fixzone i 4 ½ år. Angela gick igenom administrativa papper
+med mig som jag sedan fyllde i. Jag fick sedan första
+arbetsuppgiften som bestod i att ändra i inloggningsförfarandet
+i ett system vid namn ”CAST” för kunden Argos (en MVC applikation).
+Jag studerade koden för att senare kunna göra uppgiften. Åt
+två medtagna smörgåsar och en banan till lunch vid skrivbordet.
+Jag avslutade arbetsdagen ca. kl. 17.30 och promenerade hem.
