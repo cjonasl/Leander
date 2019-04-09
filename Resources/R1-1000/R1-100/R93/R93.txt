@@ -1,0 +1,45 @@
+﻿93
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-09 23:31:07
+
+----- New property -----
+
+JavaScript Closures
+
+----- New property -----
+
+2
+
+----- New property -----
+
+www.w3schools.com has a good example
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null

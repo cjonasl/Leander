@@ -1835,3 +1835,23 @@ Git repository Leander
 ----- New property -----
 
 Git
+
+---------- New resource ----------
+
+93
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-09 23:31:07
+
+----- New property -----
+
+JavaScript Closures
+
+----- New property -----
+
+JavaScript
