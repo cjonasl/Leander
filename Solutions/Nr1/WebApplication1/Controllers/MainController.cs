@@ -176,8 +176,8 @@ namespace WebApplication1.Controllers
                         ViewBag.FileNameFullPathToConfigFile = "C:##git_cjonasl##Leander##Solutions##Nr1##WebApplication1##Text##Page1Menu1Sub1Sub2Tab1.txt";
                         return View("Communication1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##Communication1.cshtml"));
                     case "Page1Menu2Sub1Sub1Tab1":
-                        ViewBag.WorkFolder = "C:##git_cjonasl##Leander##Work##Employer";
-                        ViewBag.ListWithDayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.ReturnListWithDayDateDiaryBytesInDiary(@"C:\git_cjonasl\Leander\Work\Employer", out todaysDayIsInFile, out errorMessage);
+                        ViewBag.WorkFolder = "C:##git_cjonasl##Leander##Work##Fixzone";
+                        ViewBag.ListWithDayDateDiaryBytesInDiary = DayDateDiaryBytesInDiaryUtility.ReturnListWithDayDateDiaryBytesInDiary(@"C:\git_cjonasl\Leander\Work\Fixzone", out todaysDayIsInFile, out errorMessage);
                         ViewBag.TodaysDayIsInFile = todaysDayIsInFile;
                         ViewBag.ErrorMessage = errorMessage;
                         return View("DayDateDiaryBytesInDiary1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DayDateDiaryBytesInDiary1.cshtml"));

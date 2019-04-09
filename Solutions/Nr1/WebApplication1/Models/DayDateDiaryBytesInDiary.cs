@@ -339,7 +339,7 @@ namespace WebApplication1.Models
                 d = 1 + lastDayInFile;
                 dateStr = dateToday.ToString("yyyy-MM-dd");
                 fileNameShort = string.Format("Day{0}Date{1}{2}{3}.txt", d.ToString().PadLeft(4, '0'), dateStr.Substring(2, 2), dateStr.Substring(5, 2), dateStr.Substring(8, 2));
-                fileNameFullPathDiaryFile = string.Format("{0}\\Diary\\{1}", workFolder, fileNameShort);
+                fileNameFullPathDiaryFile = string.Format("{0}\\{1}", workFolder, fileNameShort);
                 dateTimeAsLongSwedishString = Utility.ReturnDateTimeAsLongSwedishString(dateToday);
 
                 if (string.IsNullOrEmpty(fileContents))
