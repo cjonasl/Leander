@@ -1,0 +1,11 @@
+﻿Modify files:
+PasswordValidation.cs, revision 909
+UserService.cs, revision 910
+UserRepository.cs, revision 912
+NewPassword.cshtml, revision 923
+UserController.cs, revision 924
+
+Add file
+Notification_ChangePasswordFailure.cshtml, revision 917
+
+Add stored procedure DisableUser, revision 931

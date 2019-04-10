@@ -181,6 +181,11 @@ namespace WebApplication1.Controllers
                         ViewBag.TodaysDayIsInFile = todaysDayIsInFile;
                         ViewBag.ErrorMessage = errorMessage;
                         return View("DayDateDiaryBytesInDiary1", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##DayDateDiaryBytesInDiary1.cshtml"));
+                    case "Page1Menu2Sub1Sub1Tab2":
+                        searchTerm = "ka(Task,Fixzone)";
+                        ViewBag.List = ResourcePresentationInSearchUtility.GetResourcePresentationInSearchList(searchTerm);
+                        ViewBag.SearchTerm = searchTerm;
+                        return View("ConstantResourceSearch", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##ConstantResourceSearch.cshtml"));
                     case "Page1Menu3Sub1Sub1Tab1":
                         searchTerm = "ka(Thumb up)";
                         ViewBag.List = ResourcePresentationInSearchUtility.GetResourcePresentationInSearchList(searchTerm);
@@ -190,6 +195,7 @@ namespace WebApplication1.Controllers
                         searchTerm = "ka(C#)";
                         ViewBag.List = ResourcePresentationInSearchUtility.GetResourcePresentationInSearchList(searchTerm);
                         ViewBag.SearchTerm = searchTerm;
+                        return View("ConstantResourceSearch", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##ConstantResourceSearch.cshtml"));
                         return View("ConstantResourceSearch", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##ConstantResourceSearch.cshtml"));
                     case "Page3Menu1Sub1Sub1Tab1":
                         return View("InfoThumbUp", GetDocumentReadyDataForNonDefaultLocation(location, "Views##Main##InfoThumbUp.cshtml"));

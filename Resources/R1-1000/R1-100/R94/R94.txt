@@ -1,0 +1,45 @@
+﻿94
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 10:54:53
+
+----- New property -----
+
+Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
+
+----- New property -----
+
+29,12
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
+
+----- New property -----
+
+null

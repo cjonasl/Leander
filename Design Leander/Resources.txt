@@ -1855,3 +1855,103 @@ JavaScript Closures
 ----- New property -----
 
 JavaScript
+
+---------- New resource ----------
+
+94
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 10:54:53
+
+----- New property -----
+
+Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
+
+----- New property -----
+
+Fixzone,Task
+
+---------- New resource ----------
+
+95
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 10:55:45
+
+----- New property -----
+
+Task2_Day8_Date190410_AR-7 Automated disablingdeleting of Users
+
+----- New property -----
+
+Fixzone,Task
+
+---------- New resource ----------
+
+96
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 10:58:08
+
+----- New property -----
+
+Task3_Day8_Date190410_AR-11 Password changes need to be carried out by the users every 60 days
+
+----- New property -----
+
+Fixzone,Task
+
+---------- New resource ----------
+
+97
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 10:58:54
+
+----- New property -----
+
+Task4_Day8_Date190410_AR-12 Passwords structure needs to be changed so these are a minimum of 8 characters
+
+----- New property -----
+
+Fixzone,Task
+
+---------- New resource ----------
+
+98
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 11:00:31
+
+----- New property -----
+
+Task5_Day8_Date190410_AR-16 Passwords stored need to be encrypted - currently in clear text
+
+----- New property -----
+
+Fixzone,Task

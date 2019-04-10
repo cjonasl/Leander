@@ -1,0 +1,18 @@
+﻿Deployment script "Deployment script AR-7.sql"
+1. Add a column "DisabledDate" in table dbo.UserWeb
+2. Add a table "DeletedUserWebRecordsSinceLastReport" for deleted users
+
+Modify stored procedure:
+UpdateUser
+
+Add stored procedures:
+DisableUsers
+DeleteUsers
+
+OBS: 
+Need to modify in stored procedure "SignIn" such that also
+column "DisabledDate" is passed back to server (should be
+done in AR-10)
+
+Modify file User_DetailsModel.cs, revision 907
+Modify file UserController.cs, revision 908

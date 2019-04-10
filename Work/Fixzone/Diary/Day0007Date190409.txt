@@ -1,2 +1,11 @@
 ﻿Dag 7:
 Tisdag den 9 april 2019
+Gick in på Facebook och skickade en vänförfrågan till Johanna
+Fridsén (f.d. Hedén) och gratulerade henne på 50-årsdagen idag.
+Lite senare gick jag in på Facebook igen och då hade Johanna
+accepterat min vänförfrågan och även skickat ett meddelande.
+Arbetsdagen ägnade jag mest åt AR-16 som bestod i att modifiera
+så att lösenord är krypterade i databasen. Vid 13.00-tiden
+tog jag lunch och åt två medtagna smörgåsar och en banan samt
+kaffe till dryck som gratis finns att tillgå på Fixzone. Jag
+avslutade arbetsdagen drygt kl. 17.30.

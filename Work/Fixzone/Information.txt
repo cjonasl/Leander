@@ -1,0 +1,9 @@
+﻿C:\git_cjonasl\Leander\Work\Fixzone\Tasks
+
+Skype
+Email: jonasleanderfixzone@hotmail.com
+Password: The Jj-one
+
+Jira
+https://fixzone.atlassian.net/secure/BrowseProjects.jspa
+Password: The Jj-one

@@ -1,0 +1,2 @@
+﻿Modify stored procedure:
+SaveNewPassword

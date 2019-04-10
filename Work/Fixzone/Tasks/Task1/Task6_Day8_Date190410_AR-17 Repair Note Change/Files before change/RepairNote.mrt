@@ -1,0 +1,1494 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <CAST_Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>+SDRieQF48VoR9Fs8FgkO95q2YndTHOB4xD1zGEYJRPgVsEJRhgTyGJP1cxlAGWn0WppAsVXk81FQaGE5Rxtd9V4rQ/MTAGZclL5yWFsYWfgVmmJTUzZzUZH/cTqXKRn3nBlLUYDow==</ConnectionStringEncrypted>
+        <Name>CAST_Connection</Name>
+      </CAST_Connection>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <Report_ProductRepairInfo Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Report_ProductRepairInfo</Alias>
+        <Columns isList="true" count="32">
+          <value>RepairAgent_Name,System.String</value>
+          <value>RepairAgent_Address,System.String</value>
+          <value>RepairAgent_Postcode,System.String</value>
+          <value>RepairAgent_Tel,System.String</value>
+          <value>RepairAgent_Email,System.String</value>
+          <value>Customer_Name,System.String</value>
+          <value>Customer_Address,System.String</value>
+          <value>Customer_Postcode,System.String</value>
+          <value>Customer_MobileTel,System.String</value>
+          <value>Customer_HomeTel,System.String</value>
+          <value>Customer_Email,System.String</value>
+          <value>Store_Name,System.String</value>
+          <value>Store_Address,System.String</value>
+          <value>Store_Postcode,System.String</value>
+          <value>Store_Bookedby,System.String</value>
+          <value>Product_CatNo,System.String</value>
+          <value>Product_Description,System.String</value>
+          <value>Product_Supplier,System.String</value>
+          <value>Product_PurchaseDate,System.String</value>
+          <value>Product_SerialNumber,System.String</value>
+          <value>IssueDescr_FaultDescr,System.String</value>
+          <value>IssueDescr_AdditionalInfo,System.String</value>
+          <value>Repair_JobReference,System.String</value>
+          <value>Repair_BookingDate,System.String</value>
+          <value>Repair_ProductReceiveDate,System.String</value>
+          <value>Repair_Ref,System.String</value>
+          <value>IssueDescr_ConditionFromCustomer,System.String</value>
+          <value>Repair_Outcome,System.String</value>
+          <value>Repair_JobComplete,System.DateTime</value>
+          <value>Repair_CourierName,System.String</value>
+          <value>Store_Number,System.Int32</value>
+          <value>Charge_Type,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Report_ProductRepairInfo</Name>
+        <NameInSource>CAST_Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_ServiceId,Id,8,4</value>
+        </Parameters>
+        <SqlCommand>Report_ProductRepairInfo</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Report_ProductRepairInfo>
+      <RetreiveSpecificInspection Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>RetreiveSpecificInspection</Alias>
+        <Columns isList="true" count="7">
+          <value>FieldNo,System.Int16</value>
+          <value>FieldName,System.String</value>
+          <value>FieldHint,System.String</value>
+          <value>FieldMandatory,System.Boolean</value>
+          <value>InspectImage,System.String</value>
+          <value>InspectName,System.String</value>
+          <value>InsDataText,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>RetreiveSpecificInspection</Name>
+        <NameInSource>CAST_Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_ServiceID,Id,0,0</value>
+        </Parameters>
+        <SqlCommand>RetreiveSpecificInspection</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </RetreiveSpecificInspection>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="1">
+      <value>,Id,Id,Id_x0020_of_x0020_job,System.Nullable`1[System.Int32],_x0031_98945,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="3">
+    <Page1 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="12">
+        <Text64 Ref="6" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>21.2,5.8,2.4,2.8</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text64</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Text>{Report_ProductRepairInfo.Parameters["@ServiceId"].ParameterValue}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+        </Text64>
+        <ReportTitleBand1 Ref="7" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,4.6</ClientRectangle>
+          <Components isList="true" count="6">
+            <Image1 Ref="8" type="Image" isKey="true">
+              <AspectRatio>True</AspectRatio>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,4.4,3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <File>D:\Projects\CAST\trunk\CastApplication\Content\Icons\Argos_logo_small.png</File>
+              <Image>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</Image>
+              <Name>Image1</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Stretch>True</Stretch>
+            </Image1>
+            <Text1 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.2,0,7.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,20.25,Bold,Point,False,204</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>ARGOS AFTER SALES
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text2 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.2,1.2,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,14.25,Bold,Point,False,204</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>Repair Note</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text2>
+            <Text37 Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,3.2,18.6,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>Thank you for your visit to Store. We’re sorry that you have had problems with your product.
+Your product will be sent to one of our trusted repair agents who will investigate the issue. They will repair the product or, if that's not possible, give you a replacement or a refund.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </Text37>
+            <Text3 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.2,2.2,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,14.25,Bold,Point,False,204</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>Repair Ref:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text62 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.2,2.2,10.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,14.25,Bold,Point,False,204</Font>
+              <Guid>07127dc5797f45bf9f236b71ea069a45</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="5" />
+              <Parent isRef="7" />
+              <Text>{Report_ProductRepairInfo.Repair_Ref}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text62>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ReportTitleBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </ReportTitleBand1>
+        <DataBand1 Ref="14" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,5.8,19,2.8</ClientRectangle>
+          <Components isList="true" count="13">
+            <Text12 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.2,4.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Bold,Point,False,204</Font>
+              <Guid>1dec378c3634433086df6cc48e4a062d</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>Customer Details</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text12>
+            <Text13 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2,0.8,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>37ddeb4fc884436ca306a2c1f980a502</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>{Report_ProductRepairInfo.Customer_Name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text13>
+            <Text14 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2,1.4,7.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <Guid>32a838055f4d417cbfed2beadd37efde</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <NullValue>None</NullValue>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>{Report_ProductRepairInfo.Customer_Address}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text14>
+            <Text15 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2,2,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>b6e6e9f3884e4f57a17ef53db07ae7f1</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>{Report_ProductRepairInfo.Customer_Postcode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text15>
+            <Text16 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.2,0.8,6.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>550574ebe17c4a2f9fd2600634b8fc15</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <NullValue>None</NullValue>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>{Report_ProductRepairInfo.Customer_MobileTel}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text16>
+            <Text17 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.2,1.4,6.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>bc1e0830bae14e8b9ba3f41513922312</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <NullValue>None</NullValue>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>{Report_ProductRepairInfo.Customer_HomeTel}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text17>
+            <Text18 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.2,2,6.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>8b79413eb9174c3cb548c3062547a8bc</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <NullValue>None</NullValue>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>{Report_ProductRepairInfo.Customer_Email}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text18>
+            <Text4 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,0.8,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>Name</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text4>
+            <Text5 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,1.4,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>07fbb3a88c1944dda29bfb05a75d1374</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>Address</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text6 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,2,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>e6834828c0844a958160cc2b05810bcf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>Postcode</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.6,0.8,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>e8f65b7b91864e60a1a6d6d4fb720f7c</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>Mobile Tel.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text8 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.6,1.4,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>71de27f6c03141e4986d838f8a7d79f5</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>Home Tel.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+            <Text9 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.6,2,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>731c1e8dc68c48aea6cd6ee25c3e0f25</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="5" />
+              <Parent isRef="14" />
+              <Text>Email address</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text9>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <ChildBand1 Ref="28" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,9.4,19,0.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>ChildBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </ChildBand1>
+        <DataBand2 Ref="29" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,10.4,19,2.8</ClientRectangle>
+          <Components isList="true" count="10">
+            <Text20 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,0.8,6.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>31b8a44c4f6a4ac6a435531708516034</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>{Report_ProductRepairInfo.Store_Name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text20>
+            <Text21 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.6,1.4,16.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <Guid>655f5476ecef48838bb327acdf914fe2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>{Report_ProductRepairInfo.Store_Address}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text21>
+            <Text22 Ref="32" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.6,2,6.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>44d2877e21f0407787c30f4a6433e550</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>{Report_ProductRepairInfo.Store_Postcode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text22>
+            <Text23 Ref="33" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.2,0.8,6.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>4346328ba18c47ef861b647f46f75253</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>{Report_ProductRepairInfo.Store_Bookedby}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+            </Text23>
+            <Text19 Ref="34" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.2,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Bold,Point,False,204</Font>
+              <Guid>29976ff222a54df496b44ab4aee152c4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>Store Details</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text10 Ref="35" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.8,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>8d4051d59ab94dcd85685189ddd82032</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>Store Name</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text10>
+            <Text11 Ref="36" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,1.4,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>1e4e079a12ca45c18426c8d84d131f58</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>Address</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text29 Ref="37" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,2,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>0053109f9920405ebc98b7556aca48d9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>Postcode</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text29>
+            <Text38 Ref="38" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.6,0.8,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>32b9bcc2148c4507a1c5d467fff6b983</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>Job Booked By </Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text38>
+            <Text65 Ref="39" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.6,0.2,6.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <NullValue>-</NullValue>
+              <Page isRef="5" />
+              <Parent isRef="29" />
+              <Text>{Report_ProductRepairInfo.Store_Number}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text65>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <ChildBand2 Ref="40" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,14,19,0.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Guid>ec0c784aaec54d558409fc2705861eb3</Guid>
+          <Name>ChildBand2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </ChildBand2>
+        <DataBand3 Ref="41" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,15,19,2.2</ClientRectangle>
+          <Components isList="true" count="9">
+            <Text24 Ref="42" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.2,3.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Bold,Point,False,204</Font>
+              <Guid>474df412f1e541f58716f716db4578fb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>Product Details</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text24>
+            <Text25 Ref="43" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.6,0.8,5.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>2036e337c63d4e7083c1c47436064950</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>{Report_ProductRepairInfo.Product_CatNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text25>
+            <Text26 Ref="44" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.6,1.4,5.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <Guid>af7a8913814348dfaf705de4693490f9</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>{Report_ProductRepairInfo.Product_Description}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text26>
+            <Text27 Ref="45" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.6,1.4,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>f3d66109d9ca4999b7da462e744fee4e</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>{Report_ProductRepairInfo.Product_Supplier}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text27>
+            <Text28 Ref="46" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.6,0.8,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>f0a6a5ae1c5d4d64a5a0f34dab05f5c9</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>{Report_ProductRepairInfo.Product_PurchaseDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="47" type="DateFormat" isKey="true">
+                <StringFormat>dd/MM/yyyy</StringFormat>
+              </TextFormat>
+              <Type>DataColumn</Type>
+            </Text28>
+            <Text39 Ref="48" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,0.8,3.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>81628ceeb02a458d884cffb1e09baeff</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>Cat No.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text39>
+            <Text40 Ref="49" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,1.4,3.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>3961b135e821477294163b053f890bd0</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>Product Description</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text40>
+            <Text42 Ref="50" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>10,0.8,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>e794ddb24804433f9d7c5bf004d8c605</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>Purchase Date</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text42>
+            <Text43 Ref="51" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>10,1.4,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>263e8869ed5947dfb32afa8a17192f57</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="5" />
+              <Parent isRef="41" />
+              <Text>Supplier</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text43>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand3</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand3>
+        <ChildBand3 Ref="52" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,18,19,0.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Guid>4092ea1486004bfe8775a89ce4a63421</Guid>
+          <Name>ChildBand3</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </ChildBand3>
+        <DataBand4 Ref="53" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,19,19,2.2</ClientRectangle>
+          <Components isList="true" count="5">
+            <Text30 Ref="54" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.2,4.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Bold,Point,False,204</Font>
+              <Guid>52ca4d0d7e76420c914dbca471963dac</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="5" />
+              <Parent isRef="53" />
+              <Text>Description of Issue</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text30>
+            <Text31 Ref="55" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.2,0.8,13.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>2a2c0901b832454e8c415d6d0fcdd026</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="5" />
+              <Parent isRef="53" />
+              <Text>{Report_ProductRepairInfo.IssueDescr_FaultDescr}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text31>
+            <Text41 Ref="56" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,0.8,5,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="5" />
+              <Parent isRef="53" />
+              <Text>Fault Reported By Customer</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text41>
+            <Text44 Ref="57" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,1.4,7.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>1b60ca6d21aa4c7cae578e6fbb1bf84c</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="5" />
+              <Parent isRef="53" />
+              <Text>Condition of Product on Receipt from Customer</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text44>
+            <Text61 Ref="58" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.8,1.4,11,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>6f4ed0af08264e03afa7b72cb076d6c1</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="5" />
+              <Parent isRef="53" />
+              <Text>{Report_ProductRepairInfo.IssueDescr_ConditionFromCustomer}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text61>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand4</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand4>
+        <ChildBand4 Ref="59" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,22,19,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Guid>1c8d056406124c5081d3f7a5a0bab37e</Guid>
+          <Name>ChildBand4</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </ChildBand4>
+        <DataBand5 Ref="60" type="DataBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,22.8,19,2.2</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text33 Ref="61" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.2,4.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Bold,Point,False,204</Font>
+              <Guid>88b294f375dc4bfcab23780c3f9a43b2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="5" />
+              <Parent isRef="60" />
+              <Text>Repair Details</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text33>
+            <Text34 Ref="62" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.8,0.8,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>98a9958d34c24a2aba133283024658b8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="5" />
+              <Parent isRef="60" />
+              <Text>{Report_ProductRepairInfo.Repair_JobReference}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text34>
+            <Text35 Ref="63" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.4,0.8,6.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <Guid>88e91ccd62f640b6a3fe49d41c2eea6a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="5" />
+              <Parent isRef="60" />
+              <Text>{Report_ProductRepairInfo.Repair_BookingDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="64" type="DateFormat" isKey="true">
+                <StringFormat>dd/MM/yyyy</StringFormat>
+              </TextFormat>
+              <Type>DataColumn</Type>
+            </Text35>
+            <Text45 Ref="65" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.8,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>3c03ad5347484177b64d5036ad477556</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="5" />
+              <Parent isRef="60" />
+              <Text>Repair Ref.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text45>
+            <Text47 Ref="66" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,1.4,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>a2c16c50061647b588d5f958db4fa33f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="5" />
+              <Parent isRef="60" />
+              <Text>Repair Agent</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text47>
+            <Text48 Ref="67" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,0.8,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>12e0fb542e05480fb1ae07ee5e1028f8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="5" />
+              <Parent isRef="60" />
+              <Text>Booking Date</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text48>
+            <Text36 Ref="68" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.8,1.4,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>75057b10137247e0bd33db964afb5cdd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="5" />
+              <Parent isRef="60" />
+              <Text>{Report_ProductRepairInfo.RepairAgent_Name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text36>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand5</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand5>
+        <ChildBand5 Ref="69" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,25.8,19,0.4</ClientRectangle>
+          <Components isList="true" count="1">
+            <Panel2 Ref="70" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,19,0.4</ClientRectangle>
+              <Components isList="true" count="1">
+                <SubReport1 Ref="71" type="SubReport" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,19,0.4</ClientRectangle>
+                  <Components isList="true" count="0" />
+                  <Name>SubReport1</Name>
+                  <Page isRef="5" />
+                  <Parent isRef="70" />
+                  <SubReportPageGuid>558d2765a8ce4f479e75f059a9b133d6</SubReportPageGuid>
+                </SubReport1>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <GrowToHeight>True</GrowToHeight>
+              <Name>Panel2</Name>
+              <Page isRef="5" />
+              <Parent isRef="69" />
+            </Panel2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>c7721649e4ec4de3991f7d66aadb0d5b</Guid>
+          <Name>ChildBand5</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </ChildBand5>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>7c47c246a0f742db951ab6826c3c8b13</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="72" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <Page2 Ref="73" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="7">
+        <DataBand6 Ref="74" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,5.6</ClientRectangle>
+          <Components isList="true" count="2">
+            <rtfRNS_NextSteps Ref="75" type="Stimulsoft.Report.Components.StiRichText" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.1,0,18.8,3.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <DataColumn />
+              <Guid>ce6bef25fbae4dcda0b2e55b8c00e889</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>rtfRNS_NextSteps</Name>
+              <Page isRef="73" />
+              <Parent isRef="74" />
+              <Text>__LP___x005C_rtf1_x005C_ansi_x005C_ansicpg1252_x005C_deff0_x005C_deflang1033__LP___x005C_fonttbl__LP___x005C_f0_x005C_fswiss_x005C_fprq2_x005C_fcharset0_x0020_Helvetica_x003B___RP____LP___x005C_f1_x005C_fnil_x005C_fcharset0_x0020_Microsoft_x0020_Sans_x0020_Serif_x003B___RP____RP___x000D__x000A__x005C_viewkind4_x005C_uc1_x005C_pard_x005C_sb120_x005C_sa60_x005C_lang2057_x005C_b_x005C_f0_x005C_fs16_x0020_Next_x0020_Steps_x005C_fs20_x005C_par_x000D__x000A__x005C_pard_x005C_sa60_x005C_b0_x005C_fs16_x0020_We_x0020_will_x0020_contact_x0020_you_x0020_either_x0020_by_x0020_text_x0020_message_x002C__x0020_email_x0020_or_x0020_phone_x0020_to_x0020_let_x0020_you_x0020_know_x0020_that_x0020_your_x0020_product_x0020_is_x0020_back_x0020_in_x0020_store_x0020_and_x0020_ready_x0020_to_x0020_collect._x005C_par_x000D__x000A_If_x0020_we_x0020_propose_x0020_to_x0020_make_x0020_a_x0020_charge_x002C__x0020_you_x0020_will_x0020_be_x0020_advised_x0020_beforehand_x0020_so_x0020_that_x0020_you_x0020_can_x0020_confirm_x0020_whether_x0020_the_x0020_repair_x0020_should_x0020_proceed._x0020_Your_x0020_statutory_x0020_rights_x0020_remain_x0020_unaffected._x005C_par_x000D__x000A__x005C_pard_x005C_sa120_x0020_I_x0020_AGREE_x0020_to_x0020_accept_x0020_liability_x0020_for_x0020_any_x0020_costs_x0020_incurred_x0020_a_x0029__x0020_for_x0020_a_x0020_repair_x0020_where_x0020_the_x0020_product_x0020_itself_x0020_is_x0020_not_x0020_suffering_x0020_from_x0020_a_x0020_manufacturing_x0020_fault_x0020_or_x0020_b_x0029__x0020_for_x0020_screening_x002C__x0020_postage_x0020_and_x0020_labour_x0020_where_x0020_a_x0020_chargeable_x0020_repair_x0020_to_x0020_the_x0020_product_x0020_can_x0020_be_x0020_undertaken_x0020_at_x0020_additional_x0020_cost_x0020_but_x0020_is_x0020_not_x0020_carried_x0020_out_x0020_at_x0020_my_x0020_request._x0020_Goods_x0020_will_x0020_be_x0020_returned_x0020_on_x0020_payment_x0020_of_x0020_any_x0020_outstanding_x0020_charges._x005C_fs22_x005C_par_x000D__x000A__x005C_pard_x005C_lang1033_x005C_f1_x005C_fs17_x005C_par_x000D__x000A___RP___x000D__x000A_</Text>
+            </rtfRNS_NextSteps>
+            <RichText4 Ref="76" type="Stimulsoft.Report.Components.StiRichText" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.1,3.4,18.8,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <DataColumn />
+              <Guid>3ae4acd3e53f43d3b05e934813c2f48a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>RichText4</Name>
+              <Page isRef="73" />
+              <Parent isRef="74" />
+              <Text>__LP___x005C_rtf1_x005C_ansi_x005C_ansicpg1252_x005C_deff0_x005C_deflang1033__LP___x005C_fonttbl__LP___x005C_f0_x005C_fswiss_x005C_fprq2_x005C_fcharset0_x0020_Helvetica_x003B___RP____LP___x005C_f1_x005C_fnil_x005C_fcharset0_x0020_Microsoft_x0020_Sans_x0020_Serif_x003B___RP____RP___x000D__x000A__x005C_viewkind4_x005C_uc1_x005C_pard_x005C_sa120_x005C_lang2057_x005C_f0_x005C_fs16_x0020_The_x0020_personal_x0020_information_x0020_you_x0020_provide_x0020_us_x0020_on_x0020_this_x0020_form_x0020_is_x0020_only_x0020_used_x0020_in_x0020_relation_x0020_to_x0020_the_x0020_repair_x0020_of_x0020_your_x0020_product._x0020__x0020_For_x0020_example_x0020_we_x0020_will_x0020_use_x0020_it_x0020_to_x0020_contact_x0020_you_x0020_either_x0020_by_x0020_text_x0020_message_x002C__x0020_email_x0020_or_x0020_phone_x0020_to_x0020_let_x0020_you_x0020_know_x0020_that_x0020_your_x0020_product_x0020_is_x0020_back_x0020_in_x0020_store_x0020_and_x0020_ready_x0020_to_x0020_collect._x0020__x005C_b_x005C_par_x000D__x000A_For_x0020_more_x0020_information_x0020_about_x0020_how_x0020_we_x0020_process_x0020_personal_x0020_data_x0020_and_x0020_your_x0020_rights_x0020_in_x0020_relation_x0020_to_x0020_it_x0020_please_x0020_visit_x0020_https:_x002F__x002F_www.argos.co.uk_x002F_help_x002F_privacy-policy_x002F__x005C_b0_x005C_fs22_x005C_par_x000D__x000A__x005C_pard_x005C_lang1033_x005C_f1_x005C_fs17_x005C_par_x000D__x000A___RP___x000D__x000A_</Text>
+            </RichText4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <Filters isList="true" count="0" />
+          <Guid>f832e1f69516402fb0ab1aa317d8fba3</Guid>
+          <Name>DataBand6</Name>
+          <Page isRef="73" />
+          <Parent isRef="73" />
+          <Sort isList="true" count="0" />
+        </DataBand6>
+        <ChildBand6 Ref="77" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,6.8,19,0.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Guid>8aa78172ae144b1088a031fdb7ca02af</Guid>
+          <Name>ChildBand6</Name>
+          <Page isRef="73" />
+          <Parent isRef="73" />
+        </ChildBand6>
+        <DataBand7 Ref="78" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,7.8,19,5.8</ClientRectangle>
+          <Components isList="true" count="19">
+            <Text50 Ref="79" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0.4,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Signed
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text50>
+            <Text51 Ref="80" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,1,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>55b87f8422c746248deae7a6e8293f6a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Print Name
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text51>
+            <Text52 Ref="81" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,1.6,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>6bfc3fe6ec554dbd8f9a633157626ef3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Date
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text52>
+            <Text53 Ref="82" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.6,0.4,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>00a7e07aa5c840558f8fa7041c67a7f0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Witnessed By</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text53>
+            <Text54 Ref="83" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.6,1,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>6dfbab39cdff4df4940ee9161a1f03c6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Print Name</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text54>
+            <Text55 Ref="84" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,3.4,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>c111b04d054a4617abcddffce8072fbd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Signed
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text55>
+            <Text56 Ref="85" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,4,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>bf0f16864c8a481a85376ea9d6546d00</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Print Name
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text56>
+            <Text57 Ref="86" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,4.6,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>9cb54988f709440ab44da42305abe513</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Date
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text57>
+            <Text58 Ref="87" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.6,3.4,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>594edbefd6604aaf9220c8c59b62c344</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text58</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Witnessed By</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text58>
+            <Text59 Ref="88" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.6,4,7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>8af69c50278a417fa89a9a884cc5def2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>Print Name</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text59>
+            <Text60 Ref="89" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,2.6,9.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <Text>I confirm that I have received my product.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text60>
+            <StartPointPrimitive1 Ref="90" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>0.2,0.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive1</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>c91dbe7636794a5f8d3d659dd4672195</ReferenceToGuid>
+            </StartPointPrimitive1>
+            <EndPointPrimitive1 Ref="91" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>7.6,2.4,0,0</ClientRectangle>
+              <Name>EndPointPrimitive1</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>c91dbe7636794a5f8d3d659dd4672195</ReferenceToGuid>
+            </EndPointPrimitive1>
+            <StartPointPrimitive2 Ref="92" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>11.4,0.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive2</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>8eb776f703fb4959a5262f9e8322618c</ReferenceToGuid>
+            </StartPointPrimitive2>
+            <EndPointPrimitive2 Ref="93" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>18.8,1.8,0,0</ClientRectangle>
+              <Name>EndPointPrimitive2</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>8eb776f703fb4959a5262f9e8322618c</ReferenceToGuid>
+            </EndPointPrimitive2>
+            <StartPointPrimitive8 Ref="94" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>0.2,3.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive8</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>62296c3030ea4cc086517f8f26674e5b</ReferenceToGuid>
+            </StartPointPrimitive8>
+            <EndPointPrimitive8 Ref="95" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>7.6,5.4,0,0</ClientRectangle>
+              <Name>EndPointPrimitive8</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>62296c3030ea4cc086517f8f26674e5b</ReferenceToGuid>
+            </EndPointPrimitive8>
+            <StartPointPrimitive9 Ref="96" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>11.4,3.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive9</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>de25a4ef3faa484f86ac873d2df57921</ReferenceToGuid>
+            </StartPointPrimitive9>
+            <EndPointPrimitive9 Ref="97" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>18.8,4.8,0,0</ClientRectangle>
+              <Name>EndPointPrimitive9</Name>
+              <Page isRef="73" />
+              <Parent isRef="78" />
+              <ReferenceToGuid>de25a4ef3faa484f86ac873d2df57921</ReferenceToGuid>
+            </EndPointPrimitive9>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand7</Name>
+          <Page isRef="73" />
+          <Parent isRef="73" />
+          <Sort isList="true" count="0" />
+        </DataBand7>
+        <RectanglePrimitive1 Ref="98" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>0.2,8,7.4,2.2</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>c91dbe7636794a5f8d3d659dd4672195</Guid>
+          <Name>RectanglePrimitive1</Name>
+          <Page isRef="73" />
+          <Parent isRef="73" />
+        </RectanglePrimitive1>
+        <RectanglePrimitive2 Ref="99" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>11.4,8,7.4,1.6</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>8eb776f703fb4959a5262f9e8322618c</Guid>
+          <Name>RectanglePrimitive2</Name>
+          <Page isRef="73" />
+          <Parent isRef="73" />
+        </RectanglePrimitive2>
+        <RectanglePrimitive8 Ref="100" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>0.2,11,7.4,2.2</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>62296c3030ea4cc086517f8f26674e5b</Guid>
+          <Name>RectanglePrimitive8</Name>
+          <Page isRef="73" />
+          <Parent isRef="73" />
+        </RectanglePrimitive8>
+        <RectanglePrimitive9 Ref="101" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>11.4,11,7.4,1.6</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>de25a4ef3faa484f86ac873d2df57921</Guid>
+          <Name>RectanglePrimitive9</Name>
+          <Page isRef="73" />
+          <Parent isRef="73" />
+        </RectanglePrimitive9>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>e2ccd5280f5040978012e07e12e59084</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page2</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PrintOnPreviousPage>True</PrintOnPreviousPage>
+      <Report isRef="0" />
+      <Watermark Ref="102" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page2>
+    <subReport_1 Ref="103" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand8 Ref="104" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,0.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <Panel1 Ref="105" type="Panel" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,19,0.8</ClientRectangle>
+              <Components isList="true" count="2">
+                <Text63 Ref="106" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>5.4,0.2,6.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9</Font>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text63</Name>
+                  <Page isRef="103" />
+                  <Parent isRef="105" />
+                  <Text>{RetreiveSpecificInspection.InsDataText}</Text>
+                  <TextBrush>Black</TextBrush>
+                </Text63>
+                <Text66 Ref="107" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.4,0.2,4.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9</Font>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text66</Name>
+                  <Page isRef="103" />
+                  <Parent isRef="105" />
+                  <Text>{RetreiveSpecificInspection.FieldName}</Text>
+                  <TextBrush>Black</TextBrush>
+                </Text66>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Name>Panel1</Name>
+              <Page isRef="103" />
+              <Parent isRef="104" />
+            </Panel1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>RetreiveSpecificInspection</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand8</Name>
+          <Page isRef="103" />
+          <Parent isRef="103" />
+          <Sort isList="true" count="0" />
+        </DataBand8>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>558d2765a8ce4f479e75f059a9b133d6</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="108" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_1>
+  </Pages>
+  <PrinterSettings Ref="109" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>7/10/2018 10:56:02 AM</ReportChanged>
+  <ReportCreated>4/29/2012 1:03:20 PM</ReportCreated>
+  <ReportFile>D:\SVN\CAST\Trunk\CastApplication\Content\Reports\RepairNote.mrt</ReportFile>
+  <ReportGuid>38ad73a7f976492b9160dd6b9cb650f4</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2014.1.1900</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

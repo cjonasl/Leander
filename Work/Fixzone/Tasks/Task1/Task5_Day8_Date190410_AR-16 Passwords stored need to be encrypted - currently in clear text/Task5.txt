@@ -1,0 +1,5 @@
+﻿Modify stored procedure SignIn, revision 928
+Deployment script, revision 929
+Modify stored procedure UpdateUser, revision 930
+Modify stored procedure SaveNewPassword, revision 932
+Modify file UserController.cs, revision 933

@@ -1,0 +1,4 @@
+﻿Change in the following two reports:
+C:\Jonas\SVN\CAST\CastApplication\Content\Reports\RepairNote.mrt
+C:\Jonas\SVN\CAST\CastApplication\Content\Reports\ProductRepairInstruction.mrt
+

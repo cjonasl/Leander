@@ -1,0 +1,45 @@
+﻿96
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 10:58:08
+
+----- New property -----
+
+Task3_Day8_Date190410_AR-11 Password changes need to be carried out by the users every 60 days
+
+----- New property -----
+
+29,12
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task3_Day8_Date190410_AR-11 Password changes need to be carried out by the users every 60 days
+
+----- New property -----
+
+null
