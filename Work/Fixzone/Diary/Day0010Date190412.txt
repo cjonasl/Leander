@@ -1,0 +1,12 @@
+﻿Dag 10:
+Fredag den 12 april 2019
+Mail inkom från Danny angående rapporten i task 6 (AR-17) och
+han ville ha några ändringar som jag gjorde. Jag mailade honom
+nya pdf-filer på rapporten och han återkom sedan att han var
+nöjd. Efteråt hade Angela och Vijay en ge-nomgång med mig om
+projektet ”ShopDirect”. En ändring skulle göras och vi kom
+överens om att Vijay och jag gör det tillsammans nu innan jag
+lär mig hur ”ShopDirect” fungerar. Efter genomgången studerade
+jag ”ShopDirect”, installerade ”visualcron” och senaste versionen
+av ”SqlExpress”. Vid 13.00-tiden åt jag medtagen banan och
+smörgås till lunch. Jag avslutade arbetsdagen ca. kl. 17.30.

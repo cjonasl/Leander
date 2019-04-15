@@ -171,7 +171,7 @@
     <Content Include="Views\Main\AddEditKeyWords.cshtml" />
     <Content Include="Views\Main\HelpSearchResources.cshtml" />
     <Content Include="Views\Main\SelfResource.cshtml" />
-    <Content Include="Views\Main\DayDateDiaryBytesInDiary1.cshtml" />
+    <Content Include="Views\Main\DayDateDiaryBytesInDiary.cshtml" />
     <Content Include="Views\Main\AdhocCode.cshtml" />
     <Content Include="Views\Main\CommunicationTable.cshtml" />
     <Content Include="Views\Main\Communication1.cshtml" />

@@ -756,7 +756,10 @@
           else if ((cmd === "nr") || (cmd === "er")) {
             window.jonas.loadAndOpenResourceModal(data);
           }
-          else if (cmd === "r" || cmd=== "task") {
+          else if (cmd === "r" || cmd === "task") {
+              if (cmd == "task")
+                  window.jonas.maxResourceId++;
+
             alert(data); //Show message of the result of regenerate file Resource.txt or check file Resource.txt or create a task
           }
 

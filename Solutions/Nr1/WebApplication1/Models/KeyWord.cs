@@ -276,5 +276,54 @@ namespace WebApplication1.Models
 
             return returnValue;
         }
+
+        public static string ReplaceWithKeyWordId(string[] kWords, out string errorMessage)
+        {
+            List<KeyWord> list;
+            ArrayList keyWords, ids, v;
+            int i, index;
+            string keyWordIds = null;
+
+            errorMessage = null;
+
+            try
+            {
+                list = GetKeyWords();
+                keyWords = new ArrayList();
+                ids = new ArrayList();
+
+                for (i = 0; i < list.Count; i++)
+                {
+                    keyWords.Add(list[i].Phrase);
+                    ids.Add(list[i].Id.Value);
+                }
+
+                v = new ArrayList();
+
+                for (i = 0; i < kWords.Length; i++)
+                {
+                    index = keyWords.IndexOf(kWords[i]);
+
+                    if (index == -1)
+                    {
+                        errorMessage = string.Format("The key word \"{0}\" does not exist as expected", kWords[i]);
+                        return null;
+                    }
+
+                    v.Add(ids[index]);
+                }
+
+                v.Sort();
+
+                keyWordIds = Utility.ReturnItems(v, ",");
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("ERROR!! An Exception occured in method ReplaceWithKeyWordId! e.Message:\r\n{0}", e.Message);
+                return null;
+            }
+
+            return keyWordIds;
+        }
     }
 }

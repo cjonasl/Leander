@@ -12,3 +12,40 @@ IP-address live SQL-server: 109.69.232.227.1433
 
 VisualCron is a job scheduler and automation tool for Windows.
 https://www.visualcron.com
+
+hrg/fixzone-jonas
+Password: spat-X11
+
+Live site:
+http://hrg.fieldengineer.co.uk/
+
+Important query when log in to live site
+select CLIENTID,USERID,* from  service order by SERVICEID desc
+
+When test a new mrt-file search for a job and press GO, then
+you get reports in a dropdown list.
+
+Web server live: hrgweb01
+
+
+--------- Important query Cast-Argos --------------
+SELECT
+  pd.ProcessStep,
+  pp.PageURL,
+  pp.PageDescription
+FROM
+  ProcessDetail pd
+  INNER JOIN ProcessPage pp ON pd.ExecuteLinkID = pp.PageID
+WHERE
+  pd.ProcessID = 4
+ORDER BY
+  pd.ProcessStep
+
+SELECT * FROM [dbo].Model
+WHERE model = '1020113'
+
+SELECT * FROM RepairProfile
+WHERE RepairID = 337
+
+SELECT * FROM [dbo].[Enginrs]
+WHERE [ENGINEERID] = 301

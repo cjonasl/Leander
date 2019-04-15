@@ -70,12 +70,13 @@ namespace WebApplication1.Models
 
             try
             {
-                string shortName, title, fileNameFullPath, fileContents, str, dateStr = "", folder;
+                string shortName, title, fileNameFullPath, fileContents, str, dateStr = "", keyWords, taskFolderNameShort, taskFolderNameLong;
                 bool todaysDateInFileDayDatetxt = false;
                 DateTime tmpDate, dateToday;
-                string[] v;
+                string[] v, kWords;
                 int day = 0, index, i, taskId, nextTaskId, folderIndex;
                 List<Work> list;
+                Resource r1, r2;
 
                 index = shortNameTitle.IndexOf(' ');
                 shortName = shortNameTitle.Substring(0, index);
@@ -102,6 +103,12 @@ namespace WebApplication1.Models
                     message = string.Format("Can not find shortName \"{0}\" in the config file \"{1}\"!", shortName, _fileNameFullPathToConfigFile);
                     return;
                 }
+
+                kWords = new string[2] { "Task", list[index].FullName };
+                keyWords = KeyWordUtility.ReplaceWithKeyWordId(kWords, out message);
+
+                if (!string.IsNullOrEmpty(message))
+                    return;
 
                 fileNameFullPath = string.Format("{0}\\DayDate.txt", list[index].Folder);
 
@@ -157,11 +164,20 @@ namespace WebApplication1.Models
                 if ((taskId % 100) != 0)
                     folderIndex++;
 
-                folder = string.Format("{0}\\Tasks\\Task{1}\\Task{2}_Day{3}_Date{4}{5}{6}_{7}", list[index].Folder, folderIndex, taskId.ToString(), day.ToString(), dateStr.Substring(2, 2), dateStr.Substring(5, 2), dateStr.Substring(8, 2), title);
+                taskFolderNameShort = string.Format("Task{0}_Day{1}_Date{2}{3}{4}_{5}", taskId.ToString(), day.ToString(), dateStr.Substring(2, 2), dateStr.Substring(5, 2), dateStr.Substring(8, 2), title);
+                taskFolderNameLong = string.Format("{0}\\Tasks\\Task{1}\\{2}", list[index].Folder, folderIndex, taskFolderNameShort);
 
-                System.IO.Directory.CreateDirectory(folder);
+                System.IO.Directory.CreateDirectory(taskFolderNameLong);
                 Utility.CreateNewFile(fileNameFullPath, nextTaskId.ToString());
-                message = string.Format("Task number {0} was successfully created for {1}", taskId, list[index].FullName);
+                Utility.CreateNewFile(string.Format("{0}\\Task{1}.txt", taskFolderNameLong, taskId.ToString()), string.Format("Task{0}:", taskId.ToString()));
+
+                r1 = new Resource(0, ResourcesType.Self, DateTime.Now.ToString("yyyy-MM-dd"), taskFolderNameShort, keyWords, null, 0, 0, null, null, taskFolderNameLong, null);
+                r2 = ResourceUtility.AddResource(r1, out message);
+
+                if (!string.IsNullOrEmpty(message))
+                    return;
+
+                message = string.Format("Task number {0} and resource {1} were successfully created for {2}", taskId, r2.Id, list[index].FullName);
             }
             catch (Exception e)
             {

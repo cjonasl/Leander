@@ -46,7 +46,7 @@ namespace WebApplication1.Models
             int nextResource,
             string thumbUpLocation,
             string htmlFile,
-            string files,
+            string filesFolders,
             string links)
         {
             this.Id = id;
@@ -59,7 +59,7 @@ namespace WebApplication1.Models
             this.NextResource = nextResource;
             this.ThumbUpLocation = string.IsNullOrEmpty(thumbUpLocation) ? null : thumbUpLocation;
             this.HtmlFile = string.IsNullOrEmpty(htmlFile) ? null : htmlFile;
-            this.FilesFolders = string.IsNullOrEmpty(files) ? null : files;
+            this.FilesFolders = string.IsNullOrEmpty(filesFolders) ? null : filesFolders;
             this.Links = string.IsNullOrEmpty(links) ? null : links;
         }
     }
@@ -168,14 +168,14 @@ namespace WebApplication1.Models
                 return list;
         }
 
-        private static string[] GetFilesInResourceDirectoryOrInFoldersInResourceDirectory(string resourceDirectory)
+        private static string[] GetFilesInDirectoryAndInFoldersInDirectory(string dir)
         {
             string[] f, d, v;
             ArrayList arrayList;
             int i;
 
-            f = Directory.GetFiles(resourceDirectory);
-            d = Directory.GetDirectories(resourceDirectory);
+            f = Directory.GetFiles(dir);
+            d = Directory.GetDirectories(dir);
 
             arrayList = new ArrayList();
 
@@ -256,7 +256,7 @@ namespace WebApplication1.Models
 
                 resourceDeserialized.KeyWordPhrases = string.Format("({0})", KeyWordUtility.ReturnCommaSeparatedListWithKeyWords(resourceDeserialized.KeyWords).Replace(",", ", "));
 
-                filesInResourceDirectoryOrInFoldersInResourceDirectory = GetFilesInResourceDirectoryOrInFoldersInResourceDirectory(resourceDirectory);
+                filesInResourceDirectoryOrInFoldersInResourceDirectory = GetFilesInDirectoryAndInFoldersInDirectory(resourceDirectory);
 
                 if ((filesInResourceDirectoryOrInFoldersInResourceDirectory.Length > 1) || !string.IsNullOrEmpty(resourceDeserialized.FilesFolders))
                 {
@@ -299,11 +299,11 @@ namespace WebApplication1.Models
                             }
                             else
                             {
-                                v = Directory.GetFiles(u[i]);
+                                v = GetFilesInDirectoryAndInFoldersInDirectory(u[i]);
 
                                 for (j = 0; j < v.Length; j++)
                                 {
-                                    if (System.IO.File.Exists(v[j]) && (tmp.IndexOf(v[j].Trim().ToLower()) == -1))
+                                    if (tmp.IndexOf(v[j].Trim().ToLower()) == -1)
                                     {
                                         tmp.Add(v[j].Trim().ToLower());
                                         Utility.AddFileInfo(v[j], fileNamesShort, directoryNames, fileCreationDate, fileUpdatedDate);

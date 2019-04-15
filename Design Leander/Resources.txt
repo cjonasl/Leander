@@ -1874,7 +1874,7 @@ Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
 
 ----- New property -----
 
-Fixzone,Task
+Task,Fixzone
 
 ---------- New resource ----------
 
@@ -1894,7 +1894,7 @@ Task2_Day8_Date190410_AR-7 Automated disablingdeleting of Users
 
 ----- New property -----
 
-Fixzone,Task
+Task,Fixzone
 
 ---------- New resource ----------
 
@@ -1914,7 +1914,7 @@ Task3_Day8_Date190410_AR-11 Password changes need to be carried out by the users
 
 ----- New property -----
 
-Fixzone,Task
+Task,Fixzone
 
 ---------- New resource ----------
 
@@ -1934,7 +1934,7 @@ Task4_Day8_Date190410_AR-12 Passwords structure needs to be changed so these are
 
 ----- New property -----
 
-Fixzone,Task
+Task,Fixzone
 
 ---------- New resource ----------
 
@@ -1954,4 +1954,84 @@ Task5_Day8_Date190410_AR-16 Passwords stored need to be encrypted - currently in
 
 ----- New property -----
 
-Fixzone,Task
+Task,Fixzone
+
+---------- New resource ----------
+
+99
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-10 11:05:16
+
+----- New property -----
+
+Task6_Day8_Date190410_AR-17 Repair Note Change
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+100
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-11 12:22:01
+
+----- New property -----
+
+Task7_Day9_Date190411_Correct errors in Argos
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+101
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-15 12:32:56
+
+----- New property -----
+
+Task8_Day11_Date190415_Update sp RetrieveUserData
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+102
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-15 14:53:23
+
+----- New property -----
+
+Task9_Day11_Date190415_AR-14 Consent for marketing question when booking a repair
+
+----- New property -----
+
+Task,Fixzone

@@ -1,4 +1,4 @@
-﻿94
+﻿99
 
 ----- New property -----
 
@@ -6,11 +6,11 @@ Self
 
 ----- New property -----
 
-2019-04-10 10:54:53
+2019-04-10 11:05:16
 
 ----- New property -----
 
-Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
+Task6_Day8_Date190410_AR-17 Repair Note Change
 
 ----- New property -----
 
@@ -38,7 +38,7 @@ null
 
 ----- New property -----
 
-C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task6_Day8_Date190410_AR-17 Repair Note Change
 
 ----- New property -----
 

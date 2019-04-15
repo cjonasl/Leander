@@ -1,0 +1,22 @@
+﻿@using CAST.Process
+
+@{
+    ViewBag.Title = "CAST. Repair Questions.";
+}
+<table class="table border-around border-color-blue">
+    <thead>
+        <th>Repair question</th>
+    </thead>
+    <tr>
+        <td class="text-size-h4 text-weight-bold margin-top">
+          By booking a repair you consent to your details being shared with selected
+          Third Party Repair agents only in order to facilitate your repair.  Without
+          your consent this service cannot be carried out - Are you happy to proceed?
+        </td>
+    </tr>
+    <tr>
+        <td class="text-align-center margin-top">
+          <a href="@Url.ProcessNextStep()" class="btn-argos span1">Yes</a>
+        </td>
+    </tr>
+</table>

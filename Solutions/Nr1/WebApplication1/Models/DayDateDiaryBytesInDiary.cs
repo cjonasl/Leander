@@ -299,10 +299,12 @@ namespace WebApplication1.Models
 
             str = sb.ToString();
 
-            if (n == 1)
-                str = str.Replace("#####REPLACE#####", "This weekday, i.e. not saturday or sunday, has not been registered as a day in the diary:");
-            else if (n > 1)
-                str = str.Replace("#####REPLACE#####", "These weekdays, i.e. not saturday or sunday, have not been registered as days in the diary:");
+            if (n == 0)
+                str = str.Replace("#####REPLACE#####", "");
+            else if (n == 1)
+                str = str.Replace("#####REPLACE#####", "OBS! This weekday, i.e. not saturday or sunday, has not been registered as a day in the diary:");
+            else
+                str = str.Replace("#####REPLACE#####", "OBS! These weekdays, i.e. not saturday or sunday, have not been registered as days in the diary:");
 
             if (dateTodayIsAWeekendDate || foundNonWeekendDateNotRegistered)
                 return str;
@@ -339,7 +341,7 @@ namespace WebApplication1.Models
                 d = 1 + lastDayInFile;
                 dateStr = dateToday.ToString("yyyy-MM-dd");
                 fileNameShort = string.Format("Day{0}Date{1}{2}{3}.txt", d.ToString().PadLeft(4, '0'), dateStr.Substring(2, 2), dateStr.Substring(5, 2), dateStr.Substring(8, 2));
-                fileNameFullPathDiaryFile = string.Format("{0}\\{1}", workFolder, fileNameShort);
+                fileNameFullPathDiaryFile = string.Format("{0}\\Diary\\{1}", workFolder, fileNameShort);
                 dateTimeAsLongSwedishString = Utility.ReturnDateTimeAsLongSwedishString(dateToday);
 
                 if (string.IsNullOrEmpty(fileContents))
@@ -386,7 +388,7 @@ namespace WebApplication1.Models
                 errorMessage = null;
                 bytesInDiary = Utility.ReturnNumberOfBytesInFile(diaryFileNameFullPath, true);
                 fi = new FileInfo(diaryFileNameFullPath);
-                warningMessage = ReturnWarningMessage(fi.DirectoryName);
+                warningMessage = ReturnWarningMessage(fi.DirectoryName.Substring(0, fi.DirectoryName.LastIndexOf("\\"))); //ReturnWarningMessage takes work folder as parameter and it is one directory up from diary folder
             }
             catch (Exception e)
             {

@@ -1,4 +1,4 @@
-﻿94
+﻿100
 
 ----- New property -----
 
@@ -6,11 +6,11 @@ Self
 
 ----- New property -----
 
-2019-04-10 10:54:53
+2019-04-11 12:22:01
 
 ----- New property -----
 
-Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
+Task7_Day9_Date190411_Correct errors in Argos
 
 ----- New property -----
 
@@ -38,7 +38,7 @@ null
 
 ----- New property -----
 
-C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task1_Day8_Date190410_AR-6 Quarterly report to be provided on user activity
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task7_Day9_Date190411_Correct errors in Argos
 
 ----- New property -----
 

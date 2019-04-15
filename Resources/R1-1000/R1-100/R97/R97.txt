@@ -14,7 +14,7 @@ Task4_Day8_Date190410_AR-12 Passwords structure needs to be changed so these are
 
 ----- New property -----
 
-29,12
+12,29
 
 ----- New property -----
 
@@ -38,7 +38,7 @@ null
 
 ----- New property -----
 
-C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task4_Day8_Date190410_AR-12 Passwords structure needs to be changed so these are a minimum of 8 characters----- New filefolder -----C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task4_Day8_Date190410_AR-12 Passwords structure needs to be changed so these are a minimum of 8 characters\Files before modify----- New filefolder -----C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task4_Day8_Date190410_AR-12 Passwords structure needs to be changed so these are a minimum of 8 characters\Files after modify
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task4_Day8_Date190410_AR-12 Passwords structure needs to be changed so these are a minimum of 8 characters
 
 ----- New property -----
 
