@@ -16,3 +16,5 @@ done in AR-10)
 
 Modify file User_DetailsModel.cs, revision 907
 Modify file UserController.cs, revision 908
+
+Add stored procedure DeleteUsers 2019-04-11, revision 946

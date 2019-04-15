@@ -1,0 +1,5 @@
+Important tables:
+triggers
+triggerres
+letter
+footer

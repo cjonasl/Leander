@@ -1,0 +1,21 @@
+﻿----- After 1. Enrolment - Very -----
+Custapl
+Customer
+CustomerEnrolment
+Footer
+model
+POP_Apl
+RetailClient
+TriggerRes
+----- After 2. Inital conf appt - Very -----
+DiaryEnt
+service
+SpecJobMapping
+----- After 3. Enrolment - Littlewoods -----
+----- After 4. Forgotten Pwd - Very -----
+----- After 5. Forgotten Pwd - Littlewoods -----
+----- After 6. Password Change - Very -----
+userpasswordchangehistory
+----- After 7. Password Change - Littlewoods -----
+----- After 8. TriggerId 8 ConfirmedBooking Very -----
+Enginrs

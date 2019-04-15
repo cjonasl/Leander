@@ -1,0 +1,12 @@
+﻿Connection string:
+Server=localhost\SQLEXPRESS01;Database=master;Trusted_Connection=True;
+
+SQL server install log folder:
+C:\Program Files\Microsoft SQL Server\140\Setup Bootstrap\Log\20190412_160022
+
+Installation media folder:
+C:\SQLServer2017Media\Express_ENU
+
+Installation resources folder:
+C:\Program Files\Microsoft SQL Server\140\SSEI\Resources
+

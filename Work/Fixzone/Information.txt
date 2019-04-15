@@ -7,3 +7,8 @@ Password: The Jj-one
 Jira
 https://fixzone.atlassian.net/secure/BrowseProjects.jspa
 Password: The Jj-one
+
+IP-address live SQL-server: 109.69.232.227.1433
+
+VisualCron is a job scheduler and automation tool for Windows.
+https://www.visualcron.com

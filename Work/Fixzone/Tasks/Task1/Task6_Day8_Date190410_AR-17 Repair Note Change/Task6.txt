@@ -2,3 +2,12 @@
 C:\Jonas\SVN\CAST\CastApplication\Content\Reports\RepairNote.mrt
 C:\Jonas\SVN\CAST\CastApplication\Content\Reports\ProductRepairInstruction.mrt
 
+Modify ProductRepairInstruction.mrt and RepairNote.mrt 2019-04-11:
+ProductRepairInstruction.mrt, revision 944
+RepairNote.mrt, revision 945
+
+Modify ProductRepairInstruction.mrt and RepairNote.mrt 2019-04-12:
+ProductRepairInstruction.mrt, revision 947
+RepairNote.mrt, revision 948
+ProductRepairInstruction.mrt, revision 949 (Fix so gets in one page)
+

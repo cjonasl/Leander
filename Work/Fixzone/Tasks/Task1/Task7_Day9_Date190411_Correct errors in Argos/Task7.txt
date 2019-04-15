@@ -1,0 +1,5 @@
+﻿9. AddDetails-Alter-SP.sql, revision 936
+8. AddNewUser-Alter-SP.sql, revision 937
+7. ChangePassword-Alter-SP.sql, revision 938
+6. UserPasswordEmpty-Alter-SP.sql, revision 939
+SignIn, revision 940
