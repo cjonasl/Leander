@@ -1,0 +1,48 @@
+﻿@model CAST.ViewModels.User.User_AccountInfoModel
+
+@{
+    ViewBag.Title = "CAST.Personal info.";
+}
+
+@using (Html.BeginForm("ShowConfidentialDetails", "User", FormMethod.Post, new { @class = "" }))
+{
+    <table class="table table-user-detail-info table-bordered">
+        <thead>
+            <th colspan="2">Personal details</th>
+        </thead>
+       
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.ReminderQuestion)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.ReminderQuestion, new { @class = "input" })
+                <div>
+                    @Html.ValidationMessageFor(model => model.ReminderQuestion, string.Empty, new { @class = "error" })
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.ReminderAnswer)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.ReminderAnswer, new { @class = "input" })
+                <div>
+                    @Html.ValidationMessageFor(model => model.ReminderAnswer, string.Empty, new { @class = "error" })
+                </div>
+            </td>
+        </tr>   <tr>
+            <td class="field-name">Date of Birth (DD/MM/YYYY):</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.Day, new { @class = "input readonly", @readonly = "readonly" })/
+                @Html.TextBoxFor(model => model.Month, new { @class = "input readonly", @readonly = "readonly" })/
+                @Html.TextBoxFor(model => model.Year, new { @class = "input readonly", @readonly = "readonly" })
+                <div class="error">@Html.ValidationMessageFor(model => model.Day)</div>
+                <div class="error">@Html.ValidationMessageFor(model => model.Month)</div>
+                <div class="error">@Html.ValidationMessageFor(model => model.Year)</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-align-center">
+                 <input type="submit" value="Save" class="btn-argos span1"/>
+            </td>
+        </tr>
+    </table>
+}

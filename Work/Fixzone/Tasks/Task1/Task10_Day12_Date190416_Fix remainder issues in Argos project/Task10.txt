@@ -1,0 +1,12 @@
+﻿Task10:
+
+Check in files 2019-04-16:
+Deployment script CheckDetails.sql, revision 965
+SignIn.sql, revision 966
+AdministrationController.cs, revision 967
+UserController.cs, revision 968
+AdministrationUserModel.cs, revision 969
+UserRepository.cs, revision 970
+User_ConfidentialInfoModel.cs, revision 971
+User_DetailsModel.cs, revision 972
+MissingDetails.cshtml, revision 973

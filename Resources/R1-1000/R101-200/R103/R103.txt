@@ -1,0 +1,45 @@
+﻿103
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-16 09:54:06
+
+----- New property -----
+
+Task10_Day12_Date190416_Fix remainder issues in Argos project
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task10_Day12_Date190416_Fix remainder issues in Argos project
+
+----- New property -----
+
+null

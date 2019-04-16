@@ -1,5 +1,5 @@
 ﻿Dag 6:
-Tisdag den 12 mars 2019
+Måndag den 8 april 2019
 Installerade git, git extension och Visual studio Enterprise
 2017. Arbetade med mina Argos-punkter. Vid 13.00-tiden intog
 jag kaffe, två medtagna smörgåsar och en banan till lunch vid

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1032px,602px] -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Test js</title>
+  <script src="http://www.nr1web1.com/JavaScriptHtml/jQuery1/js/jQuery3.3.1.js"></script>
+  <script src="http://www.nr1web1.com/JavaScriptHtml/Shared/jonas.js"></script>
+</head>
+<body>
+    <button id="btnBack" onclick="Back()" disabled="disabled">Back</button>&nbsp;&nbsp;<span id="spanNObjInList" style="font-weight:bolder;"></span><br />
+    <div id="divShowObjectHierarchy"></div>
+
+    <script>
+        function Back() {
+            var obj = window.Jonas.HierarchyStack.pop();
+            var name = window.Jonas.HierarchyStackName.pop();
+            var l = window.Jonas.HierarchyStack.length;
+
+            if (l === 0) {
+                $("#btnBack").prop("disabled", false);
+                $("#spanNObjInList").text("");
+            }
+            else
+                $("#spanNObjInList").text(l.toString());
+
+            window.Jonas.ShowObjectHierarchy(obj, null, name);
+        };
+
+        function Bil(bil) {
+            this.bil = bil;
+        }
+
+        function myFunction() {
+            var aaa = { a: 1, b: "Berlin", c: true };
+            var bbb = Object.create(aaa);
+            bbb.b = "Paris";
+            var ccc = Object.create(bbb);
+            ccc.b = "London";
+            var ddd = new Bil("Volvo");
+
+            alert(aaa.isPrototypeOf(bbb));
+            alert(aaa.isPrototypeOf(ccc));
+            alert(ccc.isPrototypeOf(aaa));
+            alert(ddd instanceof Bil);
+
+            var eee = Object.getPrototypeOf(ddd);
+            eee.constructor = function () { };
+
+            alert(ddd instanceof Bil);
+
+            window.Jonas.ShowObjectHierarchy(ddd, null, "Test");
+        }
+    </script>
+</body>
+</html>
