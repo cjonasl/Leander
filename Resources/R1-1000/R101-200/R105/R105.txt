@@ -1,0 +1,45 @@
+﻿105
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-17 10:49:31
+
+----- New property -----
+
+Task11_Day13_Date190417_Review of collection sql queries for ShopDirect
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task11_Day13_Date190417_Review of collection sql queries for ShopDirect
+
+----- New property -----
+
+null

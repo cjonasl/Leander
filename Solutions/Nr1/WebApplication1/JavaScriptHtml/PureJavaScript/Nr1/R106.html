@@ -1,4 +1,4 @@
-﻿1303px756px <!DOCTYPE html>
+﻿<!DOCTYPE html> <!-- iframe dimension: [1000,600] textarea dimension: [1000px,500px] -->
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -32,16 +32,8 @@
        window.Jonas.ShowObjectHierarchy(obj, null, name);
    };
 
-  function myFunction() {
-    var aaa = {a: 1, b: "Berlin", c: true};
-    var bbb = Object.create(aaa); 
-    bbb.b = "Paris";
-    var ccc = Object.create(bbb);
-    ccc.b = "London";
-    window.Jonas.HierarchyStack.push(ccc);
-    window.Jonas.TmpCurrentIndex = 1;
-    window.Jonas.ShowObjectHierarchy(ccc, null, "Test");
-  }
+   var jonasFcn = function() {};
+   window.Jonas.ShowObjectHierarchy(jonasFcn, null, "Test"); 
   </script>
 </body>
 </html>

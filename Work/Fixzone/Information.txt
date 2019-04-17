@@ -1,4 +1,7 @@
-﻿C:\git_cjonasl\Leander\Work\Fixzone\Tasks
+﻿Folder for ShopDirect documents:
+L:\FixzoneUKLtd\Clients\JTM\ShopDirect
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks
 
 Skype
 Email: jonasleanderfixzone@hotmail.com
@@ -49,3 +52,7 @@ WHERE RepairID = 337
 
 SELECT * FROM [dbo].[Enginrs]
 WHERE [ENGINEERID] = 301
+
+
+------------ Directory for ShopDirect-files ---------
+L:\FixzoneUKLtd\Clients\JTM\ShopDirect\Comms\FZ WIP (double click script "LOGIN_SCRIPT.bat" on desktop to get access to L-drive)
