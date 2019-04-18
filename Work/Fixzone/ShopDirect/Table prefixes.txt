@@ -1,0 +1,13 @@
+﻿cap: Custapl
+ctm: Customer
+cen: CustomerEnrolment
+dia: DiaryEnt
+eng: Enginrs
+ftr: Footer
+mdl: model
+pap: POP_Apl
+rcl: RetailClient
+ser: service
+map: SpecJobMapping
+res: TriggerRes
+upc: userpasswordchangehistory

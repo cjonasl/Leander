@@ -1,4 +1,7 @@
-﻿Folder for ShopDirect documents:
+﻿Vijay on Skype 2019-04-18 when I asked aboput "courier collection"
+For some small appliance servicing, the appliances will be collected from customer place and repair will happen in depot
+
+Folder for ShopDirect documents:
 L:\FixzoneUKLtd\Clients\JTM\ShopDirect
 
 C:\git_cjonasl\Leander\Work\Fixzone\Tasks
@@ -30,6 +33,12 @@ you get reports in a dropdown list.
 
 Web server live: hrgweb01
 
+--------- Important query ShopDirect --------------
+--To get which TriggerIds are actually running
+SELECT [TRIGGERID], COUNT(*)
+FROM [dbo].[TriggerRes]
+GROUP BY [TRIGGERID]
+ORDER BY [TRIGGERID]
 
 --------- Important query Cast-Argos --------------
 SELECT
