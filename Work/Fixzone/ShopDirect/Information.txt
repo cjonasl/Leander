@@ -1,5 +1,49 @@
+My email to Fixzone:
+Jonas.Leander@fixzone.com
+
+-------------------------------------------------------------
+
+OBS, first column name in every TRIGGERSQL must start with:
+
+SELECT TriggerId, [GroupCode] + '_' + [LetterCode] + '_' + [LetterType]
+FROM Letter
+
+-------------------------------------------------------------
+Non valid service types:
+
+SELECT
+  DISTINCT p.VISITCD,  p.[DESC]
+FROM
+  SpecJobMapping s
+  LEFT OUTER JOIN POP_CC p ON s.VisitType = p.VISITCD
+WHERE
+  s.DummyJob = 1
+
+-------------------------------------------------------------
+
+--To get which TriggerIds are actually running
+SELECT [TRIGGERID], COUNT(*)
+FROM [dbo].[TriggerRes]
+WHERE TRIGGERDATETIME > '2019-04-01'
+GROUP BY [TRIGGERID]
+ORDER BY [TRIGGERID]
+
+-------------------------------------------------------------
+
+Execute directory:
+C:\Fixzone\ShopDirect\MessageSVR - Live\Very
+
+SMS, usually not needed to separate between Very and Littlewoods ("brands")
+because same contents.
+
+BER = Beyond Economical Repair (low cost products, if broke then replace instead of repair)
+RPG, RP = Replacement guarantee
+
 Important tables:
 triggers
 triggerres
 letter
 footer
+
+------------ Directory for ShopDirect-files ---------
+L:\FixzoneUKLtd\Clients\JTM\ShopDirect\Comms\FZ WIP (double click script "LOGIN_SCRIPT.bat" on desktop to get access to L-drive)

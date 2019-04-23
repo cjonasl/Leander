@@ -1,2 +1,16 @@
 ﻿Dag 13:
 Onsdag den 17 april 2019
+Gick in på Facebook och gratulerade Åsa Fröjd Harnesk
+(f.d. Danielsson) på 50-årsdagen idag. Lite senare på
+dagen gick jag in på Facebook igen och då hade Åsa
+svarat på mitt meddelande och hon tackade för min gratulation.
+Vijay gick igenom nya sql:er hon skrivit i uppgift SD-35
+(kolumn TRIGGERSQL i tabellen Triggers i ShopDirect-databasen).
+Jag fick sedan i uppgift att validera sql:er för skapande
+av mail och sms för kunden “ShopDirect”. Jag skapade task
+11 för uppgiften och därefter ägnade jag resten av arbetsdagen
+åt det. Vid 13.00-tiden intog jag smörgås och banan till
+lunch. Fick stora goda goda kakor av Claire. Fick höra
+att hon ska resa till Singapore imorgon på semester i tre
+veckor. Jag avslutade arbetsdagen ca. kl. 17.45 och
+promenerade hem.

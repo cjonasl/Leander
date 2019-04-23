@@ -1,6 +1,3 @@
-USE [ShopDirect_test]
-GO
-
 UPDATE [Triggers]
 SET [TRIGGERSQL] =
 'SELECT
@@ -9,7 +6,7 @@ SET [TRIGGERSQL] =
   dia.DiaryID,
   CONVERT(char(10), dia.EventDate, 103) AS ''EventDate'', 
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS ''CustomerName'',
-  COALESCE(mdl.[DESCRIPTION], ''item'') AS ''DESC'',
+  COALESCE(mdl.[DESCRIPTION], ''Product'') AS ''DESC'',
   ''0800 092 9051'' AS ''UKWPHONENUMBER'',
   ftr.footer AS Footer,
   rcl.RetailClientName AS ''Brand'',
@@ -31,13 +28,13 @@ FROM
   LEFT JOIN Model mdl ON cap.APPLIANCECD = mdl.APPLIANCECD AND cap.MFR = mdl.MFR AND cap.MODEL = mdl.MODEL
   LEFT JOIN SpecJobMapping map ON ser.VISITCD = map.VisitType
 WHERE
-  dbo.fnFilter_ValueExists(res.id) = 0 --Record is not already handled
-  AND dbo.fnFilter_WithinDateRange(dia.EventDate, ''2017-12-01'', getdate()) = 1 --EventDate between 2017-12-01 and current date
-  AND dbo.fnFilter_RetailClient(ctm.RetailClientID, ''Very'') = 1 --Retailer is Very
-  AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1 --Customer email exists
-  AND dbo.fnFilter_ServiceStatus(ser.STATUSID, ''Complete'') = 1 --The service is complete
-  AND dbo.fnFilter_EntitledServiceType(map.DummyJob) = 1 --Entitled service type
-  AND dbo.fnFilter_ValueExists(ftr.footer) = 1 --Footer exists
-  AND dbo.fnFilter_ValueExists(rcl.Domain) = 1 --Domain exists'
+  dbo.fnFilter_ValueExists(res.id) = 0
+  AND dbo.fnFilter_WithinDateRange(dia.EventDate, ''2017-12-01'', getdate()) = 1
+  AND dbo.fnFilter_RetailClient(ctm.RetailClientID, ''Very'') = 1
+  AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
+  AND dbo.fnFilter_ServiceStatus(ser.STATUSID, ''Complete'') = 1
+  AND dbo.fnFilter_EntitledServiceType(map.DummyJob) = 1
+  AND dbo.fnFilter_ValueExists(ftr.footer) = 1
+  AND dbo.fnFilter_ValueExists(rcl.Domain) = 1'
 WHERE
   TRIGGERID = 21
