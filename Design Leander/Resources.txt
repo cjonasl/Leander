@@ -2135,3 +2135,23 @@ Test JavaScript function
 ----- New property -----
 
 Adhoc,JavaScript
+
+---------- New resource ----------
+
+108
+
+----- New property -----
+
+ThumbUpLocation
+
+----- New property -----
+
+2019-04-24 09:58:15
+
+----- New property -----
+
+Fixzone tasks
+
+----- New property -----
+
+Fixzone

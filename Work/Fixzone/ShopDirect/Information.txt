@@ -30,6 +30,52 @@ ORDER BY [TRIGGERID]
 
 -------------------------------------------------------------
 
+SELECT * FROM Triggers
+WHERE TriggerId NOT IN(
+SELECT [TRIGGERID]
+FROM [dbo].[TriggerRes]
+WHERE TRIGGERDATETIME > '2019-04-01'
+GROUP BY [TRIGGERID])
+ORDER BY TriggerId
+
+-------------------------------------------------------------
+
+--Service status
+SELECT
+  StatusID,
+  CASE
+    WHEN StatusType = 'S' THEN 'Service guarantee'
+	WHEN StatusType = 'R' THEN 'Replacement'
+	WHEN StatusType = 'D' THEN 'Delivery'
+  END AS 'StatusType',
+  SetBy,
+  StatusDesc
+FROM
+  [dbo].[status]
+ORDER BY
+  StatusID
+
+-------------------------------------------------------------
+
+SELECT
+  l.[TriggerId],
+  l.[GroupCode],
+  l.[LetterCode],
+  l.[LetterType],
+  l.[LetterName],
+  l.[LetterDesc],
+  l.[LetterBody],
+  t.[TRIGGERNAME],
+  t.[TRIGGERSQL],
+  t.[TRIGGERFIELDNAME]
+FROM
+  Letter l
+  INNER JOIN Triggers t ON l.TriggerId = t.Triggerid
+WHERE
+  l.TriggerId = 19
+
+-------------------------------------------------------------
+
 Execute directory:
 C:\Fixzone\ShopDirect\MessageSVR - Live\Very
 
