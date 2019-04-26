@@ -1,4 +1,7 @@
-﻿My email to Fixzone:
+﻿connectionString database "cast_demo":
+<add name="Database" connectionString="server=109.69.232.227,1433;Initial Catalog=cast_demo;User ID=sa;password=Ukraine344;" providerName="System.Data.SqlClient" />
+
+My email to Fixzone:
 Jonas.Leander@fixzone.com
 
 Vijay on Skype 2019-04-18 when I asked aboput "courier collection"

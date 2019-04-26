@@ -2155,3 +2155,23 @@ Fixzone tasks
 ----- New property -----
 
 Fixzone
+
+---------- New resource ----------
+
+109
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-25 09:54:16
+
+----- New property -----
+
+Task12_Day17_Date190425_Correct errors in Argos-project
+
+----- New property -----
+
+Task,Fixzone

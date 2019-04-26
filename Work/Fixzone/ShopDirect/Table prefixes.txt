@@ -1,10 +1,12 @@
-﻿cap: Custapl
+﻿can: CustomerCancelLog
+cap: Custapl
 ctm: Customer
-cen: CustomerEnrolment
+enr: CustomerEnrolment
 dia: DiaryEnt
 eng: Enginrs
 ftr: Footer
 mdl: model
+new: NewCustAplForCustomer
 pap: POP_Apl
 rcl: RetailClient
 ser: service

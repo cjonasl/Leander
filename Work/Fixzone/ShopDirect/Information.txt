@@ -30,6 +30,7 @@ ORDER BY [TRIGGERID]
 
 -------------------------------------------------------------
 
+--To get which TriggerIds are actually NOT running
 SELECT * FROM Triggers
 WHERE TriggerId NOT IN(
 SELECT [TRIGGERID]
@@ -58,6 +59,7 @@ ORDER BY
 -------------------------------------------------------------
 
 SELECT
+  l.[GroupCode] + '_' + l.[LetterCode] + '_' + l.[LetterType] AS Msg,
   l.[TriggerId],
   l.[GroupCode],
   l.[LetterCode],

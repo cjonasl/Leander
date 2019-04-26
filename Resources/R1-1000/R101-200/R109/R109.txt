@@ -1,0 +1,45 @@
+﻿109
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-25 09:54:16
+
+----- New property -----
+
+Task12_Day17_Date190425_Correct errors in Argos-project
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task12_Day17_Date190425_Correct errors in Argos-project
+
+----- New property -----
+
+null

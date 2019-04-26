@@ -1,0 +1,4 @@
+﻿Task12:
+
+Check in: "10.UpdateUser-Alter-SP.sql" (revision 977)
+Check in: "10.UpdateUser-Alter-SP.sql" and "11. RetrieveUserData-Alter-SP.sql" (revision 979)

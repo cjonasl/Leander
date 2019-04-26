@@ -36,6 +36,12 @@ DROP FUNCTION fnFilter_DiaryEntDateIsToday
 
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_PolicyType')
 DROP FUNCTION fnFilter_PolicyType
+
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_CustomerEnrolmentIsValid')
+DROP FUNCTION fnFilter_CustomerEnrolmentIsValid
+
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_ValidLinkType')
+DROP FUNCTION fnFilter_ValidLinkType
 GO
 
 CREATE FUNCTION [dbo].[fnFilter_WithinDateRange]
@@ -275,6 +281,45 @@ IF
   (@PolicyNumber LIKE '%RPG' AND @TargetPolicyType = 'Replacement Guarantee') OR
   (@PolicyNumber LIKE '%MPI' AND @TargetPolicyType = 'Mobile')
 )
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
+CREATE FUNCTION [dbo].[fnFilter_CustomerEnrolmentIsValid]
+(
+  @ValidFlag bit
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF (@ValidFlag = 1)
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
+CREATE FUNCTION [dbo].[fnFilter_ValidLinkType]
+(
+  @LinkType int,
+  @TargetLinkType int
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF (@LinkType = @TargetLinkType)
   SET @Result = 1
 ELSE
   SET @Result = 0
