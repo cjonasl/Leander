@@ -1,0 +1,12 @@
+dbo.fnFilter_ValueExists(res.id) = 0
+AND dbo.fnFilter_DiaryEntDateIsToday(dia.EventDate) = 1
+AND dbo.fnFilter_EntitledServiceType(map.DummyJob) = 1
+AND dbo.fnFilter_WithinDateRange(cap.CONTRACTDT, '2018-01-29', getdate()) = 1
+AND dbo.fnFilter_NotContractStatus(cap.CONTRACTSTATUS, 60) = 1
+AND (dbo.fnFilter_PolicyType(cap.POLICYNUMBER, 'Service Guarantee') = 1 OR
+dbo.fnFilter_PolicyType(cap.POLICYNUMBER, 'Mobile') = 1)
+AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1
+AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
+AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
+AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Awaiting Parts Order') = 1 --What service.STATUSID should it be?
+AND dbo.fnFilter_ServiceSubStatus(ser.SUBSTATUS, 1) = 1

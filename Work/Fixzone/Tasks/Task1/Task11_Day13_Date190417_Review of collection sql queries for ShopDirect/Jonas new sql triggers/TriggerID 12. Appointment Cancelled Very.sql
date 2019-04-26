@@ -1,5 +1,5 @@
 SELECT 
-  ctm.EMAIL AS MESSAGESRV_CANCELV_HTML_EMAIL,  
+  ctm.EMAIL AS 'MESSAGESRV_CANCELV_HTML_EMAIL',  
   can.CancelledID,
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate',
   ftr.footer AS 'Footer',

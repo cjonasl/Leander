@@ -46,8 +46,8 @@ SELECT
   StatusID,
   CASE
     WHEN StatusType = 'S' THEN 'Service guarantee'
-	WHEN StatusType = 'R' THEN 'Replacement'
-	WHEN StatusType = 'D' THEN 'Delivery'
+    WHEN StatusType = 'R' THEN 'Replacement'
+    WHEN StatusType = 'D' THEN 'Delivery'
   END AS 'StatusType',
   SetBy,
   StatusDesc

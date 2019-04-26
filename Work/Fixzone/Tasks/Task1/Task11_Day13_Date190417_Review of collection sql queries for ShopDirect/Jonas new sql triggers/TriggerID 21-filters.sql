@@ -1,0 +1,10 @@
+  dbo.fnFilter_ValueExists(res.id) = 0 --Record does not already exist
+  AND dbo.fnFilter_EntitledServiceType(map.DummyJob) = 1 --Entitled service type (i.e. not dummy job)
+  AND dbo.fnFilter_WithinDateRange(cap.CONTRACTDT, '2018-01-29', getdate()) = 1 --Contract date after 28/01/2018
+  AND dbo.fnFilter_NotContractStatus(cap.CONTRACTSTATUS, 60) = 1 --Contract status not 60
+  AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1 --Is a "SDPOLICY"
+  AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1 --Client filter
+  AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1 --Customer has an email
+  AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Complete') = 1 --The service is complete
+  AND dbo.fnFilter_ValueExists(ftr.footer) = 1 --Has a footer
+  AND dbo.fnFilter_ValueExists(rcl.Domain) = 1 --Has a domain

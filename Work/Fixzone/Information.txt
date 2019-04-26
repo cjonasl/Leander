@@ -1,4 +1,7 @@
-﻿connectionString database "cast_demo":
+﻿Sage:
+https://ssm.pacificagroup.co.uk/SelfService/snowweb.dll/DisplayLogin
+
+connectionString database "cast_demo":
 <add name="Database" connectionString="server=109.69.232.227,1433;Initial Catalog=cast_demo;User ID=sa;password=Ukraine344;" providerName="System.Data.SqlClient" />
 
 My email to Fixzone:

@@ -1,5 +1,5 @@
 SELECT
-  ctm.EMAIL AS 'MESSAGESRV_SURVEYV_HTML_EMAIL',
+  ctm.EMAIL AS MESSAGESRV_SURVEYLW_HTML_EMAIL,
   ser.ServiceID,
   dia.DiaryID,
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate', 
@@ -10,7 +10,7 @@ SELECT
   rcl.RetailClientName AS 'Brand',
   rcl.Domain + '/Survey' AS 'Domain',
   rcl.Domain + '/Content/img/ClientLogo.png' AS 'Logo',
-  'We''d really like to know what you thought of us' AS 'VerySurvey',
+  'We''d really like to know what you thought of us' AS 'LWSurvey',
   CASE
     WHEN (cap.POLICYNUMBER LIKE '%ESP') THEN 'Service Request'
     ELSE  'Claim'
@@ -18,7 +18,7 @@ SELECT
 FROM
   DiaryEnt dia 
   LEFT JOIN [service] ser ON dia.TagInteger1 = ser.SERVICEID
-  LEFT JOIN TriggerRes res ON res.TRIGGERID = 21 AND res.TRIGGERFIELDLAST = 'ServiceId' AND res.TriggerValue = ser.SERVICEID
+  LEFT JOIN TriggerRes res ON res.TRIGGERID = 58 AND res.TRIGGERFIELDLAST = 'ServiceId' AND res.TriggerValue = ser.SERVICEID
   LEFT JOIN SpecJobMapping map ON ser.VISITCD = map.VisitType
   LEFT JOIN Custapl cap ON ser.CUSTAPLID = cap.CUSTAPLID
   LEFT JOIN Customer ctm ON ISNULL(cap.OwnerCustomerID, cap.CUSTOMERID) = ctm.CUSTOMERID
@@ -31,7 +31,7 @@ WHERE
   AND dbo.fnFilter_WithinDateRange(cap.CONTRACTDT, '2018-01-29', getdate()) = 1
   AND dbo.fnFilter_NotContractStatus(cap.CONTRACTSTATUS, 60) = 1
   AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1
-  AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
+  AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Littlewoods') = 1
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Complete') = 1
   AND dbo.fnFilter_ValueExists(ftr.footer) = 1

@@ -1,5 +1,5 @@
 SELECT TOP 25
-  ctm.EMAIL AS MESSAGESRV_EMAILCUSTL_HTML_EMAIL,
+  ctm.EMAIL AS 'MESSAGESRV_EMAILCUSTL_HTML_EMAIL',
   enr.EnroleID, 
   CAST(enr.EnroleCode AS CHAR(36)) AS 'EnroleCode',    
   enr.CustomerID, 

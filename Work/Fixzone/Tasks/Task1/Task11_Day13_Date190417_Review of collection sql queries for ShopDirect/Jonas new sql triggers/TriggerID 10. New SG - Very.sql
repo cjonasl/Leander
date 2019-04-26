@@ -1,5 +1,5 @@
 SELECT
-  ctm.EMAIL AS MESSAGESRV_NEWSGV_HTML_EMAIL, 
+  ctm.EMAIL AS 'MESSAGESRV_NEWSGV_HTML_EMAIL', 
   new.CustomerID,
   new.CustAplID,
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',

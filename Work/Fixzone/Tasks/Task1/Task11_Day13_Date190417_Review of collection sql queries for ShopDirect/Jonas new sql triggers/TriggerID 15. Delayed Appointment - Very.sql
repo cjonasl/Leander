@@ -1,5 +1,5 @@
- SELECT
-  ctm.EMAIL AS MESSAGESRV_DELAYEDV_HTML_EMAIL, 
+SELECT
+  ctm.EMAIL AS 'MESSAGESRV_DELAYEDV_HTML_EMAIL', 
   dia.DiaryID,
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate', 
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',

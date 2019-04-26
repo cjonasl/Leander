@@ -1,6 +1,5 @@
 SELECT 
-  ctm.EMAIL AS MESSAGESRV_DEPOTV_HTML_EMAIL,  
-  ctm.EMAIL AS MESSAGESRV_COUREPV_HTML_EMAIL,
+  ctm.EMAIL AS 'MESSAGESRV_DEPOTV_HTML_EMAIL,
   dia.DiaryID,
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate',
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',

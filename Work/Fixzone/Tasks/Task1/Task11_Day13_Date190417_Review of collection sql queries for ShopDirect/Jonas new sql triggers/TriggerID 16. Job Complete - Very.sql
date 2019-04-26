@@ -1,5 +1,5 @@
 SELECT 
-  ctm.Email AS MESSAGESRV_COMPLETEV_HTML_EMAIL,
+  ctm.Email AS 'MESSAGESRV_COMPLETEV_HTML_EMAIL',
   ser.ServiceID,
   dia.DiaryID,
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate', 

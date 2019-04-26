@@ -2175,3 +2175,23 @@ Task12_Day17_Date190425_Correct errors in Argos-project
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+110
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-26 14:18:21
+
+----- New property -----
+
+Task13_Day18_Date190426_Correct sp RetrieveUserData
+
+----- New property -----
+
+Task,Fixzone
