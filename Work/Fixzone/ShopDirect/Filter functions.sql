@@ -31,6 +31,9 @@ DROP FUNCTION fnFilter_EntitledEngineer
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_NotContractStatus')
 DROP FUNCTION fnFilter_NotContractStatus
 
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_NotServiceStatus')
+DROP FUNCTION fnFilter_NotServiceStatus
+
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_DiaryEntDateIsToday')
 DROP FUNCTION fnFilter_DiaryEntDateIsToday
 
@@ -42,6 +45,9 @@ DROP FUNCTION fnFilter_CustomerEnrolmentIsValid
 
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_ValidLinkType')
 DROP FUNCTION fnFilter_ValidLinkType
+
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_CustomerHas07TelNumber')
+DROP FUNCTION fnFilter_CustomerHas07TelNumber
 GO
 
 CREATE FUNCTION [dbo].[fnFilter_WithinDateRange]
@@ -245,6 +251,26 @@ return @Result
 END
 GO
 
+CREATE FUNCTION [dbo].[fnFilter_NotServiceStatus]
+(
+  @ServiceStatusId int,
+  @NotServiceStatusId int
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF (@ServiceStatusId IS NULL OR @ServiceStatusId <> @NotServiceStatusId)
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
 CREATE FUNCTION [dbo].[fnFilter_DiaryEntDateIsToday]
 (
   @EventDate date
@@ -320,6 +346,27 @@ DECLARE
 @Result bit
 
 IF (@LinkType = @TargetLinkType)
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
+CREATE FUNCTION [dbo].[fnFilter_CustomerHas07TelNumber]
+(
+  @Tel1 varchar(20),
+  @Tel2 varchar(20),
+  @Tel3 varchar(20)
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF ((@Tel1 IS NOT NULL AND @Tel1 LIKE '07%') OR (@Tel2 IS NOT NULL AND @Tel2 LIKE '07%') OR (@Tel3 IS NOT NULL AND @Tel3 LIKE '07%'))
   SET @Result = 1
 ELSE
   SET @Result = 0
