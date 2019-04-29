@@ -1,10 +1,10 @@
-SELECT 
-  ctm.EMAIL AS 'MESSAGESRV_DEPOTV_HTML_EMAIL,
+SELECT
+  ctm.EMAIL AS 'MESSAGESRV_DEPOTV_HTML_EMAIL',
   dia.DiaryID,
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate',
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',
   ISNULL(mdl.[DESCRIPTION], 'Product') AS 'DESC',
-  ISNULL(ctm.ADDR1, '') AS 'ADDR1' , 
+  ISNULL(ctm.ADDR1, '') AS 'ADDR1', 
   ISNULL(ctm.ADDR2, '') AS 'ADDR2', 
   ISNULL(ctm.ADDR3, '') AS 'ADDR3',
   ctm.POSTCODE,

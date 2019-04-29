@@ -4,7 +4,7 @@ SELECT
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate',
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',
   ISNULL(pap.[DESC], 'Product') AS 'DESC',
-  ISNULL(ctm.ADDR1, '') AS 'ADDR1' ,
+  ISNULL(ctm.ADDR1, '') AS 'ADDR1',
   ISNULL(ctm.ADDR2, '') AS 'ADDR2',
   ISNULL(ctm.ADDR3, '') AS 'ADDR3',
   ctm.POSTCODE,
@@ -21,8 +21,8 @@ FROM
   LEFT JOIN POP_Apl pap ON cap.APPLIANCECD = pap.APPLIANCECD
 WHERE
   dbo.fnFilter_ValueExists(res.id) = 0
-  AND dbo.fnFilter_NotServiceStatus(ser.Statusid, 2)
-  AND dbo.fnFilter_NotServiceStatus(ser.Statusid, 10)
+  AND dbo.fnFilter_NotServiceStatus(ser.Statusid, 2) = 1
+  AND dbo.fnFilter_NotServiceStatus(ser.Statusid, 10) = 1
   AND dbo.fnFilter_WithinDateRange(dia.EnterDate, getdate(), '2100-01-01') = 1
   AND dbo.fnFilter_EntitledEngineer(eng.DumpDiary) = 1
   AND dbo.fnFilter_EntitledServiceType(map.DummyJob) = 1

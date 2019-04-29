@@ -1,4 +1,4 @@
-USE [ShopDirect_test]
+USE [ShopDirect]
 GO
 
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_WithinDateRange')
@@ -25,6 +25,9 @@ DROP FUNCTION fnFilter_EntitledServiceType
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_EligibleForCourierCollection')
 DROP FUNCTION fnFilter_EligibleForCourierCollection
 
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_NotEligibleForCourierCollection')
+DROP FUNCTION fnFilter_NotEligibleForCourierCollection
+
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_EntitledEngineer')
 DROP FUNCTION fnFilter_EntitledEngineer
 
@@ -36,6 +39,9 @@ DROP FUNCTION fnFilter_NotServiceStatus
 
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_DiaryEntDateIsToday')
 DROP FUNCTION fnFilter_DiaryEntDateIsToday
+
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_DiaryEntDateIsTomorrow')
+DROP FUNCTION fnFilter_DiaryEntDateIsTomorrow
 
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_PolicyType')
 DROP FUNCTION fnFilter_PolicyType
@@ -212,6 +218,25 @@ return @Result
 END
 GO
 
+CREATE FUNCTION [dbo].[fnFilter_NotEligibleForCourierCollection]
+(
+  @Flag varchar(1)
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF (@Flag IS NULL OR @Flag = 'F')
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
 CREATE FUNCTION [dbo].[fnFilter_EntitledEngineer]
 (
   @Flag bit
@@ -282,6 +307,25 @@ DECLARE
 @Result bit
 
 IF (@EventDate = CONVERT(DATE, GETDATE()))
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
+CREATE FUNCTION [dbo].[fnFilter_DiaryEntDateIsTomorrow]
+(
+  @EventDate date
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF (@EventDate = CONVERT(DATE, GETDATE() + 1))
   SET @Result = 1
 ELSE
   SET @Result = 0

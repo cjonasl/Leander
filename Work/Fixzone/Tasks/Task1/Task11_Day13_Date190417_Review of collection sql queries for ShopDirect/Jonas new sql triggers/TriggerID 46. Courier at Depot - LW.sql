@@ -1,21 +1,21 @@
-SELECT 
-  ctm.EMAIL AS 'MESSAGESRV_COURDESV_HTML_EMAIL',
-  dia.DiaryID,  
+SELECT
+  ctm.EMAIL AS 'MESSAGESRV_DEPOTLW_HTML_EMAIL',
+  dia.DiaryID,
+  CONVERT(char(10), dia.EventDate, 103) AS 'EventDate',
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',
-  ISNULL(mdl.[DESCRIPTION], 'Product') AS  'DESC',
-  eng.ENGINEERID,
-  ISNULL(eng.TELNO,'0800 092 9051') AS 'TELNO', 
-  'DPD' AS 'CourierName', 
-  '5148870299' AS 'COURIERTRACKING',
-  '0800 092 9051' AS 'UKWPHONENUMBER',
+  ISNULL(mdl.[DESCRIPTION], 'Product') AS 'DESC',
+  ISNULL(ctm.ADDR1, '') AS 'ADDR1', 
+  ISNULL(ctm.ADDR2, '') AS 'ADDR2', 
+  ISNULL(ctm.ADDR3, '') AS 'ADDR3',
+  ctm.POSTCODE,
   ftr.footer AS 'Footer',
   rcl.RetailClientName AS 'Brand',
   rcl.Domain AS 'Domain',
   rcl.Domain + '/Content/img/ClientLogo.png' AS 'Logo',
-  'Your '+ ISNULL(mdl.[DESCRIPTION], 'Product')+ ' has been despatched' AS VeryCourierDespatch
+  'Your '+ ISNULL(mdl.[DESCRIPTION], 'Product') + ' has arrived' AS 'LWDepot'
 FROM
   DiaryEnt dia
-  LEFT JOIN TriggerRes res ON res.TRIGGERID = 20 AND res.TRIGGERFIELDLAST = 'DiaryID' AND res.TriggerValue = dia.DiaryID
+  LEFT JOIN TriggerRes res ON res.TRIGGERID = 46 AND res.TRIGGERFIELDLAST = 'DiaryID' AND res.TriggerValue = dia.DiaryID
   LEFT JOIN Enginrs eng ON dia.UserID = eng.EngineerId
   LEFT JOIN [service] ser ON dia.TagInteger1 = ser.ServiceId
   LEFT JOIN SpecJobMapping map ON ser.VISITCD = map.VisitType
@@ -26,15 +26,16 @@ FROM
   LEFT JOIN Footer ftr ON RIGHT(cap.policynumber, 3) = ftr.[Type]
   LEFT JOIN Model mdl ON cap.APPLIANCECD = mdl.APPLIANCECD AND cap.MFR = mdl.MFR AND cap.MODEL = mdl.MODEL
 WHERE
-  dbo.fnFilter_ValueExists(res.id) = 0
+  dbo.fnFilter_WithinDateRange(dia.EnterDate, getdate(), '2100-01-01') = 1
+  AND dbo.fnFilter_ValueExists(res.id) = 0
   AND dbo.fnFilter_EntitledEngineer(eng.DumpDiary) = 1
   AND dbo.fnFilter_EntitledServiceType(map.DummyJob) = 1
   AND dbo.fnFilter_WithinDateRange(cap.CONTRACTDT, '2018-01-29', getdate()) = 1
   AND dbo.fnFilter_NotContractStatus(cap.CONTRACTSTATUS, 60) = 1
+  AND dbo.fnFilter_PolicyType(cap.POLICYNUMBER, 'Service Guarantee') = 1
   AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1
-  AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
+  AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Littlewoods') = 1
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
   AND dbo.fnFilter_EligibleForCourierCollection(pap.MONITORFG) = 1
-  AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Dispatch') = 1
   AND dbo.fnFilter_ValueExists(ftr.footer) = 1
   AND dbo.fnFilter_ValueExists(rcl.Domain) = 1

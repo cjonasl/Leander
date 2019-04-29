@@ -6,7 +6,7 @@ SET [TRIGGERSQL] =
   CONVERT(char(10), dia.EventDate, 103) AS ''CourierDeliveryDate'',
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS ''CustomerName'',
   COALESCE(mdl.[DESCRIPTION], ''Product'') AS ''DESC'',
-  COALESCE(ctm.ADDR1, '''') AS ''ADDR1'' , 
+  COALESCE(ctm.ADDR1, '''') AS ''ADDR1'', 
   COALESCE(ctm.ADDR2, '''') AS ''ADDR2'', 
   COALESCE(ctm.ADDR3, '''') AS ''ADDR3'',
   ctm.POSTCODE,
