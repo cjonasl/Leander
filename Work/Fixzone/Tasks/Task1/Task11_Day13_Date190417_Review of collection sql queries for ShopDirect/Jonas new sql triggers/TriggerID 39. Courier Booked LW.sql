@@ -9,7 +9,7 @@ SELECT
   ISNULL(ctm.ADDR3, '') AS 'ADDR3',
   ctm.POSTCODE, 
   CASE
-    WHEN cap.POLICYNUMBER like '%ESP' THEN  'SERVICE GUARANTEE'
+    WHEN cap.POLICYNUMBER like '%ESP' THEN 'SERVICE GUARANTEE'
     WHEN cap.POLICYNUMBER like '%RPG' THEN 'REPLACEMENT GUARANTEE' 
     WHEN cap.POLICYNUMBER like '%MPI' THEN 'MOBILE PHONE INSURANCE'
   END AS 'Subject',
@@ -40,5 +40,3 @@ WHERE
   AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Littlewoods') = 1
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
-  AND dbo.fnFilter_ValueExists(ftr.footer) = 1
-  AND dbo.fnFilter_ValueExists(rcl.Domain) = 1

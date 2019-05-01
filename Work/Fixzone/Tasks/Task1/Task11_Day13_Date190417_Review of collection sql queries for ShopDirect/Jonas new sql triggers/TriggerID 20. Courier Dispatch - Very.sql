@@ -36,5 +36,3 @@ WHERE
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
   AND dbo.fnFilter_EligibleForCourierCollection(pap.MONITORFG) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Dispatch') = 1
-  AND dbo.fnFilter_ValueExists(ftr.footer) = 1
-  AND dbo.fnFilter_ValueExists(rcl.Domain) = 1

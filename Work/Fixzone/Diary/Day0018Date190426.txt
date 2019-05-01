@@ -1,2 +1,21 @@
 ﻿Dag 18:
 Fredag den 26 april 2019
+Frågade Angela om min utestående lön igår och hon undersöke
+saken och det berodde på att HR-avdelningen hade slarvat och
+inte registrerat mig. Det skulle åtgärdas och förhoppningsvis
+får jag min lön på måndag. Jag började arbeta med task 11
+(Review of collection sql queries for ShopDirect). Mark testade
+punkter i Argos-projektet och meddelade att hanteringen av
+lösenordsfråga, lösenordssvar och födelsedagsdatum inte fungerar
+riktigt som det ska då giltighetstiden för en användares lösenord
+gått ut (användaren ska då komma till en sida för att sätta dessa
+om någon av de tre saknar värde i databasen) och jag tittade på
+det. Det visade sig att det berodde på att jag hade glömt att
+registrera ett uppdateringsskript för stored procedure ”RetrieveUserData”.
+Jag skapade task 12 för att göra det. Mark påpekade också att en
+användare väldigt enkelt kan kringgå att byta lösenord då
+webbapplikationen gör ”redirect” till en sida för detta eftersom
+man då redan är ”authenticated” och jag började titta på hur det
+ska kunna lösas. Vid 13.00-tiden åt jag smörgås och banan till lunch.
+Jag avslutade arbetsdagen drygt kl. 17.30 och promenerade till
+Surbiton centrum. 

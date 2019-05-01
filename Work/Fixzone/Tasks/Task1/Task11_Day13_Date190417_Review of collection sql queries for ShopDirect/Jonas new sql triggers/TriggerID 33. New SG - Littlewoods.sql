@@ -1,7 +1,7 @@
 SELECT
-  ctm.EMAIL AS 'MESSAGESRV_NEWSGLW_HTML_EMAIL', 
-  new.CustomerID,
+  ctm.EMAIL AS 'MESSAGESRV_NEWSGLW_HTML_EMAIL',
   new.CustAplID,
+  new.CustomerID,
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',
   ISNULL(mdl.[DESCRIPTION], 'Product') AS 'DESC',
   cap.PolicyNumber,

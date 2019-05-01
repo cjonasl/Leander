@@ -34,5 +34,3 @@ WHERE
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Littlewoods') = 1
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Complete') = 1
-  AND dbo.fnFilter_ValueExists(ftr.footer) = 1
-  AND dbo.fnFilter_ValueExists(rcl.Domain) = 1

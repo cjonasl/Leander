@@ -1,5 +1,5 @@
-SELECT 
-  ctm.EMAIL AS 'MESSAGESRV_FAILEDLW_HTML_EMAIL',
+SELECT
+  ctm.EMAIL AS 'MESSAGESRV_DELAYEDLW_HTML_EMAIL', 
   dia.DiaryID,
   CONVERT(char(10), dia.EventDate, 103) AS 'EventDate', 
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',
@@ -8,12 +8,11 @@ SELECT
   rcl.RetailClientName AS 'Brand',
   rcl.Domain AS 'Domain',
   rcl.Domain + '/Content/img/ClientLogo.png' AS 'Logo',
-  '0800 092 9051' AS 'UKWPHONENUMBER',
-  'We missed you' AS 'FAILEDLW'
+  'Service Request Reschedule' AS 'LWDelayedAppt'
 FROM
   DiaryEnt dia 
   LEFT JOIN [service] ser ON dia.TagInteger1 = ser.SERVICEID
-  LEFT JOIN TriggerRes res ON res.TRIGGERID = 45 AND res.TRIGGERFIELDLAST = 'DiaryID' AND res.TriggerValue = dia.DiaryID
+  LEFT JOIN TriggerRes res ON res.TRIGGERID = 50 AND res.TRIGGERFIELDLAST = 'DiaryID' AND res.TriggerValue = dia.DiaryID
   LEFT JOIN SpecJobMapping map ON ser.VISITCD = map.VisitType
   LEFT JOIN Custapl cap ON ser.CUSTAPLID = cap.CUSTAPLID
   LEFT JOIN Customer ctm ON ISNULL(cap.OwnerCustomerID, cap.CUSTOMERID) = ctm.CUSTOMERID
@@ -31,4 +30,4 @@ WHERE
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Littlewoods') = 1
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Awaiting Parts Order') = 1 --What service.STATUSID should it be?
-  AND dbo.fnFilter_ServiceSubStatus(ser.SUBSTATUS, 1) = 1
+  AND dbo.fnFilter_ServiceSubStatus(ser.SUBSTATUS, 1) = 2

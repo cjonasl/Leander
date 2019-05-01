@@ -1,3 +1,8 @@
+Vijay's triggers for "Annual health check": 13, 49, 73 and 74
+
+Folder for triggers:
+C:\Jonas\SVN\ClientConnect_CustomerConnectWeb\Database\SD\Triggers
+
 My email to Fixzone:
 Jonas.Leander@fixzone.com
 

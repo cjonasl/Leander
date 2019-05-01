@@ -34,5 +34,3 @@ WHERE
   AND dbo.fnFilter_CustomerHas07TelNumber(ctm.TEL1, ctm.TEL2, ctm.TEL3) = 1
   AND dbo.fnFilter_EligibleForCourierCollection(pap.MONITORFG) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Dispatch') = 1
-  AND dbo.fnFilter_ValueExists(ftr.footer) = 1
-  AND dbo.fnFilter_ValueExists(rcl.Domain) = 1

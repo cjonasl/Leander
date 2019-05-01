@@ -2195,3 +2195,23 @@ Task13_Day18_Date190426_Correct sp RetrieveUserData
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+111
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-04-30 11:18:44
+
+----- New property -----
+
+Task14_Day20_Date190430_check in Shop Direct triggers
+
+----- New property -----
+
+Task,Fixzone
