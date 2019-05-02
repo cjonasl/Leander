@@ -26,16 +26,16 @@ FROM
   LEFT JOIN Model mdl ON cap.APPLIANCECD = mdl.APPLIANCECD AND cap.MFR = mdl.MFR AND cap.MODEL = mdl.MODEL
 WHERE
   dbo.fnFilter_ValueExists(res.id) = 0
+  AND dbo.fnFilter_WithinDateRange(dia.EventDate, DATEADD(day, 1, getdate()), '2100-01-01') = 1
   AND dbo.fnFilter_NotServiceStatus(ser.Statusid, 2) = 1
   AND dbo.fnFilter_NotServiceStatus(ser.Statusid, 8) = 1
-  AND dbo.fnFilter_DiaryEntDateIsTomorrow(dia.EventDate) = 1
   AND dbo.fnFilter_EntitledServiceType(map.DummyJob) = 1
   AND dbo.fnFilter_WithinDateRange(cap.CONTRACTDT, '2018-01-29', getdate()) = 1
   AND dbo.fnFilter_NotContractStatus(cap.CONTRACTSTATUS, 60) = 1
   AND dbo.fnFilter_PolicyType(cap.POLICYNUMBER, 'Service Guarantee') = 1
   AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
-  AND dbo.fnFilter_NotEligibleForCourierCollection(pap.MONITORFG) = 1
+  AND dbo.fnFilter_EligibleForCourierCollection(pap.MONITORFG) = 0
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
 GROUP BY
   ctm.TITLE,

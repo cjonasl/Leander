@@ -25,9 +25,6 @@ DROP FUNCTION fnFilter_EntitledServiceType
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_EligibleForCourierCollection')
 DROP FUNCTION fnFilter_EligibleForCourierCollection
 
-IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_NotEligibleForCourierCollection')
-DROP FUNCTION fnFilter_NotEligibleForCourierCollection
-
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_EntitledEngineer')
 DROP FUNCTION fnFilter_EntitledEngineer
 
@@ -54,6 +51,9 @@ DROP FUNCTION fnFilter_ValidLinkType
 
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_CustomerHas07TelNumber')
 DROP FUNCTION fnFilter_CustomerHas07TelNumber
+
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_ContractNotCancelled')
+DROP FUNCTION fnFilter_ContractNotCancelled
 GO
 
 CREATE FUNCTION [dbo].[fnFilter_WithinDateRange]
@@ -210,25 +210,6 @@ DECLARE
 @Result bit
 
 IF (@Flag = 'T')
-  SET @Result = 1
-ELSE
-  SET @Result = 0
-
-return @Result
-END
-GO
-
-CREATE FUNCTION [dbo].[fnFilter_NotEligibleForCourierCollection]
-(
-  @Flag varchar(1)
-)
-RETURNS bit
-AS
-BEGIN
-DECLARE
-@Result bit
-
-IF (@Flag IS NULL OR @Flag = 'F')
   SET @Result = 1
 ELSE
   SET @Result = 0
@@ -411,6 +392,25 @@ DECLARE
 @Result bit
 
 IF ((@Tel1 IS NOT NULL AND @Tel1 LIKE '07%') OR (@Tel2 IS NOT NULL AND @Tel2 LIKE '07%') OR (@Tel3 IS NOT NULL AND @Tel3 LIKE '07%'))
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
+CREATE FUNCTION [dbo].[fnFilter_ContractNotCancelled]
+(
+  @ContractCancelDate date
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF (@ContractCancelDate IS NULL OR @ContractCancelDate = '1900-01-01')
   SET @Result = 1
 ELSE
   SET @Result = 0

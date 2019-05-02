@@ -12,7 +12,7 @@ FROM
   CustomerEnrolment enr
   LEFT JOIN TriggerRes res ON res.TRIGGERID = 5 AND res.TRIGGERFIELDLAST = 'EnroleID' AND res.TriggerValue = enr.EnroleID
   LEFT JOIN Customer ctm ON enr.CustomerID = ctm.CUSTOMERID
-  LEFT JOIN Custapl cap ON ctm.CUSTOMERID = cap.CUSTOMERID
+  LEFT JOIN Custapl cap ON ctm.CUSTOMERID = ISNULL(cap.OwnerCustomerID, cap.CUSTOMERID)
   LEFT JOIN RetailClient rcl ON ctm.RetailClientID = rcl.RetailCode AND ctm.CLIENTID = rcl.RetailClientID
 WHERE
   dbo.fnFilter_ValueExists(res.id) = 0

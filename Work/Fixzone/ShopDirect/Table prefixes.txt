@@ -12,4 +12,4 @@ rcl: RetailClient
 ser: service
 map: SpecJobMapping
 res: TriggerRes
-upc: userpasswordchangehistory
+his: UserPasswordChangeHistory

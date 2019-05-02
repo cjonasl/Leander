@@ -1,10 +1,10 @@
 ﻿Task14:
 TriggerID 21. Survey - Very.sql (Revision 10908)
-TriggerID 3. Enrolment - Littlewoods.sql (Revision 10909)
-TriggerID 1. Enrolment - Very.sql (Revision 10910), (Revision 10962)
+TriggerID 3. Enrolment - Littlewoods.sql (Revision 10909) (Revision 10995 correct)
+TriggerID 1. Enrolment - Very.sql (Revision 10910) (Revision 10962 correct) (Revision 10995 correct)
 TriggerID 9. Courier Booked Very.sql (Revision 10911)
 TriggerID 10. New SG - Very.sql (Revision 10912)
-TriggerID 11. Appointment Reminder Very.sql (Revision 10913)
+TriggerID 11. Appointment Reminder Very.sql (Revision 10913) (Revision 10979 correct)
 TriggerID 12. Appointment Cancelled Very (Revision 10914)
 TriggerID 14. Failed Appointment - Very.sql (Revision 10917)
 TriggerID 15. Delayed Appointment - Very.sql (Revision 10918)
@@ -18,10 +18,10 @@ TriggerID 24. Courier at Depot - V RPG.sql (Revision 10925)
 TriggerID 25. Loan TV Dispatch - Very.sql (Revision 10926)
 TriggerID 26. Claim Closed - VERY.sql (Revision 10927)
 TriggerID 29. Courier Booked SMS Very.sql (Revision 10928)
-TriggerID 31. Failed Appt - Very SMS (Revision 10929)
+TriggerID 31. Failed Appt - Very SMS (Revision 10929) (Revision 10989 correct)
 TriggerID 33. New SG - Littlewoods.sql (Revision 10930)
 TriggerID 35. Survey - Very RPG MPI.sql (Revision 10932)
-TriggerID 37. Appointment Reminder Littlewoods.sql (Revision 10933)
+TriggerID 37. Appointment Reminder Littlewoods.sql (Revision 10933) (Revision 10979 correct)
 TriggerID 39. Courier Booked LW.sql (Revision 10934)
 TriggerID 40. Courier Repair Complete - LW.sql (Revision 10935)
 TriggerID 41. Courier Despatch - LW.sql (Revision 10937)
@@ -43,10 +43,20 @@ TriggerID 60. BER.sql (Revision 10954)
 TriggerID 61. Courier at Depot - SMS.sql (Revision 10955)
 TriggerID 62. Courier Despatched - SMS.sql (Revision 10956)
 TriggerID 63. Courier Repair Complete- SMS.sql (Revision 10957)
-TriggerID 2. Inital conf appt - Very.sql (Revision 10959)
-TriggerID 34. Inital conf appt - Littlewoods.sql (Revision 10959)
-TriggerID 4. Forgotten Pwd - Very.sql (Revision 10963)
-TriggerID 5. Forgotten Pwd - Littlewoods.sql (Revision 10964)
+TriggerID 2. Inital conf appt - Very.sql (Revision 10959) (Revision 10975 correct) (Revision 10979 correct)
+TriggerID 34. Inital conf appt - Littlewoods.sql (Revision 10959) (Revision 10977 correct) (Revision 10979 correct)
+TriggerID 4. Forgotten Pwd - Very.sql (Revision 10963) (Revision 10995 correct)
+TriggerID 5. Forgotten Pwd - Littlewoods.sql (Revision 10964) (Revision 10995 correct)
+TriggerID 6. Password Change - Very.sql (Revision 10971) (Revision 10995 correct)
+TriggerID 7. Password Change - Littlewoods.sql (Revision 10972) (Revision 10995 correct)
+TriggerID 8. ConfirmedBooking Very.sql (Revision 10974) (Revision 10978 correct) (Revision 10979 correct)
+TriggerID 23. Inital conf appt sms.sql (Revision 10980) (Revision 10983 correct)
+TriggerID 28. ConfirmedBooking SMS Very.sql (Revision 10981) (Revision 10984 correct)
+TriggerID 30. Appointment Reminder Very SMS.sql (Revision 10985)
+TriggerID 44. ConfirmedBooking LW.sql (Revision 10987)
+TriggerID 64. B2BSMS.sql (Revision 10990)
+TriggerID 67. New SG - SMS.sql (Revision 10992)
+TriggerID 69. Enrolment - Very PolLoad Temp.sql (Revision 10996)
 
 ------------- ????? service.STATUSID=19 ????-----------------
 TriggerID 14. Failed Appointment - Very.sql
@@ -61,6 +71,7 @@ TriggerID 54. B2B Repair - LW RPG.sql
 TriggerID 57. BER - LW.sql
 TriggerID 59. Delayed Appointment - SMS.sql
 TriggerID 60. BER.sql
+TriggerID 64. B2BSMS.sql
 
 ------------- ????? service.STATUSID=800 ????-----------------
 TriggerID 19. Courier Repair Complete - Very.sql

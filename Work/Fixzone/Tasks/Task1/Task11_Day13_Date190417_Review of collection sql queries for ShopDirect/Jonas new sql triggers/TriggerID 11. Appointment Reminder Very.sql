@@ -41,7 +41,7 @@ WHERE
   AND dbo.fnFilter_PolicyType(cap.POLICYNUMBER, 'Service Guarantee') = 1
   AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
-  AND dbo.fnFilter_NotEligibleForCourierCollection(pap.MONITORFG) = 1
+  AND dbo.fnFilter_EligibleForCourierCollection(pap.MONITORFG) = 0
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
 GROUP BY
   ctm.Email,  

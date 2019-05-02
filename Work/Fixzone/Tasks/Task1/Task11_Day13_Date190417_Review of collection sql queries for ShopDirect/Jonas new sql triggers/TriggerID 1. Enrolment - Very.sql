@@ -14,7 +14,7 @@ FROM
   CustomerEnrolment enr
   LEFT JOIN TriggerRes res ON res.TRIGGERID = 1 AND res.TRIGGERFIELDLAST = 'EnroleID' AND res.TriggerValue = enr.EnroleID
   LEFT JOIN Customer ctm ON enr.CustomerID = ctm.CUSTOMERID
-  LEFT JOIN Custapl cap ON ctm.CUSTOMERID = cap.CUSTOMERID
+  LEFT JOIN Custapl cap ON ctm.CUSTOMERID = ISNULL(cap.OwnerCustomerID, cap.CUSTOMERID)
   LEFT JOIN POP_Apl pap ON cap.APPLIANCECD = pap.APPLIANCECD
   LEFT JOIN Model mdl ON cap.APPLIANCECD = mdl.APPLIANCECD AND cap.MFR = mdl.MFR AND cap.MODEL = mdl.MODEL
   LEFT JOIN RetailClient rcl ON ctm.RetailClientID = rcl.RetailCode AND ctm.CLIENTID = rcl.RetailClientID
