@@ -54,6 +54,9 @@ DROP FUNCTION fnFilter_CustomerHas07TelNumber
 
 IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_ContractNotCancelled')
 DROP FUNCTION fnFilter_ContractNotCancelled
+
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'fnFilter_RetailClientID')
+DROP FUNCTION fnFilter_RetailClientID
 GO
 
 CREATE FUNCTION [dbo].[fnFilter_WithinDateRange]
@@ -411,6 +414,26 @@ DECLARE
 @Result bit
 
 IF (@ContractCancelDate IS NULL OR @ContractCancelDate = '1900-01-01')
+  SET @Result = 1
+ELSE
+  SET @Result = 0
+
+return @Result
+END
+GO
+
+CREATE FUNCTION [dbo].[fnFilter_RetailClientID]
+(
+  @RetailClientID int,
+  @TargetRetailClientID int
+)
+RETURNS bit
+AS
+BEGIN
+DECLARE
+@Result bit
+
+IF (@RetailClientID = @TargetRetailClientID)
   SET @Result = 1
 ELSE
   SET @Result = 0

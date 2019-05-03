@@ -1,0 +1,45 @@
+﻿112
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-02 14:42:07
+
+----- New property -----
+
+Task15_Day22_Date190502_Validate spPopulateAnnualHealthCheck
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task15_Day22_Date190502_Validate spPopulateAnnualHealthCheck
+
+----- New property -----
+
+null

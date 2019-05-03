@@ -32,3 +32,4 @@ WHERE
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Awaiting Parts Order') = 1 --What service.STATUSID should it be?
   AND dbo.fnFilter_ServiceSubStatus(ser.SUBSTATUS, 1) = 1
+  AND dbo.fnFilter_RetailClientID(rcl.RetailClientID, 673) = 1

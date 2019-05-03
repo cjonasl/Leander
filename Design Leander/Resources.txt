@@ -2215,3 +2215,43 @@ Task14_Day20_Date190430_check in Shop Direct triggers
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+112
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-02 14:42:07
+
+----- New property -----
+
+Task15_Day22_Date190502_Validate spPopulateAnnualHealthCheck
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+113
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-03 09:55:45
+
+----- New property -----
+
+Task16_Day23_Date190503_Document the work flow of handling disabled and deleted users in Argos
+
+----- New property -----
+
+Task,Fixzone

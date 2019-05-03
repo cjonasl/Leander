@@ -29,3 +29,4 @@ WHERE
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
   AND dbo.fnFilter_EligibleForCourierCollection(pap.MONITORFG) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'LoanTV Dispatch') = 1
+  AND dbo.fnFilter_RetailClientID(ctm.CLIENTID, 673) = 1

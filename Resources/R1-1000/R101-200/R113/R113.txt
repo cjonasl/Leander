@@ -1,0 +1,45 @@
+﻿113
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-03 09:55:45
+
+----- New property -----
+
+Task16_Day23_Date190503_Document the work flow of handling disabled and deleted users in Argos
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task16_Day23_Date190503_Document the work flow of handling disabled and deleted users in Argos
+
+----- New property -----
+
+null

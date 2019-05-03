@@ -32,6 +32,7 @@ WHERE
   AND dbo.fnFilter_ValueExists(cap.CUSTOMERID) = 1
   AND dbo.fnFilter_PolicyType(cap.POLICYNUMBER, 'Service Guarantee') = 1
   AND dbo.fnFilter_WithinDateRange(cap.SUPPLYDAT, '2018-07-01', '2100-01-01') = 1
+  AND dbo.fnFilter_RetailClientID(rcl.RetailClientID, 673) = 1
 GROUP BY
   ctm.EMAIL,
   enr.EnroleID, 

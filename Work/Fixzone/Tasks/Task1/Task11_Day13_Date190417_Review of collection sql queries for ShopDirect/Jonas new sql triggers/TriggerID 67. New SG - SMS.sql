@@ -1,6 +1,6 @@
 SELECT
   dbo.fn_getCustomerTel(ctm.TEL1, ctm.TEL2, ctm.TEL3) AS 'MESSAGESRV_NewSGSMS_TEXT_SMS',
-  'This Service Guarantee for your '+ ISNULL(mdl.[DESCRIPTION], 'Product') +' policy number '+ cap.POLICYNUMBER +' will be added into your Online Service Centre account.' AS 'NewSGVSMSTEXT', 
+  'This Service Guarantee for your '+ ISNULL(mdl.[DESCRIPTION], 'Product') + ' policy number '+ cap.POLICYNUMBER + ' will be added into your Online Service Centre account.' AS 'NewSGVSMSTEXT', 
   new.CustomerID,
   new.CustAplID,
   rcl.RetailClientName AS 'Brand',
@@ -20,3 +20,4 @@ WHERE
   AND dbo.fnFilter_CustomerUserID(ctm.UserID, 'SDPOLICY') = 1
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
   AND dbo.fnFilter_CustomerHas07TelNumber(ctm.TEL1, ctm.TEL2, ctm.TEL3) = 1
+  AND dbo.fnFilter_RetailClientID(rcl.RetailClientID, 673) = 1

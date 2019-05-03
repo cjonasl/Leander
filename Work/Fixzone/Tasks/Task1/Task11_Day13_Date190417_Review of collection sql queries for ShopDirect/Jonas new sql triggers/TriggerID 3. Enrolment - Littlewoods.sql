@@ -26,6 +26,7 @@ WHERE
   AND dbo.fnFilter_ValueExists(cap.CUSTOMERID) = 1
   AND dbo.fnFilter_PolicyType(cap.POLICYNUMBER, 'Service Guarantee') = 1
   AND dbo.fnFilter_WithinDateRange(cap.SUPPLYDAT, '2018-07-01', '2100-01-01') = 1
+  AND dbo.fnFilter_RetailClientID(ctm.CLIENTID, 673) = 1
 GROUP BY
   ctm.EMAIL,
   enr.EnroleID, 
@@ -41,7 +42,8 @@ SELECT
   COALESCE(model.Description, 'Electrical Items') AS ElectricalItem, 
   'Littlewoods' AS Brand,
   'Welcome to the Service Guarantee Online Service Centre' AS LWEnrolment
-FROM #EnroleEmail_LW EEV
-LEFT JOIN Customer ON Customer.CUSTOMERID=EEV.CustomerID 
-LEFT JOIN Custapl ON CustApl.CUSTOMERID=Customer.CUSTOMERID AND AppCount=1 and Custapl.policynumber like '%ESP' AND (Custapl.SUPPLYDAT is not null AND Custapl.SUPPLYDAT > '2018-06-30') 
-LEFT JOIN model ON model.APPLIANCECD=CUSTAPL.APPLIANCECD and model.model=custapl.model and model.MFR =custapl.MFR
+FROM
+  #EnroleEmail_LW EEV
+  LEFT JOIN Customer ON Customer.CUSTOMERID=EEV.CustomerID 
+  LEFT JOIN Custapl ON CustApl.CUSTOMERID=Customer.CUSTOMERID AND AppCount=1 and Custapl.policynumber like '%ESP' AND (Custapl.SUPPLYDAT is not null AND Custapl.SUPPLYDAT > '2018-06-30') 
+  LEFT JOIN model ON model.APPLIANCECD=CUSTAPL.APPLIANCECD and model.model=custapl.model and model.MFR =custapl.MFR

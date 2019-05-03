@@ -1,0 +1,23 @@
+Work flow of handling disabled and deleted users in Argos
+
+Step 1:
+Stored procedure "DisableUsers" is run by a scheduler (VisualCron)
+which disables users that have been inactive for more than 90 days
+(UserWeb.Enabled is set to 0 and DisabledDate is set to execution date).
+The scheduler should run the stored proicedure once a day and I think
+around 01:00 am is a good time.
+
+Step 2:
+Directly after the scheduler has run stored procedure "DisableUsers"
+the scheduler then runs stored procedure "DeleteUsers" which deletes
+users that have been disabled for more than 30 days and move them to
+table DeletedUserWebRecordsSinceLastReport.
+
+Step 3:
+On a regular basis stored procedure "GenerateReportDisabledDeletedUsers"
+is manually run to generate a report of disabled and deleted users
+(since last time a report was generated0.
+
+Step 4:
+The stored procedure "DeleteTmpStoredDeletedUsers" is manually run to delete
+all rows in table DeletedUserWebRecordsSinceLastReport.

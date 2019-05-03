@@ -27,3 +27,4 @@ WHERE
   AND dbo.fnFilter_RetailClient(ctm.RetailClientID, 'Very') = 1
   AND dbo.fnFilter_ValueExists(ctm.EMAIL) = 1
   AND dbo.fnFilter_ServiceStatus(ser.STATUSID, 'Complete') = 1
+  AND dbo.fnFilter_RetailClientID(ctm.CLIENTID, 673) = 1
