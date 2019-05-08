@@ -1,0 +1,45 @@
+﻿117
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-08 15:54:44
+
+----- New property -----
+
+Task20_Day25_Date190508_Update Argos such that missing details are handled before log in
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task20_Day25_Date190508_Update Argos such that missing details are handled before log in
+
+----- New property -----
+
+null

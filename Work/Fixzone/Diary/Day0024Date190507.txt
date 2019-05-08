@@ -1,2 +1,10 @@
 ﻿Dag 24:
 Tisdag den 7 maj 2019
+Arbetade med sql triggers för ”Shop Direct”. Korrigerade
+några sql:er som blev fel då jag uppdaterade Shop Directs
+databas i fredags. Vid 13.00-tiden åt jag medtagna smörgåsar
+och en banan till lunch Skapade task18 för att lägga in
+aktiva sql triggers i ett worddokument och sedan gjorde
+jag det. Efteråt skickade jag dokumentet till Angela och
+Vijay. Jag avslutade arbetsdagen ca. kl. 17.45 och promenerade
+hem.

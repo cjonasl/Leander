@@ -16,7 +16,7 @@ table DeletedUserWebRecordsSinceLastReport.
 Step 3:
 On a regular basis stored procedure "GenerateReportDisabledDeletedUsers"
 is manually run to generate a report of disabled and deleted users
-(since last time a report was generated0.
+(since last time a report was generated).
 
 Step 4:
 The stored procedure "DeleteTmpStoredDeletedUsers" is manually run to delete

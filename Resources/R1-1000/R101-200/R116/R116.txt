@@ -1,0 +1,45 @@
+﻿116
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-08 10:27:36
+
+----- New property -----
+
+Task19_Day25_Date190508_Create own CheckStoreFilter.OnActionExecuted
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task19_Day25_Date190508_Create own CheckStoreFilter.OnActionExecuted
+
+----- New property -----
+
+null

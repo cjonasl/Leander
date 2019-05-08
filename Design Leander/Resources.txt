@@ -2295,3 +2295,43 @@ Task18_Day24_Date190507_Document trigger filters
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+116
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-08 10:27:36
+
+----- New property -----
+
+Task19_Day25_Date190508_Create own CheckStoreFilter.OnActionExecuted
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+117
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-08 15:54:44
+
+----- New property -----
+
+Task20_Day25_Date190508_Update Argos such that missing details are handled before log in
+
+----- New property -----
+
+Task,Fixzone

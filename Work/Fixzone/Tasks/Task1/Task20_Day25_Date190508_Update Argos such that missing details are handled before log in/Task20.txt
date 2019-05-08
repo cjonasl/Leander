@@ -1,0 +1,8 @@
+﻿Task20:
+
+Update files (check in revision: 984)
+UserController.cs
+CheckStoreFilter.cs
+User_DetailsModel.cs
+MissingDetails.cshtml
+NewPassword.cshtml
