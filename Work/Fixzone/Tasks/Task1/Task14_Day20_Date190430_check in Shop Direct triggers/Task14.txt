@@ -1,9 +1,12 @@
-﻿Task14:
+﻿Collectively check in:
+2019-05-07: Revision 11009
+
+Task14:
 TriggerID 21. Survey - Very.sql (Revision 10908)
 TriggerID 3. Enrolment - Littlewoods.sql (Revision 10909) (Revision 10995 correct)
 TriggerID 1. Enrolment - Very.sql (Revision 10910) (Revision 10962 correct) (Revision 10995 correct)
 TriggerID 9. Courier Booked Very.sql (Revision 10911)
-TriggerID 10. New SG - Very.sql (Revision 10912)
+TriggerID 10. New SG - Very.sql (Revision 10912) (Revision 10912) (Revision 11010)
 TriggerID 11. Appointment Reminder Very.sql (Revision 10913) (Revision 10979 correct)
 TriggerID 12. Appointment Cancelled Very (Revision 10914)
 TriggerID 14. Failed Appointment - Very.sql (Revision 10917)
@@ -19,7 +22,7 @@ TriggerID 25. Loan TV Dispatch - Very.sql (Revision 10926)
 TriggerID 26. Claim Closed - VERY.sql (Revision 10927)
 TriggerID 29. Courier Booked SMS Very.sql (Revision 10928)
 TriggerID 31. Failed Appt - Very SMS (Revision 10929) (Revision 10989 correct)
-TriggerID 33. New SG - Littlewoods.sql (Revision 10930)
+TriggerID 33. New SG - Littlewoods.sql (Revision 10930) (Revision 11015)
 TriggerID 35. Survey - Very RPG MPI.sql (Revision 10932)
 TriggerID 37. Appointment Reminder Littlewoods.sql (Revision 10933) (Revision 10979 correct)
 TriggerID 39. Courier Booked LW.sql (Revision 10934)
@@ -58,7 +61,7 @@ TriggerID 64. B2BSMS.sql (Revision 10990)
 TriggerID 67. New SG - SMS.sql (Revision 10992)
 TriggerID 69. Enrolment - Very PolLoad Temp.sql (Revision 10996) (Revision 10999 correct)
 TriggerID 70. Enrolment - Littlewoods PolLoad Temp.sql (Revision 10998) (Revision 10999 correct)
-TriggerID 72. Enrolment - LW-bespoke.sql (Revision 11000 correct)
+TriggerID 72. Enrolment - LW-bespoke.sql (Revision 11000 correct) (Revision 11011 correct)
 TriggerID 71. Enrolment - Very-bespoke.sql (Revision 11001 correct)
 
 ------------- ????? service.STATUSID=19 ????-----------------

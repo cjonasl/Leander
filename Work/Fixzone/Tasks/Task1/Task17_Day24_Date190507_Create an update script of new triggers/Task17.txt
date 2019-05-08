@@ -1,0 +1,4 @@
+﻿Task17:
+
+Jag skrev programmet i projekt:
+C:\Jonas\Solutions\Nr1\CreateAnUpdateScriptOfNewTriggers

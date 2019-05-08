@@ -77,7 +77,7 @@ WHERE
   AND dbo.fnFilter_NotContractStatus(cap.CONTRACTSTATUS, 60) = 1
   AND dbo.fnFilter_ContractNotCancelled(cap.CONTRACTCANCELDATE) = 1
 GROUP BY
-  eev.MESSAGESRV_EMLBESV_HTML_EMAIL,
+  eev.MESSAGESRV_EMLBESLW_HTML_EMAIL,
   eev.EnroleID,
   eev.EnroleCode,
   eev.CustomerID,

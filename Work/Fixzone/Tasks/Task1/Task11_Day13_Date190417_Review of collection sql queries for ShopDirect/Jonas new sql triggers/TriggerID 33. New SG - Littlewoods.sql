@@ -15,7 +15,7 @@ SELECT
 FROM
   NewCustAplForCustomer new
   LEFT JOIN TriggerRes res ON res.TRIGGERID = 33 AND res.TRIGGERFIELDLAST = 'CustAplID' AND res.TriggerValue = new.CustAplID
-  LEFT JOIN Custapl cap ON new.CustomerID = cap.CUSTAPLID
+  LEFT JOIN Custapl cap ON new.CustAplID = cap.CUSTAPLID
   LEFT JOIN POP_Apl pap ON cap.APPLIANCECD = pap.APPLIANCECD
   LEFT JOIN Customer ctm ON ISNULL(cap.OwnerCustomerID, cap.CUSTOMERID) = ctm.CUSTOMERID
   LEFT JOIN RetailClient rcl ON ctm.RetailClientID = rcl.RetailCode AND ctm.CLIENTID = rcl.RetailClientID

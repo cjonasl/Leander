@@ -2255,3 +2255,43 @@ Task16_Day23_Date190503_Document the work flow of handling disabled and deleted 
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+114
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-07 11:24:26
+
+----- New property -----
+
+Task17_Day24_Date190507_Create an update script of new triggers
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+115
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-07 14:39:34
+
+----- New property -----
+
+Task18_Day24_Date190507_Document trigger filters
+
+----- New property -----
+
+Task,Fixzone

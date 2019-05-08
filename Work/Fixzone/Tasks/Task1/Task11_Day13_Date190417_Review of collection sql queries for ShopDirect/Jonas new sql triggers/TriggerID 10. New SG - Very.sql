@@ -15,7 +15,7 @@ SELECT
 FROM
   NewCustAplForCustomer new
   LEFT JOIN TriggerRes res ON res.TRIGGERID = 10 AND res.TRIGGERFIELDLAST = 'CustAplID' AND res.TriggerValue = new.CustAplID
-  LEFT JOIN Custapl cap ON new.CustomerID = cap.CUSTAPLID
+  LEFT JOIN Custapl cap ON new.CustAplID = cap.CUSTAPLID
   LEFT JOIN Customer ctm ON ISNULL(cap.OwnerCustomerID, cap.CUSTOMERID) = ctm.CUSTOMERID
   LEFT JOIN RetailClient rcl ON ctm.RetailClientID = rcl.RetailCode AND ctm.CLIENTID = rcl.RetailClientID
   LEFT JOIN Footer ftr ON RIGHT(cap.policynumber, 3) = ftr.[Type]

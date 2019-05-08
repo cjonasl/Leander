@@ -1,7 +1,7 @@
 SELECT 
   dbo.fn_getCustomerTel(ctm.TEL1, ctm.TEL2, ctm.TEL3) AS 'MESSAGESRV_COUREPV_TEXT_SMS',  
   dia.DiaryID,
-  CONVERT(char(10), DiaryEnt.EventDate, 103) AS 'CourierDeliveryDate', 
+  CONVERT(char(10), dia.EventDate, 103) AS 'CourierDeliveryDate', 
   dbo.fn_getCustomerName(ctm.TITLE, ctm.FIRSTNAME, ctm.SURNAME) AS 'CustomerName',
   ISNULL(mdl.[DESCRIPTION], 'Product') AS 'DESC',
   ISNULL(ctm.ADDR1, '') AS 'ADDR1',

@@ -1,0 +1,45 @@
+﻿114
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-07 11:24:26
+
+----- New property -----
+
+Task17_Day24_Date190507_Create an update script of new triggers
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task17_Day24_Date190507_Create an update script of new triggers
+
+----- New property -----
+
+null

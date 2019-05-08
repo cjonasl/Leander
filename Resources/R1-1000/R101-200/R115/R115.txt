@@ -1,0 +1,45 @@
+﻿115
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-07 14:39:34
+
+----- New property -----
+
+Task18_Day24_Date190507_Document trigger filters
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task18_Day24_Date190507_Document trigger filters
+
+----- New property -----
+
+null

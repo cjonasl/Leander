@@ -1,2 +1,13 @@
 ﻿Dag 23:
 Fredag den 3 maj 2019
+Skapade task 15 för att dokumentera hur rapporteringen ska ske av
+avregistrerade och raderade användare i Argos och sedan gjorde jag
+den tasken. Annars under dagen arbetade jag tillsammans med Vijay
+att göra klart uppgften med triggers hos kunden ”ShopDirect”. Jag
+uppdaterade kolumnen ”TRIGGERSQL” i tabellen ”Triggers” med min
+egen sql för 35 stycken TRIGGERID (jag körde skriptet ”C:\git_-
+cjonasl\Leander\Work\Fixzone\Scripts that I run on live database-
+\UpdateScript_TriggerSql_2019-05-03.sql” för det, ett skript jag
+skapade med mitt eget console-program ”CreateAnUpdateScriptOfNew-
+Triggers.csproj”). Jag avslutade arbetsdagen ca. kl. 17.30 och
+promenerade till Surbiton.

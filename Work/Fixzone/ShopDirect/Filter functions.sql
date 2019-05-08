@@ -193,7 +193,7 @@ BEGIN
 DECLARE
 @Result bit
 
-IF (@DummyJob iS NULL OR @DummyJob <> 1)
+IF (@DummyJob IS NULL OR @DummyJob <> 1)
   SET @Result = 1
 ELSE
   SET @Result = 0
