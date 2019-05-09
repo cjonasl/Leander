@@ -1,4 +1,8 @@
-﻿Sage:
+﻿Tools:
+Snipping Tool (create screen shots)
+Snagit 2018 (create video)
+
+Sage:
 https://ssm.pacificagroup.co.uk/SelfService/snowweb.dll/DisplayLogin
 
 connectionString database "cast_demo":

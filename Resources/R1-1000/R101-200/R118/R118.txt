@@ -1,0 +1,45 @@
+﻿118
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-09 14:45:23
+
+----- New property -----
+
+Task21_Day26_Date190509_Call new web service for button 'Book Courier Collection'
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task21_Day26_Date190509_Call new web service for button 'Book Courier Collection'
+
+----- New property -----
+
+null

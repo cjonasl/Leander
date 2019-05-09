@@ -2335,3 +2335,23 @@ Task20_Day25_Date190508_Update Argos such that missing details are handled befor
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+118
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-09 14:45:23
+
+----- New property -----
+
+Task21_Day26_Date190509_Call new web service for button 'Book Courier Collection'
+
+----- New property -----
+
+Task,Fixzone

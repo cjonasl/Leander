@@ -1,0 +1,20 @@
+﻿Task21:
+
+Database server: datasvr
+Database name: SAEDI_PRD
+Login: sa
+Password: Ping68pong
+
+Live portal:
+https://portal.fieldengineer.co.uk/fzportal/
+
+Important page:
+C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx
+C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx.cs
+C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx
+C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx.cs
+
+Log in with user: 3CCH23DE (password: CH24)
+
+Use solution:
+C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal.sln
