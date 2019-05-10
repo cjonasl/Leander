@@ -1,2 +1,14 @@
 ﻿Dag 26:
 Torsdag den 9 maj 2019
+Jag tänkte testa rapporteringen av inaktivering och
+radering av användare i Argos, men jag råkade ha för
+brottom och uppdaterade felaktigt kolumn Lastacdt i
+tabellen UserWeb och jag ägnade sedan hela förmiddagen
+åt att försöka återställa det med hjälp av transaktionsloggen,
+men det gick inte. Vid 13.00-tiden intog jag kaffe,
+smörgås och banan till lunch. Efter lunch gick Vijay
+igenom en ny uppgift för mig bestående av att ersätta en
+webservice i portal.fieldengineer. Jag skapade task21
+för det och efter genomgången ägnade jag resten av
+arbetsdagen åt att sätta mig in i uppgiften. Jag avslutade
+arbetsdagen ca. kl. 17.30 och promenerade hem.

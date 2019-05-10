@@ -8,6 +8,10 @@ Password: Ping68pong
 Live portal:
 https://portal.fieldengineer.co.uk/fzportal/
 
+Test account live portal:
+User name: fixtest
+Password: t3st1ng
+
 Important page:
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx.cs
