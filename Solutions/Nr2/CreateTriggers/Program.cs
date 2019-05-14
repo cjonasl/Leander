@@ -268,7 +268,8 @@ namespace CreateTriggers
 
             try
             {
-                string cmdText = string.Format("SELECT name FROM sys.columns WHERE object_id = {0} ORDER BY column_id", object_id);
+                //CASE WHEN system_type_id IN(34, 35, 99) THEN '0' is to avoid error "Cannot use text, ntext, or image columns in the 'inserted' and 'deleted' tables." (34 = image, 45 = text and 99 = ntext)
+                string cmdText = string.Format("SELECT CASE WHEN system_type_id IN(34, 35, 99) THEN '0' ELSE name END FROM sys.columns WHERE object_id = {0} ORDER BY column_id", object_id);
                 DataTable dataTable = ReturnDataTable(connectionString, cmdText, out errorMessage);
 
                 if (!string.IsNullOrEmpty(errorMessage))
@@ -381,7 +382,10 @@ namespace CreateTriggers
             {
                 if (i == (arrayList.Count - 1))
                 {
-                    sb.Append(string.Format("CAST({0} AS varchar(max))", arrayList[i]));
+                    if ((string)arrayList[i] == "0")
+                        sb.Append(string.Format("'0'", arrayList[i]));
+                    else
+                        sb.Append(string.Format("CAST([{0}] AS varchar(max))", arrayList[i]));
 
                     if (arrayList.Count < maxNumberOfColumns)
                     {
@@ -404,7 +408,10 @@ namespace CreateTriggers
                 }
                 else
                 {
-                    sb.Append(string.Format("CAST({0} AS varchar(max)), ", arrayList[i]));
+                    if ((string)arrayList[i] == "0")
+                        sb.Append(string.Format("'0', ", arrayList[i]));
+                    else
+                        sb.Append(string.Format("CAST([{0}] AS varchar(max)), ", arrayList[i]));
                 }
             }
 

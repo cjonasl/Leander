@@ -1,2 +1,18 @@
 ﻿Dag 27:
 Fredag den 10 maj 2019
+Fick mail från Angela som bad mig inaktivera TriggerID 10
+och 33 (”New SG”), så jag öppnade ”Visual Crone” och gjorde
+det (Vijay hade semester idag). Skrev mail till Angela och
+frågade om det finns någon översiktlig dokumentation om
+”Engineer connect” så att jag har mer på fötterna inför
+task21 (Call new web service for button ”Book Courier Collection”)
+och hon kom och sa att Ivo kan ge mig en introduktion. Jag
+gick till honom och han gav mig en övergripande bild och det
+var väldigt bra. Jag fick också ett testkonto till riktiga
+portalen och där finns tillgång till pdf-dokumentation och
+länkar till youtube-video som beskriver olika delar av systemet.
+Resten av arbetsdagen ägnade jag åt att läsa dokumentation
+och studera Engineer connects källkod. Vid 13.00-tiden intog
+jag ost- och skinksmörgås, bananer och kaffe till lunch. Jag
+avslutade arbetsdagen drygt kl. 17.30 och gick till Tolworths
+tågstation och åkte till Wimbledon.

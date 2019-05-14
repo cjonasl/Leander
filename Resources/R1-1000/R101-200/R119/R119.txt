@@ -1,0 +1,45 @@
+﻿119
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-13 11:05:49
+
+----- New property -----
+
+Task22_Day28_Date190513_Make database CAST_ClientDemo ready for test
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task22_Day28_Date190513_Make database CAST_ClientDemo ready for test
+
+----- New property -----
+
+null

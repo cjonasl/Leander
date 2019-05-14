@@ -22,3 +22,7 @@ Log in with user: 3CCH23DE (password: CH24)
 
 Use solution:
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal.sln
+
+courier = delivery service
+
+"RMA Collection Not Booked" = At least one part needs to be returned to Sony warehouse because it is damaged.

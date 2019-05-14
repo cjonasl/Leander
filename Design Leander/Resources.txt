@@ -2355,3 +2355,23 @@ Task21_Day26_Date190509_Call new web service for button 'Book Courier Collection
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+119
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-13 11:05:49
+
+----- New property -----
+
+Task22_Day28_Date190513_Make database CAST_ClientDemo ready for test
+
+----- New property -----
+
+Task,Fixzone

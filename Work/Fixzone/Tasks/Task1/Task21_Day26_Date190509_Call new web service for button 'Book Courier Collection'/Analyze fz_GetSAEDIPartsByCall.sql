@@ -1,4 +1,19 @@
+DECLARE
+@saediID varchar(20),
+@saediCallRef varchar(20)
+
+SET @saediID = '3CCH23DE'
+SET @saediCallRef = '1076'
+
+--SELECT * FROM SAEDIParts P
+--WHERE P.[SaediFromID] = @saediID --AND P.[SAEDICallRef] = @saediCallRef
+--ORDER BY P.Id
+
+--1350667
+
+
 /*
+  DATA from 6 different sources
   1. SAEDIParts P
   2. R
   3. SonySearchReturnData SRD
@@ -7,58 +22,13 @@
   6. Sonyswaprma SSRMA
 */
 
-ALTER proCEDURE [dbo].[fz_GetSAEDIPartsByCall]
-  @saediID varchar(20),
-  @saediCallRef varchar(20)
-AS
-BEGIN
   SELECT DISTINCT
     P.[Id],
-    P.[OrderNumber],
-    P.[SAEDIFromID], --User
-    P.[SAEDICallRef], --Job/call
-	P.[Stk],
-	CAST(P.[PartDescription] AS VARCHAR(MAX)) AS PartDescription,
-	P.[Quantity],
-	P.[UnitPrice],
-	P.[TransactionCode],	
-	P.[OrderReference],	  	
-	P.[ReturnRequired],
-	P.[ReturnDescription],
-	P.[DeliveryNumber],
-	P.[CourierReference], 
-	P.[StatusTitle],
-	P.[StatusID],
-	P.[OrderDate],
-	P.[DispatchDate],
-	ISNULL(P.[Allocated],0) as Allocated,
-	ISNULL(P.[Estimated],0) as Estimated,
-	ISNULL(P.[Fitted],0) as Fitted,
-	ISNULL(P.[Primary],0) as [Primary],	
-	ISNULL(P.[PartConsumption],0) as PartConsumption, 
-	 ISNULL(C.INPUTson, '') AS INPUTson,
-	 ISNULL(C.IsBulletin, '0') AS IsBulletin,
-	 ISNULL(C.INPUTisPrimary, '0') AS IsPrimary,
-	 ISNULL(C.INPUTwarrantyStatus, '0') AS WarrantyStatus,
-	 ISNULL(C.INPUTascMaterialId, '0') AS INPUTascMaterialId,
-     ISNULL(SRD.shipmentStatus,'N/A') AS ShipmentStatus,
-     ISNULL(SRD.validationStatus,'N/A') AS ValidationStatus	, 
-	 ISNULL(CourBS.RET_AddressLabelURL,'') as LabelUrl,	ISNULL(CourBS.RET_ConsignmentDocURL,'') as ConNoteUrl,
-	 ISNULL(CourBS.RetConsignmentNo,'') as ConsignmentNo,
-	 ISNULL(CourBS.RetBookingUniqueNumber,'') as BookingUniqueNumber,
-	 ISNULL(CourBS.INPUT_CourierID,'') as INPUT_CourierID,
- 	(case p.CodeID when '000000010' then SSRMA.collectionaddedon else	R.collectionaddedon end) as collectionaddedon,
-	(case p.CodeID when '000000010' then SSRMA.CollectionDate else R.CollectionDate end) as CollectionDate, 
-	(case p.CodeID when '000000010' then SSRMA.Collectionref else	R.Collectionref end) as Collectionref,
-     R.ClientRef,
-	 p.returnCourierReference as RetCourierRef,
-	CASE
-	  WHEN (C.IsBulletin = 1) THEN ISNULL(C.INPUTsonyPartNumber, 'UNKNOWN CODE') 
-	  ELSE P.[CodeID]
-	END AS CodeID,
-    (case p.CodeID when '000000010' then SSRMA.RmaId else ISNULL(P.[ReturnReference], '') end) AS [ReturnReference],
-    (case p.CodeID when '000000010' then SSRMA.RmaDocumentUrl else	ISNULL(R.RmaDocumentUrl, '') end) as RmaDocumentUrl,
-	 ISNULL(R.Success, '0') AS RmaDone
+    R.INPUT_partNumberReceived,
+	SRD.ascMaterialId,
+	C.INPUTsonyPartNumber,
+	CourBS.ClientRef,
+	SSRMA.ClientRef
    FROM
      SAEDIParts P WITH (nolock)
      LEFT OUTER JOIN
@@ -102,9 +72,7 @@ BEGIN
 
     LEFT OUTER JOIN CourierBookingService CourBS on CourBS.ClientRef =p.SAEDICallRef and CourBS.PartReference=p.OrderNumber  and p.SAEDIFromID=CourBS.SaediId and CourBS.RET_Success=1
     LEFT OUTER JOIN Sonyswaprma SSRMA on SSRMA.ClientRef = p.SAEDICallRef and SSRMA.Success=1
-    WHERE P.[SaediFromID] = @saediID AND P.[SAEDICallRef] = @saediCallRef
-END
-
-GO
-
-
+    WHERE
+	  P.[SaediFromID] = @saediID AND
+	  P.[SAEDICallRef] = @saediCallRef AND
+	  P.[Id] = 1350667
