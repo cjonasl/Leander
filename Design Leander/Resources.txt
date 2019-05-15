@@ -2375,3 +2375,23 @@ Task22_Day28_Date190513_Make database CAST_ClientDemo ready for test
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+120
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-15 11:00:19
+
+----- New property -----
+
+Task23_Day30_Date190515_Implement max 3 log in attempts in Argos
+
+----- New property -----
+
+Task,Fixzone

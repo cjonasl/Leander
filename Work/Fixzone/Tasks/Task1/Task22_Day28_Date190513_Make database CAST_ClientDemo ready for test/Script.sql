@@ -543,8 +543,9 @@ FROM
   UserWeb u
   INNER JOIN Client c ON u.ClientID = c.ClientID
 WHERE
-   u.DisabledDate IS NOT NULL AND
-   datediff(day, u.DisabledDate, @DateToday) > 30
+  (Lastacdt IS NULL OR datediff(day, Lastacdt, @DateToday) > 120) AND
+  u.DisabledDate IS NOT NULL AND 
+  datediff(day, u.DisabledDate, @DateToday) > 30
 
 DELETE FROM UserWeb
 WHERE Userid IN(SELECT Userid FROM DeletedUserWebRecordsSinceLastReport)
@@ -645,7 +646,7 @@ AS
      
 	declare @clientpriorityB bit
 	
-	DECLARE @DisabledDate date   
+	DECLARE @Lastacdt date   
 
 	DECLARE @PasswordHashed varbinary(20) = NULL
 	declare @reminderQuestion varchar(30) = NULL
@@ -673,17 +674,17 @@ AS
   -- if password empty    
 		UPDATE [UserWeb]
 		SET Lastacdt = GETDATE()
-		WHERE UPPER(Userid) = UPPER(@UserId)
+		WHERE UPPER(Userid) = UPPER(@UserId) AND [Enabled] = 1
 		
 		select @ClientId = ClientID, @FullName = Fullname, @Enabled = Enabled,    @PasswordExpired = case     
         when PasswordValidUntilDate > GETDATE() then CAST(0 as bit)  else CAST(1 as bit)  end,
-		@DisabledDate = DisabledDate,@reminderQuestion=ReminderQuestion,@reminderAnswer=ReminderAnswer,@DateOfBirth=DateOfBirth
+		@Lastacdt = Lastacdt,@reminderQuestion=ReminderQuestion,@reminderAnswer=ReminderAnswer,@DateOfBirth=DateOfBirth
     	from [UserWeb]  where upper(UserId) = upper(@UserId)      
     
 		SELECT @ClientId as 'UserStoreID', @UserId as 'UserId', @FullName as 'UserName', ClientName as 'UserStoreName',     
 		CAST(ClientPriorityBooking as BIT) as 'ClientPriorityBooking', @PasswordExpired as 'PasswordExpired', CAST(@Enabled as int) as 'Enabled',    
         CAST(1 as int) as 'IsPasswordEmpty',Cast(GroupID as int) as GroupID,
-		@DisabledDate AS 'DisabledDate',@reminderQuestion as ReminderQuestion,@reminderAnswer as ReminderAnswer,@DateOfBirth AS DateOfBirth
+		@Lastacdt AS 'Lastacdt',@reminderQuestion as ReminderQuestion,@reminderAnswer as ReminderAnswer,@DateOfBirth AS DateOfBirth
 		FROM Client  
 		WHERE ClientID = @ClientId
 	END 
@@ -694,7 +695,7 @@ AS
 		  @FullName = Fullname,
 		  @Enabled = [Enabled],
 		  @PasswordExpired = case when PasswordValidUntilDate > GETDATE() then CAST(0 as bit) else CAST(1 as bit) end,
-		  @DisabledDate = DisabledDate,@reminderQuestion=ReminderQuestion,@reminderAnswer=ReminderAnswer,@DateOfBirth=DateOfBirth
+		  @Lastacdt = Lastacdt,@reminderQuestion=ReminderQuestion,@reminderAnswer=ReminderAnswer,@DateOfBirth=DateOfBirth
 	    FROM
 		  [UserWeb]
 		WHERE 
@@ -715,12 +716,13 @@ AS
 		    Lastacdt = GETDATE()
 		  WHERE
 		    UPPER(Userid) = UPPER(@UserId) AND
-			[Password] = @PasswordHashed
+			[Password] = @PasswordHashed AND
+			[Enabled] = 1
     
 		  SELECT @ClientId as 'UserStoreID', @UserId as 'UserId', @FullName as 'UserName', ClientName as 'UserStoreName',     
 		  CAST(ClientPriorityBooking as BIT) as 'ClientPriorityBooking', @PasswordExpired as 'PasswordExpired', CAST(@Enabled as int) as 'Enabled',    
  
-		  CAST(0 as int) as 'IsPasswordEmpty' ,CAST(GroupID as int) as GroupID, @DisabledDate AS 'DisabledDate',@reminderQuestion as ReminderQuestion,@reminderAnswer as ReminderAnswer,@DateOfBirth AS DateOfBirth FROM Client 
+		  CAST(0 as int) as 'IsPasswordEmpty' ,CAST(GroupID as int) as GroupID, @Lastacdt AS 'Lastacdt',@reminderQuestion as ReminderQuestion,@reminderAnswer as ReminderAnswer,@DateOfBirth AS DateOfBirth FROM Client 
     
 		  WHERE ClientID = @ClientId  
         END

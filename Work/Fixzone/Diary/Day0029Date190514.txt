@@ -1,0 +1,19 @@
+﻿Dag 29:
+Tisdag den 14 maj 2019
+Bad Vijay om hjälp att bättre förstå hur verksamheten fungerar
+i ”Engineer connect” för att kunna göra task21 (Call new web
+service for button 'Book Courier Collection') och hon tog sig
+tid att besvara frågor som jag hade, vilket var bra. Jag
+arbetade därefter med den tasken. Vid 13.00-tiden åt jag
+smörgås och bananer till lunch. Mark testade Argos och meddelade
+att inaktivering av konto efter 3 misslyckade uppdatering av
+lösenord inte fungerade riktigt och jag tittade på det. Jag
+fann några fel som jag rättade och Mark testade igen och sa
+att det fortfarande inte fungerade. Jag satte mig vid hans
+dator och tittade då han testade och det visade sig att han
+testade vid själva inloggningen och inte vid uppdatering av
+lösenord och formodligen hade jag missuppfattat det hela och
+att det var där det skulle implementeras och inte vid
+uppdatering av lösenord. Vi bestämde att imorgon fråga Angela
+hur det ska vara och korrigera om det behövs. Jag avslutade
+arbetsdagen ca. kl. 17.30.

@@ -1,0 +1,45 @@
+﻿120
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-15 11:00:19
+
+----- New property -----
+
+Task23_Day30_Date190515_Implement max 3 log in attempts in Argos
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task23_Day30_Date190515_Implement max 3 log in attempts in Argos
+
+----- New property -----
+
+null

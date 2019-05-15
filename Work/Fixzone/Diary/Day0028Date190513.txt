@@ -1,2 +1,10 @@
 ﻿Dag 28:
 Måndag den 13 maj 2019
+Varken Paul eller Angela var på arbetet idag. Jag ägnade arbetsdagen
+mest åt att sätta in mig i vad jag ska göra i task21 (Call new web
+service for button 'Book Courier Collection'). Vijay bad mig ordna
+med databas ”CAST_ClientDemo” så att Argos kan börja testa det vi
+gjort i Argos-projektet. Jag skapade task22 för uppgiften och skapade
+ett skript som jag körde på databasen. Vid 13.00-tiden åt jag medtagen
+smörgås och bananer till lunch. Jag avslutade arbetsdagen ca. kl.
+18.00 och promenerade hem.

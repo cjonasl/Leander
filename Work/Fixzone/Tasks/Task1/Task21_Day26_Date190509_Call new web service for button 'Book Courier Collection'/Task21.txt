@@ -26,3 +26,7 @@ C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal.sln
 courier = delivery service
 
 "RMA Collection Not Booked" = At least one part needs to be returned to Sony warehouse because it is damaged.
+
+fzshipmate is a "Rest webservice" (according to David on Skype 2019-05-14)
+
+https://www.shipmate.co.uk/guides/api 
