@@ -489,7 +489,7 @@ DECLARE @ClientName varchar(50) = NULL
 DECLARE @Enabled bit = CAST(0 AS bit)
 DECLARE @IsPasswordEmpty int = 0
 DECLARE @UserCanLogIn bit = CAST(0 AS bit) --Default
-DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HASHBYTES('SHA1', @Password) ELSE NULL END
+DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HASHBYTES('SHA1', @Password) ELSE HASHBYTES('SHA1', '') END
 DECLARE @HashedPasswordInDB varbinary(20) = NULL
 
 SELECT
@@ -727,7 +727,7 @@ DECLARE @ReminderAnswer varchar(20) = NULL
 DECLARE @DateOfBirth datetime = NULL
 DECLARE @Lastacdt datetime = NULL
 DECLARE @NumberOfLogInFailures int = NULL
-DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HASHBYTES('SHA1', @Password) ELSE NULL END
+DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HASHBYTES('SHA1', @Password) ELSE HASHBYTES('SHA1', '') END
 DECLARE @DateToday datetime = getdate()
 DECLARE @HashedPasswordInDB varbinary(20) = NULL
 DECLARE @NumberOfLogInFailuresUpdateValue int = 0
@@ -764,7 +764,7 @@ BEGIN
     UPPER(Userid) = UPPER(@UserId)
 END
 
-IF (@Enabled = 1 AND @IsPasswordEmpty = 0 AND @PasswordHashed IS NOT NULL AND @PasswordHashed <> @HashedPasswordInDB) --Handle NumberOfLogInFailures
+IF (@Enabled = 1 AND @IsPasswordEmpty = 0 AND @PasswordHashed <> @HashedPasswordInDB) --Handle NumberOfLogInFailures
 BEGIN
   SET @NumberOfLogInFailures = @NumberOfLogInFailures + 1
 			
@@ -772,7 +772,7 @@ BEGIN
   BEGIN
     exec dbo.DisableUser @UserId
     SET @NumberOfLogInFailuresUpdateValue = 0
-	SET @Enabled = 0
+	SET @Enabled = CAST(0 AS bit)
   END
   ELSE
     SET @NumberOfLogInFailuresUpdateValue = @NumberOfLogInFailures
@@ -822,5 +822,3 @@ IF (@@ERROR = 0)
   COMMIT TRAN
 ELSE
   ROLLBACK TRAN
-
-

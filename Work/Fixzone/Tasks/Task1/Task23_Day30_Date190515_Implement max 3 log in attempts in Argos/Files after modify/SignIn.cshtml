@@ -1,0 +1,203 @@
+﻿@using System.Web.Optimization
+@using CAST.Process
+@model CAST.ViewModels.User.User_DetailsModel
+           
+@{
+    ViewBag.Title = "CAST. SIGN IN";
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/signin-js")
+    <script type="text/javascript">
+        var autoDiagnose = parseInt('@Model.RunAutoDiagnostic');
+        var isGetSystemInfo = parseInt('@Model.IsGetSystemInfo');
+        //$("#UserId").blur(function()
+        //{
+        //    var msgpassword;
+        //    var loginNB;
+        //    var isStoreUser;
+        //    var s = $("#user-sign-in-form");
+        //    // Get flags
+        //    $.ajax({
+        //        async: false,
+        //        type: 'GET',
+        //        dataType: 'json',
+        //        url: '/User/DisplayPwdTxtforStoreUser',
+        //        data: { user: $("#UserId").val() },
+        //        success: function(data) {
+        //            msgpassword = data["msg"];
+        //            loginNB = data["loginNB"];
+        //            isStoreUser = data["isStoreUser"];
+        //            $("#IsStoreuser").val( isStoreUser);
+        //        }
+        //    })
+        //    //if (isStoreUser)
+        //    //$("#Password").keypress(function (e) {
+        //    //    //if the letter is not digit then display error and don't type anything
+        //    //    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //    //        //display error message
+        //    //        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+        //    //        return false;
+        //    //    }
+        //    //});
+        //    $("#login_password").html(msgpassword);
+        //    $("#LoginNB").html(loginNB);
+
+        //    if (isStoreUser==1 || isStoreUser==2)
+        //    {
+        //        var str = $("forgotpwd").text();
+        //        $("#forgotpwd").html("");
+        //        }
+        //    else 
+        //        $("#forgotpwd").html("Forgotten password?");
+            
+        //})
+
+
+        $(document).ready(function () {
+            // init dialogs
+            DialogInit("#DialogUserNotif_NoStore", 500);
+            DialogInit("#DialogUserNotif_OtherUser", 500);
+            DialogInit("#wait-auto-diagnostic-view", 500, 200, "", false, false, false);
+            DialogInit("#wait_get-system-info", 500, 200, "", false, false, false);
+            $("#Password").keypress(function (e) {
+                var isStoreuser=$("#IsStoreuser").val();
+                if(isStoreuser==1)
+                //if the letter is not digit then display error and don't type anything
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    //display error message
+                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                    return false;
+                }
+            });
+            $("#btn_Ok").click(function () {
+                DialogClose("#DialogUserNotif_OtherUser");
+                $.ajax({
+                    async: false,
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '/User/ChangeUserStoreNumber',
+                    data: { Userid: $("#UserId").val(), storeNumber: $("#Password").val() },
+                    success: function (data) {
+                        msg = data["msg"];
+                        newStoreId = data["newStoreId"];
+                        $("#Password").val(newStoreId);
+                        if (msg = "success") {
+                            $("#user-sign-in-form").submit();
+                         
+                        }
+                    }
+                });
+            });
+            $("#btn_Cancel").click(function () {
+                $("#user-sign-in-form").submit();
+            });
+
+            $("#btn_Yes").click(function() {
+                $("#user-sign-in-form").submit();
+            });
+
+            $("#btn_No").click(function() {
+                DialogClose("#DialogUserNotif_OtherUser");
+                DialogClose("#DialogUserNotif_NoStore");
+                DialogClose("#DialogUserNotif_OtherUser");
+            });
+
+          
+
+            $("#btn_SignIn").click(function() {
+                var ShowWinNoStore, ShowWinOtherUser, msg;
+                var s = $("#user-sign-in-form");
+                // Get flags
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: '/User/DisplayConfirmMessage',
+                    data: { user: $("#UserId").val(), password: $("#Password").val() },
+                    success: function(data) {
+                        ShowWinNoStore = data["ShowWinNoStore"];
+                        ShowWinOtherUser = data["ShowWinOtherUser"];
+                        msg = data["msg"];
+                    }
+                });
+                
+                // Show pop up menu
+                if (ShowWinNoStore == true) {
+                    DialogShow("#DialogUserNotif_NoStore");
+                    $("#no_store_msg_text").html(msg);
+                }
+                if (ShowWinOtherUser == true) {
+                    DialogShow("#DialogUserNotif_OtherUser");
+                    $("#other_login_msg_text").html(msg);
+                }
+
+                if ((!ShowWinNoStore) && (!ShowWinOtherUser)) {
+                    $("#user-sign-in-form").submit();
+                }
+            });
+
+            if (autoDiagnose == 1) {
+                // set function if auto diagnose successed 
+                SetAutoDiagnosticFunction_OnSuccess(submit_SignIn);
+                AutoDiagnostic($("#UserId").val(), $("#ClientId").val());
+            }
+        });
+        
+        function submit_SignIn() {
+            $("#user-sign-in-form").submit();
+        }
+        
+    </script>    
+}
+
+<form action="/User/SignIn/" method="POST" id="user-sign-in-form" name ="signInForm">
+    <table class="table table-user-sign-in">
+        <thead>
+            <th colspan="2">Sign In</th>
+        </thead>
+        <tr>
+            <td class="field-name text-align-right">Employee Number <span class="text-color-red">*</span></td>
+            <td class="field-value"><input class="input" type="text" name="UserId" id="UserId" value="@Model.UserId"/></td>
+        </tr>
+        <tr>
+            <td class="field-name text-align-right">
+                   Password
+               </td>
+            <td class="field-value"><input class="input" type="password" name="UserPassword" id="Password" value="@Model.UserPassword"/></td>
+        </tr>
+        <tr>
+            <td class="text-size-h7 text-align-right vertical-align-top text-weight-bold"><span class="text-color-red">&#39;*&#39;</span> NB.</td>
+            <td class="text-size-h7"> <div id="LoginNB" > @(@Model.ClientPriorityBooking? "Store colleagues should now use their assigned Argos store number rather than their password. Passwords will no longer be used":"Call centre colleagues should use their Windows user and password as usual")</div></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-align-center">
+             <div id="errormess" >     @Html.ValidationMessageFor(x=>x.UserId, null, new{@class = "error"})</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-align-right" colspan="2">
+                <a id="forgotpwd"  runat=server href="@Url.Process(PredefinedProcess.ForgottenPassword)">Forgotten password?</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"  class="text-align-center">
+                <input class="btn-argos span1" type="button" value="Sign In" id="btn_SignIn"/>
+                <div>
+                    <span class="error">@ViewBag.userNotAdminMsg</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <input id="ClientId" name ="UserStoreID" value ="@Model.UserStoreID" type="hidden"/>
+      <input id="IsStoreuser" name ="UserStoreID" value ="@Model.ClientPriorityBooking" type="hidden"/>
+</form>
+
+<div id="silverlightControlHost" class="">
+    
+</div>
+
+@Html.Partial("~/Views/ConfirmDialog/ConfirmUserNoStore.cshtml")
+@Html.Partial("~/Views/ConfirmDialog/ConfirmUserDifferentLogin.cshtml")
+@Html.Partial("~/Views/Notification/Wait_SystemInfo.cshtml")
+@Html.Partial("~/Views/Notification/Wait_AutoDiagnostic.cshtml")

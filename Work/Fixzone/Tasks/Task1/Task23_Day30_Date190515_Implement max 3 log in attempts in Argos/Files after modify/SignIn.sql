@@ -60,7 +60,7 @@ BEGIN
   BEGIN
     exec dbo.DisableUser @UserId
     SET @NumberOfLogInFailuresUpdateValue = 0
-	SET @Enabled = 0
+	SET @Enabled = CAST(0 AS bit)
   END
   ELSE
     SET @NumberOfLogInFailuresUpdateValue = @NumberOfLogInFailures

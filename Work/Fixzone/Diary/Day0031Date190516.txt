@@ -1,2 +1,13 @@
 ﻿Dag 31:
 Torsdag den 16 maj 2019
+Gjorde klart task23 (Implement max 3 log in attempts in
+Argos) och sedan arbetade jag med task21 (Call new web
+service for button 'Book Courier Collection'). Vid 12.30-
+tiden intog jag två bananer, två smörgåsar och kaffe till
+lunch. Mark testade inloggningen i task23 och upptäckte
+att det inte alltid fungerar som det ska utan ibland vid
+ett misslyckat inloggningsförsök sker ytterligare ett
+automatiskt direkt efteråt utan att användaren tryckt på
+”SIGN IN” knappen. Jag började titta på det, men löste det
+inte idag utan får fortsätta imorgon. Jag avslutade
+arbetsdagen ca. kl. 18.00 och promenerade hemåt. 

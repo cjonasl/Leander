@@ -32,6 +32,23 @@ namespace CAST.Controllers
 
 
         #region SignIn
+
+        private void SetAuthInfo(User_DetailsModel userInfo)
+        {
+            _userService.SetAuthInfo(userInfo);
+
+            string[] v = new string[] {
+                "signInUserInfo",
+                "signInDateTime",
+                "errorMessage"
+            };
+
+            foreach(string key in v)
+            {
+                if (HttpContext.Session[key] != null)
+                    HttpContext.Session.Remove(key);
+            }
+        }
         
         /// <summary>
         /// User checking
@@ -73,6 +90,30 @@ namespace CAST.Controllers
         [HttpPost]
         public ActionResult SignIn(User_DetailsModel model)
         {
+            if (HttpContext.Session["signInDateTime"] == null)
+                HttpContext.Session["signInDateTime"] = DateTime.Now;
+            else
+            {
+                DateTime previousDateTinme = (DateTime)HttpContext.Session["signInDateTime"];
+                DateTime currentDateTinme = DateTime.Now;
+                HttpContext.Session["signInDateTime"] = currentDateTinme;
+                TimeSpan ts = currentDateTinme - previousDateTinme;
+
+                if (ts.Seconds < 2) //Log in failure submitted directly again for some reason (maybe a double click). Do not consider this request.
+                {
+                    model.UserPassword = string.Empty;
+                    ModelState.AddModelError("UserId", (string)HttpContext.Session["errorMessage"]);
+                    return View(model);
+                }
+            }
+
+
+            if (string.IsNullOrEmpty(model.UserId))
+            {
+                ModelState.AddModelError("UserId", "Please enter employee number");
+                return View(model);
+            }
+
             // get user info 
             var userInfo = _userService.SignIn(model.UserId, model.UserPassword);
             userInfo.UserComputerName = model.UserComputerName;
@@ -93,6 +134,9 @@ namespace CAST.Controllers
                     }
                     else
                         errorMessage = "It was 3rd time you entered invalid password and the account was deactivated. Please request re-activation by your manager.";
+
+                    HttpContext.Session["errorMessage"] = errorMessage;
+                    userInfo.UserPassword = string.Empty;
 
                     ModelState.AddModelError("UserId", errorMessage);
                     return View(userInfo);
@@ -137,7 +181,7 @@ namespace CAST.Controllers
                     return Redirect(Url.Process(PredefinedProcess.ExpiredPassword));
                 }
 
-                _userService.SetAuthInfo(userInfo);
+                SetAuthInfo(userInfo);
 
                 // Redirect back
                 if (IsAutoSignIn && !urlForback.Contains("/"))
@@ -295,8 +339,7 @@ namespace CAST.Controllers
                 });
             else
             {
-                _userService.SetAuthInfo(userInfo);
-                HttpContext.Session.Remove("signInUserInfo");
+                SetAuthInfo(userInfo);
                 return Redirect(Url.ProcessNextStep());
             }
         }
@@ -324,8 +367,7 @@ namespace CAST.Controllers
                 _userService.SaveUserDetails(model);
 
                 User_DetailsModel userInfo = (User_DetailsModel)HttpContext.Session["signInUserInfo"];
-                _userService.SetAuthInfo(userInfo);
-                HttpContext.Session.Remove("signInUserInfo");
+                SetAuthInfo(userInfo);
 
                 return Redirect(Url.ProcessNextStep());
             }
@@ -415,7 +457,7 @@ namespace CAST.Controllers
                 string urlForback = _userService.GetUrlForBack() ?? "/";
                 bool IsAutoSignIn = _userService.IsAutoSignIn();
 
-                _userService.SetAuthInfo(info);
+                SetAuthInfo(info);
                 
                 // Redirect back
                 if (IsAutoSignIn && !urlForback.Contains("/"))
