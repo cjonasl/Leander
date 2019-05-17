@@ -82,25 +82,11 @@ namespace CAST.Controllers
             // If user id exist in DB
             if (!string.IsNullOrEmpty(userInfo.UserId))
             {
-                string errorMessage;
-                
-                if (userInfo.NumberOfLogInFailures.HasValue)
-                {
-                    if (userInfo.NumberOfLogInFailures.Value <= 2)
-                    {
-                        string s = userInfo.NumberOfLogInFailures.Value == 1 ? "s" : "";
-                        errorMessage = string.Format("The given password was incorrect. {0} attempt{1} remain before the account is deactivated.", 3 - userInfo.NumberOfLogInFailures.Value, s);
-                    }
-                    else
-                        errorMessage = "It was 3rd time you entered invalid password and the account was deactivated. Please request re-activation by your manager.";
-
-                    ModelState.AddModelError("UserId", errorMessage);
-                    return View(userInfo);
-                }
-
                 // If user disabled
                 if (!Convert.ToBoolean(userInfo.Enabled))
                 {
+                    string errorMessage;
+
                     if (userInfo.Lastacdt.HasValue && ((DateTime.Today - userInfo.Lastacdt.Value).Days) > 90)
                     {
                         errorMessage = string.Format("Account inactive for more than 90 days, please request re-activation by your manager. If no further login in next {0} days you will be deleted from the system.", 120 - (DateTime.Today - userInfo.Lastacdt.Value).Days);
@@ -153,7 +139,7 @@ namespace CAST.Controllers
             }
             userInfo.RunAutoDiagnostic = 0;
             userInfo.UserId = model.UserId;
-
+            
             ModelState.AddModelError("UserId", "User not found! Check login and password.");
           
             return View(userInfo);
@@ -176,9 +162,8 @@ namespace CAST.Controllers
             // If password or user not inputed get user store number
             if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password))
             {
-                var model = _userService.GetUserStoreInfo(user, password);
-
-                if (model.UserCanLogIn)
+                var model = _userService.GetUserInfo(user, password);
+                if (model.UserId != null)
                 {
                     // If no store, set flag in true
                     if (!_storeService.IsStoreInfoExist())
@@ -525,6 +510,9 @@ namespace CAST.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (HttpContext.Session["NumberofAttemptsToSetPassword"] != null)
+                    HttpContext.Session.Remove("NumberofAttemptsToSetPassword");
+
                 if (string.IsNullOrEmpty(model.Password))
                 {
                     ModelState.AddModelError("Password", "Input Password");
@@ -541,7 +529,25 @@ namespace CAST.Controllers
                         return Redirect(Url.ProcessNextStep());
                 }
             }
+            else
+            {
+                if (HttpContext.Session["NumberofAttemptsToSetPassword"] == null)
+                    HttpContext.Session["NumberofAttemptsToSetPassword"] = 0;
 
+                int numberofAttemptsToSetPassword = 1 + (int)HttpContext.Session["NumberofAttemptsToSetPassword"];
+
+                if (numberofAttemptsToSetPassword == 3)
+                {
+                    _userService.DisableUser(_userService.GetFirstTimeUserId());
+                    _userService.SetUrlForBack("");
+                    _userService.ClearInfoFromSession();
+                    HttpContext.Session.Remove("signInUserInfo");
+                    ViewBag.ChangePasswordFailure = true;
+                    HttpContext.Session.Remove("NumberofAttemptsToSetPassword");
+                }
+                else
+                    HttpContext.Session["NumberofAttemptsToSetPassword"] = numberofAttemptsToSetPassword;
+            }
             return View(model);
         }
 

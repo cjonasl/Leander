@@ -20,18 +20,22 @@ namespace CAST.Repositories
         }
 
         #region GET INFO
+
+        public User_DetailsModel SignIn(string UserId, string Password)
+        {
+            return _dataContext.Connection.Query<User_DetailsModel>("SignIn", new { UserId, Password }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+        }
+
         /// <summary>
-        /// Return true, if user exist and false - if not.
+        /// Get user information
         /// </summary>
         /// <param name="userId">Employee number</param>
-        /// <param name="password">Employee password</param>
-        /// <returns>True or false</returns>
-        public User_DetailsModel UserInfo(string UserId, string Password)
+        /// <returns>An instance of User_DetailsModel</returns>
+        public User_DetailsModel UserInformation(string UserId)
         {
-            var model = _dataContext.Connection.Query<User_DetailsModel>("SignIn",
-                                                                   new { UserId, Password },
+            var model = _dataContext.Connection.Query<User_DetailsModel>("UserInformation",
+                                                                   new { UserId},
                                                                    commandType: CommandType.StoredProcedure).FirstOrDefault();
-            //model.Enabled = true;
             return model;
         }
 
@@ -173,7 +177,12 @@ namespace CAST.Repositories
 
         }
 
-
+        public UserStoreInfo GetUserStoreInfo(string UserId, string Password)
+        {
+            return _dataContext.Connection.Query<UserStoreInfo>("GetUserStoreInfo",
+                                                                   new { UserId, Password },
+                                                                   commandType: CommandType.StoredProcedure).FirstOrDefault();
+        }
 
         #endregion
 

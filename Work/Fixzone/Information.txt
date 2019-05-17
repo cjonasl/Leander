@@ -1,4 +1,9 @@
-﻿Tools:
+﻿Publish folder: C:\Jonas\SVN\Publish
+
+Test site Argos (server hrgweb01)
+http://hrg.fieldengineer.co.uk:8080/User/SignIn
+
+Tools:
 Snipping Tool (create screen shots)
 Snagit 2018 (create video)
 

@@ -125,7 +125,12 @@ GO
 
 
 ----------------------------- Number 3 -----------------------------------------------------------------
-update userweb set password=clientid, passwordvaliduntildate = dateadd(dd,-1,getdate()) 
+DECLARE
+@DateToday datetime
+
+SET @DateYesterday = dateadd(dd, -1, getdate()) 
+
+update userweb set [password] = clientid, passwordvaliduntildate = @DateYesterday
 where clientid in (select clientid from client where clientprioritybooking=1)
 GO
 
@@ -480,51 +485,63 @@ CREATE PROCEDURE GetUserStoreInfo
 @Password varchar(max)
 AS
 DECLARE @ClientId int = NULL
-DECLARE @PasswordInDB varbinary(20) = NULL
-DECLARE @Enabled bit = NULL
-DECLARE @PasswordHashed varbinary(20) = NULL
+DECLARE @ClientName varchar(50) = NULL
+DECLARE @Enabled bit = CAST(0 AS bit)
+DECLARE @IsPasswordEmpty int = 0
 DECLARE @UserCanLogIn bit = CAST(0 AS bit) --Default
+DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HASHBYTES('SHA1', @Password) ELSE NULL END
+DECLARE @HashedPasswordInDB varbinary(20) = NULL
 
-IF (@Password IS NOT NULL)
-  SET @PasswordHashed = HASHBYTES('SHA1', @Password) 
-
-SELECT TOP 1
-  @PasswordInDB = [Password],
-  @ClientId = ClientID,
-  @Enabled = [Enabled]
+SELECT
+  @ClientId = u.ClientID,
+  @ClientName = c.ClientName,
+  @Enabled = u.[Enabled],
+  @IsPasswordEmpty = CASE WHEN [Password] IS NULL OR [Password] = HASHBYTES('SHA1', '') THEN CAST(1 AS bit) ELSE CAST(0 AS bit) END,
+  @HashedPasswordInDB = u.[Password]
 FROM
-  [UserWeb]
+  UserWeb u
+  INNER JOIN Client c ON u.ClientID = c.ClientID
 WHERE
-  UPPER(Userid) = UPPER(@UserId) 
+  UPPER(Userid) = UPPER(@UserId)
 
-IF (@ClientId IS NOT NULL AND @Enabled = 1 AND (@PasswordInDB IS NULL OR @PasswordInDB = HASHBYTES('SHA1', '')))
-  SET @UserCanLogIn = CAST(1 AS bit)
-ELSE IF (@ClientId IS NOT NULL AND @Enabled = 1)
+IF (@Enabled = 1 AND (@IsPasswordEmpty = 1 OR (@PasswordHashed = @HashedPasswordInDB))) --Log in succcess
 BEGIN
-  SET @ClientId = NULL
-
-  SELECT
-    @ClientId = ClientID
-  FROM
-    [UserWeb]
-  WHERE 
-    UPPER(Userid) = UPPER(@UserId) AND
-	[Password] = @PasswordHashed
-
-  IF (@ClientId IS NOT NULL)
-    SET @UserCanLogIn = CAST(1 AS bit)
-END
-
-IF (@UserCanLogIn = 1)
-BEGIN
-  SELECT @UserCanLogIn AS 'UserCanLogIn', @ClientId AS 'UserStoreID', ClientName AS 'UserStoreName'
-  FROM Client
-  WHERE ClientID = @ClientId
+  SELECT CAST(1 AS bit) AS 'UserCanLogIn', @ClientId AS 'UserStoreID', @ClientName AS 'UserStoreName'
 END
 ELSE
 BEGIN
-  SELECT @UserCanLogIn AS 'UserCanLogIn', NULL AS 'UserStoreID', NULL AS 'UserStoreName'
+  SELECT CAST(0 AS bit) AS 'UserCanLogIn', NULL AS 'UserStoreID', NULL AS 'UserStoreName'
 END
+GO
+
+----------------------------- Number 16 -----------------------------------------------------------------
+IF EXISTS(SELECT 1 FROM sys.objects WHERE name = 'UserInformation')
+DROP PROCEDURE UserInformation
+GO
+
+CREATE PROCEDURE [dbo].[UserInformation]
+@UserId varchar(max)
+AS
+SELECT
+  u.ClientID AS 'UserStoreID',
+  u.Userid,
+  u.Fullname AS 'UserName',
+  c.ClientName AS 'UserStoreName',
+  c.ClientPriorityBooking AS 'ClientPriorityBooking',
+  CASE WHEN PasswordValidUntilDate > getdate() THEN CAST(0 AS bit) ELSE CAST(1 AS bit) END AS 'PasswordExpired',
+  u.[Enabled],
+  CASE WHEN [Password] IS NULL OR [Password] = HASHBYTES('SHA1', '') THEN CAST(1 AS bit) ELSE CAST(0 AS bit) END AS 'IsPasswordEmpty',
+  CAST(c.GroupID AS int) AS 'GroupID',
+  u.ReminderQuestion,
+  u.ReminderAnswer,
+  u.DateOfBirth,
+  u.Lastacdt,
+  NULL AS 'NumberOfLogInFailures'
+FROM
+  UserWeb u
+  INNER JOIN Client c ON u.ClientID = c.ClientID
+WHERE
+  UPPER(Userid) = UPPER(@UserId)
 GO
 
 
@@ -694,135 +711,94 @@ GO
 
 ---------------------------- Signin -------------------------------------------------------------
 ALTER PROCEDURE [dbo].[SignIn]
-@UserId VARCHAR(MAX),
-@Password VARCHAR(MAX)
-AS 
-	DECLARE @ClientId INT = null     
-   
-	DECLARE @ClientIdInDB INT = null     
-     
-	DECLARE @FullName VARCHAR(MAX) = null    
-        
-	DECLARE @PasswordExpired BIT    
-   
-	DECLARE @Enabled BIT = 1    
-  
-	DECLARE @PasswordInDB varbinary(20)    
-     
-	declare @clientpriorityB bit
-	
-	DECLARE @Lastacdt date   
+@UserId varchar(max),
+@Password varchar(max)
+AS
+DECLARE @ClientId int = NULL
+DECLARE @FullName varchar(max) = NULL
+DECLARE @ClientName varchar(50) = NULL
+DECLARE @ClientPriorityBooking bit = CAST(0 AS bit)
+DECLARE @PasswordExpired bit = CAST(0 AS bit)
+DECLARE @Enabled bit = CAST(0 AS bit)
+DECLARE @IsPasswordEmpty int = 0
+DECLARE @GroupID int = 0
+DECLARE @ReminderQuestion varchar(60) = NULL
+DECLARE @ReminderAnswer varchar(20) = NULL
+DECLARE @DateOfBirth datetime = NULL
+DECLARE @Lastacdt datetime = NULL
+DECLARE @NumberOfLogInFailures int = NULL
+DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HASHBYTES('SHA1', @Password) ELSE NULL END
+DECLARE @DateToday datetime = getdate()
+DECLARE @HashedPasswordInDB varbinary(20) = NULL
+DECLARE @NumberOfLogInFailuresUpdateValue int = 0
 
-	DECLARE @PasswordHashed varbinary(20) = NULL
-	declare @reminderQuestion varchar(30) = NULL
-    declare @reminderAnswer varchar(30) = NULL
-	declare @DateOfBirth datetime = NULL
-	declare @NumberOfLogInFailures int = NULL
-	declare @NumberOfLogInFailuresUpdateValue int
- -- check is password empty
-     
-	 IF (@Password IS NOT NULL)
-         SET @PasswordHashed = HASHBYTES('SHA1', @Password)     
-     
-	SELECT TOP 1
-	  @PasswordInDB = [Password],
-	  @ClientIdInDB = [UserWeb].ClientID,
-	  @NumberOfLogInFailures = NumberOfLogInFailures,
-	  @Enabled = [Enabled]
-	FROM
-	  [UserWeb]
-	WHERE
-	  UPPER(Userid) = UPPER(@UserId)    
-  
+SELECT
+  @ClientId = u.ClientID,
+  @FullName = u.Fullname,
+  @ClientName = c.ClientName,
+  @ClientPriorityBooking  = c.ClientPriorityBooking,
+  @PasswordExpired = CASE WHEN PasswordValidUntilDate > @DateToday THEN CAST(0 AS bit) ELSE CAST(1 AS bit) END,
+  @Enabled = u.[Enabled],
+  @IsPasswordEmpty = CASE WHEN [Password] IS NULL OR [Password] = HASHBYTES('SHA1', '') THEN CAST(1 AS bit) ELSE CAST(0 AS bit) END,
+  @GroupID = CAST(c.GroupID AS int),
+  @ReminderQuestion = u.ReminderQuestion,
+  @ReminderAnswer = u.ReminderAnswer,
+  @DateOfBirth = u.DateOfBirth,
+  @Lastacdt = u.Lastacdt,
+  @NumberOfLogInFailures = u.NumberOfLogInFailures,
+  @HashedPasswordInDB = u.[Password]
+FROM
+  UserWeb u
+  INNER JOIN Client c ON u.ClientID = c.ClientID
+WHERE
+  UPPER(Userid) = UPPER(@UserId)
 
-   -- if password empty but user exist    
-    
-	IF ((@PasswordInDB is null or @PasswordInDB = HASHBYTES('SHA1', '')) AND @ClientIdInDB is not null)
-	BEGIN    
-   
-  -- if password empty    
-		UPDATE
-		  [UserWeb]
-		SET
-		  Lastacdt = getdate(),
-		  NumberOfLogInFailures = 0
-		WHERE
-		  UPPER(Userid) = UPPER(@UserId) AND
-		  [Enabled] = 1
-		
-		select @ClientId = ClientID, @FullName = Fullname, @Enabled = [Enabled],    @PasswordExpired = case
-        when PasswordValidUntilDate > GETDATE() then CAST(0 as bit)  else CAST(1 as bit)  end,
-		@Lastacdt = Lastacdt,@reminderQuestion=ReminderQuestion,@reminderAnswer=ReminderAnswer,@DateOfBirth=DateOfBirth
-    	from [UserWeb]  where upper(UserId) = upper(@UserId)      
-    
-		SELECT @ClientId as 'UserStoreID', @UserId as 'UserId', @FullName as 'UserName', ClientName as 'UserStoreName',     
-		CAST(ClientPriorityBooking as BIT) as 'ClientPriorityBooking', @PasswordExpired as 'PasswordExpired', CAST(@Enabled as int) as 'Enabled',    
-        CAST(1 as int) as 'IsPasswordEmpty',Cast(GroupID as int) as GroupID,
-		@Lastacdt AS 'Lastacdt',@reminderQuestion as ReminderQuestion,@reminderAnswer as ReminderAnswer,@DateOfBirth AS DateOfBirth, NULL AS 'NumberOfLogInFailures'
-		FROM Client  
-		WHERE ClientID = @ClientId
-	END 
-	ELSE
-	BEGIN  
-		SELECT
-		  @ClientId = ClientID,
-		  @FullName = Fullname,
-		  @Enabled = [Enabled],
-		  @PasswordExpired = case when PasswordValidUntilDate > GETDATE() then CAST(0 as bit) else CAST(1 as bit) end,
-		  @Lastacdt = Lastacdt,@reminderQuestion=ReminderQuestion,@reminderAnswer=ReminderAnswer,@DateOfBirth=DateOfBirth
-	    FROM
-		  [UserWeb]
-		WHERE 
-		  UPPER(Userid) = UPPER(@UserId) AND
-		  [Password] = @PasswordHashed
-     
-        IF (@ClientId is null)    
-	    BEGIN
-		  IF (@NumberOfLogInFailures IS NOT NULL AND @Enabled = 1)
-		  BEGIN
-		    SET @NumberOfLogInFailures = @NumberOfLogInFailures + 1
+IF (@Enabled = 1 AND (@IsPasswordEmpty = 1 OR (@PasswordHashed = @HashedPasswordInDB))) --Log in succcess
+BEGIN
+  UPDATE
+    UserWeb
+  SET
+    Lastacdt = getdate(),
+    NumberOfLogInFailures = 0
+  WHERE
+    UPPER(Userid) = UPPER(@UserId)
+END
+
+IF (@Enabled = 1 AND @IsPasswordEmpty = 0 AND @PasswordHashed IS NOT NULL AND @PasswordHashed <> @HashedPasswordInDB) --Handle NumberOfLogInFailures
+BEGIN
+  SET @NumberOfLogInFailures = @NumberOfLogInFailures + 1
 			
-			IF (@NumberOfLogInFailures = 3) --Disable user and reset NumberOfLogInFailures to 0
-			BEGIN
-		      exec dbo.DisableUser @UserId
-			  SET @NumberOfLogInFailuresUpdateValue = 0
-			END
-			ELSE
-			  SET @NumberOfLogInFailuresUpdateValue = @NumberOfLogInFailures
+  IF (@NumberOfLogInFailures = 3) --Disable user and reset NumberOfLogInFailures to 0
+  BEGIN
+    exec dbo.DisableUser @UserId
+    SET @NumberOfLogInFailuresUpdateValue = 0
+	SET @Enabled = 0
+  END
+  ELSE
+    SET @NumberOfLogInFailuresUpdateValue = @NumberOfLogInFailures
 
-			UPDATE [UserWeb]
-			SET NumberOfLogInFailures = @NumberOfLogInFailuresUpdateValue
-			WHERE UPPER(Userid) = UPPER(@UserId)
-		  END
-		  ELSE IF (@NumberOfLogInFailures IS NOT NULL AND @Enabled = 0)
-		    SET @NumberOfLogInFailures = NULL  --Only handle NumberOfLogInFailures when account is enabled
-		  ELSE
-		    SET @UserId = NULL --Indicate that user does not exist
-	      
-		  SELECT null as 'UserStoreID', @UserId as 'UserId', null as 'UserName', null as 'UserStoreName', CAST(0 as BIT) as 'ClientPriorityBooking',    
-		  CAST(@Enabled as int) as 'Enabled', CAST(0 as int) as 'IsPasswordEmpty', CAST(0 as int ) as GroupID      ,'' as ReminderQuestion,'' as ReminderAnswer, NULL as DateOfBirth, @NumberOfLogInFailures as 'NumberOfLogInFailures'
-	    END     
-	    ELSE       
-        BEGIN    
-          --SetUp the LastLogin date    
-		  UPDATE
-		    [UserWeb]
-		  SET
-		    Lastacdt = getdate(),
-		    NumberOfLogInFailures = 0
-		  WHERE
-		    UPPER(Userid) = UPPER(@UserId) AND
-			[Password] = @PasswordHashed AND
-			[Enabled] = 1
-    
-		  SELECT @ClientId as 'UserStoreID', @UserId as 'UserId', @FullName as 'UserName', ClientName as 'UserStoreName',     
-		  CAST(ClientPriorityBooking as BIT) as 'ClientPriorityBooking', @PasswordExpired as 'PasswordExpired', CAST(@Enabled as int) as 'Enabled',    
- 
-		  CAST(0 as int) as 'IsPasswordEmpty' ,CAST(GroupID as int) as GroupID, @Lastacdt AS 'Lastacdt', @reminderQuestion as ReminderQuestion, @reminderAnswer as ReminderAnswer, @DateOfBirth AS DateOfBirth, NULL AS 'NumberOfLogInFailures' FROM Client 
-    
-		  WHERE ClientID = @ClientId  
-        END
-    END
+  UPDATE UserWeb
+  SET NumberOfLogInFailures = @NumberOfLogInFailuresUpdateValue
+  WHERE UPPER(Userid) = UPPER(@UserId)
+END
+ELSE
+  SET @NumberOfLogInFailures = NULL
+
+SELECT
+  @ClientId AS 'UserStoreID',
+  @UserId AS 'UserId',
+  @FullName AS 'UserName',
+  @ClientName AS 'UserStoreName',
+  @ClientPriorityBooking AS 'ClientPriorityBooking',
+  @PasswordExpired AS 'PasswordExpired',
+  @Enabled AS 'Enabled',
+  @IsPasswordEmpty AS 'IsPasswordEmpty',
+  @GroupID AS 'GroupID',
+  @ReminderQuestion AS 'ReminderQuestion', 
+  @ReminderAnswer AS 'ReminderAnswer',
+  @DateOfBirth AS 'DateOfBirth',
+  @Lastacdt AS 'Lastacdt',
+  @NumberOfLogInFailures AS 'NumberOfLogInFailures'
 GO
 
 

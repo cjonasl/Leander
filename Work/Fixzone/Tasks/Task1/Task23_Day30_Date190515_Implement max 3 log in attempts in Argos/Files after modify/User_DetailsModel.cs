@@ -50,7 +50,7 @@ namespace CAST.ViewModels.User
         /// <summary>
         /// Is user enabled
         /// </summary>
-        public int Enabled { get; set; }
+        public bool Enabled { get; set; }
 
         /// <summary>
         /// Is password empty or not

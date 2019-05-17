@@ -154,10 +154,6 @@ namespace CAST.Services
             return info;
         }
 
-        public UserStoreInfo GetUserStoreInfo(string userId, string password)
-        {
-            return _reporsitory.GetUserStoreInfo(userId, password);
-        }
 
         public bool GetUserInfo(string userId)
         {

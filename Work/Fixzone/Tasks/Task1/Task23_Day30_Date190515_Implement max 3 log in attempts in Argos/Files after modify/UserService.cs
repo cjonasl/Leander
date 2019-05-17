@@ -146,14 +146,26 @@ namespace CAST.Services
         /// <param name="userId"></param>
         /// <param name="password"></param>
         /// <returns>Model where the field IsUserExist shows if this user exists in the database</returns>
-        public User_DetailsModel GetUserInfo(string userId, string password)
+        public User_DetailsModel SignIn(string userId, string password)
         {
             var _store = new StoreService(_dataContext);
-            var info = _reporsitory.UserInfo(userId, password);
+            var info = _reporsitory.SignIn(userId, password);
             info.RunAutoDiagnostic = Convert.ToInt32(!_store.IsAutoDiagnosted);
             return info;
         }
 
+        public User_DetailsModel GetUserInformation(string userId)
+        {
+            var _store = new StoreService(_dataContext);
+            var info = _reporsitory.UserInformation(userId);
+            info.RunAutoDiagnostic = Convert.ToInt32(!_store.IsAutoDiagnosted);
+            return info;
+        }
+
+        public UserStoreInfo GetUserStoreInfo(string userId, string password)
+        {
+            return _reporsitory.GetUserStoreInfo(userId, password);
+        }
 
         public bool GetUserInfo(string userId)
         {

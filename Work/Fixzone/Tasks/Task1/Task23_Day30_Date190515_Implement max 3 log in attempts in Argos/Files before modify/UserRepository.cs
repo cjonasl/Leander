@@ -173,12 +173,7 @@ namespace CAST.Repositories
 
         }
 
-        public UserStoreInfo GetUserStoreInfo(string UserId, string Password)
-        {
-            return _dataContext.Connection.Query<UserStoreInfo>("GetUserStoreInfo",
-                                                                   new { UserId, Password },
-                                                                   commandType: CommandType.StoredProcedure).FirstOrDefault();
-        }
+
 
         #endregion
 

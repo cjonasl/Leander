@@ -1,2 +1,7 @@
 ﻿Dag 30:
 Onsdag den 15 maj 2019
+Jag ägnade hela arbetsdagen åt att i Argos implementera
+max 3 inloggningsförsök och jag skapade task23 för det.
+Vid 13.30-tiden intog jag kaffe, bananer och smörgås till
+lunch. Jag avslutade arbetsdagen ca. kl. 17.30 och
+promenerade hem.
