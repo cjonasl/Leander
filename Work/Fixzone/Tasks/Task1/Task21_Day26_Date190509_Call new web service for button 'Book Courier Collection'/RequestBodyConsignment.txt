@@ -1,0 +1,1 @@
+﻿{"consignment_reference":"80000883","Token":"628af98fb045bdb636452204fde483d6","service_key":"DPDNEXT","to_address":{"name":"David Xu","line_1":"35 Ford Street","city":"Derby","postcode":"DE1 1EE","country":"GB"},"parcels":[{"reference":"80000883-1","weight":3000,"width":20,"length":10,"depth":15}]}

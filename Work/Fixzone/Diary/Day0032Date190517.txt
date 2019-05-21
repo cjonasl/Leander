@@ -1,2 +1,14 @@
 ﻿Dag 32:
 Fredag den 17 maj 2019
+Kath fyllde år och vi sjöng ”Happy Birthday” för honom
+och han fick ett födelsedagskort. Det fanns också en
+chokladtårta som jag tog en bit av. Jag rättade/förbättrade
+lösningen jag gjorde i task23 (Implement max 3 log in
+attempts in Argos). Kath ville bjuda oss på lunch och det
+bestämdes att vi beställer mat online på Nandos. Jag
+beställde kyckling, pommes frites, ”garlic bread” och
+Coca-Cola och vi åt tillsammans ca. kl. 13.30. Jag blev
+klar med task23 och fortsatte därefter arbeta med task21
+(Call new web service for button 'Book Courier Collection').
+Jag avslutade arbetsdagen drygt kl. 17.30 och promenerade
+hemåt.

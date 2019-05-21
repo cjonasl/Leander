@@ -29,4 +29,7 @@ courier = delivery service
 
 fzshipmate is a "Rest webservice" (according to David on Skype 2019-05-14)
 
-https://www.shipmate.co.uk/guides/api 
+https://www.shipmate.co.uk/guides/api
+
+
+Log in table OnlineBookingLog
