@@ -2395,3 +2395,23 @@ Task23_Day30_Date190515_Implement max 3 log in attempts in Argos
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+121
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-21 12:07:30
+
+----- New property -----
+
+Task24_Day34_Date190521_Correct error in Argos
+
+----- New property -----
+
+Task,Fixzone

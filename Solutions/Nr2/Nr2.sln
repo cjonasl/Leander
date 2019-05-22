@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular2", "Angular2\Angula
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication4", "WebApplication4\WebApplication4.csproj", "{66A45C2C-5171-47A8-8AA7-DDA67B9F56D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFzShipMate", "TestFzShipMate\TestFzShipMate.csproj", "{CA892FFD-11CB-4473-898F-7B10790DBFBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{66A45C2C-5171-47A8-8AA7-DDA67B9F56D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66A45C2C-5171-47A8-8AA7-DDA67B9F56D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66A45C2C-5171-47A8-8AA7-DDA67B9F56D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA892FFD-11CB-4473-898F-7B10790DBFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA892FFD-11CB-4473-898F-7B10790DBFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA892FFD-11CB-4473-898F-7B10790DBFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA892FFD-11CB-4473-898F-7B10790DBFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

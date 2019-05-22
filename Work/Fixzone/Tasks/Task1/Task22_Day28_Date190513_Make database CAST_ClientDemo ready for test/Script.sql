@@ -487,7 +487,7 @@ AS
 DECLARE @ClientId int = NULL
 DECLARE @ClientName varchar(50) = NULL
 DECLARE @Enabled bit = CAST(0 AS bit)
-DECLARE @IsPasswordEmpty int = 0
+DECLARE @IsPasswordEmpty bit = CAST(0 AS bit)
 DECLARE @UserCanLogIn bit = CAST(0 AS bit) --Default
 DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HASHBYTES('SHA1', @Password) ELSE HASHBYTES('SHA1', '') END
 DECLARE @HashedPasswordInDB varbinary(20) = NULL
@@ -720,7 +720,7 @@ DECLARE @ClientName varchar(50) = NULL
 DECLARE @ClientPriorityBooking bit = CAST(0 AS bit)
 DECLARE @PasswordExpired bit = CAST(0 AS bit)
 DECLARE @Enabled bit = CAST(0 AS bit)
-DECLARE @IsPasswordEmpty int = 0
+DECLARE @IsPasswordEmpty bit = CAST(0 AS bit)
 DECLARE @GroupID int = 0
 DECLARE @ReminderQuestion varchar(60) = NULL
 DECLARE @ReminderAnswer varchar(20) = NULL
