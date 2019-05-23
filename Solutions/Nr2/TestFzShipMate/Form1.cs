@@ -28,6 +28,8 @@ namespace TestFzShipMate
         }
 
         private void HandleTextBoxes(
+            string ServiceID,
+            string RemittanceID,
             string consignment_reference,
             string Token,
             string service_key,
@@ -44,6 +46,28 @@ namespace TestFzShipMate
             string Tracking_reference
             )
         {
+            if (string.IsNullOrEmpty(ServiceID))
+            {
+                this.txt_ServiceID.Clear();
+                this.txt_ServiceID.Enabled = false;
+            }
+            else
+            {
+                this.txt_ServiceID.Text = ServiceID;
+                this.txt_ServiceID.Enabled = true;
+            }
+
+            if (string.IsNullOrEmpty(RemittanceID))
+            {
+                this.txt_RemittanceID.Clear();
+                this.txt_RemittanceID.Enabled = false;
+            }
+            else
+            {
+                this.txt_RemittanceID.Text = RemittanceID;
+                this.txt_RemittanceID.Enabled = true;
+            }
+
             if (string.IsNullOrEmpty(consignment_reference))
             {
                 this.txt_consignment_reference.Clear();
@@ -211,35 +235,35 @@ namespace TestFzShipMate
                 switch (name)
                 {
                     case "Login":
-                        HandleTextBoxes("", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                        HandleTextBoxes("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                         _fzShipMateAction = FzShipMateAction.Login;
                         break;
                     case "Services":
-                        HandleTextBoxes("", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                        HandleTextBoxes("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                         _fzShipMateAction = FzShipMateAction.Services;
                         break;
                     case "CreateConsignment":
-                        HandleTextBoxes("80000883", "628af98fb045bdb636452204fde483d6", "DPDNEXT", "David Xu", "35 Ford Street", "Derby", "DE1 1EE", "GB", "80000883-1", "3000", "20", "10", "15", "");
+                        HandleTextBoxes("123456", "23456", "80000883", "628af98fb045bdb636452204fde483d6", "DPDNEXT", "David Xu", "35 Ford Street", "Derby", "DE1 1EE", "GB", "80000883-1", "3000", "20", "10", "15", "");
                         _fzShipMateAction = FzShipMateAction.CreateConsignment;
                         break;
                     case "TrackingByConsignment":
-                        HandleTextBoxes("80000885", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "");
+                        HandleTextBoxes("", "", "80000885", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "");
                         _fzShipMateAction = FzShipMateAction.TrackingByConsignment;
                         break;
                     case "TrackingByParcels":
-                        HandleTextBoxes("", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "15553245200014");
+                        HandleTextBoxes("", "", "", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "15553245200014");
                         _fzShipMateAction = FzShipMateAction.TrackingByParcels;
                         break;
                     case "CancelConsignment":
-                        HandleTextBoxes("", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "80000883", "", "", "", "", "");
+                        HandleTextBoxes("", "", "", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "80000883", "", "", "", "", "");
                         _fzShipMateAction = FzShipMateAction.CancelConsignment;
                         break;
                     case "Label":
-                        HandleTextBoxes("", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "15553245200011");
+                        HandleTextBoxes("", "", "", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "15553245200011");
                         _fzShipMateAction = FzShipMateAction.Label;
                         break;
                     case "PrintLabel":
-                        HandleTextBoxes("", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "15553245200014");
+                        HandleTextBoxes("", "", "", "628af98fb045bdb636452204fde483d6", "", "", "", "", "", "", "", "", "", "", "", "15553245200014");
                         _fzShipMateAction = FzShipMateAction.PrintLabel;
                         break;
                     default:
@@ -270,7 +294,7 @@ namespace TestFzShipMate
                         List <Parcel> list = new List<Parcel>();
                         Parcel parcel = new Parcel(this.txt_reference.Text, int.Parse(this.txt_weight.Text), int.Parse(this.txt_width.Text), int.Parse(this.txt_length.Text), int.Parse(this.txt_depth.Text));
                         list.Add(parcel);
-                        consignmentResponse = fzShipMate.CreateConsignment(new ConsignmentRequest(this.txt_consignment_reference.Text, this.txt_Token.Text, this.txt_service_key.Text, new ToAddressRequest(this.txt_name.Text, this.txt_line_1.Text, this.txt_city.Text, this.txt_postcode.Text, this.txt_country.Text), list));
+                        consignmentResponse = fzShipMate.CreateConsignment(new ConsignmentRequest(int.Parse(this.txt_ServiceID.Text), int.Parse(this.txt_RemittanceID.Text), this.txt_consignment_reference.Text, this.txt_Token.Text, this.txt_service_key.Text, new ToAddressRequest(this.txt_name.Text, this.txt_line_1.Text, this.txt_city.Text, this.txt_postcode.Text, this.txt_country.Text), list));
                         this.txtResponse.Text = consignmentResponse.ToString();
                         break;
                     case FzShipMateAction.TrackingByConsignment:

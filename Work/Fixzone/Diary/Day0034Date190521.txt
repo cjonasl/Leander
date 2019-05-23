@@ -1,2 +1,12 @@
 ﻿Dag 34:
 Tisdag den 21 maj 2019
+På förmiddagen studerade jag kod i solution MobilePortal.sln
+för att kunna göra task21. Mark meddelade att det blir fel
+då en ny användare loggar in i Argos och jag tittade på det.
+Felet berodde på att datatypen på ”IsPasswordEmpty”, som ska
+vara bool (eller bit i T-sql), var int på en del ställen och
+jag korrigerade felet och dokumenterade i task24. Vid 12.45-
+tiden intog jag två smörgåsar, en banan och kaffe till lunch.
+Efter lunchen testade jag ”Shipmate service” och som hjälp
+skapade jag ”Windows Forms” applikationen ”TestFzShipMate”.
+Jag avslutade arbetsdagen drygt kl. 17.30 och promenerade hem.

@@ -2415,3 +2415,23 @@ Task24_Day34_Date190521_Correct error in Argos
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+122
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-05-22 10:24:40
+
+----- New property -----
+
+Task25_Day35_Date190522_Create Windows Forms application to test Shipmate service
+
+----- New property -----
+
+Task,Fixzone

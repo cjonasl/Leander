@@ -169,14 +169,18 @@ namespace Mobile.Portal.BLL.FzShipMate
 
     public class ConsignmentRequest
     {
+        public int ServiceID { get; set; }
+        public int RemittanceID { get; set; }
         public string consignment_reference { get; set; }
         public string Token { get; set; }
         public string service_key { get; set; }
         public ToAddressRequest to_address { get; set; }
         public List<Parcel> parcels { get; set; }
 
-        public ConsignmentRequest(string consignmentReference, string token, string serviceKey, ToAddressRequest toAddress, List<Parcel> parcels)
+        public ConsignmentRequest(int serviceID, int remittanceID, string consignmentReference, string token, string serviceKey, ToAddressRequest toAddress, List<Parcel> parcels)
         {
+            this.ServiceID = serviceID;
+            this.RemittanceID = remittanceID;
             this.consignment_reference = consignmentReference.ReplaceNullAndWhiteSpaceWithEmptyString();
             this.Token = token.ReplaceNullAndWhiteSpaceWithEmptyString();
             this.service_key = serviceKey.ReplaceNullAndWhiteSpaceWithEmptyString();
@@ -186,8 +190,8 @@ namespace Mobile.Portal.BLL.FzShipMate
 
         public override string ToString()
         {
-            return string.Format("(string) consignment_reference = {0}\r\n(string) Token = {1}\r\n(string) service_key = {2}\r\n(ToAddressRequest) to_address =\r\n{3}\r\n(List<Parcel>) parcels =\r\n{4}",
-                consignment_reference.Write(), Token.Write(), service_key.Write(), to_address.ToString(), parcels.ToString());
+            return string.Format("(int) ServiceID = {0}\r\n(int) RemittanceID = {1}\r\n(string) consignment_reference = {2}\r\n(string) Token = {3}\r\n(string) service_key = {4}\r\n(ToAddressRequest) to_address =\r\n{5}\r\n(List<Parcel>) parcels =\r\n{6}",
+                ServiceID.ToString(), RemittanceID.ToString(), consignment_reference.Write(), Token.Write(), service_key.Write(), to_address.ToString(), parcels.ToString());
         }
 
         public string ToJson()
@@ -497,7 +501,7 @@ namespace Mobile.Portal.BLL.FzShipMate
 
         public TrackingByParcelsResponse TrackingByParcels(string trackingReference)
         {
-            return MakeWebRequest<TrackingByParcelsResponse>(GetUrl(FzShipMateAction.TrackingByConsignment, trackingReference: trackingReference), null);
+            return MakeWebRequest<TrackingByParcelsResponse>(GetUrl(FzShipMateAction.TrackingByParcels, trackingReference: trackingReference), null);
         }
 
         public CancelConsignmentResponse CancelConsignments(string consignmentReference)
@@ -512,7 +516,7 @@ namespace Mobile.Portal.BLL.FzShipMate
 
         public ConsignmentResponse PrintLabel(string trackingReference)
         {
-            return MakeWebRequest<ConsignmentResponse>(GetUrl(FzShipMateAction.Label, trackingReference: trackingReference), null);
+            return MakeWebRequest<ConsignmentResponse>(GetUrl(FzShipMateAction.PrintLabel, trackingReference: trackingReference), null);
         }
     }
 }
