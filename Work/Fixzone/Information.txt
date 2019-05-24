@@ -1,6 +1,26 @@
-﻿Live site: https://portal.fieldengineer.co.uk/Fixzone/Admin/Login
+﻿https://ssm.pacificagroup.co.uk/SelfService/
+Username: 1199
+Password: Your national insurance number with the last letter lowercase (SZ526264a)
+In which town were you born? Karlstad
+What is the name of your first pet? Sara
+What is the name of your last school? Tingvalla
+What is your favourite colour? Red
+What is your mothers maiden name? Ljungberg
+
+Live site: https://portal.fieldengineer.co.uk/Fixzone/Admin/Login
 Username: fixjonas
 Password: Ping68pong!
+Step 1: Click menu "Client List"
+Step 2: Serach for "3CCH23DE"
+Step 3: Click button "Details"
+Step 4: Click button "Login to E/C (PILOT)"
+Alternative: Go directly to site "https://portal.fieldengineer.co.uk/MobilePilot/Login.aspx" (Username: 3CCH23DE and Password: CH24)
+
+---- To make job complete for test job in "https://portal.fieldengineer.co.uk/MobilePilot/Login.aspx"
+UPDATE SAEDICalls
+SET  StatusID = 54
+WHERE _id = 2670703
+------------------------------
 
 Log in information: L:\FixzoneUKLtd\documents\Login Details - 19-12-2018.pdf
 Password: rjd2rjd2

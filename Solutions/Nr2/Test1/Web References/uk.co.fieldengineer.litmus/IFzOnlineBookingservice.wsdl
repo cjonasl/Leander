@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://soap.service.callcenterv2.servicepower.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://soap.service.servicepower.com" xmlns:ns1="urn:FzOnlineBookingIntf" name="IFzOnlineBookingservice" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns="urn:FzOnlineBookingIntf" targetNamespace="urn:FzOnlineBookingIntf">
+      <xs:complexType name="TRequestDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="SaediID" type="xs:string" />
+          <xs:element name="CurrentServiceID" type="xs:int" />
+          <xs:element name="ClientID" type="xs:int" />
+          <xs:element name="ClientSAEDIID" type="xs:string" />
+          <xs:element name="ClientPassword" type="xs:string" />
+          <xs:element name="RequestedDate" type="xs:string" />
+          <xs:element name="RequestedTime" type="xs:string" />
+          <xs:element name="RequestedDiaryMinutes" type="xs:int" />
+          <xs:element name="RequestedEngineerID" type="xs:int" />
+          <xs:element name="EngineerSAEDIID" type="xs:string" />
+          <xs:element name="BookImmediately" type="xs:boolean" />
+          <xs:element name="CreateServiceCall" type="xs:boolean" />
+          <xs:element name="BookingOptions" type="xs:int" />
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="AddressLine1" type="xs:string" />
+          <xs:element name="Town" type="xs:string" />
+          <xs:element name="Skill" type="xs:string" />
+          <xs:element name="ApplianceCode" type="xs:string" />
+          <xs:element name="UniqueDates" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TResponseDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+          <xs:element name="RequestSuccess" type="xs:boolean" />
+          <xs:element name="AllocatedDiaryEntID" type="xs:int" />
+          <xs:element name="AllocatedServiceID" type="xs:int" />
+          <xs:element name="AllocatedEngineerID" type="xs:int" />
+          <xs:element name="BookingOptionResult" type="ns1:TBookOptionResult" />
+          <xs:element name="applianceProblemId" type="xs:string" />
+          <xs:element name="ConsumerId" type="xs:string" />
+          <xs:element name="ProductObjectId" type="xs:string" />
+          <xs:element name="GroupId" type="xs:string" />
+          <xs:element name="AllocatedCentreCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TBookOptionResult">
+        <xs:complexContent mixed="false">
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema" />
+            <xs:attribute xmlns:n1="http://schemas.xmlsoap.org/wsdl/" n1:arrayType="ns1:TOneBookOptionResult[]" ref="soapenc:arrayType" />
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TOneBookOptionResult">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="EngineerName" type="xs:string" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="Calls" type="xs:int" />
+          <xs:element name="Distance" type="xs:double" />
+          <xs:element name="Priority" type="xs:int" />
+          <xs:element name="EventDate" type="xs:dateTime" />
+          <xs:element name="Description" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TAvailableRequestDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="PreferredVisitDate" type="xs:string" />
+          <xs:element name="RequestedEngineerID" type="xs:int" />
+          <xs:element name="BookImmediately" type="xs:boolean" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="BookToManual" type="xs:boolean" />
+          <xs:element name="BookingOptions" type="xs:int" />
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="Skill" type="xs:string" />
+          <xs:element name="ApplianceCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TAvailableResponseDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+          <xs:element name="RequestSuccess" type="xs:boolean" />
+          <xs:element name="AvailableList" type="ns1:TAvailableList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TAvailableList">
+        <xs:complexContent mixed="false">
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema" />
+            <xs:attribute xmlns:n1="http://schemas.xmlsoap.org/wsdl/" n1:arrayType="ns1:TOneAvailableResult[]" ref="soapenc:arrayType" />
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TOneAvailableResult">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="EngineerName" type="xs:string" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="Calls" type="xs:int" />
+          <xs:element name="Distance" type="xs:double" />
+          <xs:element name="Priority" type="xs:int" />
+          <xs:element name="EventDate" type="xs:dateTime" />
+          <xs:element name="Description" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TFollowOnAvailableRequestDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="UserName" type="xs:string" />
+          <xs:element name="Password" type="xs:string" />
+          <xs:element name="FromID" type="xs:string" />
+          <xs:element name="ClientRef" type="xs:string" />
+          <xs:element name="RequestedDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TFollowOnAvailableResponseDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+          <xs:element name="RequestSuccess" type="xs:boolean" />
+          <xs:element name="AvailableList" type="ns1:TFollowOnAvailableList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TFollowOnAvailableList">
+        <xs:complexContent mixed="false">
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema" />
+            <xs:attribute xmlns:n1="http://schemas.xmlsoap.org/wsdl/" n1:arrayType="ns1:TFollowOnOneAvailableResult[]" ref="soapenc:arrayType" />
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TFollowOnOneAvailableResult">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="TravelDistance" type="xs:double" />
+          <xs:element name="AvailableDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TCustomer">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="CustomerID" type="xs:int" />
+          <xs:element name="ClientCustRef" type="xs:string" />
+          <xs:element name="CustomerType" type="xs:int" />
+          <xs:element name="Title" type="xs:string" />
+          <xs:element name="Firstname" type="xs:string" />
+          <xs:element name="Surname" type="xs:string" />
+          <xs:element name="Addr1" type="xs:string" />
+          <xs:element name="Addr2" type="xs:string" />
+          <xs:element name="Addr3" type="xs:string" />
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="Town" type="xs:string" />
+          <xs:element name="County" type="xs:string" />
+          <xs:element name="Telephone" type="xs:string" />
+          <xs:element name="Telephone2" type="xs:string" />
+          <xs:element name="Fax" type="xs:string" />
+          <xs:element name="Email" type="xs:string" />
+          <xs:element name="ClientID" type="xs:int" />
+          <xs:element name="CustomerOnStop" type="xs:boolean" />
+          <xs:element name="CustomerOnStopReason" type="xs:string" />
+          <xs:element name="CustomerNotes" type="xs:string" />
+          <xs:element name="RetailClientID" type="xs:int" />
+          <xs:element name="Telephone3" type="xs:string" />
+          <xs:element name="PreferredContactMethod" type="xs:int" />
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorMsg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TCustomerContact">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="CustomerID" type="xs:int" />
+          <xs:element name="CustomerContactID" type="xs:int" />
+          <xs:element name="Title" type="xs:string" />
+          <xs:element name="Firstname" type="xs:string" />
+          <xs:element name="Name" type="xs:string" />
+          <xs:element name="Position" type="xs:string" />
+          <xs:element name="TelNo1" type="xs:string" />
+          <xs:element name="TelNo2" type="xs:string" />
+          <xs:element name="Email" type="xs:string" />
+          <xs:element name="Addr1" type="xs:string" />
+          <xs:element name="Addr2" type="xs:string" />
+          <xs:element name="Addr3" type="xs:string" />
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="Town" type="xs:string" />
+          <xs:element name="County" type="xs:string" />
+          <xs:element name="Fax" type="xs:string" />
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorMsg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TCustomerAppliance">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="CustomerID" type="xs:int" />
+          <xs:element name="CustAplID" type="xs:int" />
+          <xs:element name="ApplianceCD" type="xs:string" />
+          <xs:element name="Model" type="xs:string" />
+          <xs:element name="ModelDesc" type="xs:string" />
+          <xs:element name="SupplyDat" type="xs:string" />
+          <xs:element name="SNO" type="xs:string" />
+          <xs:element name="MFR" type="xs:string" />
+          <xs:element name="PolicyNumber" type="xs:string" />
+          <xs:element name="AuthNo" type="xs:string" />
+          <xs:element name="PolicyStartDate" type="xs:dateTime" />
+          <xs:element name="PolicyExpireDate" type="xs:dateTime" />
+          <xs:element name="PNC" type="xs:string" />
+          <xs:element name="RegNo" type="xs:string" />
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorMsg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TOnlineBookRequestDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ServiceID" type="xs:int" />
+          <xs:element name="CustomerID" type="xs:int" />
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="CustAplID" type="xs:int" />
+          <xs:element name="ApplianceCD" type="xs:string" />
+          <xs:element name="Model" type="xs:string" />
+          <xs:element name="ModelDesc" type="xs:string" />
+          <xs:element name="SupplyDat" type="xs:string" />
+          <xs:element name="SNO" type="xs:string" />
+          <xs:element name="MFR" type="xs:string" />
+          <xs:element name="PolicyNumber" type="xs:string" />
+          <xs:element name="PolicyExpireyDate" type="xs:dateTime" />
+          <xs:element name="AltCode" type="xs:string" />
+          <xs:element name="ReportFault" type="xs:string" />
+          <xs:element name="ClientID" type="xs:int" />
+          <xs:element name="ClientRef" type="xs:string" />
+          <xs:element name="StatusID" type="xs:int" />
+          <xs:element name="SubStatusID" type="xs:int" />
+          <xs:element name="ClientLabourID" type="xs:int" />
+          <xs:element name="CustomerContactID" type="xs:int" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="VisitCode" type="xs:string" />
+          <xs:element name="VisitDate" type="xs:dateTime" />
+          <xs:element name="Skills" type="xs:string" />
+          <xs:element name="AppointmentNote" type="xs:string" />
+          <xs:element name="RequestedEarlierAppt" type="xs:boolean" />
+          <xs:element name="RequestedLaterAppt" type="xs:boolean" />
+          <xs:element name="JobID" type="xs:int" />
+          <xs:element name="AuthNo" type="xs:string" />
+          <xs:element name="SlotID" type="xs:int" />
+          <xs:element name="OrigRef" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TOnlineBookResponseDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="BookSuccessfully" type="xs:boolean" />
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorMsg" type="xs:string" />
+          <xs:element name="ServiceID" type="xs:int" />
+          <xs:element name="CustomerID" type="xs:int" />
+          <xs:element name="CustomerName" type="xs:string" />
+          <xs:element name="DiaryID" type="xs:int" />
+          <xs:element name="FraudCheckCode" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TOnlineBookRequestDetails2">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ServiceID" type="xs:int" />
+          <xs:element name="CustomerTitle" type="xs:string" />
+          <xs:element name="CustomerForename" type="xs:string" />
+          <xs:element name="CustomerSurname" type="xs:string" />
+          <xs:element name="CustomerPostcode" type="xs:string" />
+          <xs:element name="CustomerStreet" type="xs:string" />
+          <xs:element name="CustomerAddressTown" type="xs:string" />
+          <xs:element name="CustomerCounty" type="xs:string" />
+          <xs:element name="CustomerWorkTelNo" type="xs:string" />
+          <xs:element name="CustomerMobileNo" type="xs:string" />
+          <xs:element name="CustomerEmailAddress" type="xs:string" />
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="CustAplID" type="xs:int" />
+          <xs:element name="ApplianceCD" type="xs:string" />
+          <xs:element name="Model" type="xs:string" />
+          <xs:element name="ModelDesc" type="xs:string" />
+          <xs:element name="SupplyDat" type="xs:dateTime" />
+          <xs:element name="SNO" type="xs:string" />
+          <xs:element name="MFR" type="xs:string" />
+          <xs:element name="PolicyNumber" type="xs:string" />
+          <xs:element name="PolicyExpireyDate" type="xs:dateTime" />
+          <xs:element name="AltCode" type="xs:string" />
+          <xs:element name="CallType" type="xs:string" />
+          <xs:element name="ReportFault" type="xs:string" />
+          <xs:element name="ClientID" type="xs:int" />
+          <xs:element name="ClientRef" type="xs:string" />
+          <xs:element name="StatusID" type="xs:int" />
+          <xs:element name="SubStatusID" type="xs:int" />
+          <xs:element name="ClientLabourID" type="xs:int" />
+          <xs:element name="CustomerContactID" type="xs:int" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="VisitCode" type="xs:string" />
+          <xs:element name="VisitDate" type="xs:dateTime" />
+          <xs:element name="Skills" type="xs:string" />
+          <xs:element name="AppointmentNote" type="xs:string" />
+          <xs:element name="RequestedEarlierAppt" type="xs:boolean" />
+          <xs:element name="RequestedLaterAppt" type="xs:boolean" />
+          <xs:element name="JobID" type="xs:int" />
+          <xs:element name="AuthNo" type="xs:string" />
+          <xs:element name="SlotID" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TOnlineBookFollowOnDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="UserName" type="xs:string" />
+          <xs:element name="Password" type="xs:string" />
+          <xs:element name="FromID" type="xs:string" />
+          <xs:element name="ClientRef" type="xs:string" />
+          <xs:element name="SelectedDate" type="xs:dateTime" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="BookingReason" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TOnlineBookFollowOnResponseDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+          <xs:element name="Booked" type="xs:boolean" />
+          <xs:element name="ClientRef" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TAppointmentRequestDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ClientID" type="xs:int" />
+          <xs:element name="ClientRef" type="xs:string" />
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="Model" type="xs:string" />
+          <xs:element name="SlotsRequired" type="xs:int" />
+          <xs:element name="PreferredDate" type="xs:string" />
+          <xs:element name="SelectedDate" type="xs:string" />
+          <xs:element name="EngineerID" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TAppointmentResponseDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+          <xs:element name="AppointmentDateList" type="ns1:TAppointmentDateList" />
+          <xs:element name="SelectedEngineerID" type="xs:int" />
+          <xs:element name="SelectedEngineerName" type="xs:string" />
+          <xs:element name="SelectedAppointmentDate" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TAppointmentDateList">
+        <xs:complexContent mixed="false">
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema" />
+            <xs:attribute xmlns:n1="http://schemas.xmlsoap.org/wsdl/" n1:arrayType="ns1:TOneAppointmentDate[]" ref="soapenc:arrayType" />
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TOneAppointmentDate">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="AppointmentDate" type="xs:dateTime" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="EngineerName" type="xs:string" />
+          <xs:element name="Calls" type="xs:int" />
+          <xs:element name="Distance" type="xs:double" />
+          <xs:element name="Priority" type="xs:int" />
+          <xs:element name="Description" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TRepeatRepairRequest">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ClientID" type="xs:int" />
+          <xs:element name="CustAplID" type="xs:int" />
+          <xs:element name="ServiceID" type="xs:int" />
+          <xs:element name="Manufact" type="xs:string" />
+          <xs:element name="Model" type="xs:string" />
+          <xs:element name="SerialNo" type="xs:string" />
+          <xs:element name="RecallDays" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TRepeatRepairResult">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="RepeatDetectedFlag" type="xs:boolean" />
+          <xs:element name="RepeatHistory" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TServiceNote">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ServiceID" type="xs:int" />
+          <xs:element name="CustomerID" type="xs:int" />
+          <xs:element name="UserID" type="xs:string" />
+          <xs:element name="Importance" type="xs:int" />
+          <xs:element name="Visibility" type="xs:string" />
+          <xs:element name="Communication" type="xs:string" />
+          <xs:element name="Notes" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TInspection">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ServiceID" type="xs:int" />
+          <xs:element name="InspectID" type="xs:int" />
+          <xs:element name="InspectionLines" type="ns1:TInspectionLines" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TInspectionLines">
+        <xs:complexContent mixed="false">
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema" />
+            <xs:attribute xmlns:n1="http://schemas.xmlsoap.org/wsdl/" n1:arrayType="ns1:TInspectionLine[]" ref="soapenc:arrayType" />
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TInspectionLine">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="InspectFieldID" type="xs:int" />
+          <xs:element name="InspectData" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TInspectionResponse">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TMedia">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="LinkID" type="xs:int" />
+          <xs:element name="TypeID" type="xs:int" />
+          <xs:element name="MediaExtension" type="xs:string" />
+          <xs:element name="MediaText" type="xs:string" />
+          <xs:element name="MediaTimeStamp" type="xs:string" />
+          <xs:element name="MediaSubject" type="xs:string" />
+          <xs:element name="MediaContext" type="xs:int" />
+          <xs:element name="MediaPrivateFg" type="xs:boolean" />
+          <xs:element name="MSGUID" type="xs:string" />
+          <xs:element name="FileName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TAddMediaResponse">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TMediaResponse">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorText" type="xs:string" />
+          <xs:element name="MediaList" type="ns1:TMediaList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TMediaList">
+        <xs:complexContent mixed="false">
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema" />
+            <xs:attribute xmlns:n1="http://schemas.xmlsoap.org/wsdl/" n1:arrayType="ns1:TMedia[]" ref="soapenc:arrayType" />
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TOnlineBookReservationRequestDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="Postcode" type="xs:string" />
+          <xs:element name="ApplianceCode" type="xs:string" />
+          <xs:element name="PNC" type="xs:string" />
+          <xs:element name="CustomerName" type="xs:string" />
+          <xs:element name="ClientID" type="xs:int" />
+          <xs:element name="ClientRef" type="xs:string" />
+          <xs:element name="EngineerID" type="xs:int" />
+          <xs:element name="VisitDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TOnlineBookReservationResponseDetails">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="BookSuccessfully" type="xs:boolean" />
+          <xs:element name="ErrorCode" type="xs:int" />
+          <xs:element name="ErrorMsg" type="xs:string" />
+          <xs:element name="ReservationID" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns="http://soap.service.callcenterv2.servicepower.com" targetNamespace="http://soap.service.callcenterv2.servicepower.com">
+      <xs:complexType name="RequestAppointmentsRequest">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="additionalConsumerInfo" type="ns2:ReqAptAdditionalConsumerInfo" />
+          <xs:element name="additionalProductInfo" type="ns2:ReqAptAdditionalProductInfo" />
+          <xs:element name="appointmentType" type="xs:string" />
+          <xs:element name="callType" type="xs:string" />
+          <xs:element name="earliestDate" type="xs:int" />
+          <xs:element name="productInfo" type="ns2:ReqAptProductInfo" />
+          <xs:element name="searchLocation" type="ns2:SearchLocation" />
+          <xs:element name="userAuth" type="ns2:UserAuth" />
+          <xs:element name="warrantyStatus" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReqAptAdditionalConsumerInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="address" type="xs:string" />
+          <xs:element name="address2" type="xs:string" />
+          <xs:element name="cellPhoneNumber" type="xs:string" />
+          <xs:element name="consumerId" type="xs:string" />
+          <xs:element name="email" type="xs:string" />
+          <xs:element name="firstName" type="xs:string" />
+          <xs:element name="lastName" type="xs:string" />
+          <xs:element name="phoneNumber" type="xs:string" />
+          <xs:element name="titleId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReqAptAdditionalProductInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="authorityNumber" type="xs:string" />
+          <xs:element name="faultCode" type="xs:string" />
+          <xs:element name="modelNumber" type="xs:string" />
+          <xs:element name="policyExpiryDate" type="xs:string" />
+          <xs:element name="policyNumber" type="xs:string" />
+          <xs:element name="problemCode" type="xs:string" />
+          <xs:element name="productObjectId" type="xs:string" />
+          <xs:element name="purchaseDate" type="xs:string" />
+          <xs:element name="serialNumber" type="xs:string" />
+          <xs:element name="storeName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReqAptProductInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="brandCode" type="xs:string" />
+          <xs:element name="productCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SearchLocation">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="countryCode" type="xs:string" />
+          <xs:element name="county" type="xs:string" />
+          <xs:element name="postalCode" type="xs:string" />
+          <xs:element name="town" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="UserAuth">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="contractNumber" type="xs:string" />
+          <xs:element name="password" type="xs:string" />
+          <xs:element name="userId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns="http://soap.service.servicepower.com" targetNamespace="http://soap.service.servicepower.com">
+      <xs:complexType name="CreateCallRequest">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="additionalInfo" type="ns3:CreateCallRequestAdditionalInfo" />
+          <xs:element name="callInfo" type="ns3:CallInfo" />
+          <xs:element name="callNumber" type="xs:string" />
+          <xs:element name="callStatus" type="xs:string" />
+          <xs:element name="consumerInfo" type="ns3:ConsumerInfo" />
+          <xs:element name="paymentInfo" type="ns3:CallPaymentInfo" />
+          <xs:element name="productInfo" type="ns3:CrtCallProductInfo" />
+          <xs:element name="scheduleInfo" type="ns3:CallScheduleInfo" />
+          <xs:element name="userAuth" type="ns3:UserAuth" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CreateCallRequestAdditionalInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="consumerId" type="xs:string" />
+          <xs:element name="faultCode" type="xs:string" />
+          <xs:element name="groupId" type="xs:string" />
+          <xs:element name="policyExpiryDate" type="xs:int" />
+          <xs:element name="problemCode" type="xs:string" />
+          <xs:element name="productObjectId" type="xs:string" />
+          <xs:element name="rebookReason" type="xs:string" />
+          <xs:element name="updateExistingCall" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CallInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="accessoriesIncluded" type="xs:string" />
+          <xs:element name="authorityNumber" type="xs:string" />
+          <xs:element name="authorizationLimit" type="xs:string" />
+          <xs:element name="callType" type="xs:string" />
+          <xs:element name="customerProblem" type="xs:string" />
+          <xs:element name="goodsCondition" type="xs:string" />
+          <xs:element name="goodsType" type="xs:string" />
+          <xs:element name="loanType" type="xs:string" />
+          <xs:element name="policyNumber" type="xs:string" />
+          <xs:element name="policyScheme" type="xs:string" />
+          <xs:element name="repairMaxAmount" type="xs:int" />
+          <xs:element name="repairRefNumber" type="xs:string" />
+          <xs:element name="specialInstructions" type="xs:string" />
+          <xs:element name="warrantyStatus" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ConsumerInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="address" type="xs:string" />
+          <xs:element name="address2" type="xs:string" />
+          <xs:element name="cellPhoneNumber" type="xs:string" />
+          <xs:element name="countryCode" type="xs:string" />
+          <xs:element name="county" type="xs:string" />
+          <xs:element name="email" type="xs:string" />
+          <xs:element name="firstName" type="xs:string" />
+          <xs:element name="lastName" type="xs:string" />
+          <xs:element name="phoneNumber" type="xs:string" />
+          <xs:element name="postalCode" type="xs:string" />
+          <xs:element name="titleId" type="xs:string" />
+          <xs:element name="town" type="xs:string" />
+          <xs:element name="workPhoneExt" type="xs:string" />
+          <xs:element name="workPhoneNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CallPaymentInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="laborRate" type="xs:float" />
+          <xs:element name="mileageRate" type="xs:float" />
+          <xs:element name="otherRate" type="xs:float" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CrtCallProductInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="brandCode" type="xs:string" />
+          <xs:element name="catalogNumber" type="xs:string" />
+          <xs:element name="model" type="xs:string" />
+          <xs:element name="productCode" type="xs:string" />
+          <xs:element name="purchaseDate" type="xs:int" />
+          <xs:element name="serialNumber" type="xs:string" />
+          <xs:element name="storeName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CallScheduleInfo">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="serviceDate" type="xs:int" />
+          <xs:element name="servicerId" type="xs:string" />
+          <xs:element name="timePeriod" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="UserAuth">
+        <xs:sequence xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:element name="contractNumber" type="xs:string" />
+          <xs:element name="password" type="xs:string" />
+          <xs:element name="userId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AppointmentRequest0Request">
+    <part name="Value" type="ns1:TRequestDetails" />
+  </message>
+  <message name="AppointmentRequest0Response">
+    <part name="return" type="ns1:TResponseDetails" />
+  </message>
+  <message name="AppointmentRequest11Request">
+    <part name="Value" type="ns2:RequestAppointmentsRequest" />
+  </message>
+  <message name="AppointmentRequest11Response">
+    <part name="return" type="ns1:TResponseDetails" />
+  </message>
+  <message name="AvailabilityRequest2Request">
+    <part name="Value" type="ns1:TAvailableRequestDetails" />
+  </message>
+  <message name="AvailabilityRequest2Response">
+    <part name="return" type="ns1:TAvailableResponseDetails" />
+  </message>
+  <message name="FollowOnAvailabilityRequest3Request">
+    <part name="Value" type="ns1:TFollowOnAvailableRequestDetails" />
+  </message>
+  <message name="FollowOnAvailabilityRequest3Response">
+    <part name="return" type="ns1:TFollowOnAvailableResponseDetails" />
+  </message>
+  <message name="AddCustomer4Request">
+    <part name="Value" type="ns1:TCustomer" />
+  </message>
+  <message name="AddCustomer4Response">
+    <part name="return" type="ns1:TCustomer" />
+  </message>
+  <message name="AddCustomerContact5Request">
+    <part name="Value" type="ns1:TCustomerContact" />
+  </message>
+  <message name="AddCustomerContact5Response">
+    <part name="return" type="ns1:TCustomerContact" />
+  </message>
+  <message name="AddCustomerAppliance6Request">
+    <part name="Value" type="ns1:TCustomerAppliance" />
+  </message>
+  <message name="AddCustomerAppliance6Response">
+    <part name="return" type="ns1:TCustomerAppliance" />
+  </message>
+  <message name="BookNow7Request">
+    <part name="Value" type="ns1:TOnlineBookRequestDetails" />
+  </message>
+  <message name="BookNow7Response">
+    <part name="return" type="ns1:TOnlineBookResponseDetails" />
+  </message>
+  <message name="BookNow28Request">
+    <part name="Value" type="ns1:TOnlineBookRequestDetails2" />
+  </message>
+  <message name="BookNow28Response">
+    <part name="return" type="ns1:TOnlineBookResponseDetails" />
+  </message>
+  <message name="BookNow39Request">
+    <part name="aRequest" type="ns3:CreateCallRequest" />
+  </message>
+  <message name="BookNow39Response">
+    <part name="return" type="ns1:TOnlineBookResponseDetails" />
+  </message>
+  <message name="BookFollowOn10Request">
+    <part name="Value" type="ns1:TOnlineBookFollowOnDetails" />
+  </message>
+  <message name="BookFollowOn10Response">
+    <part name="return" type="ns1:TOnlineBookFollowOnResponseDetails" />
+  </message>
+  <message name="BookAppointment11Request">
+    <part name="Value" type="ns1:TAppointmentRequestDetails" />
+  </message>
+  <message name="BookAppointment11Response">
+    <part name="return" type="ns1:TAppointmentResponseDetails" />
+  </message>
+  <message name="VersionNumber12Request" />
+  <message name="VersionNumber12Response">
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="GetServiceID13Request" />
+  <message name="GetServiceID13Response">
+    <part name="return" type="xs:int" />
+  </message>
+  <message name="SetStatusID14Request">
+    <part name="iServiceID" type="xs:int" />
+    <part name="iStatusID" type="xs:int" />
+    <part name="iSubStatusID" type="xs:int" />
+  </message>
+  <message name="SetStatusID14Response">
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="RepeatRepairCheck15Request">
+    <part name="Value" type="ns1:TRepeatRepairRequest" />
+  </message>
+  <message name="RepeatRepairCheck15Response">
+    <part name="return" type="ns1:TRepeatRepairResult" />
+  </message>
+  <message name="AddServiceNote16Request">
+    <part name="Value" type="ns1:TServiceNote" />
+  </message>
+  <message name="AddServiceNote16Response">
+    <part name="return" type="xs:int" />
+  </message>
+  <message name="AddInspection17Request">
+    <part name="Value" type="ns1:TInspection" />
+  </message>
+  <message name="AddInspection17Response">
+    <part name="return" type="ns1:TInspectionResponse" />
+  </message>
+  <message name="AddMedia18Request">
+    <part name="Value" type="ns1:TMedia" />
+  </message>
+  <message name="AddMedia18Response">
+    <part name="return" type="ns1:TAddMediaResponse" />
+  </message>
+  <message name="RetrieveMedia19Request">
+    <part name="LinkID" type="xs:int" />
+    <part name="TypeID" type="xs:int" />
+    <part name="MediaContext" type="xs:int" />
+  </message>
+  <message name="RetrieveMedia19Response">
+    <part name="return" type="ns1:TMediaResponse" />
+  </message>
+  <message name="BookReservation20Request">
+    <part name="Value" type="ns1:TOnlineBookReservationRequestDetails" />
+  </message>
+  <message name="BookReservation20Response">
+    <part name="return" type="ns1:TOnlineBookReservationResponseDetails" />
+  </message>
+  <portType name="IFzOnlineBooking">
+    <operation name="AppointmentRequest">
+      <input message="tns:AppointmentRequest0Request" />
+      <output message="tns:AppointmentRequest0Response" />
+    </operation>
+    <operation name="AppointmentRequest1">
+      <input message="tns:AppointmentRequest11Request" />
+      <output message="tns:AppointmentRequest11Response" />
+    </operation>
+    <operation name="AvailabilityRequest">
+      <input message="tns:AvailabilityRequest2Request" />
+      <output message="tns:AvailabilityRequest2Response" />
+    </operation>
+    <operation name="FollowOnAvailabilityRequest">
+      <input message="tns:FollowOnAvailabilityRequest3Request" />
+      <output message="tns:FollowOnAvailabilityRequest3Response" />
+    </operation>
+    <operation name="AddCustomer">
+      <input message="tns:AddCustomer4Request" />
+      <output message="tns:AddCustomer4Response" />
+    </operation>
+    <operation name="AddCustomerContact">
+      <input message="tns:AddCustomerContact5Request" />
+      <output message="tns:AddCustomerContact5Response" />
+    </operation>
+    <operation name="AddCustomerAppliance">
+      <input message="tns:AddCustomerAppliance6Request" />
+      <output message="tns:AddCustomerAppliance6Response" />
+    </operation>
+    <operation name="BookNow">
+      <input message="tns:BookNow7Request" />
+      <output message="tns:BookNow7Response" />
+    </operation>
+    <operation name="BookNow2">
+      <input message="tns:BookNow28Request" />
+      <output message="tns:BookNow28Response" />
+    </operation>
+    <operation name="BookNow3">
+      <input message="tns:BookNow39Request" />
+      <output message="tns:BookNow39Response" />
+    </operation>
+    <operation name="BookFollowOn">
+      <input message="tns:BookFollowOn10Request" />
+      <output message="tns:BookFollowOn10Response" />
+    </operation>
+    <operation name="BookAppointment">
+      <input message="tns:BookAppointment11Request" />
+      <output message="tns:BookAppointment11Response" />
+    </operation>
+    <operation name="VersionNumber">
+      <input message="tns:VersionNumber12Request" />
+      <output message="tns:VersionNumber12Response" />
+    </operation>
+    <operation name="GetServiceID">
+      <input message="tns:GetServiceID13Request" />
+      <output message="tns:GetServiceID13Response" />
+    </operation>
+    <operation name="SetStatusID">
+      <input message="tns:SetStatusID14Request" />
+      <output message="tns:SetStatusID14Response" />
+    </operation>
+    <operation name="RepeatRepairCheck">
+      <input message="tns:RepeatRepairCheck15Request" />
+      <output message="tns:RepeatRepairCheck15Response" />
+    </operation>
+    <operation name="AddServiceNote">
+      <input message="tns:AddServiceNote16Request" />
+      <output message="tns:AddServiceNote16Response" />
+    </operation>
+    <operation name="AddInspection">
+      <input message="tns:AddInspection17Request" />
+      <output message="tns:AddInspection17Response" />
+    </operation>
+    <operation name="AddMedia">
+      <input message="tns:AddMedia18Request" />
+      <output message="tns:AddMedia18Response" />
+    </operation>
+    <operation name="RetrieveMedia">
+      <input message="tns:RetrieveMedia19Request" />
+      <output message="tns:RetrieveMedia19Response" />
+    </operation>
+    <operation name="BookReservation">
+      <input message="tns:BookReservation20Request" />
+      <output message="tns:BookReservation20Response" />
+    </operation>
+  </portType>
+  <binding name="IFzOnlineBookingbinding" type="tns:IFzOnlineBooking">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="AppointmentRequest">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AppointmentRequest" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AppointmentRequest1">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AppointmentRequest1" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AvailabilityRequest">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AvailabilityRequest" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="FollowOnAvailabilityRequest">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#FollowOnAvailabilityRequest" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AddCustomer">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AddCustomer" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AddCustomerContact">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AddCustomerContact" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AddCustomerAppliance">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AddCustomerAppliance" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="BookNow">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#BookNow" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="BookNow2">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#BookNow2" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="BookNow3">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#BookNow3" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="BookFollowOn">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#BookFollowOn" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="BookAppointment">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#BookAppointment" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="VersionNumber">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#VersionNumber" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="GetServiceID">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#GetServiceID" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="SetStatusID">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#SetStatusID" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="RepeatRepairCheck">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#RepeatRepairCheck" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AddServiceNote">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AddServiceNote" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AddInspection">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AddInspection" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AddMedia">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#AddMedia" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="RetrieveMedia">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#RetrieveMedia" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="BookReservation">
+      <soap:operation soapAction="urn:FzOnlineBookingIntf-IFzOnlineBooking#BookReservation" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:FzOnlineBookingIntf-IFzOnlineBooking" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="IFzOnlineBookingservice">
+    <port name="IFzOnlineBookingPort" binding="tns:IFzOnlineBookingbinding">
+      <soap:address location="http://litmus.fieldengineer.co.uk/FZOnlineBooking-JTM/FZOnlineBooking.dll/soap/IFzOnlineBooking" />
+    </port>
+  </service>
+</definitions>

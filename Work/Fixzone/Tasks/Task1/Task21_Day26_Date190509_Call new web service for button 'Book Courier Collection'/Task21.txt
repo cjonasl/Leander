@@ -38,3 +38,14 @@ https://www.shipmate.co.uk/guides/api
 
 
 Log in table OnlineBookingLog
+
+------------------------------------------------------------------------------------------------------------------------------
+For media work:
+
+select * from UploadedFiles order by FileId desc
+
+URL: http://media.fixzone.com/MediaServer.dll/QueryFile?fguid={BBB99208-AACB-E711-BA92-000C2991128D}&rt=FILE&lcl=true&prv=true
+
+Look at file: C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\DownloadFile.aspx.cs
+
+------------------------------------------------------------------------------------------------------------------------------

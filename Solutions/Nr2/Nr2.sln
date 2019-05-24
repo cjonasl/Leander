@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication4", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFzShipMate", "TestFzShipMate\TestFzShipMate.csproj", "{CA892FFD-11CB-4473-898F-7B10790DBFBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test1", "Test1\Test1.csproj", "{9B8C0B45-3E69-45CE-BFB5-577C31DC2D85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{CA892FFD-11CB-4473-898F-7B10790DBFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA892FFD-11CB-4473-898F-7B10790DBFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA892FFD-11CB-4473-898F-7B10790DBFBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B8C0B45-3E69-45CE-BFB5-577C31DC2D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B8C0B45-3E69-45CE-BFB5-577C31DC2D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B8C0B45-3E69-45CE-BFB5-577C31DC2D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B8C0B45-3E69-45CE-BFB5-577C31DC2D85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
