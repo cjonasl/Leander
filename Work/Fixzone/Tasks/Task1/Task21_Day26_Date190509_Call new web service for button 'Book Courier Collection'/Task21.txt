@@ -48,4 +48,6 @@ URL: http://media.fixzone.com/MediaServer.dll/QueryFile?fguid={BBB99208-AACB-E71
 
 Look at file: C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\DownloadFile.aspx.cs
 
+Important key in web.confog: downloadMediaURL (<add key="downloadMediaURL" value="https://litmus.fieldengineer.co.uk/ms/mediaserver.dll/QueryFile?fguid={GUID}&amp;rt=FILE&amp;lcl=true&amp;prv={prv}"/>)
+
 ------------------------------------------------------------------------------------------------------------------------------
