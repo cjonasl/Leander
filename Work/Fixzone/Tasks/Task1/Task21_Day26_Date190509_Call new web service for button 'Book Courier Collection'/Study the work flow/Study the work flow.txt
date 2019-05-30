@@ -1,0 +1,2 @@
+﻿1. Stored procedure "fz_SAEDICalls_GetModelsNewCalls_Paged" gets new calls/jobs
+

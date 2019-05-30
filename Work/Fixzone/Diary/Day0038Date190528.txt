@@ -1,2 +1,7 @@
 ﻿Dag 38:
 Tisdag den 28 maj 2019
+Jag ägnade arbetsdagen åt att i ShipMate (task21) implementera
+en länk som öppnar en ny tabb och visar en etikett som ska
+sättas på paketet som ska skickas iväg. Drygt kl. 13.00 intog
+jag banan, smörgås och kaffe till lunch. Jag avslutade arbetsdagen
+knappt kl. 18.00 och promenerade hem.
