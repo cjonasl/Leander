@@ -1,0 +1,10 @@
+﻿Dag 40:
+Torsdag den 30 maj 2019
+Jag ägnade arbetsdagen åt task21 (Call new web service for
+button 'Book Courier Collection'). Jag fick veta av Angela
+att man vill ha en rapport på skapade ”consignments” med
+den nya webservicen så jag skapade en ny tabell för att
+logga webservicens request/response data. Jag inog två
+dubbelsmörgåsar och kaffe till lunch ca. kl. 13.00. Jag
+avslutade arbetsdagen drygt kl. 17.30 och promenerade mot
+Surbiton. 
