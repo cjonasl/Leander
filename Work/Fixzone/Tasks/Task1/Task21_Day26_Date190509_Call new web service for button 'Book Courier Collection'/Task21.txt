@@ -1,9 +1,71 @@
 ﻿Task21:
 
+----------------- Slutresultat ----------------------------------------
+
+-------- Modification in file C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx -----------------------------------------------------------------------------------------------------------
+Add 2 <asp:LinkButton> and 1 <asp:HyperLink> from line 180 to 187
+
+<asp:LinkButton ID="linkBtnShowConsignmentDetails" runat="server" Text="Show consignment details" Font-Size="Smaller" OnCommand="linkBtnShowConsignmentDetails_Click" CommandArgument='<%#Eval("Collectionref")%>'
+Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton> <br />
+
+<asp:HyperLink ID="hyperLinkTNTTrackAndTraceUrl" runat="server" Text="Track" NavigateUrl='<%# ConfigurationManager.AppSettings["TNTTrackAndTraceUrl"]+Eval("Collectionref") %>' Target="_blank" 
+Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink> <br />
+
+<asp:LinkButton ID="linkBtnShowShipmateLabel" runat="server" Text="Show RMA PDF" Font-Size="Smaller" OnCommand="linkBtnShowShipmateLabel_Click" CommandArgument='<%#Eval("Collectionref")%>'
+Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton>
+
+Add "(!(bool)Eval("IsSony"))" in 8 places in Visible-attribute from line 215 to 236
+(4 <asp:Label), 2 <asp:HyperLink> and 2 <asp:LinkButton>)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-------- Modification in file C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx.cs -----------------------------------------------------------------------------------------------------------
+
+Modify eventhandler "protected void BtnBookCourier_Click(object sender, CommandEventArgs e)"
+Add eventhandler "protected void linkBtnShowConsignmentDetails_Click(object sender, CommandEventArgs e)"
+Add eventhandler "protected void linkBtnShowShipmateLabel_Click(object sender, CommandEventArgs e)"
+
+Delete an else if block in method partsUsedGridView_RowCommand
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Modify stored procedure "UpdateCollectionjob"
+
+Add new table "ShipmateConsignmentCreation"
+
+Add new stored procedure "fz_LogShipmateConsignmentRequestResponse"
+
+-------- Add new column in table "SONYRMA" ----------
+
+ALTER TABLE [dbo].[SONYRMA]
+ADD ShipmateConsignmentCreationId int
+
+-----------------------------------------------------
+
+---------- New keys in C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Web.config ------------------------------------------
+<add key="ShipmateUserName" value="paul@fixzone.com" />
+<add key="ShipmatePassword" value="Rjd2rjd2" />
+<add key="ShipmateToken" value="628af98fb045bdb636452204fde483d6" />
+<add key="ShipmateServiceKey" value="DPDNEXT" />
+<add key="ShipmateBaseUrl" value="http://web2016/FzShipmate/FzShipmate.dll/" />
+<add key="TNTTrackAndTraceUrl" value="https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&amp;cons=" />
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+New files:
+C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Shipmate.aspx
+C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Shipmate.aspx.cs
+C:\Jonas\SVN\SaediSVN\FixzonePortalDataAccess\Mobile.Portal.DAL\Shipmate.cs
+C:\Jonas\SVN\SaediSVN\FixzonePortalDataAccess\Mobile.Portal.BLL\Shipmate.cs
+
+
 Modified files:
-C:\Jonas\SVN\SaediSVN\FixzonePortalDataAccess\Mobile.Portal.BLL\OnlineBookingLogBLL.cs
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx.cs
+C:\Jonas\SVN\SaediSVN\FixzonePortalDataAccess\Mobile.Portal.DAL\RMARefDataProvider.cs
+C:\Jonas\SVN\SaediSVN\FixzonePortalDataAccess\Mobile.Portal.BLL\RMARefBLL.cs
+C:\Jonas\SVN\SaediSVN\FixzonePortalDataAccess\Mobile.Portal.DAL.Interfaces\IRMARefDataProvider.cs
+
 
 Database server: datasvr
 Database name: SAEDI_PRD

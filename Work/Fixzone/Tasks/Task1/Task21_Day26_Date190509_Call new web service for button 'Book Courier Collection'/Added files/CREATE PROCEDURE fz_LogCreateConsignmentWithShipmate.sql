@@ -36,7 +36,9 @@ CREATE PROCEDURE fz_LogShipmateConsignmentRequestResponse
 @RepZpl varchar(max) = NULL,
 @RepPng varchar(max) = NULL
 AS
-INSERT INTO ShipmateConsignmentRequestResponse
+DECLARE @ID int
+
+INSERT INTO ShipmateConsignmentCreation
 (
   DateCreated,
   Success,
@@ -116,3 +118,9 @@ VALUES
   @RepZpl,
   @RepPng
 )
+
+SELECT TOP 1 @ID = ID
+FROM ShipmateConsignmentCreation
+ORDER BY ID desc
+
+return @ID

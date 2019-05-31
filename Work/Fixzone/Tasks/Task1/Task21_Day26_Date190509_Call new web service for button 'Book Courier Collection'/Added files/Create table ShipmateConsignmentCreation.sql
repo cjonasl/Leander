@@ -10,7 +10,7 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [dbo].[ShipmateConsignmentRequestResponse](
+CREATE TABLE [dbo].[ShipmateConsignmentCreation](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[DateCreated] [datetime] NULL,
 	[Success] [bit] NULL,
