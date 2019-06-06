@@ -1595,7 +1595,7 @@ namespace MobilePortal
         {
             string title = "Shipmate label";
             string trackingReference = e.CommandArgument.ToString();
-            string queryString = string.Format("Shipmate.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
+            string queryString = string.Format("ShowShipmateLabel.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
             Iframe.Attributes.Add("src", queryString);
             ModalPopupExtender1.Show();
         }

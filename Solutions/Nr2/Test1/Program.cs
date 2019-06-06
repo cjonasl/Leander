@@ -10,20 +10,15 @@ namespace Test1
     {
         static void Main(string[] args)
         {
-            uk.co.fieldengineer.litmus.TOnlineBookResponseDetails response = BookJob();
+            int n;
+            bool b = true;
 
-            string result = string.Format("BookSuccessfully: {0}\r\nErrorCode: {1}\r\nErrorMsg: {2}\r\nServiceID: {3}\r\nCustomerID: {4}\r\nCustomerName: {5}\r\nDiaryID: {6}\r\nFraudCheckCode: {7}\r\n",
-                response.BookSuccessfully.ToString(), response.ErrorCode.ToString(), response.ErrorMsg, response.ServiceID.ToString(), response.CustomerID.ToString(), response.CustomerName, response.DiaryID.ToString(), response.FraudCheckCode.ToString());
+            string[] v = new string[] { "23", "0", "100" };
 
-            Console.Write(result);
+            if (v.Any(x => !int.TryParse(x, out n) || (int.TryParse(x, out n) && n < 1)))
+                b = false;
 
-            /*
-            List<BookOptionResult> result = GetBookOptionResults();
-
-            foreach (var r in result)
-            {
-                Console.Write(r.ToString() + "\r\n\r\n");
-            } */
+            bool c = b;
         }
 
         public static List<BookOptionResult> GetBookOptionResults()
@@ -94,6 +89,24 @@ namespace Test1
             {
                 Console.WriteLine(a);
             }        
+        }
+
+        public static void Test2()
+        {
+            uk.co.fieldengineer.litmus.TOnlineBookResponseDetails response = BookJob();
+
+            string result = string.Format("BookSuccessfully: {0}\r\nErrorCode: {1}\r\nErrorMsg: {2}\r\nServiceID: {3}\r\nCustomerID: {4}\r\nCustomerName: {5}\r\nDiaryID: {6}\r\nFraudCheckCode: {7}\r\n",
+                response.BookSuccessfully.ToString(), response.ErrorCode.ToString(), response.ErrorMsg, response.ServiceID.ToString(), response.CustomerID.ToString(), response.CustomerName, response.DiaryID.ToString(), response.FraudCheckCode.ToString());
+
+            Console.Write(result);
+
+            /*
+            List<BookOptionResult> result = GetBookOptionResults();
+
+            foreach (var r in result)
+            {
+                Console.Write(r.ToString() + "\r\n\r\n");
+            } */
         }
     }
 

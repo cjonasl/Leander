@@ -524,8 +524,7 @@ namespace Mobile.Portal.BLL.Shipmate
                 else
                 {
                     onlineBookingLogBLL.InsertOnlineServiceLog(consignmentRequest, consignmentResponse.message + " " + StringHelper.Dump(consignmentResponse), saediFromId, GetUrl(ShipmateAction.CreateConsignment), false);
-                    shipmateConsignmentCreationId = shipmateBLL.CreateLogEntry(GetShipmateConsignmentRequestResponse(false, consignmentResponse.message, consignmentRequest, consignmentResponse), true);
-                    throw new Exception(consignmentResponse.message);
+                    shipmateConsignmentCreationId = shipmateBLL.CreateLogEntry(GetShipmateConsignmentRequestResponse(false, consignmentResponse.message, consignmentRequest, null), false);
                 }
             }
             catch (Exception e)
@@ -534,6 +533,9 @@ namespace Mobile.Portal.BLL.Shipmate
                 shipmateBLL.CreateLogEntry(GetShipmateConsignmentRequestResponse(false, e.Message, consignmentRequest, null), false);
                 throw;
             }
+
+            if (consignmentResponse.message != "Consignment Created")
+                throw new Exception(consignmentResponse.message);
 
             return consignmentResponse;
         }

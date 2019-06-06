@@ -177,13 +177,13 @@
                                    
                                       <%# ((bool)(Eval("IsSony")))? ( String.IsNullOrEmpty(Eval("Collectionref").ToString().Trim())?"":"Collection ref:"+Eval("Collectionref").ToString()):"" %>
                                      <br />
-                                      <asp:LinkButton ID="linkBtnShowConsignmentDetails" runat="server" Text="Show consignment details" Font-Size="Smaller" OnCommand="linkBtnShowConsignmentDetails_Click" CommandArgument='<%#Eval("Collectionref")%>'
+                                     <asp:LinkButton ID="linkBtnShowConsignmentDetails" runat="server" Text="Show consignment details" Font-Size="Smaller" OnCommand="linkBtnShowConsignmentDetails_Click" CommandArgument='<%#Eval("Collectionref")%>'
                                                  Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton> <br />
 
                                       <asp:HyperLink ID="hyperLinkTNTTrackAndTraceUrl" runat="server" Text="Track" NavigateUrl='<%# ConfigurationManager.AppSettings["TNTTrackAndTraceUrl"]+Eval("Collectionref") %>' Target="_blank" 
                                                     Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink> <br />
 
-                                      <asp:LinkButton ID="linkBtnShowShipmateLabel" runat="server" Text="Show RMA PDF" Font-Size="Smaller" OnCommand="linkBtnShowShipmateLabel_Click" CommandArgument='<%#Eval("Collectionref")%>'
+                                      <asp:LinkButton ID="linkBtnShowShipmateLabel" runat="server" Text="Show courier label" Font-Size="Smaller" OnCommand="linkBtnShowShipmateLabel_Click" CommandArgument='<%#Eval("Collectionref")%>'
                                                  Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton>
                                       <br />
                                        <%# ((bool)(Eval("IsSony")))?  (String.IsNullOrEmpty(Eval("CollectionDate").ToString().Trim())?"":"Collection booked for:"+Eval("CollectionDate","{0:d}")):"" %>
@@ -212,28 +212,28 @@
                                          <asp:Label ID="Label15" runat="server" Text='<%# ((bool)Eval("IsRmaDone") == true) ? "RMA Done" : "RMA Not Done!"  %>'
                                         Font-Size="Smaller" Visible='<%# Eval("Code").ToString() != "000000010" %>'></asp:Label>
                                     <br />
-                                    <asp:Label ID="Label92" runat="server" Visible='<%# (!(bool)Eval("IsSony")) && Eval("ReturnReference") != null && Eval("ReturnReference") != "" %>'
+                                    <asp:Label ID="Label92" runat="server" Visible='<%# Eval("ReturnReference") != null && Eval("ReturnReference") != "" %>'
                                         Font-Size="Smaller">Return Ref.: </asp:Label>
-                                    <asp:Label ID="Label90" runat="server" Text='<%# Eval("ReturnReference") %>' Visible='<%# (!(bool)Eval("IsSony")) && Eval("ReturnReference") != null && Eval("ReturnReference") != "" %>'
+                                    <asp:Label ID="Label90" runat="server" Text='<%# Eval("ReturnReference") %>' Visible='<%# Eval("ReturnReference") != null && Eval("ReturnReference") != "" %>'
                                         Font-Size="Smaller"></asp:Label>
                                     <br />
-                                    <asp:Label ID="Label20" runat="server" Visible='<%# (!(bool)Eval("IsSony")) && Eval("ReturnReference") != null && Eval("ReturnReference").ToString() != "" %>'
+                                    <asp:Label ID="Label20" runat="server" Visible='<%# Eval("ReturnReference") != null && Eval("ReturnReference").ToString() != "" %>'
                                         Font-Size="Smaller">RMA Status: </asp:Label> 
-                                    <asp:Label ID="Label21" runat="server" Text='<%# Eval("ValidationStatus") + " / " + Eval("ShipmentStatus")  %>' Visible='<%# (!(bool)Eval("IsSony")) && Eval("ReturnReference") != null && Eval("ReturnReference") != "" %>'
+                                    <asp:Label ID="Label21" runat="server" Text='<%# Eval("ValidationStatus") + " / " + Eval("ShipmentStatus")  %>' Visible='<%# Eval("ReturnReference") != null && Eval("ReturnReference") != "" %>'
                                         Font-Size="Smaller"></asp:Label>
                                     <br />
                                     <asp:HyperLink ID="HyperLink1" runat="server" Text="Show RMA PDF document" NavigateUrl='<%# Eval("RmaDocumentUrl") %>' Target="_blank" 
-                                                   Visible='<%# (!(bool)Eval("IsSony")) && Eval("RmaDocumentUrl") != null && Eval("RmaDocumentUrl") != "" %>' Font-Size="Smaller"></asp:HyperLink>
+                                                   Visible='<%# Eval("RmaDocumentUrl") != null && Eval("RmaDocumentUrl") != "" %>' Font-Size="Smaller"></asp:HyperLink>
                                      <%-- Visible='<%#( (bool)Eval("IsAllocated")  || Eval("StatusID").ToString() == "V")  &&--%>
                                
                                              <asp:LinkButton ID="LinkButton1" runat="server" Text="Courier Label"  Font-Size="Smaller"   CommandArgument='<%#Eval("ConsignmentNo")+ ";" +Eval("Input_courierid")+";"+Eval("BookingUniqueNumber")%>'
-                                                    Visible='<%# (!(bool)Eval("IsSony")) && Eval("LabelUrl") != null && Eval("LabelUrl") != "" %>'></asp:LinkButton><%--OnCommand="LnkLabel_Click" --%>
+                                                    Visible='<%# Eval("LabelUrl") != null && Eval("LabelUrl") != "" %>'></asp:LinkButton><%--OnCommand="LnkLabel_Click" --%>
                                                  
                                     <asp:LinkButton ID="LnkConNote" runat="server" Text="Courier Consignment note"  Font-Size="Smaller"   OnCommand="LnkConNote_Click" CommandArgument='<%#Eval("ConsignmentNo")+ ";" +Eval("Input_courierid")+";"+Eval("BookingUniqueNumber")%>'
-                                                    Visible='<%# (!(bool)Eval("IsSony")) && Eval("ConNoteUrl") != null && Eval("ConNoteUrl") != "" %>'></asp:LinkButton>
+                                                    Visible='<%# Eval("ConNoteUrl") != null && Eval("ConNoteUrl") != "" %>'></asp:LinkButton>
                                   <%--+ ";" +Eval("Input_courierid")--%>
                                     <asp:HyperLink ID="CourierTracking" runat="server" Text="Track" NavigateUrl='<%# ConfigurationSettings.AppSettings["TNTTrackUrl"]+Eval("ConsignmentNo") %>' Target="_blank" 
-                                                    Font-Size="Smaller"  Visible='<%# (!(bool)Eval("IsSony")) && Eval("ConNoteUrl") != null && Eval("ConNoteUrl") != "" %>'></asp:HyperLink>
+                                                    Font-Size="Smaller"  Visible='<%# Eval("ConNoteUrl") != null && Eval("ConNoteUrl") != "" %>'></asp:HyperLink>
 
 
 
