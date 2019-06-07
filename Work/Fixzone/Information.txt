@@ -1,4 +1,17 @@
-﻿https://ssm.pacificagroup.co.uk/SelfService/
+﻿Table "SAEDIClient" is for company/engineers.
+Column "ClientType" in table "SAEDIClient": Transfer refers to company and Portal to engineer
+
+https://www.recognitionpr.co.uk/clients/id/22082
+
+Based in Houghton le Spring, Pacifica Group is one of the UK's largest
+providers of home services and product warranty, which handles in excess
+of 4,000 jobs per week and employs more than 450 staff. The Group comprises
+Pacifica Home Services, which includes 0800 Repair Gas, Pacifica Appliance
+Services and UK Warranty.
+
+PAS = Pacifica Appliance Services
+
+https://ssm.pacificagroup.co.uk/SelfService/
 Username: 1199
 Password: Your national insurance number with the last letter lowercase (SZ526264a)
 In which town were you born? Karlstad

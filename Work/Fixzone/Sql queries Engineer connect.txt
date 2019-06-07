@@ -1,0 +1,11 @@
+﻿SELECT * FROM dbo.SAEDIParts
+WHERE SaediFromID = '3CCH23DE'
+
+SELECT * FROM dbo.SONYRMA
+WHERE SaediFromID = '3CCH23DE' AND ClientRef IS NOT NULL AND ClientRef <> ''
+
+SELECT * FROM
+SAEDICalls c
+INNER JOIN SAEDIParts sp ON c.SAEDIFromID = sp.SAEDIFromID COLLATE Database_Default  AND c.ClientRef = sp.SAEDICallRef COLLATE Database_Default 
+INNER JOIN SONYRMA rma ON sp.SaediFromID = rma.SaediFromID COLLATE Database_Default  AND sp.SAEDICallRef = rma.ClientRef COLLATE Database_Default 
+WHERE rma.SaediFromID = '3CCH23DE' AND rma.ClientRef IS NOT NULL AND rma.ClientRef <> ''

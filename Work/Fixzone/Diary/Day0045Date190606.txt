@@ -1,0 +1,13 @@
+﻿Dag 45:
+Torsdag den 6 juni 2019
+Jag kämpade hela arbetsdagen med att göra deploy
+av Shipmate-uppgiften i task21 till pilot-servern
+https://portal.fieldengineer.co.uk/MobilePilot och
+jag lyckades nästan, men inte riktigt eftersom det
+visade sig att den servern inte har rättigheter att
+anropa Shipmate service som är installerad på web2016.
+Claire hade varit i Sverige och hon hade köpt Ahlgrens
+bilar och punschrullar som hon bjöd på. Jag intog
+smörgås, banan och kaffe till lunch ca. kl. 13.30.
+Jag avslutade arbetsdagen ca. kl. 17.45 och promenerade
+hemåt.

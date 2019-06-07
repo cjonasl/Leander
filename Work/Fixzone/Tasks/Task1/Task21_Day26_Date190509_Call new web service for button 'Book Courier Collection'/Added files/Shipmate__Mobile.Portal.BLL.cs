@@ -563,26 +563,26 @@ namespace Mobile.Portal.BLL.Shipmate
 
             if (consignmentResponse != null)
             {
-                s.RepMessage = consignmentResponse.message;
-                s.RepConsignmentReference = consignmentResponse.data[0].consignment_reference;
-                s.RepParcelReference = consignmentResponse.data[0].parcel_reference;
-                s.RepCarrier = consignmentResponse.data[0].carrier;
-                s.RepServiceName = consignmentResponse.data[0].service_name;
-                s.RepTrackingReference = consignmentResponse.data[0].tracking_reference;
-                s.RepCreatedBy = consignmentResponse.data[0].created_by;
-                s.RepCreatedWith = consignmentResponse.data[0].created_with;
-                s.RepCreatedAt = consignmentResponse.data[0].created_at;
-                s.RepDeliveryName = consignmentResponse.data[0].to_address.delivery_name;
-                s.RepLine1 = consignmentResponse.data[0].to_address.line_1;
-                s.RepLine2 = consignmentResponse.data[0].to_address.line_2;
-                s.RepLine3 = consignmentResponse.data[0].to_address.line_3;
-                s.RepCity = consignmentResponse.data[0].to_address.city;
-                s.RepCounty = consignmentResponse.data[0].to_address.county;
-                s.RepPostcode = consignmentResponse.data[0].to_address.postcode;
-                s.RepCountry = consignmentResponse.data[0].to_address.country;
-                s.RepPdf = consignmentResponse.data[0].pdf;
-                s.RepZpl = consignmentResponse.data[0].zpl;
-                s.RepPng = consignmentResponse.data[0].png;
+                s.ResMessage = consignmentResponse.message;
+                s.ResConsignmentReference = consignmentResponse.data[0].consignment_reference;
+                s.ResParcelReference = consignmentResponse.data[0].parcel_reference;
+                s.ResCarrier = consignmentResponse.data[0].carrier;
+                s.ResServiceName = consignmentResponse.data[0].service_name;
+                s.ResTrackingReference = consignmentResponse.data[0].tracking_reference;
+                s.ResCreatedBy = consignmentResponse.data[0].created_by;
+                s.ResCreatedWith = consignmentResponse.data[0].created_with;
+                s.ResCreatedAt = consignmentResponse.data[0].created_at;
+                s.ResDeliveryName = consignmentResponse.data[0].to_address.delivery_name;
+                s.ResLine1 = consignmentResponse.data[0].to_address.line_1;
+                s.ResLine2 = consignmentResponse.data[0].to_address.line_2;
+                s.ResLine3 = consignmentResponse.data[0].to_address.line_3;
+                s.ResCity = consignmentResponse.data[0].to_address.city;
+                s.ResCounty = consignmentResponse.data[0].to_address.county;
+                s.ResPostcode = consignmentResponse.data[0].to_address.postcode;
+                s.ResCountry = consignmentResponse.data[0].to_address.country;
+                s.ResPdf = consignmentResponse.data[0].pdf;
+                s.ResZpl = consignmentResponse.data[0].zpl;
+                s.ResPng = consignmentResponse.data[0].png;
             }
 
             return s;

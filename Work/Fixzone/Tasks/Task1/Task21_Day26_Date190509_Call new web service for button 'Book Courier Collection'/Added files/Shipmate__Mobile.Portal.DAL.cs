@@ -32,26 +32,26 @@ namespace Mobile.Portal.DAL
         public int ReqWidth { get; set; }
         public int ReqLength { get; set; }
         public int ReqDepth { get; set; }
-        public string RepMessage { get; set; }
-        public string RepConsignmentReference { get; set; }
-        public string RepParcelReference { get; set; }
-        public string RepCarrier { get; set; }
-        public string RepServiceName { get; set; }
-        public string RepTrackingReference { get; set; }
-        public string RepCreatedBy { get; set; }
-        public string RepCreatedWith { get; set; }
-        public DateTime RepCreatedAt { get; set; }
-        public string RepDeliveryName { get; set; }
-        public string RepLine1 { get; set; }
-        public string RepLine2 { get; set; }
-        public string RepLine3 { get; set; }
-        public string RepCity { get; set; }
-        public string RepCounty { get; set; }
-        public string RepPostcode { get; set; }
-        public string RepCountry { get; set; }
-        public string RepPdf { get; set; }
-        public string RepZpl { get; set; }
-        public string RepPng { get; set; }
+        public string ResMessage { get; set; }
+        public string ResConsignmentReference { get; set; }
+        public string ResParcelReference { get; set; }
+        public string ResCarrier { get; set; }
+        public string ResServiceName { get; set; }
+        public string ResTrackingReference { get; set; }
+        public string ResCreatedBy { get; set; }
+        public string ResCreatedWith { get; set; }
+        public DateTime ResCreatedAt { get; set; }
+        public string ResDeliveryName { get; set; }
+        public string ResLine1 { get; set; }
+        public string ResLine2 { get; set; }
+        public string ResLine3 { get; set; }
+        public string ResCity { get; set; }
+        public string ResCounty { get; set; }
+        public string ResPostcode { get; set; }
+        public string ResCountry { get; set; }
+        public string ResPdf { get; set; }
+        public string ResZpl { get; set; }
+        public string ResPng { get; set; }
     }
 
     public class ShipmateDataProvider : DataAccess<ShipmateConsignmentRequestResponse>, IShipmateDataProvider
@@ -91,26 +91,26 @@ namespace Mobile.Portal.DAL
 
             if (addResponseParameters)
             {
-                parameters[16] = new SqlParameter("@RepMessage", s.RepMessage);
-                parameters[17] = new SqlParameter("@RepConsignmentReference", s.RepConsignmentReference);
-                parameters[18] = new SqlParameter("@RepParcelReference", s.RepParcelReference);
-                parameters[19] = new SqlParameter("@RepCarrier", s.RepCarrier);
-                parameters[20] = new SqlParameter("@RepServiceName", s.RepServiceName);
-                parameters[21] = new SqlParameter("@RepTrackingReference", s.RepTrackingReference);
-                parameters[22] = new SqlParameter("@RepCreatedBy", s.RepCreatedBy);
-                parameters[23] = new SqlParameter("@RepCreatedWith", s.RepCreatedWith);
-                parameters[24] = new SqlParameter("@RepCreatedAt", s.RepCreatedAt);
-                parameters[25] = new SqlParameter("@RepDeliveryName", s.RepDeliveryName);
-                parameters[26] = new SqlParameter("@RepLine1", s.RepLine1);
-                parameters[27] = new SqlParameter("@RepLine2", s.RepLine2);
-                parameters[28] = new SqlParameter("@RepLine3", s.RepLine3);
-                parameters[29] = new SqlParameter("@RepCity", s.RepCity);
-                parameters[30] = new SqlParameter("@RepCounty", s.RepCounty);
-                parameters[31] = new SqlParameter("@RepPostcode", s.RepPostcode);
-                parameters[32] = new SqlParameter("@RepCountry", s.RepCountry);
-                parameters[33] = new SqlParameter("@RepPdf", s.RepPdf);
-                parameters[34] = new SqlParameter("@RepZpl", s.RepZpl);
-                parameters[35] = new SqlParameter("@RepPng", s.RepPng);
+                parameters[16] = new SqlParameter("@ResMessage", s.ResMessage);
+                parameters[17] = new SqlParameter("@ResConsignmentReference", s.ResConsignmentReference);
+                parameters[18] = new SqlParameter("@ResParcelReference", s.ResParcelReference);
+                parameters[19] = new SqlParameter("@ResCarrier", s.ResCarrier);
+                parameters[20] = new SqlParameter("@ResServiceName", s.ResServiceName);
+                parameters[21] = new SqlParameter("@ResTrackingReference", s.ResTrackingReference);
+                parameters[22] = new SqlParameter("@ResCreatedBy", s.ResCreatedBy);
+                parameters[23] = new SqlParameter("@ResCreatedWith", s.ResCreatedWith);
+                parameters[24] = new SqlParameter("@ResCreatedAt", s.ResCreatedAt);
+                parameters[25] = new SqlParameter("@ResDeliveryName", s.ResDeliveryName);
+                parameters[26] = new SqlParameter("@ResLine1", s.ResLine1);
+                parameters[27] = new SqlParameter("@ResLine2", s.ResLine2);
+                parameters[28] = new SqlParameter("@ResLine3", s.ResLine3);
+                parameters[29] = new SqlParameter("@ResCity", s.ResCity);
+                parameters[30] = new SqlParameter("@ResCounty", s.ResCounty);
+                parameters[31] = new SqlParameter("@ResPostcode", s.ResPostcode);
+                parameters[32] = new SqlParameter("@ResCountry", s.ResCountry);
+                parameters[33] = new SqlParameter("@ResPdf", s.ResPdf);
+                parameters[34] = new SqlParameter("@ResZpl", s.ResZpl);
+                parameters[35] = new SqlParameter("@ResPng", s.ResPng);
             }
 
             return ExecuteStoredProc("fz_LogShipmateConsignmentRequestResponse", parameters, out rowsAffected);

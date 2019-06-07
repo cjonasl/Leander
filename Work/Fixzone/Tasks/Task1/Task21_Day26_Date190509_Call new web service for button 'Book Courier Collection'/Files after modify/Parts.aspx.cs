@@ -1552,7 +1552,7 @@ namespace MobilePortal
             string reference = rmaId + "-1";
             string title = "Create Shipmate consignment";
 
-            string queryString = string.Format("Shipmate.aspx?" +
+            string queryString = string.Format("ShipmatePage.aspx?" +
                 "Title={0}&" +
                 "ServiceID={1}&" +
                 "RemittanceID={2}&" +
@@ -1586,7 +1586,7 @@ namespace MobilePortal
         {
             string title = "Consignment details";
             string trackingReference = e.CommandArgument.ToString();
-            string queryString = string.Format("Shipmate.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
+            string queryString = string.Format("ShipmatePage.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
             Iframe.Attributes.Add("src", queryString);
             ModalPopupExtender1.Show();
         }

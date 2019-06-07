@@ -45,7 +45,6 @@ ADD ShipmateConsignmentCreationId int
 <add key="ShipmateToken" value="628af98fb045bdb636452204fde483d6" />
 <add key="ShipmateServiceKey" value="DPDNEXT" />
 <add key="ShipmateBaseUrl" value="http://web2016/FzShipmate/FzShipmate.dll/" />
-<add key="TNTTrackAndTraceUrl" value="https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&amp;cons=" />
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 New files:
