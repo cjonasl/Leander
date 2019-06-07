@@ -1,4 +1,6 @@
-﻿Table "SAEDIClient" is for company/engineers.
+﻿Vijays telephone number: 07859231307
+
+Table "SAEDIClient" is for company/engineers.
 Column "ClientType" in table "SAEDIClient": Transfer refers to company and Portal to engineer
 
 https://www.recognitionpr.co.uk/clients/id/22082
