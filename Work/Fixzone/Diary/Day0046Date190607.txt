@@ -1,2 +1,21 @@
 ﻿Dag 46:
 Fredag den 7 juni 2019
+Gick in på mitt konto hos ”Patient Access” och beställde
+en tid hos dr. Sarina Patel på Nelsons vårdcentral den 21
+juni kl. 07.15 för att fråga om behandling av mina hudproblem
+i ansikte och hårbotten. Jag ägnade sedan arbetsdagen mest
+åt att i task21 (Call new web service for button 'Book Courier
+Collection') implementera så att konfigureringsdata tas ifrån
+tabellen SAEDIClient istället för ifrån web.config. Vijay
+gjorde mig uppmärksam på att det är problem med tabellen
+”SpecJobMapping” i SQL-frågorna i ShopDirect eftersom join-
+villkoret ”service.VISITCD = SpecJobMapping.VisitType” inte
+alltid är tillräckligt för att bibehålla ett email per service
+och jag tittade lite på det. Vid 13.45-tiden intog jag smörgås
+och kaffe till lunch. Jag ville gärna få klart implementeringen
+av konfigureringen i task21, men att jag inte skulle hinna till
+17.30 så jag frågade Angela om jag fick jobba över och hon
+svarade ja och jag fick en nyckel till kontoret och instruktioner
+om hur larmet sätts på. Jag blev sedan klar med implementeringen
+ca. kl. 21.15. Jag satte på larmet och låste kontoret och det
+gick bra och därefter promenerade jag hemåt.

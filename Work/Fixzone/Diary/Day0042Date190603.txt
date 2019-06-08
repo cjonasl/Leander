@@ -1,2 +1,11 @@
 ﻿Dag 42:
 Måndag den 3 juni 2019
+Jag ägnade arbetsdagen åt att göra det sista på task21
+(Call new web service for button 'Book Courier Collection')
+och jag påbörjade arbetet med att göra deploy på pilot-
+servern så att Pacifica kan testa. Jag intog smörgås, banan
+och kaffe till lunch. Fick biljetter av Angela för att åka
+till Durham imorgon. Vid 17.30-tiden fick jag veta lite om
+”WarrantyOnline” av Mark som kanske kan vara bra inför resan
+till Durham. Jag avslutade arbetsdagen ca. kl. 17.30 och
+promenerade hemåt. 
