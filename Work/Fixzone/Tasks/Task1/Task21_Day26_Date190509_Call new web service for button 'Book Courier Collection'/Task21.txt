@@ -1,9 +1,12 @@
 ﻿Task21:
 
+Use this URL for Shipmate on fieldengineer:
+http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll
+
 ----------------- Slutresultat ----------------------------------------
 
 -------- Modification in file C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx -----------------------------------------------------------------------------------------------------------
-Lines 180-187:
+Lines 180-187 and 391-398:
 
 <asp:LinkButton ID="linkBtnShowConsignmentDetails" runat="server" Text="Show consignment details" Font-Size="Smaller" OnCommand="linkBtnShowConsignmentDetails_Click" CommandArgument='<%#Eval("Collectionref")%>'
   Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton> <br />

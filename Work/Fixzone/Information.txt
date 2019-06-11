@@ -1,4 +1,10 @@
-﻿Vijays telephone number: 07859231307
+﻿Server: datasvr
+Password: Ping68pong
+
+Use this URL for Shipmate on fieldengineer:
+http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll
+
+Vijays telephone number: 07859231307
 
 Table "SAEDIClient" is for company/engineers.
 Column "ClientType" in table "SAEDIClient": Transfer refers to company and Portal to engineer
