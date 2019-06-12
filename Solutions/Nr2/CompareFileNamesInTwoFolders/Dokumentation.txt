@@ -20,7 +20,7 @@ Files in Dir2, but not in Dir1:
 {Utskrift av filnamn, en per rad, som finns i Dir2, men inte i Dir1}
 
 Files in both:
-{Filnamn som finns i bådat katalogerna}
+{Filnamn som finns i båda katalogerna}
 ---------------------------------------------------------------------
 
 Samt också i tre filer som läggs i samma katalog där exe-filen ligger (CompareFileNamesInTwoFolders.exe):

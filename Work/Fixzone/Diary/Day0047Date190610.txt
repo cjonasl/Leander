@@ -1,2 +1,9 @@
 ﻿Dag 47:
 Måndag den 10 juni 2019
+Jag ägnade hela arbetsdagen åt att komplettera i task21 (Call
+new web service for button 'Book Courier Collection'). Vijay
+gjorde mig uppmärksam på att knappen ”Book Courier Collection”
+finns på andra ställen än i Part-sidan där jag bara hade implementerat
+den nya servicen med Shipmate. Vid 13.15-tiden intog jag smörgås,
+banan och kaffe till lunch. Jag avslutade arbetsdagen drygt kl.
+17.30 och promenerade hemåt.

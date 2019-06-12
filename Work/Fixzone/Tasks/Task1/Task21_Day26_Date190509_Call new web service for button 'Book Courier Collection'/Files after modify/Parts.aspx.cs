@@ -1510,73 +1510,13 @@ namespace MobilePortal
         protected void BtnBookCourier_Click(object sender, CommandEventArgs e)
         {
             string rmaId = e.CommandArgument.ToString();
-            RMARefBLL rmaRefBLL = new RMARefBLL();
-            PartsBLL SAEDIParts = new PartsBLL();
 
             SiteSession session = SiteSessionFactory.LoadSession(this.Page);
             Call call = new Call();
             call = (Call)session.Data["call"];
 
-            ClientBLL clientBLL = new ClientBLL();
-            Client client = clientBLL.GetBySaediId(call.SaediFromId, programVersion: "2");
-
-            SAEDIParts.List = SAEDIParts.GetSAEDIPartsByCall(call.SaediFromId, call.ClientRef).ToList();
-
-            CallPart saediPart = SAEDIParts.List.Find(p => p.ReturnReference == rmaId);
-
-            string name = client.CompanyName != null ? client.CompanyName.Trim() : "";
-
-            string[] address = new string[5];
-            address[0] = string.IsNullOrEmpty(client.DeliveryAddress.Address1) ? "" : client.DeliveryAddress.Address1.Trim();
-            address[1] = string.IsNullOrEmpty(client.DeliveryAddress.Address2) ? "" : client.DeliveryAddress.Address2.Trim();
-            address[2] = string.IsNullOrEmpty(client.DeliveryAddress.Address3) ? "" : client.DeliveryAddress.Address3.Trim();
-            address[3] = string.IsNullOrEmpty(client.DeliveryAddress.Address4) ? "" : client.DeliveryAddress.Address4.Trim();
-            address[4] = string.IsNullOrEmpty(client.DeliveryAddress.Address5) ? "" : client.DeliveryAddress.Address5.Trim();
-
-            string line1 = "";
-
-            for (int i = 0; i < 5; i++)
-            {
-                if (line1 != "" && address[i] != "")
-                    line1 += (" " + address[i]);
-                else if (address[i] != "")
-                    line1 = address[i];
-            }
-
-            string city = client.DeliveryAddress.City != null ? client.DeliveryAddress.City.Trim() : "";
-            string postcode = client.DeliveryAddress.PostalCode != null ? client.DeliveryAddress.PostalCode.Trim() : "";
-            string country = client.DeliveryAddress.Country != null ? client.DeliveryAddress.Country.Trim() : "";
-            int serviceID = Convert.ToInt32(call.Id);
-            int remittanceID = Convert.ToInt32(saediPart.Id);
-            string serviceKey = ConfigurationManager.AppSettings["ShipmateServiceKey"];
-            string reference = rmaId + "-1";
-            string title = "Create Shipmate consignment";
-
-            string queryString = string.Format("ShipmatePage.aspx?" +
-                "Title={0}&" +
-                "ServiceID={1}&" +
-                "RemittanceID={2}&" +
-                "ConsignmentReference={3}&" +
-                "ServiceKey={4}&" +
-                "Name={5}&" +
-                "Line1={6}&" +
-                "City={7}&" +
-                "Postcode={8}&" +
-                "Country={9}&" +
-                "Reference={10}&" +
-                "SaediFromId={11}",
-                title,
-                serviceID.ToString(),
-                remittanceID.ToString(),
-                rmaId,
-                serviceKey,
-                name,
-                line1,
-                city,
-                postcode,
-                country,
-                reference,
-                call.SaediFromId);
+            Mobile.Portal.BLL.Shipmate.Shipmate shipmate = new Mobile.Portal.BLL.Shipmate.Shipmate(session.Login.CreatedBy);
+            string queryString = shipmate.BtnBookCourierClick(call.SaediFromId, rmaId, call.ClientRef, call.Id);
 
             Iframe.Attributes.Add("src", queryString);
             ModalPopupExtender1.Show();
@@ -1587,15 +1527,6 @@ namespace MobilePortal
             string title = "Consignment details";
             string trackingReference = e.CommandArgument.ToString();
             string queryString = string.Format("ShipmatePage.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
-            Iframe.Attributes.Add("src", queryString);
-            ModalPopupExtender1.Show();
-        }
-
-        protected void linkBtnShowShipmateLabel_Click(object sender, CommandEventArgs e)
-        {
-            string title = "Shipmate label";
-            string trackingReference = e.CommandArgument.ToString();
-            string queryString = string.Format("ShowShipmateLabel.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
             Iframe.Attributes.Add("src", queryString);
             ModalPopupExtender1.Show();
         }

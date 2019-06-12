@@ -13,7 +13,12 @@ namespace Mobile.Portal.DAL
     {
         int CreateLogEntry(ShipmateConsignmentRequestResponse s, bool addResponseParameters);
     }
-    
+
+    public interface IShipmateConfigProvider
+    {
+        string ShipmateConfig(string clientId, string config, bool isGet); //isGet indicates if it is to get or set config data
+    }
+
     public class ShipmateConsignmentRequestResponse
     {
         public bool Success { get; set; }
@@ -120,6 +125,34 @@ namespace Mobile.Portal.DAL
         {
             ShipmateConsignmentRequestResponse s = new ShipmateConsignmentRequestResponse();
             return s;
+        }
+    }
+
+    public class ShipmateConfigProvider : DataAccess<string>, IShipmateConfigProvider
+    {
+        public string ShipmateConfig(string clientId, string config, bool isGet)
+        {
+            SqlParameter[] parameters;
+
+            if (isGet)
+                parameters = new SqlParameter[2];
+            else
+                parameters = new SqlParameter[3];
+
+            parameters[0] = new SqlParameter("@SAEDIID", clientId);
+            parameters[1] = new SqlParameter("@IsGet", isGet);
+
+            if (!isGet)
+                parameters[2] = new SqlParameter("@ShipmateConfig", config);
+
+            List<string> list = SelectStoredProc("fz_ShipmateConfig", parameters);
+
+            return list[0];
+        }
+
+        public override string MapDataToClass(System.Data.DataRow row)
+        {
+            return row[0].ToString();
         }
     }
 }

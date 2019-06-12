@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Shipmate.aspx.cs" Inherits="MobilePortal.ShipmatePage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShipmatePage.aspx.cs" Inherits="MobilePortal.ShipmatePage" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
+<head runat="server">
     <title>Shipmate</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" />

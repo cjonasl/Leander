@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Mobile.Portal.BLL.Shipmate;
+using Mobile.Portal.Session;
 
 namespace MobilePortal
 {
@@ -15,7 +16,8 @@ namespace MobilePortal
             string trackingReference = Request.QueryString["TrackingReference"];
 
             Response.ContentType = "application/pdf";
-            Shipmate shipmate = new Shipmate();
+            SiteSession session = SiteSessionFactory.LoadSession(this.Page);
+            Shipmate shipmate = new Shipmate(session.Login.CreatedBy);
             ConsignmentResponse consignmentResponse = shipmate.GetLabel(trackingReference);
             Session["ShipMateMediaFile"] = consignmentResponse.data[0].pdf;
             Response.BinaryWrite(Convert.FromBase64String(consignmentResponse.data[0].pdf));

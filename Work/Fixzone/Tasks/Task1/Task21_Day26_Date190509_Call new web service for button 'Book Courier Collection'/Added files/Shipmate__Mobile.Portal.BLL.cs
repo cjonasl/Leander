@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Net;
 using System.Web.Script.Serialization;
 using Mobile.Portal.Helpers;
 using Mobile.Portal.DAL;
+using System.Security.Cryptography;
+using Mobile.Portal.Classes;
 
 namespace Mobile.Portal.BLL.Shipmate
 {
@@ -410,23 +413,49 @@ namespace Mobile.Portal.BLL.Shipmate
         }
     }
 
+    public class ShipmateConfigEncrypted
+    {
+        public string UserName { get; set; }
+        public string PasswordEncrypted { get; set; }
+        public string TokenEncrypted { get; set; }
+        public string ServiceKey { get; set; }
+        public string BaseUrl { get; set; }
+    }
+
+    public class ShipmateConfig
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Token { get; set; }
+        public string ServiceKey { get; set; }
+        public string BaseUrl { get; set; }
+    }
+
     public class Shipmate
     {
-        public Shipmate()
+        public Shipmate() {}
+
+        public Shipmate(string clientId)
         {
-            UserName = ConfigurationManager.AppSettings["ShipmateUserName"];
-            Password = ConfigurationManager.AppSettings["ShipmatePassword"];
-            Token = ConfigurationManager.AppSettings["ShipmateToken"];
-            BaseUrl = ConfigurationManager.AppSettings["ShipmateBaseUrl"];
+            string errorMessage;
+            ShipmateConfig shipmateConfig;
+
+            shipmateConfig = GetConfig(clientId, out errorMessage);
+
+            if (!string.IsNullOrEmpty(errorMessage))
+                throw new Exception(errorMessage);
+
+            Token = shipmateConfig.Token;
+            BaseUrl = shipmateConfig.BaseUrl;
+            ServiceKey = shipmateConfig.ServiceKey;
         }
 
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
-
         public string Token { get; set; }
-
         private string BaseUrl { get; set; }
+        private string ServiceKey { get; set; }
+
+        private readonly byte[] encryptorKey = { 239, 172, 233, 89, 121, 55, 70, 175, 83, 250, 36, 213, 16, 139, 196, 146, 117, 221, 136, 132, 91, 222, 69, 101, 5, 72, 64, 93, 234, 209, 30, 122 };
+        private readonly byte[] encryptorIV = { 68, 50, 142, 152, 81, 76, 162, 227, 9, 129, 248, 95, 63, 220, 119, 120 };
 
         private T MakeWebRequest<T>(string url, string requestBody)
         {
@@ -470,7 +499,7 @@ namespace Mobile.Portal.BLL.Shipmate
             return deserializeResult;
         }
 
-        public string GetUrl(ShipmateAction shipmateAction, string trackingReference = null, string consignmentReference = null)
+        private string GetUrl(ShipmateAction shipmateAction, string trackingReference = null, string consignmentReference = null)
         {
             switch (shipmateAction)
             {
@@ -493,6 +522,91 @@ namespace Mobile.Portal.BLL.Shipmate
                 default:
                     throw new Exception(string.Format("Unsupported ShipmateAction \"{0}\"", shipmateAction));
             }
+        }
+
+        private string Encrypt(string strDecrypted)
+        {
+            string strEncrypted;
+            byte[] bytes = Encoding.Unicode.GetBytes(strDecrypted);
+            using (Aes encryptor = Aes.Create())
+            {
+                encryptor.Key = encryptorKey;
+                encryptor.IV = encryptorIV;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(bytes, 0, bytes.Length);
+                        cs.Close();
+                    }
+                    strEncrypted = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return strEncrypted;
+        }
+
+        private string Decrypt(string strEncrypted)
+        {
+            string strDecrypted;
+            byte[] bytes = Convert.FromBase64String(strEncrypted.Replace(" ", "+"));
+            using (Aes encryptor = Aes.Create())
+            {
+                encryptor.Key = encryptorKey;
+                encryptor.IV = encryptorIV;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(bytes, 0, bytes.Length);
+                        cs.Close();
+                    }
+                    strDecrypted = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return strDecrypted;
+        }
+
+        public string SetConfig(string clientId, string userName, string password, string token, string serviceKey, string baseUrl)
+        {
+            ShipmateConfigEncrypted config = new ShipmateConfigEncrypted()
+            {
+                UserName = userName,
+                PasswordEncrypted = Encrypt(password),
+                TokenEncrypted = Encrypt(token),
+                ServiceKey = serviceKey,
+                BaseUrl = baseUrl
+            };
+
+            ShipmateConfigBLL shipmateConfigBLL = new ShipmateConfigBLL();
+            return shipmateConfigBLL.ShipmateConfig(clientId, (new JavaScriptSerializer()).Serialize(config), false);
+        }
+
+        public ShipmateConfig GetConfig(string clientId, out string errorMessage)
+        {
+            ShipmateConfig shipmateConfig = null;
+            ShipmateConfigBLL shipmateConfigBLL = new ShipmateConfigBLL();
+            string result = shipmateConfigBLL.ShipmateConfig(clientId, null, true);
+
+            if (result.StartsWith("Error"))
+            {
+                errorMessage = result;
+            }
+            else
+            {
+                errorMessage = null;
+                ShipmateConfigEncrypted shipmateConfigEncrypted = (new JavaScriptSerializer()).Deserialize<ShipmateConfigEncrypted>(result);
+
+                shipmateConfig = new ShipmateConfig()
+                {
+                    UserName = shipmateConfigEncrypted.UserName,
+                    Password = Decrypt(shipmateConfigEncrypted.PasswordEncrypted),
+                    Token = Decrypt(shipmateConfigEncrypted.TokenEncrypted),
+                    ServiceKey = shipmateConfigEncrypted.ServiceKey,
+                    BaseUrl = shipmateConfigEncrypted.BaseUrl
+                };
+            }
+
+            return shipmateConfig;
         }
 
         public LoginResponse Login(LoginRequest loginRequest)
@@ -612,6 +726,77 @@ namespace Mobile.Portal.BLL.Shipmate
         {
             return MakeWebRequest<ConsignmentResponse>(GetUrl(ShipmateAction.PrintLabel, trackingReference: trackingReference), null);
         }
+
+        public string BtnBookCourierClick(string saediFromId, string rmaId, string clientRef = null, long serviceID = 0L)
+        {
+            int remittanceID = 0;
+            RMARefBLL rmaRefBLL = new RMARefBLL();
+            ClientBLL clientBLL = new ClientBLL();
+            Client client = clientBLL.GetBySaediId(saediFromId, programVersion: "2");
+
+            string name = client.CompanyName != null ? client.CompanyName.Trim() : "";
+
+            string[] address = new string[5];
+            address[0] = string.IsNullOrEmpty(client.DeliveryAddress.Address1) ? "" : client.DeliveryAddress.Address1.Trim();
+            address[1] = string.IsNullOrEmpty(client.DeliveryAddress.Address2) ? "" : client.DeliveryAddress.Address2.Trim();
+            address[2] = string.IsNullOrEmpty(client.DeliveryAddress.Address3) ? "" : client.DeliveryAddress.Address3.Trim();
+            address[3] = string.IsNullOrEmpty(client.DeliveryAddress.Address4) ? "" : client.DeliveryAddress.Address4.Trim();
+            address[4] = string.IsNullOrEmpty(client.DeliveryAddress.Address5) ? "" : client.DeliveryAddress.Address5.Trim();
+
+            string line1 = "";
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (line1 != "" && address[i] != "")
+                    line1 += (" " + address[i]);
+                else if (address[i] != "")
+                    line1 = address[i];
+            }
+
+            string city = client.DeliveryAddress.City != null ? client.DeliveryAddress.City.Trim() : "";
+            string postcode = client.DeliveryAddress.PostalCode != null ? client.DeliveryAddress.PostalCode.Trim() : "";
+            string country = client.DeliveryAddress.Country != null ? client.DeliveryAddress.Country.Trim() : "";
+            string reference = rmaId + "-1";
+            string title = "Create Shipmate consignment";
+
+            if (!string.IsNullOrEmpty(clientRef))
+            {
+                PartsBLL SAEDIParts = new PartsBLL();
+                SAEDIParts.List = SAEDIParts.GetSAEDIPartsByCall(saediFromId, clientRef).ToList();
+                CallPart saediPart = SAEDIParts.List.Find(p => p.ReturnReference == rmaId);
+
+                if (saediPart != null)
+                    remittanceID = Convert.ToInt32(saediPart.Id);
+            }
+
+            string queryString = string.Format("ShipmatePage.aspx?" +
+                "Title={0}&" +
+                "ServiceID={1}&" +
+                "RemittanceID={2}&" +
+                "ConsignmentReference={3}&" +
+                "ServiceKey={4}&" +
+                "Name={5}&" +
+                "Line1={6}&" +
+                "City={7}&" +
+                "Postcode={8}&" +
+                "Country={9}&" +
+                "Reference={10}&" +
+                "SaediFromId={11}",
+                title,
+                serviceID.ToString(),
+                remittanceID.ToString(),
+                rmaId,
+                this.ServiceKey,
+                name,
+                line1,
+                city,
+                postcode,
+                country,
+                reference,
+                saediFromId);
+
+            return queryString;
+        }
     }
 }
 
@@ -629,6 +814,21 @@ namespace Mobile.Portal.BLL
         public int CreateLogEntry(Mobile.Portal.DAL.ShipmateConsignmentRequestResponse s, bool addResponseParameters)
         {
             return _dal.CreateLogEntry(s, addResponseParameters);
+        }
+    }
+
+    public class ShipmateConfigBLL : BaseBLL<string>, Mobile.Portal.DAL.IShipmateConfigProvider
+    {
+        Mobile.Portal.DAL.IShipmateConfigProvider _dal;
+
+        public ShipmateConfigBLL()
+        {
+            _dal = new Mobile.Portal.DAL.ShipmateConfigProvider();
+        }
+
+        public string ShipmateConfig(string clientId, string config, bool isGet)
+        {
+            return _dal.ShipmateConfig(clientId, config, isGet);
         }
     }
 }
