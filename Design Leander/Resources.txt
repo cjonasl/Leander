@@ -2435,3 +2435,43 @@ Task25_Day35_Date190522_Create Windows Forms application to test Shipmate servic
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+123
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-12 12:32:47
+
+----- New property -----
+
+Task26_Day49_Date190612_Sonar project
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+124
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-12 14:41:58
+
+----- New property -----
+
+Task27_Day49_Date190612_Update trigger sql
+
+----- New property -----
+
+Task,Fixzone

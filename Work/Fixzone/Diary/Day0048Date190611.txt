@@ -1,2 +1,10 @@
 ﻿Dag 48:
 Tisdag den 11 juni 2019
+Jag ägnade en stor del av arbetsdagen åt att ordna
+så att ”Engineer connect” kan anropa Shipmate på
+testservern, men jag lyckades inte. Läste dokumentation
+om ”Engineer connect” i ett pdf-dokument. Vid 13.30-tiden
+intog jag banan, kaffe och smörgås till lunch. Gick
+in på ”Sage” och ansökte om semester från 30/9-11/10.
+Jag avslutade arbetsdagen ca. kl. 18.00 och promenerade
+hem.

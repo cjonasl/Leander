@@ -1,0 +1,45 @@
+﻿123
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-12 12:32:47
+
+----- New property -----
+
+Task26_Day49_Date190612_Sonar project
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task26_Day49_Date190612_Sonar project
+
+----- New property -----
+
+null

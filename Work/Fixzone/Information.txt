@@ -1,4 +1,7 @@
-﻿Server: datasvr
+﻿To bundle many sql-triggers in one file use application "CreateAnUpdateScriptOfNewTriggers"
+in solution C:\Jonas\Solutions\Nr1\Nr1.sln
+
+Server: datasvr
 Password: Ping68pong
 
 Use this URL for Shipmate on fieldengineer:

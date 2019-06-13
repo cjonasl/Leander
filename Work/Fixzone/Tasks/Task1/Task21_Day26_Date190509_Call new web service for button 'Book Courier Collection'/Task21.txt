@@ -1,5 +1,9 @@
 ﻿Task21:
 
+http://web2016/FzShipmate/FzShipmate.dll/services?token=628af98fb045bdb636452204fde483d6
+http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll/services?token=628af98fb045bdb636452204fde483d6
+
+
 Configuration:
 ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll
 
