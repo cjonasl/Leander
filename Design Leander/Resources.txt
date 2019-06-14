@@ -2475,3 +2475,43 @@ Task27_Day49_Date190612_Update trigger sql
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+125
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-13 09:51:55
+
+----- New property -----
+
+Task28_Day50_Date190613_Do changes in Argos
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+126
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-13 12:26:30
+
+----- New property -----
+
+Task29_Day50_Date190613_Update trigger sql
+
+----- New property -----
+
+Task,Fixzone

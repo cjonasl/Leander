@@ -1,0 +1,45 @@
+﻿126
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-13 12:26:30
+
+----- New property -----
+
+Task29_Day50_Date190613_Update trigger sql
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task29_Day50_Date190613_Update trigger sql
+
+----- New property -----
+
+null

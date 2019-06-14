@@ -1,0 +1,45 @@
+﻿125
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-13 09:51:55
+
+----- New property -----
+
+Task28_Day50_Date190613_Do changes in Argos
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task28_Day50_Date190613_Do changes in Argos
+
+----- New property -----
+
+null
