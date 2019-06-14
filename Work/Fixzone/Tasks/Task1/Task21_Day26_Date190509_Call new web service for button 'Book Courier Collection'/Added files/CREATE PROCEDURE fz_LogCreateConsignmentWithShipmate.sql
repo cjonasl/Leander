@@ -32,9 +32,8 @@ CREATE PROCEDURE fz_LogShipmateConsignmentRequestResponse
 @ResCounty varchar(40) = NULL,
 @ResPostcode varchar(10) = NULL,
 @ResCountry varchar(40) = NULL,
-@ResPdf varchar(max) = NULL,
-@ResZpl varchar(max) = NULL,
-@ResPng varchar(max) = NULL
+@ResMediaURL varchar(250) = NULL,
+@ResMediaGUID uniqueidentifier = NULL
 AS
 DECLARE @ID int
 
@@ -74,9 +73,8 @@ INSERT INTO ShipmateConsignmentCreation
   ResCounty,
   ResPostcode,
   ResCountry,
-  ResPdf,
-  ResZpl,
-  ResPng
+  ResMediaURL,
+  ResMediaGUID
 )
 VALUES
 (
@@ -114,9 +112,8 @@ VALUES
   @ResCounty,
   @ResPostcode,
   @ResCountry,
-  @ResPdf,
-  @ResZpl,
-  @ResPng
+  @ResMediaURL,
+  @ResMediaGUID
 )
 
 SELECT TOP 1 @ID = ID
