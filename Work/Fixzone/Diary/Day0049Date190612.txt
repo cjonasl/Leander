@@ -1,2 +1,16 @@
 ﻿Dag 49:
 Onsdag den 12 juni 2019
+Experimenterade och försökte ordna så att server för ”Engineer
+Connect” kan anropa server web2016 där Shipmate server ligger,
+men misslyckades. Jag kommunicerade bl.a. med David Xu som
+arbetar från Kina. Det slutade med att Vijay skickade ett mail
+till någon administratör på Pacifica Group som måste fixa med
+DNS för att det ska gå. Registrerade task26 för ”Sonar project”
+som jag fått mail om från Angela och sedan tittade jag en stund
+på det. Intog banan, smörgås och kaffe till lunch. Vijay meddelade
+att hon hade ckeckat in flera sql triggrar i SVN och hon bad mig
+gå igenom och validera dem och sedan köra på dem på prod-databasen,
+vilket jag gjorde i task27. Registrerade task28 för ett par
+ändringar som ska göras i Argos och sedan arbetade jag med det.
+Jag avslutade arbetsdagen ca. kl. 17.50 och gick till ”Tesco
+Express” och handlade kola, bananer  och bröd (kostnad: 3.64 pund).

@@ -1,2 +1,30 @@
 ﻿Dag 51:
 Fredag den 14 juni 2019
+Vijay ville att jag från källkodshanteraren SVN skulle ladda
+ner solution för portal ”CustomerConnect” gällande ”Shop Direct”
+och bekanta mig med koden. Jag laddade ner koden och sedan ville
+jag gärna ha en kopia av prod databasen så det blev att jag
+ägnade lång tid åt att undersöka hur man kopierar en sql-databas.
+När jag sedan lyckades lösa hur man gör det dokumenterade jag
+förfarandet i en ”Snagit video”. Jag frågade Vijay om jag kunde
+göra en kopia av prod databasen, men hon svarade att hon istället
+skulle ordna en databas på en utvecklingsserver. Vid 14.00-tiden
+åt jag två medtagna smörgåsar och kaffe till dryck. Till efterrätt
+fick jag en pinnglass av Vijay. Vijay visade på googlemap från
+vilken stad i Indien hon kommer ifrån (stad längst ner i södra
+Indien vid kusten). Det upptäcktes på eftermiddagen att min lösning
+i task21 för hantering av etiketten inte är riktigt korrekt. Det
+finns en url till etiketten som David Xu har tillgänglig som jag
+ska använda istället för att anropa Shipmate och få en base64-
+string i pdf format och rendera i webbläsaren som jag hade gjort.
+Dessutom behöver jag anropa en webbservice för att skapa en kopia
+av etiketten i en annan databas och för det behöver jag guid:en
+för etiketten som också David Xu har tillgänglig. Jag skrev ett
+mail till David och bad honom ändra i svars json-strängen i metoden
+”CreateConsignment” så att han istället för att skicka tillbaka en
+base64-sträng av etiketten i variabel pdf skickar tillbaka url
+och guid till etiketten i variablerna MediaURL och MediaGUID samt
+att han även kan utesluta variablernazpl ch png som alltid är
+tomma och inte används. Jag stannade kvar på arbetet till knappt
+kl. 20.00 och arbetade med den nya funktionaliteten av etiketten.
+Jag var sist därifrån så jag fick sätta på larmet och låsa. 

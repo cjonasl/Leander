@@ -1,2 +1,14 @@
 ﻿Dag 50:
 Torsdag den 13 juni 2019
+Jag gjorde klart task28 (Do changes in Argos) och uppdaterade
+testportalen. Efteråt skrev jag mail till Jemma Cantwell och
+Danny Cobley på Argos att de kan testa om de felpunkter som
+jag hade rättat. Jag intog kaffe, smörgås och banan till lunch
+vid 14.00-tiden. Vijay gick igenom arkitekturen av hela systemet
+med mig och det är verkligen många olika databaser, portaler
+och program som är inblandade!! Vijay meddelade att hon hade
+ckeckat in tre nya sql-triggrar och hon bad mig validera dem
+och sedan köra den på prod-databasen, vilket jag gjorde i task29.
+Efteråt gick jag igenom ej aktiva sql triggrar som ska sättas
+om till aktiv så att de inte skickar iväg mail om gamla jobb.
+Jag avslutade arbetsdagen drygt kl. 17.30 och gick till Surbiton.
