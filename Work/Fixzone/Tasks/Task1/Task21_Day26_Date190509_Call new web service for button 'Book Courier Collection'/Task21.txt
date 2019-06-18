@@ -5,7 +5,9 @@ http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll/services?token=628af98f
 
 
 Configuration:
-ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll
+ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll/
+ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=http://web2016/FzShipmate/FzShipmate.dll/
+
 
 Get configuration:
 ShipmatePage.aspx?Title=GetConfig&AdminPsw=Ping68pong&ClientId=SONY3C
@@ -75,6 +77,7 @@ C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.BLL\RMARefBLL.cs
 C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL.Interfaces\IRMARefDataProvider.cs
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.BLL\CourierRMABLL.cs
 
 Login Shipmate: https://app-staging.shipmate.co.uk/login
 Username: paul@fixzone.com

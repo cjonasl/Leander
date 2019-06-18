@@ -33,7 +33,7 @@ CREATE PROCEDURE fz_LogShipmateConsignmentRequestResponse
 @ResPostcode varchar(10) = NULL,
 @ResCountry varchar(40) = NULL,
 @ResMediaURL varchar(250) = NULL,
-@ResMediaGUID uniqueidentifier = NULL
+@ResMediaGUID varchar(50) = NULL
 AS
 DECLARE @ID int
 

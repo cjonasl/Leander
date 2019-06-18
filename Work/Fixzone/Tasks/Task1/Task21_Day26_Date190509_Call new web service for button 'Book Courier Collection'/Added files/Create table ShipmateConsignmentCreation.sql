@@ -47,7 +47,7 @@ CREATE TABLE [dbo].[ShipmateConsignmentCreation](
 	[ResPostcode] [varchar](10) NULL,
 	[ResCountry] [varchar](40) NULL,
 	[ResMediaURL] [varchar](250) NULL,
-	[ResMediaGUID] [uniqueidentifier] NULL,
+	[ResMediaGUID] [varchar](50) NULL,
  CONSTRAINT [PK_ShipmateConsignmentCreation] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
