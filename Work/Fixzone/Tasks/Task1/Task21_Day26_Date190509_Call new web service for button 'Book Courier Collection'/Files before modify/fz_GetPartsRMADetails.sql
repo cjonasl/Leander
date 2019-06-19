@@ -1,13 +1,3 @@
-USE [Saedi_PRD]
-GO
-
-/****** Object:  StoredProcedure [dbo].[fz_GetPartsRMADetails]    Script Date: 06/14/2019 19:19:10 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER proc [dbo].[fz_GetPartsRMADetails] 
 
 @SAEDIFromID varchar(15),

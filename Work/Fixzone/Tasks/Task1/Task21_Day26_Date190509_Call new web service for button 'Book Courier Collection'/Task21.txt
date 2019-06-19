@@ -1,5 +1,8 @@
 ﻿Task21:
 
+https://cloud.fixzone.com/FZShipmate/FzShipmate.dll/Consignments
+https://cloud.fixzone.com/FZShipmate/FzShipmate.dll/services?token=c107fb733d9573b610e2f93589d848df
+
 http://web2016/FzShipmate/FzShipmate.dll/services?token=628af98fb045bdb636452204fde483d6
 http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll/services?token=628af98fb045bdb636452204fde483d6
 
@@ -65,19 +68,30 @@ ADD ShipmateConsignmentCreationId int
 New files:
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\ShipmatePage.aspx
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\ShipmatePage.aspx.cs
-C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\ShowShipmateLabel.aspx
-C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\ShowShipmateLabel.aspx.cs
 C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL\Shipmate.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.BLL\Shipmate.cs
+Create table ShipmateConsignmentCreation.sql
+CREATE PROCEDURE fz_ShipmateConfig.sql
+CREATE PROCEDURE fz_LogCreateConsignmentWithShipmate.sql
+CREATE PROCEDURE fz_GetShipmateConsignmentDetails.sql
 
 Modified files:
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\Parts.aspx
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\Parts.aspx.cs
-C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL\RMARefDataProvider.cs
-C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.BLL\RMARefBLL.cs
-C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL.Interfaces\IRMARefDataProvider.cs
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx
 C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL\RMARefDataProvider.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL.Interfaces\IRMARefDataProvider.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.BLL\RMARefBLL.cs
 C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.BLL\CourierRMABLL.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.Classes\CallPart.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.Classes\RMARef.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL\PartsDataProvider.cs
+Add column ShipmateConsignmentCreationId in table SONYRMA.sql
+Add column ShipmateConfig in table SAEDIClient.sql
+UpdateCollectiobJob.sql
+fz_GetPartsRMADetails.sql
+fz_GetSAEDIPartsByCall.sql
 
 Login Shipmate: https://app-staging.shipmate.co.uk/login
 Username: paul@fixzone.com
