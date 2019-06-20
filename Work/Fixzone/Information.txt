@@ -1,4 +1,10 @@
-﻿---------------- Understand the system --------------------------------------
+﻿Log in FIXZONECLOUD:
+Username: FIXZONECLOUD\Jonas.Leander
+Password: The Jj-one
+
+The live Shipmate service is deployed in "cloud.fixzone.com" (FIXZONECLOUD\fixzone-jonas)
+
+---------------- Understand the system --------------------------------------
 
 1. An engineer can work for different clients, for example GAS, Sony or JTM
 

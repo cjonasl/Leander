@@ -1,15 +1,21 @@
 ﻿Task21:
 
-https://cloud.fixzone.com/FZShipmate/FzShipmate.dll/Consignments
+https://www.shipmate.co.uk/guides/api#consignment-create
+
+The live Shipmate service is deployed in "cloud.fixzone.com" (FIXZONECLOUD\fixzone-jonas)
+
+https://web2016/FZShipmate/FzShipmate.dll/Consignments
 https://cloud.fixzone.com/FZShipmate/FzShipmate.dll/services?token=c107fb733d9573b610e2f93589d848df
 
 http://web2016/FzShipmate/FzShipmate.dll/services?token=628af98fb045bdb636452204fde483d6
 http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll/services?token=628af98fb045bdb636452204fde483d6
 
+https://portal.fieldengineer.co.uk/Demo/ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=https://cloud.fixzone.com/FZShipmate/FzShipmate.dll/
+https://portal.fieldengineer.co.uk/Demo/ShipmatePage.aspx?Title=GetConfig&AdminPsw=Ping68pong&ClientId=SONY3C
 
 Configuration:
 ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=http://api.fieldengineer.co.uk/FzShipmate/FzShipmate.dll/
-ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=http://web2016/FzShipmate/FzShipmate.dll/
+ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=SONY3C&UserName=paul@fixzone.com&Password=Rjd2rjd2&Token=628af98fb045bdb636452204fde483d6&ServiceKey=DPDNEXT&BaseUrl=https://cloud.fixzone.com/FZShipmate/FzShipmate.dll/
 
 
 Get configuration:

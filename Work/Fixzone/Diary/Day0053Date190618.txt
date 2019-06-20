@@ -1,0 +1,14 @@
+﻿Dag 53:
+Tisdag den 18 juni 2019
+Jag ägnade arbetsdagen mest åt att i task21 (Call new web
+service for button 'Book Courier Collection') validera allt
+jag gjort och gå igenom vilka filer jag modifierat och lagt
+till. Jag kunde inte testa ordentligt eftersom David Xus
+senaste version av Shipmate service inte fungerade (det
+blev ”access violation” error då ”/Consignments” anropades).
+Vid 13.00-tiden intog jag smörgås, banan och kaffe till
+lunch. I slutet av arbetsdagen provade jag att med ”Git
+Extensions” ladda ner ”Ecomaster Web App” och det fungerade
+(jag använde inloggningsuppgifter som hade skickats till
+Mark eftersom jag inte fått egna ännu). Jag avslutade
+arbetsdagen ca. kl. 17.30 och promenerade hem.
