@@ -1,2 +1,9 @@
 ﻿Dag 52:
 Måndag den 17 juni 2019
+Jag ägnade arbetsdagen åt task21 (Call new web service for
+button 'Book Courier Collection'), särskilt med att komplettera
+med kod så att en referens till Shipmate etiketten läggs in
+i Sony Delphis databas. Jag intog banan, smörgås och kaffe
+till lunch. Jag avslutade arbetsdagen ca. kl. 19.30 och
+promenerade hem (jag var sist ifrån kontoret så jag fick
+sätta på larmet och låsa).
