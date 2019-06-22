@@ -1,2 +1,15 @@
 ﻿Dag 55:
 Torsdag den 20 juni 2019
+Jag ägnade arbetsdagen åt task21 (Call new web service for button
+'Book Courier Collection'). Kommunicerade på Skype med Vijay (som
+arbetade hemifrån idag) och David Xu (som arbetar från Kina) och
+försökte klargöra olika saker rörande Shipmate, bl.a. att David
+måste lägga till ”collection_address” i request json-strängen då
+en ”consignment” skapas. David la till ”collection_address”, men
+då han skapade en ”consignment” med det tillägget så blev avsändare
+på etiketten ändå Shipmatekontots adress och David bad mig göra
+”research” på varför det blir så. Jag tog reda på en email adress
+till Shipmate och skrev ett mail till dem och frågade. Vid 13.15-
+tiden intog jag banan, smörgås och kaffe till lunch. På eftermiddagen
+arbetade jag med att modifiera så att konfigureringen av Shipmate
+kan göras i en websida istället för i en ”query string”.

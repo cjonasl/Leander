@@ -1,8 +1,8 @@
-﻿Log in FIXZONECLOUD:
+﻿Log in cloud.fixzone.com:13389
 Username: FIXZONECLOUD\Jonas.Leander
 Password: The Jj-one
 
-The live Shipmate service is deployed in "cloud.fixzone.com" (FIXZONECLOUD\fixzone-jonas)
+The live Shipmate service is deployed in "cloud.fixzone.com"
 
 ---------------- Understand the system --------------------------------------
 

@@ -1,7 +1,7 @@
 CREATE PROCEDURE fz_ShipmateConfig
 @SAEDIID varchar(11),
 @IsGet bit,
-@ShipmateConfig varchar(500) = NULL
+@ShipmateConfig varchar(1000) = NULL
 AS
 DECLARE 
 @ID int = NULL,
@@ -9,18 +9,13 @@ DECLARE
 
 SELECT @ID = _id
 FROM SAEDIClient
-WHERE (SAEDIID = @SAEDIID AND ClientType = 'Transfer')
+WHERE SAEDIID = @SAEDIID AND ClientType = 'Transfer'
 
 IF (@ID IS NOT NULL AND @IsGet = 1)
 BEGIN
-  SELECT @Value = ISNULL(ShipmateConfig, '')
+  SELECT ISNULL(ShipmateConfig, '')
   FROM SAEDIClient
   WHERE _id = @ID
-
-  IF (@Value = '')
-    SELECT 'Error in fz_ShipmateConfig! Shipmate is not configured for client ' + @SAEDIID
-  ELSE
-    SELECT @Value
 END
 ELSE IF (@ID IS NOT NULL AND @IsGet = 0)
 BEGIN
@@ -31,4 +26,4 @@ BEGIN
   SELECT 'Success'
 END
 ELSE
-  SELECT 'Error in fz_ShipmateConfig! The client ' + @SAEDIID + ' does not exist in table SAEDIClient as expected.'
+  SELECT 'ClientId does not exist!'
