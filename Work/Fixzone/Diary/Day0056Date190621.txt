@@ -1,2 +1,14 @@
 ﻿Dag 56:
 Fredag den 21 juni 2019
+Fick i uppgift av Vijay att på web server ”RD-WEB” (cloud.fixzone.com)
+skapa egna siter i IIS:en för 6 applikationer och ”virtual directories”,
+vilket jag gjorde. Annars under arbetsdagen ägnade jag mig åt task21
+(Call new web service for button 'Book Courier Collection'). Jag gjorde
+bl.a. klart arbetet som jag påbörjade igår med att modifiera så att
+konfigureringen av Shipmate kan göras i en websida istället för i en
+”query string”. Fick svar från Shipmate på ett mail jag skickade igår
+där jag frågade om collection_address och det är inte implementerat
+fastän det står med i dokumentationen på deras hemsida. Det kan bli
+stora problem med det! Jag intog banan, smörgås och kaffe till lunch.
+Jag avslutade arbetsdagen ca. kl. 19.15 och promenerade hem (jag var
+sist ifrån kontoret så jag fick sätta på larmet och låsa). 
