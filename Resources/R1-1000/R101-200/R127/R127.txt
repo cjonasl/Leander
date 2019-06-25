@@ -1,0 +1,45 @@
+﻿127
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-24 10:48:43
+
+----- New property -----
+
+Task30_Day57_Date190624_Write SQL trigger query for Sony ETA
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task30_Day57_Date190624_Write SQL trigger query for Sony ETA
+
+----- New property -----
+
+null

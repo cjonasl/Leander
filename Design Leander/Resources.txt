@@ -2515,3 +2515,23 @@ Task29_Day50_Date190613_Update trigger sql
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+127
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-24 10:48:43
+
+----- New property -----
+
+Task30_Day57_Date190624_Write SQL trigger query for Sony ETA
+
+----- New property -----
+
+Task,Fixzone

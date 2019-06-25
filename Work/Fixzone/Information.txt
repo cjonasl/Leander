@@ -1,4 +1,7 @@
-﻿------- Ecomater (from David Lee 2019-06-19) -------
+﻿Remove submodules:
+git submodule deinit -f --all
+
+------- Ecomater (from David Lee 2019-06-19) -------
 Hi Jonas
 
 Here are your login details…
