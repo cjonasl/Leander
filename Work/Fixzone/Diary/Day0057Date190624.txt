@@ -1,2 +1,13 @@
 ﻿Dag 57:
 Måndag den 24 juni 2019
+Skrev mail till David Lee på Sapere och meddelade att jag har
+problem med submodulerna i WebApp-solution. David svarade att
+han rekommenderar att ta bort submodulerna och sedan lägga till
+dem igen, vilket jag provade men det fungerade inte i alla fall.
+Fick i uppgift av Vijay att i ”Engineer Connect” skriva en trigger
+sql som skickar iväg ett mail till ingenjörer då en utbytt vara
+skickats för en kund (Advanced Exchange Program). Jag skapade
+task30 för uppgiften och sedan gjorde jag den och det tog ca.
+tre timmar. Knappt kl. 13.30 intog jag smörgås, banan och kaffe
+till lunch. Installerade senaste npm och node.js och studerade
+”Cordova”.

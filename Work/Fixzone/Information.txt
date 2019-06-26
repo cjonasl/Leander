@@ -1,4 +1,8 @@
-﻿Remove submodules:
+﻿MsgMessageService (Web box Engineer Connect)
+C:\Fixzone\MsgServiceSQLFixzone
+Run for example TriggerID 11: C:\Fixzone\MsgServiceSQLFixzone\MessageServiceSQL.EXE /AUTO /TriggerID:11
+
+Remove submodules:
 git submodule deinit -f --all
 
 ------- Ecomater (from David Lee 2019-06-19) -------
