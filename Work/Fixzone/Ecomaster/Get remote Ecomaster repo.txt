@@ -1,0 +1,28 @@
+Get remote Ecomaster repo
+
+1. Make sure git is installed on the machine
+2. Create a folder for repo
+3. Open a command prompt and navigate to repo
+4. Run: git init
+5. Run: git remote add origin http://mark.remus@162.13.12.164:8080/r/pacifica/ecomaster.git
+6. Run: git fetch -a origin
+7. Run: git checkout master
+
+URL: http://mark.remus@162.13.12.164:8080/r/pacifica/ecomaster.git -- Main Web App
+
+
+[submodule "UtilityMethods"]
+            path = UtilityMethods
+            url = http://mark.remus@162.13.12.164:8080/r/source/UtilityMethods.git
+[submodule "PetaPocoModded"]
+            path = PetaPocoModded
+            url = http://mark.remus@162.13.12.164:8080/r/source/PetaPocoModded.git
+[submodule "FileCombiner"]
+            path = FileCombiner
+            url = http://mark.remus@162.13.12.164:8080/r/source/FileCombiner.git
+[submodule "pdfgeneration"]
+            path = pdfgeneration
+            url = http://mark.remus@162.13.12.164:8080/r/sapere-apps/pdfgeneration.git
+
+
+URL: http://mark.remus@162.13.12.164:8080/r/pacifica/ecomastermobile.git -- Mobile App

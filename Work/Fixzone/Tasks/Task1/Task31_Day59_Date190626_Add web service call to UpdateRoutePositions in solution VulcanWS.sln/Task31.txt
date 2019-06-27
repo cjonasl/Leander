@@ -1,0 +1,6 @@
+﻿Task31:
+
+Did the task 2019-06-25, but created this task the day after
+(2019-06-26).
+
+Checked in SVN files Vulcan.WebService\WebService.cs and Vulcan.DAL\RoutePosDAL.cs

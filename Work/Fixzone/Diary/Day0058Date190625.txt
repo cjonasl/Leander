@@ -1,2 +1,9 @@
 ﻿Dag 58:
 Tisdag den 25 juni 2019
+Vijay tittade på min task30 (Write SQL trigger query for Sony AEP)
+och vi rättade/förbättrade och testade tillsammans och det verkade
+fungera. Drygt kl. 13.00 intog jag banan, smörgås och kaffe till
+lunch. På eftermiddagen bad Vijay mig att lägga in ett webservice-
+anrop till UpdateRoutePositions in solution VulcanWS.sln, vilket
+jag gjorde (task31). Jag avslutade arbetsdagen drygt kl. 17.30
+och promenerade hem.
