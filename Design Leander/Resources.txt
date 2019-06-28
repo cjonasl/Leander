@@ -2555,3 +2555,23 @@ Task31_Day59_Date190626_Add web service call to UpdateRoutePositions in solution
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+129
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-27 10:46:22
+
+----- New property -----
+
+Task32_Day60_Date190627_Engineer Connect Improve performance call has inspections
+
+----- New property -----
+
+Task,Fixzone

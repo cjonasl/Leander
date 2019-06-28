@@ -1,2 +1,17 @@
 ﻿Dag 59:
 Onsdag den 26 juni 2019
+Fortsatte från igår att kämpa med att ladda ner submodulerna i
+Ecomasters WebApp, men det gick inte. Skrev ett mail till David
+Lee på Sapere och meddelade att jag fortfarande har problem med
+submodulerna och jag bifogade en Snagit-video där jag med hjälp
+av TortoiseGit försöker ladda ner en submodul, men fick fel. Lite
+senare på dagen svarade David och han hade upptäckt fel i portnumren
+på de git url:er som han hade angivit för submodulerna och jag
+ändrade och försökte igen och då fungerade det. Intog smörgås,
+banan och kaffe till lunch. Tittade lite på koden i ”Ecomaster Webb
+App”. I slutet av dagen ägnade jag mig lite åt att det inte
+fungerade med den nya webservicen ”UpdateRoutePositions” som jag
+arbetade med i task31 och jag kommunicerade om saken med Vijay på
+Skype (hon satt hemma och arbetade). Vijay meddelade sedan att
+felet berodde på Delphi-webservicen som Paul Ralphs hade skrivit.
+Jag avslutade arbetsdagen drygt kl. 17.30 och promenerade hem.

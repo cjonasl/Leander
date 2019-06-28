@@ -1,0 +1,45 @@
+﻿129
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-27 10:46:22
+
+----- New property -----
+
+Task32_Day60_Date190627_Engineer Connect Improve performance call has inspections
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task32_Day60_Date190627_Engineer Connect Improve performance call has inspections
+
+----- New property -----
+
+null

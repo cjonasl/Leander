@@ -1,0 +1,7 @@
+﻿Task32:
+
+Modify files:
+C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\CallList.aspx.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL.Interfaces\IInspectionDataProvider.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.BLL\InspectionBLL.cs
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL\InspectionDataProvider.cs
