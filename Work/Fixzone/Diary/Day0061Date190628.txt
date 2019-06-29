@@ -1,0 +1,13 @@
+﻿Dag 61:
+Fredag den 28 juni 2019
+Skrev mail till Vijay, Angela, David Lee och Janssen Wright och
+frågade hur jag ska kunna få en Ecomaster databas för test, om
+någon eventuellt kan föra över en backup från live db till en
+testserver hos Fixzone eller om Sapere har ett skript för att
+skapa en tom databas plus nödvändig konfigureringsdata. Jag ägnade
+sedan arbetsdagen mest åt task21, ”Call new web service for button
+'Book Courier Collection'”, speciellt med att uppdatera i koden så
+att ”collection_address” kommer med i json-strängen då en consignment
+ska skapas. Jag avslutade arbeytsdagen ca. kl. 19.45 och gick till
+”M&S” och handlade för 14.60 pund (jag var sist ifrån kontoret så
+jag fick sätta på larmet och låsa).

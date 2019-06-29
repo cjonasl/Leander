@@ -1,0 +1,8 @@
+﻿Task33:
+
+Add stored procedure:
+fz_GetInspections
+
+Modify file:
+C:\Jonas\SVN\SaediSVN3\FixzonePortalDataAccess\Mobile.Portal.DAL\InspectionDataProvider.cs
+

@@ -1,2 +1,11 @@
 ﻿Dag 60:
 Torsdag den 27 juni 2019
+Vijay bad mig i ”Engineer Connect” förbättra hantering av bestämning
+om ett jobb har associerade ”Inspections”, vilket jag gjorde. Jag
+skapade task32 för uppgiften. Jag ändrade så att en stored procedure
+(en ny som jag skrev vid namn ”fz_CallHasInspections”) anropas istället
+för hårdkodad sql i C#. Vid 13.00 åt jag medtagen smörgås och banan
+till lunch samt kaffe till dryck. Började arbeta med en consoleapplikation
+som är tänkt att ligga i ”Visual Crone” och uppdatera Shipmate status
+för consignments. Jag avslutade arbetsdagen ca. kl. 19.00 och promenerade
+hem (jag var sist ifrån kontoret och fick sätta på larmet och låsa).

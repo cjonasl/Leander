@@ -2575,3 +2575,23 @@ Task32_Day60_Date190627_Engineer Connect Improve performance call has inspection
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+130
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-06-28 10:29:38
+
+----- New property -----
+
+Task33_Day61_Date190628_Engineer Connect Get Inspections from sp instead of hardcoded sql
+
+----- New property -----
+
+Task,Fixzone

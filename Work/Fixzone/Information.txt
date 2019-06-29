@@ -2,9 +2,6 @@
 C:\Fixzone\MsgServiceSQLFixzone
 Run for example TriggerID 11: C:\Fixzone\MsgServiceSQLFixzone\MessageServiceSQL.EXE /AUTO /TriggerID:11
 
-Remove submodules:
-git submodule deinit -f --all
-
 ------- Ecomater (from David Lee 2019-06-19) -------
 Hi Jonas
 
@@ -19,10 +16,12 @@ Cheers
 David
 ----------------------------------------------------
 
-
 Log in cloud.fixzone.com:13389
 Username: FIXZONECLOUD\Jonas.Leander
 Password: The Jj-one
+
+After log in to cloud.fixzone.com:13389 then open
+remote "Remote Desktop" and connect to "RD-WEB".
 
 The live Shipmate service is deployed in "cloud.fixzone.com"
 
