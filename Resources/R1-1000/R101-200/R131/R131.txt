@@ -1,0 +1,45 @@
+﻿131
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-01 14:40:19
+
+----- New property -----
+
+Task34_Day62_Date190701_Add functionality for Sonar project
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task34_Day62_Date190701_Add functionality for Sonar project
+
+----- New property -----
+
+null

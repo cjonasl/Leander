@@ -2595,3 +2595,23 @@ Task33_Day61_Date190628_Engineer Connect Get Inspections from sp instead of hard
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+131
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-01 14:40:19
+
+----- New property -----
+
+Task34_Day62_Date190701_Add functionality for Sonar project
+
+----- New property -----
+
+Task,Fixzone
