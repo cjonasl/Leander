@@ -1,2 +1,12 @@
 ﻿Dag 62:
 Måndag den 1 juli 2019
+Jag ägnade arbetsdagen mest åt att arbeta med task21 (Call
+new web service for button 'Book Courier Collection'). Drygt
+kl. 13.00 intog jag två medtagna smörgåsar till lunch samt
+kaffe till dryck som gratis finns att tillgå på Fixzone. På
+eftermiddagen bad Vijay mig att skapa en ny tabell i ”Enginer
+Connect” för att hålla information om vilka Sony-ingenjörer
+som ingår i ”Sonar” samt tillhörande stored procedure och
+kod i ”access- och business layer”. Jag skapade task34 för
+uppgiften och gjorde den. Jag avslutade arbetsdagen ca.
+kl. 18.00 och promenerade hem.

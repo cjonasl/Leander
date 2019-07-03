@@ -16,12 +16,12 @@ BEGIN
     SCC.ResMediaURL AS ShipmateMediaURL
 FROM
   sonyRma R
-  LEFT JOIN SonySearchReturnData D on D.son = R.INPUT_sonNumber and R.Success <> '1'
+  LEFT JOIN SonySearchReturnData D on D.son = R.INPUT_sonNumber AND R.Success <> '1'
   LEFT JOIN ShipmateConsignmentCreation SCC ON R.ShipmateConsignmentCreationId = SCC.ID
 WHERE
-   SaediFromID = @SAEDIFromID and
-   R.INPUT_sonNumber = @SON and
-   R.Success='1' and
-   @SON<>''
+   SaediFromID = @SAEDIFromID AND
+   R.INPUT_sonNumber = @SON AND
+   R.Success = '1' and
+   @SON <> ''
 END
 GO

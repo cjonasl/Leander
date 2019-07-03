@@ -1,0 +1,45 @@
+﻿132
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-02 15:43:41
+
+----- New property -----
+
+Task35_Day63_Date190702_Test PASClientconnect
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task35_Day63_Date190702_Test PASClientconnect
+
+----- New property -----
+
+null

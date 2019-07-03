@@ -1,4 +1,7 @@
-﻿MsgMessageService (Web box Engineer Connect)
+﻿Microsoft SDK:
+C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin
+
+MsgMessageService (Web box Engineer Connect)
 C:\Fixzone\MsgServiceSQLFixzone
 Run for example TriggerID 11: C:\Fixzone\MsgServiceSQLFixzone\MessageServiceSQL.EXE /AUTO /TriggerID:11
 

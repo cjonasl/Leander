@@ -2615,3 +2615,23 @@ Task34_Day62_Date190701_Add functionality for Sonar project
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+132
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-02 15:43:41
+
+----- New property -----
+
+Task35_Day63_Date190702_Test PASClientconnect
+
+----- New property -----
+
+Task,Fixzone
