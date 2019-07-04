@@ -1,4 +1,9 @@
-﻿Microsoft SDK:
+﻿Client connect
+Delphi side: Terminal server, then remote desktop to server PG-DUR-FSERVER, then go to E:\CompleteService\LitmusDemo\bin, program "service" (Username: FIXZONE, password: toothblue)
+Username: Jonas.Leander
+Password: Leeds#6231
+
+Microsoft SDK:
 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin
 
 MsgMessageService (Web box Engineer Connect)

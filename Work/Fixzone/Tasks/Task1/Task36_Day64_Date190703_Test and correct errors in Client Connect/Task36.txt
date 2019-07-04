@@ -1,0 +1,6 @@
+﻿Task36:
+
+Modify files:
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\ViewModels\BookNewService\Appointment.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\BookNewService\RequestDate.cshtml

@@ -2635,3 +2635,23 @@ Task35_Day63_Date190702_Test PASClientconnect
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+133
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-03 17:23:35
+
+----- New property -----
+
+Task36_Day64_Date190703_Test and correct errors in Client Connect
+
+----- New property -----
+
+Task,Fixzone

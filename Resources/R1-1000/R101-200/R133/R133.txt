@@ -1,0 +1,45 @@
+﻿133
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-03 17:23:35
+
+----- New property -----
+
+Task36_Day64_Date190703_Test and correct errors in Client Connect
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task36_Day64_Date190703_Test and correct errors in Client Connect
+
+----- New property -----
+
+null
