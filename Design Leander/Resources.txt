@@ -2675,3 +2675,23 @@ Task37_Day65_Date190704_Update report
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+135
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-05 18:29:43
+
+----- New property -----
+
+Task38_Day66_Date190705_Argos help guides
+
+----- New property -----
+
+Task,Fixzone

@@ -1,1 +1,6 @@
 ﻿Task24:
+
+Modify files:
+C:\Jonas\SVN\CAST\CastApplication\ViewModels\User\User_DetailsModel.cs
+15. Add stored procedure GetUserStoreInfo.sql
+Signin.sql

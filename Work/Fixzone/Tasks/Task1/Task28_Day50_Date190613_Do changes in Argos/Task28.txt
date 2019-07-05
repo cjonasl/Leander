@@ -1,1 +1,7 @@
 ﻿Task28:
+
+Modify files:
+C:\Jonas\SVN\CAST\CastApplication\Controllers\AdministrationController.cs
+C:\Jonas\SVN\CAST\CastApplication\Models\User\UserDetailsModel.cs
+C:\Jonas\SVN\CAST\CastApplication\ViewModels\User\User_ConfidentialInfoModel.cs
+C:\Jonas\SVN\CAST\CastApplication\Views\Administration\UserInformation.cshtml

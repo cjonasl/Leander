@@ -1,0 +1,45 @@
+﻿135
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-05 18:29:43
+
+----- New property -----
+
+Task38_Day66_Date190705_Argos help guides
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task38_Day66_Date190705_Argos help guides
+
+----- New property -----
+
+null
