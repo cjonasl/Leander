@@ -2655,3 +2655,23 @@ Task36_Day64_Date190703_Test and correct errors in Client Connect
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+134
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-04 14:27:43
+
+----- New property -----
+
+Task37_Day65_Date190704_Update report
+
+----- New property -----
+
+Task,Fixzone

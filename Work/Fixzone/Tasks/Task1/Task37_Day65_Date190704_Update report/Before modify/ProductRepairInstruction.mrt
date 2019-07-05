@@ -1,0 +1,1633 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <CAST_Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>CAST_Connection</Alias>
+        <ConnectionStringEncrypted>9Mjzoe9V8wVqe72Ye1yxf9F8y89WVwHN4ly5gGFxd6fkcMELS1RLCfVJzdzoTCJP1cj7DcVgS7xpa9EAY1xte99a24zJW+PtbGFZBOrc4D/T</ConnectionStringEncrypted>
+        <Name>CAST_Connection</Name>
+      </CAST_Connection>
+    </Databases>
+    <DataSources isList="true" count="11">
+      <Categories Ref="3" type="DataTableSource" isKey="true">
+        <Alias>Categories</Alias>
+        <Columns isList="true" count="3">
+          <value>CategoryID,System.Int32</value>
+          <value>CategoryName,System.String</value>
+          <value>Description,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Categories</Name>
+        <NameInSource>Demo.Categories</NameInSource>
+      </Categories>
+      <Customers Ref="4" type="DataTableSource" isKey="true">
+        <Alias>Customers</Alias>
+        <Columns isList="true" count="11">
+          <value>CustomerID,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>ContactName,System.String</value>
+          <value>ContactTitle,System.String</value>
+          <value>Address,System.String</value>
+          <value>City,System.String</value>
+          <value>Region,System.String</value>
+          <value>PostalCode,System.String</value>
+          <value>Country,System.String</value>
+          <value>Phone,System.String</value>
+          <value>Fax,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Customers</Name>
+        <NameInSource>Demo.Customers</NameInSource>
+      </Customers>
+      <Employees Ref="5" type="DataTableSource" isKey="true">
+        <Alias>Employees</Alias>
+        <Columns isList="true" count="14">
+          <value>EmployeeID,System.Int32</value>
+          <value>LastName,System.String</value>
+          <value>FirstName,System.String</value>
+          <value>Title,System.String</value>
+          <value>BirthDate,System.DateTime</value>
+          <value>HireDate,System.DateTime</value>
+          <value>Address,System.String</value>
+          <value>City,System.String</value>
+          <value>Region,System.String</value>
+          <value>PostalCode,System.String</value>
+          <value>Country,System.String</value>
+          <value>HomePhone,System.String</value>
+          <value>Notes,System.String</value>
+          <value>ReportsTo,System.Int32</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Employees</Name>
+        <NameInSource>Demo.Employees</NameInSource>
+      </Employees>
+      <Order_x0020_Details Ref="6" type="DataTableSource" isKey="true">
+        <Alias>Order Details</Alias>
+        <Columns isList="true" count="5">
+          <value>OrderID,System.Int32</value>
+          <value>ProductID,System.Int32</value>
+          <value>UnitPrice,System.Decimal</value>
+          <value>Quantity,System.Int16</value>
+          <value>Discount,System.Single</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Order Details</Name>
+        <NameInSource>Demo.Order Details</NameInSource>
+      </Order_x0020_Details>
+      <Orders Ref="7" type="DataTableSource" isKey="true">
+        <Alias>Orders</Alias>
+        <Columns isList="true" count="14">
+          <value>OrderID,System.Int32</value>
+          <value>CustomerID,System.String</value>
+          <value>EmployeeID,System.Int32</value>
+          <value>OrderDate,System.DateTime</value>
+          <value>RequiredDate,System.DateTime</value>
+          <value>ShippedDate,System.DateTime</value>
+          <value>ShipVia,System.Int32</value>
+          <value>Freight,System.Decimal</value>
+          <value>ShipName,System.String</value>
+          <value>ShipAddress,System.String</value>
+          <value>ShipCity,System.String</value>
+          <value>ShipRegion,System.String</value>
+          <value>ShipPostalCode,System.String</value>
+          <value>ShipCountry,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Orders</Name>
+        <NameInSource>Demo.Orders</NameInSource>
+      </Orders>
+      <Products Ref="8" type="DataTableSource" isKey="true">
+        <Alias>Products</Alias>
+        <Columns isList="true" count="7">
+          <value>ProductID,System.Int32</value>
+          <value>ProductName,System.String</value>
+          <value>SupplierID,System.Int32</value>
+          <value>CategoryID,System.Int32</value>
+          <value>QuantityPerUnit,System.String</value>
+          <value>UnitPrice,System.Decimal</value>
+          <value>UnitsInStock,System.Int16</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Products</Name>
+        <NameInSource>Demo.Products</NameInSource>
+      </Products>
+      <Shippers Ref="9" type="DataTableSource" isKey="true">
+        <Alias>Shippers</Alias>
+        <Columns isList="true" count="3">
+          <value>ShipperID,System.Int32</value>
+          <value>CompanyName,System.String</value>
+          <value>Phone,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Shippers</Name>
+        <NameInSource>Demo.Shippers</NameInSource>
+      </Shippers>
+      <Suppliers Ref="10" type="DataTableSource" isKey="true">
+        <Alias>Suppliers</Alias>
+        <Columns isList="true" count="12">
+          <value>SupplierID,System.Int32</value>
+          <value>CompanyName,System.String</value>
+          <value>ContactName,System.String</value>
+          <value>ContactTitle,System.String</value>
+          <value>Address,System.String</value>
+          <value>City,System.String</value>
+          <value>Region,System.String</value>
+          <value>PostalCode,System.String</value>
+          <value>Country,System.String</value>
+          <value>Phone,System.String</value>
+          <value>Fax,System.String</value>
+          <value>HomePage,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Suppliers</Name>
+        <NameInSource>Demo.Suppliers</NameInSource>
+      </Suppliers>
+      <Countries Ref="11" type="DataTableSource" isKey="true">
+        <Alias>Countries</Alias>
+        <Columns isList="true" count="3">
+          <value>CountriesID,System.Int32</value>
+          <value>Flag,System.Byte[]</value>
+          <value>CountryName,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Countries</Name>
+        <NameInSource>Demo.Countries</NameInSource>
+      </Countries>
+      <Report_ProductRepairInfo Ref="12" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Report_ProductRepairInfo</Alias>
+        <Columns isList="true" count="33">
+          <value>RepairAgent_Name,System.String</value>
+          <value>RepairAgent_Address,System.String</value>
+          <value>RepairAgent_Postcode,System.String</value>
+          <value>RepairAgent_Tel,System.String</value>
+          <value>RepairAgent_Email,System.String</value>
+          <value>Repair_Ref,System.String</value>
+          <value>Customer_Name,System.String</value>
+          <value>Customer_Address,System.String</value>
+          <value>Customer_Postcode,System.String</value>
+          <value>Customer_MobileTel,System.String</value>
+          <value>Customer_HomeTel,System.String</value>
+          <value>Customer_Email,System.String</value>
+          <value>Store_Name,System.String</value>
+          <value>Store_Address,System.String</value>
+          <value>Store_Postcode,System.String</value>
+          <value>Store_Bookedby,System.String</value>
+          <value>Product_CatNo,System.String</value>
+          <value>Product_Description,System.String</value>
+          <value>Product_Supplier,System.String</value>
+          <value>Product_PurchaseDate,System.DateTime</value>
+          <value>Product_SerialNumber,System.String</value>
+          <value>IssueDescr_FaultDescr,System.String</value>
+          <value>IssueDescr_AdditionalInfo,System.String</value>
+          <value>IssueDescr_ConditionFromCustomer,System.String</value>
+          <value>Repair_BookingDate,System.DateTime</value>
+          <value>Repair_ProductReceiveDate,System.DateTime</value>
+          <value>Repair_Outcome,System.String</value>
+          <value>Repair_JobComplete,System.DateTime</value>
+          <value>Repair_CourierName,System.String</value>
+          <value>Repair_JobReference,System.Int32</value>
+          <value>Store_Number,System.Int32</value>
+          <value>Charge_Type,System.String</value>
+          <value>Store_Phone,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Report_ProductRepairInfo</Name>
+        <NameInSource>CAST_Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_ServiceID,Id,8,0</value>
+        </Parameters>
+        <SqlCommand>execute Report_ProductRepairInfo @ServiceID = @ServiceID</SqlCommand>
+      </Report_ProductRepairInfo>
+      <ReportRepairAgentAddressDX Ref="13" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>ReportRepairAgentAddressDX</Alias>
+        <Columns isList="true" count="19">
+          <value>Service_x0020_Name,System.String</value>
+          <value>Service_x0020_Type,System.String</value>
+          <value>Barcode_x0020_Number,System.String</value>
+          <value>Check_x0020_Digits,System.String</value>
+          <value>Tracking_x0020_Number,System.String</value>
+          <value>FAO,System.String</value>
+          <value>S_x0020_Ref,System.String</value>
+          <value>Company_x0020_Name,System.String</value>
+          <value>Receivers_x0020_Name,System.String</value>
+          <value>Address_x0020_Line1,System.String</value>
+          <value>Address_x0020_Line2,System.String</value>
+          <value>Address_x0020_Line3,System.String</value>
+          <value>Address_x0020_Line4,System.String</value>
+          <value>Postcode,System.String</value>
+          <value>Delivery_x0020_Center,System.String</value>
+          <value>From,System.String</value>
+          <value>Cust_x0020_Ref,System.String</value>
+          <value>Check_x0020_Sum,System.String</value>
+          <value>Weight,System.Single</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>ReportRepairAgentAddressDX</Name>
+        <NameInSource>CAST_Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_ServiceId,Id,8,0</value>
+        </Parameters>
+        <SqlCommand>execute ReportRepairAgentAddressDX @ServiceID = @ServiceID</SqlCommand>
+      </ReportRepairAgentAddressDX>
+    </DataSources>
+    <Relations isList="true" count="8">
+      <Employees Ref="14" type="DataRelation" isKey="true">
+        <Alias>Employees</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>ReportsTo</value>
+        </ChildColumns>
+        <ChildSource isRef="5" />
+        <Dictionary isRef="1" />
+        <Name>Employees</Name>
+        <NameInSource>EmployeesEmployees</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>EmployeeID</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </Employees>
+      <Products Ref="15" type="DataRelation" isKey="true">
+        <Alias>Products</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>ProductID</value>
+        </ChildColumns>
+        <ChildSource isRef="6" />
+        <Dictionary isRef="1" />
+        <Name>Products</Name>
+        <NameInSource>ProductsOrder_Details</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>ProductID</value>
+        </ParentColumns>
+        <ParentSource isRef="8" />
+      </Products>
+      <Orders Ref="16" type="DataRelation" isKey="true">
+        <Alias>Orders</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>OrderID</value>
+        </ChildColumns>
+        <ChildSource isRef="6" />
+        <Dictionary isRef="1" />
+        <Name>Orders</Name>
+        <NameInSource>OrdersOrder_Details</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>OrderID</value>
+        </ParentColumns>
+        <ParentSource isRef="7" />
+      </Orders>
+      <Customers Ref="17" type="DataRelation" isKey="true">
+        <Alias>Customers</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>CustomerID</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>Customers</Name>
+        <NameInSource>CustomersOrders</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>CustomerID</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </Customers>
+      <Shippers Ref="18" type="DataRelation" isKey="true">
+        <Alias>Shippers</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>ShipVia</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>Shippers</Name>
+        <NameInSource>ShippersOrders</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>ShipperID</value>
+        </ParentColumns>
+        <ParentSource isRef="9" />
+      </Shippers>
+      <Employees Ref="19" type="DataRelation" isKey="true">
+        <Alias>Employees</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>EmployeeID</value>
+        </ChildColumns>
+        <ChildSource isRef="7" />
+        <Dictionary isRef="1" />
+        <Name>Employees</Name>
+        <NameInSource>EmployeesOrders</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>EmployeeID</value>
+        </ParentColumns>
+        <ParentSource isRef="5" />
+      </Employees>
+      <Categories Ref="20" type="DataRelation" isKey="true">
+        <Alias>Categories</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>CategoryID</value>
+        </ChildColumns>
+        <ChildSource isRef="8" />
+        <Dictionary isRef="1" />
+        <Name>Categories</Name>
+        <NameInSource>CategoriesProducts</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>CategoryID</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </Categories>
+      <Suppliers Ref="21" type="DataRelation" isKey="true">
+        <Alias>Suppliers</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>SupplierID</value>
+        </ChildColumns>
+        <ChildSource isRef="8" />
+        <Dictionary isRef="1" />
+        <Name>Suppliers</Name>
+        <NameInSource>SuppliersProducts</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>SupplierID</value>
+        </ParentColumns>
+        <ParentSource isRef="10" />
+      </Suppliers>
+    </Relations>
+    <Report isRef="0" />
+    <Variables isList="true" count="1">
+      <value>,Id,Id,Id_x0020_of_x0020_the_x0020_job,System.Nullable`1[System.Int32],_x0031_68,False,False,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Repair_x0020_Note_x0020___x0020_Customer Ref="22" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="9">
+        <PageFooterBand2 Ref="23" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,110.2,19,0.6</ClientRectangle>
+          <Components isList="true" count="2">
+            <txtCustomerCopy Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.6,0,4.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Bold,Point,False,204</Font>
+              <Guid>4cbe226d9893421db2973aef30263d60</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>txtCustomerCopy</Name>
+              <Page isRef="22" />
+              <Parent isRef="23" />
+              <Text>Customer Copy</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </txtCustomerCopy>
+            <Text32 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,8.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>cf4813d2398f45eeac5c102d27289113</Guid>
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="22" />
+              <Parent isRef="23" />
+              <Text>{Report_ProductRepairInfo.Repair_Ref}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text32>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>5c48eece0f684ec98630eeb680e1bc62</Guid>
+          <Linked>True</Linked>
+          <Name>PageFooterBand2</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+        </PageFooterBand2>
+        <titleRNC Ref="26" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,3.2</ClientRectangle>
+          <Components isList="true" count="5">
+            <imgRNC_ArgosLogo Ref="27" type="Image" isKey="true">
+              <AspectRatio>True</AspectRatio>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,4.4,3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Guid>4ed35d14757d4a91af8ca8be08179c97</Guid>
+              <Image>iVBORw0KGgoAAAANSUhEUgAAAHIAAAAzCAYAAABL2Vy0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAIsUlEQVR4Xu2by1UkORBFMQET2gRMYDzABEzABM5YgAmY0AbMgtVsBxPYzwYPat5V69WoROiTRYpu+rC4VJYipAzp6ZtZXBwOhxMu/vjzTjyJF3HIPItHcVX7R8jvUlyLb5G9R5F36l6GewnH/iocO/UgDdtllLeF/K8EsQyJ8rf465+Lb+IazrRfZfuxjY5GBXMjLB4NQeVNKeqD6DaI7FQO3/vI3qPI+xTZI+RLTI7PsZNG5+O6tE3HVOUdQdl3UTklavxbcSh4EccOr+v7wgbP4tjeun4sbPBIejIqADcehBXNPq7Y98jHZN9mWT2KvEMh5cPoZbbAn852G/kBtuyTyhbD0Zn98Gc0E1cE5dJhPAsQT1i2Gv1SvBYinIihT0ZabYPUQfRZdwJz48ZwEN0pIvu64W4iH6Cc7LNayGPHEjPClPF3OyPIx+UPp075lGWH9VaDMx1GQrxkez0aTWoLfbbs9wTAlMrNU68YIT/WIvybDS3bciEpO/s9R/YW8i8bvDmCQfZpIUF+lI2/vr61q8FbIy7VQZ83VbrxiG0JeVc2SLdSJfJNU1SdbmRbKqRsNJhnkXM2VGxiyJtGQgvZNwkJRZ5ws6ZG/16JAMfZTdesiaWNqTiVpU82QfXUzPdLbmwhm1NljXxZF5oiybZaSO6Pz9QsEqG8TMfdest2jpDeeIV5aHTByHoSiHpy/2xnQ2P7SYfQd8S0nc/UkbkxC3m34bZCJXKZq4QcijCCvLmMZmeQ7T0jcjrPHnDjcpra3PARVOLc8oq8PSFTvHX6FpTf61lzepXtHCHxh+aU/+/r39fiPvPGT6OM3Smj9k6cbOL4XtiPy+GPPz/WjHL7zNQ13AW2UN5lQirdAmza5ESojNFav0lI+XEMacYOEu5BHApexXH6lDj1OZFzZtKCT1GvoakdjjcgWALIgRi+M+czDU0LK1+L8R5aQg5H7CyUQVl1urFddIWUnY5vXwZC2FYS7FshYEk6CkmU1q71IdsZoZH99s3NFASjE/G8RS8h2OG6JB83Nj2ePFvwfX8lIYmpjBH8cMEwozEimx1egjGlRkK+YpcgreNFqqs+W/b78IaGoASjEWE99QIVaQYsmxt7xdT6qwhp2PVPbbok2GhEth4Y+Bw5PyJ7ELCwoM2GlG2lkF4j9xBy1zVyBok2WiM5VpQicU5MGyJ9hmukuHxzoxGqVLkxCh8iUPFsX7Vrxa7L2D6D8i/Ztc4g4W7Fe3atpJ/YTwqYRRXzoTd8XknFs32VkG7g8OnJDMq75Bz5syBYAu0+qqqhYjlfa/pbLaQfYrznyY6PCr03JkuEzCPJT25OytYIvcwj9Uk8iujJzkPOz+ePEZkDheYBtoaK5Tw/S0imRaZ3mI7bKI+ftabdYgvZdxdSDV+fE+G4WZJwzyJcQ+XHtFo/a03nzDLY6UaXr6fWdL4J7EuFBMrOfsPXUSXypxP4iLPr248RanBGUymCSXWVYDeFgCXetbaOH+nthxtuKmD5lJud0J/0bF8mJMjHgkxNsfJDRD+nnSl/byFbx4s0M0gwptRIyBSr/PrnSAXq3o1AXIdnRKXzBMMH4d4m4aOELEcXn80Gl43NjWPHt3kONvLZW0imxkiINKtIsKtKQJPaUX6tXwj8f45UsAjokcYnlWAKBa7LJxnhlGpk/xAhQX6I6akeiJNRR32Aa9drU0zy3VVIoNErEY7nRJBobHBKEVkzj51OvvU5Mw2ok5soYN7+s5srRTP0YhpsuLnAR9CImxugyDv9ohtyPne6OnbS2Olu2hjJP7133ZpvhBqftZKdK89W38wMEo6RyTQbPjHK+ZhmjzvaN05ffE7CxC8+H2HiF5+PMPGLz0eY+MU22AwVG6OSzRuscyEIbljv8iJ8JNkUnHxdfnPbL5uPHDOUcXTPgrJvKbdmuOPGR0S75BpOAs02k+09cUL6gbIbmpu5J9UQrA/eQGNOncfwy3lmhOTYU9+7hBjrOJpvQGSbLTei21llL8+uxHUivL57lJZCh7Eq3UeuCMomL+VEdrimEC5wnOmB3NBvHmAoJj4jX9nc4LMPAYjDgiJm2OhK31TuLCqvFHF43sUn+zZjbSF/16Hb1jhOC2nwFQRFvu7PHGTfXUiQb/l4LvwvKKXvLmRRJkw/tJCv22FTLPJfJyTI3y9mRz+7XyIkyN+zQ5hP6SuE9FQ5/Be6GuXxE7PmclAj37VCgvK4Ur2XsyuF7OYb2beicqbeY7ZQPk/JXVFK5PshQs78XGKlkL7/RwnpunRfGrRQPpYDYtqy6/8QIQmMvL0fMK0U0j189IJ7LyE9A039/HEPdK/1QoLypQ1HnW6K8ncVssjTjL3w2UtIb66G7zL3Qvf6MCHdS1tHgF2FlI/PXN4199Znl4sAXE8RlQWyUZYuY/sKckzd9gMc9xKyNSq2CIk4lNcCH8MOcHT0cbmbqMsxI/sKdL/fUkhPbcD37jZedpf7NSJHKB8NSv6PmlrLn3YgfHO9km263Bny/XQZ21dQ1GG5kN3KFeXvIqSRr59BNo8Csu0tZLfTrkD3Wi+k8viA3PynU9lWCdk9Q4JsewvpznPW8UP5fI785Z7s+BHZz3ogQB5dNu17Czmsb49z8st3rZDyp3elaVX0XiX9TkJy9KG87trcQnm8WZtua3xznmVCOl+3kQq/Ty8kqCz/Un3TYzr5+1XWuf8wtb+Q8vVaQc/sLvyyrxQy9fA63Zxbbg+V5VEJU6+x5Ff+m8X0+gjy31dI2f1S2a9iCGwovnxWCuldZBgH6dm+m5Cg8jy6oPs6K/taxK4YEcqzWUh6Nw1TUx7CDelTPUt+K4X0zBCODKW7XBqyrteI7mjDLigb/FMS7gfsqPlett25b0ymhSSgqCI1NBojctMZSv4uv/dMlKkHn63rDg1GvrCSSne55zCcNuXDLOXO1II1ddP+o0R5XYd+x4oSv9gOYtVEfms4XPwHSx9lue2Db/8AAAAASUVORK5CYII=</Image>
+              <Name>imgRNC_ArgosLogo</Name>
+              <Page isRef="22" />
+              <Parent isRef="26" />
+              <Stretch>True</Stretch>
+            </imgRNC_ArgosLogo>
+            <txtRNC_ArgosAfterSales Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0,11,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,18,Bold</Font>
+              <Guid>723bc7e11bf44a7cb400ef5617c07cd0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>txtRNC_ArgosAfterSales</Name>
+              <Page isRef="22" />
+              <Parent isRef="26" />
+              <Text>SHOPDIRECT AFTER SALES
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </txtRNC_ArgosAfterSales>
+            <Text2 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,1.2,10.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,14.25,Bold,Point,False,204</Font>
+              <Guid>421adf3f99f249898264caeebeba6653</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="22" />
+              <Parent isRef="26" />
+              <Text>Repair Note - Customer Copy</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text2>
+            <Text3 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,2.2,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,14.25,Bold,Point,False,204</Font>
+              <Guid>f3fe627a35224e2c8264fa8e6c51375a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="22" />
+              <Parent isRef="26" />
+              <Text>Repair Ref:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text62 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8,2.2,10.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,14.25,Bold,Point,False,204</Font>
+              <Guid>3dbfb2570526490ab4c3c4e3bfcc11e4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="22" />
+              <Parent isRef="26" />
+              <Text>{Report_ProductRepairInfo.Repair_Ref}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text62>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>45c3c97c18284e5bbc09181a78ad15bc</Guid>
+          <Linked>True</Linked>
+          <Name>titleRNC</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+          <ResetPageNumber>True</ResetPageNumber>
+        </titleRNC>
+        <hbThankyouForVisit Ref="32" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4.4,19,1.2</ClientRectangle>
+          <Components isList="true" count="1">
+            <rtThankyouForVisit Ref="33" type="Stimulsoft.Report.Components.StiRichText" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.1,0,18.8,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <DataColumn />
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>rtThankyouForVisit</Name>
+              <Page isRef="22" />
+              <Parent isRef="32" />
+              <Text>__LP___x005C_rtf1_x005C_ansi_x005C_ansicpg1252_x005C_deff0_x005C_deflang1033__LP___x005C_fonttbl__LP___x005C_f0_x005C_fnil_x005C_fcharset0_x0020_Arial_x003B___RP____LP___x005C_f1_x005C_fnil_x005C_fcharset0_x0020_Microsoft_x0020_Sans_x0020_Serif_x003B___RP____RP___x000D__x000A__x005C_viewkind4_x005C_uc1_x005C_pard_x005C_fs18_x0020_Thank_x0020_you_x0020_for_x0020_your_x0020_visit_x0020_to_x0020_our_x0020_store._x0020_We_x005C_rquote_x0020_re_x0020_sorry_x0020_that_x0020_you_x0020_have_x0020_had_x0020_problems_x0020_with_x0020_your_x0020_product._x005C_par_x000D__x000A_Your_x0020_product_x0020_will_x0020_be_x0020_sent_x0020_to_x0020_one_x0020_of_x0020_our_x0020_trusted_x0020_repair_x0020_agents_x0020_who_x0020_will_x0020_investigate_x0020_the_x0020_issue._x0020_They_x0020_will_x0020_repair_x0020_the_x0020_product_x0020_or_x002C__x0020_if_x0020_that_x0027_s_x0020_not_x0020_possible_x002C__x0020_give_x0020_you_x0020_a_x0020_replacement_x0020_or_x0020_a_x0020_refund._x005C_f1_x005C_fs17_x005C_par_x000D__x000A___RP___x000D__x000A_</Text>
+            </rtThankyouForVisit>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Linked>True</Linked>
+          <Name>hbThankyouForVisit</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+        </hbThankyouForVisit>
+        <dataRepairNote_Customer Ref="34" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <CanBreak>True</CanBreak>
+          <CanShrink>True</CanShrink>
+          <ClientRectangle>0,6.4,19,3.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <pnlRN_Customer Ref="35" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,19,3.8</ClientRectangle>
+              <Components isList="true" count="14">
+                <txtRN_CustomerDetails Ref="36" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,4.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Bold,Point,False,204</Font>
+                  <Guid>6d098b66143d4c38a4e364eb2d6c0976</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_CustomerDetails</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>Customer Details</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </txtRN_CustomerDetails>
+                <txtRN_DBCustomerName Ref="37" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>1.8,0.6,7.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>b3379e40f82a462086f1db5037ec86f7</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_DBCustomerName</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>{Report_ProductRepairInfo.Customer_Name}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </txtRN_DBCustomerName>
+                <txtRN_DBCustomerAddress Ref="38" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>1.8,1.2,7.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <GrowToHeight>True</GrowToHeight>
+                  <Guid>27996f12db964bfdabfb1ba355744343</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_DBCustomerAddress</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>{Report_ProductRepairInfo.Customer_Address}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>DataColumn</Type>
+                </txtRN_DBCustomerAddress>
+                <txtRN_DBCustomerPostcode Ref="39" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>1.8,1.8,7.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>d7f6a8b31f6f426e97768d7a4bbf9eb8</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_DBCustomerPostcode</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>{Report_ProductRepairInfo.Customer_Postcode}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </txtRN_DBCustomerPostcode>
+                <txtRN_DBMobile Ref="40" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>12,0.6,6.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>b43f432fea1d4ed9b5a03ca8dad358c6</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_DBMobile</Name>
+                  <NullValue>None</NullValue>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>{Report_ProductRepairInfo.Customer_MobileTel}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </txtRN_DBMobile>
+                <txtRN_DBHomeTel Ref="41" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>12,1.2,6.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>0c834cd5224744e2a541ac88d37f93bb</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_DBHomeTel</Name>
+                  <NullValue>None</NullValue>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>{Report_ProductRepairInfo.Customer_HomeTel}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </txtRN_DBHomeTel>
+                <txtRN_DBCustomerEmail Ref="42" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>12,1.8,6.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>6b36c3e4f96748ca9726f943fa30cd7e</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_DBCustomerEmail</Name>
+                  <NullValue>None</NullValue>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>{Report_ProductRepairInfo.Customer_Email}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </txtRN_DBCustomerEmail>
+                <txtRN_CustomerName Ref="43" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>0,0.6,1.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>94eec8c3cee246a2b6eda67148fe0af2</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_CustomerName</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>Name</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </txtRN_CustomerName>
+                <Text10 Ref="44" type="Text" isKey="true">
+                  <Alias>txtRN_Address</Alias>
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>0,1.2,1.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>75a821871dfb44e19abb1781059e2f70</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text10</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>Address</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text10>
+                <Text11 Ref="45" type="Text" isKey="true">
+                  <Alias>txtRN_CustomerPostcode</Alias>
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>0,1.8,1.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>ba50b0cb6cb24e11ae2720990817de28</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text11</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>Postcode</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text11>
+                <txtRN_Mobile Ref="46" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>9.4,0.6,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>50914c76dbcb45c4adf065279e0b1232</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_Mobile</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>Mobile Tel.</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </txtRN_Mobile>
+                <txtRN_HomeTel Ref="47" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>9.4,1.2,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>b6f1d7ab6977404081a28b8fc7108b8f</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_HomeTel</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>Home Tel.</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </txtRN_HomeTel>
+                <txtRN_CustomerEmail Ref="48" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>9.4,1.8,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>8005d41b13f54cf3a80e7d18ff32c193</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>txtRN_CustomerEmail</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>Email address</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </txtRN_CustomerEmail>
+                <rtfSpamNotice Ref="49" type="Stimulsoft.Report.Components.StiRichText" isKey="true">
+                  <BackColor>Transparent</BackColor>
+                  <CanGrow>True</CanGrow>
+                  <CanShrink>True</CanShrink>
+                  <ClientRectangle>0.1,2.4,18.6,1.2</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <DataColumn />
+                  <Guid>e59da316bcb1440badfefe43c03373fc</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>rtfSpamNotice</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="35" />
+                  <Text>__LP___x005C_rtf1_x005C_ansi_x005C_ansicpg1252_x005C_deff0_x005C_deflang1033__LP___x005C_fonttbl__LP___x005C_f0_x005C_fnil_x005C_fcharset0_x0020_Arial_x003B___RP____LP___x005C_f1_x005C_fnil_x005C_fcharset0_x0020_Microsoft_x0020_Sans_x0020_Serif_x003B___RP____RP___x000D__x000A__x005C_viewkind4_x005C_uc1_x005C_pard_x005C_b_x005C_fs16_x0020_Important_x0020_Notice_x005C_b0_x005C_par_x000D__x000A_Please_x0020_check_x0020_that_x0020_you_x0020_have_x0020_received_x0020_your_x0020_initial_x0020_booking_x0020_email_x0020_from_x0020_us._x0020_If_x0020_you_x0020_haven_x0027_t_x0020_received_x0020_this_x0020_then_x0020_please_x0020_check_x0020_that_x0020_the_x0020_email_x0020_hasn_x0027_t_x0020_ended_x0020_up_x0020_in_x0020_your_x0020_Spam_x0020_filter._x0020__x0020_Please_x0020_add_x0020_it_x0020_to_x0020_your_x0020_allowed_x0020_list_x0020_so_x0020_that_x0020_you_x0020_can_x0020_receive_x0020_updates_x0020_from_x0020_us_x0020_regarding_x0020_your_x0020_repair_x002F_service._x005C_f1_x005C_fs17_x005C_par_x000D__x000A___RP___x000D__x000A_</Text>
+                </rtfSpamNotice>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Linked>True</Linked>
+              <Name>pnlRN_Customer</Name>
+              <Page isRef="22" />
+              <Parent isRef="34" />
+            </pnlRN_Customer>
+          </Components>
+          <Conditions isList="true" count="1">
+            <value>Report_ProductRepairInfo.Customer_Email,NotEqualTo,_x0027__x0027_,,String,Red,Transparent,Arial_x002C_8,True,False,,,None</value>
+          </Conditions>
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>dataRepairNote_Customer</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+          <Sort isList="true" count="0" />
+        </dataRepairNote_Customer>
+        <DataBand9 Ref="50" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,11,19,2.4</ClientRectangle>
+          <Components isList="true" count="1">
+            <pnRNC_StoreDetails Ref="51" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,19,2.4</ClientRectangle>
+              <Components isList="true" count="9">
+                <Text20 Ref="52" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>2.4,0.6,6.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>56262ceb96ff40d28e272954f11e2fcb</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text20</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>{Report_ProductRepairInfo.Store_Name}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>DataColumn</Type>
+                </Text20>
+                <Text21 Ref="53" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>2.4,1.2,16.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <GrowToHeight>True</GrowToHeight>
+                  <Guid>509d632abb6043298615a346ac0daa64</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text21</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>{Report_ProductRepairInfo.Store_Address}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>DataColumn</Type>
+                </Text21>
+                <Text22 Ref="54" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>2.4,1.8,6.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <GrowToHeight>True</GrowToHeight>
+                  <Guid>e58ba40f7133442aa7ef330ce5a6dd47</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text22</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>{Report_ProductRepairInfo.Store_Postcode}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </Text22>
+                <Text23 Ref="55" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>12,0.6,6.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>2b8a487970f44340a0bd971820a48520</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text23</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>{Report_ProductRepairInfo.Store_Bookedby}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>DataColumn</Type>
+                </Text23>
+                <Text19 Ref="56" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,4.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Bold,Point,False,204</Font>
+                  <Guid>524baa635c89443aa6d6842e49302a92</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text19</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>Store Details</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text19>
+                <Text9 Ref="57" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0.6,2.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>972919b4f9cd47dd8f26a707486b4178</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text9</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>Store Name</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text9>
+                <Text12 Ref="58" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,1.2,2.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>45d55b6761014abbafe1ed0f1c60f6d3</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text12</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>Address</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text12>
+                <Text29 Ref="59" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,1.8,2.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>fe980adea7764f28858454944d77cd4d</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text29</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>Postcode</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text29>
+                <Text38 Ref="60" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>9.4,0.6,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>46f44b62ca5441a7bfa18052ac23e686</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text38</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="51" />
+                  <Text>Job Booked By </Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text38>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Guid>3291221ddf4040c7a0389a16e37a0706</Guid>
+              <Linked>True</Linked>
+              <Name>pnRNC_StoreDetails</Name>
+              <Page isRef="22" />
+              <Parent isRef="50" />
+            </pnRNC_StoreDetails>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>ca2745727cf54cfa95389d0ac3539d00</Guid>
+          <Name>DataBand9</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+          <Sort isList="true" count="0" />
+        </DataBand9>
+        <DataBand8 Ref="61" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,14.2,19,1.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <pnlRNC_ProductDetails Ref="62" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,19,1.8</ClientRectangle>
+              <Components isList="true" count="9">
+                <Text24 Ref="63" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,4.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Bold,Point,False,204</Font>
+                  <Guid>d045a7c3a7a1454a8119e84004dade28</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text24</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>Product Details</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text24>
+                <Text25 Ref="64" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>3.4,0.6,6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>706e1985bc4d4669920d23be1666b1fa</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text25</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>{Report_ProductRepairInfo.Product_CatNo}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </Text25>
+                <Text26 Ref="65" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>3.4,1.2,6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>45b052e6b05a48ce837055c91e57d610</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text26</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>{Report_ProductRepairInfo.Product_Description}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </Text26>
+                <Text27 Ref="66" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>12.4,1.2,6.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <GrowToHeight>True</GrowToHeight>
+                  <Guid>42b58be47d6f42b084329efb11b975cd</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text27</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>{Report_ProductRepairInfo.Product_Supplier}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </Text27>
+                <Text28 Ref="67" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>12.4,0.6,3.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>b67902d984974918aa289942e660de14</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text28</Name>
+                  <NullValue>-</NullValue>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>{Report_ProductRepairInfo.Product_PurchaseDate}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextFormat Ref="68" type="DateFormat" isKey="true">
+                    <StringFormat>dd/MM/yyyy</StringFormat>
+                  </TextFormat>
+                  <Type>DataColumn</Type>
+                </Text28>
+                <Text39 Ref="69" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0.6,3.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>0ebe703623a34e118a0f8d7b49df3042</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text39</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>Cat No.</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text39>
+                <Text40 Ref="70" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,1.2,3.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>8c4ec848920349f0bdc144b37b600646</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text40</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>Product Description</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text40>
+                <Text42 Ref="71" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>9.8,0.6,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>74d45077e8df4908ae118d5b59634f15</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text42</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>Purchase Date</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text42>
+                <Text43 Ref="72" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>9.8,1.2,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>8169124b13be40d9b744856aa6b6608d</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text43</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="62" />
+                  <Text>Supplier</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text43>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Guid>ec61fc98b86840be96cab740d11db896</Guid>
+              <Linked>True</Linked>
+              <Name>pnlRNC_ProductDetails</Name>
+              <Page isRef="22" />
+              <Parent isRef="61" />
+            </pnlRNC_ProductDetails>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>882337b174144f93bd0a6ae207020056</Guid>
+          <Name>DataBand8</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+          <Sort isList="true" count="0" />
+        </DataBand8>
+        <DataBand10 Ref="73" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,16.8,19,2</ClientRectangle>
+          <Components isList="true" count="1">
+            <pnlRNC_DescriptionOfIssue Ref="74" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,19,2</ClientRectangle>
+              <Components isList="true" count="5">
+                <Text30 Ref="75" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,4.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Bold,Point,False,204</Font>
+                  <Guid>559ca0dbbc0a494eb474c583772500d8</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text30</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="74" />
+                  <Text>Description of Issue</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text30>
+                <Text31 Ref="76" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>5,0.6,13.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>a32298f2f24e404696205cf4f90b2794</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text31</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="74" />
+                  <Text>{Report_ProductRepairInfo.IssueDescr_FaultDescr}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <Type>DataColumn</Type>
+                </Text31>
+                <Text41 Ref="77" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0.6,5,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>2a536d77568d4271940ba9ba05359349</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text41</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="74" />
+                  <Text>Fault Reported By Customer</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text41>
+                <Text44 Ref="78" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,1.2,7.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>97ba3855ecb742c7b44a26ebd24abef7</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text44</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="74" />
+                  <Text>Condition of Product on Receipt from Customer</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text44>
+                <Text61 Ref="79" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <CanGrow>True</CanGrow>
+                  <ClientRectangle>7.6,1.2,11.2,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>b0f68218ebf04f6f81473a493d638db2</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text61</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="74" />
+                  <Text>{Report_ProductRepairInfo.IssueDescr_ConditionFromCustomer}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </Text61>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Guid>418f2fede27e45ef8a641c85d27d3ab9</Guid>
+              <Linked>True</Linked>
+              <Name>pnlRNC_DescriptionOfIssue</Name>
+              <Page isRef="22" />
+              <Parent isRef="73" />
+            </pnlRNC_DescriptionOfIssue>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>1a1ce797aea64fa18d7a4ad70c326f38</Guid>
+          <Name>DataBand10</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+          <Sort isList="true" count="0" />
+        </DataBand10>
+        <DataBand7 Ref="80" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,19.6,19,1.4</ClientRectangle>
+          <Components isList="true" count="1">
+            <pnlRNC_RepairDetails Ref="81" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,19,1.4</ClientRectangle>
+              <Components isList="true" count="5">
+                <Text33 Ref="82" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,4.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Bold,Point,False,204</Font>
+                  <Guid>682c77be5a944980a690ae3aef0f7474</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text33</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="81" />
+                  <Text>Repair Details</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text33>
+                <Text35 Ref="83" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>15.4,0.6,3.4,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>82af8519a2324556ad3e1742e5f6ac93</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text35</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="81" />
+                  <Text>{Report_ProductRepairInfo.Repair_BookingDate}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </Text35>
+                <Text47 Ref="84" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0.6,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>91f5223409fe4f41821173b6a6945fab</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text47</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="81" />
+                  <Text>Repair Agent</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text47>
+                <Text48 Ref="85" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>12.8,0.6,2.6,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>19269a41de694f7ab8563131432a66cb</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text48</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="81" />
+                  <Text>Booking Date</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text48>
+                <Text36 Ref="86" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>2.6,0.6,10,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <GrowToHeight>True</GrowToHeight>
+                  <Guid>b9caf5fae5a34dba849a57cdff7e617d</Guid>
+                  <Linked>True</Linked>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text36</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="81" />
+                  <Text>{Report_ProductRepairInfo.RepairAgent_Name}</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>DataColumn</Type>
+                </Text36>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Guid>e8c0c477c0d7425eb493db91fcdbfdb0</Guid>
+              <Linked>True</Linked>
+              <Name>pnlRNC_RepairDetails</Name>
+              <Page isRef="22" />
+              <Parent isRef="80" />
+            </pnlRNC_RepairDetails>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Report_ProductRepairInfo</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand7</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+          <Sort isList="true" count="0" />
+        </DataBand7>
+        <footerRepairNote_Customer Ref="87" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanShrink>True</CanShrink>
+          <ClientRectangle>0,21.8,19,9</ClientRectangle>
+          <Components isList="true" count="6">
+            <pnlRNC_Signed1 Ref="88" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,3.4,9.2,2.2</ClientRectangle>
+              <Components isList="true" count="3">
+                <Text50 Ref="89" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.2,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>912dd008ee1f4b7187b43780f25f272e</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text50</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="88" />
+                  <Text>Signed
+</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text50>
+                <Text51 Ref="90" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.8,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>463f8cda181545578222cc641b23e90a</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text51</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="88" />
+                  <Text>Print Name
+</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text51>
+                <Text52 Ref="91" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,1.4,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>46a6ab8c6f3b4cfd8c7aa36860811a5c</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text52</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="88" />
+                  <Text>Date
+</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text52>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Linked>True</Linked>
+              <Name>pnlRNC_Signed1</Name>
+              <Page isRef="22" />
+              <Parent isRef="87" />
+            </pnlRNC_Signed1>
+            <pnlRNC_Witness1 Ref="92" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,3.4,9.2,2.2</ClientRectangle>
+              <Components isList="true" count="2">
+                <Text53 Ref="93" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.2,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>4c1c1018818d4f488352c58bfbe449c1</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text53</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="92" />
+                  <Text>Witnessed By</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text53>
+                <Text54 Ref="94" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.8,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>b5f47f52e20a4645884a8f0803339137</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text54</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="92" />
+                  <Text>Print Name</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text54>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Linked>True</Linked>
+              <Name>pnlRNC_Witness1</Name>
+              <Page isRef="22" />
+              <Parent isRef="87" />
+            </pnlRNC_Witness1>
+            <pnlRNC_Signed2 Ref="95" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,6.2,9.2,2.2</ClientRectangle>
+              <Components isList="true" count="3">
+                <Text4 Ref="96" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.2,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>021c3a66d7e54d16908946f38d69c7ef</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text4</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="95" />
+                  <Text>Signed
+</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text4>
+                <Text5 Ref="97" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.8,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>721ea896dddd406bbe52c5554a26e899</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text5</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="95" />
+                  <Text>Print Name
+</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text5>
+                <Text6 Ref="98" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,1.4,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>1f70d7ba8aae49bb82db655621699bad</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text6</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="95" />
+                  <Text>Date
+</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text6>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Guid>46a871eacb864047903103e7426b295d</Guid>
+              <Linked>True</Linked>
+              <Name>pnlRNC_Signed2</Name>
+              <Page isRef="22" />
+              <Parent isRef="87" />
+            </pnlRNC_Signed2>
+            <pnlRNC_Witness2 Ref="99" type="Panel" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,6.2,9.2,2.2</ClientRectangle>
+              <Components isList="true" count="2">
+                <Text7 Ref="100" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.2,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>fdbbaf3d455b42f0a81cbfc3df0e8ac5</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text7</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="99" />
+                  <Text>Witnessed By</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text7>
+                <Text8 Ref="101" type="Text" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0.2,0.8,8.8,0.6</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,9.75,Regular,Point,False,204</Font>
+                  <Guid>9c8c58d046284df5bdeb062db926b4e8</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Text8</Name>
+                  <Page isRef="22" />
+                  <Parent isRef="99" />
+                  <Text>Print Name</Text>
+                  <TextBrush>Black</TextBrush>
+                  <Type>Expression</Type>
+                </Text8>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Guid>845b27ef6ead4376985b1f8ed7e8c974</Guid>
+              <Linked>True</Linked>
+              <Name>pnlRNC_Witness2</Name>
+              <Page isRef="22" />
+              <Parent isRef="87" />
+            </pnlRNC_Witness2>
+            <RichText1 Ref="102" type="Stimulsoft.Report.Components.StiRichText" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,19,3.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <DataColumn />
+              <Linked>True</Linked>
+              <Margins>0,0,0,0</Margins>
+              <Name>RichText1</Name>
+              <Page isRef="22" />
+              <Parent isRef="87" />
+              <Text>__LP___x005C_rtf1_x005C_ansi_x005C_ansicpg1252_x005C_deff0_x005C_deflang1033__LP___x005C_fonttbl__LP___x005C_f0_x005C_fnil_x005C_fcharset0_x0020_Arial_x003B___RP____LP___x005C_f1_x005C_fswiss_x005C_fprq2_x005C_fcharset0_x0020_Helvetica_x003B___RP____LP___x005C_f2_x005C_fnil_x005C_fcharset0_x0020_Microsoft_x0020_Sans_x0020_Serif_x003B___RP____RP___x000D__x000A__x005C_viewkind4_x005C_uc1_x005C_pard_x005C_sb120_x005C_sa60_x005C_lang2057_x005C_b_x005C_fs16_x0020_Next_x0020_Steps_x005C_b0_x005C_fs20_x005C_par_x000D__x000A__x005C_pard_x005C_sa60_x005C_fs16_x0020_We_x0020_will_x0020_contact_x0020_you_x0020_either_x0020_by_x0020_text_x0020_message_x002C__x0020_email_x0020_or_x0020_phone_x0020_to_x0020_let_x0020_you_x0020_know_x0020_that_x0020_your_x0020_product_x0020_is_x0020_back_x0020_in_x0020_store_x0020_and_x0020_ready_x0020_to_x0020_collect._x005C_par_x000D__x000A_If_x0020_we_x0020_propose_x0020_to_x0020_make_x0020_a_x0020_charge_x002C__x0020_you_x0020_will_x0020_be_x0020_advised_x0020_beforehand_x0020_so_x0020_that_x0020_you_x0020_can_x0020_confirm_x0020_whether_x0020_the_x0020_repair_x0020_should_x0020_proceed._x0020_Your_x0020_statutory_x0020_rights_x0020_remain_x0020_unaffected._x005C_par_x000D__x000A__x005C_pard_x005C_sa120_x0020_I_x0020_AGREE_x0020_to_x0020_accept_x0020_liability_x0020_for_x0020_any_x0020_costs_x0020_incurred_x0020_a_x0029__x0020_for_x0020_a_x0020_repair_x0020_where_x0020_the_x0020_product_x0020_itself_x0020_is_x0020_not_x0020_suffering_x0020_from_x0020_a_x0020_manufacturing_x0020_fault_x0020_or_x0020_b_x0029__x0020_for_x0020_screening_x002C__x0020_postage_x0020_and_x0020_labour_x0020_where_x0020_a_x0020_chargeable_x0020_repair_x0020_to_x0020_the_x0020_product_x0020_can_x0020_be_x0020_undertaken_x0020_at_x0020_additional_x0020_cost_x0020_but_x0020_is_x0020_not_x0020_carried_x0020_out_x0020_at_x0020_my_x0020_request._x0020_Goods_x0020_will_x0020_be_x0020_returned_x0020_on_x0020_payment_x0020_of_x0020_any_x0020_outstanding_x0020_charges._x005C_f1_x005C_fs22_x005C_par_x000D__x000A__x005C_pard_x005C_lang1033_x005C_f2_x005C_fs17_x005C_par_x000D__x000A___RP___x000D__x000A_</Text>
+            </RichText1>
+            <txt_I_Confirm Ref="103" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,5.6,9.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9.75,Regular,Point,False,204</Font>
+              <Guid>dbf185298f7543d586ad04c9609cbd01</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>txt_I_Confirm</Name>
+              <Page isRef="22" />
+              <Parent isRef="87" />
+              <Text>I confirm that I have received my product.</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </txt_I_Confirm>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Linked>True</Linked>
+          <Name>footerRepairNote_Customer</Name>
+          <Page isRef="22" />
+          <Parent isRef="22" />
+        </footerRepairNote_Customer>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>fa21706f11d247f29b523933864392e4</Guid>
+      <LargeHeight>True</LargeHeight>
+      <Margins>1,1,1,1</Margins>
+      <Name>Repair Note - Customer</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="104" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Repair_x0020_Note_x0020___x0020_Customer>
+  </Pages>
+  <PrinterSettings Ref="105" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>5/22/2017 3:37:09 PM</ReportChanged>
+  <ReportCreated>5/28/2012 12:04:36 PM</ReportCreated>
+  <ReportFile>C:\Users\vijay\Desktop\ProductRepairInstruction.mrt</ReportFile>
+  <ReportGuid>947e773e7e5749bb89002f7b98b9ff76</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2014.1.1900</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();			
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

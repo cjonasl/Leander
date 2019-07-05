@@ -1,0 +1,45 @@
+﻿134
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-04 14:27:43
+
+----- New property -----
+
+Task37_Day65_Date190704_Update report
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task37_Day65_Date190704_Update report
+
+----- New property -----
+
+null
