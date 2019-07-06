@@ -1,2 +1,11 @@
 ﻿Dag 66:
 Fredag den 5 juli 2019
+Fortsatte från igår med att testa ”Client Connect”. Intog medtagen
+smörgås och kaffe till lunch. Vijay gjorde forward på ett mail från
+Argos där de vill ha en ny meny för användarhjälp, ”Help Guides”,
+och Vijay bad mig titta på det. Jag skapade task38 för uppgiften och
+sedan började jag repetera Argos-koden och jag checkade också in
+kod som blivit liggande efter Argosändringar i task28. Jag la sedan
+in en meny för användarhjälp och spelade in en Snaggit-video på mitt
+förslag och mailade till Argos. Jag avslutade arbetsdagen knappt kl.
+19.00. Jag var sist ifrån kontoret och fick sätta på larmet och låsa.
