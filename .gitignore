@@ -18,6 +18,8 @@ Thumbs.db
 *.lock
 *.ide
 *.ide-shm
+FetchPull.bat
+AddCommitPush.bat
 [Bb]in
 [Dd]ebug*/
 *.sbr
