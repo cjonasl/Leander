@@ -10,3 +10,4 @@ var Point = /** @class */ (function () {
 }());
 var point = new Point(3, 4);
 console.log(point.getDist());
+//# sourceMappingURL=Interface1.js.map
