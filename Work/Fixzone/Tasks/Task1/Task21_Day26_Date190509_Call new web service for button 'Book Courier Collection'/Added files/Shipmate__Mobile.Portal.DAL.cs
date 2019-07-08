@@ -11,139 +11,231 @@ namespace Mobile.Portal.DAL
 {
     public interface IShipmateDataProvider
     {
-        int CreateLogEntry(ShipmateConsignmentRequestResponse s, bool addResponseParameters);
+        int CreateLogEntry(ShipmateConsignmentDetails data, bool addResponseParameters);
+        ShipmateConsignmentDetails GetShipmateConsignmentDetails(string trackingReference);
     }
 
     public interface IShipmateConfigProvider
     {
-        string ShipmateConfig(string clientId, string config, bool isGet); //isGet indicates if it is to get or set config data
+        string ShipmateConfig(string clientId = null, string config = null, string trackingReference = null);
     }
 
-    public class ShipmateConsignmentRequestResponse
+    /// <summary>
+    /// Req = Was sent in request json-string
+    /// Res = In response json-string
+    /// </summary>
+    public class ShipmateConsignmentDetails
     {
-        public bool Success { get; set; }
-        public string ErrorMessage { get; set; }
+        public string ClientId { get; set; }
+        public bool SendRequestSuccess { get; set; }
+        public string SendRequestErrorMessage { get; set; }
+        public string ResTrackingReference { get; set; }
+        public DateTime? LabelCreated { get; set; }
+        public DateTime? Manifested { get; set; }
+        public DateTime? Collected { get; set; }
+        public DateTime? InTransit { get; set; }
+        public DateTime? Delivered { get; set; }
+        public DateTime? DeliveryFailed { get; set; }
         public int ReqServiceID { get; set; }
         public int ReqRemittanceID { get; set; }
         public string ReqConsignmentReference { get; set; }
         public string ReqServiceKey { get; set; }
-        public string ReqName { get; set; }
-        public string ReqLine1 { get; set; }
-        public string ReqCity { get; set; }
-        public string ReqPostcode { get; set; }
-        public string ReqCountry { get; set; }
-        public string ReqReference { get; set; }
-        public int ReqWeight { get; set; }
-        public int ReqWidth { get; set; }
-        public int ReqLength { get; set; }
-        public int ReqDepth { get; set; }
+        public string ReqCollectionFromName { get; set; }
+        public string ReqCollectionFromLine1 { get; set; }
+        public string ReqCollectionFromLine2 { get; set; }
+        public string ReqCollectionFromLine3 { get; set; }
+        public string ReqCollectionFromCompanyName { get; set; }
+        public string ReqCollectionFromTelephone { get; set; }
+        public string ReqCollectionFromEmailAddress { get; set; }
+        public string ReqCollectionFromCity { get; set; }
+        public string ReqCollectionFromPostcode { get; set; }
+        public string ReqCollectionFromCountry { get; set; }
+        public string ReqDeliveryToName { get; set; }
+        public string ReqDeliveryToLine1 { get; set; }
+        public string ReqDeliveryToLine2 { get; set; }
+        public string ReqDeliveryToLine3 { get; set; }
+        public string ReqDeliveryToCompanyName { get; set; }
+        public string ReqDeliveryToTelephone { get; set; }
+        public string ReqDeliveryToEmailAddress { get; set; }
+        public string ReqDeliveryToCity { get; set; }
+        public string ReqDeliveryToPostcode { get; set; }
+        public string ReqDeliveryToCountry { get; set; }
+        public string ReqParcelReference { get; set; }
+        public int ReqParcelWeight { get; set; }
+        public int ReqParcelWidth { get; set; }
+        public int ReqParcelLength { get; set; }
+        public int ReqParcelDepth { get; set; }
         public string ResMessage { get; set; }
         public string ResConsignmentReference { get; set; }
         public string ResParcelReference { get; set; }
         public string ResCarrier { get; set; }
         public string ResServiceName { get; set; }
-        public string ResTrackingReference { get; set; }
         public string ResCreatedBy { get; set; }
         public string ResCreatedWith { get; set; }
-        public DateTime ResCreatedAt { get; set; }
-        public string ResDeliveryName { get; set; }
-        public string ResLine1 { get; set; }
-        public string ResLine2 { get; set; }
-        public string ResLine3 { get; set; }
-        public string ResCity { get; set; }
-        public string ResCounty { get; set; }
-        public string ResPostcode { get; set; }
-        public string ResCountry { get; set; }
-        public string ResPdf { get; set; }
-        public string ResZpl { get; set; }
-        public string ResPng { get; set; }
+        public DateTime? ResCreatedAt { get; set; }
+        public string ResMediaURL { get; set; }
+        public string ResMediaGUID { get; set; }
     }
 
-    public class ShipmateDataProvider : DataAccess<ShipmateConsignmentRequestResponse>, IShipmateDataProvider
+    public class ShipmateDataProvider : DataAccess<ShipmateConsignmentDetails>, IShipmateDataProvider
     {
-        public int CreateLogEntry(ShipmateConsignmentRequestResponse s, bool addResponseParameters)
+        public int CreateLogEntry(ShipmateConsignmentDetails data, bool addResponseParameters)
         {
-            int rowsAffected;
+            int rowsAffected, n = -1;
             SqlParameter[] parameters;
 
             if (addResponseParameters)
-
-                parameters = new SqlParameter[36];
+                parameters = new SqlParameter[44];
             else
-                parameters = new SqlParameter[16];
+                parameters = new SqlParameter[34];
 
-            parameters[0] = new SqlParameter("@Success", s.Success);
+            parameters[++n] = new SqlParameter("@ClientId", data.ClientId);
+            parameters[++n] = new SqlParameter("@SendRequestSuccess", data.SendRequestSuccess);
 
-            if (s.ErrorMessage == null)
-                parameters[1] = new SqlParameter("@ErrorMessage", DBNull.Value);
+            if (data.SendRequestErrorMessage == null)
+                parameters[++n] = new SqlParameter("@SendRequestErrorMessage", DBNull.Value);
             else
-                parameters[1] = new SqlParameter("@ErrorMessage", s.ErrorMessage);
+                parameters[++n] = new SqlParameter("@SendRequestErrorMessage", data.SendRequestErrorMessage);
 
-            parameters[2] = new SqlParameter("@ReqServiceID", s.ReqServiceID);
-            parameters[3] = new SqlParameter("@ReqRemittanceID", s.ReqRemittanceID);
-            parameters[4] = new SqlParameter("@ReqConsignmentReference", s.ReqConsignmentReference);
-            parameters[5] = new SqlParameter("@ReqServiceKey", s.ReqServiceKey);
-            parameters[6] = new SqlParameter("@ReqName", s.ReqName);
-            parameters[7] = new SqlParameter("@ReqLine1", s.ReqLine1);
-            parameters[8] = new SqlParameter("@ReqCity", s.ReqCity);
-            parameters[9] = new SqlParameter("@ReqPostcode", s.ReqPostcode);
-            parameters[10] = new SqlParameter("@ReqCountry", s.ReqCountry);
-            parameters[11] = new SqlParameter("@ReqReference", s.ReqReference);
-            parameters[12] = new SqlParameter("@ReqWeight", s.ReqWeight);
-            parameters[13] = new SqlParameter("@ReqWidth", s.ReqWidth);
-            parameters[14] = new SqlParameter("@ReqLength", s.ReqLength);
-            parameters[15] = new SqlParameter("@ReqDepth", s.ReqDepth);
+            if (data.ResTrackingReference == null)
+                parameters[++n] = new SqlParameter("@ResTrackingReference", DBNull.Value);
+            else
+                parameters[++n] = new SqlParameter("@ResTrackingReference", data.ResTrackingReference);
+
+            if (data.LabelCreated == null)
+                parameters[++n] = new SqlParameter("@LabelCreated", DBNull.Value);
+            else
+                parameters[++n] = new SqlParameter("@LabelCreated", data.LabelCreated.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            parameters[++n] = new SqlParameter("@ReqServiceID", data.ReqServiceID);
+            parameters[++n] = new SqlParameter("@ReqRemittanceID", data.ReqRemittanceID);
+            parameters[++n] = new SqlParameter("@ReqConsignmentReference", data.ReqConsignmentReference);
+            parameters[++n] = new SqlParameter("@ReqServiceKey", data.ReqServiceKey);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromName", data.ReqCollectionFromName);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromLine1", data.ReqCollectionFromLine1);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromLine2", data.ReqCollectionFromLine2);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromLine3", data.ReqCollectionFromLine3);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromCompanyName", data.ReqCollectionFromCompanyName);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromTelephone", data.ReqCollectionFromTelephone);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromEmailAddress", data.ReqDeliveryToEmailAddress);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromCity", data.ReqCollectionFromCity);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromPostcode", data.ReqCollectionFromPostcode);
+            parameters[++n] = new SqlParameter("@ReqCollectionFromCountry", data.ReqCollectionFromCountry);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToName", data.ReqDeliveryToName);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToLine1", data.ReqDeliveryToLine1);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToLine2", data.ReqDeliveryToLine2);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToLine3", data.ReqDeliveryToLine3);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToCompanyName", data.ReqDeliveryToCompanyName);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToTelephone", data.ReqDeliveryToTelephone);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToEmailAddress", data.ReqDeliveryToEmailAddress);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToCity", data.ReqDeliveryToCity);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToPostcode", data.ReqDeliveryToPostcode);
+            parameters[++n] = new SqlParameter("@ReqDeliveryToCountry", data.ReqDeliveryToCountry);
+            parameters[++n] = new SqlParameter("@ReqParcelReference", data.ReqParcelReference);
+            parameters[++n] = new SqlParameter("@ReqParcelWeight", data.ReqParcelWeight);
+            parameters[++n] = new SqlParameter("@ReqParcelWidth", data.ReqParcelWidth);
+            parameters[++n] = new SqlParameter("@ReqParcelLength", data.ReqParcelLength);
+            parameters[++n] = new SqlParameter("@ReqParcelDepth", data.ReqParcelDepth);
 
             if (addResponseParameters)
             {
-                parameters[16] = new SqlParameter("@ResMessage", s.ResMessage);
-                parameters[17] = new SqlParameter("@ResConsignmentReference", s.ResConsignmentReference);
-                parameters[18] = new SqlParameter("@ResParcelReference", s.ResParcelReference);
-                parameters[19] = new SqlParameter("@ResCarrier", s.ResCarrier);
-                parameters[20] = new SqlParameter("@ResServiceName", s.ResServiceName);
-                parameters[21] = new SqlParameter("@ResTrackingReference", s.ResTrackingReference);
-                parameters[22] = new SqlParameter("@ResCreatedBy", s.ResCreatedBy);
-                parameters[23] = new SqlParameter("@ResCreatedWith", s.ResCreatedWith);
-                parameters[24] = new SqlParameter("@ResCreatedAt", s.ResCreatedAt);
-                parameters[25] = new SqlParameter("@ResDeliveryName", s.ResDeliveryName);
-                parameters[26] = new SqlParameter("@ResLine1", s.ResLine1);
-                parameters[27] = new SqlParameter("@ResLine2", s.ResLine2);
-                parameters[28] = new SqlParameter("@ResLine3", s.ResLine3);
-                parameters[29] = new SqlParameter("@ResCity", s.ResCity);
-                parameters[30] = new SqlParameter("@ResCounty", s.ResCounty);
-                parameters[31] = new SqlParameter("@ResPostcode", s.ResPostcode);
-                parameters[32] = new SqlParameter("@ResCountry", s.ResCountry);
-                parameters[33] = new SqlParameter("@ResPdf", s.ResPdf);
-                parameters[34] = new SqlParameter("@ResZpl", s.ResZpl);
-                parameters[35] = new SqlParameter("@ResPng", s.ResPng);
+                parameters[++n] = new SqlParameter("@ResMessage", data.ResMessage);
+                parameters[++n] = new SqlParameter("@ResConsignmentReference", data.ResConsignmentReference);
+                parameters[++n] = new SqlParameter("@ResParcelReference", data.ResParcelReference);
+                parameters[++n] = new SqlParameter("@ResCarrier", data.ResCarrier);
+                parameters[++n] = new SqlParameter("@ResServiceName", data.ResServiceName);
+                parameters[++n] = new SqlParameter("@ResCreatedBy", data.ResCreatedBy);
+                parameters[++n] = new SqlParameter("@ResCreatedWith", data.ResCreatedWith);
+                parameters[++n] = new SqlParameter("@ResCreatedAt", data.ResCreatedAt.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                parameters[++n] = new SqlParameter("@ResMediaURL", data.ResMediaURL);
+                parameters[++n] = new SqlParameter("@ResMediaGUID", data.ResMediaGUID);
             }
 
             return ExecuteStoredProc("fz_LogShipmateConsignmentRequestResponse", parameters, out rowsAffected);
         }
 
-        public override ShipmateConsignmentRequestResponse MapDataToClass(System.Data.DataRow row)
+        public ShipmateConsignmentDetails GetShipmateConsignmentDetails(string trackingReference)
         {
-            ShipmateConsignmentRequestResponse s = new ShipmateConsignmentRequestResponse();
-            return s;
+            SqlParameter[] parameter = new SqlParameter[] { new SqlParameter("@TrackingReference", trackingReference) };
+            List<ShipmateConsignmentDetails> list = SelectStoredProc("fz_GetShipmateConsignmentDetails", parameter);
+            return list[0];
+        }
+
+        public override ShipmateConsignmentDetails MapDataToClass(System.Data.DataRow row)
+        {
+            ShipmateConsignmentDetails scd = new ShipmateConsignmentDetails();
+
+            scd.ResTrackingReference = row["ResTrackingReference"].ToString();
+            scd.LabelCreated = row["LABEL_CREATED"] == DBNull.Value ? null : (DateTime?)DateTime.Parse(row["LABEL_CREATED"].ToString());
+            scd.Manifested = row["MANIFESTED"] == DBNull.Value ? null : (DateTime?)DateTime.Parse(row["MANIFESTED"].ToString());
+            scd.Collected = row["COLLECTED"] == DBNull.Value ? null : (DateTime?)DateTime.Parse(row["COLLECTED"].ToString());
+            scd.InTransit = row["IN_TRANSIT"] == DBNull.Value ? null : (DateTime?)DateTime.Parse(row["IN_TRANSIT"].ToString());
+            scd.Delivered = row["DELIVERED"] == DBNull.Value ? null : (DateTime?)DateTime.Parse(row["DELIVERED"].ToString());
+            scd.DeliveryFailed = row["DELIVERY_FAILED"] == DBNull.Value ? null : (DateTime?)DateTime.Parse(row["DELIVERY_FAILED"].ToString());
+            scd.ReqServiceID = int.Parse(row["ReqServiceID"].ToString());
+            scd.ReqRemittanceID = int.Parse(row["ReqRemittanceID"].ToString());
+            scd.ReqConsignmentReference = row["ReqConsignmentReference"].ToString();
+            scd.ReqServiceKey = row["ReqServiceKey"].ToString();
+            scd.ReqCollectionFromName = row["ReqCollectionFromName"].ToString();
+            scd.ReqCollectionFromLine1 = row["ReqCollectionFromLine1"].ToString();
+            scd.ReqCollectionFromLine2 = row["ReqCollectionFromLine2"].ToString();
+            scd.ReqCollectionFromLine3 = row["ReqCollectionFromLine3"].ToString();
+            scd.ReqCollectionFromCompanyName = row["ReqCollectionFromCompanyName"].ToString();
+            scd.ReqCollectionFromTelephone = row["ReqCollectionFromTelephone"].ToString();
+            scd.ReqCollectionFromEmailAddress = row["ReqCollectionFromEmailAddress"].ToString();
+            scd.ReqCollectionFromCity = row["ReqCollectionFromCity"].ToString();
+            scd.ReqCollectionFromPostcode = row["ReqCollectionFromPostcode"].ToString();
+            scd.ReqCollectionFromCountry = row["ReqCollectionFromCountry"].ToString();
+            scd.ReqDeliveryToName = row["ReqDeliveryToName"].ToString();
+            scd.ReqDeliveryToLine1 = row["ReqDeliveryToLine1"].ToString();
+            scd.ReqDeliveryToLine2 = row["ReqDeliveryToLine2"].ToString();
+            scd.ReqDeliveryToLine3 = row["ReqDeliveryToLine3"].ToString();
+            scd.ReqDeliveryToCompanyName = row["ReqDeliveryToCompanyName"].ToString();
+            scd.ReqDeliveryToTelephone = row["ReqDeliveryToTelephone"].ToString();
+            scd.ReqDeliveryToEmailAddress = row["ReqDeliveryToEmailAddress"].ToString();
+            scd.ReqDeliveryToCity = row["ReqDeliveryToCity"].ToString();
+            scd.ReqDeliveryToPostcode = row["ReqDeliveryToPostcode"].ToString();
+            scd.ReqDeliveryToCountry = row["ReqDeliveryToCountry"].ToString();
+            scd.ReqParcelReference = row["ReqParcelReference"].ToString();
+            scd.ReqParcelWeight = int.Parse(row["ReqParcelWeight"].ToString());
+            scd.ReqParcelWidth = int.Parse(row["ReqParcelWidth"].ToString());
+            scd.ReqParcelLength = int.Parse(row["ReqParcelLength"].ToString());
+            scd.ReqParcelDepth = int.Parse(row["ReqParcelDepth"].ToString());
+            scd.ResConsignmentReference = row["ResConsignmentReference"].ToString();
+            scd.ResParcelReference = row["ResParcelReference"].ToString();
+            scd.ResCarrier = row["ResCarrier"].ToString();
+            scd.ResServiceName = row["ResServiceName"].ToString();
+            scd.ResCreatedBy = row["ResCreatedBy"].ToString();
+            scd.ResCreatedWith = row["ResCreatedWith"].ToString();
+            scd.ResCreatedAt = row["ResCreatedAt"] == DBNull.Value ? null : (DateTime?)DateTime.Parse(row["ResCreatedAt"].ToString());
+            scd.ResMediaGUID = row["ResMediaGUID"].ToString();
+
+            return scd;
         }
     }
 
     public class ShipmateConfigProvider : DataAccess<string>, IShipmateConfigProvider
     {
-        public string ShipmateConfig(string clientId, string config, bool isGet)
+        public string ShipmateConfig(string clientId = null, string config = null, string trackingReference = null)
         {
             SqlParameter[] parameters;
 
-            if (isGet)
+            if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(config))
+            {
                 parameters = new SqlParameter[2];
+
+                parameters[0] = new SqlParameter("@SAEDIID", clientId);
+                parameters[1] = new SqlParameter("@ShipmateConfig", config);
+            }
             else
-                parameters = new SqlParameter[3];
+            {
+                parameters = new SqlParameter[1];
 
-            parameters[0] = new SqlParameter("@SAEDIID", clientId);
-            parameters[1] = new SqlParameter("@IsGet", isGet);
-
-            if (!isGet)
-                parameters[2] = new SqlParameter("@ShipmateConfig", config);
+                if (!string.IsNullOrEmpty(clientId))
+                    parameters[0] = new SqlParameter("@SAEDIID", clientId);
+                else
+                    parameters[0] = new SqlParameter("@ResTrackingReference", trackingReference);
+            }
 
             List<string> list = SelectStoredProc("fz_ShipmateConfig", parameters);
 

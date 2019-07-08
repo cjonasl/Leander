@@ -637,6 +637,32 @@ namespace MobilePortal
                 if (call.IsSony)// 
                     setCourierButton(call);
             }
+
+            else if (e.CommandName == "BookCourier")
+            {
+                SiteSession session = SiteSessionFactory.LoadSession(this.Page);
+                Call call = new Call();
+                call = (Call)session.Data["call"];
+                string queryString = string.Empty;
+                CallPart part = usedPartsBLL.List.Find(f => f.ReturnReference.ToString() == e.CommandArgument.ToString());
+
+                if (part != null && part.Code == "000000010")
+                {
+                    string rmaId = e.CommandArgument.ToString();
+                    queryString = string.Format("Collectionjob.aspx?SAEDIID={0}&ClientRef={1}&RMAREF={2}&SWAP2Credit={3}", call.SaediFromId, call.ClientRef, call.SonySwapCreditRMAid, true);
+
+                }
+                else
+                {
+                    string rmaId = e.CommandArgument.ToString();
+                    queryString = string.Format("Collectionjob.aspx?SAEDIID={0}&ClientRef={1}&RMAREF={2}", call.SaediFromId, call.ClientRef, rmaId);//  "LIR388");
+
+                }
+                Iframe.Attributes.Add("src", queryString);
+
+                ModalPopupExtender1.Show();
+            }
+
         }
 
         protected void partsUsedGridView_SelectedIndexChanged(object sender, EventArgs e)
@@ -1392,7 +1418,7 @@ namespace MobilePortal
             Response.Redirect("~/Parts.aspx");
         }
 
-        protected void BtnBookCourier_Click_old(object sender, CommandEventArgs e)
+        protected void BtnBookCourier_Click(object sender, CommandEventArgs e)
         {
             //    Button btn = sender as Button;
             //    GridViewRow row = btn.NamingContainer as GridViewRow;
@@ -1507,28 +1533,32 @@ namespace MobilePortal
                 return false;
         }
 
-        protected void BtnBookCourier_Click(object sender, CommandEventArgs e)
+        protected void BtnBookCourier_Click_New(object sender, CommandEventArgs e)
         {
             string rmaId = e.CommandArgument.ToString();
 
             SiteSession session = SiteSessionFactory.LoadSession(this.Page);
-            Call call = new Call();
-            call = (Call)session.Data["call"];
+            Call call = (Call)session.Data["call"];
 
-            Mobile.Portal.BLL.Shipmate.Shipmate shipmate = new Mobile.Portal.BLL.Shipmate.Shipmate(session.Login.CreatedBy);
-            string queryString = shipmate.BtnBookCourierClick(call.SaediFromId, rmaId, call.ClientRef, call.Id);
-
+            string queryString = string.Format("ShipmatePage.aspx?Title=Book Courier Collection&SaediFromId={0}&RmaId={1}&ClientRef={2}", call.SaediFromId, rmaId, call.ClientRef);
             Iframe.Attributes.Add("src", queryString);
+            Iframe.ID = "ModalPopupExtender";
             ModalPopupExtender1.Show();
         }
 
         protected void linkBtnShowConsignmentDetails_Click(object sender, CommandEventArgs e)
         {
-            string title = "Consignment details";
             string trackingReference = e.CommandArgument.ToString();
-            string queryString = string.Format("ShipmatePage.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
+            string queryString = string.Format("ShipmatePage.aspx?Title=Consignment details&TrackingReference={0}", trackingReference);
             Iframe.Attributes.Add("src", queryString);
+            Iframe.ID = "ModalPopupExtender";
             ModalPopupExtender1.Show();
+        }
+
+        protected string GetCarrierTrackAndTraceUrl(string trackingReference)
+        {
+            Mobile.Portal.BLL.Shipmate.Shipmate s = new Mobile.Portal.BLL.Shipmate.Shipmate();
+            return s.GetCarrierTrackAndTraceUrl(trackingReference);
         }
     }
 }

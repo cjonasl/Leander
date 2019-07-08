@@ -19,20 +19,14 @@ namespace MobilePortal
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SiteSession session = SiteSessionFactory.LoadSession(this.Page);
+            SiteSession session = SiteSessionFactory.LoadSession(this.Page);           
 
             if (!session.LoginAccepted)
             {
                 Response.Redirect("~/Denied.aspx");
             }
             else
-            {
-                if (Request.QueryString["ShowConsignmentDetails"] != null)
-                {
-                    ShowConsignmentDetails(Request.QueryString["ShowConsignmentDetails"].ToString());
-                    return;
-                }
-
+            {               
                 //if (!Page.IsPostBack)
                 //{
                     Call call = new Call();
@@ -122,10 +116,13 @@ namespace MobilePortal
             else if (e.CommandName == "BookCourier")
             {
                 SiteSession session = SiteSessionFactory.LoadSession(this.Page);
+               
                 string rmaId = e.CommandArgument.ToString();
-                string queryString = string.Format("ShipmatePage.aspx?Title=Book Courier Collection&SaediFromId={0}&RmaId={1}&ClientRef=0", session.Login.SaediId, rmaId);
+                string queryString = string.Format("Collectionjob.aspx?SAEDIID={0}&RMAList={1}&loop=true", session.Login.SaediId, rmaId );
+
+
                 Iframe.Attributes.Add("src", queryString);
-                Iframe.ID = "ModalPopupExtender";
+
                 ModalPopupExtender1.Show();
             }
         }
@@ -187,20 +184,8 @@ namespace MobilePortal
                         BtnBookCourier.CommandArgument = string.IsNullOrEmpty(BtnBookCourier.CommandArgument) ? item.rmaId : BtnBookCourier.CommandArgument + "," + item.rmaId;
                     }
                     returnResult.AppendFormat("{3}. Return Ref: {1} ;{2}<br/> <a href='{0}' target='_blank' style='{4}'>Show RMA Document</a><br/>", item.rmaDocumentUrl, item.rmaId, item.shipmentStatus, (result.IndexOf(item)) + 1, string.IsNullOrEmpty(item.rmaDocumentUrl)? "visibility: hidden":"");
-                    if (!string.IsNullOrEmpty(item.Collectionref))
-                    {
-                        if (!string.IsNullOrEmpty(item.CollectionDate))
-                            returnCourierResult.AppendFormat(" Collection Ref : {0}  {1} <br/>", item.Collectionref, item.CollectionDate);
-                        else //New Shipmate (CollectionDate is not set)
-                        {
-                            returnCourierResult.AppendFormat(" Collection Ref : {0}<br/>", item.Collectionref);
-                            returnCourierResult.AppendFormat(" <a href='PartStock.aspx?ShowConsignmentDetails={0}'>Show consignment details</a> <br/>", item.Collectionref);
-                            Mobile.Portal.BLL.Shipmate.Shipmate s = new Mobile.Portal.BLL.Shipmate.Shipmate();
-                            returnCourierResult.AppendFormat(" <a href='{0}{1}' target='_blank'>Track</a> <br/>", s.GetCarrierTrackAndTraceUrl(item.Collectionref), item.Collectionref);
-                            returnCourierResult.AppendFormat(" <a href='{0}' target='_blank'>Show courier label</a> <br/>", item.ShipmateMediaURL);
-                        }
-
-                    }
+                    if(!string.IsNullOrEmpty(item.Collectionref))
+                        returnCourierResult.AppendFormat(" Collection Ref : {0}  {1} <br/>",item.Collectionref,item.CollectionDate);
                 }
               Label lbl = (Label)(e.Row.FindControl("ReturnDetails"));
               Label lblCourierDetails = (Label)(e.Row.FindControl("CourierDetails"));
@@ -215,15 +200,6 @@ namespace MobilePortal
         //        part.RmaDetails = result;
         //    }
         //ReturnDetails
-        }
-
-        protected void ShowConsignmentDetails(string trackingReference)
-        {
-            string title = "Consignment details";
-            string queryString = string.Format("ShipmatePage.aspx?Title={0}&TrackingReference={1}", title, trackingReference);
-            Iframe.Attributes.Add("src", queryString);
-            Iframe.ID = "ModalPopupExtender";
-            ModalPopupExtender1.Show();
         }
     }
 }

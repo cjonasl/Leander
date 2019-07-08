@@ -1,4 +1,5 @@
 CREATE PROCEDURE fz_LogShipmateConsignmentRequestResponse
+@ClientId varchar(11),
 @SendRequestSuccess bit,
 @SendRequestErrorMessage varchar(500),
 @ResTrackingReference varchar(100),
@@ -48,6 +49,7 @@ DECLARE @ID int
 INSERT INTO ShipmateConsignmentCreation
 (
   DateTimeRowInserted,
+  ClientId,
   SendRequestSuccess,
   SendRequestErrorMessage,
   ResTrackingReference,
@@ -95,6 +97,7 @@ INSERT INTO ShipmateConsignmentCreation
 VALUES
 (
   getdate(),
+  @ClientId,
   @SendRequestSuccess,
   @SendRequestErrorMessage,
   @ResTrackingReference,

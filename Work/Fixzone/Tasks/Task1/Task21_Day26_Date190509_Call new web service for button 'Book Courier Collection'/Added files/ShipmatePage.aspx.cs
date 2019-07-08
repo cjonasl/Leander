@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Mobile.Portal.BLL.Shipmate;
 using Mobile.Portal.BLL;
+using Mobile.Portal.Classes;
 using Mobile.Portal.Session;
 
 namespace MobilePortal
@@ -19,132 +20,90 @@ namespace MobilePortal
                 return;
 
             string title = Request.QueryString["Title"];
-            lblTitle.Text = title;
 
-            if (title == "Create Shipmate consignment")
+            if (title != null)
+                lblTitle.Text = title;
+
+            if (title == null) //Configuration (the default)
             {
-                txtServiceID.Text = txtServiceID.ToolTip = Request.QueryString["ServiceID"];
-                txtRemittanceID.Text = txtRemittanceID.ToolTip = Request.QueryString["RemittanceID"];
-                txtConsignmentReference.Text = txtConsignmentReference.ToolTip = Request.QueryString["ConsignmentReference"];
-                txtServiceKey.Text = txtServiceKey.ToolTip = Request.QueryString["ServiceKey"];
-                txtName.Text = txtName.ToolTip = Request.QueryString["Name"];
-                txtLine1.Text = txtLine1.ToolTip = Request.QueryString["Line1"];
-                txtCity.Text = txtCity.ToolTip = Request.QueryString["City"];
-                txtPostcode.Text = txtPostcode.ToolTip = Request.QueryString["Postcode"];
-                txtCountry.Text = txtCountry.ToolTip = Request.QueryString["Country"];
-                txtReference.Text = txtReference.ToolTip = Request.QueryString["Reference"];
-                txtWeight.Text = txtWeight.ToolTip = "3000";
-                txtWidth.Text = txtWidth.ToolTip = "20";
-                txtLength.Text = txtLength.ToolTip = "10";
-                txtDepth.Text = txtDepth.ToolTip = "15";
-                SaediFromId.Value = Request.QueryString["SaediFromId"]; //Hidden field
                 UpdateVisibility(true, false, false, false);
+                divModalHeader.Visible = false;
+                divModalBody.Visible = false;
+                configState.Value = "ConfigSearch";
+            }
+            else if (title == "Book Courier Collection")
+            {
+                string saediFromId = Request.QueryString["SaediFromId"];
+                string rmaId = Request.QueryString["RmaId"];
+                string clientRef = Request.QueryString["ClientRef"];
+                string onlineBookingURL;
+
+                SiteSession session = SiteSessionFactory.LoadSession(this.Page);
+                Shipmate shipmate = new Shipmate(session.Login.CreatedBy);
+
+                CreateConsignmentRequest createConsignmentRequest = shipmate.GetCreateConsignmentRequest(saediFromId, rmaId, clientRef, out onlineBookingURL);
+
+                txtParcelWeight.Text = "3000";
+                txtParcelWidth.Text = "20";
+                txtParcelLength.Text = "10";
+                txtParcelDepth.Text = "15";
+                txtConsignmentReference.Text = createConsignmentRequest.consignment_reference;
+                txtParcelReference.Text = createConsignmentRequest.consignment_reference + "-1";
+                txtServiceID.Text = createConsignmentRequest.ServiceID.ToString();
+                txtServiceKey.Text = createConsignmentRequest.service_key;
+                txtCollectionFromName.Text = createConsignmentRequest.collection_address.name;
+                txtCollectionFromLine1.Text = createConsignmentRequest.collection_address.line_1;
+                txtCollectionFromLine2.Text = createConsignmentRequest.collection_address.line_2;
+                txtCollectionFromLine3.Text = createConsignmentRequest.collection_address.line_3;
+                txtCollectionFromCompanyName.Text = createConsignmentRequest.collection_address.company_name;
+                txtCollectionFromTelephone.Text = createConsignmentRequest.collection_address.telephone;
+                txtCollectionFromEmailAddress.Text = createConsignmentRequest.collection_address.email_address;
+                txtCollectionFromCity.Text = createConsignmentRequest.collection_address.city;
+                txtCollectionFromPostcode.Text = createConsignmentRequest.collection_address.postcode;
+                txtCollectionFromCountry.Text = createConsignmentRequest.collection_address.country;
+                txtDeliveryToName.Text = createConsignmentRequest.to_address.name;
+                txtDeliveryToLine1.Text = createConsignmentRequest.to_address.line_1;
+                txtDeliveryToLine2.Text = createConsignmentRequest.to_address.line_2;
+                txtDeliveryToLine3.Text = createConsignmentRequest.to_address.line_3;
+                txtDeliveryToCompanyName.Text = createConsignmentRequest.to_address.company_name;
+                txtDeliveryToTelephone.Text = createConsignmentRequest.to_address.telephone;
+                txtDeliveryToEmailAddress.Text = createConsignmentRequest.to_address.email_address;
+                txtDeliveryToCity.Text = createConsignmentRequest.to_address.city;
+                txtDeliveryToPostcode.Text = createConsignmentRequest.to_address.postcode;
+                txtDeliveryToCountry.Text = createConsignmentRequest.to_address.country;
+                consignmentState.Value = "Create";
+                SaediFromId.Value = saediFromId; //Hidden field
+                ClientRef.Value = clientRef; //Hidden field
+                OnlineBookingURL.Value = onlineBookingURL; //Hidden field
+
+                UpdateVisibility(false, true, false, false);
             }
             else if (title == "Consignment details")
             {
                 try
                 {
-                    string trackingReference = Request.QueryString["TrackingReference"];
+                    lblTitle.Text = title;
                     SiteSession session = SiteSessionFactory.LoadSession(this.Page);
                     Shipmate shipmate = new Shipmate(session.Login.CreatedBy);
-                    ConsignmentResponse consignmentResponse = shipmate.GetLabel(trackingReference);
-                    lblTitle.Text = title;
-                    SetLblText(consignmentResponse);
-                    UpdateVisibility(false, false, true, false);
+                    string trackingReference = Request.QueryString["TrackingReference"];
+                    object shipmateConsignmentDetails = shipmate.GetShipmateConsignmentDetails(trackingReference);
+                    ShipmateConsignmentRequestRepsonseDetails shipmateConsignmentRequestRepsonseDetails = shipmate.GetShipmateConsignmentRequestRepsonseDetails(shipmateConsignmentDetails);
+                    Mobile.Portal.BLL.Shipmate.Address collectionFromAddress = shipmate.GetCollectionFromAddress(shipmateConsignmentDetails);
+                    Mobile.Portal.BLL.Shipmate.Address deliveryToAddress = shipmate.GetDeliveryToAddress(shipmateConsignmentDetails);
+                    SetLblText(shipmateConsignmentRequestRepsonseDetails, collectionFromAddress, deliveryToAddress);
+                    consignmentState.Value = "Show details";
+                    UpdateVisibility(false, true, false, false);
                 }
                 catch (Exception ex)
                 {
-                    divError.InnerText = string.Format("An error occurred:\r\n{0}", ex.Message);
+                    spanError.InnerText = string.Format("An error occurred: {0}", ex.Message);
                     UpdateVisibility(false, false, false, true);
-                }
-            }
-            else if (title == "SetConfig") //ShipmatePage.aspx?Title=SetConfig&AdminPsw=Ping68pong&ClientId=??????????&UserName=??????????&Password=??????????&Token=??????????&ServiceKey=??????????&BaseUrl=??????????
-            {
-                string errorMessage, clientId = "", userName = "", password = "", token = "", serviceKey = "", baseUrl = "";
-
-                errorMessage = CheckAdminPsw();
-
-                if (errorMessage == "")
-                {
-                    clientId = Request.QueryString["ClientId"];
-                    userName = Request.QueryString["UserName"];
-                    password = Request.QueryString["Password"];
-                    token = Request.QueryString["Token"];
-                    serviceKey = Request.QueryString["ServiceKey"];
-                    baseUrl = Request.QueryString["BaseUrl"];
-
-                    if (string.IsNullOrEmpty(clientId))
-                        errorMessage = "ClientId is not given in the query string!";
-                    else if (string.IsNullOrEmpty(userName))
-                        errorMessage = "UserName is not given in the query string!";
-                    else if (string.IsNullOrEmpty(password))
-                        errorMessage = "Password is not given in the query string!";
-                    else if (string.IsNullOrEmpty(token))
-                        errorMessage = "Token is not given in the query string!";
-                    else if (string.IsNullOrEmpty(serviceKey))
-                        errorMessage = "ServiceKey is not given in the query string!";
-                    else if (string.IsNullOrEmpty(baseUrl))
-                        errorMessage = "BaseUrl is not given in the query string!";
-                }
-
-                if (errorMessage != "")
-                {
-                    ReturnHtml("Error", string.Format("<span style='color: red; font-weight: bold;'>{0}</span>", errorMessage));
-                }
-                else
-                {
-                    Shipmate shipmate = new Shipmate();
-                    string result = shipmate.SetConfig(clientId, userName, password, token, serviceKey, baseUrl);
-
-                    if (result.StartsWith("Error"))
-                    {
-                        ReturnHtml("Error", string.Format("<span style='color: red; font-weight: bold;'>{0}</span>", errorMessage));
-                    }
-                    else
-                    {
-                        ReturnHtml("SetConfig", string.Format("<span style='color: green; font-weight: bold;'>Shipmate configuration was successfully updated for {0}</span>", clientId));
-                    }
-                }
-            }
-            else if (title == "GetConfig") //ShipmatePage.aspx?Title=GetConfig&AdminPsw=Ping68pong&ClientId=??????????
-            {
-                string clientId = "";
-                string errorMessage = CheckAdminPsw();
-                ShipmateConfig shipmateConfig = null;
-
-                if (errorMessage == "")
-                {
-                    clientId = Request.QueryString["ClientId"];
-
-                    if (string.IsNullOrEmpty(clientId))
-                        errorMessage = "ClientId is not given in the query string!";
-                    else
-                    {
-                        Shipmate shipmate = new Shipmate();
-                        shipmateConfig = shipmate.GetConfig(clientId, out errorMessage);
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(errorMessage))
-                {
-                    ReturnHtml("Error", string.Format("<span style='color: red; font-weight: bold;'>{0}</span>", errorMessage));
-                }
-                else
-                {
-                    StringBuilder sb = new StringBuilder(string.Format("<div style='margin-top: 15px; margin-left: 15px;'><h2>Shipmate configuration for {0}</h2><table style='border-collapse: collapse;'>", clientId));
-
-                    sb.Append("<tr><td style='border: 1px solid black'><strong>UserName</strong><td style='border: 1px solid black'>" + shipmateConfig.UserName + "</td></tr>");
-                    sb.Append("<tr><td style='border: 1px solid black'><strong>Password</strong><td style='border: 1px solid black'>" + shipmateConfig.Password + "</td></tr>");
-                    sb.Append("<tr><td style='border: 1px solid black'><strong>Token</strong><td style='border: 1px solid black'>" + shipmateConfig.Token + "</td></tr>");
-                    sb.Append("<tr><td style='border: 1px solid black'><strong>ServiceKey</strong><td style='border: 1px solid black'>" + shipmateConfig.ServiceKey + "</td></tr>");
-                    sb.Append("<tr><td style='border: 1px solid black'><strong>BaseUrl</strong><td style='border: 1px solid black'>" + shipmateConfig.BaseUrl + "</td></tr></table></div>");
-
-                    ReturnHtml("GetConfig", sb.ToString());
                 }
             }
             else
             {
-                ReturnHtml("Error", "<span style='color: red; font-weight: bold;'>Incorrect Title in the query string!</span>");
+                spanError.InnerText = "Incorrect Title in the query string!";
+                UpdateVisibility(false, false, false, true);
             }
         }
 
@@ -166,76 +125,137 @@ namespace MobilePortal
             }
         }
 
-        private void ReturnHtml(string title, string body)
+        private void UpdateVisibility(bool showConfig, bool showDivConsignment, bool showDivNonPositiveIntegerError, bool showDivError)
         {
-            string template = "<!DOCTYPE html> <html lang='en' xmlns='http://www.w3.org/1999/xhtml'><head><title>{0}</title><body>{1}</body></html>";
-            string html = string.Format(template, title, body);
-            Response.ContentType = "text/html";
-            Response.BinaryWrite(Encoding.UTF8.GetBytes(html.ToCharArray()));
-            Response.Flush();
-            Response.Close();
-        }
-
-        private void UpdateVisibility(bool showDivCreateConsignmenmt, bool showDivNonPositiveIntegerError, bool showDivConsignmentDetails, bool showDivError)
-        {
-            divCreateConsignmenmt.Visible = showDivCreateConsignmenmt;
+            divConfig.Visible = showConfig;
+            divConsignment.Visible = showDivConsignment;
             divNonPositiveIntegerError.Visible = showDivNonPositiveIntegerError;
-            divConsignmentDetails.Visible = showDivConsignmentDetails;
             divError.Visible = showDivError;
         }
 
-        private void SetLblText(ConsignmentResponse consignmentResponse)
+        private void SetLblText(ShipmateConsignmentRequestRepsonseDetails details, Mobile.Portal.BLL.Shipmate.Address collectionFromAddress, Mobile.Portal.BLL.Shipmate.Address deliveryToAddress)
         {
-            lblConsignmentReference.Text = consignmentResponse.data[0].consignment_reference;
-            lblParcelReference.Text = consignmentResponse.data[0].parcel_reference;
-            lblCarrier.Text = consignmentResponse.data[0].carrier;
-            lblServiceName.Text = consignmentResponse.data[0].service_name;
-            lblTrackingReference.Text = consignmentResponse.data[0].tracking_reference;
-            lblCreatedBy.Text = consignmentResponse.data[0].created_by;
-            lblCreatedWith.Text = consignmentResponse.data[0].created_with;
-            lblCreatedAt.Text = consignmentResponse.data[0].created_at.ToString();
-            lblDeliveryName.Text = consignmentResponse.data[0].to_address.delivery_name;
-            lblLine.Text = consignmentResponse.data[0].to_address.line_1;
-            lblCity.Text = consignmentResponse.data[0].to_address.city;
-            lblPostcode.Text = consignmentResponse.data[0].to_address.postcode;
-            lblCountry.Text = consignmentResponse.data[0].to_address.country;
+            lblConsignmentReference.Text = details.ConsignmentReference;
+            lblParcelReference.Text = details.ParcelReference;
+            lblServiceID.Text = details.ServiceID;
+            lblServiceKey.Text = details.ServiceKey;
+            lblTrackingReference.Text = details.TrackingReference;
+            lblLabelCreated.Text = details.LabelCreated;
+            lblManifested.Text = details.Manifested;
+            lblCollected.Text = details.Collected;
+            lblInTransit.Text = details.InTransit;
+            lblDelivered.Text = details.Delivered;
+            lblDeliverFailed.Text = details.DeliveryFailed;
+            lblCarrier.Text = details.Carrier;
+            lblServiceName.Text = details.ServiceName;
+            lblCreatedBy.Text = details.CreatedBy;
+            lblCreatedWith.Text = details.CreatedWith;
+            lblCreatedAt.Text = details.CreatedAt;
+            lblParcelWeight.Text = details.ParcelWeight;
+            lblParcelWidth.Text = details.ParcelWidth;
+            lblParcelLength.Text = details.ParcelLength;
+            lblParcelDepth.Text = details.ParcelDepth;
+            lblCollectionFromName.Text = collectionFromAddress.name;
+            lblCollectionFromLine1.Text = collectionFromAddress.line_1;
+            lblCollectionFromLine2.Text = collectionFromAddress.line_2;
+            lblCollectionFromLine3.Text = collectionFromAddress.line_3;
+            lblCollectionFromCompanyName.Text = collectionFromAddress.company_name;
+            lblCollectionFromTelephone.Text = collectionFromAddress.telephone;
+            lblCollectionFromEmailAddress.Text = collectionFromAddress.email_address;
+            lblCollectionFromCity.Text = collectionFromAddress.city;
+            lblCollectionFromPostcode.Text = collectionFromAddress.postcode;
+            lblCollectionFromCountry.Text = collectionFromAddress.country;
+            lblDeliveryToName.Text = deliveryToAddress.name;
+            lblDeliveryToLine1.Text = deliveryToAddress.line_1;
+            lblDeliveryToLine2.Text = deliveryToAddress.line_2;
+            lblDeliveryToLine3.Text = deliveryToAddress.line_3;
+            lblDeliveryToCompanyName.Text = deliveryToAddress.company_name;
+            lblDeliveryToTelephone.Text = deliveryToAddress.telephone;
+            lblDeliveryToEmailAddress.Text = deliveryToAddress.email_address;
+            lblDeliveryToCity.Text = deliveryToAddress.city;
+            lblDeliveryToPostcode.Text = deliveryToAddress.postcode;
+            lblDeliveryToCountry.Text = deliveryToAddress.country;
         }
 
         protected void btnCreateConsignment_Click(object sender, EventArgs e)
         {
-            int shipmateConsignmentCreationId;
-            Shipmate shipmate;
-            ConsignmentRequest consignmentRequest;
-            ConsignmentResponse consignmentResponse;
-            ToAddressRequest toAddress;
-            List<Parcel> parcels;
-            Parcel parcel;
-            PartsBLL SAEDIParts = new PartsBLL();
-            RMARefBLL rmaRefBLL = new RMARefBLL();
-
             int n;
-            string[] v = new string[] { txtWeight.Text, txtWidth.Text, txtLength.Text, txtDepth.Text };
+            string[] v = new string[] { txtParcelWeight.Text, txtParcelWidth.Text, txtParcelLength.Text, txtParcelDepth.Text };
 
             if (v.Any(x => !int.TryParse(x, out n) || (int.TryParse(x, out n) && n < 1)))
             {
-                UpdateVisibility(true, true, false, false);
+                UpdateVisibility(false, true, true, false);
             }
             else
             {
                 try
                 {
-                    toAddress = new ToAddressRequest(txtName.Text, txtLine1.Text, txtCity.Text, txtPostcode.Text, txtCountry.Text);
-                    parcel = new Parcel(txtReference.Text, int.Parse(txtWeight.Text), int.Parse(txtWidth.Text), int.Parse(txtLength.Text), int.Parse(txtDepth.Text));
-                    parcels = new List<Parcel>();
-                    parcels.Add(parcel);
-                    SiteSession session = SiteSessionFactory.LoadSession(this.Page);
+                    SiteSession session;
+                    int shipmateConsignmentCreationId;
+                    Shipmate shipmate;
+                    RMARefBLL rmaRefBLL = new RMARefBLL();
+                    CourierRMABLL onlinemediaBLL = new CourierRMABLL();
+                    CreateConsignmentRequest createConsignmentRequest;
+                    int serviceID;
+                    string consignmentReference, serviceKey;
+                    Mobile.Portal.BLL.Shipmate.Address collectionAddress, toAddress;
+                    List<Parcel> parcels;
+
+                    session = SiteSessionFactory.LoadSession(this.Page);
                     shipmate = new Shipmate(session.Login.CreatedBy);
-                    consignmentRequest = new ConsignmentRequest(int.Parse(txtServiceID.Text), int.Parse(txtRemittanceID.Text), txtConsignmentReference.Text, shipmate.Token, txtServiceKey.Text, toAddress, parcels);
-                    consignmentResponse = shipmate.CreateConsignment(SaediFromId.Value, consignmentRequest, out shipmateConsignmentCreationId);
-                    rmaRefBLL.UpdateCollectionjob(txtConsignmentReference.Text, consignmentResponse.data[0].tracking_reference, null, false, shipmateConsignmentCreationId);
-                    lblTitle.Text = "Consignment was created successfully";
-                    SetLblText(consignmentResponse);
-                    UpdateVisibility(false, false, true, false);
+                    serviceID = int.Parse(txtServiceID.Text);
+                    consignmentReference = txtConsignmentReference.Text;
+                    serviceKey = txtServiceKey.Text;
+
+                    collectionAddress = new Mobile.Portal.BLL.Shipmate.Address(
+                        txtCollectionFromName.Text,
+                        txtCollectionFromLine1.Text,
+                        txtCollectionFromLine2.Text,
+                        txtCollectionFromLine3.Text,
+                        txtCollectionFromCompanyName.Text,
+                        txtCollectionFromTelephone.Text,
+                        txtCollectionFromEmailAddress.Text,
+                        txtCollectionFromCity.Text,
+                        txtCollectionFromPostcode.Text,
+                        txtCollectionFromCountry.Text);
+
+                    toAddress = new Mobile.Portal.BLL.Shipmate.Address(
+                        txtDeliveryToName.Text,
+                        txtDeliveryToLine1.Text,
+                        txtDeliveryToLine2.Text,
+                        txtDeliveryToLine3.Text,
+                        txtDeliveryToCompanyName.Text,
+                        txtDeliveryToTelephone.Text,
+                        txtDeliveryToEmailAddress.Text,
+                        txtDeliveryToCity.Text,
+                        txtDeliveryToPostcode.Text,
+                        txtDeliveryToCountry.Text);
+
+                    parcels = new List<Parcel>();
+                    parcels.Add(new Parcel(txtParcelReference.Text, int.Parse(txtParcelWeight.Text), int.Parse(txtParcelWidth.Text), int.Parse(txtParcelLength.Text), int.Parse(txtParcelDepth.Text)));
+
+                    createConsignmentRequest = new CreateConsignmentRequest(serviceID, consignmentReference, null, serviceKey, collectionAddress, toAddress, parcels);
+
+                    string trackingReference = shipmate.CreateConsignment(SaediFromId.Value, createConsignmentRequest, out shipmateConsignmentCreationId);
+
+                    object shipmateConsignmentDetails = shipmate.GetShipmateConsignmentDetails(trackingReference);
+                    ShipmateConsignmentRequestRepsonseDetails shipmateConsignmentRequestRepsonseDetails = shipmate.GetShipmateConsignmentRequestRepsonseDetails(shipmateConsignmentDetails);
+
+                    Mobile.Portal.BLL.Shipmate.Address collectionFromAddress = shipmate.GetCollectionFromAddress(shipmateConsignmentDetails);
+                    Mobile.Portal.BLL.Shipmate.Address deliveryToAddress = shipmate.GetDeliveryToAddress(shipmateConsignmentDetails);
+
+                    rmaRefBLL.UpdateCollectionjob(txtConsignmentReference.Text, trackingReference, null, false, shipmateConsignmentCreationId);
+
+                    int linkId = int.Parse(ClientRef.Value);
+
+                    if (linkId != 0) //When linkId == 0 it is a PartStock and for those we don't need to call AddMediaMapping according to Paul/Vijay 19/06/2019
+                    {
+                        onlinemediaBLL.AddMediaMapping(OnlineBookingURL.Value, shipmateConsignmentRequestRepsonseDetails.MediaGUID, true, "pdf", "Courier Collection Label", linkId, (int)MediaTypeId.ServiceCall, (int)MediaContextId.General, SaediFromId.Value);
+                    }
+
+                    SetLblText(shipmateConsignmentRequestRepsonseDetails, collectionFromAddress, deliveryToAddress);
+                    consignmentState.Value = "Create success";
+                    UpdateVisibility(false, true, false, false);
                 }
                 catch (Exception ex)
                 {
@@ -243,6 +263,109 @@ namespace MobilePortal
                     UpdateVisibility(false, false, false, true);
                 }
             }
+        }
+
+        private void ResetLabels()
+        {
+            lblMsgAdminPassword.Text = "";
+            lblErrorMsgSearchClient.Text = "";
+        }
+
+        protected void btnSearchClient_Click(object sender, EventArgs e)
+        {
+            ResetLabels();
+
+            if (!txtConfigAdminPassword.ReadOnly)
+            {
+                if (string.IsNullOrEmpty(txtConfigAdminPassword.Text))
+                    lblMsgAdminPassword.Text = "Admin password is not given!";
+                else if (txtConfigAdminPassword.Text != "Ping68pong")
+                    lblMsgAdminPassword.Text = "Admin password is incorrect!";
+                else
+                {
+                    txtConfigAdminPassword.TextMode = TextBoxMode.SingleLine;
+                    txtConfigAdminPassword.Text = "..........";
+                    txtConfigAdminPassword.ReadOnly = true;
+                    lblMsgAdminPassword.Text = "Correct password";
+                    lblMsgAdminPassword.ForeColor = System.Drawing.Color.Green;
+                }
+            }
+            else
+            {
+                lblMsgAdminPassword.Text = "Correct password";
+            }
+
+            if (string.IsNullOrEmpty(txtConfigClientId.Text))
+                lblErrorMsgSearchClient.Text = "ClientId is not given!";
+
+            if (lblMsgAdminPassword.Text == "Correct password" && string.IsNullOrEmpty(lblErrorMsgSearchClient.Text))
+            {
+                string message;
+                Shipmate shipmate = new Shipmate();
+                ShipmateConfig shipmateConfig = shipmate.GetConfig(txtConfigClientId.Text, out message);
+
+                if (message == "ClientId does not exist!")
+                    lblErrorMsgSearchClient.Text = "ClientId does not exist!";
+                else
+                {
+                    configState.Value = "ConfigEditAvailable";
+
+                    if (message != "Config is empty")
+                    {
+                        txtConfigShipmateUsername.Text = shipmateConfig.ShipmateUsername;
+                        txtConfigShipmatePassword.Text = shipmateConfig.ShipmatePassword;
+                        txtConfigShipmateToken.Text = shipmateConfig.ShipmateToken;
+                        txtConfigShipmateServiceKey.Text = shipmateConfig.ShipmateServiceKey;
+                        txtConfigShipmateBaseUrl.Text = shipmateConfig.ShipmateBaseUrl;
+                        txtConfigCarrierTrackAndTraceUrl.Text = shipmateConfig.CarrierTrackAndTraceUrl;
+                        txtConfigDeliveryToName.Text = shipmateConfig.DeliveryToName;
+                        txtConfigDeliveryToLine1.Text = shipmateConfig.DeliveryToLine1;
+                        txtConfigDeliveryToLine2.Text = shipmateConfig.DeliveryToLine2;
+                        txtConfigDeliveryToLine3.Text = shipmateConfig.DeliveryToLine3;
+                        txtConfigDeliveryToCompanyName.Text = shipmateConfig.DeliveryToCompanyName;
+                        txtConfigDeliveryToTelephone.Text = shipmateConfig.DeliveryToTelephone;
+                        txtConfigDeliveryToEmail.Text = shipmateConfig.DeliveryToEmail;
+                        txtConfigDeliveryToCity.Text = shipmateConfig.DeliveryToCity;
+                        txtConfigDeliveryToPostcode.Text = shipmateConfig.DeliveryToPostcode;
+                        txtConfigDeliveryToCountry.Text = shipmateConfig.DeliveryToCountry;
+                    }
+                }
+            }
+        }
+
+        protected void btnEditConfig_Click(object sender, EventArgs e)
+        {
+            configState.Value = "ConfigEdit";
+        }
+
+        protected void btnSaveConfig_Click(object sender, EventArgs e)
+        {
+            Shipmate shipmate = new Shipmate();
+
+            shipmate.SetConfig(txtConfigClientId.Text,
+                txtConfigShipmateUsername.Text, 
+                txtConfigShipmatePassword.Text,
+                txtConfigShipmateToken.Text,
+                txtConfigShipmateServiceKey.Text,
+                txtConfigShipmateBaseUrl.Text,
+                txtConfigCarrierTrackAndTraceUrl.Text,
+                txtConfigDeliveryToName.Text,
+                txtConfigDeliveryToLine1.Text,
+                txtConfigDeliveryToLine2.Text,
+                txtConfigDeliveryToLine3.Text,
+                txtConfigDeliveryToCompanyName.Text,
+                txtConfigDeliveryToTelephone.Text,
+                txtConfigDeliveryToEmail.Text,
+                txtConfigDeliveryToCity.Text,
+                txtConfigDeliveryToPostcode.Text,
+                txtConfigDeliveryToCountry.Text);
+
+            configState.Value = "ConfigEditAvailable";
+        }
+
+        protected void btnNewSearchClient_Click(object sender, EventArgs e)
+        {
+            configState.Value = "ConfigSearch";
         }
     }
 }

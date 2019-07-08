@@ -12,8 +12,9 @@ GO
 
 CREATE TABLE [dbo].[ShipmateConsignmentCreation](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[DateTimeRowInserted] [datetime] NULL,
-	[SendRequestSuccess] [bit] NULL,
+	[DateTimeRowInserted] [datetime] NOT NULL,
+	[ClientId] [varchar](50) NOT NULL,
+	[SendRequestSuccess] [bit] NOT NULL,
 	[SendRequestErrorMessage] [varchar](500) NULL,
 	[ResTrackingReference] [varchar](100) NULL,
     [LABEL_CREATED] [datetime] NULL,

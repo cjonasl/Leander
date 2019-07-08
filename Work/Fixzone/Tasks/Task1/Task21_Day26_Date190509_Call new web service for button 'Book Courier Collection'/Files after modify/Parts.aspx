@@ -179,13 +179,13 @@
                                      <br />
 
                                      <asp:LinkButton ID="linkBtnShowConsignmentDetails" runat="server" Text="Show consignment details" Font-Size="Smaller" OnCommand="linkBtnShowConsignmentDetails_Click" CommandArgument='<%#Eval("Collectionref")%>'
-                                         Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton> <br />
+                                         Visible='<%# ((bool)Eval("IsSony")) && Eval("ShipmateMediaURL") != null && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton> <br />
 
-                                     <asp:HyperLink ID="hyperLinkTNTTrackAndTraceUrl" runat="server" Text="Track" NavigateUrl='<%# ConfigurationManager.AppSettings["TNTTrackAndTraceUrl"]+Eval("Collectionref") %>' Target="_blank" 
-                                          Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink> <br />
+                                     <asp:HyperLink ID="hyperLinkTNTTrackAndTraceUrl" runat="server" Text="Track" NavigateUrl='<%# (Eval("Collectionref") != null && Eval("Collectionref") != "") ? (GetCarrierTrackAndTraceUrl(Eval("Collectionref").ToString()) + Eval("Collectionref")) : "" %>' Target="_blank" 
+                                          Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("ShipmateMediaURL") != null && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink> <br />
 
-                                     <asp:HyperLink ID="hyperLinkShowShipmateLabel" runat="server" Text="Show courier label" NavigateUrl='<%# "~/ShowShipmateLabel.aspx?TrackingReference=" + Eval("Collectionref") %>' Target="_blank" 
-                                          Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink>
+                                     <asp:HyperLink ID="hyperLinkShowShipmateLabel" runat="server" Text="Show courier label" NavigateUrl='<%# Eval("ShipmateMediaURL") %>' Target="_blank" 
+                                          Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("ShipmateMediaURL") != null && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink>
                                       <br />
                                        <%# ((bool)(Eval("IsSony")))?  (String.IsNullOrEmpty(Eval("CollectionDate").ToString().Trim())?"":"Collection booked for:"+Eval("CollectionDate","{0:d}")):"" %>
                                     
@@ -389,13 +389,13 @@
                                        <%# ((bool)(Eval("IsSony")))?  (String.IsNullOrEmpty(Eval("CollectionDate").ToString())?"":"Collection booked for:"+Eval("CollectionDate","{0:d}")):"" %>
 
                                         <asp:LinkButton ID="linkBtnShowConsignmentDetails" runat="server" Text="Show consignment details" Font-Size="Smaller" OnCommand="linkBtnShowConsignmentDetails_Click" CommandArgument='<%#Eval("Collectionref")%>'
-                                       Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton> <br />
+                                       Visible='<%# ((bool)Eval("IsSony")) && Eval("ShipmateMediaURL") != null && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:LinkButton> <br />
 
-                                       <asp:HyperLink ID="hyperLinkTNTTrackAndTraceUrl" runat="server" Text="Track" NavigateUrl='<%# ConfigurationManager.AppSettings["TNTTrackAndTraceUrl"]+Eval("Collectionref") %>' Target="_blank" 
-                                         Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink> <br />
+                                       <asp:HyperLink ID="hyperLinkTNTTrackAndTraceUrl" runat="server" Text="Track" NavigateUrl='<%# (Eval("Collectionref") != null && Eval("Collectionref") != "") ? (GetCarrierTrackAndTraceUrl(Eval("Collectionref").ToString()) + Eval("Collectionref")) : "" %>' Target="_blank" 
+                                         Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("ShipmateMediaURL") != null && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink> <br />
 
-                                       <asp:HyperLink ID="hyperLinkShowShipmateLabel" runat="server" Text="Show courier label" NavigateUrl='<%# "~/ShowShipmateLabel.aspx?TrackingReference=" + Eval("Collectionref") %>' Target="_blank" 
-                                         Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink>
+                                       <asp:HyperLink ID="hyperLinkShowShipmateLabel" runat="server" Text="Show courier label" NavigateUrl='<%# Eval("ShipmateMediaURL") %>' Target="_blank"
+                                         Font-Size="Smaller" Visible='<%# ((bool)Eval("IsSony")) && Eval("ShipmateMediaURL") != null && Eval("Collectionref") != null && Eval("Collectionref") != "" %>'></asp:HyperLink>
 
                                          <%--    <%} %>--%>
                                          </div>  <div  class="pull-right" style="width:270px">

@@ -256,6 +256,7 @@ namespace Mobile.Portal.DAL
             rma.ClientRef = row["ClientRef"]==null?"":row["ClientRef"].ToString();
             rma.INPUT_sonNumber = row["INPUT_sonNumber"] == null ? "" : row["INPUT_sonNumber"].ToString();
             rma.INPUT_PartNumber = row["INPUT_PartNumber"]==null?"": row["INPUT_PartNumber"].ToString();
+            rma.ShipmateMediaURL = row["ShipmateMediaURL"] == null ? string.Empty : row["ShipmateMediaURL"].ToString();
             try
             {
                 rma.Partdesc = row["Partdesc"] == null ? "" : row["Partdesc"].ToString();
