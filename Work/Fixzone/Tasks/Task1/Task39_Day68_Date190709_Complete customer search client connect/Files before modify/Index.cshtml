@@ -1,0 +1,64 @@
+﻿@using ClientConnect.Infrastructure
+@using ClientConnect.Process
+@{
+    ViewBag.Title = "Main page";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $('#AdvSearch').click( function (e){
+            e.preventDefault();
+            window.location.href = '@Url.Action("AdvSearch", "Job")';
+        })
+
+</script>
+
+    }
+    <div class="cols cols3">
+
+         <div class="col prod-search">		
+        @Html.Partial("~/Views/Product/_ProductSearchHeader.cshtml")
+    </div>
+        <div class="col job-search">
+        @Html.Partial("~/Views/Job/_JobSearchHeader.cshtml")
+    </div>
+       <div class="col job-search">
+        @Html.Partial("~/Views/Customer/_CustomerSearchHeader.cshtml")
+    </div>
+        </div>
+
+
+@*@if (ViewBag.IsStoreSet)
+{
+   
+          @Html.Partial("~/Views/JobStatus/JobStatuses.cshtml", (ClientConnect.ViewModels.JobStatuses.JobStatus_Model) ViewBag.JobStatus)
+  
+    }*@
+<div class="cols cols2">
+    <div class="col prod-search">		
+		
+    </div>
+
+   @* <div class="col job-search">
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+         
+        { 
+            if(!(ViewBag.SuperAdmin==true) )
+        {<a class="button bbg " style="float: left;      position: relative;      left: 35%;" href="/Job/RepeatedJobs">Unapproved jobs</a>
+            <a class="button bbg pull-right" href="/Job/FindNotBookedJobs">Unconfirmed Jobs</a>
+            }
+        }
+    </div>*@
+</div>
+
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <div class="cols cols2 foot-actions">
+        <div class="col2">
+            <a class="button bbg" href="@Url.Process(PredefinedProcess.Administration)">Administration</a>
+        @*   <a class="button bbg" href="/AdminJobStatus/AdminJobsStatistics">Jobs Statistics</a>
+          <a class="button bbg" href="/View/Reports" target="_blank">MI Reports</a>
+           <a class="button bbg" href="#">Import file</a>*@
+        </div>
+    </div>
+}

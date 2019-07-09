@@ -1,0 +1,5 @@
+﻿Task39:
+
+Modify files:
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Home\Index.cshtml
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\_CustomerSearchHeader.cshtml

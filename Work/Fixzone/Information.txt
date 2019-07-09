@@ -1,4 +1,6 @@
 ﻿Client connect
+http://www.gdjfjhccbyuhdjjfdjfh.com/Account/SignIn
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect
 Delphi side: Terminal server, then remote desktop to server PG-DUR-FSERVER, then go to E:\CompleteService\LitmusDemo\bin, program "service" (Username: FIXZONE, password: toothblue)
 Username: Jonas.Leander
 Password: Leeds#6231

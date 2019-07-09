@@ -1,0 +1,45 @@
+﻿136
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-09 16:03:52
+
+----- New property -----
+
+Task39_Day68_Date190709_Complete customer search client connect
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task39_Day68_Date190709_Complete customer search client connect
+
+----- New property -----
+
+null
