@@ -1,0 +1,79 @@
+﻿@using ClientConnect.Customer
+@using PagedList
+@using PagedList.Mvc
+@model Customer_SearchModel
+@{
+    ViewBag.Title = "Job search.";
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+           @* $('#AdvSearch').click(function (e) {
+                e.preventDefault();
+                window.location.href = '@Url.Action("AdvSearch", "Customer")';
+        })*@
+            $(".AnchorCustomer").click(function (e) {
+                e.preventDefault();
+                var id = $(this).attr('href');
+               
+                window.location.href = "/Customer/CustomerDetails/?id=" + id;
+
+            })
+
+        })
+
+        </script>
+    }
+
+
+<div class="cols cols2">
+    <div class="col2 job-search">
+        @Html.Partial("~/Views/Customer/_CustomerSearchAHeader.cshtml", Model.SearchCriteria)
+    </div>
+
+
+    <div class="col2">
+        @if (Model.SearchResults.Count > 0)
+        {
+            <table>
+                <thead>
+                    <th>Customer Name</th>
+                    <th>Created on</th>
+                   
+                    <th>Address</th>
+                    <th>Postcode</th>
+                    <th>Retailer</th>
+                    <th>Client</th>
+
+                </thead>
+                @foreach (var Customer in Model.SearchResults)
+                {
+                    <tr>
+                        <td><a href="@Customer.CustomerId" class="AnchorCustomer"><strong>@Customer.CustomerName                   </strong>     </a></td>
+                       <td>@Customer.Logged.ToString("dd/MM/yy")</td>
+                         @*<td>@job.CustomerName</td>*@
+                        <td>@Customer.Address</td>
+                        <td>@Customer.Postcode</td>
+                        <td>@Customer.RetailClientName</td>
+                        <td>@String.Format("{0} {1}", Customer.StoreName, (Customer.StoreId == 0) ? "" : ("(" + Customer.StoreId.ToString() + ")"))</td>
+
+                    </tr>
+                }
+            </table>
+	
+            <div class="col2 search-show-items">
+                Showing items @Model.FirstItemIndex-@Model.LastItemIndex (@Model.TotalRecords) 
+                    @if (ViewBag.OnePageOfJobs != null)
+                    {  <span class="pull-right">
+                        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfJobs, page => Url.Action("AdvSearch", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                    </span>
+                    }
+            </div>
+        }
+        else
+        {
+            <p class="error">No Customer match for this criteria</p>
+        }
+    </div>
+</div>

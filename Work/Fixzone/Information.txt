@@ -1,4 +1,12 @@
-﻿Client connect
+﻿Location database triggers:
+C:\Jonas\SVN\ClientConnect_CustomerConnectWeb\Database\SD\Triggers
+
+Test website vulnerabilities:
+https://qualysguard.qualys.eu/portal-front/
+Username: fxzne-tf
+Password: Rttk3oi8w
+
+Client connect
 http://www.gdjfjhccbyuhdjjfdjfh.com/Account/SignIn
 C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect
 Delphi side: Terminal server, then remote desktop to server PG-DUR-FSERVER, then go to E:\CompleteService\LitmusDemo\bin, program "service" (Username: FIXZONE, password: toothblue)

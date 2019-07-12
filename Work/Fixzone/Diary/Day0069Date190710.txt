@@ -1,2 +1,9 @@
 ﻿Dag 69:
 Onsdag den 10 juli 2019
+Angela var tillbaka efter knappt två veckor semester. Hon
+hade varit i Kenya. Hälsade på en nyanställd som ska arbeta
+med Delphi. Jag ägnade hela arbetsdagen åt task39 (Complete
+customer search client connect). Jag blev så gott som klar
+(det återstår att checka in i SVN). Intog smörgås och banan
+till lunch ca. kl. 13.00. Jag avslutade arbetsdagen ca. kl.
+17.45 och promenerade hem.

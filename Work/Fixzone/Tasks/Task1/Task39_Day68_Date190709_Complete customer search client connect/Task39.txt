@@ -1,5 +1,14 @@
 ﻿Task39:
 
-Modify files:
-C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Home\Index.cshtml
+Modify files (checked in 2019-07-11, revision 11259)
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Controllers\CustomerController.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Models\Customer\CustomerSessionModel.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Process\PredefinedProcess.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Repositories\CustomerRepository.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Services\CustomerService.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\ViewModels\Customer\Customer_SearchModel.cs
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\_CustomerSearchAHeader.cshtml
 C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\_CustomerSearchHeader.cshtml
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\AdvSearch.cshtml
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\Search.cshtml
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Home\Index.cshtml
