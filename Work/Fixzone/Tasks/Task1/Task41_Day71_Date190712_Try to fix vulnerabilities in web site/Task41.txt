@@ -1,0 +1,18 @@
+﻿Task41:
+
+----- Information from Mark on Slack 2019-07-11 --------
+https://qualysguard.qualys.eu/portal-front/
+Uid: fxzne-tf
+Pwd: Rttk3oi8w
+
+Login info for the Very web application
+https://www.productprotection.very.co.uk
+mary@fixzone.com
+sd21smsd
+1234 - account number
+
+Test site: https://howdenscc.fieldengineer.co.uk
+
+To access live Veri IIS server
+1. Log in to hrg.fieldenghineer.co.uk (password: spat-X11)
+2. Log in to box "clientweb01" (username: hrg\fixzone-jonas, password: spat-X11)

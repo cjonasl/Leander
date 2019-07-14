@@ -2715,3 +2715,63 @@ Task39_Day68_Date190709_Complete customer search client connect
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+137
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-12 10:00:30
+
+----- New property -----
+
+Task40_Day71_Date190712_Send trigger sql 13 49 73 74 to Angela
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+138
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-12 10:29:26
+
+----- New property -----
+
+Task41_Day71_Date190712_Try to fix vulnerabilities in web site
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+139
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-12 10:55:05
+
+----- New property -----
+
+Task42_Day71_Date190712_Warranty Online Policy Connect changes
+
+----- New property -----
+
+Task,Fixzone

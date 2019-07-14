@@ -1,0 +1,45 @@
+﻿137
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-12 10:00:30
+
+----- New property -----
+
+Task40_Day71_Date190712_Send trigger sql 13 49 73 74 to Angela
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task40_Day71_Date190712_Send trigger sql 13 49 73 74 to Angela
+
+----- New property -----
+
+null

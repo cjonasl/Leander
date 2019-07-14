@@ -1,0 +1,13 @@
+﻿Dag 71:
+Fredag den 12 juli 2019
+Skickade ett worddokument till Angela med trigger sql för ID
+13, 49, 73 och 74, vilket hon bad om igår (jag dokumenterade
+uppgiften i task40). Skapade task41 för att försöka åtgärda
+tre säkerhetshål enligt en rapport för webplats productprotection.very.co.uk
+och sedan arbetade jag med det. Mellan ca. kl. 15.00 och 16.30
+var jag med på ett telefonmöte om nyutveckling i ”Warranty online”
+(jag lyssnade dock bara). Jag skapade task42 för det hela och
+sparade en specifikation, ”Retra.pdf”, som Angela hade mailat.
+Jag avslutade arbetsdagen ca. kl. 17.30. Jag gick till Angelas
+rum och sa ”trevlig helg” och där var också Brian med sin fru
+som var på besök och jag hälsade på henne.

@@ -1,0 +1,45 @@
+﻿139
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-12 10:55:05
+
+----- New property -----
+
+Task42_Day71_Date190712_Warranty Online Policy Connect changes
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task42_Day71_Date190712_Warranty Online Policy Connect changes
+
+----- New property -----
+
+null
