@@ -21,7 +21,7 @@ namespace Sudoku
             int[][][] candidates, squareCellToRowColumnMapper;
             int maxNumberOfAttemptsToSolveSudoku, numberOfAttemptsToSolveSudoku;
             int numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, numberOfCandidates;
-            int row, column, square, number, numberOfCandidatesInCell, i, j;
+            int row = 0, column = 0, square = 0, number = 0, numberOfCandidatesInCell, i, j;
             bool sudokuSolved, numbersAddedWithCertaintyAndThenNoCandidates, foundNumberToSet;
             Random random;
             string errorMessage, message;
@@ -473,8 +473,7 @@ namespace Sudoku
                 {
                     index = i;
                     returnValue = 1;
-                }
-                    
+                }                
                 else
                     i++;
             }
@@ -567,7 +566,7 @@ namespace Sudoku
         {
             to.Clear();
 
-            for(int i = 0; i < from.Count; i++)
+            for (int i = 0; i < from.Count; i++)
             {
                 to.Add(from[i]);
             }

@@ -1,4 +1,6 @@
-﻿Location database triggers:
+﻿Argos live site: http://hrg.fieldengineer.co.uk/User/SignIn/
+
+Location database triggers:
 C:\Jonas\SVN\ClientConnect_CustomerConnectWeb\Database\SD\Triggers
 
 Test website vulnerabilities:
