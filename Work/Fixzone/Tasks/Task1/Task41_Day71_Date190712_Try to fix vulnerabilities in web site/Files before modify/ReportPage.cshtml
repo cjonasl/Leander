@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Repair Instructions.";
+}
+
+@section Scripts
+{
+
+    <script src="viewer.js"></script>
+    <script type="text/javascript">
+        var buttons = new Buttons();
+        $(buttons.back_BtnId).addClass("hide");
+
+        window.onload = function () {
+            $("#report").html(
+                 //"<iframe src=\"/Content/web/compressed.tracemonkey-pldi-09.pdf\"></iframe>");
+                "<iframe src=\"@Url.Action(ViewBag.ActionName, ViewBag.ControllerName, new{serviceId = ViewBag.ServiceId, modelId = ViewBag.ModelId})\" class=\"report-window\" onload=\"on_load()\" type=\"application/pdf\">" +
+                    "</iframe>"
+            );
+        };
+
+        function on_load() {
+            $("#loading-indicator").attr("class", 'hide');
+        }
+    </script>
+
+
+}
+
+<form action="" id="printForm">
+
+
+    <div class="section section__full">
+        <div class="section__box">
+
+            <span class="section__heading">Booking report</span>
+
+            <div class="section__content">
+                <span class="message">Customer repair number <span><input value="@ViewBag.ServiceId" readonly="true" /></span></span>
+                <img src="/Content/Images/loading_animation.gif" id="loading-indicator" class="loading-indicator" />
+
+                <div id="report">
+
+                </div>
+
+                <h2>Next Steps</h2>
+                @ViewBag.NextStep
+            </div>
+
+        </div>
+</form>

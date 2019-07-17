@@ -1,0 +1,262 @@
+﻿@using System.Web.Optimization
+@using CAST.Products
+@model CAST.Products.Product_DetailModel
+@{
+    ViewBag.Title = "Product details.";
+}
+
+@section Scripts{
+    @*  @Scripts.Render("~/scripts/layout-js")
+
+        <script src="/js/dialog_new2.js"></script>
+        <script src="/js/dialogs.factory.js"></script>
+        <script src="/js/diagnostic.new.js"></script>*@
+    @Scripts.Render("~/scripts/alternative-products-js")
+    <script src="/Scripts/EditToolbar.js"></script>
+    <script src="/Scripts/ResponsiveHeightCaption.js"></script>
+
+    <script type="text/javascript">
+
+      @*  $(function () {*@
+        $(buttons.back_BtnId).click(function (e) {
+            e.preventDefault();
+            // alert(window.location.href);
+            window.location.href = '@Url.Action("Details", "Customer")';
+
+            });
+        @* var mobileNo = @Html.Raw(Json.Encode(Model.MobileTel));
+        var landLine = @Html.Raw(Json.Encode(Model.LandlineTel));
+        var tel3 = @Html.Raw(Json.Encode(Model.Tel3));
+        $.ajax({
+            async: false,
+            url: "/Customer/ValidatePhones",
+            type: 'GET',
+            data: {
+                Mobile: mobileNo,
+                Landiline: landLine,
+                Tel3: tel3*@
+        //lkSetup
+
+        $("#lkSetup").click(function (event) {
+            //  alert("ddfd");
+            event.preventDefault();
+
+            var dialog = new Dialog({
+                height: 'auto',
+
+                width: '600',
+                title: 'Product Support',
+                containerId: '#edit-form',
+                contentPath: '/Product/SupportSetup/',
+
+                closeIcon: '',
+                buttons: [{
+                    text: "close", "class": "button button-secondary no-btn pull-right",
+                    click: function () {
+
+                        var url = "/Product/ShowDetails";
+                        window.location.href = url;
+                    }
+
+                }],
+                refreshPageAfterClose: false
+            });
+
+
+
+
+            var options = {
+                target: '#edit-form'
+            };
+            $('#edit-form form').ajaxForm(options);
+            dialog.show();
+        })
+
+        $("#lkHints").click(function (event) {
+            //  alert("ddfd");
+            event.preventDefault();
+
+            var dialog =new Dialog({
+                height: 'auto',
+
+                width: '600',
+                title: 'Product Support',
+                containerId: '#edit-form',
+                contentPath: '/Product/SupportContents/',
+
+                closeIcon: '',
+                buttons: [ {
+                    text: "close", "class": "button button-secondary no-btn pull-right",
+                        click: function () {
+
+                            var url = "/Product/ShowDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+            });
+
+
+
+
+             var options = {
+                 target: '#edit-form'
+             };
+             $('#edit-form form').ajaxForm(options);
+             dialog.show();
+         })
+
+        $("#txtTest").click(function (event) {
+            event.preventDefault();
+
+            $("#divSupport").dialog();
+            // alert("add note");
+
+            var options = {
+                target: '#edit-form'
+            };
+            $('#edit-form form').ajaxForm(options);
+            dialog.show();
+        });
+
+        $("#show-notification-sms").click(function () {
+            /*dialog init*/
+            var smsDialog = new Dialog({
+                height: '300',
+                width: '600',
+                title: 'Sms sending...',
+                containerId: '#sms-container-form',
+                contentPath: '/Product/SendSmsNotification',
+                closeIcon: ''
+            });
+            smsDialog.show();
+        });
+
+        $("#show-notification-email").click(function () {
+            /*dialog init*/
+            var smsDialog = new Dialog({
+                height: '300',
+                width: '600',
+                title: 'Email sending...',
+                containerId: '#email-container-form',
+                contentPath: '/Product/SendEmailNotification',
+                closeIcon: ''
+            });
+            smsDialog.show();
+        });
+
+
+
+    </script>
+}
+
+
+<div class="section section__split">
+    <div class="section__box">
+
+        <span class="section__heading">
+            Electrical Item details
+
+            @if (Model.AlternativeFlag)
+            {
+            <button type="button" class="button alternative-product" value="@Model.ModelId">Alternatives</button>
+            }
+            @{
+                if (!Model.IsCallCenter)
+                {
+                <a class="" href="@Url.Action("ShowDetailsReport", new { Model.ModelId })" title="Print">
+                    <span aria-hidden="true" class="" title="Print"></span>
+                </a>
+                }
+            }
+        </span>
+
+        <div class="section__content">
+
+            <table class="data__simple">
+                <tr>
+                    <td colspan="2">
+                        @if (null != Model.ImageFileName)
+                        {
+                        <img src="@Url.Content(Model.ImageFileName)" alt="..." />
+                        }
+                        else
+                        {
+                        <img src="@Url.Content("../../Content/img/NoImg.png")" alt="..." />
+
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Model Number</th>
+                    <td>
+                        @Model.ItemCode
+                        @{
+                            if (!String.IsNullOrEmpty(Model.ModelPnc))
+                            {
+                            @:(@Model.ModelPnc)
+		                    }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>@Model.Description </td>
+                </tr>
+                <tr>
+                    <th>Brand</th>
+                    <td>@Model.ManufactName</td>
+                </tr>
+
+                <tr>
+                    <th>Serial number</th>
+                    <td>@Model.SerialNumber</td>
+                </tr>
+
+
+                <tr>
+                    <th>Warranty Description</th>
+                    <td>@Model.GuaranteeName</td>
+                </tr>
+
+                <tr>
+                    <th>Date of purchase</th>
+                    <td>@("01/01/0001" != @Model.DateOfPurchase.ToShortDateString() ? @Model.DateOfPurchase.ToShortDateString() : "//")</td>
+                </tr>
+                <tr>
+                    <th>Agreement Number</th>
+                    <td>@(null != @Model.PolicyNumber ? @Model.PolicyNumber : "N/A")</td>
+                </tr>
+                <tr>
+                    <th>Warranty Start Date</th>
+                    <td>@(null != @Model.CONTRACTSTART ? @Model.CONTRACTSTART.Value.ToShortDateString() : "//")</td>
+                </tr>
+                <tr>
+                    <th>Warranty Expiry Date</th>
+                    <td>@(null != @Model.CONTRACTEXPIRES ? @Model.CONTRACTEXPIRES.Value.ToShortDateString() : "//")</td>
+                </tr>
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    @Html.Partial("_ProductDetailsServiceAvailable", Model)
+
+
+
+
+</div>
+
+
+
+<div id="edit-form"></div>
+
+
+
+
+

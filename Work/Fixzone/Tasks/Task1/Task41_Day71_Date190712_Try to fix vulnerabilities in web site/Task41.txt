@@ -1,5 +1,22 @@
 ﻿Task41:
 
+Customer Connect, modify the following files:
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Administration\AccountInfo.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\ReportPage.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Customer\Details.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Customer\JobDetails.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Job\CustomerDetails.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Job\JobDetails.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Job\JobNotes.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Logs\ConnectLogLogs.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Logs\FileLogs.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Map\MapRoute.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Product\ShowDetails.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\RequestDate.cshtml
+C:\Jonas\SVN\AAA\CustomerConnect\ViewModels\Product\Product_InfoModel.cs
+
+
+
 ----- Information from Mark on Slack 2019-07-11 --------
 https://qualysguard.qualys.eu/portal-front/
 Uid: fxzne-tf

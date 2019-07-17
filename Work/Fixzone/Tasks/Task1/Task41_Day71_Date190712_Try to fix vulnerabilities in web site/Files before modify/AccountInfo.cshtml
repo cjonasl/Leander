@@ -1,0 +1,132 @@
+﻿@using CAST.Services
+@model CAST.ViewModels.Administration.AccountDetails
+
+@{
+    ViewBag.Title = "User Details.";
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("/Scripts/EditToolbar.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#delete-user-form").dialog(parameterDialogFactory("account-delete-dialog"));
+            $("#delete-user-form .no-btn").click(function () { closeAllDialogs(); });
+            $("#delete-btn").click(function() {
+                $("#delete-user-form").dialog("open");
+            });
+
+            //customer toolbar
+            var userEditToolbar = new EditToolbar('.toolbar');
+            userEditToolbar.onEditFunction = function () {
+                userEditToolbar.toEditMode();
+                $.ajax({
+                    type: "GET",
+                    url: "/Administration/AccountEdit",
+                    data: { userId: "@Model.UserId" },
+                    success: function (result) {
+                        $("#user-info").html(result);
+                    }
+                });
+            };
+
+            userEditToolbar.onSaveFunction = function () {
+                var options = {
+                    target: '#user-info',   // target element(s) to be updated with server response
+                };
+                $('#user-info form').ajaxSubmit(options);
+            };
+
+            userEditToolbar.onCancelFunction = function() {
+                window.location.reload();
+            };
+
+        })
+    </script>
+}
+
+<div class="section section__full">
+    <div class="section__box">
+
+        <span class="section__heading">User Information</span>
+
+        <div class="section__content">
+
+            <span>@Html.Partial("~/Views/Job/_EditToolbar.cshtml")</span>
+
+            <table class="data__stack" id="user-info">
+                <tr>
+                    <td class="data__title">User ID</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Model.UserId
+                    </td>
+                </tr>
+                <tr>
+                    <td class="data__title">Name</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Model.UserName
+                    </td>
+                </tr>
+                <tr>
+                    <td class="data__title">Level</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Model.AccesLevelName
+                    </td>
+                </tr>
+                <tr>
+                    <td class="data__title">Enabled</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.CheckBoxFor(model => model.IsEnabled, new { @class = "readonly", @disabled = "disabled" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="data__title">Date of Birth</td>
+                </tr>
+                <tr>
+                    <td>
+                        @(Functions.DateTimeToString(Model.DateOfBirth))
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" value="Delete" id="delete-btn" class="button" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="success">@ViewBag.Success</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@using (Html.BeginForm("DeleteUser", "Administration", FormMethod.Post, new { @id = "delete-user-form" }))
+{
+@Html.HiddenFor(x => x.UserId)
+<div id="confirm-dialog-delete-user" class="popup" title="Confirm deleting">
+    <span class="message">Are you sure you want to delete user?</span>
+</div>
+
+<div class="success">@ViewBag.Success</div>
+<div class="error">@ViewBag.Error</div>
+
+<div>
+    @if (string.IsNullOrEmpty(ViewBag.Success))
+        {
+    <button type="submit" class="button yes-btn">Yes</button>
+    <input type="button" class="button button-secondary no-btn" value="No" />
+        }
+</div>
+}

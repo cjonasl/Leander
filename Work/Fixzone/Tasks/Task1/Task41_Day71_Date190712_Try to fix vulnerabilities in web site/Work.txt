@@ -1,0 +1,52 @@
+C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\RequestDate.cshtml
+<link href="@Url.Content("/Content/css/datepicker.css")" rel="stylesheet" type="text/css" />
+
+AccountInfo
+<script src="@Url.Content("/Scripts/EditToolbar.js")"></script>
+
+ReportPage
+<script src="viewer.js"></script>
+
+Details
+<script src="@Url.Content("/Scripts/EditToolbar.js")"></script>
+<script src="@Url.Content("/Scripts/ResponsiveHeightCaption.js")"></script>
+
+Customer\JobDetails
+<script src="@Url.Content("~/Scripts/EditToolbar.js")"></script>
+
+CustomerDetails
+<script src="@Url.Content("~/Scripts/EditToolbar.js")"></script>
+
+Job\JobDetails
+<script src="@Url.Content("~/Scripts/EditToolbar.js")"></script>
+<script src="/Scripts/ResponsiveHeightCaption.js"></script>
+
+JobNotes
+<link href="~/Content/css/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Script/jqGrid/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.0.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.9.0.min.js"></script>
+<script src="~/Scripts/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/JobNotes.js"></script>
+
+Log\ConnectLogLogs.cshtml
+<script src="@Url.Content("~/Scripts/jquery.shorten.js")"></script>
+<script src="/Scripts/jquery.responsiveTabs.js"></script>
+
+Log\FileLogs.cshtml
+<script src="@Url.Content("~/Scripts/jquery.shorten.js")"></script>
+@section Styles
+{
+    <link href="@Url.Content("/Content/css/tabs.css")" rel="stylesheet" />
+}
+
+
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Map\MapRoute.cshtml
+<script type="text/javascript" src="~/scripts/eploy.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="~/scripts/mapRouteScript.js"></script>
+<link rel="stylesheet" type="text/css" src="~/style.css">
+
+C:\Jonas\SVN\AAA\CustomerConnect\Views\Product\ShowDetails.cshtml
+<script src="/Scripts/EditToolbar.js"></script>
+<script src="/Scripts/ResponsiveHeightCaption.js"></script>
