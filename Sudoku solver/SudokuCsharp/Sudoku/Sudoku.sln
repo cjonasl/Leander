@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku", "Sudoku\Sudoku.csproj", "{C8B24B56-EC71-4DD2-94A8-A146DFD3DA8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidateInputSudokuBoards", "ValidateInputSudokuBoards\ValidateInputSudokuBoards.csproj", "{D333C91C-BBB3-4994-87C6-EDDD5B8010CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C8B24B56-EC71-4DD2-94A8-A146DFD3DA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B24B56-EC71-4DD2-94A8-A146DFD3DA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B24B56-EC71-4DD2-94A8-A146DFD3DA8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D333C91C-BBB3-4994-87C6-EDDD5B8010CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D333C91C-BBB3-4994-87C6-EDDD5B8010CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D333C91C-BBB3-4994-87C6-EDDD5B8010CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D333C91C-BBB3-4994-87C6-EDDD5B8010CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

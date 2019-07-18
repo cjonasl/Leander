@@ -17,43 +17,33 @@ namespace Sudoku
     {
         public static void Run(string[] args)
         {
-            int[][] workingSudokuBoard, certaintySudokuBoard, bestSoFarSudokuBoard;
+            int row = 0, column = 0, number, i;
+            int[][] certaintySudokuBoard = null;
+            int[][] workingSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
+            int[][]  bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
             int[][][] candidates, squareCellToRowColumnMapper;
-            int maxNumberOfAttemptsToSolveSudoku, numberOfAttemptsToSolveSudoku;
-            int numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, numberOfCandidates;
-            int row = 0, column = 0, square = 0, number = 0, numberOfCandidatesInCell, i, j;
-            bool sudokuSolved, numbersAddedWithCertaintyAndThenNoCandidates, foundNumberToSet;
-            Random random;
-            string errorMessage, message;
-            ArrayList cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty; //Lists with two-tuples of int
+            int maxNumberOfAttemptsToSolveSudoku = 25, numberOfAttemptsToSolveSudoku = 0;
+            int numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar = 0, numberOfCandidates;
+            bool sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
+            Random random = new Random((int)(DateTime.Now.Ticks % 64765L));
+            string msg;
+            ArrayList cellsRemainToSet = new ArrayList();
+            ArrayList cellsRemainToSetAfterAddedNumbersWithCertainty = null;
 
-            //Init
-            row = column = number = numberOfCellsSetInBestSoFar = 0;
-            certaintySudokuBoard = null;
-            bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
-            cellsRemainToSetAfterAddedNumbersWithCertainty = null;
-            maxNumberOfAttemptsToSolveSudoku = 10;
-            numberOfAttemptsToSolveSudoku = 0;
-            sudokuSolved = false;
-            numbersAddedWithCertaintyAndThenNoCandidates = false;
-            workingSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
-            cellsRemainToSet = new ArrayList();           
-            random = new Random((int)(DateTime.Now.Ticks % 64765L));
+            msg = GetInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
 
-            errorMessage = GetInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
-
-            if (errorMessage != null)
+            if (msg != null)
             {
-                Console.Write(errorMessage);
+                Console.Write(msg);
                 return;
             }
 
             squareCellToRowColumnMapper = ReturnSquareToCellMapper();
-            errorMessage = ValidateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
+            msg = ValidateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
 
-            if (errorMessage != null)
+            if (msg != null)
             {
-                Console.Write(errorMessage);
+                Console.Write(msg);
                 return;
             }
 
@@ -85,44 +75,18 @@ namespace Sudoku
 
                 while (numberOfCandidates > 0)
                 {
-                    foundNumberToSet = false;
+                    number = 0;
                     i = 0;
 
-                    while (i < cellsRemainToSet.Count && !foundNumberToSet)
+                    while (i < cellsRemainToSet.Count && number == 0)
                     {
                         row = ((int[])cellsRemainToSet[i])[0];
                         column = ((int[])cellsRemainToSet[i])[1];
-                        square = ReturnSquare(row, column);
-                        numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
-
-                        if (numberOfCandidatesInCell == 1)
-                        {
-                            number = candidates[row - 1][column - 1][1];
-                            foundNumberToSet = true;
-                        }
-                        else
-                        {
-                            j = 1;
-                            while (j <= numberOfCandidatesInCell && !foundNumberToSet)
-                            {
-                                number = candidates[row - 1][column - 1][j];
-
-                                if (NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, row, Target.Row))
-                                    foundNumberToSet = true;
-                                else if (NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, column, Target.Column))
-                                    foundNumberToSet = true;
-                                else if (NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, square, Target.Square))
-                                    foundNumberToSet = true;
-                                else
-                                    j++;
-                            }
-                        }
-
-                        if (!foundNumberToSet)
-                            i++;
+                        number = TryFindNumberToSetInCellWithCertainty(row, column, candidates, squareCellToRowColumnMapper);
+                        i = (number == 0) ? i + 1 : i;
                     }
 
-                    if (!foundNumberToSet)
+                    if (number != 0)
                     {
                         SimulateOneNumber(candidates, random, cellsRemainToSet, out i, out number);
                         row = ((int[])cellsRemainToSet[i])[0];
@@ -157,15 +121,14 @@ namespace Sudoku
             }
 
             if (numberOfCellsSetInBestSoFar == 81)
-                message = string.Format("The sudoku was solved. {0} numbers added to the original {1}", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
+                msg = string.Format("The sudoku was solved. {0} numbers added to the original {1}", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
             else
-                message = string.Format("The sudoku was partially solved. {0} numbers added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
+                msg = string.Format("The sudoku was partially solved. {0} numbers added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
 
-            PrintSudokuBoard(numberOfCellsSetInBestSoFar == 81 ? true : false, args, message, bestSoFarSudokuBoard);
+            PrintSudokuBoard(numberOfCellsSetInBestSoFar == 81 ? true : false, args, msg, bestSoFarSudokuBoard);
 
-            Console.Write(message);
+            Console.Write(msg);
         }
-
 
         private static void CopySudokuBoard(int[][] sudokuBoardFrom, int[][] sudokuBoardTo)
         {
@@ -310,6 +273,38 @@ namespace Sudoku
             }
 
             return v;
+        }
+
+        private static int TryFindNumberToSetInCellWithCertainty(int row, int column, int[][][] candidates, int[][][] squareCellToRowColumnMapper)
+        {
+            int i, square, numberOfCandidatesInCell, number = 0;
+            bool foundNumberToSet = false;
+
+            square = ReturnSquare(row, column);
+            numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
+
+            if (numberOfCandidatesInCell == 1)
+            {
+                number = candidates[row - 1][column - 1][1];
+                foundNumberToSet = true;
+            }
+            else
+            {
+                i = 1;
+                while (i <= numberOfCandidatesInCell && !foundNumberToSet)
+                {
+                    number = candidates[row - 1][column - 1][i];
+
+                    if (NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, row, Target.Row) ||
+                        NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, column, Target.Column) ||
+                        NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, square, Target.Square))                
+                        foundNumberToSet = true;
+                    else
+                        i++;
+                }
+            }
+
+            return number;
         }
 
         private static int ReturnNumberOfOccurenciesOfNumber(int[][] sudokuBoard, int[][][] squareCellToRowColumnMapper, int number, int t, Target target) //t refers to a row, column or square

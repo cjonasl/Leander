@@ -1,2 +1,9 @@
 ﻿Dag 73:
 Tisdag den 16 juli 2019
+Jag ägnade arbetsdagen åt att gå igenom hur js- och css-
+filer hanteras i webbplats ”Customer Connet” i syfte att
+försöka minska antal säkerhetshål (task41). Om det fanns
+möjlighet la jag in dem in en bundle. Intog kaffe, smörgås
+och banan till lunch ca. kl. 13.00. Jag avslutade arbetsdagen
+ca. kl. 17.45 och gick till M&S och handlade för 13 pund,
+bl.a. oliver, hallon och blåbär.

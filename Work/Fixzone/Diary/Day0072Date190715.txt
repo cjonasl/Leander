@@ -1,2 +1,24 @@
 ﻿Dag 72:
 Måndag den 15 juli 2019
+Arbetade med task41 (Try to fix vulnerabilities in web
+site). Jag gick in på Fixzones konto hos Qualys och
+skapade ett nytt projekt som pekade på min testwebbplats
+för productprotection.very.co.uk och sedan fixade jag
+med java script filer på testwebbplatsen och körde Qualys
+rapport med förhoppningen om att antal säkerhetshål
+skulle minska, men det blev tyvärr inte så. Intog
+smörgås, banan och kaffe till lunch. Jag åkte hem med
+buss drygt kl. 17.30. Jag gick ut och joggade 5.3-
+slingan ner mot Themsen. Det var soligt och fint väder.
+Duschade och därefter gick jag iväg igen. Köpte en stor
+Schweppes för 2.29 pund och sedan buss tillbaka till
+arbetet för att kl. 20.00 assistera Vijay via Skype
+med produktionssättning av vårt Argos-arbete. Jag kom
+fram knappt kl. 19.30 och hade tid att äta en sallad
+som jag hade med mig hemifrån. Vijay kontaktade mig
+sedan på Skype och hon körde på skript och jag fick
+ordna med collationfel i en stored procedure. Vijay
+bad mig testa webbplatsen med ett testkonto, vilket
+jag gjorde. En stored procedure saknades som jag la
+till ifrån testdatabasen och sedan fungerade det bra.
+Jag åkte hem med buss knappt kl. 22.00.
