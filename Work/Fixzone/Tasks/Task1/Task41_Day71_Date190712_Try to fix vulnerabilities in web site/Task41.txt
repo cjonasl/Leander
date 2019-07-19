@@ -16,6 +16,11 @@ C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\RequestDate.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\ViewModels\Product\Product_InfoModel.cs
 
 
+Connection string live Customer Connect
+<connectionStrings>
+    <add name="Database" connectionString="server=hrgsql;Initial Catalog=ShopDirect;User ID=shopdirect_prd;password=5PkM5yQb;" providerName="System.Data.SqlClient" />
+</connectionStrings>
+
 
 ----- Information from Mark on Slack 2019-07-11 --------
 https://qualysguard.qualys.eu/portal-front/

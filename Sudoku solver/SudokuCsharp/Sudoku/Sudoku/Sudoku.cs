@@ -2,7 +2,6 @@
 using System.Collections;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Sudoku
 {
@@ -15,6 +14,26 @@ namespace Sudoku
 
     public class Sudoku
     {
+        /* A total of 18 static methods in the class:
+           CopyList
+           CopySudokuBoard
+           ReturnTwoDimensionalDataStructure
+           ReturnThreeDimensionalDataStructure
+           GetInputSudokuBoard
+           ReturnSquare
+           NumberIsAloneCandidate
+           ReturnNumberOfOccurenciesOfNumber
+           RemoveNumberIfItExists
+           SimulateOneNumber
+           ReturnSudokuBoardsAsString
+           ReturnSquareCellToRowColumnMapper (Dependent on ReturnSquare)
+           TryFindNumberToSetInCellWithCertainty (Dependent on ReturnSquare, NumberIsAloneCandidate)
+           ValidateSudokuBoard (Dependent on ReturnSquare, ReturnNumberOfOccurenciesOfNumber)
+           InitCandidates (Dependent on ReturnSquare, ReturnNumberOfOccurenciesOfNumber)
+           UpdateCandidates (Dependent on ReturnSquare, RemoveNumberIfItExists)
+           PrintSudokuBoard (Dependent on ReturnSudokuBoardsAsString)
+           Run (Dependent on GetInputSudokuBoard, ValidateSudokuBoard, ReturnTwoDimensionalDataStructure, SimulateOneNumber, ReturnThreeDimensionalDataStructure, ReturnSquareCellToRowColumnMapper, InitCandidates, TryFindNumberToSetInCellWithCertainty, CopyList, CopySudokuBoard, UpdateCandidates, PrintSudokuBoard)
+        */
         public static void Run(string[] args)
         {
             int row = 0, column = 0, number, i;
@@ -38,7 +57,7 @@ namespace Sudoku
                 return;
             }
 
-            squareCellToRowColumnMapper = ReturnSquareToCellMapper();
+            squareCellToRowColumnMapper = ReturnSquareCellToRowColumnMapper();
             msg = ValidateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
 
             if (msg != null)
@@ -69,7 +88,7 @@ namespace Sudoku
                 if (numberOfAttemptsToSolveSudoku > 0)
                 {
                     CopySudokuBoard(certaintySudokuBoard, workingSudokuBoard);
-                    Copy(cellsRemainToSetAfterAddedNumbersWithCertainty, cellsRemainToSet);
+                    CopyList(cellsRemainToSetAfterAddedNumbersWithCertainty, cellsRemainToSet);
                     numberOfCandidates = InitCandidates(workingSudokuBoard, squareCellToRowColumnMapper, candidates);
                 }
 
@@ -97,7 +116,7 @@ namespace Sudoku
                             certaintySudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
                             cellsRemainToSetAfterAddedNumbersWithCertainty = new ArrayList();
                             CopySudokuBoard(workingSudokuBoard, certaintySudokuBoard);
-                            Copy(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty);
+                            CopyList(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty);
                         }
                     }
 
@@ -128,6 +147,16 @@ namespace Sudoku
             PrintSudokuBoard(numberOfCellsSetInBestSoFar == 81 ? true : false, args, msg, bestSoFarSudokuBoard);
 
             Console.Write(msg);
+        }
+
+        private static void CopyList(ArrayList from, ArrayList to)
+        {
+            to.Clear();
+
+            for (int i = 0; i < from.Count; i++)
+            {
+                to.Add(from[i]);
+            }
         }
 
         private static void CopySudokuBoard(int[][] sudokuBoardFrom, int[][] sudokuBoardTo)
@@ -246,7 +275,165 @@ namespace Sudoku
             return 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
         }
 
-        private static int[][][] ReturnSquareToCellMapper()
+        private static bool NumberIsAloneCandidate(int number, int[][][] candidates, int[][][] squareCellToRowColumnMapper, int t, Target target)
+        {
+            int row = 0, column = 0, n, i, j, numberOfOccurenciesOfNumber = 0;
+
+            for (i = 0; i < 9; i++)
+            {
+                switch (target)
+                {
+                    case Target.Row:
+                        row = t;
+                        column = i + 1;
+                        break;
+                    case Target.Column:
+                        row = i + 1;
+                        column = t;
+                        break;
+                    case Target.Square:
+                        row = squareCellToRowColumnMapper[t - 1][i][0];
+                        column = squareCellToRowColumnMapper[t - 1][i][1];
+                        break;
+                }
+
+                n = candidates[row - 1][column - 1][0];
+
+                if (n != -1)
+                {
+                    for (j = 0; j < n; j++)
+                    {
+                        if (candidates[row - 1][column - 1][1 + j] == number)
+                        {
+                            numberOfOccurenciesOfNumber++;
+
+                            if (numberOfOccurenciesOfNumber > 1)
+                                return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private static int ReturnNumberOfOccurenciesOfNumber(int[][] sudokuBoard, int[][][] squareCellToRowColumnMapper, int number, int t, Target target) //t refers to a row, column or square
+        {
+            int row = 0, column = 0, n = 0;
+
+            for (int i = 0; i < 9; i++)
+            {
+                switch (target)
+                {
+                    case Target.Row:
+                        row = t;
+                        column = i + 1;
+                        break;
+                    case Target.Column:
+                        row = i + 1;
+                        column = t;
+                        break;
+                    case Target.Square:
+                        row = squareCellToRowColumnMapper[t - 1][i][0];
+                        column = squareCellToRowColumnMapper[t - 1][i][1];
+                        break;
+                }
+
+                if (sudokuBoard[row - 1][column - 1] == number)
+                    n++;
+            }
+
+            return n;
+        }
+
+        /// <summary>
+        ///  Returns 1 if number exists, otherwise 0
+        /// </summary>
+        private static int RemoveNumberIfItExists(int[] v, int number)
+        {
+            int i, n, index = -1, returnValue = 0;
+
+            n = v[0];
+            i = 1;
+            while (i <= n && index == -1)
+            {
+                if (v[i] == number)
+                {
+                    index = i;
+                    returnValue = 1;
+                }
+                else
+                    i++;
+            }
+
+            if (index != -1)
+            {
+                while (index + 1 <= n)
+                {
+                    v[index] = v[index + 1];
+                    index++;
+                }
+
+                v[0]--;
+            }
+
+            return returnValue;
+        }
+
+        private static void SimulateOneNumber(int[][][] candidates, Random random, ArrayList cellsRemainToSet, out int index, out int number)
+        {
+            int row, column, i, minNumberOfCandidates = 9;
+            ArrayList v;
+
+            for (i = 0; i < cellsRemainToSet.Count; i++)
+            {
+                row = ((int[])cellsRemainToSet[i])[0];
+                column = ((int[])cellsRemainToSet[i])[1];
+
+                if (candidates[row - 1][column - 1][0] < minNumberOfCandidates)
+                    minNumberOfCandidates = candidates[row - 1][column - 1][0];
+            }
+
+            v = new ArrayList();
+
+            for (i = 0; i < cellsRemainToSet.Count; i++)
+            {
+                row = ((int[])cellsRemainToSet[i])[0];
+                column = ((int[])cellsRemainToSet[i])[1];
+
+                if (candidates[row - 1][column - 1][0] == minNumberOfCandidates)
+                    v.Add(i);
+            }
+
+            index = random.Next(0, v.Count);
+            row = ((int[])cellsRemainToSet[index])[0];
+            column = ((int[])cellsRemainToSet[index])[1];
+            number = candidates[row - 1][column - 1][1 + random.Next(0, minNumberOfCandidates)];
+        }
+
+        private static string ReturnSudokuBoardsAsString(int[][] sudokuBoard)
+        {
+            int row, column;
+            StringBuilder sb = new StringBuilder();
+
+            for (row = 1; row <= 9; row++)
+            {
+                if (row > 1)
+                    sb.Append("\r\n");
+
+                for (column = 1; column <= 9; column++)
+                {
+                    if (column == 1)
+                        sb.Append(sudokuBoard[row - 1][column - 1].ToString());
+                    else
+                        sb.Append(string.Format(" {0}", sudokuBoard[row - 1][column - 1].ToString()));
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private static int[][][] ReturnSquareCellToRowColumnMapper()
         {
             int[][][] v;
             int[] index;
@@ -307,34 +494,6 @@ namespace Sudoku
             return number;
         }
 
-        private static int ReturnNumberOfOccurenciesOfNumber(int[][] sudokuBoard, int[][][] squareCellToRowColumnMapper, int number, int t, Target target) //t refers to a row, column or square
-        {
-            int row = 0, column = 0, n = 0;
-
-            for (int i = 0; i < 9; i++)
-            {
-                switch(target)
-                {
-                    case Target.Row:
-                        row = t;
-                        column = i + 1;
-                        break;
-                    case Target.Column:
-                        row = i + 1;
-                        column = t;
-                        break;
-                    case Target.Square:
-                        row = squareCellToRowColumnMapper[t - 1][i][0];
-                        column = squareCellToRowColumnMapper[t - 1][i][1];
-                        break;
-                }
-
-                if (sudokuBoard[row - 1][column - 1] == number)
-                    n++;
-            }
-
-            return n;
-        }
 
         private static string ValidateSudokuBoard(int[][] sudokuBoard, int[][][] squareCellToRowColumnMapper)
         {
@@ -411,113 +570,6 @@ namespace Sudoku
             return numberOfCandidates;
         }
 
-        private static bool NumberIsAloneCandidate(int number, int[][][] candidates, int[][][] squareCellToRowColumnMapper, int t, Target target)
-        {
-            int row = 0, column = 0, n, i, j, numberOfOccurenciesOfNumber = 0;
-
-            for (i = 0; i < 9; i++)
-            {
-                switch (target)
-                {
-                    case Target.Row:
-                        row = t;
-                        column = i + 1;
-                        break;
-                    case Target.Column:
-                        row = i + 1;
-                        column = t;
-                        break;
-                    case Target.Square:
-                        row = squareCellToRowColumnMapper[t - 1][i][0];
-                        column = squareCellToRowColumnMapper[t - 1][i][1];
-                        break;
-                }
-
-                n = candidates[row - 1][column - 1][0];
-
-                if (n != -1)
-                {
-                    for (j = 0; j < n; j++)
-                    {
-                        if (candidates[row - 1][column - 1][1 + j] == number)
-                        {
-                            numberOfOccurenciesOfNumber++;
-
-                            if (numberOfOccurenciesOfNumber > 1)
-                                return false;
-                        }
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        ///  Returns 1 if number exists, otherwise 0
-        /// </summary>
-        private static int RemoveNumberIfItExists(int[] v, int number)
-        {
-            int i, n, index = -1, returnValue = 0;
-
-            n = v[0];
-            i = 1;
-            while (i <= n && index == -1)
-            {
-                if (v[i] == number)
-                {
-                    index = i;
-                    returnValue = 1;
-                }                
-                else
-                    i++;
-            }
-
-            if (index != -1)
-            {
-                while (index + 1 <= n)
-                {
-                    v[index] = v[index + 1];
-                    index++;
-                }
-
-                v[0]--;
-            }
-
-            return returnValue;
-        }
-
-        private static void SimulateOneNumber(int[][][] candidates, Random random, ArrayList cellsRemainToSet, out int index, out int number)
-        {
-            int row, column, i, minNumberOfCandidates = 9;
-            ArrayList v;
-
-            for (i = 0; i < cellsRemainToSet.Count; i++)
-            {
-                row = ((int[])cellsRemainToSet[i])[0];
-                column = ((int[])cellsRemainToSet[i])[1];
-
-                if (candidates[row - 1][column - 1][0] < minNumberOfCandidates)
-                    minNumberOfCandidates = candidates[row - 1][column - 1][0];
-            }
-
-            v = new ArrayList();
-
-            for (i = 0; i < cellsRemainToSet.Count; i++)
-            {
-                row = ((int[])cellsRemainToSet[i])[0];
-                column = ((int[])cellsRemainToSet[i])[1];
-
-                if (candidates[row - 1][column - 1][0] == minNumberOfCandidates)
-                    v.Add(i);
-            }
-
-            index = random.Next(0, v.Count);
-            row = ((int[])cellsRemainToSet[index])[0];
-            column = ((int[])cellsRemainToSet[index])[1];
-            number = candidates[row - 1][column - 1][1 + random.Next(0, minNumberOfCandidates)];
-        }
-
         private static int UpdateCandidates(int[][][] candidates, int[][][] squareCellToRowColumnMapper, int row, int column, int number)
         {
             int i, r, c, square, totalNumberOfCandidatesRemoved;
@@ -555,38 +607,6 @@ namespace Sudoku
             }
 
             return totalNumberOfCandidatesRemoved;
-        }
-
-        private static void Copy(ArrayList from, ArrayList to)
-        {
-            to.Clear();
-
-            for (int i = 0; i < from.Count; i++)
-            {
-                to.Add(from[i]);
-            }
-        }
-
-        private static string ReturnSudokuBoardsAsString(int[][] sudokuBoard)
-        {
-            int row, column;
-            StringBuilder sb = new StringBuilder();
-
-            for (row = 1; row <= 9; row++)
-            {
-                if (row > 1)
-                    sb.Append("\r\n");
-
-                for (column = 1; column <= 9; column++)
-                {
-                    if (column == 1)
-                        sb.Append(sudokuBoard[row - 1][column - 1].ToString());
-                    else
-                        sb.Append(string.Format(" {0}", sudokuBoard[row - 1][column - 1].ToString()));
-                }
-            }
-
-            return sb.ToString();
         }
 
         private static void PrintSudokuBoard(bool solved, string[] args, string message, int[][] sudokuBoard)

@@ -1,2 +1,11 @@
 ﻿Dag 74:
 Onsdag den 17 juli 2019
+Jag ägnade arbetsdagen åt task41 (Try to fix vulnerabilities in
+web site). Jag skrev bl.a. applikationen CopyOrMoveFiles.csproj
+för att automatiskt kunna kopiera in nya filer. Intog smörgås,
+banan och kaffe till lunch. Ordnade med dokument för medgivande
+av databaskontroll som alla anställda enligt ett mail förra veckan
+måste inkomma med senast denna dag. Jag fick hjälp av Kath att
+skanna in dem till ett pdf-dokument som jag mailade till Vikki
+Weston på Pacifica. Jag avslutade arbetsdagen ca. kl. 17.50 och
+promenerade hem.
