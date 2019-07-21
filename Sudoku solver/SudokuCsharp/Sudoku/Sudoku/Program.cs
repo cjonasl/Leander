@@ -10,7 +10,13 @@ namespace Sudoku
     {
         static void Main(string[] args)
         {
-            SudokuDebug.Sudoku.Run(args);
+            if (args[2] == "1")
+                SudokuMain.Sudoku.Run(args);
+            else if (args[2] == "2")
+                SudokuDebug.Sudoku.Run(args);
+            else
+                SudokuDebugOld.Sudoku.Run(args);
+
             //SudokuMarch2019.Sudoku.Run(args);
         }
     }

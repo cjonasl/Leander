@@ -1,2 +1,5 @@
 ﻿Dag 75:
-Torsdag den 18 juli 2019
+Torsdag den 18 juli 2019Jag ägnade arbetsdagen mest åt 
+att ordna med koden i ”Customer Connect” för att få bort
+säkerhetshålen som Qualys genererar för webbplatsen. Jag
+avslutade arbetsdagen drygt kl. 17.30 och promenerade hem. 

@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Sudoku solver</title>
+
+  <style>
+    a:link, a:visited, a:active {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      margin-right: 3px;
+    }
+
+    a:hover {
+      color: deeppink !important;
+      text-decoration: none !important;
+    }
+
+    .languages > a {
+      margin-right: 5px;
+    }
+
+    .leftMenu {
+      min-height: 20000px;
+      min-width: 15%;
+      max-width: 15%;
+      background-color: #ccffcc;
+      padding: 10px;
+      position: fixed;
+    }
+
+    .main {
+      min-height: 20000px;
+      min-width: 83%;
+      max-width: 83%;
+      padding: 5px;
+      float: right;
+    }
+  </style>
+
+</head>
+<body style="margin: 0px;">
+  <div class="leftMenu">
+    <a href="#CopyList" style="display: block;">CopyList</a>
+    <a href="#CopySudokuBoard" style="display: block;">CopySudokuBoard</a>
+    <a href="#GetInputSudokuBoard" style="display: block;">GetInputSudokuBoard</a>
+    <a href="#NumberIsAloneCandidate" style="display: block;">NumberIsAloneCandidate</a>
+    <a href="#RemoveNumberIfItExists" style="display: block;">RemoveNumberIfItExists</a>
+    <a href="#ReturnNumberOfOccurenciesOfNumber" style="display: block;">ReturnNumberOfOccurenciesOfNumber</a>
+    <a href="#ReturnTwoDimensionalDataStructure" style="display: block;">ReturnTwoDimensionalDataStructure</a>
+    <a href="#ReturnThreeDimensionalDataStructure" style="display: block;">ReturnThreeDimensionalDataStructure</a>
+    <a href="#ReturnSquareCellToRowColumnMapper" style="display: block;">ReturnSquareCellToRowColumnMapper</a>
+    <a href="#ReturnSudokuBoardsAsString" style="display: block;">ReturnSudokuBoardsAsString</a>
+    <a href="#SimulateOneNumber" style="display: block;">SimulateOneNumber</a>
+    <a href="#InitCandidates" style="display: block;">InitCandidates</a>
+    <a href="#TryFindNumberToSetInCellWithCertainty" style="display: block;">TryFindNumberToSetInCellWithCertainty</a>
+    <a href="#UpdateCandidates" style="display: block;">UpdateCandidates</a>
+    <a href="#ValidateSudokuBoard" style="display: block;">ValidateSudokuBoard</a>
+    <a href="#PrintSudokuBoard" style="display: block;">PrintSudokuBoard</a>
+    <a href="#Run" style="display: block;">Run</a>
+  </div>
+  <div class="main">
+    <h3 id="CopyList">CopyList</h3>
+    <div class="languages">
+      <a href="javascript: setImagePath('imgCopyList', 'C#/CopyList.png')">C#</a>
+      <a href="javascript: setImagePath('imgCopyList', 'JavaScript/CopyList.png')">JavaScript</a>
+    </div>
+    <img id="imgCopyList" src="" />
+    <hr />
+
+    <h3 id="CopySudokuBoard">CopySudokuBoard</h3>
+    <div class="languages">
+      <a href="javascript: setImagePath('imgCopySudokuBoard', 'C#/CopySudokuBoard.png')">C#</a>
+      <a href="javascript: setImagePath('imgCopySudokuBoard', 'JavaScript/CopySudokuBoard.png')">JavaScript</a>
+    </div>
+    <img id="imgCopySudokuBoard" src="" />
+    <hr />
+
+  </div>
+
+  <script src="http://www.sudokusolver.com/jquery-3.4.1.js"></script>
+
+  <script>
+    window.sudokobas = "www.sudokusolver.com/";
+
+    function setImagePath(id, path) {
+      $("#" + id).attr("src", window.sudokobas + path);
+    }
+
+    $(document).ready(function () {
+      setImagePath("")
+    });
+  </script>
+</body>
+</html>
