@@ -1,0 +1,209 @@
+﻿@using System.Web.Optimization
+@model CAST.ViewModels.Account.CustomerAccount
+@{
+    ViewBag.Title = "SIGN IN";
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/addresses-js")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $(function(){
+                $('#txtPass').keydown(function(e){
+                    if (e.keyCode == 13) {
+                        $("#Login-form").trigger('submit');
+
+                        return false;
+                    }
+                });
+            });
+            $(function(){
+                $('#txtAccNo').keydown(function(e){
+                    if (e.keyCode == 13) {
+                        $("#Login-form").trigger('submit');
+
+                        return false;
+                    }
+                });
+            });
+
+            $('.text').focus(function() {
+                $(".error").empty();
+                $(".error").removeClass("error");
+            });
+
+            $('#Login-form').attr('autocomplete', 'off');
+
+            //urn == null || urn == "" ||
+             $('#Login-form').submit(function (e) {
+                          var email = $("#txtEmail").val();
+                var pass = $("#txtPost").val();
+                var urn = $('#txtAccNo').val();
+                var ClientRef = @Html.Raw(Json.Encode(Model.ClientCustRef));
+
+                $.ajax({
+                    async: false,
+                    url: "/Account/IsUniqueMail",
+                    type: 'GET',
+                    data: {
+                        Email: email,
+                        urn: urn
+
+                    },
+                    success: function (data) {
+
+                        isUniqueMail = data["isUniqueMail"];
+                        if (isUniqueMail && ( ClientRef == null || ClientRef == "")) {
+                            e.preventDefault();
+                            $("#tdCustomerUrn").show();
+                        }
+                        else {
+                            $("#hidEmail").val($("#txtEmail").val());
+                            $("#hidPass").val($("#txtPass").val());
+                            $("#hidAccNo").val($("#txtAccNo").val());
+                            $(this).trigger('submit');
+                        }
+                    }
+                });
+
+            })
+        })
+    </script>
+}
+
+
+<div class="section section__split">
+    <div class="section__box" style="height: 750px">
+
+        <span class="section__heading">Sign in</span>
+
+        <div class="section__content">
+            <input style="display: none;" type="text" name="useridplaceholder" />
+            <input style="display: none;" type="password" name="pwdplaceholder" />
+            <table class="data__stack">
+
+                @Html.TextBoxFor(model => model.UserId, new { @autocompletetype="Disabled", @id="txtUserId", @class="text", style = "display:none;"})
+                <tr>
+                    <td class="data__title">Email Address</td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        @Html.TextBoxFor(model => model.Email, new { @autocompletetype="Disabled",@class="text", @id="txtEmail"})
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(model => model.Email, null, new {@class = "error"})
+                    </td>
+                </tr>
+                @*this is to fool the browser to disable the browser passsword saving functionality *@
+                <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
+                <tr>
+                    <td class="data__title">Password</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.PasswordFor(model => model.Password, new { autocomplete="off",value = Model.Password ,@class="text", @id="txtPass"})
+                        @Model.Email
+                        @Model.ClientCustRef
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(model => model.Password, null, new {@class = "error"})
+                    </td>
+                </tr>
+            </table>
+            <div id="tdCustomerUrn" style="display: none">
+                <table class="data__stack">
+                    <tr><td class="data__title">@ViewBag.Site Account Number</td></tr>
+                    <tr>
+                        <td>This can be found in My Account at @ViewBag.Domain</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.TextBoxFor(model => model.ClientCustRef, new {@autocompletetype="Disabled", @id = "txtAccNo" ,@class="text",value = Model.ClientCustRef})
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.ValidationMessageFor(model => model.ClientCustRef, null, new { @class = "error" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                @using (Html.BeginForm("SignIn", "Account", FormMethod.Post, new { autocomplete = "off", @id = "Login-form" }))
+{
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Email, new { @autocompletetype="Disabled", @id="hidEmail"})
+                @Html.HiddenFor(model => model.Password, new { autocomplete="off",value = Model.Password , @id="hidPass"})
+                @Html.HiddenFor(model => model.ClientCustRef, new {@autocompletetype="Disabled", @id = "hidAccNo" ,value = Model.ClientCustRef})
+
+                <input type="hidden" id="hiddenPassword" name="password" />
+                <table class="data__stack">
+                    <tr>
+                        <td colspan="2">
+                            <input class="button" type="submit" value="Sign In" id="btn-signin" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a href="@Url.RouteUrl("ForgottenPassword", new { @returnurl = "ForgottonPass" }) ">Forgotten your password? </a>
+                            @* <a href="@Url.Action("InputUserId", "Account", new { @returnurl = "ForgottonPass" })">Forgotten your Password</a>*@
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+
+                            <strong>If you haven't already registered  please click </strong><a href="@Url.Action("InputUserId", "Account", new { @returnurl = "NewEnrole" })">HERE</a>
+                            @*    @Html.HiddenFor(x => x.ReturnUrl)*@
+                            @* <input class="button" type="submit" value=@string.Format("If you haven't already enroled please click<a href={0}", @Html.ActionLink("HERE", "InputUserId", "Account", new { @returnurl = "NewEnrole" }))/>
+
+                                @*   //@Url.Action("InputUserId", "Account", new { @returnurl = "NewEnrole" })>HERE</a> id="btn-signin"/>
+                            *@
+
+                        </td>
+                    </tr>
+
+
+
+
+
+                    @* <span colspan="2">
+                                <input class="button" type="submit" value="Sign In" id="btn-signin" />
+                            </span>
+                        </div>
+                        <div>
+                            <span colspan="2">
+                                <a href="@Url.RouteUrl("ForgottenPassword") ">Forgotten password?</a>
+                            </span>
+                        </div><div>
+                            <span >
+                                <strong>If you haven't already enroled please click </strong><a href="@Url.Action("InputUserId", "Account", new { @returnurl = "NewEnrole" })">HERE</a>
+
+                            </span></div>
+                            @Html.HiddenFor(x => x.ReturnUrl)*@
+
+
+                </table>
+                    }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

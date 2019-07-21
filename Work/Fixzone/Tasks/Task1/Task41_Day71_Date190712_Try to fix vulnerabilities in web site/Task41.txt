@@ -15,6 +15,8 @@ C:\Jonas\SVN\AAA\CustomerConnect\Views\Product\ShowDetails.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\RequestDate.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\ViewModels\Product\Product_InfoModel.cs
 
+Stored procedure GetCustomerProductsByGuidForAll takes long time
+
 
 Connection string live Customer Connect
 <connectionStrings>

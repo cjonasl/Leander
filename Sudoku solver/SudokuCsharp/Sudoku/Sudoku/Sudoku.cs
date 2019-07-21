@@ -20,17 +20,16 @@ namespace Sudoku
            ReturnTwoDimensionalDataStructure
            ReturnThreeDimensionalDataStructure
            GetInputSudokuBoard
-           ReturnSquare
            NumberIsAloneCandidate
            ReturnNumberOfOccurenciesOfNumber
            RemoveNumberIfItExists
            SimulateOneNumber
            ReturnSudokuBoardsAsString
-           ReturnSquareCellToRowColumnMapper (Dependent on ReturnSquare)
-           TryFindNumberToSetInCellWithCertainty (Dependent on ReturnSquare, NumberIsAloneCandidate)
-           ValidateSudokuBoard (Dependent on ReturnSquare, ReturnNumberOfOccurenciesOfNumber)
-           InitCandidates (Dependent on ReturnSquare, ReturnNumberOfOccurenciesOfNumber)
-           UpdateCandidates (Dependent on ReturnSquare, RemoveNumberIfItExists)
+           ReturnSquareCellToRowColumnMapper
+           TryFindNumberToSetInCellWithCertainty (Dependent on NumberIsAloneCandidate)
+           ValidateSudokuBoard (Dependent on ReturnNumberOfOccurenciesOfNumber)
+           InitCandidates (Dependent on ReturnNumberOfOccurenciesOfNumber)
+           UpdateCandidates (Dependent onRemoveNumberIfItExists)
            PrintSudokuBoard (Dependent on ReturnSudokuBoardsAsString)
            Run (Dependent on GetInputSudokuBoard, ValidateSudokuBoard, ReturnTwoDimensionalDataStructure, SimulateOneNumber, ReturnThreeDimensionalDataStructure, ReturnSquareCellToRowColumnMapper, InitCandidates, TryFindNumberToSetInCellWithCertainty, CopyList, CopySudokuBoard, UpdateCandidates, PrintSudokuBoard)
         */
@@ -270,11 +269,6 @@ namespace Sudoku
             return null;
         }
 
-        private static int ReturnSquare(int row, int column)
-        {
-            return 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
-        }
-
         private static bool NumberIsAloneCandidate(int number, int[][][] candidates, int[][][] squareCellToRowColumnMapper, int t, Target target)
         {
             int row = 0, column = 0, n, i, j, numberOfOccurenciesOfNumber = 0;
@@ -452,7 +446,7 @@ namespace Sudoku
             {
                 for (column = 1; column <= 9; column++)
                 {
-                    square = ReturnSquare(row, column);
+                    square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
                     v[square - 1][index[square - 1]][0] = row;
                     v[square - 1][index[square - 1]][1] = column;
                     index[square - 1]++;
@@ -467,7 +461,7 @@ namespace Sudoku
             int i, square, numberOfCandidatesInCell, number = 0;
             bool foundNumberToSet = false;
 
-            square = ReturnSquare(row, column);
+            square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
             numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
 
             if (numberOfCandidatesInCell == 1)
@@ -503,7 +497,7 @@ namespace Sudoku
             {
                 for (column = 1; column <= 9; column++)
                 {
-                    square = ReturnSquare(row, column);
+                    square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
 
                     number = sudokuBoard[row - 1][column - 1];
 
@@ -538,7 +532,7 @@ namespace Sudoku
             {
                 for (column = 1; column <= 9; column++)
                 {
-                    square = ReturnSquare(row, column);
+                    square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
 
                     if (sudokuBoard[row - 1][column - 1] != 0)
                     {
@@ -577,7 +571,7 @@ namespace Sudoku
             totalNumberOfCandidatesRemoved = candidates[row - 1][column - 1][0]; //Remove all candidates in that cell
             candidates[row - 1][column - 1][0] = -1; //Indicates that the cell is set already
 
-            square = ReturnSquare(row, column);
+            square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
 
             for (i = 1; i <= 9; i++)
             {
