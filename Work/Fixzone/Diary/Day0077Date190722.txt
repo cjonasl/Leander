@@ -1,2 +1,10 @@
 ﻿Dag 77:
 Måndag den 22 juli 2019
+Ägnade ett par timmar åt min html-sida för sudoku-kod i olika
+programmeringsspråk, och sedan arbetade jag med att försöka
+göra stored procedure GetCustomerProductsByGuidAllClients
+snabbare, vilket jag dessvärre misslyckades med. Jag ska
+imorgon se om jag kan införa en ”foreign key” för kolumn
+”CustomerID” i tabellen ”custapl” med förhoppning om att
+det kan lösa det hela. Jag avslutade arbetsdagen drygt kl.
+17.30 och promenerade hem.

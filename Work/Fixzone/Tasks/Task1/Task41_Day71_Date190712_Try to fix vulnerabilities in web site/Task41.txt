@@ -18,6 +18,18 @@ C:\Jonas\SVN\AAA\CustomerConnect\ViewModels\Product\Product_InfoModel.cs
 Stored procedure GetCustomerProductsByGuidForAll takes long time
 
 
+------ Recommended setting for webLimits  ----------
+
+  <system.applicationHost>
+      <webLimits connectionTimeout="00:00:30"
+         dynamicIdleThreshold="150"
+         headerWaitTimeout="00:00:30"
+         minBytesPerSecond="500"
+      />
+  </system.applicationHost>
+
+----------------------------------------------------
+
 Connection string live Customer Connect
 <connectionStrings>
     <add name="Database" connectionString="server=hrgsql;Initial Catalog=ShopDirect;User ID=shopdirect_prd;password=5PkM5yQb;" providerName="System.Data.SqlClient" />
@@ -40,3 +52,8 @@ Test site: https://howdenscc.fieldengineer.co.uk
 To access live Very IIS server
 1. Log in to hrg.fieldenghineer.co.uk (password: spat-X11)
 2. Log in to box "clientweb01" (username: hrg\fixzone-jonas, password: spat-X11)
+
+Links Slow HTTP Attacks:
+https://forums.iis.net/t/1207603.aspx
+https://docs.microsoft.com/en-us/previous-versions/tn-archive/cc750213(v=technet.10)
+https://sitecore.stackexchange.com/questions/1789/best-practices-for-http-denial-of-service-configuration

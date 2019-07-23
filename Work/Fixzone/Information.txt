@@ -1,5 +1,8 @@
 ﻿sqlConnectionString="server=fzserver;Initial Catalog=ShopDirect;User ID=sa;password=Ping68pong;"
 
+ShopDirect live:
+<add name="Database" connectionString="server=109.69.232.227,1433;Initial Catalog=ShopDirect;User ID=shopdirect_prd;password=5PkM5yQb;" providerName="System.Data.SqlClient" />
+
 Argos live site: http://hrg.fieldengineer.co.uk/User/SignIn/
 
 Location database triggers:

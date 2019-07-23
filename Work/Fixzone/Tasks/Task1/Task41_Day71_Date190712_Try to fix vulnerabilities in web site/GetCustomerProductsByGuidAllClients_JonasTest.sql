@@ -13,7 +13,7 @@ GO
 
 --exec dbo.GetCustomerProductsByGuidAllClients_JonasTest '8563B2E8-639C-4080-A044-AB210C7CB49D'
 
-CREATE PROCEDURE [dbo].[GetCustomerProductsByGuidAllClients_JonasTest]
+CREATE PROCEDURE [dbo].[GetCustomerProductsByGuidAllClients_JonasTest__ImproveSpeed]
 @CustomerGuid nvarchar(max)
 AS
 CREATE TABLE #TmpTable121212
@@ -130,9 +130,9 @@ SELECT
   c.[COUNTRY],
   c.[CustomerGuid]
  FROM
-   custapl ca
+   [service] s
+   INNER JOIN custapl ca on s.CUSTAPLID = ca.CUSTAPLID
    INNER JOIN customer c on ca.CUSTOMERID = c.CUSTOMERID OR ca.OwnerCustomerID = c.CUSTOMERID
-   LEFT OUTER JOIN [service] s ON ca.CUSTAPLID = s.CUSTAPLID
  WHERE
    c.CustomerGuid = cast(@CustomerGuid as uniqueidentifier)
 
@@ -199,62 +199,3 @@ left outer join pop_apl pa on tmp.APPLIANCECD = pa.APPLIANCECD
 left join FraudTests ft on tmp.SERVICEID = ft.SERVICEID
 left join pop_cc pc on pc.visitcd = tmp.visitcd
 join [status] as st on st.statusid = tmp.statusid
-UNION 
-SELECT
-  0 as serviceid, 
-  tmp2.TITLE as 'Title',
-  0 statusid,
-  tmp2.custaplid,
-  tmp2.FIRSTNAME as 'Forename',
-  tmp2.SURNAME as 'Surname',
-  tmp2.POSTCODE as 'Postcode',
-  (tmp2.ADDR1 +  isnull(',' + tmp2.NOTES,'')) as 'Addr1',
-  tmp2.ADDR2 as 'Addr2',
-  tmp2.ADDR3 as 'Addr3',
-  tmp2.TEL1 as 'MobileTel',
-  tmp2.TEL2 as 'LandlineTel',
-  tmp2.TEL3 as 'TEL3',
-  tmp2.EMAIL as 'Email',
-  tmp2.TOWN as 'Town',
-  tmp2.COUNTY as 'County',
-  tmp2.COUNTRY as 'Country',
-  D.EventDate  as 'VisitDate',
-  tmp2.CustomerId as 'CustomerId',
-  tmp2.CustomerGuid as 'CustomerGuid',
-  CAST(tmp2.SENDBY as int) as 'ContactMethod',
-  m.MODEL as 'ItemCode', 
-  tmp2.clientid as ClientId,
-  m.ModelId as ModelId,
-  isnull(pa.[desc],'') as 'Description', 
-  isnull(s.supplier,'') as 'Brand', 
-  isnull(m.MODEL,'') as 'ModelNumber',
-  isnull(m.notes,'') as 'Notes',
-  isnull(m.schemafile,'') as 'ImageFileName',
-  isnull(m.MFR,'')	as 'MFR',
-  isnull(man.Name,'') as Manufacturer,
-  tmp2.sno as SerialNumber,
-  tmp2.APPLIANCEPRICE as AppliancePrice,
-  tmp2.supplydat as 'SupplyDat',
-  tmp2.ServiceStart as ServiceStartDate,
-  tmp2.ServiceExpiry as ServiceExpiryDate,
-  '' as [status],
-  '' statusCustomerDescription,
-  tmp2.appliancecd as appliancecd,
-  tmp2.OnlineBookingExcluded as OnlineBookingExcluded,
-  m.processId as processId,
-  tmp2.CONTRACTSTART,
-  tmp2.CONTRACTEXPIRES,
-  pa.MonitorFg as MonitorFlag,
-  ft.FraudResult as FraudResult
-FROM
-	#TmpTable121212 tmp2
-	left outer join model m on  tmp2.MODEL = M.MODEL AND tmp2.MFR = M.MFR and tmp2.APPLIANCECD = M.APPLIANCECD AND tmp2.SERVICEID IS NULL
-	left join Manufact Man on man.MFR = m.MFR
-	left outer join supplier s on s.supplierid = m.supplierid
-	left outer join pop_apl pa on tmp2.APPLIANCECD = pa.APPLIANCECD
-	left join service sr on sr.custaplid = tmp2.custaplid
-	LEFT JOIN DiaryEnt D ON D.TagInteger1 = Sr.SERVICEID
-	left join FraudTests as ft on ft.Serviceid=sr.SERVICEID
-WHERE 
-	 sr.serviceid is null
-	 and ((DATEADD(year,3, tmp2.ServiceExpiry)>getdate() or tmp2.ServiceExpiry is null) or (DATEADD(year,3,tmp2.CONTRACTEXPIRES)>getdate()) or tmp2.CONTRACTEXPIRES is null) and tmp2.CONTRACTCANCELDATE is null 
