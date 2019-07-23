@@ -5,20 +5,42 @@
   <title>Sudoku solver</title>
 
   <style>
-    a:link, a:visited, a:active {
-      color: black;
+    .leftMenu > a:link, .leftMenu > a:visited, .leftMenu > a:active {
       text-decoration: none;
       font-weight: bold;
-      margin-right: 3px;
+      font-size: small;
+      margin-bottom: 15px;
+      font-family: Arial;
+      color: black;
+      display: block;
     }
 
-    a:hover {
-      color: deeppink !important;
-      text-decoration: none !important;
+    .languages > a:link, .languages > a:visited, .languages > a:active {
+      color: blue;
+      font-size: medium;
+      font-weight: normal;
+      margin-right: 20px;
+      text-decoration: underline;
+      font-family: 'Times New Roman';
     }
 
-    .languages > a {
-      margin-right: 5px;
+    .languages > a:hover {
+      color: deeppink;
+      text-decoration: underline;
+    }
+
+    .languages {
+      background-color: lightgray;
+      min-height: 50px;
+      max-width: 500px;
+      padding: 25px;
+      border: 1px solid black;
+    }
+
+    .code {
+      padding: 25px;
+      border: 1px solid black;
+      margin-bottom: 50px;
     }
 
     .leftMenu {
@@ -28,6 +50,7 @@
       background-color: #ccffcc;
       padding: 10px;
       position: fixed;
+      border-right: 1px solid black;
     }
 
     .main {
@@ -37,59 +60,86 @@
       padding: 5px;
       float: right;
     }
+
+    img {
+      margin-top: 15px;
+    }
+
+    h3 {
+      font-family: Arial;
+    }
   </style>
 
 </head>
 <body style="margin: 0px;">
   <div class="leftMenu">
-    <a href="#CopyList" style="display: block;">CopyList</a>
-    <a href="#CopySudokuBoard" style="display: block;">CopySudokuBoard</a>
-    <a href="#GetInputSudokuBoard" style="display: block;">GetInputSudokuBoard</a>
-    <a href="#NumberIsAloneCandidate" style="display: block;">NumberIsAloneCandidate</a>
-    <a href="#RemoveNumberIfItExists" style="display: block;">RemoveNumberIfItExists</a>
-    <a href="#ReturnNumberOfOccurenciesOfNumber" style="display: block;">ReturnNumberOfOccurenciesOfNumber</a>
-    <a href="#ReturnTwoDimensionalDataStructure" style="display: block;">ReturnTwoDimensionalDataStructure</a>
-    <a href="#ReturnThreeDimensionalDataStructure" style="display: block;">ReturnThreeDimensionalDataStructure</a>
-    <a href="#ReturnSquareCellToRowColumnMapper" style="display: block;">ReturnSquareCellToRowColumnMapper</a>
-    <a href="#ReturnSudokuBoardsAsString" style="display: block;">ReturnSudokuBoardsAsString</a>
-    <a href="#SimulateOneNumber" style="display: block;">SimulateOneNumber</a>
-    <a href="#InitCandidates" style="display: block;">InitCandidates</a>
-    <a href="#TryFindNumberToSetInCellWithCertainty" style="display: block;">TryFindNumberToSetInCellWithCertainty</a>
-    <a href="#UpdateCandidates" style="display: block;">UpdateCandidates</a>
-    <a href="#ValidateSudokuBoard" style="display: block;">ValidateSudokuBoard</a>
-    <a href="#PrintSudokuBoard" style="display: block;">PrintSudokuBoard</a>
-    <a href="#Run" style="display: block;">Run</a>
+    <h3 style="margin-top: 2px; font-family: Arial;">Methods/functions:</h3>
+    <a href="#h3CopyList">CopyList</a>
+    <a href="#h3CopySudokuBoard">CopySudokuBoard</a>
+    <a href="#h3GetInputSudokuBoard">GetInputSudokuBoard</a>
+    <a href="#h3NumberIsAloneCandidate">NumberIsAloneCandidate</a>
+    <a href="#h3RemoveNumberIfItExists" >RemoveNumberIfItExists</a>
+    <a href="#h3ReturnNumberOfOccurenciesOfNumber" >ReturnNumberOfOccurenciesOfNumber</a>
+    <a href="#h3ReturnTwoDimensionalDataStructure">ReturnTwoDimensionalDataStructure</a>
+    <a href="#h3ReturnThreeDimensionalDataStructure">ReturnThreeDimensionalDataStructure</a>
+    <a href="#h3ReturnSquareCellToRowColumnMapper" >ReturnSquareCellToRowColumnMapper</a>
+    <a href="#h3ReturnSudokuBoardsAsString" >ReturnSudokuBoardsAsString</a>
+    <a href="#h3SimulateOneNumber" >SimulateOneNumber</a>
+    <a href="#h3InitCandidates" >InitCandidates</a>
+    <a href="#h3TryFindNumberToSetInCellWithCertainty" >TryFindNumberToSetInCellWithCertainty</a>
+    <a href="#h3UpdateCandidates" >UpdateCandidates</a>
+    <a href="#h3ValidateSudokuBoard" >ValidateSudokuBoard</a>
+    <a href="#h3PrintSudokuBoard" >PrintSudokuBoard</a>
+    <a href="#h3Run">Run</a>
   </div>
   <div class="main">
-    <h3 id="CopyList">CopyList</h3>
-    <div class="languages">
-      <a href="javascript: setImagePath('imgCopyList', 'C#/CopyList.png')">C#</a>
-      <a href="javascript: setImagePath('imgCopyList', 'JavaScript/CopyList.png')">JavaScript</a>
-    </div>
-    <img id="imgCopyList" src="" />
-    <hr />
+    <h3 id="h3CopyList" style="margin-top: 5px;">CopyList</h3>
+    <div id="divCopyList" class="languages" data-active="CSharp">
+      <a id="aCopyListCSharp" href="javascript: setImagePath('CopyList', 'CSharp')" style="color: black; font-weight: bold;  font-family: Arial; text-decoration: none;">C#</a>
+      <a id="aCopyListJavaScript" href="javascript: setImagePath('CopyList', 'JavaScript')">JavaScript</a>
+    </div> 
+    <div class="code"><img id="imgCopyList" src="" /></div>
 
-    <h3 id="CopySudokuBoard">CopySudokuBoard</h3>
-    <div class="languages">
-      <a href="javascript: setImagePath('imgCopySudokuBoard', 'C#/CopySudokuBoard.png')">C#</a>
-      <a href="javascript: setImagePath('imgCopySudokuBoard', 'JavaScript/CopySudokuBoard.png')">JavaScript</a>
+    <h3 id="h3CopySudokuBoard">CopySudokuBoard</h3>
+    <div id="divCopySudokuBoard" class="languages" data-active="CSharp">
+      <a id="aCopySudokuBoardCSharp" href="javascript: setImagePath('CopySudokuBoard', 'CSharp')" style="color: black; font-weight: bold; font-family: Arial; text-decoration: none;">C#</a>
+      <a id="aCopySudokuBoardJavaScript" href="javascript: setImagePath('CopySudokuBoard', 'JavaScript')">JavaScript</a>
     </div>
-    <img id="imgCopySudokuBoard" src="" />
-    <hr />
+    <div class="code"><img id="imgCopySudokuBoard" src="" /></div>
 
-  </div>
+    </div>
 
   <script src="http://www.sudokusolver.com/jquery-3.4.1.js"></script>
 
   <script>
-    window.sudokobas = "www.sudokusolver.com/";
+    window.sudokoBasePath = "http://www.sudokusolver.com/";
 
-    function setImagePath(id, path) {
-      $("#" + id).attr("src", window.sudokobas + path);
+    function setImagePath(method, target) {
+      var currentActive = $("#div" + method).attr("data-active");
+
+      $("#a" + method + currentActive).css({
+        "color": "blue",
+        "font-weight": "normal",
+        "font-family": "Times New Roman",
+        "text-decoration": "underline"
+      });
+
+      $("#a" + method + target).css({
+        "color": "black",
+        "font-weight": "bold",
+        "font-family": "Arial",
+        "text-decoration": "none"
+      });
+
+      $("#img" + method).attr("src", window.sudokoBasePath + target + "/" + method + ".png");
+      $("#div" + method).attr("data-active", target);
     }
 
     $(document).ready(function () {
-      setImagePath("")
+      $("#imgCopyList").attr("src", window.sudokoBasePath + "CSharp/CopyList.png");
+      $("#imgCopySudokuBoard").attr("src", window.sudokoBasePath + "CSharp/CopySudokuBoard.png");
+
+
     });
   </script>
 </body>

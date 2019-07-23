@@ -1,0 +1,12 @@
+C#
+C
+JavaScript
+Perl
+Python
+Ruby
+Golang
+Java
+PHP
+TypeScript
+Objective-C
+Swift

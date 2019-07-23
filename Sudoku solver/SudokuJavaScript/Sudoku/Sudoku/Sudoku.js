@@ -103,7 +103,7 @@
 }
 
 window.sudoku.copyList = function (from, to)  {
-    to.spice(0, to.length);
+    to.splice(0, to.length);
 
     for (var i = 0; i < from.length; i++) {
         to.push(from[i]);

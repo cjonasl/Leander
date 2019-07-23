@@ -1,0 +1,14 @@
+USE [ShopDirect]
+GO
+
+UPDATE [dbo].[Custapl]
+SET CUSTOMERID = NULL
+WHERE CUSTOMERID NOT IN(SELECT [CUSTOMERID] FROM [dbo].[Customer])
+GO
+
+ALTER TABLE [dbo].[Custapl]  WITH CHECK ADD  CONSTRAINT [FK_Custapl_Customer] FOREIGN KEY([CUSTOMERID])
+REFERENCES [dbo].[Customer] ([CUSTOMERID])
+GO
+
+ALTER TABLE [dbo].[Custapl] CHECK CONSTRAINT [FK_Custapl_Customer]
+GO
