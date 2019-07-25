@@ -1,1 +1,5 @@
 ﻿Task38:
+
+Modify the files:
+C:\Jonas\SVN\CAST\CastApplication\Content\css\custom.css
+C:\Jonas\SVN\CAST\CastApplication\Views\Shared\_Layout.cshtml

@@ -1,4 +1,10 @@
-﻿sqlConnectionString="server=fzserver;Initial Catalog=ShopDirect;User ID=sa;password=Ping68pong;"
+﻿Cast live is on hrgweb01
+
+Litmus IIS:
+User name: FIXZONE\Administrator
+Password: phoA0ria
+
+sqlConnectionString="server=fzserver;Initial Catalog=ShopDirect;User ID=sa;password=Ping68pong;"
 
 ShopDirect live:
 <add name="Database" connectionString="server=109.69.232.227,1433;Initial Catalog=ShopDirect;User ID=shopdirect_prd;password=5PkM5yQb;" providerName="System.Data.SqlClient" />

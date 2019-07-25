@@ -76,7 +76,7 @@ namespace SudokuMain
 
             if (numberOfCandidates == 0)
             {
-                Console.WriteLine("It is not possible to add any number to the sudoku.");
+                Console.Write("It is not possible to add any number to the sudoku.");
                 return;
             }
 

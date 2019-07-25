@@ -35,6 +35,7 @@ Connection string live Customer Connect
     <add name="Database" connectionString="server=hrgsql;Initial Catalog=ShopDirect;User ID=shopdirect_prd;password=5PkM5yQb;" providerName="System.Data.SqlClient" />
 </connectionStrings>
 
+<add name="Database" connectionString="server=fzserver;Initial Catalog=ShopDirect;User ID=sa;password=Ping68pong;" providerName="System.Data.SqlClient" />
 
 ----- Information from Mark on Slack 2019-07-11 --------
 https://qualysguard.qualys.eu/portal-front/
@@ -57,3 +58,6 @@ Links Slow HTTP Attacks:
 https://forums.iis.net/t/1207603.aspx
 https://docs.microsoft.com/en-us/previous-versions/tn-archive/cc750213(v=technet.10)
 https://sitecore.stackexchange.com/questions/1789/best-practices-for-http-denial-of-service-configuration
+
+Mary's solution:
+C:\Mary\CustomerConnectWeb\CustomerConnectWeb\CustomerConnectMVC Upgrade\CustomerConnect\CustomerConnect.sln
