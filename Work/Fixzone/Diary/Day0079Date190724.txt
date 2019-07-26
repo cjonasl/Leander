@@ -1,2 +1,29 @@
 ﻿Dag 79:
 Onsdag den 24 juli 2019
+En varm och solig dag och väldigt varmt på kontoret.
+Ett tillägg i web.config som jag igår gjorde i Verys
+testwebbplats och som sedan medförde att Qualys inte
+rapporterade några säkerhetshål visade sig dessvärrde
+inte vara som vi trodde eftersom webbplatsen inte
+fungerade alls pga. felkonfigurering (förmodligen
+gjorde Qualys ingen analys alls och det hade varit
+bättre om den rapporterat att webbplatsen inte
+fungerade istället för att visa att inga fel
+upptäcktes). Jag fick (dessvärre) fortsätta arbeta
+med task41. Felet med konfigureringen var att den
+(förmodligen) inte är webbplatsspecifik utan gäller
+för hela webbserven och således kan den inte ligga
+i web.config, utan snarare någon-stans högre upp,
+t.ex. i machine.config. Intog kaffe och en medtagen
+smörgås till lunch. Argos hörde av sig rörande
+task38, ”Argos help guides”. Jag fick 6 pdf-guider
+via mail och de ville ha det produktionssatt inom
+de närmsta dagarna. Jag tog tag i uppgiften direkt
+och gjorde klart den på ett par timmar och mailade
+en snaggit-video på resultatet. Jemma Cantwell på
+Argos svarade att det var bra (”That is brilliant,
+thank you”) och att jag kunde produktionsätta, vilket
+jag gjorde. Jag avslutade arbetsdagen ca. kl. 20.15
+och gick till ”Tesco express” runt hörnet och handlade
+bananer, mineralvatten och handtvål för 2.49 pund
+och sedan promenad hem. 

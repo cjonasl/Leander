@@ -1,2 +1,13 @@
 ﻿Dag 78:
 Tisdag den 23 juli 2019
+Fortsatte kämpa med att få inloggningen till ”Customer
+Connect” att gå snabbare för att få bort sista säkerhetshålet
+i Qualys rapport (task41). Vijay uppmärksammade mig på att
+sista säkerhetshålet i själva verket gäller ”Slow HTTP Attacks”
+(benäms även ”denial-of-service", DoS) och inte direkt att
+inloggningen tar lång tid. Jag började söka på Internet om
+hur man förhindrar ”Slow HTTP Attacks” och fann en rekommenderad
+konfigurering (för ”webLimits” i elementet ”system.applicationHost”)
+som jag skrev in i web.config och körde Qualys rapport igen och
+då försvann även sista säkerhetshålet. Jag avslutade arbetsdagen
+ca. kl. 17.45 och promenerade hem.

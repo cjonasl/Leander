@@ -52,31 +52,28 @@
                         </td>
                     </tr>
                     <tr>
-                        <td >
+                        <td>
                             <a class="btn-argos-Bold span1" href="@Url.ProcessPreviousStep()" id="backButton">Back</a>@**@
                             @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn-argos-Bold span1", @title="Go to home page", @id="home-btn"})
                        </td>
 
                         <td class="text-align-left" > 
 
-                            @{
-                               var userGuideVisibility = @User.Identity.IsAuthenticated ? "visible" : "hidden";
-                             }
-                             <div class="dropdown" style="visibility: @userGuideVisibility">
+                            <div class="dropdown">
                                <span style="font-size: 14px !important; font-family: 'Argos-CondensedBook;' !important; text-align: right !important;">HELP GUIDES</span>
                                  <div class="dropdown-content" style="text-align: left !important;">
-                                   <a href="Content/UserGuides/Creating a Password.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">1. Creating a password</a><br />
-                                   <a href="Content/UserGuides/Expired.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">2. Expired</a><br />
-                                   <a href="Content/UserGuides/New Colleague.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">3. New Colleague</a><br />
-                                   <a href="Content/UserGuides/Assign a new Administrator.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">4. Assign a New Administrator</a><br />
-                                   <a href="Content/UserGuides/To unlock a user.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">5. To unlock a user</a><br />
-                                   <a href="Content/UserGuides/Deleting a Colleague.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">6. Deleting a Colleague</a>
+                                   <a href="http://hrg.fieldengineer.co.uk/Content/UserGuides/Creating a Password.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">1. Creating a password</a><br />
+                                   <a href="http://hrg.fieldengineer.co.uk/Content/UserGuides/Expired.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">2. Expired</a><br />
+                                   <a href="http://hrg.fieldengineer.co.uk/Content/UserGuides/New Colleague.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">3. New Colleague</a><br />
+                                   <a href="http://hrg.fieldengineer.co.uk/Content/UserGuides/Assign a new Administrator.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">4. Assign a New Administrator</a><br />
+                                   <a href="http://hrg.fieldengineer.co.uk/Content/UserGuides/To unlock a user.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">5. To unlock a user</a><br />
+                                   <a href="http://hrg.fieldengineer.co.uk/Content/UserGuides/Deleting a Colleague.pdf" target="_blank" style="font-family: 'Argos-CondensedBook;' !important; white-space: nowrap !important;">6. Deleting a Colleague</a>
                                  </div>
-                             </div>
+                            </div>
 
-                            <a class="btn-argos-Bold " href="http://www.argos-support.co.uk/" target="_blank" id="Support-btn">Product Support & Helplines</a>
+                            <a class="btn-argos-Bold" href="http://www.argos-support.co.uk/" target="_blank" id="Support-btn">Product Support & Helplines</a>
                            
-                            <a class="btn-argos-Bold " href="http://go/randg/consumeraffairs/consumerlaw/returns.asp" target="_blank" id="consume-affairs-btn">Consumer affairs</a>
+                            <a class="btn-argos-Bold" href="http://go/randg/consumeraffairs/consumerlaw/returns.asp" target="_blank" id="consume-affairs-btn">Consumer affairs</a>
                             @if (!User.Identity.IsAuthenticated)
                             {
                                 <a href="@Url.Process(PredefinedProcess.SignIn)" class="btn-argos-Bold span1" title="Go to sign in" id="sign-in-btn">Sign In</a>
