@@ -1,2 +1,25 @@
 ﻿Dag 80:
 Torsdag den 25 juli 2019
+Hälsade på Vikki Weston som var här ifrån Durham för att
+ordna med ”DBS Checks” (någon slags databaskontroll). Jag
+hade med mig mitt pass som hon tittade på. Jag blev sedan
+inkallad till Vikki som informerade att Pacifica ska växa
+ordentligt och inleda ett samarbete med något företag som
+kräver denna databaskontroll och jag fick ett ”brev” att
+läsa igenom och skriva under bevittnat. Blev inkallad till
+Angela som gick igenom några administrativa frågor och
+sedan bad hon mig göra två online-kurser rörande hälsa och
+säkerhet (”Health & Safety Training Course” och ”Level 2
+Health & Safety in the Workplace Training”), vilket jag
+gjorde. På eftermiddagen hade jag ett utvecklingssamtal
+med Paul och Vicky. Vid 15.45-tiden gick jag till ”Tesco
+express” och köpte en bulle och läsk (kostnad: 2.50 pund).
+Jag skrev under brevet jag fick av Vikki och gav tillbaka
+det till henne (Mark bevittnade). Det blev inte så mycket
+annat arbete under dagen. Jag ägnade lite tid åt task38
+(Argos help guides). Vijay hade semester, men kommunicerade
+ändå lite på Skype, och hon bad mig ordna så att man inte
+behöver vara inloggad för att kunna läsa i hjälp-pdf:erna
+och jag gjorde en liten modifiering i _Layout.cshtml
+och la in direkt i prod så att detta är möjligt. Jag
+avslutade arbetsdagen ca. kl. 17.45 och promenerade hem. 
