@@ -1,4 +1,6 @@
-﻿Cast live is on hrgweb01
+﻿URL Cast live site: http://hrg.fieldengineer.co.uk/User/SignIn/
+
+Cast live is on hrgweb01
 
 Litmus IIS:
 User name: FIXZONE\Administrator

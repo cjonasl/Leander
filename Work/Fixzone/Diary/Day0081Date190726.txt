@@ -1,2 +1,18 @@
 ﻿Dag 81:
 Fredag den 26 juli 2019
+Jag ägnade arbetsdagen åt task41 (Try to fix vulnerabilities
+in web site) och åt att gå igenom Marys CustomerConnect-solution
+som ligger i prod och jämföra med koden i SVN och uppdatera
+då Mary inte checkat in. Jag åt en medtagen smörgås till lunch.
+Framåt kvällen tog jag mig friheten att uppdatera ”webLimits”
+till rekommenderade värden på IIS-serven som har min Very
+testwebplats, men även produktionswebplatsen, och sedan
+satte jag igång en Qualys-körning mot Very testwebplatsen
+med förhoppning om att Qualys inte ska rapportera om denial-
+of-service säkerhetshål, vilket den gjort tidigare. Under
+tiden Qualys körde gick jag till M&S och handlade för 24.05
+pund. Klockan var då ca. 19.00. När jag kom tillbaka hade
+Qualys kört klart, men dessvärre hade den ändå rapporterat
+om denial-of-service säkerhetshål trots de uppdaterade
+”webLimits” till rekommenderade värden. Jag åkte hem med
+buss ca. kl. 21.30.

@@ -139,9 +139,9 @@ namespace SudokuMain
             }
 
             if (numberOfCellsSetInBestSoFar == 81)
-                msg = string.Format("The sudoku was solved. {0} numbers added to the original {1}", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
+                msg = string.Format("The sudoku was solved. {0} number(s) added to the original {1}.", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
             else
-                msg = string.Format("The sudoku was partially solved. {0} numbers added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
+                msg = string.Format("The sudoku was partially solved. {0} number(s) added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
 
             PrintSudokuBoard(numberOfCellsSetInBestSoFar == 81 ? true : false, args, msg, bestSoFarSudokuBoard);
 
@@ -209,12 +209,12 @@ namespace SudokuMain
                 {
                     if (!int.TryParse(columns[column - 1], out n))
                     {
-                        return string.Format("The value, \"{0}\", in row {1} and column {2} in input file is not a valid integer!", columns[column - 1], row.ToString(), column.ToString());
+                        return string.Format("The value \"{0}\" in row {1} and column {2} in input file is not a valid integer!", columns[column - 1], row.ToString(), column.ToString());
                     }
 
                     if (n < 0 || n > 9)
                     {
-                        return string.Format("The value, \"{0}\", in row {1} and column {2} in input file is not an integer in the interval [0,9] as expected!", columns[column - 1], row.ToString(), column.ToString());
+                        return string.Format("The value \"{0}\" in row {1} and column {2} in input file is not an integer in the interval [0, 9] as expected!", columns[column - 1], row.ToString(), column.ToString());
                     }
 
                     sudokuBoard[row - 1][column - 1] = n;
@@ -576,7 +576,6 @@ namespace SudokuMain
                 for (column = 1; column <= 9; column++)
                 {
                     square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
-
                     number = sudokuBoard[row - 1][column - 1];
 
                     if (number != 0)
