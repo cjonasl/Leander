@@ -82,11 +82,6 @@ sudoku.run = function(args) {
                     sudoku.copySudokuBoard(workingSudokuBoard, certaintySudokuBoard);
                     sudoku.copyList(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty);
                 }
-
-                console.log("Simulate (" + row + ", " + column + ", " + number + ")");
-            }
-            else {
-              console.log("(" + row + ", " + column + ", " + number + ")");
             }
 
             workingSudokuBoard[row - 1][column - 1] = number;
@@ -437,8 +432,7 @@ sudoku.initCandidates = function(sudokuBoard, squareCellToRowColumnMapper, candi
 }
 
 sudoku.tryFindNumberToSetInCellWithCertainty = function(row, column, candidates, squareCellToRowColumnMapper) {
-    var i, square, numberOfCandidatesInCell, number = 0;
-    var foundNumberToSet = false;
+    var i, square, numberOfCandidatesInCell, number, returnNumber = 0;
 
     square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
     numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
@@ -449,19 +443,19 @@ sudoku.tryFindNumberToSetInCellWithCertainty = function(row, column, candidates,
     }
     else {
         i = 1;
-        while (i <= numberOfCandidatesInCell && !foundNumberToSet) {
+        while (i <= numberOfCandidatesInCell && returnNumber == 0) {
             number = candidates[row - 1][column - 1][i];
 
             if (sudoku.numberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, row, "row") ||
                 sudoku.numberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, column, "column") ||
                 sudoku.numberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, square, "square"))
-                foundNumberToSet = true;
+                returnNumber = number;
             else
                 i++;
         }
     }
 
-    return number;
+    return returnNumber;
 }
 
 sudoku.updateCandidates = function(candidates, squareCellToRowColumnMapper, row, column, number) {
@@ -557,7 +551,7 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard)
     }
 
     if (solved && dir != "")
-        fileNameFullPath = dir + "\\" + fileNme + "__Solved_" + suffix;
+        fileNameFullPath = dir + "\\" + fileName + "__Solved_" + suffix;
     else if (!solved && dir != "")
         fileNameFullPath = dir + "\\" + fileName + "__Partially_solved" + suffix;
     else if (solved && dir == "")

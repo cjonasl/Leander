@@ -40,7 +40,7 @@ namespace SudokuMain
             int[][] workingSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
             int[][]  bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
             int[][][] candidates, squareCellToRowColumnMapper;
-            int maxNumberOfAttemptsToSolveSudoku = 50, numberOfAttemptsToSolveSudoku = 0;
+            int maxNumberOfAttemptsToSolveSudoku = 100, numberOfAttemptsToSolveSudoku = 0;
             int numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar = 0, numberOfCandidates;
             bool sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
             Random random = new Random((int)(DateTime.Now.Ticks % 64765L));
@@ -607,9 +607,9 @@ namespace SudokuMain
             char c;
 
             if (solved)
-                suffix = (new FileInfo(args[0])).Name + string.Format("__Solved_{0}.txt", DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff"));
+                suffix = string.Format("__Solved_{0}.txt", DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff"));
             else
-                suffix = (new FileInfo(args[0])).Name + string.Format("__Partially_solved_{0}.txt", DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff"));
+                suffix = string.Format("__Partially_solved_{0}.txt", DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff"));
 
             if (args.Length >= 2 && Directory.Exists(args[1]))
             {
