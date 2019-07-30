@@ -344,7 +344,7 @@ sudoku.returnSquareCellToRowColumnMapper = function() {
     return v;
 }
 
-sudoku.returnSudokuBoardsAsString = function(sudokuBoard) {
+sudoku.returnSudokuBoardAsString = function(sudokuBoard) {
     var row, column, sb = "";
 
     for (row = 1; row <= 9; row++) {
@@ -559,7 +559,7 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard)
     else
         fileNameFullPath = args[0] + "__Partially_solved" + suffix;
 
-    fileContent = message + "\r\n\r\n" + sudoku.returnSudokuBoardsAsString(sudokuBoard);
+    fileContent = message + "\r\n\r\n" + sudoku.returnSudokuBoardAsString(sudokuBoard);
 
     fs.writeFileSync(fileNameFullPath, fileContent, { encoding: 'ascii' });
 }

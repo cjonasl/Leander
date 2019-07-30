@@ -1,0 +1,45 @@
+﻿140
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-29 09:37:39
+
+----- New property -----
+
+Task43_Day82_Date190729_Dashboard ClientConnect
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task43_Day82_Date190729_Dashboard ClientConnect
+
+----- New property -----
+
+null

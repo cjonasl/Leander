@@ -2775,3 +2775,23 @@ Task42_Day71_Date190712_Warranty Online Policy Connect changes
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+140
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-07-29 09:37:39
+
+----- New property -----
+
+Task43_Day82_Date190729_Dashboard ClientConnect
+
+----- New property -----
+
+Task,Fixzone

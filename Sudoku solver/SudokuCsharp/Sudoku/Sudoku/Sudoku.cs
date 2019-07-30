@@ -22,15 +22,15 @@ namespace SudokuMain
            RemoveNumberIfItExists
            ReturnNumberOfOccurenciesOfNumber
            ReturnTwoDimensionalDataStructure
-           ReturnThreeDimensionalDataStructure        
-           ReturnSquareCellToRowColumnMapper         
-           ReturnSudokuBoardsAsString    
+           ReturnThreeDimensionalDataStructure
+           ReturnSquareCellToRowColumnMapper
+           ReturnSudokuBoardAsString
            SimulateOneNumber
            InitCandidates (Dependent on ReturnNumberOfOccurenciesOfNumber)
            TryFindNumberToSetInCellWithCertainty (Dependent on NumberIsAloneCandidate)
            UpdateCandidates (Dependent on RemoveNumberIfItExists)
            ValidateSudokuBoard (Dependent on ReturnNumberOfOccurenciesOfNumber)   
-           PrintSudokuBoard (Dependent on ReturnSudokuBoardsAsString)
+           PrintSudokuBoard (Dependent on ReturnSudokuBoardAsString)
            Run (Dependent on GetInputSudokuBoard, ValidateSudokuBoard, ReturnTwoDimensionalDataStructure, SimulateOneNumber, ReturnThreeDimensionalDataStructure, ReturnSquareCellToRowColumnMapper, InitCandidates, TryFindNumberToSetInCellWithCertainty, CopyList, CopySudokuBoard, UpdateCandidates, PrintSudokuBoard)
         */
         public static void Run(string[] args)
@@ -401,7 +401,7 @@ namespace SudokuMain
             return v;
         }
 
-        private static string ReturnSudokuBoardsAsString(int[][] sudokuBoard)
+        private static string ReturnSudokuBoardAsString(int[][] sudokuBoard)
         {
             int row, column;
             StringBuilder sb = new StringBuilder();
@@ -623,7 +623,7 @@ namespace SudokuMain
             streamWriter = new StreamWriter(fileStream, Encoding.ASCII);
             streamWriter.WriteLine(message);
             streamWriter.WriteLine();
-            streamWriter.Write(ReturnSudokuBoardsAsString(sudokuBoard));
+            streamWriter.Write(ReturnSudokuBoardAsString(sudokuBoard));
             streamWriter.Flush();
             fileStream.Flush();
             streamWriter.Close();
