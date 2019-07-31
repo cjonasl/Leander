@@ -1,2 +1,8 @@
 ﻿Dag 82:
 Måndag den 29 juli 2019
+Skapade task43 (Dashboard ClientConnect) för uppgiften att
+skapa en Stimulsoft dashboard i ClientConnect och sedan arbetade
+jag med det under arbetsdagen. Jag ägnade mig även lite åt
+implementering av min Sudoku-algoritm i Python. Vid 13.00-tiden
+intog jag banan, smörgås och kaffe till lunch. Jag avslutade
+arbetsdagen drygt kl. 17.30 och promenerade hem.
