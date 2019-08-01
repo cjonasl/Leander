@@ -11,12 +11,11 @@ sudoku.run = function(args) {
     var row = 0, column = 0, number, i, tmp1, tmp2;
     var certaintySudokuBoard = null;
     var workingSudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
-    var  bestSoFarSudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
-    var candidates, squareCellToRowColumnMapper;
+    var bestSoFarSudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
+    var candidates, squareCellToRowColumnMapper, msg;
     var maxNumberOfAttemptsToSolveSudoku = 100, numberOfAttemptsToSolveSudoku = 0;
     var numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar = 0, numberOfCandidates;
     var sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
-    var msg;
     var cellsRemainToSet = [];
     var cellsRemainToSetAfterAddedNumbersWithCertainty = null;
     var indexNumber = [0, 0];
@@ -129,14 +128,14 @@ sudoku.sourceExists = function(source, isFile) {
        else
            return false;
      }
-     catch {
+      catch (err) {
        if (isFile)
            return false;
        else
            return true;
     }
   }
-  catch {
+  catch (err) {
     return false;
   }
 }
@@ -158,14 +157,20 @@ sudoku.copySudokuBoard = function (sudokuBoardFrom, sudokuBoardTo) {
 }
 
 sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
-    var rows, columns, sudokuBoardString ;
+    var rows, columns, sudokuBoardString;
     var row, column, n;
 
     if (args.length == 0) {
-        return "An input file is not given to the program!";
+        return "An input file is not given to the program (first parameter)!";
     }
-    else if (!sudoku.sourceExists(args[0], true)) {
-        return "The given input file does not exist!";
+    else if (args.length > 2) {
+        return "At most two parameters may be given to the program!";
+    }
+    else if (!sudoku.sourceExists(args[0], true)) {      
+        return "The given input file in first parameter does not exist!";
+    }
+    else if (args.length == 2 && !sudoku.sourceExists(args[1], false)) {
+        return "The directory given in second parameter does not exist!";
     }
 
     sudokuBoardString = fs.readFileSync(args[0], { encoding: 'ascii' }).trim().replace("\r\n", "\n");
@@ -437,10 +442,8 @@ sudoku.tryFindNumberToSetInCellWithCertainty = function(row, column, candidates,
     square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
     numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
 
-    if (numberOfCandidatesInCell == 1) {
-        number = candidates[row - 1][column - 1][1];
-        foundNumberToSet = true;
-    }
+    if (numberOfCandidatesInCell == 1) 
+        returnNumber = candidates[row - 1][column - 1][1];
     else {
         i = 1;
         while (i <= numberOfCandidatesInCell && returnNumber == 0) {
@@ -517,7 +520,7 @@ sudoku.validateSudokuBoard = function(sudokuBoard, squareCellToRowColumnMapper) 
 
 sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard)
 {
-    var fileName, fileNameFullPath, d, yearStr, month, date, hour, minute, second, millisecond;
+    var fileName, fileNameFullPath, d, yearStr, month, date, hour, minute, second, millisecond, str;
     var suffix, monthStr, dateStr, hourStr, minuteStr, secondStr, millisecondStr, dir, fileContent;
 
     d  = new Date();
@@ -539,15 +542,16 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard)
     
     suffix = yearStr + "." + monthStr + "." + dateStr + "." + hourStr + "." + minuteStr + "." + secondStr + "." + millisecondStr + ".txt";
     
-    fileName = args[0].substring(1 + args[0].lastIndexOf("\\"));
+    fileName = args[0].substring(1 + args[0].lastIndexOf("\\")).trim();
 
-    if (args.length < 2 || !sudoku.sourceExists(args[1], false))
+    if (args.length == 1)
         dir = "";
     else {
-        if (args[1][args[1].trim().length - 1] == "\\")
-            dir = args[1].substring(0, args[1].trim().length - 1);
+        str = args[1].trim();
+        if (str[str.length - 1] == "\\")
+            dir = str.substring(0, str.length - 1);
         else
-            dir = args[1];
+            dir = str;
     }
 
     if (solved && dir != "")
@@ -555,9 +559,9 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard)
     else if (!solved && dir != "")
         fileNameFullPath = dir + "\\" + fileName + "__Partially_solved" + suffix;
     else if (solved && dir == "")
-        fileNameFullPath = args[0] + "__Solved_" + suffix;
+        fileNameFullPath = args[0].trim() + "__Solved_" + suffix;
     else
-        fileNameFullPath = args[0] + "__Partially_solved" + suffix;
+        fileNameFullPath = args[0].trim() + "__Partially_solved" + suffix;
 
     fileContent = message + "\r\n\r\n" + sudoku.returnSudokuBoardAsString(sudokuBoard);
 
@@ -566,10 +570,7 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard)
 
 var args = [];
 
-if (process.argv.length >= 3)
-    args.push(process.argv[2]);
-
-if (process.argv.length >= 4)
-    args.push(process.argv[3]);
+for (var i = 2; i < process.argv.length; i++)
+    args.push(process.argv[i]);
 
 sudoku.run(args);

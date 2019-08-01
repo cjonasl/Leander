@@ -176,11 +176,19 @@ namespace SudokuMain
 
             if (args.Length == 0)
             {
-                return "An input file is not given to the program!";
+                return "An input file is not given to the program (first parameter)!";
+            }
+            else if (args.Length > 2)
+            {
+                return "At most two parameters may be given to the program!";
             }
             else if (!File.Exists(args[0]))
             {
-                return "The given input file does not exist!";
+                return "The given input file in first parameter does not exist!";
+            }
+            else if (args.Length == 2 && !Directory.Exists(args[1]))
+            {
+                return "The directory given in second parameter does not exist!";
             }
 
             FileStream fileStream = new FileStream(args[0], FileMode.Open, FileAccess.Read);
@@ -611,7 +619,7 @@ namespace SudokuMain
             else
                 suffix = string.Format("__Partially_solved_{0}.txt", DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff"));
 
-            if (args.Length >= 2 && Directory.Exists(args[1]))
+            if (args.Length == 2)
             {
                 c = args[1].Trim()[args[1].Trim().Length - 1];
                 fileNameFullpath = args[1].Trim() + ((c == '\\') ? "" : "\\") + (new FileInfo(args[0])).Name + suffix;

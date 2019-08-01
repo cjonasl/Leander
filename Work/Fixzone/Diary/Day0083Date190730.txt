@@ -1,2 +1,6 @@
 ﻿Dag 83:
 Tisdag den 30 juli 2019
+Jag ägnade arbetsdagen åt task43 (Dashboard ClientConnect)
+och åt att implementera min Sudoku-algoritm i Python. Vid
+13.00 intog jag smörgås och kaffe till lunch. Jag avslutade
+arbetsdagen ca. kl. 17.45 och tog bussen till Surbiton.
