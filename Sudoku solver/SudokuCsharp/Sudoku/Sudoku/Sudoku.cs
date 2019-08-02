@@ -18,7 +18,7 @@ namespace SudokuMain
            CopyList
            CopySudokuBoard
            GetInputSudokuBoard
-           NumberIsAloneCandidate
+           CandidateIsAlonePossible
            RemoveNumberIfItExists
            ReturnNumberOfOccurenciesOfNumber
            ReturnTwoDimensionalDataStructure
@@ -27,7 +27,7 @@ namespace SudokuMain
            ReturnSudokuBoardAsString
            SimulateOneNumber
            InitCandidates (Dependent on ReturnNumberOfOccurenciesOfNumber)
-           TryFindNumberToSetInCellWithCertainty (Dependent on NumberIsAloneCandidate)
+           TryFindNumberToSetInCellWithCertainty (Dependent on CandidateIsAlonePossible)
            UpdateCandidates (Dependent on RemoveNumberIfItExists)
            ValidateSudokuBoard (Dependent on ReturnNumberOfOccurenciesOfNumber)   
            PrintSudokuBoard (Dependent on ReturnSudokuBoardAsString)
@@ -190,11 +190,7 @@ namespace SudokuMain
                 return "The directory given in second parameter does not exist!";
             }
 
-            FileStream fileStream = new FileStream(args[0], FileMode.Open, FileAccess.Read);
-            StreamReader streamReader = new StreamReader(fileStream, Encoding.ASCII);
-            string sudokuBoardString = streamReader.ReadToEnd().Trim().Replace("\r\n", "\n");
-            streamReader.Close();
-            fileStream.Close();
+            string sudokuBoardString = File.ReadAllText(args[0]).Trim().Replace("\r\n", "\n");
 
             rows = sudokuBoardString.Split(new string[] { "\n" }, StringSplitOptions.None);
 
@@ -236,7 +232,7 @@ namespace SudokuMain
             return null;
         }
 
-        private static bool NumberIsAloneCandidate(int number, int[][][] candidates, int[][][] squareCellToRowColumnMapper, int t, Target target)
+        private static bool CandidateIsAlonePossible(int number, int[][][] candidates, int[][][] squareCellToRowColumnMapper, int t, Target target)
         {
             int row = 0, column = 0, n, i, j, numberOfOccurenciesOfNumber = 0;
 
@@ -507,32 +503,32 @@ namespace SudokuMain
 
         private static int TryFindNumberToSetInCellWithCertainty(int row, int column, int[][][] candidates, int[][][] squareCellToRowColumnMapper)
         {
-            int i, square, numberOfCandidatesInCell, number, returnNumber = 0;
+            int i, square, numberOfCandidatesInCell, candidate, number = 0;
 
             square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
             numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
 
             if (numberOfCandidatesInCell == 1)
             {
-                returnNumber = candidates[row - 1][column - 1][1];
+                number = candidates[row - 1][column - 1][1];
             }
             else if (numberOfCandidatesInCell > 1)
             {
                 i = 1;
                 while (i <= numberOfCandidatesInCell && returnNumber == 0)
                 {
-                    number = candidates[row - 1][column - 1][i];
+                    candidate = candidates[row - 1][column - 1][i];
 
-                    if (NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, row, Target.Row) ||
-                        NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, column, Target.Column) ||
-                        NumberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, square, Target.Square))
-                        returnNumber = number;
+                    if (CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, row, Target.Row) ||
+                        CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, column, Target.Column) ||
+                        CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, square, Target.Square))
+                        number = candidate;
                     else
                         i++;
                 }
             }
 
-            return returnNumber;
+            return number;
         }
 
         private static int UpdateCandidates(int[][][] candidates, int[][][] squareCellToRowColumnMapper, int row, int column, int number)
@@ -608,8 +604,6 @@ namespace SudokuMain
 
         private static void PrintSudokuBoard(bool solved, string[] args, string message, int[][] sudokuBoard)
         {
-            FileStream fileStream;
-            StreamWriter streamWriter;
             string suffix, fileNameFullpath;
             char c;
 
@@ -626,15 +620,7 @@ namespace SudokuMain
             else
                 fileNameFullpath = args[0] + suffix;
 
-            fileStream = new FileStream(fileNameFullpath, FileMode.Create, FileAccess.Write);
-            streamWriter = new StreamWriter(fileStream, Encoding.ASCII);
-            streamWriter.WriteLine(message);
-            streamWriter.WriteLine();
-            streamWriter.Write(ReturnSudokuBoardAsString(sudokuBoard));
-            streamWriter.Flush();
-            fileStream.Flush();
-            streamWriter.Close();
-            fileStream.Close();
+            File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
         }
     }
 }

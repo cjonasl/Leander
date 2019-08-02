@@ -149,7 +149,7 @@ def get_input_sudoku_board(args, sudoku_board, cells_remain_to_set):
 
             if n < 0 or n > 9:
                 return "The value \"" + columns[column - 1] + "\" in row " + str(row) + " and column " + str(column) + " in input file is not an integer in the interval [0, 9] as expected!"
-            
+
             sudoku_board[row - 1][column - 1] = n
 
             if n == 0:
@@ -157,7 +157,9 @@ def get_input_sudoku_board(args, sudoku_board, cells_remain_to_set):
 
     return None
 
-def number_is_alone_candidate(number, candidates, squareCellToRowColumnMapper, t, target):
+def candidate_is_alone_possible(number, candidates, square_cell_to_row_column_mapper, t, target):
+    number_of_occurencies_of_number = 0
+
     for i in range(9):
         if target == Target.ROW:
             row = t
@@ -166,18 +168,17 @@ def number_is_alone_candidate(number, candidates, squareCellToRowColumnMapper, t
             row = i + 1
             column = t
         else:
-            row = squareCellToRowColumnMapper[t - 1][i][0]
-            column = squareCellToRowColumnMapper[t - 1][i][1]
+            row = square_cell_to_row_column_mapper[t - 1][i][0]
+            column = square_cell_to_row_column_mapper[t - 1][i][1]
 
         n = candidates[row - 1][column - 1][0]
-        numberOfOccurenciesOfNumber = 0
 
         if n != -1:
             for j in range(9):
                 if candidates[row - 1][column - 1][1 + j] == number:
-                    numberOfOccurenciesOfNumber += 1
+                    number_of_occurencies_of_number += 1
 
-                    if numberOfOccurenciesOfNumber > 1:
+                    if number_of_occurencies_of_number > 1:
                         return False
     return True
 
@@ -203,7 +204,7 @@ def remove_number_if_it_exists(v, number):
 
     return returnValue
 
-def return_number_of_occurencies_of_number(sudokuBoard, squareCellToRowColumnMapper, number, t, target):
+def return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, t, target):
     n = 0
 
     for i in range(9):
@@ -214,12 +215,12 @@ def return_number_of_occurencies_of_number(sudokuBoard, squareCellToRowColumnMap
             row = i + 1
             column = t
         else:
-            row = squareCellToRowColumnMapper[t - 1][i][0]
-            column = squareCellToRowColumnMapper[t - 1][i][1]
+            row = square_cell_to_row_column_mapper[t - 1][i][0]
+            column = square_cell_to_row_column_mapper[t - 1][i][1]
             
-        if sudokuBoard[row - 1][column - 1] == number:
+        if sudoku_board[row - 1][column - 1] == number:
             n += 1
-            
+
     return n
 
 def return_two_dimensional_data_structure(m, n):
@@ -270,7 +271,7 @@ def return_sudoku_board_as_string(sudoku_board):
 
     for row in range(1, 10):
         if row > 1:
-            sb += "\r\n"
+            sb += "\n"
 
         for column in range(1, 10):
             if column == 1:
@@ -285,16 +286,16 @@ def simulate_one_number(candidates, cells_remain_to_set, index_number):
     min_number_of_candidates = 9
 
     for i in range(len(cells_remain_to_set)):
-        row = cellsRemainToSet[i][0]
-        column = cellsRemainToSet[i][1]
+        row = cells_remain_to_set[i][0]
+        column = cells_remain_to_set[i][1]
         number_of_candidates = candidates[row - 1][column - 1][0]
 
         if number_of_candidates > 0 and number_of_candidates < min_number_of_candidates:
             min_number_of_candidates = number_of_candidates
 
     for i in range(n):
-        row = cellsRemainToSet[i][0]
-        column = cellsRemainToSet[i][1]
+        row = cells_remain_to_set[i][0]
+        column = cells_remain_to_set[i][1]
 
         if candidates[row - 1][column - 1][0] == min_number_of_candidates:
             v.append(i)
@@ -302,7 +303,7 @@ def simulate_one_number(candidates, cells_remain_to_set, index_number):
     tmp = randrange(0, len(v))
     index_number[0] = v[tmp]
     row = cells_remain_to_set[index_number[0]][0]
-    column = cells_remain_to_set[indexNumber[0]][1]
+    column = cells_remain_to_set[index_number[0]][1]
     index_number[1] = candidates[row - 1][column - 1][1 + randrange(0, min_number_of_candidates)]
 
 def init_candidates(sudoku_board, square_cell_to_row_column_mapper, candidates):
@@ -319,8 +320,8 @@ def init_candidates(sudoku_board, square_cell_to_row_column_mapper, candidates):
                 candidates[row - 1][column - 1][0] = 0
                 for number in range(1, 10):
                     if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target.ROW):
-                        if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target.COLUMN):
-                            if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target.SQUARE):
+                        if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, column, Target.COLUMN):
+                            if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, square, Target.SQUARE):
                                 n += 1
                                 candidates[row - 1][column - 1][0] = n
                                 candidates[row - 1][column - 1][n] = number
@@ -329,30 +330,29 @@ def init_candidates(sudoku_board, square_cell_to_row_column_mapper, candidates):
     return number_of_candidates
 
 def try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper):
-    return_number = 0
-
+    number = 0
     square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
     number_of_candidates_in_cell = candidates[row - 1][column - 1][0]
 
     if number_of_candidates_in_cell == 1:
-        return_number = candidates[row - 1][column - 1][1]
+        number = candidates[row - 1][column - 1][1]
     else:
         i = 1
-        while i <= number_of_candidates_in_cell and return_number == 0:
-            number = candidates[row - 1][column - 1][i]
+        while i <= number_of_candidates_in_cell and number == 0:
+            candidate = candidates[row - 1][column - 1][i]
 
-            if number_is_alone_candidate(number, candidates, square_cell_to_row_column_mapper, row, Target.ROW):
-                return_number = number
+            if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, row, Target.ROW):
+                number = candidate
             else:
-                if number_is_alone_candidate(number, candidates, square_cell_to_row_column_mapper, row, Target.COLUMN):
-                    return_number = number
+                if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, column, Target.COLUMN):
+                    number = candidate
                 else:
-                    if number_is_alone_candidate(number, candidates, square_cell_to_row_column_mapper, row, Target.SQUARE):
-                        return_number = number
+                    if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, square, Target.SQUARE):
+                        number = candidate
                     else:
                         i += 1
 
-    return return_number
+    return number
 
 def update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number):
     total_number_of_candidates_removed = candidates[row - 1][column - 1][0] #Remove all candidates in that cell
@@ -413,7 +413,7 @@ def print_sudoku_board(solved, args, message, sudoku_board):
     else:
         fileNamefullPath = args[0] + suffix
 
-    fileContent = message + "\r\n\r\n" + return_sudoku_board_as_string(sudoku_board)
+    fileContent = message + "\n\n" + return_sudoku_board_as_string(sudoku_board)
     f = open(fileNamefullPath, "w")
     f.write(fileContent)
     f.close()

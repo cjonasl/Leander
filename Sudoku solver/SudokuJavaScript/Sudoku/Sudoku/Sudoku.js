@@ -208,7 +208,7 @@ sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
     return null;
 }
 
-sudoku.numberIsAloneCandidate = function(number, candidates, squareCellToRowColumnMapper, t, target) {
+sudoku.candidateIsAlonePossible = function(number, candidates, squareCellToRowColumnMapper, t, target) {
     var row = 0, column = 0, n, i, j, numberOfOccurenciesOfNumber = 0;
 
     for (i = 0; i < 9; i++) {
@@ -435,28 +435,28 @@ sudoku.initCandidates = function(sudokuBoard, squareCellToRowColumnMapper, candi
 }
 
 sudoku.tryFindNumberToSetInCellWithCertainty = function(row, column, candidates, squareCellToRowColumnMapper) {
-    var i, square, numberOfCandidatesInCell, number, returnNumber = 0;
+    var i, square, numberOfCandidatesInCell, candidate, number = 0;
 
     square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
     numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
 
     if (numberOfCandidatesInCell == 1) 
-        returnNumber = candidates[row - 1][column - 1][1];
+        number = candidates[row - 1][column - 1][1];
     else {
         i = 1;
         while (i <= numberOfCandidatesInCell && returnNumber == 0) {
-            number = candidates[row - 1][column - 1][i];
+            candidate = candidates[row - 1][column - 1][i];
 
-            if (sudoku.numberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, row, "row") ||
-                sudoku.numberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, column, "column") ||
-                sudoku.numberIsAloneCandidate(number, candidates, squareCellToRowColumnMapper, square, "square"))
+            if (sudoku.candidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, row, "row") ||
+                sudoku.candidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, column, "column") ||
+                sudoku.candidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, square, "square"))
                 returnNumber = number;
             else
                 i++;
         }
     }
 
-    return returnNumber;
+    return number;
 }
 
 sudoku.updateCandidates = function(candidates, squareCellToRowColumnMapper, row, column, number) {
