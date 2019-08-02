@@ -518,8 +518,7 @@ sudoku.validateSudokuBoard = function(sudokuBoard, squareCellToRowColumnMapper) 
     return null;
 }       
 
-sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard)
-{
+sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
     var fileName, fileNameFullPath, d, yearStr, month, date, hour, minute, second, millisecond, str;
     var suffix, monthStr, dateStr, hourStr, minuteStr, secondStr, millisecondStr, dir, fileContent;
 

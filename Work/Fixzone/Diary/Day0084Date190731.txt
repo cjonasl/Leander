@@ -1,2 +1,6 @@
 ﻿Dag 84:
 Onsdag den 31 juli 2019
+Jag ägnade arbetsdagen åt task43 (Dashboard ClientConnect) och
+åt att implementera min sudokualgoritm i Python. Vid 13.00-tiden
+åt jag banan och smörgås till lunch samt kaffe till dryck. Jag
+avslutade arbetsdagen ca. kl. 18.00 och promenerade hem.
