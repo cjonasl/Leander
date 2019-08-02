@@ -138,13 +138,12 @@ namespace SudokuMain
                     numberOfAttemptsToSolveSudoku++;
             }
 
-            if (numberOfCellsSetInBestSoFar == 81)
+            if (sudokuSolved)
                 msg = string.Format("The sudoku was solved. {0} number(s) added to the original {1}.", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
             else
                 msg = string.Format("The sudoku was partially solved. {0} number(s) added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
 
-            PrintSudokuBoard(numberOfCellsSetInBestSoFar == 81 ? true : false, args, msg, bestSoFarSudokuBoard);
-
+            PrintSudokuBoard(sudokuSolved, args, msg, bestSoFarSudokuBoard);
             Console.Write(msg);
         }
 

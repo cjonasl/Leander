@@ -1,2 +1,6 @@
 ﻿Dag 85:
 Torsdag den 1 augusti 2019
+Jag arbetade först med att implementera min sudoku-algoritm
+i Python, och sedan med task43 (Dashboard ClientConnect). Jag
+intog lunch (smörgås, banan och kaffe) ca. kl. 13.00. Vid
+17.45-tiden avslutade jag arbetsdagen och promenerade hem.

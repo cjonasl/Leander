@@ -102,17 +102,15 @@ sudoku.run = function(args) {
     }
 
     tmp1 = 81 - numberOfCellsSetInInputSudokuBoard;
-    if (numberOfCellsSetInBestSoFar == 81)      
+    if (sudokuSolved)
         msg = "The sudoku was solved. " + tmp1 + " number(s) added to the original " +  numberOfCellsSetInInputSudokuBoard + ".";
-    
-    else  {     
+    else  {
         tmp1 = numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard;
         tmp2 = 81 - numberOfCellsSetInBestSoFar
         msg = "The sudoku was partially solved. " + tmp1 + " number(s) added to the original " + numberOfCellsSetInInputSudokuBoard + ". Unable to set " + tmp2 + " number(s).";
     }
 
-    sudoku.printSudokuBoard(numberOfCellsSetInBestSoFar == 81 ? true : false, args, msg, bestSoFarSudokuBoard);
-
+    sudoku.printSudokuBoard(sudokuSolved, args, msg, bestSoFarSudokuBoard);
     console.log(msg);
 }
 
@@ -364,7 +362,7 @@ sudoku.returnSudokuBoardAsString = function(sudokuBoard) {
         }
     }
 
-    return sb
+    return sb;
 }
 
 sudoku.returnIntegerRandomNumber = function (minIncluded, maxExcluded) {
@@ -566,6 +564,7 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
 
     fs.writeFileSync(fileNameFullPath, fileContent, { encoding: 'ascii' });
 }
+
 
 var args = [];
 
