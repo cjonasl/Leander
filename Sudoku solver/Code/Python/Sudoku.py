@@ -217,7 +217,7 @@ def return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_colu
         else:
             row = square_cell_to_row_column_mapper[t - 1][i][0]
             column = square_cell_to_row_column_mapper[t - 1][i][1]
-            
+
         if sudoku_board[row - 1][column - 1] == number:
             n += 1
 
@@ -293,7 +293,7 @@ def simulate_one_number(candidates, cells_remain_to_set, index_number):
         if number_of_candidates > 0 and number_of_candidates < min_number_of_candidates:
             min_number_of_candidates = number_of_candidates
 
-    for i in range(n):
+    for i in range(len(cells_remain_to_set)):
         row = cells_remain_to_set[i][0]
         column = cells_remain_to_set[i][1]
 
@@ -360,15 +360,15 @@ def update_candidates(candidates, square_cell_to_row_column_mapper, row, column,
 
     square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
 
-    for i in range(1, 10):
-        if i != column and candidates[row - 1][i - 1][0] > 0:
-            total_number_of_candidates_removed += remove_number_if_it_exists(candidates[row - 1][i - 1], number)
+    for c in range(1, 10):
+        if c != column and candidates[row - 1][c - 1][0] > 0:
+            total_number_of_candidates_removed += remove_number_if_it_exists(candidates[row - 1][c - 1], number)
 
-    for i in range(1, 10):
-        if i != row and candidates[i - 1][column - 1][0] > 0:
-            total_number_of_candidates_removed += remove_number_if_it_exists(candidates[i - 1][column - 1], number)
+    for r in range(1, 10):
+        if r != row and candidates[r - 1][column - 1][0] > 0:
+            total_number_of_candidates_removed += remove_number_if_it_exists(candidates[r - 1][column - 1], number)
 
-    for i in range(1, 9):
+    for i in range(0, 9):
         r = square_cell_to_row_column_mapper[square - 1][i][0]
         c = square_cell_to_row_column_mapper[square - 1][i][1]
 
@@ -395,13 +395,13 @@ def validate_sudoku_board(sudoku_board, square_cell_to_row_column_mapper):
 
 def print_sudoku_board(solved, args, message, sudoku_board):
     index = args[0].rfind("\\")
-    fileName = args[0][1 + n :]
+    fileName = args[0][1 + index :]
     tmp = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S.%f")
 
     if solved:
         suffix = "__Solved_" + tmp[0 : len(tmp) - 3] + ".txt"
     else:
-        suffix = "__Partially_solved" + tmp[0 : len(tmp) - 3] + ".txt"
+        suffix = "__Partially_solved_" + tmp[0 : len(tmp) - 3] + ".txt"
 
     if len(args) == 2:
         d = args[1].strip()

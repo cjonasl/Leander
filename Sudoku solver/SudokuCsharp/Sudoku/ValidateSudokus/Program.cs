@@ -21,7 +21,7 @@ namespace ValidateSudokus
             {
                 DateTime min, max, tmp;
                 TimeSpan ts;
-                int i, n, total = 0, solved = 0, partiallySolved = 0, error = 0;
+                int i, n, milliSeconds, total = 0, solved = 0, partiallySolved = 0, error = 0;
                 FileStream fileStream;
                 StreamWriter streamWriter;
                 int[][][] squareCellToRowColumnMapper;
@@ -75,12 +75,13 @@ namespace ValidateSudokus
                 total = solved + partiallySolved + error;
 
                 ts = max - min;
+                milliSeconds = 1000 * ts.Seconds + ts.Milliseconds;
 
                 sb.Append(string.Format("\r\nSolved: {0}\r\n", solved.ToString()));
                 sb.Append(string.Format("Partially solved: {0}\r\n", partiallySolved.ToString()));
                 sb.Append(string.Format("Error: {0}\r\n", error.ToString()));
                 sb.Append(string.Format("Total: {0}\r\n", total.ToString()));
-                sb.Append(string.Format("Time: {0} seconds\r\n", ts.Seconds.ToString()));
+                sb.Append(string.Format("Time: {0} milliseconds\r\n", milliSeconds.ToString()));
 
                 fileStream = new FileStream(currentDirectory + "\\Result.txt", FileMode.Create, FileAccess.Write);
                 streamWriter = new StreamWriter(fileStream, Encoding.ASCII);
@@ -94,7 +95,7 @@ namespace ValidateSudokus
                 Console.WriteLine(string.Format("Partially solved: {0}", partiallySolved.ToString()));
                 Console.WriteLine(string.Format("Error: {0}", error.ToString()));
                 Console.WriteLine(string.Format("Total: {0}", total.ToString()));
-                Console.WriteLine(string.Format("Time: {0} seconds", ts.Seconds.ToString()));
+                Console.WriteLine(string.Format("Time: {0} milliseconds", milliSeconds.ToString()));
             }
             catch (Exception e)
             {
@@ -278,8 +279,8 @@ namespace ValidateSudokus
                             (ReturnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, row, Target.Row) > 1) ||
                             (ReturnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, column, Target.Column) > 1) ||
                             (ReturnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, square, Target.Square) > 1)
-                           )        
-                            return 2;       
+                           )
+                            return 2;
                 }
             }
 

@@ -1,2 +1,10 @@
 ﻿Dag 86:
 Fredag den 2 augusti 2019
+På förmiddagen arbetade jag med att implementera min
+sudoku-algoritm i Python. Jag tog lunch ca. kl. 12.30
+och intog en banan, smörgås och kaffe. Efter lunchen
+arbetade jag med task43 (Dashboard ClientConnect). Jag
+skickade en snaggit-video till Paul av vad jag gjort
+hittills i den uppgiften och han svarade att det såg
+bra ut. Jag avslutade arbetsdagen ca. kl. 17.30 och
+promenerade hem.
