@@ -1,6 +1,6 @@
-﻿sudoku = Object.new
+﻿class Sudoku
 
-def sudoku.run(args)
+def Sudoku.run(args)
     row = 0
     column = 0
     certainty_sudoku_board = nil
@@ -60,8 +60,7 @@ def sudoku.run(args)
                 row = cells_remain_to_set[i][0]
                 column = cells_remain_to_set[i][1]
                 number = try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper)
-                if number == 0
-                    i += 1
+                i = (number == 0) ? i + 1 : i
             end
 
             if number == 0
@@ -80,7 +79,7 @@ def sudoku.run(args)
             end
 
             working_sudoku_board[row - 1][column - 1] = number
-            del cells_remain_to_set[i]
+            cells_remain_to_set.delete_at(i)
             number_of_candidates -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
 
         if number_of_cells_set_in_best_so_far < (81 - cells_remain_to_set.size)
@@ -110,7 +109,7 @@ def sudoku.run(args)
     print(msg)
 end
 
-def sudoku.copy_list(list_from, list_to)
+def Sudoku.copy_list(list_from, list_to)
     list_to.clear()
 
     for i in 0..list_from.size - 1
@@ -118,7 +117,7 @@ def sudoku.copy_list(list_from, list_to)
     end
 end
 
-def sudoku.copy_sudoku_board(sudoku_board_from, sudoku_board_to)
+def Sudoku.copy_sudoku_board(sudoku_board_from, sudoku_board_to)
     for row in 1..9
         for column in 1..9
             sudoku_board_to[row - 1][column - 1] = sudoku_board_from[row - 1][column - 1]
@@ -126,19 +125,19 @@ def sudoku.copy_sudoku_board(sudoku_board_from, sudoku_board_to)
     end
 end
 
-def sudoku.get_input_sudoku_board(args, sudoku_board, cells_remain_to_set)
+def Sudoku.get_input_sudoku_board(args, sudoku_board, cells_remain_to_set)
     if args.size == 0
         return "An input file is not given to the program (first parameter)!"
     elsif args.size > 2
         return "At most two parameters may be given to the program!" 
-    elsif not os.path.isfile(args[0])
+    elsif not File.file?(args[0])
         return "The given input file in first parameter does not exist!"
-    elsif args.size == 2 and (not os.path.exists(args[1]) or os.path.isfile(args[1]))
+    elsif args.size == 2 and (not Dir.exist?(args[1])
         return "The directory given in second parameter does not exist!"
     end
 
     fs = open(args[0], "rt")
-    sudoku_board_string = fs.read().strip().replace("\r\n", "\n")
+    sudoku_board_string = fs.read().strip().gsub("\r\n", "\n")
 
     rows = sudoku_board_string.split("\n")
 
@@ -154,10 +153,10 @@ def sudoku.get_input_sudoku_board(args, sudoku_board, cells_remain_to_set)
         end
 
         for column in 1..9
-            if not columns[column - 1].isdigit()
+            n = Integer(columns[column - 1]) rescue nil
+            if n == nil
                 return "The value \"" + columns[column - 1] + "\" in row " + row.to_s + " and column " +  column.to_s + " in input file is not a valid integer!"
-
-            n = int(columns[column - 1], 10)
+            end
 
             if n < 0 or n > 9
                 return "The value \"" + columns[column - 1] + "\" in row " + row.to_s + " and column " + column.to_s + " in input file is not an integer in the interval [0, 9] as expected!"
@@ -174,7 +173,7 @@ def sudoku.get_input_sudoku_board(args, sudoku_board, cells_remain_to_set)
     return nil
 end
 
-def sudoku.candidate_is_alone_possible(number, candidates, square_cell_to_row_column_mapper, t, target)
+def Sudoku.candidate_is_alone_possible(number, candidates, square_cell_to_row_column_mapper, t, target)
     number_of_occurencies_of_number = 0
 
     for i in 0..8
@@ -200,12 +199,13 @@ def sudoku.candidate_is_alone_possible(number, candidates, square_cell_to_row_co
                         return false
                     end
                 end
+            end
         end
 
     return true
 end
 
-def sudoku.remove_number_if_it_exists(v, number)
+def Sudoku.remove_number_if_it_exists(v, number)
     index = -1
     returnValue = 0
     n = v[0]
@@ -232,7 +232,7 @@ def sudoku.remove_number_if_it_exists(v, number)
     return returnValue
 end
 
-def sudoku.return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, t, target)
+def Sudoku.return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, t, target)
     n = 0
 
     for i in 0..8
@@ -255,7 +255,7 @@ def sudoku.return_number_of_occurencies_of_number(sudoku_board, square_cell_to_r
     return n
 end
 
-def sudoku.return_two_dimensional_data_structure(m, n)
+def Sudoku.return_two_dimensional_data_structure(m, n)
     v = []
 
     for i in 0..m - 1
@@ -271,7 +271,7 @@ def sudoku.return_two_dimensional_data_structure(m, n)
     return v
 end
 
-def sudoku.return_three_dimensional_data_structure(l, m, n)
+def Sudoku.return_three_dimensional_data_structure(l, m, n)
     v = []
 
     for i in 0..l - 1
@@ -295,14 +295,14 @@ def sudoku.return_three_dimensional_data_structure(l, m, n)
     return v
 end
 
-def sudoku.return_square_cell_to_row_column_mapper()
+def Sudoku.return_square_cell_to_row_column_mapper()
     v = return_three_dimensional_data_structure(9, 9, 2)
 
     index = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     for row in 1..9
         for column in 1..9
-            square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
+            square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
             v[square - 1][index[square - 1]][0] = row
             v[square - 1][index[square - 1]][1] = column
             index[square - 1] += 1
@@ -312,7 +312,7 @@ def sudoku.return_square_cell_to_row_column_mapper()
     return v
 end
 
-def sudoku.return_sudoku_board_as_string(sudoku_board)
+def Sudoku.return_sudoku_board_as_string(sudoku_board)
     sb = ""
 
     for row in 1..9
@@ -332,7 +332,7 @@ def sudoku.return_sudoku_board_as_string(sudoku_board)
     return sb
 end
 
-def sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number)
+def Sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number)
     v = []
     min_number_of_candidates = 9
 
@@ -361,12 +361,12 @@ def sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number)
     index_number[1] = candidates[row - 1][column - 1][1 + randrange(0, min_number_of_candidates)]
 end
 
-def sudoku.init_candidates(sudoku_board, square_cell_to_row_column_mapper, candidates)
+def Sudoku.init_candidates(sudoku_board, square_cell_to_row_column_mapper, candidates)
     number_of_candidates = 0
 
     for row in 1..9
         for column in 1..9
-            square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
+            square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
 
             if sudoku_board[row - 1][column - 1] != 0
                 candidates[row - 1][column - 1][0] = -1
@@ -392,9 +392,9 @@ def sudoku.init_candidates(sudoku_board, square_cell_to_row_column_mapper, candi
     return number_of_candidates
 end
 
-def sudoku.try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper)
+def Sudoku.try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper)
     number = 0
-    square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
+    square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
     number_of_candidates_in_cell = candidates[row - 1][column - 1][0]
 
     if number_of_candidates_in_cell == 1
@@ -423,11 +423,11 @@ def sudoku.try_find_number_to_set_in_cell_with_certainty(row, column, candidates
     return number
 end
 
-def sudoku.update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
+def Sudoku.update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
     total_number_of_candidates_removed = candidates[row - 1][column - 1][0] #Remove all candidates in that cell
     candidates[row - 1][column - 1][0] = -1 #Indicates that the cell is set already
 
-    square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
+    square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
 
     for c in 1..9
         if c != column and candidates[row - 1][c - 1][0] > 0
@@ -453,10 +453,10 @@ def sudoku.update_candidates(candidates, square_cell_to_row_column_mapper, row, 
     return total_number_of_candidates_removed
 end
 
-def sudoku.validate_sudoku_board(sudoku_board, square_cell_to_row_column_mapper)
+def Sudoku.validate_sudoku_board(sudoku_board, square_cell_to_row_column_mapper)
     for row in 1..9
         for column in 1..9
-            square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
+            square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
             number = sudoku_board[row - 1][column - 1]
 
             if number != 0
@@ -474,9 +474,9 @@ def sudoku.validate_sudoku_board(sudoku_board, square_cell_to_row_column_mapper)
     return nil
 end
 
-def sudoku.print_sudoku_board(solved, args, message, sudoku_board)
-    index = args[0].rfind("\\")
-    fileName = args[0][1 + index :]
+def Sudoku.print_sudoku_board(solved, args, message, sudoku_board)
+    index = 1 + args[0].rindex("\\")
+    fileName = args[0][index, args[0].size - index]
     tmp = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S.%f")
 
     if solved
@@ -501,6 +501,8 @@ def sudoku.print_sudoku_board(solved, args, message, sudoku_board)
     f = open(fileNamefullPath, "w")
     f.write(fileContent)
     f.close()
+end
+
 end
 
 
