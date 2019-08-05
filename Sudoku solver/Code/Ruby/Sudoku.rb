@@ -136,8 +136,9 @@ def Sudoku.get_input_sudoku_board(args, sudoku_board, cells_remain_to_set)
         return "The directory given in second parameter does not exist!"
     end
 
-    fs = open(args[0], "rt")
+    fs = open(args[0], "r")
     sudoku_board_string = fs.read().strip().gsub("\r\n", "\n")
+    fs.close()
 
     rows = sudoku_board_string.split("\n")
 
@@ -477,7 +478,7 @@ end
 def Sudoku.print_sudoku_board(solved, args, message, sudoku_board)
     index = 1 + args[0].rindex("\\")
     fileName = args[0][index, args[0].size - index]
-    tmp = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S.%f")
+    tmp = Time.now.strftime("%Y.%m.%d.%H.%M.%S.%f")
 
     if solved
         suffix = "__Solved_" + tmp[0 : tmp.size - 3] + ".txt"
@@ -498,7 +499,7 @@ def Sudoku.print_sudoku_board(solved, args, message, sudoku_board)
     end
 
     fileContent = message + "\n\n" + return_sudoku_board_as_string(sudoku_board)
-    f = open(fileNamefullPath, "w")
+    f = File.new(fileNamefullPath, "w")
     f.write(fileContent)
     f.close()
 end

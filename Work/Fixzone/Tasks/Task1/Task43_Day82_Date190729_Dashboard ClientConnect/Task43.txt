@@ -20,4 +20,7 @@ connectionString="server=fzserver;Initial Catalog=pasClientconnect;User ID=sa;pa
 
 Live:
 <add name="Database" connectionString="server=109.69.232.227,1433;Initial Catalog=ShopDirect;User ID=shopdirect_prd;password=5PkM5yQb;" providerName="System.Data.SqlClient" />
+Log in:
+User name: Shopdirect
+Password: Shopdirect11
 

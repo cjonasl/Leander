@@ -129,6 +129,7 @@ def get_input_sudoku_board(args, sudoku_board, cells_remain_to_set):
 
     fs = open(args[0], "rt")
     sudoku_board_string = fs.read().strip().replace("\r\n", "\n")
+    fs.close()
 
     rows = sudoku_board_string.split("\n")
 
