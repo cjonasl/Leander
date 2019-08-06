@@ -1,2 +1,11 @@
 ﻿Dag 87:
 Måndag den 5 augusti 2019
+Jag ägnade arbetsdagen åt task43 (Dashboard ClientConnect),
+särskilt åt att försöka erhålla hel sökväg till fil som öppnas
+och inte enbart filnamnet (detta för att kunna spara ändringar
+då användaren trycker på ”Save”), men jag lyckades inte med
+det. Man får använda ”Save As” istället då en öppnad fil ska
+sparas. Vid 13.15-tiden intog jag kaffe, smörgås och banan
+till lunch. Jag avslutade arbetsdagen drygt kl. 17.30 och tog
+bussen hem eftersom jag behövde gå på toaletten (annars hade
+jag promenerat).

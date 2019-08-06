@@ -1,4 +1,10 @@
-﻿class Sudoku
+﻿module Target
+  ROW = Class.new
+  COLUMN = Class.new
+  SQUARE = Class.new
+end
+
+class Sudoku
 
 def Sudoku.run(args)
     row = 0
@@ -45,7 +51,7 @@ def Sudoku.run(args)
 
     number_of_cells_set_in_input_sudoku_board = 81 - cells_remain_to_set.size
 
-    while number_of_attempts_to_solve_sudoku < max_number_of_attempts_to_solve_sudoku and not sudoku_solved and not numbers_added_with_certainty_and_then_no_candidates:
+    while number_of_attempts_to_solve_sudoku < max_number_of_attempts_to_solve_sudoku and not sudoku_solved and not numbers_added_with_certainty_and_then_no_candidates
         if number_of_attempts_to_solve_sudoku > 0
             copy_sudoku_board(certainty_sudoku_board, working_sudoku_board)
             copy_list(cells_remain_to_set_after_added_numbers_with_certainty, cells_remain_to_set)
@@ -81,6 +87,7 @@ def Sudoku.run(args)
             working_sudoku_board[row - 1][column - 1] = number
             cells_remain_to_set.delete_at(i)
             number_of_candidates -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
+        end
 
         if number_of_cells_set_in_best_so_far < (81 - cells_remain_to_set.size)
             number_of_cells_set_in_best_so_far = 81 - cells_remain_to_set.size
@@ -132,7 +139,7 @@ def Sudoku.get_input_sudoku_board(args, sudoku_board, cells_remain_to_set)
         return "At most two parameters may be given to the program!" 
     elsif not File.file?(args[0])
         return "The given input file in first parameter does not exist!"
-    elsif args.size == 2 and (not Dir.exist?(args[1])
+    elsif args.size == 2 and not Dir.exist?(args[1])
         return "The directory given in second parameter does not exist!"
     end
 
@@ -178,10 +185,10 @@ def Sudoku.candidate_is_alone_possible(number, candidates, square_cell_to_row_co
     number_of_occurencies_of_number = 0
 
     for i in 0..8
-        if target == Target.ROW
+        if target == Target::ROW
             row = t
             column = i + 1
-        elsif target == Target.COLUMN
+        elsif target == Target::COLUMN
             row = i + 1
             column = t
         else
@@ -202,6 +209,7 @@ def Sudoku.candidate_is_alone_possible(number, candidates, square_cell_to_row_co
                 end
             end
         end
+    end
 
     return true
 end
@@ -237,10 +245,10 @@ def Sudoku.return_number_of_occurencies_of_number(sudoku_board, square_cell_to_r
     n = 0
 
     for i in 0..8
-        if target == Target.ROW
+        if target == Target::ROW
             row = t
             column = i + 1
-        elsif target == Target.COLUMN
+        elsif target == Target::COLUMN
             row = i + 1
             column = t
         else
@@ -345,6 +353,7 @@ def Sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number)
         if number_of_candidates > 0 and number_of_candidates < min_number_of_candidates
             min_number_of_candidates = number_of_candidates
         end
+    end
 
     for i in 0..cells_remain_to_set.size - 1
         row = cells_remain_to_set[i][0]
@@ -355,11 +364,11 @@ def Sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number)
         end
     end
 
-    tmp = randrange(0, v.size)
+    tmp = rand(v.size)
     index_number[0] = v[tmp]
     row = cells_remain_to_set[index_number[0]][0]
     column = cells_remain_to_set[index_number[0]][1]
-    index_number[1] = candidates[row - 1][column - 1][1 + randrange(0, min_number_of_candidates)]
+    index_number[1] = candidates[row - 1][column - 1][1 + rand(min_number_of_candidates)]
 end
 
 def Sudoku.init_candidates(sudoku_board, square_cell_to_row_column_mapper, candidates)
@@ -374,10 +383,10 @@ def Sudoku.init_candidates(sudoku_board, square_cell_to_row_column_mapper, candi
             else
                 n = 0
                 candidates[row - 1][column - 1][0] = 0
-                for number in range(1, 10)
-                    if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target.ROW)
-                        if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, column, Target.COLUMN)
-                            if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, square, Target.SQUARE)
+                for number in 1..9
+                    if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target::ROW)
+                        if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, column, Target::COLUMN)
+                            if 0 == return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, square, Target::SQUARE)
                                 n += 1
                                 candidates[row - 1][column - 1][0] = n
                                 candidates[row - 1][column - 1][n] = number
@@ -405,13 +414,13 @@ def Sudoku.try_find_number_to_set_in_cell_with_certainty(row, column, candidates
         while i <= number_of_candidates_in_cell and number == 0
             candidate = candidates[row - 1][column - 1][i]
 
-            if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, row, Target.ROW)
+            if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, row, Target::ROW)
                 number = candidate
             else
-                if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, column, Target.COLUMN)
+                if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, column, Target::COLUMN)
                     number = candidate
                 else
-                    if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, square, Target.SQUARE)
+                    if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, square, Target::SQUARE)
                         number = candidate
                     else
                         i += 1
@@ -461,11 +470,11 @@ def Sudoku.validate_sudoku_board(sudoku_board, square_cell_to_row_column_mapper)
             number = sudoku_board[row - 1][column - 1]
 
             if number != 0
-                if return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target.ROW) > 1
+                if return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target::ROW) > 1
                     return "The input sudoku is incorrect! The number " + number.to_s + " occurs more than once in row " + row.to_s
-                elsif return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, column, Target.COLUMN) > 1
+                elsif return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, column, Target::COLUMN) > 1
                     return "The input sudoku is incorrect! The number " + number.to_s + " occurs more than once in column " + column.to_s
-                elsif return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, square, Target.SQUARE) > 1
+                elsif return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, square, Target::SQUARE) > 1
                     return "The input sudoku is incorrect! The number " + number.to_s + " occurs more than once in square " + square.to_s
                 end
             end
@@ -478,12 +487,13 @@ end
 def Sudoku.print_sudoku_board(solved, args, message, sudoku_board)
     index = 1 + args[0].rindex("\\")
     fileName = args[0][index, args[0].size - index]
-    tmp = Time.now.strftime("%Y.%m.%d.%H.%M.%S.%f")
+    current_date_time = Time.now
+    tmp = current_date_time.strftime("%Y.%m.%d.%H.%M.%S.") + current_date_time.usec[0, 3]
 
     if solved
-        suffix = "__Solved_" + tmp[0 : tmp.size - 3] + ".txt"
+        suffix = "__Solved_" + tmp + ".txt"
     else
-        suffix = "__Partially_solved_" + tmp[0 : tmp.size - 3] + ".txt"
+        suffix = "__Partially_solved_" + tmp + ".txt"
     end
 
     if args.size == 2
@@ -507,10 +517,4 @@ end
 end
 
 
-args = []
-n = sys.argv.size
-
-for i in range(1, n)
-    args.append(sys.argv[i])
-
-run(args)
+Sudoku.run(ARGV)

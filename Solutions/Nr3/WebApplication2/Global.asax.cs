@@ -1,4 +1,14 @@
-﻿public class CarlJonasLeanderOutputFilterStream : System.IO.Stream
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+
+namespace WebApplication2
+{
+public class CarlJonasLeanderOutputFilterStream : System.IO.Stream
 {
     private readonly System.IO.Stream InnerStream;
     private readonly System.IO.MemoryStream CopyStream;
@@ -102,7 +112,7 @@ public static class CarlJonasLeander
 
         try
         {
-            fileStream = new System.IO.FileStream("C:\\AAA\\LogRequestResponse\\RR" + System.Guid.NewGuid().ToString().Replace("-", "") + ".txt", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
+            fileStream = new System.IO.FileStream("C:\\LogRequestResponse\\Nr3Web2\\RequestResponse\\RR" + System.Guid.NewGuid().ToString().Replace("-", "") + ".txt", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
         }
         catch
         {
@@ -387,37 +397,37 @@ public static class CarlJonasLeander
         sb.Append(ReturnrequestSummary(request));
         sb.Append("\r\n\r\n");
 
-        sb.Append("--------------------- Basic variables ----------------------");
+        sb.Append("--------------------- Basic variables ---------------------");
         sb.Append("\r\n\r\n");
         sb.Append(ReturnBasicVariables(request));
         sb.Append("\r\n\r\n");
 
-        sb.Append("--------------------- QueryString --------------------------");
+        sb.Append("--------------------- QueryString ---------------------");
         sb.Append("\r\n\r\n");
         sb.Append(ReturnNameValueCollection(request.QueryString));
         sb.Append("\r\n\r\n");
 
-        sb.Append("--------------------- Form ---------------------------------");
+        sb.Append("--------------------- Form ---------------------");
         sb.Append("\r\n\r\n");
         sb.Append(ReturnNameValueCollection(request.Form));
         sb.Append("\r\n\r\n");
 
-        sb.Append("--------------------- Headers ------------------------------");
+        sb.Append("--------------------- Headers ---------------------");
         sb.Append("\r\n\r\n");
         sb.Append(ReturnNameValueCollection(request.Headers));
         sb.Append("\r\n\r\n");
 
-        sb.Append("--------------------- ServerVariables ----------------------");
+        sb.Append("--------------------- ServerVariables ---------------------");
         sb.Append("\r\n\r\n");
         sb.Append(ReturnNameValueCollection(request.ServerVariables));
         sb.Append("\r\n\r\n");
 
-        sb.Append("--------------------- Cookies ------------------------------");
+        sb.Append("--------------------- Cookies ---------------------");
         sb.Append("\r\n\r\n");
         sb.Append(ReturnHttpCookieCollection(request.Cookies));
         sb.Append("\r\n\r\n");
 
-        sb.Append("--------------------- Files --------------------------------");
+        sb.Append("--------------------- Files ---------------------");
         sb.Append("\r\n\r\n");
         sb.Append(ReturnHttpFileCollection(request.Files));
         sb.Append("\r\n\r\n");
@@ -441,5 +451,29 @@ public static class CarlJonasLeander
         CarlJonasLeanderOutputFilterStream filter = (CarlJonasLeanderOutputFilterStream)context.Items["filter"];
         string response = filter.ReadStream();
         PrintRequestResponse(request, response);
+    }
+}
+
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_BeginRequest()
+        {
+            CarlJonasLeander.ApplicationBeginRequest(HttpContext.Current.Response, this.Context);
+        }
+
+
+        protected void Application_EndRequest()
+        {
+            CarlJonasLeander.ApplicationEndRequest(HttpContext.Current.Request, this.Context);
+        }
+
+
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
     }
 }
