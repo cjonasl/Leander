@@ -1,0 +1,30 @@
+﻿@using Stimulsoft.Report.Mvc;
+@using Stimulsoft.Report.Web;
+@using System.Web.UI.WebControls;
+
+@{
+    ViewBag.Title = "Report dashboard";
+}
+
+@{
+    Layout = Layout = "~/Views/Reports/_StimulsoftReportLayout.cshtml";
+}
+
+@Html.Stimulsoft().StiMvcViewer(new StiMvcViewerOptions()
+{
+    Actions =
+    {
+        GetReport = "GetReport",
+        ViewerEvent = "ViewerEvent",
+        DesignReport = "Design"
+    },
+    Appearance =
+    {
+        BackgroundColor = System.Drawing.Color.FromArgb(0xe8, 0xe8, 0xe8),
+        ScrollbarsMode = true
+    },
+    Toolbar =
+    {
+      ShowDesignButton = true
+    }
+})

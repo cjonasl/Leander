@@ -12,3 +12,6 @@ C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer
 C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\AdvSearch.cshtml
 C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\Search.cshtml
 C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Home\Index.cshtml
+
+New stored procedure:
+SearchCustomers.sql

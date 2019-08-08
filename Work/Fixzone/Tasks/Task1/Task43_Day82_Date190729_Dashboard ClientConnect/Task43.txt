@@ -1,7 +1,24 @@
 ﻿Task43:
 
-ClientConnect PAS live site: https://pasclientconnect.pacificagroup.co.uk/
+------------- New files ----------------------------------------------------------------------
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Content\css\site.css
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Controllers\DashboardController.cs
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Dashboard\_DashboardLayout.cshtml
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Dashboard\Index.cshtml
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Reports\_StimulsoftReportLayout.cshtml
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Reports\Dashboards.cshtml
 
+------------- Modified files -----------------------------------------------------------------
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\App_Start\BundleConfig.cs
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\ClientConnect.csproj
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Controllers\ReportsController.cs
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Home\Index.cshtml
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Shared\_CallCenterLayout.cshtml
+
+
+
+
+ClientConnect PAS live site: https://pasclientconnect.pacificagroup.co.uk/
 
 https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/CallCenterClientConnect
 
