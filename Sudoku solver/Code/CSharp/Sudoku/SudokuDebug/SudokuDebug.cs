@@ -55,6 +55,9 @@ namespace SudokuDebug
             string msg;
             ArrayList cellsRemainToSet = new ArrayList();
             ArrayList cellsRemainToSetAfterAddedNumbersWithCertainty = null;
+            string debugDirectory, debugString, debugFileNameFullPath;
+            string[] debugCategory = new string[1];
+            int debugTry, debugAddNumber;
 
             msg = GetInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
 
@@ -90,8 +93,14 @@ namespace SudokuDebug
 
             numberOfCellsSetInInputSudokuBoard = 81 - cellsRemainToSet.Count;
 
+            debugDirectory = DebugCreateAndReturnDebugDirectory();
+            debugTry = 0;
+
             while (numberOfAttemptsToSolveSudoku < maxNumberOfAttemptsToSolveSudoku && !sudokuSolved && !numbersAddedWithCertaintyAndThenNoCandidates)
             {
+                debugTry += 1;
+                debugAddNumber = 0;
+
                 if (numberOfAttemptsToSolveSudoku > 0)
                 {
                     CopySudokuBoard(certaintySudokuBoard, workingSudokuBoard);
@@ -108,7 +117,7 @@ namespace SudokuDebug
                     {
                         row = ((int[])cellsRemainToSet[i])[0];
                         column = ((int[])cellsRemainToSet[i])[1];
-                        number = TryFindNumberToSetInCellWithCertainty(row, column, candidates, squareCellToRowColumnMapper);
+                        number = TryFindNumberToSetInCellWithCertainty(row, column, candidates, squareCellToRowColumnMapper, debugCategory);
                         i = (number == 0) ? i + 1 : i;
                     }
 
@@ -125,11 +134,19 @@ namespace SudokuDebug
                             CopySudokuBoard(workingSudokuBoard, certaintySudokuBoard);
                             CopyList(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty);
                         }
+
+                        debugCategory[0] = "Simulated";
                     }
+
+                    debugString = "(row, column, number, category) = (" + row.ToString() + ", " + column.ToString() + ", " + number.ToString() + ", " + debugCategory[0] + ")\r\n\r\nData before update:\r\n\r\nSudoku board:\r\n" + ReturnSudokuBoardAsString(workingSudokuBoard);
 
                     workingSudokuBoard[row - 1][column - 1] = number;
                     cellsRemainToSet.RemoveAt(i);
                     numberOfCandidates -= UpdateCandidates(candidates, squareCellToRowColumnMapper, row, column, number);
+
+                    debugAddNumber += 1;
+                    debugFileNameFullPath = debugDirectory + "\\" + DebugReturnFileName(debugTry, debugAddNumber);
+                    File.WriteAllText(debugFileNameFullPath, debugString);
                 }
 
                 if (numberOfCellsSetInBestSoFar < (81 - cellsRemainToSet.Count))
@@ -509,7 +526,7 @@ namespace SudokuDebug
             return numberOfCandidates;
         }
 
-        private static int TryFindNumberToSetInCellWithCertainty(int row, int column, int[][][] candidates, int[][][] squareCellToRowColumnMapper)
+        private static int TryFindNumberToSetInCellWithCertainty(int row, int column, int[][][] candidates, int[][][] squareCellToRowColumnMapper, string[] debugCategory)
         {
             int i, square, numberOfCandidatesInCell, candidate, number = 0;
 
@@ -519,6 +536,7 @@ namespace SudokuDebug
             if (numberOfCandidatesInCell == 1)
             {
                 number = candidates[row - 1][column - 1][1];
+                debugCategory[0] = "Alone in cell";
             }
             else if (numberOfCandidatesInCell > 1)
             {
@@ -527,10 +545,21 @@ namespace SudokuDebug
                 {
                     candidate = candidates[row - 1][column - 1][i];
 
-                    if (CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, row, Target.Row) ||
-                        CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, column, Target.Column) ||
-                        CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, square, Target.Square))
+                    if (CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, row, Target.Row))
+                    {
                         number = candidate;
+                        debugCategory[0] = "Alone in row";
+                    }
+                    else if (CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, column, Target.Column))
+                    {
+                        number = candidate;
+                        debugCategory[0] = "Alone in column";
+                    }
+                    else if (CandidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, square, Target.Square))
+                    {
+                        number = candidate;
+                        debugCategory[0] = "Alone in square";
+                    }
                     else
                         i++;
                 }
@@ -629,6 +658,32 @@ namespace SudokuDebug
                 fileNameFullpath = args[0] + suffix;
 
             File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
+        }
+
+        private static string DebugCreateAndReturnDebugDirectory()
+        {
+            string debugDir = "C:\\Sudoku\\Debug\\Run_" + DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff");
+            Directory.CreateDirectory(debugDir);
+            return debugDir;
+        }
+
+        private static string DebugReturnFileName(int debugTry, int debugAddNumber)
+        {
+            string s1, s2;
+
+            if (debugTry < 10)
+                s1 = "00" + debugTry.ToString();
+            else if (debugTry < 100)
+                s1 = "0" + debugTry.ToString();
+            else
+                s1 = debugTry.ToString();
+
+            if (debugAddNumber < 10)
+                s2 = "0" + debugAddNumber.ToString();
+            else
+                s2 = debugAddNumber.ToString();
+
+            return "Try" + s1 + "AddNumber" + s2 + ".txt";
         }
     }
 }

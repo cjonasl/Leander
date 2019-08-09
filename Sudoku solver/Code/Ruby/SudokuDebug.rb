@@ -20,6 +20,7 @@ def Sudoku.run(args)
     cells_remain_to_set = []
     cells_remain_to_set_after_added_numbers_with_certainty = nil
     index_number = [0, 0]
+    debugCategory = ["0"]
 
     msg = get_input_sudoku_board(args, working_sudoku_board, cells_remain_to_set)
 
@@ -51,7 +52,13 @@ def Sudoku.run(args)
 
     number_of_cells_set_in_input_sudoku_board = 81 - cells_remain_to_set.size
 
+    debugDirectory = DebugCreateAndReturnDebugDirectory()
+    debugTry = 0
+
     while number_of_attempts_to_solve_sudoku < max_number_of_attempts_to_solve_sudoku and not sudoku_solved and not numbers_added_with_certainty_and_then_no_candidates
+        debugTry += 1
+        debugAddNumber = 0
+
         if number_of_attempts_to_solve_sudoku > 0
             copy_sudoku_board(certainty_sudoku_board, working_sudoku_board)
             copy_list(cells_remain_to_set_after_added_numbers_with_certainty, cells_remain_to_set)
@@ -65,7 +72,7 @@ def Sudoku.run(args)
             while i < cells_remain_to_set.size and number == 0
                 row = cells_remain_to_set[i][0]
                 column = cells_remain_to_set[i][1]
-                number = try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper)
+                number = try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper, debugCategory)
                 i = (number == 0) ? i + 1 : i
             end
 
@@ -82,11 +89,21 @@ def Sudoku.run(args)
                     copy_sudoku_board(working_sudoku_board, certainty_sudoku_board)
                     copy_list(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty)
                 end
+
+                debugCategory[0] = "Simulated"
             end
+
+            debugString = "(row, column, number, category) = (" + row.to_s + ", " + column.to_s + ", " + number.to_s + ", " + debugCategory[0] + ")\r\n\r\nData before update:\n\nSudoku board:\n" + return_sudoku_board_as_string(working_sudoku_board)
 
             working_sudoku_board[row - 1][column - 1] = number
             cells_remain_to_set.delete_at(i)
             number_of_candidates -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
+
+            debugAddNumber += 1
+            debugFileNameFullPath = debugDirectory + "\\" + DebugReturnFileName(debugTry, debugAddNumber)
+            f = File.new(debugFileNameFullPath, "w")
+            f.write(debugString)
+            f.close()
         end
 
         if number_of_cells_set_in_best_so_far < (81 - cells_remain_to_set.size)
@@ -402,13 +419,14 @@ def Sudoku.init_candidates(sudoku_board, square_cell_to_row_column_mapper, candi
     return number_of_candidates
 end
 
-def Sudoku.try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper)
+def Sudoku.try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper, debugCategory)
     number = 0
     square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
     number_of_candidates_in_cell = candidates[row - 1][column - 1][0]
 
     if number_of_candidates_in_cell == 1
         number = candidates[row - 1][column - 1][1]
+        debugCategory[0] = "Alone in cell"
     else
         i = 1
         while i <= number_of_candidates_in_cell and number == 0
@@ -416,12 +434,15 @@ def Sudoku.try_find_number_to_set_in_cell_with_certainty(row, column, candidates
 
             if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, row, Target::ROW)
                 number = candidate
+                debugCategory[0] = "Alone in row"
             else
                 if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, column, Target::COLUMN)
                     number = candidate
+                    debugCategory[0] = "Alone in column"
                 else
                     if candidate_is_alone_possible(candidate, candidates, square_cell_to_row_column_mapper, square, Target::SQUARE)
                         number = candidate
+                        debugCategory[0] = "Alone in square"
                     else
                         i += 1
                     end
@@ -512,6 +533,30 @@ def Sudoku.print_sudoku_board(solved, args, message, sudoku_board)
     f = File.new(fileNamefullPath, "w")
     f.write(fileContent)
     f.close()
+end
+
+def Sudoku.DebugCreateAndReturnDebugDirectory()
+    current_date_time = Time.now
+    tmp = current_date_time.strftime("%Y.%m.%d.%H.%M.%S.") + current_date_time.usec.to_s[0, 3]
+    debugDir = "C:\\Sudoku\\Debug\\Run_" + tmp
+    Dir.mkdir(debugDir)
+    return debugDir
+end
+
+def DebugReturnFileName(debugTry, debugAddNumber)
+    if debugTry < 10
+        s1 = "00" + debugTry.to_s
+    elsif debugTry < 100
+        s1 = "0" + debugTry.to_s
+    else
+        s1 = debugTry.to_s
+
+    if debugAddNumber < 10
+        s2 = "0" + debugAddNumber.to_s
+    else
+        s2 = debugAddNumber.to_s
+
+    return "Try" + s1 + "AddNumber" + s2 + ".txt"
 end
 
 end

@@ -1,128 +1,311 @@
-USE [PASClientconnect]
-GO
-
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[SearchCustomers]
-	@Surname VARCHAR(100) = '',
-	@Postcode VARCHAR(100) = '',
-	@TelNo VARCHAR(100) = '',
-	@PolicyNumber VARCHAR(100) = '',
-	@ClientCustRef VARCHAR(100) = '',
-	@Address VARCHAR(100) = '',
-	@UseAndInWhereCondition bit,
-	@ReturnLines INT,
-	@PageNumber INT,
-	@StoreId int
+CREATE PROCEDURE [dbo].[SearchCustomers]
+@Surname varchar(100) = '',
+@Postcode varchar(100) = '',
+@TelNo varchar(100) = '',
+@PolicyNumber varchar(100) = '',
+@ClientCustRef varchar(100) = '',
+@Address varchar(100) = '',
+@UseAndInWhereCondition bit,
+@ReturnLines int,
+@PageNumber int,
+@StoreId int
 AS
-	-- returns Customers list according to search criteria	
-	
-	SET @Surname = '%' + LTRIM(RTRIM(ISNULL(@Surname, ''))) + '%'
-	SET @Postcode = '%' + LTRIM(RTRIM(ISNULL(@Postcode, ''))) + '%'
-	SET @TelNo = '%' + LTRIM(RTRIM(ISNULL(@TelNo, ''))) + '%'
-	SET @PolicyNumber = '%' + LTRIM(RTRIM(ISNULL(@PolicyNumber, ''))) + '%'
-	SET @ClientCustRef = '%' + LTRIM(RTRIM(ISNULL(@ClientCustRef, ''))) + '%'
-	SET @Address = '%' + LTRIM(RTRIM(ISNULL(@Address, ''))) + '%'
-	DECLARE @postcodeWithoutSpaces VARCHAR(10)
-	SET @postcodeWithoutSpaces = REPLACE(LTRIM(RTRIM(@Postcode)),' ','')
+DECLARE
+@SearchCondition varchar(110),
+@postcodeWithoutSpaces varchar(10),
+@FirstInsertHasBeenDone bit,
+@StartRowNum int,
+@RecordCount int
 
-	DECLARE @startRowNum integer
-	set @startRowNum = (@PageNumber - 1) * @ReturnLines + 1
+SET @FirstInsertHasBeenDone = 0
+SET @StartRowNum = (@PageNumber - 1) * @ReturnLines + 1
+SET @postcodeWithoutSpaces = '%' + REPLACE(LTRIM(RTRIM(@Postcode)), ' ', '') + '%'
 
-	DECLARE @Results TABLE(
-		CustomerId INT,
-		--RepairNo VARCHAR(20),
-		Logged DATETIME,
-		CustomerName VARCHAR(MAX),
-		PostCode VARCHAR(8),
-			Address varchar(50),
-		--Description VARCHAR(40),
-		--Status VARCHAR(30),
-		RecordCount INT,
-		RetailClientid varchar(20),
-		--LeadTime DATETIME,
-		StoreId INT,
-		StoreName VARCHAR(50)
-		)
+CREATE TABLE #TmpTableSearchCustomers
+(
+  CUSTOMERID int NOT NULL,
+  Logged datetime NULL,
+  CustomerName varchar(max) NOT NULL,
+  [Address] varchar(150) NOT NULL,
+  Postcode varchar(8) NOT NULL,
+  TEL1 varchar(20) NOT NULL,
+  TEL2 varchar(20) NOT NULL,
+  StoreId int NOT NULL,
+  StoreName varchar(50) NOT NULL,
+  RetailClientName varchar(50) NOT NULL,
+  RecordCount int NULL,
+  POLICYNUMBER varchar(25) NOT NULL,
+  CLIENTCUSTREF varchar(25) NOT NULL,
+  ADDR1 varchar(60) NOT NULL
+)
 
-if (@UseAndInWhereCondition = 1)
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@Surname, ''))) + '%'
+IF (@SearchCondition <> '%%')
 BEGIN
-	WITH CustomersFiltered AS
-	(SELECT ROW_NUMBER() OVER (ORDER BY CreatedDateTime DESC) AS RowNumber,
-			ROW_NUMBER() OVER (ORDER BY CreatedDateTime ) AS InverseRowNumber,
-			CustomerId,	CreatedDateTime AS Logged, CustomerName,
-			Address, Postcode, RetailClientName, StoreId, StoreName		 
-		FROM   (select distinct customer.CreatedDateTime ,customer.CustomerId,	COALESCE(customer.title, '') +' '+		COALESCE(customer.Firstname, '') + ' ' + COALESCE(customer.surname, '') AS CustomerName,
-		customer.ADDR1+' ,'+		COALESCE(customer.addr2, '') + ' ' as Address,Client.ClientName,customer.postcode,r.RetailClientName,customer.CLIENTID  as StoreId,
-		Client.ClientName as StoreName
-		from  customer  					
-		JOIN Client on customer.CLIENTID = Client.ClientID	
-		left join retailclient r on r.RetailID = customer.RetailClientID
-		left join Custapl CA on ( isnull(ca.ownercustomerid,CA.CUSTOMERID)=customer.customerid  )	
-		where
-		  (@Surname ='%%' or isnull(customer.SURNAME, '') like @Surname) and
-          (@Postcode ='%%' or isnull(customer.POSTCODE, '') like @Postcode or isnull(customer.POSTCODE,'') like @postcodeWithoutSpaces or replace(isnull(customer.POSTCODE, ''), ' ', '') like @postcodeWithoutSpaces) and
-		  (@TelNo ='%%' or isnull(customer.TEL1, '') like @TelNo or isnull(customer.TEL2, '') like @TelNo) and
-		  (@PolicyNumber ='%%' or isnull(CA.POLICYNUMBER, '') like @PolicyNumber) and
-		  (@ClientCustRef ='%%' or isnull(customer.CLIENTCUSTREF, '') like @ClientCustRef) and
-		  (@Address ='%%' or isnull(customer.ADDR1, '') like @Address)
-		)	as R
-     )
-	INSERT INTO @Results
-	SELECT J.CUSTOMERID,J.Logged, J.CustomerName, J.Postcode,J.Address, RowNumber+InverseRowNumber-1 AS RecordCount, J.RetailClientName, J.StoreId, J.StoreName
-	FROM CustomersFiltered J
-	WHERE J.RowNumber BETWEEN @startRowNum AND @startRowNum + @ReturnLines - 1
+  INSERT INTO
+    #TmpTableSearchCustomers(CUSTOMERID, Logged, CustomerName, [Address], Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+  SELECT
+    cu.CUSTOMERID,
+	cu.CreatedDateTime,
+	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+	ISNULL(cu.POSTCODE, ''),
+    ISNULL(cu.TEL1, ''),
+    ISNULL(cu.TEL2, ''),
+	cu.CLIENTID,
+	cl.ClientName,
+	ISNULL(rc.RetailClientName, ''),
+	ISNULL(ca.POLICYNUMBER, ''),
+	ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(cu.ADDR1, '')
+  FROM
+    Customer cu
+    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
+	LEFT JOIN Custapl ca ON ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID) = cu.CUSTOMERID
+  WHERE
+    SURNAME LIKE @SearchCondition
+
+	SET @FirstInsertHasBeenDone = 1
 END
-ELSE
+
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@Postcode , ''))) + '%'
+IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
 BEGIN
-	WITH CustomersFiltered AS
-	(SELECT ROW_NUMBER() OVER (ORDER BY CreatedDateTime DESC) AS RowNumber,
-			ROW_NUMBER() OVER (ORDER BY CreatedDateTime ) AS InverseRowNumber,
-			CustomerId,	CreatedDateTime AS Logged, CustomerName,
-			Address, Postcode, RetailClientName, StoreId, StoreName		 
-		FROM   (select distinct customer.CreatedDateTime ,customer.CustomerId,	COALESCE(customer.title, '') +' '+		COALESCE(customer.Firstname, '') + ' ' + COALESCE(customer.surname, '') AS CustomerName,
-		customer.ADDR1+' ,'+		COALESCE(customer.addr2, '') + ' ' as Address,Client.ClientName,customer.postcode,r.RetailClientName,customer.CLIENTID  as StoreId,
-		Client.ClientName as StoreName
-		from  customer  					
-		JOIN Client on customer.CLIENTID = Client.ClientID	
-		left join retailclient r on r.RetailID = customer.RetailClientID
-		left join Custapl CA on ( isnull(ca.ownercustomerid,CA.CUSTOMERID)=customer.customerid  )	
-		where
-		  (@Surname ='%%' or isnull(customer.SURNAME, '') like @Surname) or
-          (@Postcode ='%%' or isnull(customer.POSTCODE, '') like @Postcode or isnull(customer.POSTCODE,'') like @postcodeWithoutSpaces or replace(isnull(customer.POSTCODE, ''), ' ', '') like @postcodeWithoutSpaces) or
-		  (@TelNo ='%%' or isnull(customer.TEL1, '') like @TelNo or isnull(customer.TEL2, '') like @TelNo) or
-		  (@PolicyNumber ='%%' or isnull(CA.POLICYNUMBER, '') like @PolicyNumber) or
-		  (@ClientCustRef ='%%' or isnull(customer.CLIENTCUSTREF, '') like @ClientCustRef) or
-		  (@Address ='%%' or isnull(customer.ADDR1, '') like @Address)
-		)	as R
-     )
-	INSERT INTO @Results
-	SELECT J.CUSTOMERID,J.Logged, J.CustomerName, J.Postcode,J.Address, RowNumber+InverseRowNumber-1 AS RecordCount, J.RetailClientName, J.StoreId, J.StoreName
-	FROM CustomersFiltered J
-	WHERE J.RowNumber BETWEEN @startRowNum AND @startRowNum + @ReturnLines - 1
-END	 
-	DECLARE @RecordCount integer
-	SELECT TOP 1 @RecordCount = RecordCount
-	FROM @Results
+  INSERT INTO
+    #TmpTableSearchCustomers(CUSTOMERID, Logged, CustomerName, [Address], Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+  SELECT
+    cu.CUSTOMERID,
+	cu.CreatedDateTime,
+	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+	ISNULL(cu.POSTCODE, ''),
+    ISNULL(cu.TEL1, ''),
+    ISNULL(cu.TEL2, ''),
+	cu.CLIENTID,
+	cl.ClientName,
+	ISNULL(rc.RetailClientName, ''),
+	ISNULL(ca.POLICYNUMBER, ''),
+	ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(cu.ADDR1, '')
+  FROM
+    Customer cu					
+    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
+	LEFT JOIN Custapl ca ON ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID) = cu.CUSTOMERID
+  WHERE
+    ISNULL(cu.POSTCODE, '') LIKE @SearchCondition OR
+	REPLACE(ISNULL(cu.POSTCODE, ''), ' ', '') LIKE @postcodeWithoutSpaces
 
-	SELECT R.CUSTOMERID as 'CUSTOMERID',  R.Logged as 'Logged', R.CustomerName as 'CustomerName', 
-		R.PostCode as 'Postcode',  
-		R.Address as Address,
-		case when R.StoreId is not null then R.StoreId
-			else 0		
-		end as 'StoreId',
-		case when R.StoreName is not null then R.StoreName
-			else ''
-		end as 'StoreName',RetailClientid,
-		isnull(@RecordCount,0) as 'ElemCount', isnull(@startRowNum,0) as 'StartElem', 
-			case when (@startRowNum + @ReturnLines - 1) > @RecordCount then @RecordCount
-				else (@startRowNum + @ReturnLines - 1)
-			end as 'LastElem'
-	FROM @Results R
-GO
+  SET @FirstInsertHasBeenDone = 1
+END
+ELSE IF (@SearchCondition  <> '%%')
+BEGIN
+  DELETE FROM #TmpTableSearchCustomers
+  WHERE Postcode NOT LIKE @SearchCondition AND REPLACE(Postcode, ' ', '') NOT LIKE @postcodeWithoutSpaces
+END
 
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@TelNo , ''))) + '%'
+IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
+BEGIN
+  INSERT INTO
+    #TmpTableSearchCustomers(CUSTOMERID, Logged, CustomerName, [Address], Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+  SELECT
+    cu.CUSTOMERID,
+	cu.CreatedDateTime,
+	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+	ISNULL(cu.POSTCODE, ''),
+    ISNULL(cu.TEL1, ''),
+    ISNULL(cu.TEL2, ''),
+	cu.CLIENTID,
+	cl.ClientName,
+	ISNULL(rc.RetailClientName, ''),
+	ISNULL(ca.POLICYNUMBER, ''),
+	ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(cu.ADDR1, '')
+  FROM
+    Customer cu					
+    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
+	LEFT JOIN Custapl ca ON ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID) = cu.CUSTOMERID
+  WHERE
+    cu.TEL1 LIKE @SearchCondition OR
+	cu.TEL2 LIKE @SearchCondition
 
+  SET @FirstInsertHasBeenDone = 1
+END
+ELSE IF (@SearchCondition  <> '%%')
+BEGIN
+  DELETE FROM #TmpTableSearchCustomers
+  WHERE TEL1 NOT LIKE @SearchCondition AND TEL2 NOT LIKE @SearchCondition
+END
+
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@PolicyNumber , ''))) + '%'
+IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
+BEGIN
+  INSERT INTO
+    #TmpTableSearchCustomers(CUSTOMERID, Logged, CustomerName, [Address], Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+  SELECT
+    cu.CUSTOMERID,
+	cu.CreatedDateTime,
+	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+	ISNULL(cu.POSTCODE, ''),
+    ISNULL(cu.TEL1, ''),
+    ISNULL(cu.TEL2, ''),
+	cu.CLIENTID,
+	cl.ClientName,
+	ISNULL(rc.RetailClientName, ''),
+	ISNULL(ca.POLICYNUMBER, ''),
+	ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(cu.ADDR1, '')
+  FROM
+    Customer cu					
+    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
+	LEFT JOIN Custapl ca ON ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID) = cu.CUSTOMERID
+  WHERE
+    ca.POLICYNUMBER LIKE @SearchCondition
+
+  SET @FirstInsertHasBeenDone = 1
+END
+ELSE IF (@SearchCondition  <> '%%')
+BEGIN
+  DELETE FROM #TmpTableSearchCustomers
+  WHERE POLICYNUMBER NOT LIKE @SearchCondition
+END
+
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@ClientCustRef , ''))) + '%'
+IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
+BEGIN
+  INSERT INTO
+    #TmpTableSearchCustomers(CUSTOMERID, Logged, CustomerName, [Address], Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+  SELECT
+    cu.CUSTOMERID,
+	cu.CreatedDateTime,
+	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+	ISNULL(cu.POSTCODE, ''),
+    ISNULL(cu.TEL1, ''),
+    ISNULL(cu.TEL2, ''),
+	cu.CLIENTID,
+	cl.ClientName,
+	ISNULL(rc.RetailClientName, ''),
+	ISNULL(ca.POLICYNUMBER, ''),
+	ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(cu.ADDR1, '')
+  FROM
+    Customer cu					
+    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
+	LEFT JOIN Custapl ca ON ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID) = cu.CUSTOMERID
+  WHERE
+    cu.CLIENTCUSTREF LIKE @SearchCondition
+
+  SET @FirstInsertHasBeenDone = 1
+END
+ELSE IF (@SearchCondition  <> '%%')
+BEGIN
+  DELETE FROM #TmpTableSearchCustomers
+  WHERE CLIENTCUSTREF NOT LIKE @SearchCondition
+END
+
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@Address , ''))) + '%'
+IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
+BEGIN
+  INSERT INTO
+    #TmpTableSearchCustomers(CUSTOMERID, Logged, CustomerName, [Address], Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+  SELECT
+    cu.CUSTOMERID,
+	cu.CreatedDateTime,
+	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+	ISNULL(cu.POSTCODE, ''),
+    ISNULL(cu.TEL1, ''),
+    ISNULL(cu.TEL2, ''),
+	cu.CLIENTID,
+	cl.ClientName,
+	ISNULL(rc.RetailClientName, ''),
+	ISNULL(ca.POLICYNUMBER, ''),
+	ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(cu.ADDR1, '')
+  FROM
+    Customer cu					
+    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
+	LEFT JOIN Custapl ca ON ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID) = cu.CUSTOMERID
+  WHERE
+    cu.ADDR1 LIKE @SearchCondition
+END
+ELSE IF (@SearchCondition  <> '%%')
+BEGIN
+  DELETE FROM #TmpTableSearchCustomers
+  WHERE ADDR1 NOT LIKE @SearchCondition
+END
+
+DECLARE @Results TABLE(
+		CustomerId int,
+		Logged datetime,
+		CustomerName varchar(MAX),
+		PostCode varchar(8),
+		[Address] varchar(50),
+		RetailClientid varchar(20),
+		StoreId int,
+		StoreName varchar(50)
+		);
+
+WITH CustomersFiltered AS
+(
+  SELECT
+    ROW_NUMBER() OVER (ORDER BY R.Logged DESC) AS RowNumber,
+    R.CustomerId,
+	R.Logged,
+	R.CustomerName,
+	R.Postcode,
+    R.[Address],
+	R.RetailClientName,
+	R.StoreId,
+	R.StoreName
+FROM
+(
+  SELECT DISTINCT
+    CustomerId,
+	Logged,
+	CustomerName,
+	PostCode,
+	[Address],
+	RetailClientName,
+	StoreId,
+	StoreName
+  FROM
+	 #TmpTableSearchCustomers
+) AS R)
+INSERT intO @Results
+SELECT CustomerId, Logged, CustomerName, Postcode, [Address], RetailClientName, StoreId, StoreName
+FROM CustomersFiltered
+WHERE RowNumber BETWEEN @startRowNum AND @startRowNum + @ReturnLines - 1
+
+SELECT @RecordCount = COUNT(*)
+FROM @Results
+
+SELECT
+  CUSTOMERID,
+  Logged,
+  CustomerName,
+  PostCode,
+  [Address],
+  StoreId,
+  StoreName,
+  RetailClientid,
+  @RecordCount as 'ElemCount',
+  ISNULL(@startRowNum, 0) AS 'StartElem', 
+  CASE WHEN (@startRowNum + @ReturnLines - 1) > @RecordCount THEN @RecordCount ELSE (@startRowNum + @ReturnLines - 1) END AS 'LastElem'
+FROM
+  @Results R

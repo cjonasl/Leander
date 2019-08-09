@@ -1,2 +1,8 @@
 ﻿Dag 89:
 Onsdag den 7 augusti 2019
+Jag ägnade arbetsdagen åt att gå igenom mitt arbete i
+task39 (Complete customer search client connect) och
+task43 (Dashboard ClientConnect) och skapa en testwebbplats
+för dem på Terminal server/PG-DUR-WEBSER. Vid 13.00-tiden
+intog jag banan, smörgås och kaffe till lunch. Jag avslutade
+arbetsdagen drygt kl. 17.30.
