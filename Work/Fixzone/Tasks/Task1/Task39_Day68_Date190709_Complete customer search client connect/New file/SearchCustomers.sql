@@ -54,7 +54,7 @@ BEGIN
     cu.CUSTOMERID,
 	cu.CreatedDateTime,
 	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
-    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR2, ''))),
 	ISNULL(cu.POSTCODE, ''),
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
@@ -84,7 +84,7 @@ BEGIN
     cu.CUSTOMERID,
 	cu.CreatedDateTime,
 	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
-    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR2, ''))),
 	ISNULL(cu.POSTCODE, ''),
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
@@ -120,7 +120,7 @@ BEGIN
     cu.CUSTOMERID,
 	cu.CreatedDateTime,
 	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
-    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR2, ''))),
 	ISNULL(cu.POSTCODE, ''),
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
@@ -156,7 +156,7 @@ BEGIN
     cu.CUSTOMERID,
 	cu.CreatedDateTime,
 	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
-    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR2, ''))),
 	ISNULL(cu.POSTCODE, ''),
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
@@ -191,7 +191,7 @@ BEGIN
     cu.CUSTOMERID,
 	cu.CreatedDateTime,
 	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
-    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR2, ''))),
 	ISNULL(cu.POSTCODE, ''),
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
@@ -226,7 +226,7 @@ BEGIN
     cu.CUSTOMERID,
 	cu.CreatedDateTime,
 	LTRIM(RTRIM(ISNULL(cu.TITLE, '') + ' ' + ISNULL(cu.FIRSTNAME, '') + ' ' + COALESCE(cu.SURNAME, ''))),
-    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR1, ''))),
+    LTRIM(RTRIM(ISNULL(cu.ADDR1, '') + ' ,' + ISNULL(cu.ADDR2, ''))),
 	ISNULL(cu.POSTCODE, ''),
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
@@ -249,6 +249,9 @@ BEGIN
   DELETE FROM #TmpTableSearchCustomers
   WHERE ADDR1 NOT LIKE @SearchCondition
 END
+
+SELECT @RecordCount = COUNT(*)
+FROM (SELECT DISTINCT CustomerId, Logged, CustomerName, PostCode, [Address], RetailClientName, StoreId, StoreName FROM #TmpTableSearchCustomers) R
 
 DECLARE @Results TABLE(
 		CustomerId int,
@@ -291,9 +294,6 @@ INSERT intO @Results
 SELECT CustomerId, Logged, CustomerName, Postcode, [Address], RetailClientName, StoreId, StoreName
 FROM CustomersFiltered
 WHERE RowNumber BETWEEN @startRowNum AND @startRowNum + @ReturnLines - 1
-
-SELECT @RecordCount = COUNT(*)
-FROM @Results
 
 SELECT
   CUSTOMERID,

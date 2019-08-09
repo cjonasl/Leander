@@ -461,6 +461,71 @@ def DebugReturnFileName(debugTry, debugAddNumber):
 
     return "Try" + s1 + "AddNumber" + s2 + ".txt"
 
+def DebugReturnCells(cellsRemainToSet):
+    s = ""
+
+    for i in range(1, len(cellsRemainToSet)):
+        if i > 0:
+            s += " "
+        s += "(" + str(cellsRemainToSet[i][0]) + ", " + str(cellsRemainToSet[i][1]) + ")"
+ 
+    return s;
+
+def DebugReturnCandidates(int row, int column, candidates):
+    s = ""
+    n = candidates[row - 1][column - 1][0]
+
+    for i in range(1, 1 + n):
+        if i > 1:
+            s += ", "
+
+        s += str(candidates[row - 1][column - 1][i])
+
+    return s
+
+def DebugSort(n, v):
+    for i in range(1, n - 1):
+        for j in range(i + 1, n):
+            if (v[j] < v[i]):
+                tmp = v[j];
+                v[j] = v[i];
+                v[i] = tmp;
+
+def ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, t, Target target):
+    row = 0
+    column = 0
+    n = 0
+    s = ""
+
+    for i in range(9):
+        if target == Target.ROW:
+            row = t
+            column = i + 1
+        elif target == Target.COLUMN:
+            row = i + 1
+            column = t
+        else:
+            row = square_cell_to_row_column_mapper[t - 1][i][0]
+            column = square_cell_to_row_column_mapper[t - 1][i][1]
+
+        if candidates[row - 1][column - 1][0] > 0:
+            c = candidates[row - 1][column - 1][0]
+
+            for j in range(c):
+                v[n] = candidates[row - 1][column - 1][1 + j]
+                n += 1
+
+    DebugSort(n, v)
+
+    for i in range(9):
+        if i > 0:
+            s += ", "
+        s += str(v[i])
+
+    if n > 0:
+        s += " (a total of " + str(n) + " candidates)"
+
+    return s
 
 args = []
 n = len(sys.argv)

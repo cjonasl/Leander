@@ -1,0 +1,45 @@
+﻿141
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-08-09 12:14:41
+
+----- New property -----
+
+Task44_Day91_Date190809_Transfer functionality from old PHP ClientConnect to new site
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task44_Day91_Date190809_Transfer functionality from old PHP ClientConnect to new site
+
+----- New property -----
+
+null

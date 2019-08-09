@@ -1,4 +1,14 @@
-﻿ClientConnect PAS live site: https://pasclientconnect.pacificagroup.co.uk/
+﻿Log in Complete Service:
+User name: fixzone
+Password: toothblue
+
+K:\Service\DBISAM\dbsys\dbsys.exe (Terminal Server)
+Log in DBISAM database:
+User name: admin
+Password: BON84STICKy
+
+
+ClientConnect PAS live site: https://pasclientconnect.pacificagroup.co.uk/
 Live IIS-server: Terminal server (Username: Jonas.Leander, Password: Leeds#6231), then box PG-DUR-WEBSER (Username: Jonas.Leander, Password: Leeds#6231)
 Database server: Use SSMS on "Terminal server": user name: PAS_CC, password: QchK8HZEn4g7rU9u and database name is PAS
 

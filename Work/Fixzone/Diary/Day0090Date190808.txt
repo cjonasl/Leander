@@ -1,2 +1,7 @@
 ﻿Dag 90:
 Torsdag den 8 augusti 2019
+Jag ägnade arbetsdagen åt att göra stored procedure
+”SearchCustomers” och åt att skriva debug-versioner
+av min sudoku-algoritm. Vid 13.00-tiden intog jag banan,
+kaffe och smörgås till lunch. Jag avslutade arbetsdagen
+drygt kl. 17.30 och promenerade hem.

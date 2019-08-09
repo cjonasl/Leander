@@ -1,0 +1,17 @@
+﻿Task44:
+
+"Tag" is a customer to Pacifica
+
+URL old PHP site:
+https://client.pacificagroup.co.uk/client/Client.php
+Log in:
+User name: 464
+Password: Cata464
+
+Live Shop Direct site site:
+https://shopdirect.fieldengineer.co.uk/Account/SignIn
+
+Concepts: Store (= clinet) and Call center
+
+DBISAM:
+https://www.elevatesoft.com/products?category=dbisam&type=visualstudio
