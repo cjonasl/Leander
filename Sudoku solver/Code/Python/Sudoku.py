@@ -174,8 +174,8 @@ def candidate_is_alone_possible(number, candidates, square_cell_to_row_column_ma
 
         n = candidates[row - 1][column - 1][0]
 
-        if n != -1:
-            for j in range(9):
+        if n  > 0:
+            for j in range(n):
                 if candidates[row - 1][column - 1][1 + j] == number:
                     number_of_occurencies_of_number += 1
 

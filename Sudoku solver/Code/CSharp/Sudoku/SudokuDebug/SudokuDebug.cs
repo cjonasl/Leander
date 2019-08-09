@@ -296,7 +296,7 @@ namespace SudokuDebug
 
                 n = candidates[row - 1][column - 1][0];
 
-                if (n != -1)
+                if (n > 0)
                 {
                     for (j = 0; j < n; j++)
                     {

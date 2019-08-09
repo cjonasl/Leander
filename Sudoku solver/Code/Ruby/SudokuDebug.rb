@@ -215,8 +215,8 @@ def Sudoku.candidate_is_alone_possible(number, candidates, square_cell_to_row_co
 
         n = candidates[row - 1][column - 1][0]
 
-        if n != -1
-            for j in 0..8
+        if n > 0
+            for j in 0..n - 1
                 if candidates[row - 1][column - 1][1 + j] == number
                     number_of_occurencies_of_number += 1
 

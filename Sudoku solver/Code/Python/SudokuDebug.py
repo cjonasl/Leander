@@ -24,6 +24,8 @@ def run(args):
     cells_remain_to_set_after_added_numbers_with_certainty = None
     index_number = [0, 0]
     debugCategory = ["0"]
+    debugInfo = ["0"]
+    debugTotalCellsAdded = []
 
     msg = get_input_sudoku_board(args, working_sudoku_board, cells_remain_to_set)
 
@@ -57,6 +59,7 @@ def run(args):
     while number_of_attempts_to_solve_sudoku < max_number_of_attempts_to_solve_sudoku and not sudoku_solved and not numbers_added_with_certainty_and_then_no_candidates:
         debugTry += 1
         debugAddNumber = 0
+        debugTotalCellsAdded.clear()
 
         if number_of_attempts_to_solve_sudoku > 0:
             copy_sudoku_board(certainty_sudoku_board, working_sudoku_board)
@@ -75,7 +78,7 @@ def run(args):
                     i += 1
 
             if number == 0:
-                simulate_one_number(candidates, cells_remain_to_set, index_number)
+                simulate_one_number(candidates, cells_remain_to_set, index_number, debugInfo)
                 i = index_number[0]
                 number = index_number[1]
                 row = cells_remain_to_set[i][0]
@@ -89,11 +92,21 @@ def run(args):
 
                 debugCategory[0] = "Simulated"
 
-            debugString = "(row, column, number, category) = (" + str(row) + ", " + str(column) + ", " + str(number) + ", " + debugCategory[0] + ")\n\nData before update:\n\nSudoku board:\n" + return_sudoku_board_as_string(working_sudoku_board)
+            debugTotalCellsAdded.append([row, column])
+
+            debugString = "(row, column, number, category) = (" + str(row) + ", " + str(column) + ", " + str(number) + ", " + debugCategory[0] + ")\n\n"
+            debugString += "Total cells added (" + str(len(debugTotalCellsAdded)) + " cells): " + DebugReturnCells(debugTotalCellsAdded) + "\n\n"
+
+            if debugCategory[0] == "Simulated":
+                debugString += debugInfo[0] + "\n\n"
+
+            debugString += "Data before update:\n\n" + DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates, candidates, square_cell_to_row_column_mapper)
 
             working_sudoku_board[row - 1][column - 1] = number
             del cells_remain_to_set[i]
             number_of_candidates -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
+
+            debugString += "\nData after update:\n\n" + DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates, candidates, square_cell_to_row_column_mapper)
 
             debugAddNumber += 1
             debugFileNameFullPath = debugDirectory + "\\" + DebugReturnFileName(debugTry, debugAddNumber)
@@ -191,8 +204,8 @@ def candidate_is_alone_possible(number, candidates, square_cell_to_row_column_ma
 
         n = candidates[row - 1][column - 1][0]
 
-        if n != -1:
-            for j in range(9):
+        if n > 0:
+            for j in range(n):
                 if candidates[row - 1][column - 1][1 + j] == number:
                     number_of_occurencies_of_number += 1
 
@@ -299,8 +312,9 @@ def return_sudoku_board_as_string(sudoku_board):
 
     return sb
 
-def simulate_one_number(candidates, cells_remain_to_set, index_number):
+def simulate_one_number(candidates, cells_remain_to_set, index_number, debugInfo):
     v = []
+    debugCellsWithMinNumberOfCandidates = []
     min_number_of_candidates = 9
 
     for i in range(len(cells_remain_to_set)):
@@ -311,12 +325,18 @@ def simulate_one_number(candidates, cells_remain_to_set, index_number):
         if number_of_candidates > 0 and number_of_candidates < min_number_of_candidates:
             min_number_of_candidates = number_of_candidates
 
+    s = "minNumberOfCandidates: " + str(min_number_of_candidates) + "\n";
+
     for i in range(len(cells_remain_to_set)):
         row = cells_remain_to_set[i][0]
         column = cells_remain_to_set[i][1]
 
         if candidates[row - 1][column - 1][0] == min_number_of_candidates:
             v.append(i)
+            debugCellsWithMinNumberOfCandidates.append([row, column])
+
+    s += "Cells with minNumberOfCandidates (" + str(len(v)) + " cells): " + DebugReturnCells(debugCellsWithMinNumberOfCandidates)
+    debugInfo[0] = s
 
     tmp = randrange(0, len(v))
     index_number[0] = v[tmp]
@@ -464,14 +484,14 @@ def DebugReturnFileName(debugTry, debugAddNumber):
 def DebugReturnCells(cellsRemainToSet):
     s = ""
 
-    for i in range(1, len(cellsRemainToSet)):
+    for i in range(len(cellsRemainToSet)):
         if i > 0:
             s += " "
         s += "(" + str(cellsRemainToSet[i][0]) + ", " + str(cellsRemainToSet[i][1]) + ")"
  
     return s;
 
-def DebugReturnCandidates(int row, int column, candidates):
+def DebugReturnCandidates(row, column, candidates):
     s = ""
     n = candidates[row - 1][column - 1][0]
 
@@ -484,14 +504,14 @@ def DebugReturnCandidates(int row, int column, candidates):
     return s
 
 def DebugSort(n, v):
-    for i in range(1, n - 1):
+    for i in range(n - 1):
         for j in range(i + 1, n):
-            if (v[j] < v[i]):
-                tmp = v[j];
-                v[j] = v[i];
-                v[i] = tmp;
+            if v[j] < v[i]:
+                tmp = v[j]
+                v[j] = v[i]
+                v[i] = tmp
 
-def ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, t, Target target):
+def ReturnAllCandidatesSorted(candidates, v, square_cell_to_row_column_mapper, t, target):
     row = 0
     column = 0
     n = 0
@@ -517,7 +537,7 @@ def ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, t, Tar
 
     DebugSort(n, v)
 
-    for i in range(9):
+    for i in range(n):
         if i > 0:
             s += ", "
         s += str(v[i])
@@ -526,6 +546,43 @@ def ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, t, Tar
         s += " (a total of " + str(n) + " candidates)"
 
     return s
+
+def DebugReturnInfo(sudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper):
+
+    v = []
+
+    for i in range(81):
+        v.append(0)
+
+    s = "Sudoku board:\n" + return_sudoku_board_as_string(sudokuBoard) + "\n\nCells remain to set (" + str(len(cellsRemainToSet)) + " cells): "
+    s += DebugReturnCells(cellsRemainToSet) + "\n\n"
+    s += "Number Of candidates: " + str(numberOfCandidates) + "\n\n"
+    s += "Candidates (row, column, numberOfCandidate):\n"
+
+    for row in range(1, 10):
+        for column in range(1, 10):
+            if candidates[row - 1][column - 1][0] == -1:
+                s += "(" + str(row) + ", " + str(column) + ", 0): Already set to " + str(sudokuBoard[row - 1][column - 1]) + "\n"
+            else:
+                s += "(" + str(row) + ", " + str(column) + ", " + str(candidates[row - 1][column - 1][0]) + "): " + DebugReturnCandidates(row, column, candidates) + "\n"
+
+    s += "\nCandidates in the rows:\n"
+
+    for row in range(1, 10):
+        s += str(row) + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.ROW) + "\n"
+
+    s += "\nCandidates in the columns:\n"
+
+    for column in range(1, 10):
+        s += str(column) + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.COLUMN) + "\n"
+
+    s += "\nCandidates in the squares:\n"
+
+    for square in range(1, 10):
+        s += str(square) + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.SQUARE) + "\n"
+
+    return s
+
 
 args = []
 n = len(sys.argv)
