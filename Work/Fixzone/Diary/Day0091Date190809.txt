@@ -1,2 +1,10 @@
 ﻿Dag 91:
 Fredag den 9 augusti 2019
+Fick en ny lite ospecificerad uppgift att föra över
+funktionalitet från en gammal PHP ClientConnect till
+dot Net ClientConnet. Ivo visade mig lite av den gamla
+PHP ClientConnect. Jag skapade task44 för uppgiften.
+Vid 13.00-tiden åt jag en smörgås till lunch. Arbetade
+med mina debug-versioner av sudoku-algoritmen. Jag
+avslutade arbetsdagen drygt kl. 17.30 och promenerade
+hemåt.

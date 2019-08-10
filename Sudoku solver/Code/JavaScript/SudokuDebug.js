@@ -19,7 +19,7 @@ sudoku.run = function(args) {
     var cellsRemainToSet = [];
     var cellsRemainToSetAfterAddedNumbersWithCertainty = null;
     var indexNumber = [0, 0];
-    var debugDirectory, debugTry, debugAddNumber, debugString;
+    var debugDirectory, debugTry, debugAddNumber, debugSquare, debugString;
     var debugCategory = ["0"];
 
     msg = sudoku.getInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
@@ -77,7 +77,7 @@ sudoku.run = function(args) {
             }
 
             if (number == 0) {
-                sudoku.simulateOneNumber(candidates, cellsRemainToSet, indexNumber);
+                sudoku.simulateOneNumber(candidates, cellsRemainToSet, indexNumber, debugInfo);
                 i = indexNumber[0];
                 number = indexNumber[1];
                 row = cellsRemainToSet[i][0];
@@ -93,11 +93,23 @@ sudoku.run = function(args) {
                 debugCategory[0] = "Simulated";
             }
 
-            debugString = "(row, column, number, category) = (" + row + ", " + column + ", " + number + ", " + debugCategory[0] + ")\r\n\r\nData before update:\r\n\r\nSudoku board:\r\n" + sudoku.returnSudokuBoardAsString(workingSudokuBoard);
+            debugTotalCellsAdded.push([row, column]);
+
+            debugSquare = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
+            debugString = "(row, column, square, number, category) = (" + row + ", " + column + ", " + debugSquare + ", " + number + ", " + debugCategory[0] + ")\r\n\r\n";
+            debugString += "Total cells added (" + debugTotalCellsAdded.length + " cells): " + DebugReturnCells(debugTotalCellsAdded) + "\r\n\r\n";
+
+            if (debugCategory[0] == "Simulated") {
+                debugString += debugInfo[0] + "\r\n\r\n";
+            }
+
+            debugString += "Data before update:\r\n\r\n" + DebugReturnInfo(workingSudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper);
 
             workingSudokuBoard[row - 1][column - 1] = number;
             cellsRemainToSet.splice(i, 1);
             numberOfCandidates -= sudoku.updateCandidates(candidates, squareCellToRowColumnMapper, row, column, number);
+
+            debugString += "\r\nData after update:\r\n\r\n" + DebugReturnInfo(workingSudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper);
 
             debugAddNumber += 1;
             debugFileNameFullPath = debugDirectory + "\\" + sudoku.debugReturnFileName(debugTry, debugAddNumber);
@@ -390,7 +402,7 @@ sudoku.returnIntegerRandomNumber = function (minIncluded, maxExcluded) {
     return n;
 }
 
-sudoku.simulateOneNumber = function(candidates, cellsRemainToSet, indexNumber) {
+sudoku.simulateOneNumber = function (candidates, cellsRemainToSet, indexNumber, debugInfo) {
     var v = [], tmp, row, column, i, numberOfCandidates, minNumberOfCandidates = 9;
 
     for (i = 0; i < cellsRemainToSet.length; i++) {
@@ -402,13 +414,22 @@ sudoku.simulateOneNumber = function(candidates, cellsRemainToSet, indexNumber) {
             minNumberOfCandidates = numberOfCandidates;
     }
 
+    str = "minNumberOfCandidates: " + minNumberOfCandidates + "\r\n";
+
+    debugCellsWithMinNumberOfCandidates = [];
+
     for (i = 0; i < cellsRemainToSet.length; i++) {
         row = cellsRemainToSet[i][0];
         column = cellsRemainToSet[i][1];
 
-        if (candidates[row - 1][column - 1][0] == minNumberOfCandidates)
+        if (candidates[row - 1][column - 1][0] == minNumberOfCandidates) {
+            debugCellsWithMinNumberOfCandidates.push([row, column]);
             v.push(i);
+        }
     }
+
+    str += "Cells with minNumberOfCandidates (" + v.length + " cells): " + sudoku.debugReturnCells(debugCellsWithMinNumberOfCandidates);
+    debugInfo[0] = str;
 
     tmp = sudoku.returnIntegerRandomNumber(0, v.length);
     indexNumber[0] = v[tmp];
@@ -637,6 +658,144 @@ sudoku.debugReturnFileName = function(debugTry, debugAddNumber) {
         s2 = debugAddNumber;
 
     return "Try" + s1 + "AddNumber" + s2 + ".txt";
+}
+
+sudoku.debugReturnCells = function(cellsRemainToSet) {
+    var str = "";
+
+    for (var i = 0; i < cellsRemainToSet.Count; i++)
+    {
+        if (i > 0) {
+            str += " ";
+        }
+
+        str += "(" + cellsRemainToSet[i][0] + ", " + cellsRemainToSet[i][1] + ")";
+    }
+
+    return str;
+}
+
+sudoku.debugReturnCandidates = function(row, column, candidates) {
+    var str = "";
+    var n = candidates[row - 1][column - 1][0];
+
+    for (var i = 1; i <= n; i++) {
+        if (i > 1) {
+            str += ", ";
+        }
+
+        str += candidates[row - 1][column - 1][i];
+    }
+
+    return str;
+}
+
+sudoku.debugSort = function(n, v) {
+    var tmp;
+
+    for (var i = 0; i < n - 1; i++) {
+        for (var j = i + 1; j < n; j++) {
+            if (v[j] < v[i]) {
+                tmp = v[j];
+                v[j] = v[i];
+                v[i] = tmp;
+            }
+        }
+    }
+}
+
+sudoku.debugReturnAllCandidatesSorted = function(candidates, v, squareCellToRowColumnMapper, t, target) {
+    var i, j, row = 0, column = 0, c, n = 0;
+    var str = "";
+
+    for (i = 0; i < 9; i++) {
+        switch (target) {
+            case Target.ROW:
+                row = t;
+                column = i + 1;
+                break;
+            case Target.COLUMN:
+                row = i + 1;
+                column = t;
+                break;
+            case Target.SQUARE:
+                row = squareCellToRowColumnMapper[t - 1][i][0];
+                column = squareCellToRowColumnMapper[t - 1][i][1];
+                break;
+        }
+
+        if (candidates[row - 1][column - 1][0] > 0) {
+            c = candidates[row - 1][column - 1][0];
+
+            for (j = 0; j < c; j++) {
+                v[n] = candidates[row - 1][column - 1][1 + j];
+                n += 1;
+            }
+        }
+    }
+
+    sudoku.debugSort(n, v);
+
+    for (i = 0; i < n; i++) {
+        if (i > 0) {
+            str += ", ";
+        }
+
+        str += v[i];
+    }
+
+    if (n > 0) {
+        str += " (a total of " + n + " candidates)";
+    }
+
+    return str;
+}
+
+sudoku.debugReturnInfo = function(sudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper) {
+    var str;
+    var row, column, square;
+    v = [];
+
+    for (var i = 0; i < 81; i++) {
+        v.push(0);
+    }
+
+    str = "Sudoku board:\r\n" + ReturnSudokuBoardAsString(sudokuBoard) + "\r\n\r\nCells remain to set (" + cellsRemainToSet.length + " cells): ";
+    str += sudoku.debugReturnCells(cellsRemainToSet) + "\r\n\r\n";
+    str += "Number Of candidates: " + numberOfCandidates + "\r\n\r\n";
+    str += "Candidates (row, column, square, numberOfCandidate):\r\n";
+
+    for (row = 1; row <= 9; row++) {
+        for (column = 1; column <= 9; column++) {
+            square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
+            if (candidates[row - 1][column - 1][0] == -1) {
+                str += "(" + row + ", " + column + ", " + square + ", 0): Already set to " + sudokuBoard[row - 1][column - 1] + "\r\n";
+            }
+            else {
+                str += "(" + row + ", " + column + ", " + square + ", " + candidates[row - 1][column - 1][0] + "): " + sudoku.debugReturnCandidates(row, column, candidates) + "\r\n";
+            }
+        }
+    }
+
+    str += "\r\nCandidates in the rows:\r\n";
+
+    for (row = 1; row <= 9; row++) {
+        str += row + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.Row) + "\r\n";
+    }
+
+    str += "\r\nCandidates in the columns:\r\n";
+
+    for (column = 1; column <= 9; column++) {
+        str += column + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.Column) + "\r\n";
+    }
+
+    str += "\r\nCandidates in the squares:\r\n";
+
+    for (square = 1; square <= 9; square++) {
+        str += square + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.Square) + "\r\n";
+    }
+
+    return str;
 }
 
 

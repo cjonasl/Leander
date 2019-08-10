@@ -94,7 +94,8 @@ def run(args):
 
             debugTotalCellsAdded.append([row, column])
 
-            debugString = "(row, column, number, category) = (" + str(row) + ", " + str(column) + ", " + str(number) + ", " + debugCategory[0] + ")\n\n"
+            debugSquare = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
+            debugString = "(row, column, square, number, category) = (" + str(row) + ", " + str(column) + ", " + str(debugSquare) + ", " + str(number) + ", " + debugCategory[0] + ")\n\n"
             debugString += "Total cells added (" + str(len(debugTotalCellsAdded)) + " cells): " + DebugReturnCells(debugTotalCellsAdded) + "\n\n"
 
             if debugCategory[0] == "Simulated":
@@ -325,7 +326,7 @@ def simulate_one_number(candidates, cells_remain_to_set, index_number, debugInfo
         if number_of_candidates > 0 and number_of_candidates < min_number_of_candidates:
             min_number_of_candidates = number_of_candidates
 
-    s = "minNumberOfCandidates: " + str(min_number_of_candidates) + "\n";
+    s = "minNumberOfCandidates: " + str(min_number_of_candidates) + "\n"
 
     for i in range(len(cells_remain_to_set)):
         row = cells_remain_to_set[i][0]
@@ -489,7 +490,7 @@ def DebugReturnCells(cellsRemainToSet):
             s += " "
         s += "(" + str(cellsRemainToSet[i][0]) + ", " + str(cellsRemainToSet[i][1]) + ")"
  
-    return s;
+    return s
 
 def DebugReturnCandidates(row, column, candidates):
     s = ""
@@ -511,7 +512,7 @@ def DebugSort(n, v):
                 v[j] = v[i]
                 v[i] = tmp
 
-def ReturnAllCandidatesSorted(candidates, v, square_cell_to_row_column_mapper, t, target):
+def DebugReturnAllCandidatesSorted(candidates, v, square_cell_to_row_column_mapper, t, target):
     row = 0
     column = 0
     n = 0
@@ -557,29 +558,30 @@ def DebugReturnInfo(sudokuBoard, cellsRemainToSet, numberOfCandidates, candidate
     s = "Sudoku board:\n" + return_sudoku_board_as_string(sudokuBoard) + "\n\nCells remain to set (" + str(len(cellsRemainToSet)) + " cells): "
     s += DebugReturnCells(cellsRemainToSet) + "\n\n"
     s += "Number Of candidates: " + str(numberOfCandidates) + "\n\n"
-    s += "Candidates (row, column, numberOfCandidate):\n"
+    s += "Candidates (row, column, square, numberOfCandidate):\n"
 
     for row in range(1, 10):
         for column in range(1, 10):
+            square = 1 + (3 * ((row - 1) // 3)) + (column - 1) // 3
             if candidates[row - 1][column - 1][0] == -1:
-                s += "(" + str(row) + ", " + str(column) + ", 0): Already set to " + str(sudokuBoard[row - 1][column - 1]) + "\n"
+                s += "(" + str(row) + ", " + str(column) + ", " + str(square) + ", 0): Already set to " + str(sudokuBoard[row - 1][column - 1]) + "\n"
             else:
-                s += "(" + str(row) + ", " + str(column) + ", " + str(candidates[row - 1][column - 1][0]) + "): " + DebugReturnCandidates(row, column, candidates) + "\n"
+                s += "(" + str(row) + ", " + str(column) + ", " + str(square) + ", " + str(candidates[row - 1][column - 1][0]) + "): " + DebugReturnCandidates(row, column, candidates) + "\n"
 
     s += "\nCandidates in the rows:\n"
 
     for row in range(1, 10):
-        s += str(row) + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.ROW) + "\n"
+        s += str(row) + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.ROW) + "\n"
 
     s += "\nCandidates in the columns:\n"
 
     for column in range(1, 10):
-        s += str(column) + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.COLUMN) + "\n"
+        s += str(column) + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.COLUMN) + "\n"
 
     s += "\nCandidates in the squares:\n"
 
     for square in range(1, 10):
-        s += str(square) + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.SQUARE) + "\n"
+        s += str(square) + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.SQUARE) + "\n"
 
     return s
 

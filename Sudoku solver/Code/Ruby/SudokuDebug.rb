@@ -21,6 +21,8 @@ def Sudoku.run(args)
     cells_remain_to_set_after_added_numbers_with_certainty = nil
     index_number = [0, 0]
     debugCategory = ["0"]
+    debugInfo = ["0"]
+    debugTotalCellsAdded = []
 
     msg = get_input_sudoku_board(args, working_sudoku_board, cells_remain_to_set)
 
@@ -52,12 +54,13 @@ def Sudoku.run(args)
 
     number_of_cells_set_in_input_sudoku_board = 81 - cells_remain_to_set.size
 
-    debugDirectory = DebugCreateAndReturnDebugDirectory()
+    debugDirectory = Sudoku.DebugCreateAndReturnDebugDirectory()
     debugTry = 0
 
     while number_of_attempts_to_solve_sudoku < max_number_of_attempts_to_solve_sudoku and not sudoku_solved and not numbers_added_with_certainty_and_then_no_candidates
         debugTry += 1
         debugAddNumber = 0
+        debugTotalCellsAdded.clear()
 
         if number_of_attempts_to_solve_sudoku > 0
             copy_sudoku_board(certainty_sudoku_board, working_sudoku_board)
@@ -77,7 +80,7 @@ def Sudoku.run(args)
             end
 
             if number == 0
-                simulate_one_number(candidates, cells_remain_to_set, index_number)
+                simulate_one_number(candidates, cells_remain_to_set, index_number, debugInfo)
                 i = index_number[0]
                 number = index_number[1]
                 row = cells_remain_to_set[i][0]
@@ -93,14 +96,26 @@ def Sudoku.run(args)
                 debugCategory[0] = "Simulated"
             end
 
-            debugString = "(row, column, number, category) = (" + row.to_s + ", " + column.to_s + ", " + number.to_s + ", " + debugCategory[0] + ")\r\n\r\nData before update:\n\nSudoku board:\n" + return_sudoku_board_as_string(working_sudoku_board)
+            debugTotalCellsAdded.append([row, column])
+
+            debugSquare = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
+            debugString = "(row, column, square, number, category) = (" + row.to_s + ", " + column.to_s + ", " + debugSquare.to_s + ", " + number.to_s + ", " + debugCategory[0] + ")\n\n"
+            debugString += "Total cells added (" + debugTotalCellsAdded.size.to_s + " cells): " + Sudoku.DebugReturnCells(debugTotalCellsAdded) + "\n\n"
+
+            if debugCategory[0] == "Simulated"
+                debugString += debugInfo[0] + "\n\n"
+            end
+
+            debugString += "Data before update:\n\n" + Sudoku.DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates, candidates, square_cell_to_row_column_mapper)
 
             working_sudoku_board[row - 1][column - 1] = number
             cells_remain_to_set.delete_at(i)
             number_of_candidates -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
 
+            debugString += "\nData after update:\n\n" + Sudoku.DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates, candidates, square_cell_to_row_column_mapper)
+
             debugAddNumber += 1
-            debugFileNameFullPath = debugDirectory + "\\" + DebugReturnFileName(debugTry, debugAddNumber)
+            debugFileNameFullPath = debugDirectory + "\\" + Sudoku.DebugReturnFileName(debugTry, debugAddNumber)
             f = File.new(debugFileNameFullPath, "w")
             f.write(debugString)
             f.close()
@@ -251,9 +266,9 @@ def Sudoku.remove_number_if_it_exists(v, number)
             v[index] = v[index + 1]
             index += 1
         end
-    end
 
         v[0] -= 1
+    end
 
     return returnValue
 end
@@ -358,8 +373,9 @@ def Sudoku.return_sudoku_board_as_string(sudoku_board)
     return sb
 end
 
-def Sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number)
+def Sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number, debugInfo)
     v = []
+    debugCellsWithMinNumberOfCandidates = []
     min_number_of_candidates = 9
 
     for i in 0..cells_remain_to_set.size - 1
@@ -372,14 +388,20 @@ def Sudoku.simulate_one_number(candidates, cells_remain_to_set, index_number)
         end
     end
 
+    s = "minNumberOfCandidates: " + min_number_of_candidates.to_s + "\n"
+
     for i in 0..cells_remain_to_set.size - 1
         row = cells_remain_to_set[i][0]
         column = cells_remain_to_set[i][1]
 
         if candidates[row - 1][column - 1][0] == min_number_of_candidates
+            debugCellsWithMinNumberOfCandidates.append([row, column])
             v.append(i)
         end
     end
+
+    s += "Cells with minNumberOfCandidates (" + v.size.to_s + " cells): " + Sudoku.DebugReturnCells(debugCellsWithMinNumberOfCandidates)
+    debugInfo[0] = s
 
     tmp = rand(v.size)
     index_number[0] = v[tmp]
@@ -543,20 +565,151 @@ def Sudoku.DebugCreateAndReturnDebugDirectory()
     return debugDir
 end
 
-def DebugReturnFileName(debugTry, debugAddNumber)
+def Sudoku.DebugReturnFileName(debugTry, debugAddNumber)
     if debugTry < 10
         s1 = "00" + debugTry.to_s
     elsif debugTry < 100
         s1 = "0" + debugTry.to_s
     else
         s1 = debugTry.to_s
+    end
 
     if debugAddNumber < 10
         s2 = "0" + debugAddNumber.to_s
     else
         s2 = debugAddNumber.to_s
+    end
 
     return "Try" + s1 + "AddNumber" + s2 + ".txt"
+end
+
+def Sudoku.DebugReturnCells(cellsRemainToSet)
+    s = ""
+
+    for i in 0..cellsRemainToSet.size - 1
+        if i > 0
+            s += " "
+        end
+        s += "(" + cellsRemainToSet[i][0].to_s + ", " + cellsRemainToSet[i][1].to_s + ")"
+    end
+ 
+    return s
+end
+
+def Sudoku.DebugReturnCandidates(row, column, candidates)
+    s = ""
+    n = candidates[row - 1][column - 1][0]
+
+    for i in 1..n
+        if i > 1
+            s += ", "
+        end
+
+        s += candidates[row - 1][column - 1][i].to_s
+    end
+
+    return s
+end
+
+def Sudoku.DebugSort(n, v)
+    for i in 0...n - 1
+        for j in i + 1...n
+            if v[j] < v[i]
+                tmp = v[j]
+                v[j] = v[i]
+                v[i] = tmp
+            end
+        end
+    end
+end
+
+def Sudoku.DebugReturnAllCandidatesSorted(candidates, v, square_cell_to_row_column_mapper, t, target)
+    row = 0
+    column = 0
+    n = 0
+    s = ""
+
+    for i in 0...9
+        if target == Target::ROW
+            row = t
+            column = i + 1
+        elsif target == Target::COLUMN
+            row = i + 1
+            column = t
+        else
+            row = square_cell_to_row_column_mapper[t - 1][i][0]
+            column = square_cell_to_row_column_mapper[t - 1][i][1]
+        end
+
+        if candidates[row - 1][column - 1][0] > 0
+            c = candidates[row - 1][column - 1][0]
+
+            for j in 0...c
+                v[n] = candidates[row - 1][column - 1][1 + j]
+                n += 1
+            end
+        end
+    end
+
+    Sudoku.DebugSort(n, v)
+
+    for i in 0...n
+        if i > 0
+            s += ", "
+        end
+        s += v[i].to_s
+    end
+
+    if n > 0
+        s += " (a total of " + n.to_s + " candidates)"
+    end
+
+    return s
+end
+
+def Sudoku.DebugReturnInfo(sudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper)
+
+    v = []
+
+    for i in 0...81
+        v.append(0)
+    end
+
+    s = "Sudoku board:\n" + return_sudoku_board_as_string(sudokuBoard) + "\n\nCells remain to set (" + cellsRemainToSet.size.to_s + " cells): "
+    s += Sudoku.DebugReturnCells(cellsRemainToSet) + "\n\n"
+    s += "Number Of candidates: " + numberOfCandidates.to_s + "\n\n"
+    s += "Candidates (row, column, square, numberOfCandidate):\n"
+
+    for row in 1...10
+        for column in 1...10
+            square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
+            if candidates[row - 1][column - 1][0] == -1
+                s += "(" + row.to_s + ", " + column.to_s + ", " + square.to_s + ", 0): Already set to " + sudokuBoard[row - 1][column - 1].to_s + "\n"
+            else
+                s += "(" + row.to_s + ", " + column.to_s + ", " + square.to_s + ", " + + candidates[row - 1][column - 1][0].to_s + "): " + Sudoku.DebugReturnCandidates(row, column, candidates) + "\n"
+            end
+        end
+    end
+
+    s += "\nCandidates in the rows:\n"
+
+    for row in 1..9
+        s += row.to_s + ": " + Sudoku.DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target::ROW) + "\n"
+    end
+
+    s += "\nCandidates in the columns:\n"
+
+    for column in 1..9
+        s += column.to_s + ": " + Sudoku.DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target::COLUMN) + "\n"
+    end
+
+    s += "\nCandidates in the squares:\n"
+
+    for square in 1..9
+        s += square.to_s + ": " + Sudoku.DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target::SQUARE) + "\n"
+    end
+
+    return s
 end
 
 end

@@ -59,7 +59,7 @@ namespace SudokuDebug
             string debugDirectory, debugString, debugFileNameFullPath;
             string[] debugCategory = new string[1];
             string[] debugInfo = new string[1];
-            int debugTry, debugAddNumber;
+            int debugTry, debugAddNumber, debugSquare;
 
             msg = GetInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
 
@@ -143,7 +143,8 @@ namespace SudokuDebug
 
                     debugTotalCellsAdded.Add(new int[] { row, column });
 
-                    debugString = "(row, column, number, category) = (" + row.ToString() + ", " + column.ToString() + ", " + number.ToString() + ", " + debugCategory[0] + ")\r\n\r\n";
+                    debugSquare = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
+                    debugString = "(row, column, square, number, category) = (" + row.ToString() + ", " + column.ToString() + ", " + debugSquare.ToString() + ", " + number.ToString() + ", " + debugCategory[0] + ")\r\n\r\n";
                     debugString += "Total cells added (" + debugTotalCellsAdded.Count.ToString() + " cells): " + DebugReturnCells(debugTotalCellsAdded) + "\r\n\r\n";
 
                     if (debugCategory[0] == "Simulated")
@@ -764,7 +765,7 @@ namespace SudokuDebug
             }
         }
 
-        private static string ReturnAllCandidatesSorted(int[][][] candidates, int[] v, int[][][] squareCellToRowColumnMapper, int t, Target target)
+        private static string DebugReturnAllCandidatesSorted(int[][][] candidates, int[] v, int[][][] squareCellToRowColumnMapper, int t, Target target)
         {
             int i, j, row = 0, column = 0, c, n = 0;
             string str = "";
@@ -828,19 +829,21 @@ namespace SudokuDebug
             str = "Sudoku board:\r\n" + ReturnSudokuBoardAsString(sudokuBoard) + "\r\n\r\nCells remain to set (" + cellsRemainToSet.Count.ToString() + " cells): ";
             str += DebugReturnCells(cellsRemainToSet) + "\r\n\r\n";
             str += "Number Of candidates: " + numberOfCandidates.ToString() + "\r\n\r\n";
-            str += "Candidates (row, column, numberOfCandidate):\r\n";
+            str += "Candidates (row, column, square, numberOfCandidate):\r\n";
 
             for (row = 1; row <= 9; row++)
             {
                 for (column = 1; column <= 9; column++)
                 {
+                    square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
+
                     if (candidates[row - 1][column - 1][0] == -1)
                     {
-                        str += "(" + row.ToString() + ", " + column.ToString() + ", 0): Already set to " + sudokuBoard[row - 1][column - 1].ToString() + "\r\n";
+                        str += "(" + row.ToString() + ", " + column.ToString() + ", " + square.ToString() + ", 0): Already set to " + sudokuBoard[row - 1][column - 1].ToString() + "\r\n";
                     }
                     else
                     {
-                        str += "(" + row.ToString() + ", " + column.ToString() + ", " + candidates[row - 1][column - 1][0].ToString() + "): " + DebugReturnCandidates(row, column, candidates) + "\r\n";
+                        str += "(" + row.ToString() + ", " + column.ToString() + ", " + square.ToString() + ", " + candidates[row - 1][column - 1][0].ToString() + "): " + DebugReturnCandidates(row, column, candidates) + "\r\n";
                     }
                 }
             }
@@ -849,21 +852,21 @@ namespace SudokuDebug
 
             for(row = 1; row <= 9; row++)
             {
-                str += row.ToString() + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.Row) + "\r\n";
+                str += row.ToString() + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.Row) + "\r\n";
             }
 
             str += "\r\nCandidates in the columns:\r\n";
 
             for (column = 1; column <= 9; column++)
             {
-                str += column.ToString() + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.Column) + "\r\n";
+                str += column.ToString() + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.Column) + "\r\n";
             }
 
             str += "\r\nCandidates in the squares:\r\n";
 
             for (square = 1; square <= 9; square++)
             {
-                str += square.ToString() + ": " + ReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.Square) + "\r\n";
+                str += square.ToString() + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.Square) + "\r\n";
             }
 
             return str;

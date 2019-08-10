@@ -234,9 +234,9 @@ def Sudoku.remove_number_if_it_exists(v, number)
             v[index] = v[index + 1]
             index += 1
         end
-    end
 
         v[0] -= 1
+    end
 
     return returnValue
 end
