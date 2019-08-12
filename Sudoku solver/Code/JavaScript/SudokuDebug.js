@@ -18,9 +18,11 @@ sudoku.run = function(args) {
     var sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
     var cellsRemainToSet = [];
     var cellsRemainToSetAfterAddedNumbersWithCertainty = null;
+    var debugTotalCellsAdded = [];
     var indexNumber = [0, 0];
     var debugDirectory, debugTry, debugAddNumber, debugSquare, debugString;
     var debugCategory = ["0"];
+    var debugInfo = ["0"];
 
     msg = sudoku.getInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
 
@@ -58,6 +60,7 @@ sudoku.run = function(args) {
     while (numberOfAttemptsToSolveSudoku < maxNumberOfAttemptsToSolveSudoku && !sudokuSolved && !numbersAddedWithCertaintyAndThenNoCandidates) {
         debugTry += 1;
         debugAddNumber = 0;
+        debugTotalCellsAdded.splice(0, debugTotalCellsAdded.length);
 
         if (numberOfAttemptsToSolveSudoku > 0) {
             sudoku.copySudokuBoard(certaintySudokuBoard, workingSudokuBoard);
@@ -97,19 +100,19 @@ sudoku.run = function(args) {
 
             debugSquare = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
             debugString = "(row, column, square, number, category) = (" + row + ", " + column + ", " + debugSquare + ", " + number + ", " + debugCategory[0] + ")\r\n\r\n";
-            debugString += "Total cells added (" + debugTotalCellsAdded.length + " cells): " + DebugReturnCells(debugTotalCellsAdded) + "\r\n\r\n";
+            debugString += "Total cells added (" + debugTotalCellsAdded.length + " cells): " + sudoku.debugReturnCells(debugTotalCellsAdded) + "\r\n\r\n";
 
             if (debugCategory[0] == "Simulated") {
                 debugString += debugInfo[0] + "\r\n\r\n";
             }
 
-            debugString += "Data before update:\r\n\r\n" + DebugReturnInfo(workingSudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper);
+            debugString += "Data before update:\r\n\r\n" + sudoku.debugReturnInfo(workingSudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper);
 
             workingSudokuBoard[row - 1][column - 1] = number;
             cellsRemainToSet.splice(i, 1);
             numberOfCandidates -= sudoku.updateCandidates(candidates, squareCellToRowColumnMapper, row, column, number);
 
-            debugString += "\r\nData after update:\r\n\r\n" + DebugReturnInfo(workingSudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper);
+            debugString += "\r\nData after update:\r\n\r\n" + sudoku.debugReturnInfo(workingSudokuBoard, cellsRemainToSet, numberOfCandidates, candidates, squareCellToRowColumnMapper);
 
             debugAddNumber += 1;
             debugFileNameFullPath = debugDirectory + "\\" + sudoku.debugReturnFileName(debugTry, debugAddNumber);
@@ -663,7 +666,7 @@ sudoku.debugReturnFileName = function(debugTry, debugAddNumber) {
 sudoku.debugReturnCells = function(cellsRemainToSet) {
     var str = "";
 
-    for (var i = 0; i < cellsRemainToSet.Count; i++)
+    for (var i = 0; i < cellsRemainToSet.length; i++)
     {
         if (i > 0) {
             str += " ";
@@ -710,15 +713,15 @@ sudoku.debugReturnAllCandidatesSorted = function(candidates, v, squareCellToRowC
 
     for (i = 0; i < 9; i++) {
         switch (target) {
-            case Target.ROW:
+            case sudoku.target.ROW:
                 row = t;
                 column = i + 1;
                 break;
-            case Target.COLUMN:
+            case sudoku.target.COLUMN:
                 row = i + 1;
                 column = t;
                 break;
-            case Target.SQUARE:
+            case sudoku.target.SQUARE:
                 row = squareCellToRowColumnMapper[t - 1][i][0];
                 column = squareCellToRowColumnMapper[t - 1][i][1];
                 break;
@@ -760,7 +763,7 @@ sudoku.debugReturnInfo = function(sudokuBoard, cellsRemainToSet, numberOfCandida
         v.push(0);
     }
 
-    str = "Sudoku board:\r\n" + ReturnSudokuBoardAsString(sudokuBoard) + "\r\n\r\nCells remain to set (" + cellsRemainToSet.length + " cells): ";
+    str = "Sudoku board:\r\n" + sudoku.returnSudokuBoardAsString(sudokuBoard) + "\r\n\r\nCells remain to set (" + cellsRemainToSet.length + " cells): ";
     str += sudoku.debugReturnCells(cellsRemainToSet) + "\r\n\r\n";
     str += "Number Of candidates: " + numberOfCandidates + "\r\n\r\n";
     str += "Candidates (row, column, square, numberOfCandidate):\r\n";
@@ -780,19 +783,19 @@ sudoku.debugReturnInfo = function(sudokuBoard, cellsRemainToSet, numberOfCandida
     str += "\r\nCandidates in the rows:\r\n";
 
     for (row = 1; row <= 9; row++) {
-        str += row + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.Row) + "\r\n";
+        str += row + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, sudoku.target.ROW) + "\r\n";
     }
 
     str += "\r\nCandidates in the columns:\r\n";
 
     for (column = 1; column <= 9; column++) {
-        str += column + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.Column) + "\r\n";
+        str += column + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, sudoku.target.COLUMN) + "\r\n";
     }
 
     str += "\r\nCandidates in the squares:\r\n";
 
     for (square = 1; square <= 9; square++) {
-        str += square + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.Square) + "\r\n";
+        str += square + ": " + sudoku.debugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, sudoku.target.SQUARE) + "\r\n";
     }
 
     return str;
