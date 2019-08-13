@@ -8,10 +8,23 @@ Log in:
 User name: 464
 Password: Cata464
 
-Live Shop Direct site site:
-https://shopdirect.fieldengineer.co.uk/Account/SignIn
-
-Concepts: Store (= clinet) and Call center
-
 DBISAM:
 https://www.elevatesoft.com/products?category=dbisam&type=visualstudio
+
+ews_config.php is the condig-file for the PHP site
+
+https://www.php.net
+
+ODBC: JTMContract
+Host Name: pg-dur-dbase
+IP Address: 192.168.2.196
+Port: 12005
+Database: CompleteService_JTM
+
+Utility to view database and tables:
+Terminal server\pg-dur-dbase:
+K:\Service\DBISAM\dbsys\dbsys.exe
+User name: admin
+Password: BON84STICKy
+Database directory: D:\CompleteServiceData\JTM (on pg-dur-dbase)
+To get info about database directory you can use tool: D:\DBISAM\Utils\srvadmin\srvadmin.exe (on pg-dur-dbase)

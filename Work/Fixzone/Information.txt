@@ -1,4 +1,9 @@
-﻿Log in Complete Service:
+﻿Live Shop Direct site site:
+https://shopdirect.fieldengineer.co.uk/Account/SignIn
+
+Concepts: Store (= clinet) and Call center
+
+Log in Complete Service:
 User name: fixzone
 Password: toothblue
 
