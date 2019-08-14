@@ -1,2 +1,7 @@
 ﻿Dag 92:
 Måndag den 12 augusti 2019
+Jag ägnade arbetsdagen åt att förstå DBISAM och att studera
+gamla PHP Client connect. Jag hade lite kontakt på Skype med
+kinesen David som utvecklade PHP Client connect. Vid 13.00-tiden
+intog jag kaffe, smörgås och banan till lunch. Jag avslutade
+arbetsdagen drygt kl. 17.30 och gick till M&S och handlade.

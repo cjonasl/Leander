@@ -1,0 +1,6 @@
+Steps in Argos users report:
+1. Run stored procedure DisableUsers
+2. Run stored procedure DeleteUsers
+3. Run stored procedure GenerateReportDisabledDeletedUsers 
+4. Print records from step 3 to file
+5. Run stored procedure DeleteTmpStoredDeletedUsers
