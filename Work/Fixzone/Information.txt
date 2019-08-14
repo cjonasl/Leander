@@ -18,7 +18,6 @@ Live IIS-server: Terminal server (Username: Jonas.Leander, Password: Leeds#6231)
 Database server: Use SSMS on "Terminal server": user name: PAS_CC, password: QchK8HZEn4g7rU9u and database name is PAS
 
 URL Cast live site: http://hrg.fieldengineer.co.uk/User/SignIn/
-
 Cast live is on hrgweb01
 
 Litmus IIS:

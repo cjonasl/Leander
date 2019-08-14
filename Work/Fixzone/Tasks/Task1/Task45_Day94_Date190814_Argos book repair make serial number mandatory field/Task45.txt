@@ -1,0 +1,28 @@
+﻿Task45:
+
+In "Product search" (/Product/Search) use: 7378560
+
+Test client demo:
+http://hrg.fieldengineer.co.uk:8080/User/SignIn
+UserId: 2818180
+Password: bbbbbbbb1
+
+--------------------- Email to Jemma 2019-08-14 ------------------------------------------------------------
+Hello Jemma,
+
+I am finished with a solution. I have put it on test site:
+http://hrg.fieldengineer.co.uk:8080/User/SignIn
+
+You can test with:
+Employee Number: 2818180
+Passord: bbbbbbbb1
+
+Product search: 7378560, then choose Catalogue No 7378560. It is set to "Sony profile" in test database,
+i.e. serial number should be required.
+
+Product search: 2370642, then choose Catalogue No 2370642. It is NOT set to "Sony profile" in test database,
+i.e. serial number should NOT be required.
+
+Kind regards
+Jonas
+---------------------------------------------------------------------------------------------

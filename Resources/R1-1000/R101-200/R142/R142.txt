@@ -1,0 +1,45 @@
+﻿142
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-08-14 11:37:06
+
+----- New property -----
+
+Task45_Day94_Date190814_Argos book repair make serial number mandatory field
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task45_Day94_Date190814_Argos book repair make serial number mandatory field
+
+----- New property -----
+
+null

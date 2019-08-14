@@ -1,0 +1,247 @@
+﻿@using System.Web.Optimization
+@using CAST.Process
+@model CAST.ViewModels.BookRepair.BookRepair_JobModel
+@{
+    ViewBag.Title = "BOOK REPAIR. Job details.";
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/create-job-job-js")
+    <script type="text/javascript">
+        $(function () {
+            var count = '@Model.AdditionalFields.Count()';
+            var Hintcount = 0;
+
+            Hintcount = $(".FieldHint").length;
+            $("#AddiF").attr('rowspan', parseInt(count) + parseInt(Hintcount) + 1)
+            $("#backButton").attr("href", "#");
+            $("#backButton").click(function () {
+                ReplaceAction("#jobForm", "/BookRepair/BackButtonClickOnJobPage");
+                //bug of IE6
+                setTimeout('$("#jobForm").submit();', 50);
+            });
+        });
+    </script>
+}
+
+<form action="/BookRepair/ShowJobPage/" id = "jobForm" method="POST" >
+    <table class="table table-create-job-info margin-bottom">
+        <thead>
+            <th colspan="4">
+                Book standard repair
+            </th>
+        </thead>
+    
+        @*---product info---*@
+        <tr class="delimeter">
+            <td colspan="4" ></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="info-block-title">
+                Product
+                <br/><span class="text-size-h5 text-weight-normal">not mandatory</span>
+            </td>
+            <td class="field-name">Serial number</td>
+            <td class="field-value">
+                @Html.TextBoxFor(x => x.SerialNumber, new { @class = "input" })
+            </td>
+            <td class="field-error-text">
+                @Html.ValidationMessageFor(x => x.SerialNumber, null, new { @class = "error" })
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">Item Condition and Accessories</td>
+            <td class="field-value">
+                <textarea class = "textarea" rows="3" name="ItemCondition" >@Model.ItemCondition</textarea>
+            </td>
+            <td class="field-error-text">
+            </td>
+        </tr>
+        
+        @*---DOP info---*@
+        <tr class="delimeter">
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td class="info-block-title">
+                Date of purchase
+                <br/><span class="text-size-h5 text-weight-normal">all fields are mandatory</span>
+            </td>
+            <td class="field-name">DD/MM/YY</td>
+            <td class="field-value">
+                @Html.TextBoxFor(x => x.DateOfPurchaseString, new { @class = "input" })
+            </td>
+            <td class="field-error-text">
+                @Html.ValidationMessageFor(x => x.DateOfPurchaseString, null, new { @class = "error" })
+            </td>
+        </tr>
+        
+         @*---transaction info---*@
+        <tr class="delimeter">
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td  rowspan="3" class="info-block-title">
+                Original transaction
+                
+                <br/><span class="text-size-h5 text-weight-normal"> * Please refer the receipt *</span>
+                <br/><span class="text-size-h5 text-weight-normal">not mandatory</span>
+            </td>
+            <td class="field-name">Store number</td>
+            <td class="field-value">
+                @Html.TextBoxFor(x => x.StoreNumber, new { @class = "input" })
+            </td>
+            <td class="field-error-text">
+                @Html.ValidationMessageFor(x => x.StoreNumber, null, new { @class = "error" })
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">Till number</td>
+            <td class="field-value">
+                @Html.TextBoxFor(x => x.TillNumber, new { @class = "input" })
+            </td>
+            <td class="field-error-text">
+                @Html.ValidationMessageFor(x => x.TillNumber, null, new { @class = "error" })
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">Transaction number</td>
+            <td class="field-value">
+                @Html.TextBoxFor(x => x.TransNumber, new { @class = "input" })
+            </td>
+            <td class="field-error-text">
+                @Html.ValidationMessageFor(x => x.TransNumber, null, new { @class = "error" })
+            </td>
+        </tr>
+
+        @*---repair info---*@
+        <tr class="delimeter">
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="info-block-title">
+                Repair
+                <br/><span class="text-size-h5 text-weight-normal">all fields are mandatory</span>
+            </td>
+            <td class="field-name">Type</td>
+            <td class="field-value">
+                @Html.DropDownListFor(x => x.SelectedType, Model.Type, "--please select--", new { @class = "select" })
+            </td>
+            <td class="field-error-text">
+                @Html.ValidationMessageFor(x => x.SelectedType, null, new { @class = "error" })
+            </td>
+        </tr>
+      @*---r --*@
+       @if (!String.IsNullOrEmpty(Model.BookingUrl)  && Model.InHomeAvailable)
+       {    <tr>
+             <td class="field-name">Repair Location</td>
+             <td class="field-value">@Html.HiddenFor(x => x.BookingUrl) @Html.HiddenFor(x => x.InHomeAvailable)
+ 
+               @foreach (var item in Model.StoreCollectionAnswerList)
+               {
+                   if (item.Value != "0")
+                   {
+                     @Html.RadioButtonFor(m => m.strStoreCollection, item.Value)
+                     @Html.Label(item.Text)     
+                   }
+                   else
+                   {
+                     @Html.RadioButtonFor(m => m.strStoreCollection, "gfgfgg", new { @style = "display:none" })
+                     @Html.Label(item.Text)
+                   }
+               }
+
+
+             </td>
+             <td class="field-error-text">
+                 @Html.ValidationMessageFor(x => x.StoreCollection, null, new { @class = "error" })
+             </td>
+         </tr>
+       }
+       else
+       {
+         <tr>
+             <td class="field-name"></td>
+             <td class="field-value">
+
+
+             </td>
+             <td class="field-error-text">
+               
+             </td>
+         </tr>  
+           
+       }
+
+        <tr>
+  
+            <td class="field-name">Fault description</td>
+            <td class="field-value">
+                @Html.TextAreaFor(x => x.FaultDescr, new { @cols = "20", @rows = "4", @class = "textarea" })
+            </td>
+            <td class="field-error-text">
+                @Html.ValidationMessageFor(x => x.FaultDescr, null, new { @class = "error" })
+            </td>
+        </tr>
+       @* --additional Information*@
+      
+          <tr class="delimeter">
+            <td colspan="4"></td>
+        </tr>
+        @{
+            if (Model.AdditionalFields != null)
+            {
+                var list = Model.AdditionalFields.ToList();
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    if (i == 0)
+                    {  
+              <tr>
+            <td id="AddiF" class="info-block-title">
+                Additional fields
+                <br/><span class="text-size-h5 text-weight-normal">all fields are mandatory</span>
+            </td></tr>}
+      
+              <tr>
+               <td class="field-name">
+                  @Html.HiddenFor(m => m.AdditionalFields[i].FieldNo)
+                    @Html.HiddenFor(m => m.AdditionalFields[i].InspectDataId)  
+                    @Html.HiddenFor(m => m.AdditionalFields[i].FieldName) 
+                     @Html.HiddenFor(m => m.AdditionalFields[i].FieldHint)  
+                    @Html.HiddenFor(m => m.AdditionalFields[i].InspectId)
+                    @Html.HiddenFor(m => m.AdditionalFields[i].InspectName)   
+                   @Html.HiddenFor(m => m.AdditionalFields[i].FieldMandatory)         
+                     @Html.DisplayFor(modelItem => list[i].FieldName)
+
+                    
+                 @Html.HiddenFor(m => m.AdditionalFields[i].ServiceId)
+            </td>
+                  <td class="field-value">
+                       @Html.TextBoxFor(m => m.AdditionalFields[i].FieldAnswer)
+                    
+                      </td>
+          <td class="field-error-text">
+                @Html.ValidationMessageFor(m => m.AdditionalFields[i].FieldAnswer, null, new { @class = "error" })
+            </td>
+      </tr>  
+                    if (Model.AdditionalFields.ToList().Count > 0 && Model.AdditionalFields[i].FieldHint != null && Model.AdditionalFields[i].FieldHint.Length > 0)
+                    { <tr> <td  class="field-name"/><td class="FieldHint" style="color:#FF0000; font-size:11px !important">   
+                 @Model.AdditionalFields[i].FieldHint
+
+            </td></tr>}
+
+                }
+            }}
+   
+        <tr class="delimeter">
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-align-center">
+                <input type="submit" value="Next" class="btn-argos span1" id="NextButton"></input>
+                <span id="ValidationMessage" class="error"></span>
+            </td>
+        </tr>
+    </table>
+</form>

@@ -1,2 +1,11 @@
 ﻿Dag 93:
 Tisdag den 13 augusti 2019
+Jag ägnade arbetsdagen en del åt att finjustera stored
+procedures som genererar data/rapport för Argos-användare.
+Vijay bad mig titta på något fel rörande inloggningen
+i CustomerConnect så jag gick igenom den koden, men fann
+inget fel. Däremot upptäckte Vijay att jag hade ckeckat
+in ändringar som Mary gjort i fel gren, ”CustomerConnect”
+istället för ”CustomerConnectSD” så jag får odna med det.
+Intog banan, smörgås och kaffe till lunch. Jag avslutade
+arbetsdagen ca. kl. 17.50 och promenerade hem.

@@ -2815,3 +2815,23 @@ Task44_Day91_Date190809_Transfer functionality from old PHP ClientConnect to new
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+142
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-08-14 11:37:06
+
+----- New property -----
+
+Task45_Day94_Date190814_Argos book repair make serial number mandatory field
+
+----- New property -----
+
+Task,Fixzone
