@@ -415,7 +415,7 @@ def print_sudoku_board(solved, args, message, sudoku_board):
         fileNamefullPath = args[0] + suffix
 
     fileContent = message + "\n\n" + return_sudoku_board_as_string(sudoku_board)
-    f = open(fileNamefullPath, "w")
+    f = open(fileNamefullPath, "wt")
     f.write(fileContent)
     f.close()
 

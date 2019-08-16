@@ -1,7 +1,4 @@
-USE [CAST_ClientDemo]
-GO
-
-/****** Object:  StoredProcedure [dbo].[RetrieveProduct]    Script Date: 14/08/2019 15:44:34 ******/
+--Ran successfully on live DB 2019-08-15 kl. 11:23
 SET ANSI_NULLS ON
 GO
 

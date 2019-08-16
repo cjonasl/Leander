@@ -164,7 +164,7 @@ sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
     else if (args.length > 2) {
         return "At most two parameters may be given to the program!";
     }
-    else if (!sudoku.sourceExists(args[0], true)) {      
+    else if (!sudoku.sourceExists(args[0], true)) {
         return "The given input file in first parameter does not exist!";
     }
     else if (args.length == 2 && !sudoku.sourceExists(args[1], false)) {
@@ -517,7 +517,7 @@ sudoku.validateSudokuBoard = function(sudokuBoard, squareCellToRowColumnMapper) 
 }       
 
 sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
-    var fileName, fileNameFullPath, d, yearStr, month, date, hour, minute, second, millisecond, str;
+    var file, fileName, fileNameFullPath, d, yearStr, month, date, hour, minute, second, millisecond, str;
     var suffix, monthStr, dateStr, hourStr, minuteStr, secondStr, millisecondStr, dir, fileContent;
 
     d  = new Date();
@@ -562,7 +562,9 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
 
     fileContent = message + "\r\n\r\n" + sudoku.returnSudokuBoardAsString(sudokuBoard);
 
-    fs.writeFileSync(fileNameFullPath, fileContent, { encoding: 'ascii' });
+    file = fs.openSync(fileNameFullPath, "w");
+    fs.writeFileSync(file, fileContent, { encoding: 'ascii' });
+    fs.closeSync(file);
 }
 
 

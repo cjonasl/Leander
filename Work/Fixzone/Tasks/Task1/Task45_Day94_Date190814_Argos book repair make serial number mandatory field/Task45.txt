@@ -1,5 +1,22 @@
 ﻿Task45:
 
+Modified files:
+C:\Jonas\SVN\CASTNew20190814\CastApplication\CastApplication.csproj
+C:\Jonas\SVN\CASTNew20190814\CastApplication\Controllers\ProductController.cs
+C:\Jonas\SVN\CASTNew20190814\CastApplication\Models\Product\ProductDetailsModel.cs
+C:\Jonas\SVN\CASTNew20190814\CastApplication\Services\ProductService.cs
+C:\Jonas\SVN\CASTNew20190814\CastApplication\Sessions\ProductState.cs
+C:\Jonas\SVN\CASTNew20190814\CastApplication\ViewModels\BookRepair\BookRepair_JobModel.cs
+C:\Jonas\SVN\CASTNew20190814\CastApplication\Views\BookRepair\ShowJobPage.cshtml
+C:\Jonas\SVN\CASTNew20190814\CastApplication\Web.config
+Stored procedure "RetrieveProduct"
+
+Added file:
+C:\Jonas\SVN\CASTNew20190814\CastApplication\Validation\BookRepairSerialNumberRequiredValidation.cs
+
+
+I created AR-22 for the task in Jira 2019-08-15
+
 In "Product search" (/Product/Search) use: 7378560
 
 Test client demo:

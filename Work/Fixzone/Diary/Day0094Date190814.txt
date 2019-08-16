@@ -1,2 +1,30 @@
 ﻿Dag 94:
 Onsdag den 14 augusti 2019
+Ett mail inkom ifrån Argos som ville ändra ett
+fält, ”Serial number”, från att vara valfritt
+till obligaroriskt i samband med bokning av
+reparation. Jag svarade till Angela att jag kan
+ta den uppgften och sedan började jag titta på
+det. Jag fann att det enkelt kan lösas genom
+att lägga till ett ”Required” attribut på aktuell
+property ”Serial number”, men sedan uppmärksammade
+Vijay mig på att det inte gällde för alla utan
+endast för ”Sony profile 501” och då blev det
+inte lika enkelt längre. Angela svarade att jag
+kan ta uppgiften och det blev att jag ägnade
+hela arbetsdagen åt den och jag skapade task45
+(Argos book repair make serial number mandatory
+field). På morgonen glömde jag ta med både vatten
+och smörgås så ca. kl. 12.00 gick jag till ”Tesco
+Express” och köpte det för ca. 1.70 pund. Jag
+intog kaffe och smörgåsen jag köpte till lunch
+ca. kl. 13.00 och därefter även en tårtbit som
+Angela bjöd på med anledning av hennes födelsedag.
+Jag blev klar med en lösning av task45 ca. kl.
+18.00 och jag skapade en testwebbplats för det
+hela på URL http://-hrg.fieldengineer.co.uk:8080.
+Jag skrev ett mail till Jemma Cantwell på Argos
+att hon kan testa på den URL:en och jag specificerade
+testdata som hon kan använda och därefter, ca.
+kl. 18.30, avslutade jag arbetsdagen och promenerade
+hem. 

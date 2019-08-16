@@ -23,7 +23,60 @@ function copySudokuBoard(&$sudokuBoardFrom, &$sudokuBoardTo) {
 }
 
 function getInputSudokuBoard(&$args, &$sudokuBoard, &$cellsRemainToSet) {
+    $n = count($args);
 
+    if ($n == 0) {
+        return "An input file is not given to the program (first parameter)!";
+    }
+    else if ($n > 2) {
+        return "At most two parameters may be given to the program!";
+    }
+    else if (!is_file($args[0])) {
+        return "The given input file in first parameter does not exist!";
+    }
+    else if ($n == 2 && !is_dir(args[1])) {
+        return "The directory given in second parameter does not exist!";
+    }
+
+    $n = filesize(args[0]);
+    $f = fopen(args[0], "r");
+    $sudokuBoardString = str_replace("\r\n", "\n", trim(fread($f, $n)));
+    fclose($f);
+
+
+    rows = sudokuBoardString.split("\n");
+
+    if (rows.length != 9) {
+        return "Number of rows in input file are not 9 as expected!";
+    }
+
+    for (row = 1; row <= 9; row++) {
+        columns = rows[row - 1].split(' ');
+
+        if (columns.length != 9) {
+            return "Number of columns in input file in row " + row + " are not 9 as expected!";
+        }
+
+        for (column = 1; column <= 9; column++) {
+            n = new Number(columns[column - 1]);
+
+            if (isNaN(n) || (Math.trunc(n) != n)) {
+                return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " +  column + " in input file is not a valid integer!";
+            }
+
+            if (n < 0 || n > 9) {
+                return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " + column + " in input file is not an integer in the interval [0, 9] as expected!";
+            }
+
+            sudokuBoard[row - 1][column - 1] = n;
+
+            if (n == 0) {
+                cellsRemainToSet.push([row, column]);
+            }
+        }
+    }
+
+    return null;
 }
 
 function candidateIsAlonePossible($number, &$candidates, &$squareCellToRowColumnMapper, $t, $target) {
