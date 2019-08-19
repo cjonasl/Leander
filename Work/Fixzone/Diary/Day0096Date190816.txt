@@ -1,2 +1,16 @@
 ﻿Dag 96:
 Fredag den 16 augusti 2019
+Fick mail från Kath om Stimulsoftfel i Argos som Vijay
+uppdaterade igår med mina ändringar i task45 (Argos book
+repair make serial number mandatory field). Felet berodde
+på att jag hade haft fel version av Stimulsoft-dll:erna
+då jag kompilerade så jag fick korrigera det, kompilera
+om och sedan lägga in en ny CAST.dll i Argos prod och
+därefter fungerade det. Resten av arbetsdagen ägnade
+jag åt att validera och gå igenom kod för ny uppdaterad
+version av https://www.productprotection.very.co.uk
+(task41). Jag skapade en ny testversion på hrg.field-
+enghineer.co.uk\clientweb01. Vid 13.00-tiden intog
+jag kaffe och en medtagen smörgås till lunch. Jag
+avslutade arbetsdagen ca. kl. 17.30 och promenerade
+hemåt.

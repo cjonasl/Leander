@@ -16,10 +16,17 @@ C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Home\Index.cshtml
 C:\AAAAA\CustomerConnect\CallCenterClientConnect\Views\Shared\_CallCenterLayout.cshtml
 
 
-
-
 ClientConnect PAS live site: https://pasclientconnect.pacificagroup.co.uk/
+Terminal server, PG-DUR-WEBSERV, E:\web\PAS\PASClientconnect
 
+My test site: http://localhost:7070/ (Browser in computer Terminal server/PG-DUR-WEBSERV)
+Terminal server, PG-DUR-WEBSERV, E:\web\PAS\PASClientconnectTest
+
+Mu source code:
+C:\AAAAA\CustomerConnect\CallCenterClientConnect\ClientConnect.sln
+IIS local: www.gdjfjhccbyuhdjjfdjfh.com/CallCenter/SignIn (you have an icon an google chrome tool bar "Client Connect")
+
+Source control SVN search path:
 https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/CallCenterClientConnect
 
 NegiClientConnect

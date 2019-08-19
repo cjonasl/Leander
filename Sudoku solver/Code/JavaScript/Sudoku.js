@@ -514,7 +514,7 @@ sudoku.validateSudokuBoard = function(sudokuBoard, squareCellToRowColumnMapper) 
     }
 
     return null;
-}       
+}
 
 sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
     var file, fileName, fileNameFullPath, d, yearStr, month, date, hour, minute, second, millisecond, str;

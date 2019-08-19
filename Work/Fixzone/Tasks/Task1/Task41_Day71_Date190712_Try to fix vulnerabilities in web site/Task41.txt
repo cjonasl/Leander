@@ -1,5 +1,9 @@
 ﻿Task41:
 
+OBS OBS!! The solution I used last time is:
+C:\Jonas\SVN\CASTNew20190814\CastApplication.sln
+(Source control: https://svn.fieldengineer.co.uk:8443/svn/CAST/trunk)
+
 Customer Connect, modify the following files:
 C:\Jonas\SVN\AAA\CustomerConnect\Views\Administration\AccountInfo.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\ReportPage.cshtml

@@ -34,44 +34,51 @@ function getInputSudokuBoard(&$args, &$sudokuBoard, &$cellsRemainToSet) {
     else if (!is_file($args[0])) {
         return "The given input file in first parameter does not exist!";
     }
-    else if ($n == 2 && !is_dir(args[1])) {
+    else if ($n == 2 && !is_dir($args[1])) {
         return "The directory given in second parameter does not exist!";
     }
 
-    $n = filesize(args[0]);
-    $f = fopen(args[0], "r");
+    $n = filesize($args[0]);
+    $f = fopen($args[0], "r");
     $sudokuBoardString = str_replace("\r\n", "\n", trim(fread($f, $n)));
     fclose($f);
 
 
-    rows = sudokuBoardString.split("\n");
+    $rows = explode("\n", $sudokuBoardString);
 
-    if (rows.length != 9) {
+    if (count($rows) != 9) {
         return "Number of rows in input file are not 9 as expected!";
     }
 
-    for (row = 1; row <= 9; row++) {
-        columns = rows[row - 1].split(' ');
+    for ($row = 1; $row <= 9; $row++) {
+        $columns = explode(" ", $rows[$row - 1]);
 
-        if (columns.length != 9) {
-            return "Number of columns in input file in row " + row + " are not 9 as expected!";
+        if (count($columns) != 9) {
+            return "Number of columns in input file in row " . $row . " are not 9 as expected!";
         }
 
-        for (column = 1; column <= 9; column++) {
-            n = new Number(columns[column - 1]);
+        for ($column = 1; $column <= 9; $column++) {
+            $a = is_numeric($columns[$column - 1]);
+            $b = 0;
+            $c = 0;
 
-            if (isNaN(n) || (Math.trunc(n) != n)) {
-                return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " +  column + " in input file is not a valid integer!";
+            if ($a) {
+                $b = intval($columns[$column - 1]);
+                $c = floatval($columns[$column - 1]);
             }
 
-            if (n < 0 || n > 9) {
-                return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " + column + " in input file is not an integer in the interval [0, 9] as expected!";
+            if (!$a || $b != $c) {
+                return "The value \"" . $columns[$column - 1] . "\" in row " . $row . " and column " .  $column . " in input file is not a valid integer!";
             }
 
-            sudokuBoard[row - 1][column - 1] = n;
+            if ($b < 0 || $b > 9) {
+                return "The value \"" . $columns[$column - 1] . "\" in row " . $row . " and column " . $column . " in input file is not an integer in the interval [0, 9] as expected!";
+            }
 
-            if (n == 0) {
-                cellsRemainToSet.push([row, column]);
+            $sudokuBoard[$row - 1][$column - 1] = $b;
+
+            if ($b == 0) {
+                $cellsRemainToSet[] = [$row, $colum];
             }
         }
     }
@@ -319,6 +326,86 @@ function tryFindNumberToSetInCellWithCertainty($row, $column, &$candidates, &$sq
     }
 
     return $number;
+}
+
+function updateCandidates(&$candidates, &$squareCellToRowColumnMapper, $row, $column, $number) {
+    $totalNumberOfCandidatesRemoved = $candidates[$row - 1][$column - 1][0]; //Remove all candidates in that cell
+    $candidates[$row - 1][$column - 1][0] = -1; //Indicates that the cell is set already
+
+    $square = 1 + 3 * intdiv($row - 1,  3) + intdiv($column - 1,  3);
+
+    for ($c = 1; $c <= 9; $c++) {
+        if ($c != $column && $candidates[$row - 1][$c - 1][0] > 0) {
+            $totalNumberOfCandidatesRemoved += removeNumberIfItExists($candidates[$row - 1][$c - 1], $number);
+        }
+    }
+
+    for ($r = 1; $r <= 9; $r++) {
+        if ($r != $row && $candidates[$r - 1][$column - 1][0] > 0) {
+            $totalNumberOfCandidatesRemoved += removeNumberIfItExists($candidates[$r - 1][$column - 1], $number);
+        }
+    }
+
+    for ($i = 0; $i < 9; $i++) {
+        $r = squareCellToRowColumnMapper[$square - 1][$i][0];
+        $c = squareCellToRowColumnMapper[$square - 1][$i][1];
+
+        if ($r != $row && $c != $column && $candidates[$r - 1][$c - 1][0] > 0) {
+            $totalNumberOfCandidatesRemoved += removeNumberIfItExists($candidates[$r - 1][$c - 1], $number);
+        }
+    }
+
+    return $totalNumberOfCandidatesRemoved;
+}
+
+function validateSudokuBoard(&$sudokuBoard, &$squareCellToRowColumnMapper) {
+    for ($row = 1; $row <= 9; $row++) {
+        for ($column = 1; $column <= 9; $column++) {
+            $square = 1 + 3 * intdiv($row - 1,  3) + intdiv($column - 1,  3);
+            $number = $sudokuBoard[$row - 1][$column - 1];
+
+            if ($number != 0) {
+                if (returnNumberOfOccurenciesOfNumber($sudokuBoard, $squareCellToRowColumnMapper, $number, $row, Target::ROW) > 1) {
+                    return "The input sudoku is incorrect! The number " . $number . " occurs more than once in row " . $row;
+                }
+                else if (returnNumberOfOccurenciesOfNumber($sudokuBoard, $squareCellToRowColumnMapper, $number, $column, Target::COLUMN) > 1) {
+                    return "The input sudoku is incorrect! The number " . $number . " occurs more than once in column " . $column;
+                }
+                else if (returnNumberOfOccurenciesOfNumber($sudokuBoard, $squareCellToRowColumnMapper, $number, $square, Target::SQUARE) > 1) {
+                    return "The input sudoku is incorrect! The number " . $number . " occurs more than once in square " . $square;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+function printSudokuBoard($solved, &$args, $message, &$sudokuBoard) {
+    $index = 1 + strrpos($args[0], "\\");
+    $fileName = substr($args[0], $index, strlen($args[0]) - $index);
+    $dt = date('Y.m.d.H.i.s.') . gettimeofday()['usec'];
+    $dt = substr($dt, 0, strlen($dt) - 3);
+
+    if (solved)
+        suffix = "__Solved_" . $dt . ".txt";
+    else
+        suffix = "__Partially_solved_" . $dt . ".txt";
+
+    if (count($args) == 2) {
+        $c = trim(args[1]);
+        $c = $c[strlen($c) - 1];
+    }
+
+            if (args.Length == 2)
+            {
+                c = args[1].Trim()[args[1].Trim().Length - 1];
+                fileNameFullpath = args[1].Trim() + ((c == '\\') ? "" : "\\") + (new FileInfo(args[0])).Name + suffix;
+            }
+            else
+                fileNameFullpath = args[0] + suffix;
+
+            File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
 }
 
 $from = [1, 2, 3, 4, 5, 6, 7, 8, 9];

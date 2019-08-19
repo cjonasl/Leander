@@ -2,6 +2,10 @@
 
 "Tag" is a customer to Pacifica
 
+Test site:
+http://www.abchryfdjdjgsfgfsjfd.com/Client/Client.php
+http://www.abchryfdjdjgsfgfsjfd.com/Client/Jonas1.php
+
 URL old PHP site:
 https://client.pacificagroup.co.uk/client/Client.php
 Log in:
