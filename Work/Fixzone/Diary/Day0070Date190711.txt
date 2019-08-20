@@ -1,6 +1,6 @@
 ﻿Dag 70:
 Torsdag den 11 juli 2019
-Jag trodde igår att jag i principo var klar med task39
+Jag trodde igår att jag i princip var klar med task39
 (Complete customer search client connect), men det visade
 sig att navigeringen med bakåtknappen inte fungerade riktigt,
 så det blev att jag satt hela arbetsdagen och kämpade med

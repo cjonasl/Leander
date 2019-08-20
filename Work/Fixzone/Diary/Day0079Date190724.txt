@@ -13,7 +13,7 @@ upptäcktes). Jag fick (dessvärre) fortsätta arbeta
 med task41. Felet med konfigureringen var att den
 (förmodligen) inte är webbplatsspecifik utan gäller
 för hela webbserven och således kan den inte ligga
-i web.config, utan snarare någon-stans högre upp,
+i web.config, utan snarare någonstans högre upp,
 t.ex. i machine.config. Intog kaffe och en medtagen
 smörgås till lunch. Argos hörde av sig rörande
 task38, ”Argos help guides”. Jag fick 6 pdf-guider

@@ -1,4 +1,21 @@
-﻿Live Shop Direct site site:
+﻿PAS client connect project, call center
+SVN source code: https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/CallCenterClientConnect
+Live site: https://pasclientconnect.pacificagroup.co.uk/Callcenter/SignIn
+Live IIS-server: Terminal server (Username: Jonas.Leander, Password: Leeds#6231), then box PG-DUR-WEBSER (Username: Jonas.Leander, Password: Leeds#6231)
+Database server: Use SSMS on "Terminal server": user name: PAS_CC, password: QchK8HZEn4g7rU9u and database name is PAS
+
+SVN source code: https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/ClientConnect
+Shop direct client connect
+Live site: https://shopdirect.fieldengineer.co.uk/
+Live IIS-server: hrg.fieldengineer.co.uk (password: spat-X11), then box clientweb01 (password: spat-X11)
+Create test account 2019-08-19:
+UserId: TestJonas
+Password: surbiton
+When log in then stored procedure "Retrieve_UserDetails" is called.
+When search for products then stored procedure "ProductList" is called.
+When search for jobs then stored procedure "JobList"" is called.
+
+Live Shop Direct site site:
 https://shopdirect.fieldengineer.co.uk/Account/SignIn
 
 Concepts: Store (= clinet) and Call center

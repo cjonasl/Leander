@@ -8,5 +8,5 @@ förmiddagen och försökte återskapa felet, men jag lyckades
 inte! På eftermiddagen bad Vijay mig att uppdatera en
 rapport i ”Engineer Connect” och hon skickade en mrt-fil
 på Skype. Jag skapade task37 för uppgiften. Det bestod i
-att endast byta ut en rublik och logo, så det gick fort.
+att endast byta ut en rubrik och logo, så det gick fort.
 Jag avslutade arbetsdagen ca. kl. 18.30 och promenerade hem.
