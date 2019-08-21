@@ -22,7 +22,7 @@ ca. kl. 13.00 och därefter även en tårtbit som
 Angela bjöd på med anledning av hennes födelsedag.
 Jag blev klar med en lösning av task45 ca. kl.
 18.00 och jag skapade en testwebbplats för det
-hela på URL http://-hrg.fieldengineer.co.uk:8080.
+hela på URL http://hrg.fieldengineer.co.uk:8080.
 Jag skrev ett mail till Jemma Cantwell på Argos
 att hon kan testa på den URL:en och jag specificerade
 testdata som hon kan använda och därefter, ca.

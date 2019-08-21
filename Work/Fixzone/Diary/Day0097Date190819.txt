@@ -1,2 +1,8 @@
 ﻿Dag 97:
 Måndag den 19 augusti 2019
+Jag ägnade arbetsdagen åt att gå igenom och jämföra
+PasClientConnect och ShopDirectClientConnect för att
+kunna göra task 44 (Transfer functionality from old
+PHP ClientConnect to new site). Vid 13.00-tiden intog
+jag kaffe och smörgås till lunch. Jag avslutade
+arbetsdagen ca. kl. 17.30 och promenerade hem.

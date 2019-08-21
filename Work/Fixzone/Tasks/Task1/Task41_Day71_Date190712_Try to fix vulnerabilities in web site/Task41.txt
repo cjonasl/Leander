@@ -1,10 +1,18 @@
 ﻿Task41:
 
 OBS OBS!! The solution I used last time is:
-C:\Jonas\SVN\CASTNew20190814\CastApplication.sln
-(Source control: https://svn.fieldengineer.co.uk:8443/svn/CAST/trunk)
+C:\AAAAA2\CustomerConnectSD\CustomerConnect.sln
 
-Customer Connect, modify the following files:
+Add files:
+C:\AAAAA2\CustomerConnectSD\Scripts\jquery-3.4.1.js
+C:\AAAAA2\CustomerConnectSD\Scripts\jquery-ui-1.12.1.js
+
+Modify files:
+C:\AAAAA2\CustomerConnectSD\App_Start\BundleConfig.cs
+
+
+
+---OLD OBSOLETE!!!!----- Customer Connect, modify the following files ------
 C:\Jonas\SVN\AAA\CustomerConnect\Views\Administration\AccountInfo.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\ReportPage.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\Customer\Details.cshtml
@@ -18,6 +26,9 @@ C:\Jonas\SVN\AAA\CustomerConnect\Views\Map\MapRoute.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\Product\ShowDetails.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\RequestDate.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\ViewModels\Product\Product_InfoModel.cs
+----------------------------------------------------------------------------
+
+
 
 Stored procedure GetCustomerProductsByGuidForAll takes long time
 
