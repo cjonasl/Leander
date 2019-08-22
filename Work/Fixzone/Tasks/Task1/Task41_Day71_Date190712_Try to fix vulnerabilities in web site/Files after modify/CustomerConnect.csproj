@@ -1,0 +1,1560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C1B307A2-AE66-4696-AC29-357AC4B4A9CA}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CAST</RootNamespace>
+    <AssemblyName>CAST</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabases>true</PublishDatabases>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\ErrorsDescription.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorsDescription.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\_3CService_MessageInspectorBehavior.cs" />
+    <Compile Include="Configuration\UserRoles.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
+    <Compile Include="Controllers\BookNewServiceController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DiagnosticController.cs" />
+    <Compile Include="Controllers\EngravingController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\FunctionsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobType.cs" />
+    <Compile Include="Controllers\LogsController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\JobStatusController.cs" />
+    <Compile Include="Controllers\ProcessController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\ValidateAntiForgeryTokenWrapper.cs" />
+    <Compile Include="Helpers\Encryption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\AllowedFileExtensions.cs" />
+    <Compile Include="Infrastructure\Constants.cs" />
+    <Compile Include="Infrastructure\CookiesKeys.cs" />
+    <Compile Include="Infrastructure\DefaultValues.cs" />
+    <Compile Include="Infrastructure\LogFields.cs" />
+    <Compile Include="Infrastructure\RuleSetKeys.cs" />
+    <Compile Include="Infrastructure\ValidationFormats.cs" />
+    <Compile Include="Configuration\Ioc.cs" />
+    <Compile Include="Configuration\IocRetailerConnectModule.cs" />
+    <Compile Include="Infrastructure\ValidationRuleSets.cs" />
+    <Compile Include="Logging\Logger_ConnectLog.cs" />
+    <Compile Include="Logging\Logger_File.cs" />
+    <Compile Include="Models\3C\Send\3CRegisterResult.cs" />
+    <Compile Include="Models\3C\Send\AddAttachmentResultModel.cs" />
+    <Compile Include="Models\3C\Send\AddressInfo.cs" />
+    <Compile Include="Models\3C\Send\AttachmentModel.cs" />
+    <Compile Include="Models\3C\Send\CreateAEPSwapModelResultModel.cs" />
+    <Compile Include="Models\3C\Send\EventRegResponseEventInfo.cs" />
+    <Compile Include="Models\3C\Send\GetUnitInfoResultModel.cs" />
+    <Compile Include="Models\3C\Send\PremiumServicesInfo.cs" />
+    <Compile Include="Models\3C\Send\RegisterServiceEventResultModel.cs" />
+    <Compile Include="Models\3C\Send\RegisterUnitResultModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_AEPSwapModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_CustomerInfoModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_DeliveryInfoModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_InfoModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_RegisterUnit.cs" />
+    <Compile Include="Models\3C\Send\Registration_SendModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_UnitInfoModel.cs" />
+    <Compile Include="Models\Account\AccountDetailsModel.cs" />
+    <Compile Include="Models\Account\CookiesStoredInfo.cs" />
+    <Compile Include="Models\Account\CustomerAccountModel.cs" />
+    <Compile Include="Models\Account\CustomerEnrolementModel.cs" />
+    <Compile Include="Models\Account\SessionModel.cs" />
+    <Compile Include="Models\Administration\AccountsInfoModel.cs" />
+    <Compile Include="Models\Administration\Administration_SessionModel.cs" />
+    <Compile Include="Models\Aep\AepResultModel.cs" />
+    <Compile Include="Models\Aep\AepSessionModel.cs" />
+    <Compile Include="Models\Appliance\ApplianceInfoModel.cs" />
+    <Compile Include="Models\Appliance\TroubleshootModel.cs" />
+    <Compile Include="Models\BookNewService\BookNewServiceSessionModel.cs" />
+    <Compile Include="Models\BookNewService\CustomValidation.cs" />
+    <Compile Include="Models\BookNewService\SonyAuthSessionModel.cs" />
+    <Compile Include="Models\CustomerProduct\CustomerProduct_SessionModel.cs" />
+    <Compile Include="Models\Customer\CustomerDocReadLog.cs" />
+    <Compile Include="Models\Customer\CustomerModel.cs" />
+    <Compile Include="Models\Customer\CustomerSessionModel.cs" />
+    <Compile Include="Models\Customer\Customer_CountriesModel.cs" />
+    <Compile Include="Models\Customer\FailureReasonResultModel.cs" />
+    <Compile Include="Models\Diagnostic\Diagnostic_ResultsModel.cs" />
+    <Compile Include="Models\Engineer\EngineerChoiceModel.cs" />
+    <Compile Include="Models\Engineer\EngineerModel.cs" />
+    <Compile Include="Models\Errors\Errors_SessionModel.cs" />
+    <Compile Include="Models\Files\ImportedFileModel.cs" />
+    <Compile Include="Models\Files\ImportedResult.cs" />
+    <Compile Include="Models\Files\ImportedRow.cs" />
+    <Compile Include="Models\Job\CallPart.cs" />
+    <Compile Include="Models\Job\ConditionIrisCodesModel.cs" />
+    <Compile Include="Models\Job\PartAction.cs" />
+    <Compile Include="Models\Job\PartsModel.cs" />
+    <Compile Include="Models\Job\ServiceModel.cs" />
+    <Compile Include="Models\Job\TransactionItem.cs" />
+    <Compile Include="Models\Product\RepeatHistory.cs" />
+    <Compile Include="Models\Product\RepeatRepairResult.cs" />
+    <Compile Include="Models\Job\DieryEntInfoModel.cs" />
+    <Compile Include="Models\Job\FieldsFromDB.cs" />
+    <Compile Include="Models\Job\FieldsFromDBAnswerModel.cs" />
+    <Compile Include="Models\Job\FieldsFromDBSessionModel.cs" />
+    <Compile Include="Models\Job\FileTypeCategoryModel.cs" />
+    <Compile Include="Models\Job\GetUnitInfoModel.cs" />
+    <Compile Include="Models\Job\JobInfoModel.cs" />
+    <Compile Include="Models\Job\RetailerModel.cs" />
+    <Compile Include="Models\Job\SaveServiceResult.cs" />
+    <Compile Include="Models\Job\ServiceInfoModel.cs" />
+    <Compile Include="Models\Job\SymptomIrisCodesModel.cs" />
+    <Compile Include="Models\Logs\ConnectLogsModel.cs" />
+    <Compile Include="Models\Logs\LogsSessionModel.cs" />
+    <Compile Include="Models\Logs\FileLogsModel.cs" />
+    <Compile Include="Models\Process\ProcessDetailsModel.cs" />
+    <Compile Include="Models\Process\ProcessesStack.cs" />
+    <Compile Include="Models\Repository\QueryResultModel.cs" />
+    <Compile Include="Models\Store\ClosestStoreInfoSessionModel.cs" />
+    <Compile Include="Models\UploadedFile\UploadedFileModel.cs" />
+    <Compile Include="Models\User\UserConfidentialModel.cs" />
+    <Compile Include="RemoveServerHeaderModule.cs" />
+    <Compile Include="Repositories\AccountRepository.cs" />
+    <Compile Include="Repositories\ApplianceRepository.cs" />
+    <Compile Include="Repositories\BookNewRepository.cs" />
+    <Compile Include="Repositories\CustomerProductRepository.cs" />
+    <Compile Include="Repositories\EngineerRepository.cs" />
+    <Compile Include="Repositories\Extensions.cs" />
+    <Compile Include="Repositories\FileRepository.cs" />
+    <Compile Include="Repositories\JobPartsRepository.cs" />
+    <Compile Include="Repositories\LogsRepository.cs" />
+    <Compile Include="Repositories\ProcessRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\StatusesRepository.cs" />
+    <Compile Include="Roles\AuthorizeUser.cs" />
+    <Compile Include="Roles\LogsViewRoleAttribute.cs" />
+    <Compile Include="Service References\AscServiceSync\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FzOnlineBooking\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\PostcodeService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\3CService.cs" />
+    <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\ApplianceService.cs" />
+    <Compile Include="Services\AvailableRequestDetails.cs" />
+    <Compile Include="Services\BookNewServiceService.cs" />
+    <Compile Include="Services\OnlineBookCustomerDetails.cs" />
+    <Compile Include="Services\OnlineBookingService.cs" />
+    <Compile Include="Services\CustomerProductService.cs" />
+    <Compile Include="Services\CustomerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\EngineerService.cs" />
+    <Compile Include="Services\ErrorsService.cs" />
+    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\Functions.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\LogsService.cs" />
+    <Compile Include="Services\OnlineBookRequestDetails.cs" />
+    <Compile Include="Services\ProcessService.cs" />
+    <Compile Include="Holder\CacheHolder.cs" />
+    <Compile Include="Validation\Account\AccountConfidentialInfoValidation.cs" />
+    <Compile Include="Validation\Account\AccountDetailsValidation.cs" />
+    <Compile Include="Validation\Account\CustomerAccountValidation.cs" />
+    <Compile Include="Validation\AddressValidation.cs" />
+    <Compile Include="Validation\Administration\AccountValidation.cs" />
+    <Compile Include="Validation\Administration\UserInfoEditValidation.cs" />
+    <Compile Include="Validation\BookNewService_CustomerPageValdation.cs" />
+    <Compile Include="Validation\BookNewService_JobPageValdation.cs" />
+    <Compile Include="Validation\CustomerValidation.cs" />
+    <Compile Include="Validation\Customer\CustomerValidation.cs" />
+    <Compile Include="Validation\FieldsFromDBValidation.cs" />
+    <Compile Include="Validation\ImportFile\ImportedRowValidator.cs" />
+    <Compile Include="Validation\ValidatorFactory.cs" />
+    <Compile Include="Validation\Job\AdditionalJobValidation.cs" />
+    <Compile Include="Validation\Job\ContactsValidation.cs" />
+    <Compile Include="Validation\Job\CustomerValidation.cs" />
+    <Compile Include="Validation\Job\ProductValidation.cs" />
+    <Compile Include="Validation\Job\RepairInfoValidator.cs" />
+    <Compile Include="Validation\ProcessValidation.cs" />
+    <Compile Include="Validation\ProductDetails_Validator.cs" />
+    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="ViewModels\Account\AccountConfidentialInfo.cs" />
+    <Compile Include="ViewModels\Account\AccountViewModel.cs" />
+    <Compile Include="ViewModels\Account\AccountsList.cs" />
+    <Compile Include="ViewModels\Account\CustomerAccount.cs" />
+    <Compile Include="ViewModels\Account\EntrolmentViewModel.cs" />
+    <Compile Include="ViewModels\Administration\AccountDetails.cs" />
+    <Compile Include="ViewModels\BookNewService\AepModel.cs" />
+    <Compile Include="ViewModels\BookNewService\AcceptAepModel.cs" />
+    <Compile Include="ViewModels\BookNewService\Appointment.cs" />
+    <Compile Include="ViewModels\BookNewService\ConfirmInfoModel.cs" />
+    <Compile Include="ViewModels\BookNewService\CustomerPageModel.cs" />
+    <Compile Include="ViewModels\BookNewService\EngineerListModel.cs" />
+    <Compile Include="ViewModels\BookNewService\JobBookingModel.cs" />
+    <Compile Include="ViewModels\BookNewService\JobPageModel.cs" />
+    <Compile Include="ViewModels\CustomerProduct\CustomerProductModel.cs" />
+    <Compile Include="Models\General\General_SessionModel.cs" />
+    <Compile Include="Models\JobStatuses\JobStatus_SessionModel.cs" />
+    <Compile Include="Models\Job\Guarantee_Model.cs" />
+    <Compile Include="Models\FieldsFromDB\FieldsFromDB_SessionModel.cs" />
+    <Compile Include="Models\Job\Job_RepairTypesModel.cs" />
+    <Compile Include="Models\Job\Job_SessionModel.cs" />
+    <Compile Include="Models\Product\Product_SessionModel.cs" />
+    <Compile Include="Models\FieldsFromDB\InspectFieldsModel.cs" />
+    <Compile Include="Models\FieldsFromDB\InspectFields_SessionModel.cs" />
+    <Compile Include="Models\FieldsFromDB\ListOfAnswersModel.cs" />
+    <Compile Include="Models\Job\Job_AdditionalInfo.cs" />
+    <Compile Include="Models\Job\Job_WarrantyModel.cs" />
+    <Compile Include="Models\Question\QuestionSessionModel.cs" />
+    <Compile Include="Models\Store\Store_CookiesModel.cs" />
+    <Compile Include="Models\User\User_SessionModel.cs" />
+    <Compile Include="Repositories\FieldsFromDBRepository.cs" />
+    <Compile Include="Roles\AdminRoleAttribute.cs" />
+    <Compile Include="Infrastructure\ContactMethod.cs" />
+    <Compile Include="Infrastructure\LetterCodes.cs" />
+    <Compile Include="Infrastructure\LetterGroupCodes.cs" />
+    <Compile Include="Infrastructure\ServiceUsageTypes.cs" />
+    <Compile Include="Infrastructure\VersionInfo.cs" />
+    <Compile Include="Logging\DatabaseLogger.cs" />
+    <Compile Include="Logging\Logger_Job.cs" />
+    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Logging\Logger_ProductView.cs" />
+    <Compile Include="Logging\Logger_SignIn.cs" />
+    <Compile Include="ViewModels\Administration\Administration_UserModel.cs" />
+    <Compile Include="Models\Administration\Administration_UsersSearchResult.cs" />
+    <Compile Include="ViewModels\Administration\AccountsList.cs" />
+    <Compile Include="Models\Job\Job_DetailsDto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Job\Job_NoteDto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Job\Job_NoteModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Job\Job_TrackingStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Reports\ReportListModel.cs" />
+    <Compile Include="Models\Reports\ReportsModel.cs" />
+    <Compile Include="Models\Store\StoreInfoModel.cs" />
+    <Compile Include="Notifications\Notifications_JobInfo.cs" />
+    <Compile Include="Notifications\Notifications_Sender.cs" />
+    <Compile Include="Process\ProcessDataHolder.cs" />
+    <Compile Include="Process\ProcessNavigator.cs" />
+    <Compile Include="Process\ProcessNavigationResult.cs" />
+    <Compile Include="Process\ProcessStepDetailsDto.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\AdministrationRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\DiagnosticRepository.cs" />
+    <Compile Include="Repositories\EngravingRepository.cs" />
+    <Compile Include="Repositories\HomeRepository.cs" />
+    <Compile Include="Repositories\JobRepository.cs" />
+    <Compile Include="Repositories\JobStatusesRepository.cs" />
+    <Compile Include="Repositories\LoggerRepository.cs" />
+    <Compile Include="Repositories\NotificationsRepository.cs" />
+    <Compile Include="Repositories\QuestionsRepository.cs" />
+    <Compile Include="Repositories\StoreRepository.cs" />
+    <Compile Include="Senders\EmailSender.cs" />
+    <Compile Include="Senders\SmsSender.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\AdministrationService.cs" />
+    <Compile Include="Services\DiagnosticService.cs" />
+    <Compile Include="Services\EngravingService.cs" />
+    <Compile Include="Models\Engraving\Engraving_SessionModel.cs" />
+    <Compile Include="Services\FieldsFromDBService.cs" />
+    <Compile Include="Services\GeneralService.cs" />
+    <Compile Include="Services\HomeService.cs" />
+    <Compile Include="Services\JobService.cs" />
+    <Compile Include="Services\JobStatusesService.cs" />
+    <Compile Include="Services\LoggerService.cs" />
+    <Compile Include="Services\MsgService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\QuestionService.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\StoreService.cs" />
+    <Compile Include="Holder\CookiesHolder.cs" />
+    <Compile Include="Holder\SessionHolder.cs" />
+    <Compile Include="Roles\CheckStoreFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Store\StoreInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\Job_DetailsModel_Validator.cs" />
+    <Compile Include="Validation\PasswordValidation.cs" />
+    <Compile Include="Validation\Postcode_Validation.cs" />
+    <Compile Include="Models\Address\AddressModel.cs" />
+    <Compile Include="ViewModels\Customer\Contact_InfoModel.cs" />
+    <Compile Include="ViewModels\Customer\Customer_InfoModel.cs" />
+    <Compile Include="Models\Customer\Customer_TitlesModel.cs" />
+    <Compile Include="ViewModels\EngravingPlaces\SpecificEngravingPlaces_Model.cs" />
+    <Compile Include="ViewModels\EngravingPlaces\SpecificEngravingPlaces_Result.cs" />
+    <Compile Include="ViewModels\FieldsFromDb\AdditionalFieldsModel.cs" />
+    <Compile Include="ViewModels\FieldsFromDb\AepFieldsModel.cs" />
+    <Compile Include="ViewModels\Home\BusinessRule.cs" />
+    <Compile Include="ViewModels\Home\Home_AdditionalLinksResult.cs" />
+    <Compile Include="ViewModels\JobStatuses\AdminJobStatus_Model .cs" />
+    <Compile Include="ViewModels\JobStatuses\AdminJobStatus_SearchModel .cs" />
+    <Compile Include="ViewModels\JobStatuses\JobStatus_Search.cs" />
+    <Compile Include="ViewModels\JobStatuses\JobStatus_SearchModel.cs" />
+    <Compile Include="ViewModels\JobStatuses\JobStatus_Model.cs" />
+    <Compile Include="ViewModels\JobStatuses\Status_Model.cs" />
+    <Compile Include="ViewModels\Job\CallPart.cs" />
+    <Compile Include="ViewModels\Job\ContactInfoModel.cs" />
+    <Compile Include="ViewModels\Job\CustomerInfoModel.cs" />
+    <Compile Include="ViewModels\Job\JobDetailsModel.cs" />
+    <Compile Include="ViewModels\Job\JobFaultInfo.cs" />
+    <Compile Include="ViewModels\Job\Job_NoteDtoShop.cs" />
+    <Compile Include="ViewModels\Job\NewServiceJobPage.cs" />
+    <Compile Include="ViewModels\Job\Job_StatusModel.cs" />
+    <Compile Include="ViewModels\Job\Job_DetailsModel.cs" />
+    <Compile Include="ViewModels\Job\Job_SearchModel.cs" />
+    <Compile Include="ViewModels\Job\Job_SearchResult.cs" />
+    <Compile Include="ViewModels\Job\NoteRecordModel.cs" />
+    <Compile Include="ViewModels\Job\NoteRecordModelShop.cs" />
+    <Compile Include="ViewModels\Job\ProductInfoModel.cs" />
+    <Compile Include="ViewModels\Job\RepairAddressInfoModel.cs" />
+    <Compile Include="ViewModels\Job\RepairInfoModel.cs" />
+    <Compile Include="ViewModels\Job\Repair_InfoModel.cs" />
+    <Compile Include="ViewModels\Product\Product_AdditServiceModel.cs" />
+    <Compile Include="ViewModels\Product\Product_DetailModel.cs" />
+    <Compile Include="ViewModels\Product\Product_InfoModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Product\Product_SearchModel.cs" />
+    <Compile Include="ViewModels\Product\Product_SearchResult.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\DataContext.cs" />
+    <Compile Include="Infrastructure\SqlMapper.cs" />
+    <Compile Include="Process\ActiveProcessesState.cs" />
+    <Compile Include="Process\ProcessData.cs" />
+    <Compile Include="Process\ProcessNavigationData.cs" />
+    <Compile Include="Process\ProcessesStateHolder.cs" />
+    <Compile Include="Process\ProcessState.cs" />
+    <Compile Include="Process\ProcessUrlHelper.cs" />
+    <Compile Include="Process\PredefinedProcess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Service References\SmsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="Validation\LandlinePhoneValidation.cs" />
+    <Compile Include="Validation\MobilePhoneValidation.cs" />
+    <Compile Include="ViewModels\Product\UpdateProductInfoCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Question\Question_Model.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web References\SparePartsServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app_offline.htm" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\BCrypt.Net.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\FluentValidation.dll" />
+    <Content Include="bin\FluentValidation.Mvc.dll" />
+    <Content Include="bin\FluentValidation.resources.dll" />
+    <Content Include="bin\Ionic.Zip.dll" />
+    <Content Include="bin\log4net.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\NPOI.dll" />
+    <Content Include="bin\nunit.framework.dll" />
+    <Content Include="bin\Omu.ValueInjecter.dll" />
+    <Content Include="bin\PagedList.dll" />
+    <Content Include="bin\PagedList.Mvc.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Web.Optimization.dll" />
+    <Content Include="bin\WebActivator.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\AdditionalServicesGraphics\SCN_0014.jpg" />
+    <Content Include="Content\AdditionalServicesGraphics\SCN_0015.jpg" />
+    <Content Include="Content\AdditionalServicesGraphics\SCN_0016.jpg" />
+    <Content Include="Content\css\base.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\BootstrapOverride.css" />
+    <Content Include="Content\css\cookieconsent.min.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\customBAK.css" />
+    <Content Include="Content\css\datepicker - Copy.css" />
+    <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\fontello.css" />
+    <Content Include="Content\css\fonts\ui-icons.dev.svg" />
+    <Content Include="Content\css\fonts\ui-icons.svg" />
+    <Content Include="Content\css\iconfont\fontello.svg" />
+    <Content Include="Content\css\icons_demo.html" />
+    <Content Include="Content\css\styles.css" />
+    <Content Include="Content\css\tabs.css" />
+    <Content Include="Content\css\jquery.ui.tabs.css" />
+    <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\lte-ie7.js" />
+    <Content Include="Content\css\PagedList.css" />
+    <Content Include="Content\css\very_unique.css" />
+    <Content Include="Content\Files\diagnostic_image.jpg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Icons\chevron_Fill.png" />
+    <Content Include="Content\Icons\chevron_NotFill.png" />
+    <Content Include="Content\Icons\CustomerMarker.png" />
+    <Content Include="Content\Icons\StoreMarker.png" />
+    <Content Include="Content\Icons\ui-icon-calendar.png" />
+    <Content Include="Content\Icons\ui-icons_next.png" />
+    <Content Include="Content\Icons\ui-icons_prev.png" />
+    <Content Include="Content\Images\datepicker\custom_b.png" />
+    <Content Include="Content\Images\datepicker\custom_bl.png" />
+    <Content Include="Content\Images\datepicker\custom_br.png" />
+    <Content Include="Content\Images\datepicker\custom_l.png" />
+    <Content Include="Content\Images\datepicker\custom_r.png" />
+    <Content Include="Content\Images\datepicker\custom_t.png" />
+    <Content Include="Content\Images\datepicker\custom_tl.png" />
+    <Content Include="Content\Images\datepicker\custom_tr.png" />
+    <Content Include="Content\Images\datepicker\datepicker_b.png" />
+    <Content Include="Content\Images\datepicker\datepicker_bl.png" />
+    <Content Include="Content\Images\datepicker\datepicker_br.png" />
+    <Content Include="Content\Images\datepicker\datepicker_l.png" />
+    <Content Include="Content\Images\datepicker\datepicker_r.png" />
+    <Content Include="Content\Images\datepicker\datepicker_t.png" />
+    <Content Include="Content\Images\datepicker\datepicker_tl.png" />
+    <Content Include="Content\Images\datepicker\datepicker_tr.png" />
+    <Content Include="Content\Images\datepicker\field.png" />
+    <Content Include="Content\Images\DiagnosticImage.jpg" />
+    <Content Include="Content\Images\loader.gif" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\loading_animation.gif" />
+    <Content Include="Content\Images\loading_indicator.gif" />
+    <Content Include="Content\Images\photo_not_available.png" />
+    <Content Include="Content\img\AIRCO_png.png" />
+    <Content Include="Content\img\arrow.png" />
+    <Content Include="Content\img\back-icon.png" />
+    <Content Include="Content\img\Clientlogo.png" />
+    <Content Include="Content\img\cm2.png" />
+    <Content Include="Content\img\COFF_png.png" />
+    <Content Include="Content\img\dropdown.png" />
+    <Content Include="Content\img\ELECT1.png" />
+    <Content Include="Content\img\ELECT_png.png" />
+    <Content Include="Content\img\FDG_png.png" />
+    <Content Include="Content\img\FF1.png" />
+    <Content Include="Content\img\ff_png.png" />
+    <Content Include="Content\img\GAG1.png" />
+    <Content Include="Content\img\GAG_png.png" />
+    <Content Include="Content\img\home-icon.png" />
+    <Content Include="Content\img\HVA1.png" />
+    <Content Include="Content\img\HVA_png.png" />
+    <Content Include="Content\img\icon_courier3.png" />
+    <Content Include="Content\img\info.jpg" />
+    <Content Include="Content\img\information.png" />
+    <Content Include="Content\img\LAUND1.png" />
+    <Content Include="Content\img\LAUND_png.png" />
+    <Content Include="Content\img\LCB1.png" />
+    <Content Include="Content\img\LCB_png.png" />
+    <Content Include="Content\img\LCC1 %282%29.png" />
+    <Content Include="Content\img\LCC1.png" />
+    <Content Include="Content\img\Lcc11.png" />
+    <Content Include="Content\img\LCC12.png" />
+    <Content Include="Content\img\LCC123.png" />
+    <Content Include="Content\img\LCC12345.png" />
+    <Content Include="Content\img\LCC_png.png" />
+    <Content Include="Content\img\LCD12.png" />
+    <Content Include="Content\img\LCD12345.png" />
+    <Content Include="Content\img\LCD15_png.png" />
+    <Content Include="Content\img\LCD23.png" />
+    <Content Include="Content\img\LCD_png.png" />
+    <Content Include="Content\img\littlewoods.png" />
+    <Content Include="Content\img\littlewoods\arrow.png" />
+    <Content Include="Content\img\littlewoods\back-icon.png" />
+    <Content Include="Content\img\littlewoods\Clientlogo.png" />
+    <Content Include="Content\img\littlewoods\dropdown.png" />
+    <Content Include="Content\img\littlewoods\ELECT.png" />
+    <Content Include="Content\img\littlewoods\ELECT1.png" />
+    <Content Include="Content\img\littlewoods\FDG.png" />
+    <Content Include="Content\img\littlewoods\ff.png" />
+    <Content Include="Content\img\littlewoods\FF1.png" />
+    <Content Include="Content\img\littlewoods\GAG.png" />
+    <Content Include="Content\img\littlewoods\GAG1.png" />
+    <Content Include="Content\img\littlewoods\home-icon.png" />
+    <Content Include="Content\img\littlewoods\HVA.png" />
+    <Content Include="Content\img\littlewoods\HVA1.png" />
+    <Content Include="Content\img\littlewoods\icon_cooker.png" />
+    <Content Include="Content\img\littlewoods\icon_courier3.png" />
+    <Content Include="Content\img\littlewoods\icon_dishwasher.png" />
+    <Content Include="Content\img\littlewoods\icon_e-reader.png" />
+    <Content Include="Content\img\littlewoods\icon_electric-hob.png" />
+    <Content Include="Content\img\littlewoods\icon_fridge.png" />
+    <Content Include="Content\img\littlewoods\icon_home-audio.png" />
+    <Content Include="Content\img\littlewoods\icon_incar-audio.png" />
+    <Content Include="Content\img\littlewoods\icon_memory-stick.png" />
+    <Content Include="Content\img\littlewoods\icon_microwave.png" />
+    <Content Include="Content\img\littlewoods\icon_speakers.png" />
+    <Content Include="Content\img\littlewoods\icon_tumble_dryer.png" />
+    <Content Include="Content\img\littlewoods\info.jpg" />
+    <Content Include="Content\img\littlewoods\information.png" />
+    <Content Include="Content\img\littlewoods\LAUND.png" />
+    <Content Include="Content\img\littlewoods\LAUND1.png" />
+    <Content Include="Content\img\littlewoods\LCB.png" />
+    <Content Include="Content\img\littlewoods\LCB1.png" />
+    <Content Include="Content\img\littlewoods\LCC.png" />
+    <Content Include="Content\img\littlewoods\LCC1 %282%29.png" />
+    <Content Include="Content\img\littlewoods\LCC1.png" />
+    <Content Include="Content\img\littlewoods\Lcc11.png" />
+    <Content Include="Content\img\littlewoods\LCC12.png" />
+    <Content Include="Content\img\littlewoods\LCC123.png" />
+    <Content Include="Content\img\littlewoods\LCC12345.png" />
+    <Content Include="Content\img\littlewoods\LCD.png" />
+    <Content Include="Content\img\littlewoods\LCD12.png" />
+    <Content Include="Content\img\littlewoods\LCD12345.png" />
+    <Content Include="Content\img\littlewoods\LCD15.png" />
+    <Content Include="Content\img\littlewoods\LCD23.png" />
+    <Content Include="Content\img\littlewoods\littlewoods.png" />
+    <Content Include="Content\img\littlewoods\logo.png" />
+    <Content Include="Content\img\littlewoods\NoImg.png" />
+    <Content Include="Content\img\littlewoods\NoImg1.png" />
+    <Content Include="Content\img\littlewoods\noPhoto.png" />
+    <Content Include="Content\img\littlewoods\old.png" />
+    <Content Include="Content\img\littlewoods\REF.png" />
+    <Content Include="Content\img\littlewoods\shell.png" />
+    <Content Include="Content\img\littlewoods\shlogo.png" />
+    <Content Include="Content\img\littlewoods\sony.jpg" />
+    <Content Include="Content\img\littlewoods\stock-vector-tv-icons-vector-set-tv-screens-on-a-white-background-tv-isolated-silhouettes-in-flat-style-349991753.jpg" />
+    <Content Include="Content\img\littlewoods\very-logo.png" />
+    <Content Include="Content\img\littlewoods\wash.png" />
+    <Content Include="Content\img\littlewoods\wash1.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\NoImg.png" />
+    <Content Include="Content\img\NoImg1.png" />
+    <Content Include="Content\img\noPhoto.png" />
+    <Content Include="Content\img\old.png" />
+    <Content Include="Content\img\REF_png.png" />
+    <Content Include="Content\img\shell.png" />
+    <Content Include="Content\img\shlogo.png" />
+    <Content Include="Content\img\sony.jpg" />
+    <Content Include="Content\img\STC_png.png" />
+    <Content Include="Content\img\stock-vector-tv-icons-vector-set-tv-screens-on-a-white-background-tv-isolated-silhouettes-in-flat-style-349991753.jpg" />
+    <Content Include="Content\img\TEL_png.png" />
+    <Content Include="Content\img\very-logo.png" />
+    <Content Include="Content\img\Very\arrow.png" />
+    <Content Include="Content\img\Very\back-icon.png" />
+    <Content Include="Content\img\Very\Clientlogo.png" />
+    <Content Include="Content\img\Very\cm2.png" />
+    <Content Include="Content\img\Very\dropdown.png" />
+    <Content Include="Content\img\Very\ELECT1.png" />
+    <Content Include="Content\img\Very\ELECT_png.png" />
+    <Content Include="Content\img\Very\FF1.png" />
+    <Content Include="Content\img\Very\ff_png.png" />
+    <Content Include="Content\img\Very\GAG1.png" />
+    <Content Include="Content\img\Very\GAG_png.png" />
+    <Content Include="Content\img\Very\home-icon.png" />
+    <Content Include="Content\img\Very\HVA1.png" />
+    <Content Include="Content\img\Very\HVA_png.png" />
+    <Content Include="Content\img\Very\icon_courier3.png" />
+    <Content Include="Content\img\Very\info.jpg" />
+    <Content Include="Content\img\Very\information.png" />
+    <Content Include="Content\img\Very\LAUND1.png" />
+    <Content Include="Content\img\Very\LAUND_png.png" />
+    <Content Include="Content\img\Very\LCB1.png" />
+    <Content Include="Content\img\Very\LCB_png.png" />
+    <Content Include="Content\img\Very\LCC1 %282%29.png" />
+    <Content Include="Content\img\Very\LCC1.png" />
+    <Content Include="Content\img\Very\Lcc11.png" />
+    <Content Include="Content\img\Very\LCC12.png" />
+    <Content Include="Content\img\Very\LCC123.png" />
+    <Content Include="Content\img\Very\LCC12345.png" />
+    <Content Include="Content\img\Very\LCC_png.png" />
+    <Content Include="Content\img\Very\LCD12.png" />
+    <Content Include="Content\img\Very\LCD12345.png" />
+    <Content Include="Content\img\Very\LCD15_png.png" />
+    <Content Include="Content\img\Very\LCD23.png" />
+    <Content Include="Content\img\Very\LCD_png.png" />
+    <Content Include="Content\img\Very\littlewoods.png" />
+    <Content Include="Content\img\Very\logo.png" />
+    <Content Include="Content\img\Very\NoImg.png" />
+    <Content Include="Content\img\Very\NoImg1.png" />
+    <Content Include="Content\img\Very\noPhoto.png" />
+    <Content Include="Content\img\Very\old.png" />
+    <Content Include="Content\img\Very\REF_png.png" />
+    <Content Include="Content\img\Very\shell.png" />
+    <Content Include="Content\img\Very\shlogo.png" />
+    <Content Include="Content\img\Very\sony.jpg" />
+    <Content Include="Content\img\Very\stock-vector-tv-icons-vector-set-tv-screens-on-a-white-background-tv-isolated-silhouettes-in-flat-style-349991753.jpg" />
+    <Content Include="Content\img\Very\very-logo.png" />
+    <Content Include="Content\img\Very\wash1.png" />
+    <Content Include="Content\img\Very\wash_png.png" />
+    <Content Include="Content\img\wash1.png" />
+    <Content Include="Content\img\washd_png.png" />
+    <Content Include="Content\img\wash_png.png" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\CookieConsent.min.js" />
+    <Content Include="Content\js\npm.js" />
+    <Content Include="Content\media\courier.png" />
+    <Content Include="Content\media\default.jpg" />
+    <Content Include="Content\media\eng.jpg" />
+    <Content Include="Content\media\eng.png" />
+    <Content Include="Content\media\FixzoneTest.jpg" />
+    <Content Include="Content\media\FZ1999_1401257_Image_20141217220344759.jpg" />
+    <Content Include="Content\media\NoImg.png" />
+    <Content Include="Content\ProductServices\comp.mp4" />
+    <Content Include="Content\ProductServices\comp_mp4.mp4" />
+    <Content Include="Content\ProductServices\mp4\comp.mp4" />
+    <Content Include="Content\ProductServices\mp4\comp_mp4.mp4" />
+    <Content Include="Content\ProductSupport\comp_pdf.mp4" />
+    <Content Include="Content\ProductSupport\mp4\comp_mp4.mp4" />
+    <Content Include="dist\lity.css" />
+    <Content Include="dist\lity.js" />
+    <Content Include="dist\lity.min.css" />
+    <Content Include="dist\lity.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.ico.png" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="jquery.js" />
+    <Content Include="js\angular\app.js" />
+    <Content Include="js\angular\controllers.js" />
+    <Content Include="js\angular\directives.js" />
+    <Content Include="js\angular\filters.js" />
+    <Content Include="js\angular\services.js" />
+    <Content Include="js\dialogs.factory.js" />
+    <Content Include="js\dialog_new2.js" />
+    <Content Include="js\functions2.js" />
+    <Content Include="lity.css" />
+    <Content Include="lity.js" />
+    <Content Include="lity.min.css" />
+    <Content Include="lity.min.js" />
+    <Content Include="Scripts\addresses.js" />
+    <Content Include="Scripts\alternativeProductsList.js" />
+    <Content Include="Scripts\authenticatedInfo.js" />
+    <Content Include="Scripts\buttons.js" />
+    <Content Include="Scripts\configuration.js" />
+    <Content Include="Scripts\cookieconsent.min.js" />
+    <Content Include="Scripts\datepicker.js" />
+    <Content Include="Scripts\dialogs.js" />
+    <Content Include="Scripts\EditToolbar.js" />
+    <Content Include="Scripts\fileUpload.js" />
+    <Content Include="Scripts\job-status-edit.js" />
+    <Content Include="Scripts\job-details.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.9.0.js" />
+    <Content Include="Scripts\diagnostic.js" />
+    <Content Include="Scripts\functions.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery.bgiframe.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.idletimeout.js" />
+    <Content Include="Scripts\jquery.idletimer.js" />
+    <Content Include="Scripts\jquery.shorten.js" />
+    <Content Include="Scripts\notifications.js" />
+    <Content Include="Scripts\ProgressBarPopUpMenu.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\ResponsiveHeightCaption.js" />
+    <Content Include="Scripts\Selector.js" />
+    <Content Include="Scripts\trackingSessionState.js" />
+    <Content Include="Content\Reports\ProductDetailsReport.mrt" />
+    <Content Include="Content\Reports\RepairAgentAddressLS.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces.mrt" />
+    <Content Include="Content\Reports\RepairAgentAddressDefault.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces4HeartRing.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces4StoneRing.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces6StoneRing.mrt" />
+    <Content Include="Content\Reports\ClosestStoreMap.mrt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Documents\Training Manual - Retail Connect.pdf" />
+    <Content Include="Content\Documents\Retail Connect - user guide.pdf" />
+    <Content Include="Content\Documents\Import xls template.xls" />
+    <Content Include="Content\Reports\errorReport.mrt" />
+    <Content Include="Content\Files\diagnostic_file.pdf" />
+    <Content Include="js\diagnostic.new.js" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\css\fonts\ui-icons.eot" />
+    <Content Include="Content\css\fonts\ui-icons.ttf" />
+    <Content Include="Content\css\fonts\ui-icons.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="vendor\jquery.js" />
+    <Content Include="vendor\zepto.js" />
+    <Content Include="Views\Account\HtmlPage1.html" />
+    <Content Include="Views\Error\Error.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="zepto.js" />
+    <Content Include="Content\css\iconfont\fontello.eot" />
+    <Content Include="Content\css\iconfont\fontello.ttf" />
+    <Content Include="Content\css\iconfont\fontello.woff" />
+    <Content Include="Content\css\iconfont\fontello.woff2" />
+    <Content Include="Content\Documents\FAQ.pdf" />
+    <Content Include="ContactUs.cshtml" />
+    <Content Include="Content\T&amp;C\Dish_pdf.pdf" />
+    <Content Include="Content\T&amp;C\FF_pdf.pdf" />
+    <Content Include="Content\T&amp;C\Fridge_pdf.pdf" />
+    <Content Include="Content\T&amp;C\Frz_pdf.pdf" />
+    <Content Include="Content\T&amp;C\Oven_pdf.pdf" />
+    <Content Include="Content\T&amp;C\service-guarantee C11 0376_16.05.2011.pdf" />
+    <Content Include="Content\T&amp;C\T&amp;C_New.pdf" />
+    <Content Include="Content\T&amp;C\T&amp;C_old.pdf" />
+    <Content Include="Content\T&amp;C\T&amp;C_older.pdf" />
+    <Content Include="Content\T&amp;C\Wash.pdf" />
+    <Content Include="Content\T&amp;C\Wash_pdf.pdf" />
+    <Content Include="Content\ProductSupport\AIRCO_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BAU_pdf - Copy.pdf" />
+    <Content Include="Content\ProductSupport\BAU_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BBQ_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BID_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BIF2_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BIF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BIO_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BWD2_pdf.pdf" />
+    <Content Include="Content\ProductSupport\BWM_pdf.pdf" />
+    <Content Include="Content\ProductSupport\CHF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\COFF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\Dish_pdf.pdf" />
+    <Content Include="Content\ProductSupport\DW_pdf.pdf" />
+    <Content Include="Content\ProductSupport\FF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\FF_pdf123.pdf" />
+    <Content Include="Content\ProductSupport\FRE_pdf.pdf" />
+    <Content Include="Content\ProductSupport\Fridge_pdf.pdf" />
+    <Content Include="Content\ProductSupport\Frz_pdf.pdf" />
+    <Content Include="Content\ProductSupport\HOBS_pdf.pdf" />
+    <Content Include="Content\ProductSupport\HOB_pdf.pdf" />
+    <Content Include="Content\ProductSupport\HOMK_pdf.pdf" />
+    <Content Include="Content\ProductSupport\HOOD_pdf.pdf" />
+    <Content Include="Content\ProductSupport\LWD_pdf.pdf" />
+    <Content Include="Content\ProductSupport\MICRO_pdf.pdf" />
+    <Content Include="Content\ProductSupport\Oven_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\AIRCO_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BAU_pdf - Copy.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BAU_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BBQ_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BID_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BIF2_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BIF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BIO_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BWD2_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\BWM_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\CHF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\COFF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\Dish_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\DW_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\FF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\FRE_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\Fridge_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\Frz_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\HOBS_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\HOB_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\HOMK_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\HOOD_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\LWD_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\MICRO_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\Oven_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\REF1_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\REFF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\REFRI_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\REF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\STC_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\TEL_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\TUM_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\WASD_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\WashInstall_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\Wash_pdf.pdf" />
+    <Content Include="Content\ProductSupport\pdf\Wash_pdf_old.pdf" />
+    <Content Include="Content\ProductSupport\REF1_pdf.pdf" />
+    <Content Include="Content\ProductSupport\REFF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\REFRI_pdf.pdf" />
+    <Content Include="Content\ProductSupport\REF_pdf.pdf" />
+    <Content Include="Content\ProductSupport\STC_pdf.pdf" />
+    <Content Include="Content\ProductSupport\TEL_pdf.pdf" />
+    <Content Include="Content\ProductSupport\TUM_pdf.pdf" />
+    <Content Include="Content\ProductSupport\WASD_pdf.pdf" />
+    <Content Include="Content\ProductSupport\WashInstall_pdf.pdf" />
+    <Content Include="Content\ProductSupport\Wash_pdf.pdf" />
+    <Content Include="Content\ProductServices\AIRCO_pdf.pdf" />
+    <Content Include="Content\ProductServices\BBQ_pdf.pdf" />
+    <Content Include="Content\ProductServices\BID_pdf.pdf" />
+    <Content Include="Content\ProductServices\BIF_pdf.pdf" />
+    <Content Include="Content\ProductServices\BIO_pdf.pdf" />
+    <Content Include="Content\ProductServices\BWD2_pdf.pdf" />
+    <Content Include="Content\ProductServices\BWM_pdf.pdf" />
+    <Content Include="Content\ProductServices\CHF_pdf.pdf" />
+    <Content Include="Content\ProductServices\COFF_pdf.pdf" />
+    <Content Include="Content\ProductServices\Dish.pdf" />
+    <Content Include="Content\ProductServices\Dish_pdf.pdf" />
+    <Content Include="Content\ProductServices\DW_pdf.pdf" />
+    <Content Include="Content\ProductServices\FDG_pdf.pdf" />
+    <Content Include="Content\ProductServices\FF.pdf" />
+    <Content Include="Content\ProductServices\FF_pdf.pdf" />
+    <Content Include="Content\ProductServices\FRE_pdf.pdf" />
+    <Content Include="Content\ProductServices\Fridge.pdf" />
+    <Content Include="Content\ProductServices\Fridge_pdf.pdf" />
+    <Content Include="Content\ProductServices\Frz.pdf" />
+    <Content Include="Content\ProductServices\Frz_pdf.pdf" />
+    <Content Include="Content\ProductServices\HOBS_pdf.pdf" />
+    <Content Include="Content\ProductServices\HOB_pdf.pdf" />
+    <Content Include="Content\ProductServices\HOMEK_pdf.pdf" />
+    <Content Include="Content\ProductServices\HOOD_pdf.pdf" />
+    <Content Include="Content\ProductServices\LWD_pdf.pdf" />
+    <Content Include="Content\ProductServices\MICRO_pdf.pdf" />
+    <Content Include="Content\ProductServices\Oven.pdf" />
+    <Content Include="Content\ProductServices\Oven_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\AIRCO_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\BBQ_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\BID_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\BIF_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\BIO_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\BWD2_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\BWM_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\CHF_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\COFF_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\Dish.pdf" />
+    <Content Include="Content\ProductServices\pdf\Dish_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\DW_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\FDG_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\FF.pdf" />
+    <Content Include="Content\ProductServices\pdf\FF_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\FRE_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\Fridge.pdf" />
+    <Content Include="Content\ProductServices\pdf\Fridge_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\Frz.pdf" />
+    <Content Include="Content\ProductServices\pdf\Frz_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\HOBS_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\HOB_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\HOMEK_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\HOOD_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\LWD_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\MICRO_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\Oven.pdf" />
+    <Content Include="Content\ProductServices\pdf\Oven_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\RAN1_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\RAN2_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\RAN3_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\RANGE_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\REF1_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\REFF_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\REFRI_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\REF_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\SetupGuide_FreestandingCooker.pdf" />
+    <Content Include="Content\ProductServices\pdf\SetupGuide_SteamCleaners.pdf" />
+    <Content Include="Content\ProductServices\pdf\STC_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\TEL_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\TUM_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\Wash.pdf" />
+    <Content Include="Content\ProductServices\pdf\WASHD_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\WashInstall.pdf" />
+    <Content Include="Content\ProductServices\pdf\WashInstall_pdf.pdf" />
+    <Content Include="Content\ProductServices\pdf\Wash_pdf.pdf" />
+    <Content Include="Content\ProductServices\RAN1_pdf.pdf" />
+    <Content Include="Content\ProductServices\RAN2_pdf.pdf" />
+    <Content Include="Content\ProductServices\RAN3_pdf.pdf" />
+    <Content Include="Content\ProductServices\RANGE_pdf.pdf" />
+    <Content Include="Content\ProductServices\REF1_pdf.pdf" />
+    <Content Include="Content\ProductServices\REFF_pdf.pdf" />
+    <Content Include="Content\ProductServices\REFRI_pdf.pdf" />
+    <Content Include="Content\ProductServices\REF_pdf.pdf" />
+    <Content Include="Content\ProductServices\SetupGuide_FreestandingCooker.pdf" />
+    <Content Include="Content\ProductServices\SetupGuide_SteamCleaners.pdf" />
+    <Content Include="Content\ProductServices\STC_pdf.pdf" />
+    <Content Include="Content\ProductServices\TEL_pdf.pdf" />
+    <Content Include="Content\ProductServices\TUM_pdf.pdf" />
+    <Content Include="Content\ProductServices\Wash.pdf" />
+    <Content Include="Content\ProductServices\WASHD_pdf.pdf" />
+    <Content Include="Content\ProductServices\Wash_pdf.pdf" />
+    <Content Include="Content\ProductServices\Wash_pdf_old.pdf" />
+    <None Include="Properties\PublishProfiles\Sony.pubxml" />
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.AEPSwapModelReservationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.AttachmentReturn.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.EventRegistrationReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.EventStatusUpdateReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.GetCtoSpecsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.NewServiceEventsReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.PartConsumptionReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.SolutionRegistrationReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.SolutionRqstStatusReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.UnitInformationResponseInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\CAST.AscServiceSync.UpdateServiceEventReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\AscServiceSync1.wsdl" />
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TAppointmentResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TAvailableResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TCustomer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TCustomerAppliance.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TCustomerContact.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TFollowOnAvailableResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TOnlineBookFollowOnResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TOnlineBookResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TRepeatRepairResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PostcodeService\CAST.PostcodeService.AddressData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.AuthHeader.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\CAST.FzOnlineBooking.TInspectionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\FzOnlineBooking\IFzOnlineBookingservice1.wsdl" />
+    <None Include="Service References\PostcodeService\PostcodeLookupService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\PostcodeService\service.wsdl" />
+    <None Include="Service References\PostcodeService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PostcodeService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SmsService\CAST.SmsService.TfzSMSMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SmsService\CAST.SmsService.TfzSMSMessage2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SmsService\configuration91.svcinfo" />
+    <None Include="Service References\SmsService\configuration.svcinfo" />
+    <None Include="Service References\SmsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\visibility.js" />
+    <None Include="Service References\AscServiceSync\configuration91.svcinfo" />
+    <None Include="Service References\AscServiceSync\configuration.svcinfo" />
+    <None Include="Service References\AscServiceSync\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FzOnlineBooking\configuration91.svcinfo" />
+    <None Include="Service References\FzOnlineBooking\configuration.svcinfo" />
+    <None Include="Service References\FzOnlineBooking\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\PostcodeService\configuration91.svcinfo" />
+    <Content Include="Service References\PostcodeService\configuration.svcinfo" />
+    <Content Include="Service References\PostcodeService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\BookNewService\ConfirmPage.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Administration\AddColleague.cshtml" />
+    <Content Include="Views\Administration\AccountInfo.cshtml" />
+    <Content Include="Views\Product\_ProductDetailsServiceAvailable.cshtml" />
+    <Content Include="Views\Error\Unhandled.cshtml" />
+    <Content Include="Views\Diagnostic\Index.cshtml" />
+    <Content Include="Views\Job\_AcceptJob.cshtml" />
+    <Content Include="Views\Engraving\SpecificEngravingPlaces.cshtml" />
+    <Content Include="Views\Product\_AlternativeProducts.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Book_JobPageFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Book_AEPPageFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EnginnerChoice_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AdditionalFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateJob_JobPageFields_Template.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Job_StatusModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Contact_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Customer_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Job_AdditionalInfo.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Product_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Repair_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateJob_AEPPageFields_Template.cshtml" />
+    <Content Include="Views\Address\_AddressesList.cshtml" />
+    <Content Include="Views\Address\_WrongPostcode.cshtml" />
+    <Content Include="Views\Address\_CollectAddressesList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AepFields_Template.cshtml" />
+    <Content Include="Views\Notification\UnsavedInfo.cshtml" />
+    <Content Include="Views\Job\CustomerInfo.cshtml" />
+    <Content Include="Views\Job\CustomerInfoEdit.cshtml" />
+    <Content Include="Views\Job\ContactInfo.cshtml" />
+    <Content Include="Views\Job\ProductInfoEdit.cshtml" />
+    <Content Include="Views\Job\ProductInfo.cshtml" />
+    <Content Include="Views\Job\RepairInfoEdit.cshtml" />
+    <Content Include="Views\Job\RepairInfo.cshtml" />
+    <Content Include="Views\Job\AdditionalJobInfo.cshtml" />
+    <Content Include="Views\Job\AdditionalJobEdit.cshtml" />
+    <Content Include="Views\Notification\Wait.cshtml" />
+    <Content Include="Views\Notification\AutoDiagnostic.cshtml" />
+    <Content Include="Views\Administration\AccountEdit.cshtml" />
+    <Content Include="Views\Administration\DeleteUser.cshtml" />
+    <Content Include="Views\Administration\AddCollegueSuccess.cshtml" />
+    <Content Include="Views\Product\SendSmsNotification.cshtml" />
+    <Content Include="Views\Product\SendEmailNotification.cshtml" />
+    <Content Include="Views\Notification\SessionTimeOut.cshtml" />
+    <Content Include="Views\Notification\SonyAuthorisation.cshtml" />
+    <Content Include="Views\Job\EngineerDetails.cshtml" />
+    <Content Include="Views\Notification\UploadDop.cshtml" />
+    <Content Include="Views\Error\Http404.cshtml" />
+    <Content Include="Views\Error\Http400.cshtml" />
+    <Content Include="Views\Error\Http500.cshtml" />
+    <Content Include="Views\Job\FindNotBookedJobs.cshtml" />
+    <Content Include="Views\Job\SearchNotBookedJobs.cshtml" />
+    <Content Include="Views\BookNewService\CustomerPage.cshtml" />
+    <Content Include="Views\BookNewService\JobPage.cshtml" />
+    <Content Include="Views\File\ImportFile.cshtml" />
+    <Content Include="Views\BookNewService\AepIndex.cshtml" />
+    <Content Include="Views\BookNewService\EngineerChoice.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\JobAdditionalFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\JobAdditionalFieldsHidden_Template.cshtml" />
+    <Content Include="Views\BookNewService\AcceptDop.cshtml" />
+    <Content Include="Views\BookNewService\UploadDop.cshtml" />
+    <Content Include="Views\BookNewService\AcceptAep.cshtml" />
+    <Content Include="Views\BookNewService\ReportPage.cshtml" />
+    <Content Include="Views\Product\ProductDetailsReportPage.cshtml" />
+    <Content Include="Views\Job\ReportPage.cshtml" />
+    <Content Include="Views\Logs\FileLogs.cshtml" />
+    <Content Include="Views\Logs\ConnectLogLogs.cshtml" />
+    <Content Include="Views\Account\AccountWidget.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ConfidentialDetails.cshtml" />
+    <Content Include="Views\Account\DateOfBirthCheck.cshtml" />
+    <Content Include="Views\Account\InputUserId.cshtml" />
+    <Content Include="Views\Account\ReminderAnswer.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Account\AccessDenied.cshtml" />
+    <Content Include="Views\BookNewService\RepeatJob.cshtml" />
+    <Content Include="Views\BookNewService\RegisterRepeatJob.cshtml" />
+    <Content Include="Views\Job\AwaitingForApproval.cshtml" />
+    <Content Include="Views\Job\RepeatedJobs.cshtml" />
+    <Content Include="Views\Job\RejectReason.cshtml" />
+    <Content Include="Views\Job\ApprovedJobs.cshtml" />
+    <Content Include="Views\Job\RejectedJobs.cshtml" />
+    <Content Include="Views\Customer\_FindCustomerSearch.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Job\_JobNotesShop.cshtml" />
+    <Content Include="Views\BookNewService\SoftService.cshtml" />
+    <Content Include="Views\BookNewService\ValidationCheck.cshtml" />
+    <Content Include="Views\BookNewService\CustomerService.cshtml" />
+    <Content Include="Views\BookNewService\ContactDetails.cshtml" />
+    <Content Include="Views\BookNewService\ManufactInstr.cshtml" />
+    <Content Include="Views\BookNewService\ManufactureContact.cshtml" />
+    <Content Include="Views\Customer\ClaimConfirmMessage.cshtml" />
+    <Content Include="Views\Job\_AdditionalJobInfo.cshtml" />
+    <Content Include="Views\Job\_JobNotesShopALL.cshtml" />
+    <Content Include="Views\Notification\Processing.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\BookNewService\IssueCorrected.cshtml" />
+    <Content Include="Views\BookNewService\AddressConfirmation.cshtml" />
+    <Content Include="Views\BookNewService\RequestDate.cshtml" />
+    <Content Include="Views\BookNewService\_RequestDate.cshtml" />
+    <Content Include="Views\BookNewService\BookedJobConfirmation.cshtml" />
+    <Content Include="Views\Customer\_EditToolbar.cshtml" />
+    <Content Include="Views\Customer\_ContactInfo.cshtml" />
+    <Content Include="Views\Job\CustomerDetails.cshtml" />
+    <Content Include="Views\Customer\CustomerInfo.cshtml" />
+    <Content Include="Views\Product\ShowApplianceDetails.cshtml" />
+    <Content Include="Views\Customer\JobDetails.cshtml" />
+    <Content Include="Views\BookNewService\CustomerReportPage.cshtml" />
+    <Content Include="Views\Job\PartsOrdered.cshtml" />
+    <Content Include="Views\Job\VanPartsInfo.cshtml" />
+    <Content Include="Views\Job\StockPartsInfo.cshtml" />
+    <Content Include="Web References\SparePartsServer\IOnlineSparePartsservice.wsdl" />
+    <Content Include="Web References\SparePartsServer\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\SparePartsServer\TOneAcceptPackageDeliveryResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SparePartsServer\TOneDelivery.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Job\FaultInformation.cshtml" />
+    <Content Include="Views\Job\PartsInfo.cshtml" />
+    <Content Include="Views\Job\CancelReason.cshtml" />
+    <Content Include="Views\BookNewService\SoftServiceDetails.cshtml" />
+    <Content Include="Views\BookNewService\_RequestDateDefault.cshtml" />
+    <Content Include="Views\Job\CancelLity.cshtml" />
+    <Content Include="Views\BookNewService\_RequestMobile.cshtml" />
+    <Content Include="Views\Customer\_RequestMobile.cshtml" />
+    <Content Include="Views\BookNewService\UpdateCustomerPage.cshtml" />
+    <Content Include="Views\Account\AddCollegueSuccess.cshtml" />
+    <Content Include="Views\Account\NewUser.cshtml" />
+    <Content Include="Views\BookNewService\ReScheduledJobConfirmation.cshtml" />
+    <Content Include="Views\Account\Enrolment.cshtml" />
+    <Content Include="Views\Account\EnrolmentFailure.cshtml" />
+    <Content Include="Views\Product\Video.cshtml" />
+    <Content Include="Views\Notification\ConfirmBooking.cshtml" />
+    <Content Include="Views\Product\_ProductSupport.cshtml" />
+    <Content Include="Views\Notification\ConfirmCancel.cshtml" />
+    <Content Include="Views\Account\CustomerURN.cshtml" />
+    <Content Include="Views\Product\ProductSupport.cshtml" />
+    <Content Include="Views\Notification\EmptyFaultDes.cshtml" />
+    <Content Include="Views\Notification\BookNoDate.cshtml" />
+    <Content Include="Views\Notification\ConfirmReschedule.cshtml" />
+    <Content Include="Views\Notification\AddJobNotes.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\Manufact.cshtml" />
+    <Content Include="Views\Product\SupportContents.cshtml" />
+    <Content Include="Views\Product\SupportSetup.cshtml" />
+    <Content Include="Views\Product\HealthCheckContents.cshtml" />
+    <Content Include="Views\Job\JobNotes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Job\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Job\_JobSearchHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Product\_ProductSearchHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\ShowDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Reports\ProductRepairInstruction.mrt" />
+    <Content Include="Content\Reports\ProductRepairOutcome.mrt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Reports\RepairNote.mrt" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Job\JobDetails.cshtml" />
+    <Content Include="Views\Job\_JobNotes.cshtml" />
+    <Content Include="Views\Job\_EditToolbar.cshtml" />
+    <Content Include="Views\Administration\UserList.cshtml" />
+    <Content Include="Views\Question\Show.cshtml" />
+    <Content Include="Views\JobStatus\JobList.cshtml" />
+    <Content Include="Views\JobStatus\JobStatuses.cshtml" />
+    <None Include="Service References\SmsService\IfzSmsservice.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AscServiceSync\" />
+    <WCFMetadataStorage Include="Service References\FzOnlineBooking\" />
+    <WCFMetadataStorage Include="Service References\PostcodeService\" />
+    <WCFMetadataStorage Include="Service References\SmsService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ErrorsDescription.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ErrorsDescription.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\css\Littlewoods\" />
+    <Folder Include="Content\css\Very\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.10.10.35/OSPJtm/SparePartsServerCGI.exe/wsdl/IOnlineSpareParts">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SparePartsServer\</RelPath>
+      <UpdateFromURL>http://10.10.10.35/OSPJtm/SparePartsServerCGI.exe/wsdl/IOnlineSpareParts</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CAST_SparePartsServer_IOnlineSparePartsservice</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="DevOne.Security.Cryptography.BCrypt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=4.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc, Version=4.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.resources, Version=4.0.0.1, Culture=de, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FluentValidation.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\..\Packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=1.2.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.ValueInjecter, Version=2.3.3.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.15.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=3.18.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.ServiceModel.Routing" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.DynamicData.Design" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Entity.Design" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.RegularExpressions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="Web.Optimization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivator, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>61943</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/CustomerConnect</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+</Project>

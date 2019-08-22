@@ -1,0 +1,530 @@
+﻿@using System.Web.Optimization
+@using CAST.Jobs
+@model CAST.ViewModels.Job.JobDetailsModel
+@{
+    ViewBag.Title = "Job details.";
+}
+
+@section Scripts{
+    @* @Scripts.Render("~/scripts/job-details-js")*@
+
+    <script src="@Url.Content("~/Scripts/EditToolbar.js")"></script>
+    <script src="/Scripts/ResponsiveHeightCaption.js"></script>
+    @*  <script src="/Scripts/lity.min.js"></script>*@
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @*if ('@ViewBag.AddJobNotes' != '') {
+                $("#divJNSuccess").dialog(); 
+            }*@
+            $("#pge").click(function () {
+                alert("Hi");
+            });
+
+            $("#lkSetup").click(function (event) {
+                //  alert("ddfd");
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: 'auto',
+
+                    width: '600',
+                    title: 'Product Support',
+                    containerId: '#edit-form',
+                    contentPath: '/Product/SupportSetup/',
+
+                    closeIcon: '',
+                    buttons: [{
+                        text: "close", "class": "button button-secondary no-btn pull-right",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+
+
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+
+            $("#lkHck").click(function (event) {
+                //  alert("ddfd");
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: 'auto',
+
+                    width: '600',
+                    title: 'Product Support',
+                    containerId: '#edit-form',
+                    contentPath: '/Product/HealthCheckContents/',
+
+                    closeIcon: '',
+                    buttons: [{
+                        text: "close", "class": "button button-secondary no-btn pull-right",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+
+
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+            $("#lkHints").click(function (event) {
+                //  alert("ddfd");
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: 'auto',
+
+                    width: '600',
+                    title: 'Product Support',
+                    containerId: '#edit-form',
+                    contentPath: '/Product/SupportContents/',
+
+                    closeIcon: '',
+                    buttons: [{
+                        text: "close", "class": "button button-secondary no-btn pull-right",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+
+
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+            $("#RejectJob").click(function (event) {
+                //  alert("ddfd");
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: '250',
+                    width: '800',
+                    title: 'Reason for rejection...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/RejectReason',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("RejectJob", "Job")';
+
+                            encoded_url = url + '?notes=' + encodeURIComponent($('#notes').val());
+                            window.location.href = encoded_url;
+                        }
+                    }, {
+                        text: "Cancel", "class": "bbg",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+            $("#CancelJob").click(function (event) {
+
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: '230',
+                    width: '800',
+                    title: 'Cancel Job',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/CancelReason',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "No", "class": "button button-secondary no-btn pull-right",
+                        click: function () {
+
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+
+                    }, {
+                        text: "Yes",
+                        "class": "pull-right",
+                        click: function () {
+                            var comment = $('#comments').val();
+                            if (comment != '') {
+                                //dialog.close();
+
+                                var cancelInfoDialog = new Dialog(new DefaulDialogSettings().confirmCancel);
+                                //EmptyFaultDes
+                                var waitInfoDialog = new Dialog(new DefaulDialogSettings().waitInfoDialog);
+
+                                //cancelInfoDialog.buttons([{
+
+                                //    text: 'Yes',
+                                //    "class": 'rbg',
+                                //    href: '',
+                                //    click: function () {
+
+                                        //
+                                        @*    var url = '@Url.Action("CancelJob", "Job")';
+                                        //    waitInfoDialog.show();
+
+                                        encoded_url = url + '?notes=' + encodeURIComponent($('#comments').val());
+                                        window.location.href = encoded_url;
+
+                                        //window.location.href = targetUrl;*@
+                                        var n = encodeURIComponent($('#comments').val());
+                                        cancelInfoDialog.close();
+                                       // dialog.close();
+                                        //waitInfoDialog.show();
+                                        $.ajax({
+                                            async: false,
+                                            url: "/Job/CancelJob",
+                                            type: 'POST',
+                                            data: AddAntiForgeryToken({                                         
+                                                notes: n
+                                            }),
+                                            success: function (data) {
+                                                if (data["success"]) {
+
+                                                    $("#divCancelled").dialog();
+                                                }
+                                                    //alert("success");
+                                                else {
+                                                    alert("Error on cancelling :" + data["error"]);
+
+
+                                                }
+
+                                            }
+
+                                        })
+                                    //}
+                                //}, {
+
+                                //    text: 'No',
+                                //    "class": "button button-secondary no-btn pull-right",
+                                //    click: function () {
+                                //        cancelInfoDialog.close();
+                                //    }
+
+
+
+                                //}]);
+                               // cancelInfoDialog.show()
+
+                            }
+                            else {
+                                //alert("Please enter the reason for cancelling");
+                                $("#divError").show()
+                            }
+                        }
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+
+            $("#QueryJob").click(function (event) {
+
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: '250',
+                    width: '800',
+                    title: 'Adding query...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/QueryJob',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("HighCostQueryJob", "Job")';
+                            //   alert($('#Querynotes').val());
+                            encoded_url = url + '?notes=' + encodeURIComponent($('#Querynotes').val());
+                            window.location.href = encoded_url;
+                        }
+                    }, {
+                        text: "Cancel", "class": "bbg",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+
+            $("#ApproveJob").click(function (event) {
+            })
+            $("#InsertNote").click(function (event) {
+                event.preventDefault();
+                if ($("#noteText").val() == "") {
+                    $("#divErrorJob").toggle();
+                    //alert("Please add a fault description and try again.");
+                    return false;
+                }
+                else {
+                    $("#divJNSuccess").dialog();
+                    // alert("add note");
+                }
+
+            });
+
+            $("#InsertNoteNew").click(function (event) {
+                event.preventDefault();
+               // $('#notes')[0].focus()
+                $("#job-add-note-form").submit();
+            });
+
+
+            $("#ApproveJob").click(function (event) {
+
+
+
+                var dialog = new Dialog({
+                    height: '250',
+                    width: '800',
+                    title: 'Adding notes for approval...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/ApproveJob',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("ApproveJobNotes", "Job")';
+                            //   alert($('#Querynotes').val());
+                            encoded_url = url + '?notes=' + encodeURIComponent($('#Approvenotes').val());
+                            window.location.href = encoded_url;
+                        }
+                    }, {
+                        text: "Cancel", "class": "bbg",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+
+
+            if ('@Model.IsAccepted' != 'True') { //customer toolbar
+                var customerEditToolbar = new EditToolbar('#customer-info-toolbar');
+                customerEditToolbar.onEditFunction = function () {
+                    onEdit(this, '/Job/CustomerInfoEdit');
+                };
+
+                //create contact toolbar
+                var contactEditToolbar = new EditToolbar('#contact-info-toolbar');
+                contactEditToolbar.onEditFunction = function () {
+                    onEdit(this, '/Job/ContactInfoEdit');
+                };
+
+                //create product toolbar
+                var productEditToolbar = new EditToolbar('#product-info-toolbar');
+                productEditToolbar.onEditFunction = function () {
+                    onEdit(this, '/Job/ProductInfoEdit');
+                };
+
+                //create repair toolbar
+                var repairEditToolbar = new EditToolbar('#repair-info-toolbar');
+                repairEditToolbar.onEditFunction = function () {
+                    onEdit(this, '/Job/RepairInfoEdit');
+                };
+
+                //create repair toolbar
+                var additionalInfoToolbar = new EditToolbar('#additional-job-info-toolbar');
+                additionalInfoToolbar.onEditFunction = function () {
+                    onEdit(this, '/Job/AdditionalJobEdit');
+                };
+            }
+            //on edit function
+            function onEdit(toolbar, formUrl) {
+                toolbar.toViewMode();
+                var dialog = new Dialog({
+                    height: '850',
+                    width: '800',
+                    title: 'Editing...',
+                    containerId: '#edit-form',
+                    contentPath: formUrl,
+                    closeIcon: '',
+                    refreshPageAfterClose: true
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            };
+
+            var repairAgentDialog = new Dialog();
+            repairAgentDialog.setAsCloseDialog({
+                height: '700',
+                width: '800',
+                title: 'Repair agent details',
+                containerId: '#repair-agent-details',
+                closeIcon: '',
+                Buttontext: "OK"
+            });
+
+
+            $("#show-repair-agent-details").click(function () {
+                repairAgentDialog.show();
+            });
+        });
+
+        $("#print-report-btn").click(function () {
+            $("#print-report-form").submit();
+        });
+        AddAntiForgeryToken = function (data) {
+            data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+            // alert($('input[name=__RequestVerificationToken]').val());
+            return data;
+        };
+    </script>
+}
+@*@if (Model.StatusId == 10)
+{ 
+    Model.Status.CurrentStatus=
+}*@
+
+<div class="section section__full">
+    <div class="section__box" style="margin-bottom: 0em">
+
+        <span class="section__heading">@(string.Format("Your Job reference :  {0} ", Model.RepairInformation.ServiceId))
+            <span class="section__heading--buttons">
+                <input type="button" class="button" onclick="$('#notes')[0].focus()" value="Job Notes" />
+                @*<a href="@String.Format("/Customer/Details?customerid={0} " , @Model.CustomerInformation.CustomerID)" class="button AnchorBook">My Appliances</a>*@</span>
+        </span>
+        <br />
+        @if (ViewBag.IsLowCost)
+        {
+             <span class="status"><strong>Status : Item to be replaced </strong></span>
+        }
+        else
+        {
+        <span class="status"><strong>Status : @((Model.ProductInformation.StatusText == "AW system to send") ? "Job Booked" : Model.ProductInformation.StatusText) </strong></span>@*class="messageStatus"*@
+        }
+        <br />
+
+
+        
+
+    </div>
+</div>
+
+<div class="section section__split">
+
+    
+
+    @{
+        Html.RenderPartial("RepairInfo", Model.RepairInformation);
+    }
+
+    @{
+        Html.RenderPartial("ProductInfo", Model.ProductInformation);
+    }
+
+   
+
+</div>
+<div class="">
+
+    @Html.Partial("FaultInformation", Model.JobFaultInfo)
+</div>
+<div class="" id="notes" tabindex="-1">
+    @Html.Partial("_JobNotes", Model.JobNotes)
+</div>
+
+
+<div id="edit-form"></div>
+@* @using (Html.BeginForm("JobPage", "BookNewService", FormMethod.Post, new { @id = "job-details" }))
+        {
+*@
+<div id="divCancelled" title="Thank you" style="display: none">
+    <p>Your job has now been cancelled as requested.</p>
+       
+     <a href='@Url.Action("Details", "Customer", new { })' class="products-listing__appliance_ex">Return to home page
+        </a>
+
+   
+</div>
+
+<div id="divJNSuccess" title="Job Notes" style="display: none">
+    <p>Thanks for your message we will review and reply back within 24 hours.</p>
+    <input  class="button" id="InsertNoteNew" type="submit"  value="Ok"   tabindex =210 />
+    @*  <input class="button" id="InsertNote" type="submit" value="Send" title="Save customer info and go to next step" tabindex =210/>
+    <a href='@Url.Action("AddJobNote", "Job", new {noteText=noteText})' class="products-listing__appliance_ex">*@
+
+
+
+</div>
+
+
+
+
+
+
+@*}*@

@@ -1,0 +1,128 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model CAST.Models.Logs.FileLogsModel
+
+@{
+    ViewBag.Title = "Logs view";
+}
+
+@section Styles
+{
+    <link href="@Url.Content("/Content/css/tabs.css")" rel="stylesheet" />
+}
+
+@section Scripts
+{
+   <script src="@Url.Content("~/Scripts/jquery.shorten.js")"></script>
+    <script>
+        $(function () {
+            $(".shorten").shorten(
+                {
+                    showChars: '50',
+                    moreText: 'show',
+                    lessText: 'hide'
+                }
+            );
+        });
+    </script>
+}
+
+
+
+
+
+
+<div class="ui-tabs ui-widget-content">
+    <div class="cols cols2">
+        <div class="col2">
+            <h2>Logs view</h2>
+            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header" role="tablist">
+                <li class="ui-state-default ui-tabs-active ui-state-active">
+                    <a href="FileLogs" class="icon-reporting">File log</a>
+                </li>
+                <li class="ui-state-default">
+                    <a href="ConnectLogLogs" class="icon-reporting">Connect log</a>
+                </li>
+            </ul> 
+        </div>
+    </div>
+</div>
+    
+<div class="cols cols2">
+    <div class="col">
+        @using (Html.BeginForm("ReadFile", "Logs", FormMethod.Post))
+        {
+            <table>
+                <thead>
+                    <th colspan="2">Select file:</th>
+                </thead>
+                <tr>
+                    <td>Files:</td>
+                    <td>@Html.DropDownListFor(x => x.FileName, Model.FilesList)</td>
+                </tr>
+                <tr>
+                    <td><button type="submit" class="button rbg pull-left">Read file</button></td>
+                    <td></td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div class="col">
+        @using (Html.BeginForm("FileLogFilter", "Logs", FormMethod.Post))
+        {
+            <table>
+                <thead>
+                    <th colspan="2">Filters:</th>
+                </thead>
+                <tr>
+                    <td>User:</td>
+                    <td>@Html.DropDownListFor(x => x.FilterUserName, Model.FilterUserNameList, new { @class = "select" })</td>
+                </tr>
+                <tr>
+                    <td>Store:</td>
+                    <td>@Html.DropDownListFor(x => x.FilterStore, Model.FilterStoreList, new { @class = "select" })</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="rbg pull-left" value="Filter"/>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+
+<div class="cols cols2">
+    <div class="col2">
+        @if (Model.Records.Count > 0)
+        {
+            <table width="100%">
+                <thead>
+                    <th width="15%">Date</th>
+                    <th width="15%">User</th>
+                    <th width="5%">Store</th>
+                    <th width ="30%">Action</th>
+                    <th width ="35%">Result</th>
+                </thead>
+                
+                @foreach (var record in ViewBag.oneLogPage)
+                {
+                    <tr>
+                        <td>@record.Date</td>
+                        <td>@record.User</td>
+                        <td>@record.Store</td>
+                        <td>@record.Action</td>
+                        <td class="shorten">@record.Result</td>
+                    </tr>
+                }
+            </table>
+            @Html.PagedListPager( (IPagedList)ViewBag.oneLogPage, page => Url.Action("FileLogs", new { page }), options: PagedListRenderOptions.DefaultPlusFirstAndLast )
+        }
+        else
+        {
+            <p class="error">No logs</p>
+        }
+    </div>
+</div>
+    

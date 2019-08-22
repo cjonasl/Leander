@@ -1,0 +1,473 @@
+﻿@using System.Web.Optimization
+
+@model CAST.Models.Customer.CustomerModel
+@{
+    ViewBag.Title = "";
+}
+
+@Scripts.Render("~/scripts/EditToolbarResponsiveHeightCaption-js")
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //blink_me
+
+            var allnotes = getQueryVariable("allnotes");
+
+            if (allnotes.toLowerCase() == 'false') {
+
+                $("#allnotes").show();
+                $("#shortnotes").hide();
+
+            }
+            else {
+                $("#allnotes").hide();
+                $("#shortnotes").show();
+            }
+
+            var btn = getQueryVariable("btnExp");
+
+            if (btn.toLowerCase() == 'false') {
+
+                $("#btnExp").show();
+                $("#btnSnt").hide();
+
+            }
+            else {
+                $("#btnExp").hide();
+                $("#btnSnt").show();
+            }
+
+            function getQueryVariable(variable) {
+                var query = window.location.search.substring(1);
+                if (query == "")
+                    return ('false');
+                else {
+                    var vars = query.split("&");
+
+                    for (var i = 0; i < vars.length; i++) {
+                        var pair = vars[i].split("=");
+                        if (pair[0] == variable) { return pair[1]; }
+                        else
+                        { return ('false'); }
+                    }
+                    return ('false');
+                }
+            }
+         
+
+            $("#btnExp").click(function () {
+                $("#ContactDetail").toggle();
+                $("#imgexpand").toggleClass('glyphicon-menu-up glyphicon-menu-down');
+            })
+            function onEdit(toolbar, formUrl) {
+
+                toolbar.toEditMode();
+                var dialog = new Dialog({
+                    height: '850',
+                    width: '800',
+                    title: 'Editing...',
+                    containerId: '#edit-form',
+                    contentPath: formUrl,
+                    closeIcon: '',
+                    refreshPageAfterClose: true
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                //dialog.show();
+            };
+
+
+            if('@ViewBag.NewProductSupport'!='')
+            {
+                $('#divAlert').toggle();
+            }
+
+            //*********************************************
+
+            
+            var mobileNo = @Html.Raw(Json.Encode(Model.MobileTel));
+            var landLine = @Html.Raw(Json.Encode(Model.LandlineTel));
+            var tel3 = @Html.Raw(Json.Encode(Model.Tel3));
+            $.ajax({
+                async: false,
+                url: "/Customer/ValidatePhones",
+                type: 'GET',
+                data: {
+                    Mobile: mobileNo,
+                    Landiline: landLine,
+                    Tel3: tel3
+
+                },
+                success: function (data) {
+
+                    isValid = data["isValid"];
+                    if (isValid )// (isUniqueMail && ( ClientRef == null || ClientRef == ""))
+                    {
+                        $("#mobile").hide(); 
+                    }
+                    else {
+                      
+                        $("#mobile").show();
+                        //var dialog = new Dialog({
+                        //    height: '200',
+                        //    width: '600',
+                        //    title: 'Please provide your mobile number',
+                        //    containerId: '#edit-form',
+                        //    contentPath: '/Customer/_RequestMobile',
+                        //    closeIcon: '',
+                        //    buttons: [{
+                        //        text: "OK",
+                        //        "class": "rbg",
+                        //        click: function () {
+                               
+                          
+                        //            $('#mobile').val($('#txtMobile').val());
+                           
+                        //        }
+                        //    }, {
+                        //        text: "Cancel", "class": "bbg",
+                        //        click: function () {
+
+                        //            var url = "/BookNewService/CustomerPage";
+                        //            window.location.href = url;
+                        //        }
+
+                        //    }],
+                        //    refreshPageAfterClose: false
+                        //});
+                    }
+                }
+            });
+            //**********************************
+
+
+
+            var options = {
+                target: '#edit-form'
+            };
+            $('#edit-form form').ajaxForm(options);
+            //dialog.show();
+                                    
+        
+        })
+
+
+
+
+    </script>
+}
+@*<div id="cookie-consent">
+    <div class="container">
+        <span>My site uses cookies to personalise content and adverts, to provide social media features and to analyse traffic.</span>
+        <button class="btn btn-xs btn-green" id="consent">I'm happy with this</button>
+        <button class="btn btn-xs btn-green" id="learn-more">Learn more</button>
+    </div>
+</div>*@
+<div class="section section__full">
+    <div class="section__box">
+
+        <span class="section__heading">
+            <div id="clickme">
+                @Model.Title @Model.Forename @Model.Surname
+
+                <span class="section__heading--buttons">
+                    <button id="btnExp" type="button" class="button" aria-label="Left Align" title="Expand">
+                        <i class="icon-down-open-1"></i>
+                    </button>
+                </span>
+
+                @*
+                <button type="button" class="button" aria-label="Left Align" id="btnSnt" title="Collapse">
+                    <i class="icon-up-open-1"></i>
+                </button>*@
+
+                @*   @Html.Partial("~/Views/Customer/_EditToolbar.cshtml")*@
+            </div>
+
+
+        </span>
+
+        <div class="section__content" id="ContactDetail" style="display: none;">
+
+            <div class="cf">@**@
+                <div class="section__box">
+
+                    @if (null != Model.Addr1)
+                    {   
+                        @Model.Addr1<br />
+                    }
+                    @if (null != Model.Addr2)
+                    {     
+                        @Model.Addr2<br />
+                    }
+                    @if (null != Model.Addr3)
+                    {
+                        @Model.Addr3<br />
+                    }
+                    @if (null != Model.Town)
+                    {     
+                        @Model.Town<br />
+                    }
+                    @if (null != Model.County)
+                    {     
+                        @Model.County<br />
+                    }
+                    @if (null != Model.Postcode)
+                    {
+                        @Model.Postcode<br />
+                    }
+                </div>
+
+                <div class="section__box">
+                    @if (null != Model.Email)
+                    {     
+                        @Model.Email<br />
+                    }
+                    @if (null != Model.LandlineTel)
+                    {
+                        @Model.LandlineTel<br />
+                    }
+                    @if (null != Model.MobileTel)
+                    {
+                        @Model.MobileTel<br />
+                    }
+                    @if (null != Model.Tel3)
+                    {
+                        @Model.Tel3<br />
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="mobile" style="display: none">
+        @Html.Partial("_RequestMobile", @Model)
+    </div>
+</div>
+
+
+<div class="section section__full">
+    <div class="section__box">
+
+        <div id="divAlert" style="overflow-y: scroll; height: 90px; display: none">
+
+            @foreach (var item in Model.ProductInfoModel)
+            {
+                string text = string.Format("New {0} available for {1} {2}", @ViewBag.DocName, item.MFR, item.Description.ToLower());
+                if (null != item.serviceId && item.serviceId != 0 && item.ServiceDetails.StatusId != 30 && (!item.DummyJob) && item.ServiceDetails.StatusId != 8 && item.ServiceDetails.StatusId != 2 && null != item.ContentFileName && item.ServiceDetails.VisitDate >= DateTime.Now)
+                {
+                  
+                @Html.ActionLink(text, "GoToDetails", "Job", new { id = @item.serviceId, ContentFileName = item.ContentFileName }, new { @class = "status" })@(" ")      <br />
+                }
+                else if (null != item.ContentFileName)
+                {
+                @Html.ActionLink(text, "Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded, ContentFileName = item.ContentFileName ,fr= 0}, new { @class = "status" })
+                <br />
+                }
+            }
+
+        </div>
+        <span class="section__heading">My Electrical Items
+ 
+        </span>
+
+        <div class="section__content">
+
+            <ul class="products-listing">
+
+
+
+                @foreach (var item in Model.ProductInfoModel)
+                { <li>
+                    <div class="products-listing_item">
+                        <div class="products-listing__thumbnail">
+                            @if (item.serviceId != 0 && item.ServiceDetails.StatusId != 30 && item.ServiceDetails.StatusId != 8 && item.ServiceDetails.StatusId != 2 && item.VisitDate >= DateTime.Now && (item.FraudResult== 0 || item.FraudResult ==1))
+                            {
+                            
+                            
+                                <a href='@Url.Action("GoToDetails", "Job", new { id = @item.serviceId })' >
+
+
+                                    @if (null != item.ImageFileName)
+                                    {
+
+                                        <img src="@Url.Content(item.ImageFileName)" alt="..." class="thumbnail"/>
+                                    }
+                                    else
+                                    {
+                                        <img src="@Url.Content("../../Content/img/NoImg.png")" alt="..." class="thumbnail"/>
+                                    }
+                                </a> 
+                                    if ((item.CONTRACTEXPIRES > DateTime.Now && item.CONTRACTEXPIRES != null))
+                                    {
+                                <a href='@Url.Action("GoToDetails", "Job", new { id = @item.serviceId })' class="products-listing__appliance">
+                                    <span class="Twoline">@item.Description</span> </a>
+                                    }
+                                    else
+                                    {
+                                <a href='@Url.Action("GoToDetails", "Job", new { id = @item.serviceId })' class="products-listing__appliance_ex">
+                                    <span class="Twoline">@item.Description.ToLower()</span> </a>
+                                    }
+
+                            }
+                            else
+                            {
+								<a href='@Url.Action("Details", "Product", new { modelID = item.ModelId, CustAplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult  })' class="products-listing__appliance">
+                                    @if (null != item.ImageFileName)
+                                    {
+                                        <img src="@Url.Content(item.ImageFileName)" alt="..." class="thumbnail"/>
+                                    }
+                                    else
+                                    {
+                                        <img src="@Url.Content("../../Content/img/NoImg.png")" alt="..." class="thumbnail"/>
+                                 
+                                    }</a>
+                                   
+                                <a href='@Url.Action("Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult })' class="products-listing__appliance">
+                                    <span class="Twoline">@item.Description.ToLower() </span>
+                                </a>
+                                   
+                            }
+
+
+                        </div>
+                        @*<div class="products-listing__thumbnail">*@
+                            <div class="products-listing__type">
+                                @if (string.IsNullOrEmpty(@item.Manufacturer.ToLower()))
+                                { <span>&nbsp; &nbsp; &nbsp;</span> }
+                                else
+                                { <span>@item.Manufacturer.ToLower()</span>}<br />
+                                @if (string.IsNullOrEmpty(@item.ModelNumber))
+                                { <span>&nbsp; &nbsp; &nbsp;</span> }
+                                else
+                                { <span>@item.ModelNumber</span>}<br />
+                                @if (string.IsNullOrEmpty(@item.SerialNumber))
+                                { <span>&nbsp; &nbsp; &nbsp;</span> }
+                                else
+                                { <span>@item.SerialNumber</span>}<br />
+                               
+                            </div>
+
+
+                            <div class="product-listing__action">
+                                <span class="products-listing__statustitle">
+                                    @if (item.serviceId != 0 && null != @item.CONTRACTEXPIRES)
+                                    {
+                                        if (@item.ServiceDetails.StatusId != 30 && item.ServiceDetails.StatusId != 8 && (!item.DummyJob)&& (@item.CONTRACTEXPIRES >= DateTime.Now) && @item.ServiceDetails.StatusId != 2 && item.VisitDate >= DateTime.Now  && (item.FraudResult== 0 || item.FraudResult ==1))
+                                        {
+                                         
+
+                                        <div class="status">&nbsp;&nbsp;&nbsp;</div>
+                          
+                                        @Html.ActionLink("View Job", "GoToDetails", "Job", new { id = @item.serviceId }, new { @class = "button disablelink" })
+                               
+                                            if (item.JobNotes.Where(x => x.ServiceId == item.serviceId && x.Read == null && !(x.CustomerNoteFlag)).Count() != 0)
+                                            {
+                                  
+                                        @Html.ActionLink(string.Format("{0} Notes", ((item.JobNotes.Where(x => x.ServiceId == item.serviceId && x.Read == null)).Count())), "Marknotesread", "Job", new { ServiceId = item.serviceId }, new { @class = "button button-secondary disablelink" })
+                                       
+                                            }
+
+                                        }
+                                        else if (@item.CONTRACTEXPIRES <= DateTime.Now && @item.ServiceDetails.StatusId != 2 && item.ServiceDetails.VisitDate >= DateTime.Now && (item.FraudResult == 0 || item.FraudResult == 1))
+                                        {
+@*<span class="status">&nbsp;&nbsp;&nbsp;</span>*@
+                                        <span class="status_Ex">Expired Warranty</span>
+                           
+                                        @Html.ActionLink("View Job", "GoToDetails", "Job", new { id = @item.serviceId }, new { @class = "button disablelink" })@(" ")
+                                                               
+                                        }
+                                        else if (null == @item.CONTRACTEXPIRES && (item.FraudResult == 0 || item.FraudResult == 1))
+                                        {
+                                
+                                        <span class=".status_Ex">Appliance Not Cover By Warranty</span>
+                           
+                                        @Html.ActionLink("View Job", "GoToDetails", "Job", new { id = @item.serviceId }, new { @class = "button disablelink" })@(" ")  
+                                                                                            
+                                        }
+                                        else if (@item.Status == "Cancelled" && (null != @item.CONTRACTEXPIRES) && (@item.CONTRACTEXPIRES >= DateTime.Now) && (item.FraudResult == 0 || item.FraudResult == 1))
+                                        {
+                                        <div class="status">&nbsp;&nbsp;&nbsp;</div>
+
+                            
+                                        @Html.ActionLink("Access Services", "Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult  }, new { @class = "button disablelink" })
+                                
+                                        }
+                                        else if (@item.CONTRACTEXPIRES < DateTime.Now && (item.FraudResult == 0 || item.FraudResult == 1))
+                                        {
+                                        <div class="status_Ex">&nbsp;&nbsp;&nbsp;</div>
+                           
+                                        <div class="products-listing_action">
+                                            @Html.ActionLink("Access Services", "Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult  }, new { @class = "button hover" })
+                                        </div>
+                                        }
+
+
+                                        else
+                                        {
+                                             
+                                        <div class="status">&nbsp;&nbsp;&nbsp;</div>
+
+                                        <div class="products-listing_action">
+                                            @Html.ActionLink("Access Services", "Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult  }, new { @class = "button disablelink" })
+                                        </div>
+                                        }
+
+                                    }
+                                    else if (null == @item.CONTRACTEXPIRES)
+                                    {
+                               
+                                        <span class="status">Appliance Not Cover By Warranty</span>
+                                        <div class="products-listing_action">
+                                            @Html.ActionLink("Access Services", "Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult  }, new { @class = "button bookbg disablelink" })
+                                            
+                                        </div>
+                                                                      
+                                    }
+                                    else if ((@item.CONTRACTEXPIRES <= DateTime.Now && null != @item.CONTRACTEXPIRES))
+                                    {
+                               
+                                        <span class="status_Ex">Expired Warranty</span>@*
+                                        <span class="status"></span>*@
+                           
+                                        <div class="products-listing_action">
+                                            @Html.ActionLink("Access Services", "Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult  }, new { @class = "button hover" })
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="status">&nbsp;&nbsp;&nbsp;</div>
+                           
+@*  <span class="status">Appliance Under Cover</span>*@
+@* <span class="status"></span>
+                                        <br />*@
+                                        <div class="products-listing_action">
+                                            @Html.ActionLink("Access Services", "Details", "Product", new { modelID = item.ModelId, CustaplId = item.CustaplId, isAD = item.OnlineBookingExcluded,fr =item.FraudResult  }, new { @class = "button disablelink" })
+                                        </div>
+                                    }
+
+                                </span>
+                            </div>
+
+                        </div>
+                </li>
+                   
+                }
+
+               
+
+
+
+            </ul>
+
+
+        </div>
+    </div>
+
+</div>

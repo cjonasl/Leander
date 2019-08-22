@@ -9,10 +9,22 @@ C:\AAAAA2\CustomerConnectSD\Scripts\jquery-ui-1.12.1.js
 
 Modify files:
 C:\AAAAA2\CustomerConnectSD\App_Start\BundleConfig.cs
+C:\AAAAA2\CustomerConnectSD\Views\Administration\AccountInfo.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\BookNewService\ReportPage.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\BookNewService\RequestDate.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\Customer\Details.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\Customer\JobDetails.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\Job\CustomerDetails.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\Job\JobDetails.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\Job\JobNotes.cshtml
+C:\AAAAA2\CustomerConnectSD\Views\Shared\_Layout.cshtml
+C:\AAAAA2\CustomerConnectSD\Controllers\AccountController.cs
+C:\AAAAA2\CustomerConnectSD\Repositories\AccountRepository.cs
+C:\AAAAA2\CustomerConnectSD\Services\AccountService.cs
+C:\AAAAA2\CustomerConnectSD\CustomerConnect.csproj
 
 
-
----OLD OBSOLETE!!!!----- Customer Connect, modify the following files ------
+--- OBSOLETE!!!! ----- Customer Connect, modify the following files ------
 C:\Jonas\SVN\AAA\CustomerConnect\Views\Administration\AccountInfo.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\BookNewService\ReportPage.cshtml
 C:\Jonas\SVN\AAA\CustomerConnect\Views\Customer\Details.cshtml
@@ -62,6 +74,9 @@ https://www.productprotection.very.co.uk
 mary@fixzone.com
 sd21smsd
 1234 - account number
+
+Little woord live site:
+https://www.productprotection.littlewoods.com
 
 Test site: https://howdenscc.fieldengineer.co.uk
 

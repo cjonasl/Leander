@@ -1,0 +1,294 @@
+﻿@using System.Web.Optimization
+@using CAST.Infrastructure
+@using CAST.Process
+@using CAST.Services
+@using System.Web.Helpers;
+
+<!DOCTYPE html>
+
+
+<html>
+   
+     @* @if (System.Configuration.ConfigurationManager.AppSettings["RetailClientID"].ToString() == "2")
+             {
+         @ViewBag.Brand = "Very";
+             }
+             else
+             {
+      
+             }   *@    
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mark Watts" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+     <title>@System.Configuration.ConfigurationManager.AppSettings["Brand"].ToString() | @ViewBag.Title</title>
+   
+
+    <!--css-->
+    @Styles.Render("~/css/main-css")
+    @Scripts.Render("~/scripts/layout-js")
+    @Scripts.Render("~/Scripts/ResponsiveHeightCaption.js")
+        
+    @RenderSection("Styles", required: false)
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+    <script>
+     
+
+    </script>
+
+
+    <script>
+        //(function (i, s, o, g, r, a, m) {
+        //    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        //        (i[r].q = i[r].q || []).push(arguments)
+        //    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        //    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        //})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        //ga('create', 'UA-98895790-2', 'auto');
+        //ga('send', 'pageview');
+
+      
+
+
+
+        @*            @functions{
+ public string GetAntiForgeryToken()
+ {
+ string cookieToken, formToken;
+ AntiForgery.GetTokens(null, out cookieToken, out formToken);
+ return cookieToken + "," + formToken;
+ }
+ }*@
+    </script>
+      <script type="text/javascript">
+          $(document).ready(function () {
+              var width = 0;
+              //function updateWindowSize() {
+                  if (document.body && document.body.offsetWidth) {
+                      width = document.body.offsetWidth;
+                  }
+                  if (document.compatMode == 'CSS1Compat' &&
+                      document.documentElement &&
+                      document.documentElement.offsetWidth) {
+                      width = document.documentElement.offsetWidth;
+                  }
+                  if (window.innerWidth) {
+                      width = window.innerWidth;
+                  }
+              
+          });
+          </script>
+
+
+   
+
+</head>
+
+<body>
+    
+
+    <header>
+
+        <div class="section section__full">
+            <div class="section__box">
+                <div class="section__content">
+                   
+                    <div class="header__info">
+                      
+                        <ul class="nav">
+                            @if (ViewBag.HideHome == null)
+                            {
+                                <li><a href="/" id="home-btn"><i class="icon-home-1"></i></a></li>
+                            }
+                          
+
+                            @if (ViewBag.HideBack == null)
+                            {
+                                <li><a href="@Url.ProcessPreviousStep()" id="back-btn"><span aria-hidden="true" title="BACK"><i class="icon-left-open"></i></span></a></li>
+                            }
+                          
+                             @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                             {
+                   
+                    <li>&nbsp;&nbsp;&nbsp;</li>
+                            
+                             }
+                    else
+                    {
+                                 if (ViewBag.Signout == null)
+                            {
+                        <li><a href="@Url.RouteUrl("SignOut")" class="icon-user" id="sign-out-btn">SIGN OUT</a></li>
+                                 }
+                    }
+                        </ul>
+                    </div>
+                
+                    <div class="header__logo">
+                        <img src="@Url.Content("~/Content/img/Clientlogo.png")" alt="logo" >
+                    </div>
+
+             
+                </div>
+                
+               @* <ul>
+                    
+                    @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+
+                    }
+                    else
+                    {
+                        <li><a href="@Url.RouteUrl("SignOut")" class="icon-user" id="sign-out-btn">SIGN OUT</a></li>
+                    }
+
+
+                </ul>*@
+                    
+
+
+            </div>
+
+        </div>
+        </div>
+
+    </header>
+
+
+    @*                    
+<div class="section section__full">
+	<div class="section__box">	
+		<div class="section__content">
+            <ul>
+		
+			    @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+			        {
+			        <li><a href="@Url.RouteUrl("SignIn")" id="sign-in-btn" class="icon-user">SIGN IN</a></li>
+			        }
+			        else
+			        {
+			            <li><a href="@Url.RouteUrl("SignOut")" class="icon-user" id="sign-out-btn">SIGN OUT</a></li>
+			        }
+		
+			    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+			    {
+			        <li><a href="/Logs/FileLogs" title="Logs view. Admin only." class="icon-note">Logs</a></li>
+			</ul>
+		</div>
+	</div>
+</div>*@
+
+    @* <nav>
+	<ul class="nav">
+		<li><a href="#">Home</a></li>
+		<li><a href='@Url.Action("Details", "Customer", new { allnotes = false})'>My Product</a>
+			<ul>
+				<li><a href="#">My Claims</a>
+					<ul>
+						<li><a href="/Product/Search">Make a claim</a></li>
+						<li><a href='@Url.Action("Details", "Customer", new { allnotes = false})'>Active Claims</a></li>
+						<li><a href="#">closed claims</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Help and support</a></li>
+			</ul>
+		</li>
+		<li><a href="#">Message Centre</a>
+			<ul>
+				<li><a href="#">inbox</a></li>
+				<li><a href="#">sent messages</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav> *@
+
+    
+
+    <main class="hide" id="main-content">
+    @RenderBody()
+    
+    
+</main>
+
+
+
+
+    <footer>
+        <div class="section section__full">
+            <div class="section__content">
+                
+                @*<div class="section__box" >*@
+                    <ul style="float:right">
+                          @if (ViewBag.HideContact == null)
+                          {
+                            <li>
+                                <a  href="@Url.Action("ContactUs", "Home")"  id="btnContact" target="_blank" >Contact us</a>
+
+                            </li>
+                          }
+                        @if (ViewBag.HideFAQ == null)
+                        {
+                            <li><a  href="@Url.Action("FAQ", "Home")"  id="btnFaq" target="_blank" >FAQ</a></li>
+                        }
+                        </ul>
+                   @* </div>*@
+                </div>
+            <div class="section__content">
+               @* <div class="section__box">*@
+                <strong>
+                    @Html.Raw("Shop Direct Finance Company Limited. All Rights Reserved.  Shop Direct Finance Company Limited. Registered number: 4660974.  Registered office: Aintree Innovation Centre, Park Lane, Netherton, Bootle, L30 1SL.  Authorised and regulated by the Financial Conduct Authority.  SDFC administer Service Guarantee for and on behalf of The Warranty Group Services (Isle of Man) Limited, the provider of Service Guarantee.  Registered number: 094279C. Registered Office: Third Floor, St. Georges Court, Upper Church Street, Douglas, IM1 1EE, Isle of Man.")
+                    </strong>
+                <br /><br />
+               @* <p style="font-size:smaller;color:gray">Copyright Fixzone Ltd @Functions.GetPresentDate().Year</p>*@
+                <p style="font-size:small">Version :@Functions.VersionInfo()</p>
+                    @*ul>
+                        <li>&nbsp;</li>
+                        <li style="font-size:small">Copyright Fixzone Ltd @Functions.GetPresentDate().Year
+                        </li>
+                        <li style="font-size:small">Version :@Functions.VersionInfo()</li>
+                    </ul>*@
+                    @* <p<br /></p>*@
+                @*</div>*@
+                <div class="section__box">
+                    
+                    <ul>
+                      
+                        
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    @*--- script loading---*@
+    @Scripts.Render("~/scripts/layout-js")
+
+    @*  <script src="/Content/js/diagnostic.new.js"></script>*@
+
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <script src="@Url.Content("~/Scripts/trackingSessionState.js")"></script>
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // var waitNotification = new Dialog(new DefaulDialogSettings().wait);
+
+            $(".select").bgiframe();
+            ShowElement("#main-content");
+
+            $(".select").bgiframe();
+
+            //window.onbeforeunload = function (e) {
+            //    // check condition
+            //    waitNotification.show();
+            //};
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
