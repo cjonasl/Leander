@@ -1,13 +1,18 @@
-﻿PAS client connect project, call center
+﻿PAS client connect project, call center:
 SVN source code: https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/CallCenterClientConnect
 Live site: https://pasclientconnect.pacificagroup.co.uk/Callcenter/SignIn
 Live IIS-server: Terminal server (Username: Jonas.Leander, Password: Leeds#6231), then box PG-DUR-WEBSER (Username: Jonas.Leander, Password: Leeds#6231)
 Database server: Use SSMS on "Terminal server": user name: PAS_CC, password: QchK8HZEn4g7rU9u and database name is PAS
+Use solution: C:\AAAAA3\CallCenterClientConnect\ClientConnect.sln
+Toolbar shortcut: PasClientConnect
 
+ShopDirect client connect project:
 SVN source code: https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/ClientConnect
-Shop direct client connect
 Live site: https://shopdirect.fieldengineer.co.uk/
 Live IIS-server: hrg.fieldengineer.co.uk (password: spat-X11), then box clientweb01 (password: spat-X11)
+Database server: 109.69.232.227,1433, database ShopDirect (same database as CustomerConnect "Very" and "Little woods")
+Use project: C:\AAAAA3\ClientConnect\ClientConnect.csproj
+Toolbar shortcut: SDClientConnect
 Create test account 2019-08-19:
 UserId: TestJonas
 Password: surbiton

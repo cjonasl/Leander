@@ -1,2 +1,12 @@
 ﻿Dag 98:
 Tisdag den 20 augusti 2019
+Arbetade med task44 (Transfer functionality from old
+PHP ClientConnect to new site). Gjorde ”revert” på filer
+som jag 26 juli checkade in i fel gren (CustomerConnect
+istället för CustomerConnectSD). Vid 13.00-tiden intog
+jag kaffe och smörgås till lunch. Testade ny version av
+CustomerConnect Very (och Litte woods) både i webbläsare
+på datorn samt på Fixzones iphone och ipad och det fungerade
+hyfsat bra. Jag ska imorgon ordna lite med hur jag hanterade
+laddning av css- och js-filer. Jag avslutade arbetsdagen
+ca. kl. 17.30 och promenerade hem.

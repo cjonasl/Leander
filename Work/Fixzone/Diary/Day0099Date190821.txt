@@ -1,2 +1,12 @@
 ﻿Dag 99:
 Onsdag den 21 augusti 2019
+Ordnade med hur jag hanterade laddning av css- och js-
+skript i CustomerConnect ShopDirect för Very och Litte
+woods. Jag hade lagt in css- och js-skript i default
+bundle skript, vilket orsakde att det inte fungerade
+riktigt som tidiare så jag tog bort dem och la in dem
+i egna bundle skript istället och då fungerade det bättre.
+Vid 13.00-tiden intog jag smörgås och kaffe till lunch.
+Efter lunch ägnade jag mig åt att produktionssätta ny
+version för Very och Litte woods. Jag avslutade arbetsdagen
+ca. kl. 17.50 och promenerade hem.
