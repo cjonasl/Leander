@@ -177,9 +177,13 @@ namespace SudokuDebug
                 else if (certaintySudokuBoard == null)
                 {
                     numbersAddedWithCertaintyAndThenNoCandidates = true;
+                    numberOfCellsSetInBestSoFar = 81 - cellsRemainToSet.Count;
                 }
                 else
                 {
+                    if (bestSoFarSudokuBoard == null)
+                        bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
+
                     numberOfCellsSetInBestSoFar = CheckIfCanUpdateBestSoFarSudokuBoard(numberOfCellsSetInBestSoFar, cellsRemainToSet, workingSudokuBoard, bestSoFarSudokuBoard);
                     numberOfAttemptsToSolveSudoku++;
                 }
@@ -547,10 +551,6 @@ namespace SudokuDebug
             if (numberOfCellsSetInBestSoFar < (81 - cellsRemainToSet.Count))
             {
                 retVal = 81 - cellsRemainToSet.Count;
-
-                if (bestSoFarSudokuBoard == null)
-                    bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
-
                 CopySudokuBoard(workingSudokuBoard, bestSoFarSudokuBoard);
             }
 
@@ -731,6 +731,32 @@ namespace SudokuDebug
                 fileNameFullpath = args[0] + suffix;
 
             File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
+        }
+
+        private static void PrintResult(bool initialSudokuBoardHasCandidates, string[] args, string msg, bool sudokuSolved, int numberOfCellsSetInInputSudokuBoard, int numberOfCellsSetInBestSoFar, int[][] workingSudokuBoard, int[][] bestSoFarSudokuBoard)
+        {
+            if (initialSudokuBoardHasCandidates)
+            {
+                if (sudokuSolved)
+                {
+                    msg = string.Format("The sudoku was solved. {0} number(s) added to the original {1}.", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
+                }
+                else
+                {
+                    msg = string.Format("The sudoku was partially solved. {0} number(s) added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
+                }
+
+                if (sudokuSolved || bestSoFarSudokuBoard == null)
+                {
+                    PrintSudokuBoard(sudokuSolved, args, msg, workingSudokuBoard);
+                }
+                else
+                {
+                    PrintSudokuBoard(sudokuSolved, args, msg, bestSoFarSudokuBoard);
+                }
+            }
+
+            Console.Write(msg);
         }
 
         private static string DebugCreateAndReturnDebugDirectory()
@@ -917,32 +943,6 @@ namespace SudokuDebug
             }
 
             return str;
-        }
-
-        private static void PrintResult(bool initialSudokuBoardHasCandidates, string[] args, string msg, bool sudokuSolved, int numberOfCellsSetInInputSudokuBoard, int numberOfCellsSetInBestSoFar, int[][] workingSudokuBoard, int[][] bestSoFarSudokuBoard)
-        {
-            if (initialSudokuBoardHasCandidates)
-            {
-                if (sudokuSolved)
-                {
-                    msg = string.Format("The sudoku was solved. {0} number(s) added to the original {1}.", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
-                }
-                else
-                {
-                    msg = string.Format("The sudoku was partially solved. {0} number(s) added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
-                }
-
-                if (sudokuSolved || bestSoFarSudokuBoard == null)
-                {
-                    PrintSudokuBoard(sudokuSolved, args, msg, workingSudokuBoard);
-                }
-                else
-                {
-                    PrintSudokuBoard(sudokuSolved, args, msg, bestSoFarSudokuBoard);
-                }
-            }
-
-            Console.Write(msg);
         }
     }
 }

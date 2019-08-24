@@ -144,9 +144,13 @@ namespace Sudoku
                 else if (certaintySudokuBoard == null)
                 {
                     numbersAddedWithCertaintyAndThenNoCandidates = true;
+                    numberOfCellsSetInBestSoFar = 81 - cellsRemainToSet.Count;
                 }
                 else
                 {
+                    if (bestSoFarSudokuBoard == null)
+                        bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
+
                     numberOfCellsSetInBestSoFar = CheckIfCanUpdateBestSoFarSudokuBoard(numberOfCellsSetInBestSoFar, cellsRemainToSet, workingSudokuBoard, bestSoFarSudokuBoard);
                     numberOfAttemptsToSolveSudoku++;
                 }
@@ -504,10 +508,6 @@ namespace Sudoku
             if (numberOfCellsSetInBestSoFar < (81 - cellsRemainToSet.Count))
             {
                 retVal = 81 - cellsRemainToSet.Count;
-
-                if (bestSoFarSudokuBoard == null)
-                    bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
-
                 CopySudokuBoard(workingSudokuBoard, bestSoFarSudokuBoard);
             }
 

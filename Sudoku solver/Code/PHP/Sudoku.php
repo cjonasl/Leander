@@ -22,6 +22,30 @@ function copySudokuBoard(&$sudokuBoardFrom, &$sudokuBoardTo) {
     }
 }
 
+function copyCandidates(&$candidatesFrom, &$candidatesTo) {
+    for ($row = 1; $row <= 9; $row++) {
+        for ($column = 1; $column <= 9; $column++) {
+            for ($i = 0; $i < 10; $i++) {
+                $candidatesTo[$row - 1][$column - 1][$i] = $candidatesFrom[$row - 1][$column - 1][$i];
+            }
+        }
+    }
+}
+
+function saveState(&$ccellsRemainToSet, &$ccellsRemainToSetAfterAddedNumbersWithCertainty, &$cnumberOfCandidates, &$cworkingSudokuBoard, &$ccertaintySudokuBoard, &$ccandidates, &$ccandidatesAfterAddedNumbersWithCertainty, &$cnumberOfCandidatesAfterAddedNumbersWithCertainty) {
+    copyList($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty);
+    copySudokuBoard($workingSudokuBoard, $certaintySudokuBoard);
+    copyCandidates($candidates, $candidatesAfterAddedNumbersWithCertainty);
+    $numberOfCandidatesAfterAddedNumbersWithCertainty = $numberOfCandidates;
+}
+
+function restoreState(&$ccellsRemainToSet, &$ccellsRemainToSetAfterAddedNumbersWithCertainty, &$cnumberOfCandidatesAfterAddedNumbersWithCertainty, &$cworkingSudokuBoard, &$ccertaintySudokuBoard, &$ccandidates, &$ccandidatesAfterAddedNumbersWithCertainty, &$cnumberOfCandidates) {
+    copyList($cellsRemainToSetAfterAddedNumbersWithCertainty, $cellsRemainToSet);
+    copySudokuBoard($certaintySudokuBoard, $workingSudokuBoard);
+    copyCandidates($candidatesAfterAddedNumbersWithCertainty, $candidates);
+    $numberOfCandidates = $numberOfCandidatesAfterAddedNumbersWithCertainty;
+}
+
 function getInputSudokuBoard(&$args, &$sudokuBoard, &$cellsRemainToSet) {
     $n = count($args);
 
@@ -224,7 +248,7 @@ function returnSquareCellToRowColumnMapper() {
     return v;
 }
 
-function returnSudokuBoardAsString ($sudokuBoard) {
+function returnSudokuBoardAsString($sudokuBoard) {
     $sb = "";
 
     for ($row = 1; $row <= 9; $row++) {
@@ -268,6 +292,17 @@ function simulateOneNumber(&$candidates, &$cellsRemainToSet, &$index, &$number) 
     $row = $cellsRemainToSet[$index][0];
     $column = $cellsRemainToSet[$index][1];
     $number = $candidates[$row - 1][$column - 1][1 + rand(0, $minNumberOfCandidates - 1)];
+}
+
+function checkIfCanUpdateBestSoFarSudokuBoard($numberOfCellsSetInBestSoFar, &$cellsRemainToSet, &$workingSudokuBoard, &$bestSoFarSudokuBoard) {
+    $retVal = $numberOfCellsSetInBestSoFar; //Default
+
+    if ($numberOfCellsSetInBestSoFar < (81 - count($cellsRemainToSet))) {
+        $retVal = 81 - count($cellsRemainToSet);
+        copySudokuBoard($workingSudokuBoard, $bestSoFarSudokuBoard);
+    }
+
+    return retVal;
 }
 
 function initCandidates(&$sudokuBoard, &$squareCellToRowColumnMapper, &$candidates) {
@@ -406,6 +441,29 @@ function printSudokuBoard($solved, &$args, $message, &$sudokuBoard) {
                 fileNameFullpath = args[0] + suffix;
 
             File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
+}
+
+function printResult($initialSudokuBoardHasCandidates, &$args, $msg, $sudokuSolved, $numberOfCellsSetInInputSudokuBoard, $numberOfCellsSetInBestSoFar, &$workingSudokuBoard, &$bestSoFarSudokuBoard) {
+    if ($initialSudokuBoardHasCandidates) {
+        if ($sudokuSolved) {
+            $tmp1 = 81 - $numberOfCellsSetInInputSudokuBoard;
+            $msg = "The sudoku was solved. " . $tmp1 . " number(s) added to the original " . $numberOfCellsSetInInputSudokuBoard . ".";
+        }
+        else {
+            $tmp1 = $numberOfCellsSetInBestSoFar - $numberOfCellsSetInInputSudokuBoard;
+            $tmp2 = 81 - $numberOfCellsSetInBestSoFar;
+            $msg = "The sudoku was partially solved. " . $tmp1 . " number(s) added to the original " . $numberOfCellsSetInInputSudokuBoard . ". Unable to set " . $tmp2 . " number(s).";
+        }
+
+        if ($sudokuSolved || $bestSoFarSudokuBoard == null) {
+            printSudokuBoard($sudokuSolved, $args, $msg, $workingSudokuBoard);
+        }
+        else {
+            printSudokuBoard($sudokuSolved, $args, $msg, $bestSoFarSudokuBoard);
+        }
+    }
+
+    print($msg);
 }
 
 $from = [1, 2, 3, 4, 5, 6, 7, 8, 9];

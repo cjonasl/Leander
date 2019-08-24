@@ -1,2 +1,9 @@
 ﻿Dag 101:
 Fredag den 23 augusti 2019
+Jag ägnade arbetsdagen åt att modifiera i PasClientConnect
+så att webapplikationen går att använda för både ”call center”
+användare (tillgång till samtliga kunder) och enskilda kunder
+som t.ex. ”LG” (task44, ”Transfer functionality from old PHP
+ClientConnect to new site”). Vid 13.00-tiden intog jag smörgås
+och kaffe till lunch. Jag avslutade arbetsdagen ca. kl. 17.30
+och promenerade till Surbiton.

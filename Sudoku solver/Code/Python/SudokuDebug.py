@@ -10,18 +10,20 @@ class Target(Enum):
     SQUARE = 3
 
 def run(args):
-    row = 0
-    column = 0
     certainty_sudoku_board = None
     working_sudoku_board = return_two_dimensional_data_structure(9, 9)
-    best_so_far_sudoku_board = return_two_dimensional_data_structure(9, 9)
+    best_so_far_sudoku_board = None
+    candidates_after_added_numbers_with_certainty = None
     max_number_of_attempts_to_solve_sudoku = 100
     number_of_attempts_to_solve_sudoku = 0
     number_of_cells_set_in_best_so_far = 0
+    number_of_cells_set_in_input_sudoku_board = 0
     sudoku_solved = False
     numbers_added_with_certainty_and_then_no_candidates = False
     cells_remain_to_set = []
     cells_remain_to_set_after_added_numbers_with_certainty = None
+    number_of_candidates = [0]
+    number_of_candidates_after_added_numbers_with_certainty = [0];
     index_number = [0, 0]
     debugCategory = ["0"]
     debugInfo = ["0"]
@@ -30,25 +32,25 @@ def run(args):
     msg = get_input_sudoku_board(args, working_sudoku_board, cells_remain_to_set)
 
     if msg != None:
-        print(msg)
+        print_result(False, args, msg, False, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
         return
 
     square_cell_to_row_column_mapper = return_square_cell_to_row_column_mapper()
     msg = validate_sudoku_board(working_sudoku_board, square_cell_to_row_column_mapper)
 
     if msg != None:
-        print(msg)
+        print_result(False, args, msg, False, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
         return
 
     if len(cells_remain_to_set) == 0:
-        print("A complete sudoku was given as input. There is nothing to solve.")
+        print_result(False, args, "A complete sudoku was given as input. There is nothing to solve.", True, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
         return
 
     candidates = return_three_dimensional_data_structure(9, 9, 10)
-    number_of_candidates = init_candidates(working_sudoku_board, square_cell_to_row_column_mapper, candidates)
+    number_of_candidates[0] = init_candidates(working_sudoku_board, square_cell_to_row_column_mapper, candidates)
 
-    if number_of_candidates == 0:
-        print("It is not possible to add any number to the sudoku.")
+    if number_of_candidates[0] == 0:
+        print_result(False, args, "It is not possible to add any number to the sudoku.", False, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
         return
 
     number_of_cells_set_in_input_sudoku_board = 81 - len(cells_remain_to_set)
@@ -62,11 +64,9 @@ def run(args):
         debugTotalCellsAdded.clear()
 
         if number_of_attempts_to_solve_sudoku > 0:
-            copy_sudoku_board(certainty_sudoku_board, working_sudoku_board)
-            copy_list(cells_remain_to_set_after_added_numbers_with_certainty, cells_remain_to_set)
-            number_of_candidates = init_candidates(working_sudoku_board, square_cell_to_row_column_mapper, candidates)
+            restore_state(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates)
 
-        while number_of_candidates > 0:
+        while number_of_candidates[0] > 0:
             number = 0
             i = 0
 
@@ -87,8 +87,8 @@ def run(args):
                 if certainty_sudoku_board == None:
                     certainty_sudoku_board = return_two_dimensional_data_structure(9, 9)
                     cells_remain_to_set_after_added_numbers_with_certainty = []
-                    copy_sudoku_board(working_sudoku_board, certainty_sudoku_board)
-                    copy_list(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty)
+                    candidates_after_added_numbers_with_certainty = return_three_dimensional_data_structure(9, 9, 10);
+                    save_state(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty)
 
                 debugCategory[0] = "Simulated"
 
@@ -101,13 +101,13 @@ def run(args):
             if debugCategory[0] == "Simulated":
                 debugString += debugInfo[0] + "\n\n"
 
-            debugString += "Data before update:\n\n" + DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates, candidates, square_cell_to_row_column_mapper)
+            debugString += "Data before update:\n\n" + DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates[0], candidates, square_cell_to_row_column_mapper)
 
             working_sudoku_board[row - 1][column - 1] = number
             del cells_remain_to_set[i]
-            number_of_candidates -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
+            number_of_candidates[0] -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
 
-            debugString += "\nData after update:\n\n" + DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates, candidates, square_cell_to_row_column_mapper)
+            debugString += "\nData after update:\n\n" + DebugReturnInfo(working_sudoku_board, cells_remain_to_set, number_of_candidates[0], candidates, square_cell_to_row_column_mapper)
 
             debugAddNumber += 1
             debugFileNameFullPath = debugDirectory + "\\" + DebugReturnFileName(debugTry, debugAddNumber)
@@ -115,27 +115,19 @@ def run(args):
             f.write(debugString)
             f.close()
 
-        if number_of_cells_set_in_best_so_far < (81 - len(cells_remain_to_set)):
-            number_of_cells_set_in_best_so_far = 81 - len(cells_remain_to_set)
-            copy_sudoku_board(working_sudoku_board, best_so_far_sudoku_board)
-
         if len(cells_remain_to_set) == 0:
             sudoku_solved = True
         elif certainty_sudoku_board == None:
             numbers_added_with_certainty_and_then_no_candidates = True
+            number_of_cells_set_in_best_so_far = 81 - len(cells_remain_to_set)
         else:
+            if best_so_far_sudoku_board == None:
+                best_so_far_sudoku_board = return_two_dimensional_data_structure(9, 9)
+
+            number_of_cells_set_in_best_so_far = check_if_can_update_best_so_far_sudoku_board(number_of_cells_set_in_best_so_far, cells_remain_to_set, working_sudoku_board, best_so_far_sudoku_board)
             number_of_attempts_to_solve_sudoku += 1
 
-    tmp1 = 81 - number_of_cells_set_in_input_sudoku_board
-    if sudoku_solved:
-        msg = "The sudoku was solved. " + str(tmp1) + " number(s) added to the original " +  str(number_of_cells_set_in_input_sudoku_board) + "."
-    else:
-        tmp1 = number_of_cells_set_in_best_so_far - number_of_cells_set_in_input_sudoku_board
-        tmp2 = 81 - number_of_cells_set_in_best_so_far
-        msg = "The sudoku was partially solved. " + str(tmp1) + " number(s) added to the original " + str(number_of_cells_set_in_input_sudoku_board) + ". Unable to set " + str(tmp2) + " number(s)."
-
-    print_sudoku_board(sudoku_solved, args, msg, best_so_far_sudoku_board)
-    print(msg)
+    print_result(True, args, None, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
 
 def copy_list(list_from, list_to):
     list_to.clear()
@@ -147,6 +139,24 @@ def copy_sudoku_board(sudoku_board_from, sudoku_board_to):
     for row in range(1, 10):
         for column in range(1, 10):
             sudoku_board_to[row - 1][column - 1] = sudoku_board_from[row - 1][column - 1]
+
+def copy_candidates(candidates_from, candidates_to):
+    for row in range(1, 10):
+        for column in range(1, 10):
+            for i in range(0, 10):
+                candidates_to[row - 1][column - 1][i] = candidates_from[row - 1][column - 1][i]
+
+def save_state(cells_remainT_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty):
+    copy_list(cells_remainT_to_set, cells_remain_to_set_after_added_numbers_with_certainty)
+    copy_sudoku_board(working_sudoku_board, certainty_sudoku_board)
+    copy_candidates(candidates, candidates_after_added_numbers_with_certainty)
+    number_of_candidates_after_added_numbers_with_certainty[0] = number_of_candidates[0]
+
+def restore_state(cells_remainT_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates):
+    copy_list(cells_remain_to_set_after_added_numbers_with_certainty, cells_remainT_to_set)
+    copy_sudoku_board(certainty_sudoku_board, working_sudoku_board)
+    copy_candidates(candidates_after_added_numbers_with_certainty, candidates)
+    number_of_candidates[0] = number_of_candidates_after_added_numbers_with_certainty[0]
 
 def get_input_sudoku_board(args, sudoku_board, cells_remain_to_set):
     if len(args) == 0:
@@ -345,6 +355,15 @@ def simulate_one_number(candidates, cells_remain_to_set, index_number, debugInfo
     column = cells_remain_to_set[index_number[0]][1]
     index_number[1] = candidates[row - 1][column - 1][1 + randrange(0, min_number_of_candidates)]
 
+def check_if_can_update_best_so_far_sudoku_board(number_of_cells_set_in_best_so_far, cells_remain_to_set, working_sudoku_board, best_so_far_sudoku_board):
+    ret_val = number_of_cells_set_in_best_so_far #Default
+
+    if number_of_cells_set_in_best_so_far < (81 - len(cells_remain_to_set)):
+        ret_val = 81 - len(cells_remain_to_set)
+        copy_sudoku_board(working_sudoku_board, best_so_far_sudoku_board)
+
+    return ret_val
+
 def init_candidates(sudoku_board, square_cell_to_row_column_mapper, candidates):
     number_of_candidates = 0
 
@@ -460,6 +479,23 @@ def print_sudoku_board(solved, args, message, sudoku_board):
     f = open(fileNamefullPath, "w")
     f.write(fileContent)
     f.close()
+
+def print_result(initial_sudoku_board_has_candidates, args, msg, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board):
+    if initial_sudoku_board_has_candidates:
+        if sudoku_solved:
+            tmp1 = 81 - number_of_cells_set_in_input_sudoku_board
+            msg = "The sudoku was solved. " + str(tmp1) + " number(s) added to the original " +  str(number_of_cells_set_in_input_sudoku_board) + "."
+        else:
+            tmp1 = number_of_cells_set_in_best_so_far - number_of_cells_set_in_input_sudoku_board
+            tmp2 = 81 - number_of_cells_set_in_best_so_far
+            msg = "The sudoku was partially solved. " + str(tmp1) + " number(s) added to the original " + str(number_of_cells_set_in_input_sudoku_board) + ". Unable to set " + str(tmp2) + " number(s)."
+
+        if sudoku_solved or best_so_far_sudoku_board == None:
+            print_sudoku_board(sudoku_solved, args, msg, working_sudoku_board)
+        else:
+            print_sudoku_board(sudoku_solved, args, msg, best_so_far_sudoku_board)
+
+    print(msg)
 
 def DebugCreateAndReturnDebugDirectory():
     tmp = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S.%f")
