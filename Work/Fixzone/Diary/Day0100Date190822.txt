@@ -1,2 +1,9 @@
 ﻿Dag 100:
 Torsdag den 22 augusti 2019
+Förbättrade mitt sudoku-program i C# och sedan arbetade jag
+med task44 (Transfer functionality from old PHP ClientConnect
+to new site). Jag studerade och jämförde PasClientConnect och
+ShopDirectClientConnect och arbetade med att lägga in en ny
+kund/klient, LG ClientId=39, i PasClientConnect. Vid 13.00-tiden
+intog jag banan, smörgås och kaffe till lunch. Jag avslutade
+arbetsdagen ca. kl. 17.40.
