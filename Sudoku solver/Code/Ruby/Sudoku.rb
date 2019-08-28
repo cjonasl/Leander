@@ -26,7 +26,7 @@ def Sudoku.run(args)
     msg = get_input_sudoku_board(args, working_sudoku_board, cells_remain_to_set)
 
     if msg != nil
-        print_result(false, args, msg, false, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(false, msg)
         return
     end
 
@@ -34,12 +34,12 @@ def Sudoku.run(args)
     msg = validate_sudoku_board(working_sudoku_board, square_cell_to_row_column_mapper)
 
     if msg != nil
-        print_result(false, args, msg, false, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(false, msg)
         return
     end
 
     if cells_remain_to_set.size == 0
-        print_result(false, args, "A complete sudoku was given as input. There is nothing to solve.", true, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(false, "A complete sudoku was given as input. There is nothing to solve.")
         return
     end
 
@@ -47,7 +47,7 @@ def Sudoku.run(args)
     number_of_candidates[0] = init_candidates(working_sudoku_board, square_cell_to_row_column_mapper, candidates)
 
     if number_of_candidates[0] == 0
-        print_result(false, args, "It is not possible to add any number to the sudoku.", false, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(false, "It is not possible to add any number to the sudoku.")
         return
     end
 
@@ -104,7 +104,7 @@ def Sudoku.run(args)
         end
     end
 
-    print_result(true, args, nil, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+    print_result(true, nil, args, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
 end
 
 def Sudoku.copy_list(list_from, list_to)
@@ -540,7 +540,7 @@ def Sudoku.print_sudoku_board(solved, args, message, sudoku_board)
     f.close()
 end
 
-def Sudoku.print_result(initial_sudoku_board_has_candidates, args, msg, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+def Sudoku.print_result(initial_sudoku_board_has_candidates, msg, args = nil, sudoku_solved = nil, number_of_cells_set_in_input_sudoku_board = nil, number_of_cells_set_in_best_so_far = nil, working_sudoku_board = nil, best_so_far_sudoku_board = nil)
     if initial_sudoku_board_has_candidates
         if sudoku_solved
             tmp1 = 81 - number_of_cells_set_in_input_sudoku_board

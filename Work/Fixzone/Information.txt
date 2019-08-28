@@ -1,4 +1,8 @@
-﻿PAS client connect project, call center:
+﻿Change password when email "Your password will expire in 14 days." comes:
+Log in to "Web Mail" (there is a link in the mail) and then follow instructions
+in the mail.
+
+PAS client connect project, call center:
 SVN source code: https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/CallCenterClientConnect
 Live site: https://pasclientconnect.pacificagroup.co.uk/Callcenter/SignIn
 Live IIS-server: Terminal server (Username: Jonas.Leander, Password: Leeds#6231), then box PG-DUR-WEBSER (Username: Jonas.Leander, Password: Leeds#6231)

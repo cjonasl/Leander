@@ -23,32 +23,85 @@ function run(&$args) {
     $msg = getInputSudokuBoard($args, $workingSudokuBoard, $cellsRemainToSet);
 
     if ($msg != null) {
-        printResult(false, $args, $msg, false, $numberOfCellsSetInInputSudokuBoard, $numberOfCellsSetInBestSoFar, $workingSudokuBoard, $bestSoFarSudokuBoard);
+        printResult(false, $msg);
         return;
     }
 
-    squareCellToRowColumnMapper = sudoku.returnSquareCellToRowColumnMapper();
-    msg = validateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
+    $squareCellToRowColumnMapper = returnSquareCellToRowColumnMapper();
+    $msg = validateSudokuBoard($workingSudokuBoard, $squareCellToRowColumnMapper);
 
-    if (msg != null) {
-        printResult(false, args, msg, false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+    if ($msg != null) {
+        printResult(false, $msg);
         return;
     }
 
-    if (cellsRemainToSet.length == 0) {
-        printResult(false, args, "A complete sudoku was given as input. There is nothing to solve.", true, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+    if (count($cellsRemainToSet) == 0) {
+        printResult(false, "A complete sudoku was given as input. There is nothing to solve.");
         return;
     }
 
-    candidates = sudoku.returnThreeDimensionalDataStructure(9, 9, 10);
-    numberOfCandidates = sudoku.initCandidates(workingSudokuBoard, squareCellToRowColumnMapper, candidates);
+    $candidates = returnThreeDimensionalDataStructure(9, 9, 10);
+    $numberOfCandidates = initCandidates($workingSudokuBoard, $squareCellToRowColumnMapper, $candidates);
 
-    if (numberOfCandidates == 0) {
-        printResult(false, args, "It is not possible to add any number to the sudoku.", false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+    if ($numberOfCandidates == 0) {
+        printResult(false, "It is not possible to add any number to the sudoku.");
         return;
     }
 
-    numberOfCellsSetInInputSudokuBoard = 81 - cellsRemainToSet.length;
+    $numberOfCellsSetInInputSudokuBoard = 81 - count($cellsRemainToSet);
+
+    while ($numberOfAttemptsToSolveSudoku < $maxNumberOfAttemptsToSolveSudoku && !$sudokuSolved && !$numbersAddedWithCertaintyAndThenNoCandidates) {
+        if ($numberOfAttemptsToSolveSudoku > 0) {
+            restoreState($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidatesAfterAddedNumbersWithCertainty, $workingSudokuBoard, $certaintySudokuBoard, $candidates, $candidatesAfterAddedNumbersWithCertainty, $numberOfCandidates);
+        }
+
+        while ($numberOfCandidates > 0) {
+            $number = 0;
+            $i = 0;
+
+            while ($i < count($cellsRemainToSet) && $number == 0) {
+                $row = $cellsRemainToSet[$i][0];
+                $column = $cellsRemainToSet[$i][1];
+                $number = tryFindNumberToSetInCellWithCertainty($row, $column, $candidates, $squareCellToRowColumnMapper);
+                $i = ($number == 0) ? $i + 1 : $i;
+            }
+
+            if ($number == 0) {
+                simulateOneNumber($candidates, $cellsRemainToSet, $i, $number);
+                $row = cellsRemainToSet[$i][0];
+                $column = cellsRemainToSet[$i][1];
+
+                if ($certaintySudokuBoard == null) {
+                    $certaintySudokuBoard = returnTwoDimensionalDataStructure(9, 9);
+                    $cellsRemainToSetAfterAddedNumbersWithCertainty = [];
+                    $candidatesAfterAddedNumbersWithCertainty = returnThreeDimensionalDataStructure(9, 9, 10);
+                    $saveState($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, $workingSudokuBoard, $certaintySudokuBoard, $candidates, $candidatesAfterAddedNumbersWithCertainty, $numberOfCandidatesAfterAddedNumbersWithCertainty);
+                }
+            }
+
+            $workingSudokuBoard[$row - 1][$column - 1] = $number;
+            array_splice($cellsRemainToSet, $i, 1);
+
+            $numberOfCandidates -= updateCandidates($candidates, $squareCellToRowColumnMapper, $row, $column, $number);
+        }
+
+        if (count($cellsRemainToSet) == 0) {
+            $sudokuSolved = true;
+        }
+        else if ($certaintySudokuBoard == null) {
+            $numbersAddedWithCertaintyAndThenNoCandidates = true;
+            $numberOfCellsSetInBestSoFar = 81 - $cellsRemainToSet.Count;
+        }
+        else {
+            if ($bestSoFarSudokuBoard == null)
+                $bestSoFarSudokuBoard = returnTwoDimensionalDataStructure(9, 9);
+
+            $numberOfCellsSetInBestSoFar = checkIfCanUpdateBestSoFarSudokuBoard($numberOfCellsSetInBestSoFar, $cellsRemainToSet, $workingSudokuBoard, $bestSoFarSudokuBoard);
+            $numberOfAttemptsToSolveSudoku++;
+        }
+    }
+
+    printResult(true, null, $args, $sudokuSolved, $numberOfCellsSetInInputSudokuBoard, $numberOfCellsSetInBestSoFar, $workingSudokuBoard, $bestSoFarSudokuBoard);
 }
 
 function copyList(&$from, &$to) {
@@ -77,14 +130,14 @@ function copyCandidates(&$candidatesFrom, &$candidatesTo) {
     }
 }
 
-function saveState(&$ccellsRemainToSet, &$ccellsRemainToSetAfterAddedNumbersWithCertainty, &$cnumberOfCandidates, &$cworkingSudokuBoard, &$ccertaintySudokuBoard, &$ccandidates, &$ccandidatesAfterAddedNumbersWithCertainty, &$cnumberOfCandidatesAfterAddedNumbersWithCertainty) {
+function saveState(&$ccellsRemainToSet, &$ccellsRemainToSetAfterAddedNumbersWithCertainty, $cnumberOfCandidates, &$cworkingSudokuBoard, &$ccertaintySudokuBoard, &$ccandidates, &$ccandidatesAfterAddedNumbersWithCertainty, &$cnumberOfCandidatesAfterAddedNumbersWithCertainty) {
     copyList($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty);
     copySudokuBoard($workingSudokuBoard, $certaintySudokuBoard);
     copyCandidates($candidates, $candidatesAfterAddedNumbersWithCertainty);
     $numberOfCandidatesAfterAddedNumbersWithCertainty = $numberOfCandidates;
 }
 
-function restoreState(&$ccellsRemainToSet, &$ccellsRemainToSetAfterAddedNumbersWithCertainty, &$cnumberOfCandidatesAfterAddedNumbersWithCertainty, &$cworkingSudokuBoard, &$ccertaintySudokuBoard, &$ccandidates, &$ccandidatesAfterAddedNumbersWithCertainty, &$cnumberOfCandidates) {
+function restoreState(&$ccellsRemainToSet, &$ccellsRemainToSetAfterAddedNumbersWithCertainty, $cnumberOfCandidatesAfterAddedNumbersWithCertainty, &$cworkingSudokuBoard, &$ccertaintySudokuBoard, &$ccandidates, &$ccandidatesAfterAddedNumbersWithCertainty, &$cnumberOfCandidates) {
     copyList($cellsRemainToSetAfterAddedNumbersWithCertainty, $cellsRemainToSet);
     copySudokuBoard($certaintySudokuBoard, $workingSudokuBoard);
     copyCandidates($candidatesAfterAddedNumbersWithCertainty, $candidates);
@@ -147,7 +200,7 @@ function getInputSudokuBoard(&$args, &$sudokuBoard, &$cellsRemainToSet) {
             $sudokuBoard[$row - 1][$column - 1] = $b;
 
             if ($b == 0) {
-                $cellsRemainToSet[] = [$row, $colum];
+                $cellsRemainToSet[] = [$row, $column];
             }
         }
     }
@@ -221,8 +274,7 @@ function removeNumberIfItExists(&$v, $number) {
 function returnNumberOfOccurenciesOfNumber(&$sudokuBoard, &$squareCellToRowColumnMapper, $number, $t, $target) { //t refers to a row, column or square
     $n = 0;
 
-    for ($i = 0; $i < 9; $i++)
-    {
+    for ($i = 0; $i < 9; $i++)  {
         switch ($target) {
             case Target::ROW:
                 $row = $t;
@@ -290,21 +342,21 @@ function returnSquareCellToRowColumnMapper() {
         }
     }
 
-    return v;
+    return $v;
 }
 
-function returnSudokuBoardAsString($sudokuBoard) {
+function returnSudokuBoardAsString(&$sudokuBoard) {
     $sb = "";
 
     for ($row = 1; $row <= 9; $row++) {
         if ($row > 1)
-            $sb += "\r\n";
+            $sb .= "\r\n";
 
         for ($column = 1; $column <= 9; $column++) {
             if ($column == 1)
-                $sb += $sudokuBoard[$row - 1][$column - 1];
+                $sb .= $sudokuBoard[$row - 1][$column - 1];
             else
-                $sb += (" " . $sudokuBoard[$row - 1][$column - 1]);
+                $sb .= (" " . $sudokuBoard[$row - 1][$column - 1]);
         }
     }
 
@@ -488,7 +540,7 @@ function printSudokuBoard($solved, &$args, $message, &$sudokuBoard) {
     fclose($f);
 }
 
-function printResult($initialSudokuBoardHasCandidates, &$args, $msg, $sudokuSolved, $numberOfCellsSetInInputSudokuBoard, $numberOfCellsSetInBestSoFar, &$workingSudokuBoard, &$bestSoFarSudokuBoard) {
+function printResult($initialSudokuBoardHasCandidates, $msg, &$args = null, $sudokuSolved = null, $numberOfCellsSetInInputSudokuBoard = null, $numberOfCellsSetInBestSoFar = null, &$workingSudokuBoard = null, &$bestSoFarSudokuBoard = null) {
     if ($initialSudokuBoardHasCandidates) {
         if ($sudokuSolved) {
             $tmp1 = 81 - $numberOfCellsSetInInputSudokuBoard;
@@ -511,9 +563,12 @@ function printResult($initialSudokuBoardHasCandidates, &$args, $msg, $sudokuSolv
     print($msg);
 }
 
-$from = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-$to = [4, 7];
-copyList($from, $to);
-print_r($to)
+$args = [];
+
+for($i = 1; $i < count($argv); $i++) {
+    $args[] = $argv[$i];
+}
+
+run($args);
 
 ?>
