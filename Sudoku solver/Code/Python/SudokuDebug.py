@@ -32,25 +32,25 @@ def run(args):
     msg = get_input_sudoku_board(args, working_sudoku_board, cells_remain_to_set)
 
     if msg != None:
-        print_result(False, args, msg, False, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(False, msg)
         return
 
     square_cell_to_row_column_mapper = return_square_cell_to_row_column_mapper()
     msg = validate_sudoku_board(working_sudoku_board, square_cell_to_row_column_mapper)
 
     if msg != None:
-        print_result(False, args, msg, False, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(False, msg)
         return
 
     if len(cells_remain_to_set) == 0:
-        print_result(False, args, "A complete sudoku was given as input. There is nothing to solve.", True, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(False, "A complete sudoku was given as input. There is nothing to solve.")
         return
 
     candidates = return_three_dimensional_data_structure(9, 9, 10)
     number_of_candidates[0] = init_candidates(working_sudoku_board, square_cell_to_row_column_mapper, candidates)
 
     if number_of_candidates[0] == 0:
-        print_result(False, args, "It is not possible to add any number to the sudoku.", False, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+        print_result(False, "It is not possible to add any number to the sudoku.")
         return
 
     number_of_cells_set_in_input_sudoku_board = 81 - len(cells_remain_to_set)
@@ -480,7 +480,7 @@ def print_sudoku_board(solved, args, message, sudoku_board):
     f.write(fileContent)
     f.close()
 
-def print_result(initial_sudoku_board_has_candidates, args, msg, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board):
+def print_result(initial_sudoku_board_has_candidates, msg, args = None, sudoku_solved = None, number_of_cells_set_in_input_sudoku_board = None, number_of_cells_set_in_best_so_far = None, working_sudoku_board = None, best_so_far_sudoku_board = None):
     if initial_sudoku_board_has_candidates:
         if sudoku_solved:
             tmp1 = 81 - number_of_cells_set_in_input_sudoku_board

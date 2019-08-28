@@ -8,7 +8,7 @@ sudoku.target = {
 }
 
 sudoku.run = function(args) {
-    var row = 0, column = 0, number, i;
+    var number, i;
     var certaintySudokuBoard = null;
     var bestSoFarSudokuBoard = null, workingSudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
     var candidates, squareCellToRowColumnMapper, candidatesAfterAddedNumbersWithCertainty = null;
@@ -24,7 +24,7 @@ sudoku.run = function(args) {
     msg = sudoku.getInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
 
     if (msg != null) {
-        sudoku.printResult(false, args, msg, false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+        sudoku.printResult(false, msg);
         return;
     }
 
@@ -32,12 +32,12 @@ sudoku.run = function(args) {
     msg = sudoku.validateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
 
     if (msg != null) {
-        sudoku.printResult(false, args, msg, false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+        sudoku.printResult(false, msg);
         return;
     }
 
     if (cellsRemainToSet.length == 0) {
-        PrintResult(false, args, "A complete sudoku was given as input. There is nothing to solve.", true, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+        sudoku.printResult(false, "A complete sudoku was given as input. There is nothing to solve.");
         return;
     }
 
@@ -45,7 +45,7 @@ sudoku.run = function(args) {
     numberOfCandidates[0] = sudoku.initCandidates(workingSudokuBoard, squareCellToRowColumnMapper, candidates);
 
     if (numberOfCandidates[0] == 0) {
-        PrintResult(false, args, "It is not possible to add any number to the sudoku.", false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+        sudoku.printResult(false, "It is not possible to add any number to the sudoku.");
         return;
     }
 
@@ -103,7 +103,7 @@ sudoku.run = function(args) {
         }
     }
 
-    sudoku.printResult(true, args, null, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+    sudoku.printResult(true, null, args, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
 }
 
 sudoku.sourceExists = function(source, isFile) {
@@ -203,7 +203,7 @@ sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
         }
 
         for (column = 1; column <= 9; column++) {
-            n = new Number(columns[column - 1]);
+            n = Number(columns[column - 1]);
 
             if (isNaN(n) || (Math.trunc(n) != n)) {
                 return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " +  column + " in input file is not a valid integer!";
@@ -590,7 +590,7 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
     fs.closeSync(file);
 }
 
-sudoku.printResult = function(initialSudokuBoardHasCandidates, args, msg, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard) {
+sudoku.printResult = function(initialSudokuBoardHasCandidates, msg, args, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard) {
     var tmp1, tmp2;
 
     if (initialSudokuBoardHasCandidates) {

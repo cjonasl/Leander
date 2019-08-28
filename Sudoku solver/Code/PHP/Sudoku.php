@@ -6,6 +6,51 @@ class Target {
     const SQUARE = 3;
 }
 
+function run(&$args) {
+    $certaintySudokuBoard = null;
+    $bestSoFarSudokuBoard = null;
+    $workingSudokuBoard = returnTwoDimensionalDataStructure(9, 9);
+    $candidatesAfterAddedNumbersWithCertainty = null;
+    $numberOfAttemptsToSolveSudoku = 0;
+    $maxNumberOfAttemptsToSolveSudoku = 100;
+    $numberOfCellsSetInInputSudokuBoard = 0;
+    $numberOfCellsSetInBestSoFar = 0;
+    $sudokuSolved = false;
+    $numbersAddedWithCertaintyAndThenNoCandidates = false;
+    $cellsRemainToSetAfterAddedNumbersWithCertainty = null;
+    $cellsRemainToSet = [];
+
+    $msg = getInputSudokuBoard($args, $workingSudokuBoard, $cellsRemainToSet);
+
+    if ($msg != null) {
+        printResult(false, $args, $msg, false, $numberOfCellsSetInInputSudokuBoard, $numberOfCellsSetInBestSoFar, $workingSudokuBoard, $bestSoFarSudokuBoard);
+        return;
+    }
+
+    squareCellToRowColumnMapper = sudoku.returnSquareCellToRowColumnMapper();
+    msg = validateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
+
+    if (msg != null) {
+        printResult(false, args, msg, false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+        return;
+    }
+
+    if (cellsRemainToSet.length == 0) {
+        printResult(false, args, "A complete sudoku was given as input. There is nothing to solve.", true, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+        return;
+    }
+
+    candidates = sudoku.returnThreeDimensionalDataStructure(9, 9, 10);
+    numberOfCandidates = sudoku.initCandidates(workingSudokuBoard, squareCellToRowColumnMapper, candidates);
+
+    if (numberOfCandidates == 0) {
+        printResult(false, args, "It is not possible to add any number to the sudoku.", false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+        return;
+    }
+
+    numberOfCellsSetInInputSudokuBoard = 81 - cellsRemainToSet.length;
+}
+
 function copyList(&$from, &$to) {
     array_splice($to, 0, count($to));
 
@@ -78,7 +123,7 @@ function getInputSudokuBoard(&$args, &$sudokuBoard, &$cellsRemainToSet) {
         $columns = explode(" ", $rows[$row - 1]);
 
         if (count($columns) != 9) {
-            return "Number of columns in input file in row " . $row . " are not 9 as expected!";
+            return "Number of columns in input file in row $row  are not 9 as expected!";
         }
 
         for ($column = 1; $column <= 9; $column++) {
@@ -401,13 +446,13 @@ function validateSudokuBoard(&$sudokuBoard, &$squareCellToRowColumnMapper) {
 
             if ($number != 0) {
                 if (returnNumberOfOccurenciesOfNumber($sudokuBoard, $squareCellToRowColumnMapper, $number, $row, Target::ROW) > 1) {
-                    return "The input sudoku is incorrect! The number " . $number . " occurs more than once in row " . $row;
+                    return "The input sudoku is incorrect! The number $number occurs more than once in row $row";
                 }
                 else if (returnNumberOfOccurenciesOfNumber($sudokuBoard, $squareCellToRowColumnMapper, $number, $column, Target::COLUMN) > 1) {
-                    return "The input sudoku is incorrect! The number " . $number . " occurs more than once in column " . $column;
+                    return "The input sudoku is incorrect! The number $number occurs more than once in column $column";
                 }
                 else if (returnNumberOfOccurenciesOfNumber($sudokuBoard, $squareCellToRowColumnMapper, $number, $square, Target::SQUARE) > 1) {
-                    return "The input sudoku is incorrect! The number " . $number . " occurs more than once in square " . $square;
+                    return "The input sudoku is incorrect! The number $number occurs more than once in square $square";
                 }
             }
         }
@@ -422,37 +467,37 @@ function printSudokuBoard($solved, &$args, $message, &$sudokuBoard) {
     $dt = date('Y.m.d.H.i.s.') . gettimeofday()['usec'];
     $dt = substr($dt, 0, strlen($dt) - 3);
 
-    if (solved)
-        suffix = "__Solved_" . $dt . ".txt";
+    if ($solved)
+        $suffix = "__Solved_$dt.txt";
     else
-        suffix = "__Partially_solved_" . $dt . ".txt";
+        $suffix = "__Partially_solved_$dt.txt";
 
     if (count($args) == 2) {
-        $c = trim(args[1]);
+        $c = trim($args[1]);
         $c = $c[strlen($c) - 1];
+        $fileNameFullPath = trim($args[1]) . (($c == '\\') ? "" : "\\") . $fileName . $suffix;
+    }
+    else {
+        $fileNameFullPath = trim($args[0]) . $suffix;
     }
 
-            if (args.Length == 2)
-            {
-                c = args[1].Trim()[args[1].Trim().Length - 1];
-                fileNameFullpath = args[1].Trim() + ((c == '\\') ? "" : "\\") + (new FileInfo(args[0])).Name + suffix;
-            }
-            else
-                fileNameFullpath = args[0] + suffix;
+    $fileContent = $message . "\r\n\r\n" . returnSudokuBoardAsString($sudokuBoard);
 
-            File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
+    $f = fopen($fileNameFullPath, "w");
+    fwrite($f, $fileContent);
+    fclose($f);
 }
 
 function printResult($initialSudokuBoardHasCandidates, &$args, $msg, $sudokuSolved, $numberOfCellsSetInInputSudokuBoard, $numberOfCellsSetInBestSoFar, &$workingSudokuBoard, &$bestSoFarSudokuBoard) {
     if ($initialSudokuBoardHasCandidates) {
         if ($sudokuSolved) {
             $tmp1 = 81 - $numberOfCellsSetInInputSudokuBoard;
-            $msg = "The sudoku was solved. " . $tmp1 . " number(s) added to the original " . $numberOfCellsSetInInputSudokuBoard . ".";
+            $msg = "The sudoku was solved. $tmp1 number(s) added to the original $numberOfCellsSetInInputSudokuBoard.";
         }
         else {
             $tmp1 = $numberOfCellsSetInBestSoFar - $numberOfCellsSetInInputSudokuBoard;
             $tmp2 = 81 - $numberOfCellsSetInBestSoFar;
-            $msg = "The sudoku was partially solved. " . $tmp1 . " number(s) added to the original " . $numberOfCellsSetInInputSudokuBoard . ". Unable to set " . $tmp2 . " number(s).";
+            $msg = "The sudoku was partially solved. $tmp1 number(s) added to the original $numberOfCellsSetInInputSudokuBoard . Unable to set $tmp2 number(s).";
         }
 
         if ($sudokuSolved || $bestSoFarSudokuBoard == null) {

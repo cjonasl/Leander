@@ -69,7 +69,7 @@ namespace SudokuDebug
 
             if (msg != null)
             {
-                PrintResult(false, args, msg, false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+                PrintResult(false, msg);
                 return;
             }
 
@@ -78,13 +78,13 @@ namespace SudokuDebug
 
             if (msg != null)
             {
-                PrintResult(false, args, msg, false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+                PrintResult(false, msg);
                 return;
             }
 
             if (cellsRemainToSet.Count == 0)
             {
-                PrintResult(false, args, "A complete sudoku was given as input. There is nothing to solve.", true, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+                PrintResult(false, "A complete sudoku was given as input. There is nothing to solve.");
                 return;
             }
 
@@ -93,7 +93,7 @@ namespace SudokuDebug
 
             if (numberOfCandidates == 0)
             {
-                PrintResult(false, args, "It is not possible to add any number to the sudoku.", false, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+                PrintResult(false, "It is not possible to add any number to the sudoku.");
                 return;
             }
 
@@ -189,7 +189,7 @@ namespace SudokuDebug
                 }
             }
 
-            PrintResult(true, args, null, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+            PrintResult(true, null, args, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
         }
 
         private static void CopyList(ArrayList from, ArrayList to)
@@ -733,7 +733,7 @@ namespace SudokuDebug
             File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
         }
 
-        private static void PrintResult(bool initialSudokuBoardHasCandidates, string[] args, string msg, bool sudokuSolved, int numberOfCellsSetInInputSudokuBoard, int numberOfCellsSetInBestSoFar, int[][] workingSudokuBoard, int[][] bestSoFarSudokuBoard)
+        private static void PrintResult(bool initialSudokuBoardHasCandidates, string msg, string[] args = null, bool sudokuSolved = false, int numberOfCellsSetInInputSudokuBoard = 0, int numberOfCellsSetInBestSoFar = 0, int[][] workingSudokuBoard = null, int[][] bestSoFarSudokuBoard = null)
         {
             if (initialSudokuBoardHasCandidates)
             {
