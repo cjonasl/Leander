@@ -1,2 +1,9 @@
 ﻿Dag 103:
 Onsdag den 28 augusti 2019
+Skrev klart mitt sudoku-program i PHP, men det fungerade
+inte. Jag debuggade och rättade några fel innan jag kände
+att jag måste avsluta och istället ägna mig åt Fixzone arbete.
+Jag fortsatte arbetet med att kunna lägga in en enskild kund,
+t.ex. ”LG”, i PasClientConnect (task44). Intog banan, smörgås
+och kaffe till lunch. Jag avslutade arbetsdagen ca. kl. 17.30
+och promenerade hem.

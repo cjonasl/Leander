@@ -1,0 +1,54 @@
+﻿
+@using ClientConnect.ViewModels.JobStatuses
+@model JobStatus_Model
+
+
+		<div class="cols cols2 job-status">
+			<div class="col2">
+				<h2>Job Summary</h2>
+			</div>
+			
+			<div class="col">
+				<table class="table-job-statuses">
+				    <tbody>
+				    <tr>
+				        <td>
+							<a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "Unread Client Notes", statusSearch = "UnReadClientNotes"})"><span aria-hidden="true" class="icon-collection-booking-required" title="Unread Client Notes"></span></a>
+				        </td>
+				        <td><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "Unread Client Notes", statusSearch = "UnReadClientNotes"})">Unread Client Notes</a></td>
+				        <td class="status-count">@Model.UnReadClientNotes</td>
+				        <td class="arrow"><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "Need to book a courier collection", statusSearch = "UnReadClientNotes"})"><span aria-hidden="true" class="icon-arrow" title="View"></span></a></td>
+			        </tr>
+				    <tr>
+				        <td>
+							<a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "Waiting for approval", statusSearch = "WaitingforApproval" })"><span aria-hidden="true" class="icon-collection-booked" title="Waiting for Approval"></span>
+	                </a>
+				        </td>
+				        <td><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "Waiting for approval", statusSearch ="WaitingforApproval" })">Waiting for Approval</a></td>
+				        <td class="status-count">@Model.WaitingforApproval</td>
+				        <td class="arrow"><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "Waiting for approval", statusSearch = "WaitingforApproval" })"><span aria-hidden="true" class="icon-arrow" title="View"></span></a></td>
+			        </tr>
+				   
+				</tbody></table>
+			</div>
+			<div class="col">
+				<table class="table-job-statuses">
+				    <tbody>
+				    <tr>
+				        <td>
+							<a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "WA / Query Answered", statusSearch = "WAQueryAnswered" })"><span aria-hidden="true" class="icon-repair-centre" title="WA / Query Answered"></span></a></td>
+				        <td><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "WA / Query Answered", statusSearch = "WAQueryAnswered" })">WA / Query Answered</a></td>
+				        <td class="status-count">@Model.WAQueryAnswered</td>
+				        <td class="arrow"><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "WA / Query Answered", statusSearch = "WAQueryAnswered" })"><span aria-hidden="true" class="icon-arrow" title="View"></span></a></td>
+			        </tr>
+				  <tr>
+				        <td>
+							<a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "WA / Query Raised", statusSearch = "WAQueryRaised" })"><span aria-hidden="true" class="icon-repair-centre" title="WA / Query Raised"></span></a></td>
+				        <td><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "WA / Query Raised", statusSearch = "WAQueryRaised" })">WA / Query Raised</a></td>
+				        <td class="status-count">@Model.WAQueryRaised</td>
+				        <td class="arrow"><a href="@Url.Action("OpenJobLists", "JobStatus", new { title = "WA / Query Raised", statusSearch ="WAQueryRaised" })"><span aria-hidden="true" class="icon-arrow" title="View"></span></a></td>
+			        </tr>
+				</tbody></table>
+			</div>
+		</div>
+

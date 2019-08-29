@@ -19,6 +19,9 @@ function run(&$args) {
     $numbersAddedWithCertaintyAndThenNoCandidates = false;
     $cellsRemainToSetAfterAddedNumbersWithCertainty = null;
     $cellsRemainToSet = [];
+    $debugTotalCellsAdded = [];
+    $debugCategory = ["0"];
+    $debugInfo = ["0"];
 
     $msg = getInputSudokuBoard($args, $workingSudokuBoard, $cellsRemainToSet);
 
@@ -50,7 +53,14 @@ function run(&$args) {
 
     $numberOfCellsSetInInputSudokuBoard = 81 - count($cellsRemainToSet);
 
+    $debugDirectory = debugCreateAndReturnDebugDirectory();
+    $debugTry = 0;
+
     while ($numberOfAttemptsToSolveSudoku < $maxNumberOfAttemptsToSolveSudoku && !$sudokuSolved && !$numbersAddedWithCertaintyAndThenNoCandidates) {
+        $debugTry += 1;
+        $debugAddNumber = 0;
+        array_splice($debugTotalCellsAdded, 0, count($debugTotalCellsAdded));
+
         if ($numberOfAttemptsToSolveSudoku > 0) {
             restoreState($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidatesAfterAddedNumbersWithCertainty, $workingSudokuBoard, $certaintySudokuBoard, $candidates, $candidatesAfterAddedNumbersWithCertainty, $numberOfCandidates);
         }
@@ -62,12 +72,12 @@ function run(&$args) {
             while ($i < count($cellsRemainToSet) && $number == 0) {
                 $row = $cellsRemainToSet[$i][0];
                 $column = $cellsRemainToSet[$i][1];
-                $number = tryFindNumberToSetInCellWithCertainty($row, $column, $candidates, $squareCellToRowColumnMapper);
+                $number = tryFindNumberToSetInCellWithCertainty($row, $column, $candidates, $squareCellToRowColumnMapper, $debugCategory);
                 $i = ($number == 0) ? $i + 1 : $i;
             }
 
             if ($number == 0) {
-                simulateOneNumber($candidates, $cellsRemainToSet, $i, $number);
+                simulateOneNumber($candidates, $cellsRemainToSet, $i, $number, $debugInfo);
                 $row = cellsRemainToSet[$i][0];
                 $column = cellsRemainToSet[$i][1];
 
@@ -75,13 +85,35 @@ function run(&$args) {
                     $certaintySudokuBoard = returnTwoDimensionalDataStructure(9, 9);
                     $cellsRemainToSetAfterAddedNumbersWithCertainty = [];
                     $candidatesAfterAddedNumbersWithCertainty = returnThreeDimensionalDataStructure(9, 9, 10);
-                    $saveState($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, $workingSudokuBoard, $certaintySudokuBoard, $candidates, $candidatesAfterAddedNumbersWithCertainty, $numberOfCandidatesAfterAddedNumbersWithCertainty);
+                    saveState($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, $workingSudokuBoard, $certaintySudokuBoard, $candidates, $candidatesAfterAddedNumbersWithCertainty, $numberOfCandidatesAfterAddedNumbersWithCertainty);
                 }
+
+                $debugCategory[0] = "Simulated";
             }
+
+            $debugTotalCellsAdded[] = [$row, $column];
+
+            $debugSquare  = 1 + 3 * intdiv($row - 1,  3) + intdiv($column - 1,  3);
+            $debugString = "(row, column, square, number, category) = (" . $row . ", " . $column . ", " . $debugSquare . ", " . $number . ", " . $debugCategory[0] . ")\r\n\r\n";
+            $debugString .= "Total cells added (" . count($debugTotalCellsAdded) . " cells): " . debugReturnCells($debugTotalCellsAdded) . "\r\n\r\n";
+
+            if ($debugCategory[0] == "Simulated") {
+                $debugString .= $debugInfo[0] + "\r\n\r\n";
+            }
+
+            $debugString .= "Data before update:\r\n\r\n" . debugReturnInfo($workingSudokuBoard, $cellsRemainToSet, $numberOfCandidates, $candidates, $squareCellToRowColumnMapper);
 
             $workingSudokuBoard[$row - 1][$column - 1] = $number;
             array_splice($cellsRemainToSet, $i, 1);
             $numberOfCandidates -= updateCandidates($candidates, $squareCellToRowColumnMapper, $row, $column, $number);
+
+            $debugString .= "\r\nData after update:\r\n\r\n" . debugReturnInfo($workingSudokuBoard, $cellsRemainToSet, $numberOfCandidates, $candidates, $squareCellToRowColumnMapper);
+
+            $debugAddNumber += 1;
+            $debugFileNameFullPath = $debugDirectory . "\\" . debugReturnFileName($debugTry, $debugAddNumber);
+            $f = fopen($debugFileNameFullPath, "w");
+            fwrite($f, $debugString);
+            fclose($f);
         }
 
         if (count($cellsRemainToSet) == 0) {
@@ -362,9 +394,17 @@ function returnSudokuBoardAsString(&$sudokuBoard) {
     return $sb;
 }
 
-function simulateOneNumber(&$candidates, &$cellsRemainToSet, &$index, &$number) {
+function simulateOneNumber(&$candidates, &$cellsRemainToSet, &$index, &$number, &$debugInfo) {
     $v = [];
     $minNumberOfCandidates = 9;
+
+    /*
+    $index = 0;
+    $row = $cellsRemainToSet[0][0];
+    $column = $cellsRemainToSet[0][1];
+    $number = $candidates[$row - 1][$column - 1][1];
+    $debugInfo[0] = "abc";
+    return;*/
 
     for ($i = 0; $i < count($cellsRemainToSet); $i++) {
         $row = $cellsRemainToSet[$i][0];
@@ -375,13 +415,22 @@ function simulateOneNumber(&$candidates, &$cellsRemainToSet, &$index, &$number) 
             $minNumberOfCandidates = $numberOfCandidates;
     }
 
+    $str = "minNumberOfCandidates: " . $minNumberOfCandidates . "\r\n";
+
+    $debugCellsWithMinNumberOfCandidates = [];
+
     for ($i = 0; $i < count($cellsRemainToSet); $i++) {
         $row = $cellsRemainToSet[$i][0];
         $column = $cellsRemainToSet[$i][1];
 
-        if ($candidates[$row - 1][$column - 1][0] == $minNumberOfCandidates)
+        if ($candidates[$row - 1][$column - 1][0] == $minNumberOfCandidates) {
             $v[] = $i;
+            $debugCellsWithMinNumberOfCandidates[] = [$row, $column];
+        }
     }
+
+    $str .= "Cells with minNumberOfCandidates (" . count($v) . " cells): " . debugReturnCells($debugCellsWithMinNumberOfCandidates);
+    $debugInfo[0] = $str;
 
     $tmp = rand(0, count($v) - 1);
     $index = $v[$tmp];
@@ -434,23 +483,33 @@ function initCandidates(&$sudokuBoard, &$squareCellToRowColumnMapper, &$candidat
     return $numberOfCandidates;
 }
 
-function tryFindNumberToSetInCellWithCertainty($row, $column, &$candidates, &$squareCellToRowColumnMapper) {
+function tryFindNumberToSetInCellWithCertainty($row, $column, &$candidates, &$squareCellToRowColumnMapper, &$debugCategory) {
     $number = 0;
 
     $square = 1 + 3 * intdiv($row - 1,  3) + intdiv($column - 1,  3);
     $numberOfCandidatesInCell = $candidates[$row - 1][$column - 1][0];
 
-    if ($numberOfCandidatesInCell == 1) 
+    if ($numberOfCandidatesInCell == 1) {
         $number = $candidates[$row - 1][$column - 1][1];
+        $debugCategory[0] = "Alone in cell";
+    }
     else {
         $i = 1;
         while ($i <= $numberOfCandidatesInCell && $number == 0) {
             $candidate = $candidates[$row - 1][$column - 1][$i];
 
-            if (candidateIsAlonePossible($candidate, $candidates, $squareCellToRowColumnMapper, $row, Target::ROW) ||
-                candidateIsAlonePossible($candidate, $candidates, $squareCellToRowColumnMapper, $column, Target::COLUMN) ||
-                candidateIsAlonePossible($candidate, $candidates, $squareCellToRowColumnMapper, $square, Target::SQUARE))
+            if (candidateIsAlonePossible($candidate, $candidates, $squareCellToRowColumnMapper, $row, Target::ROW)) {
                 $number = $candidate;
+                $debugCategory[0] = "Alone in row";
+            }
+            else if (candidateIsAlonePossible($candidate, $candidates, $squareCellToRowColumnMapper, $column, Target::COLUMN)) {
+                $number = $candidate;
+                $debugCategory[0] = "Alone in column";
+            }
+            else if (candidateIsAlonePossible($candidate, $candidates, $squareCellToRowColumnMapper, $square, Target::SQUARE)) {
+                $number = $candidate;
+                $debugCategory[0] = "Alone in square";
+            }
             else
                 $i++;
         }
@@ -560,6 +619,165 @@ function printResult($initialSudokuBoardHasCandidates, $msg, &$args = null, $sud
     }
 
     print($msg);
+}
+
+function debugCreateAndReturnDebugDirectory() {
+    $dt = date('Y.m.d.H.i.s.') . gettimeofday()['usec'];
+    $suffix = substr($dt, 0, strlen($dt) - 3);
+    $debugDir = "C:\\Sudoku\\Debug\\Run_" . $suffix;
+    mkdir($debugDir);
+
+    return $debugDir;
+}
+
+function debugReturnFileName($debugTry, $debugAddNumber) {
+    if ($debugTry < 10)
+        $s1 = "00" . $debugTry;
+    else if ($debugTry < 100)
+        $s1 = "0" . $debugTry;
+    else
+        $s1 = $debugTry;
+
+    if ($debugAddNumber < 10)
+        $s2 = "0" . $debugAddNumber;
+    else
+        $s2 = $debugAddNumber;
+
+    return "Try" . $s1 . "AddNumber" .$s2 . ".txt";
+}
+
+function debugReturnCells(&$cellsRemainToSet) {
+    $str = "";
+
+    for ($i = 0; $i < count($cellsRemainToSet); $i++) {
+        if ($i > 0) {
+            $str .= " ";
+        }
+
+        $str .= "(" . $cellsRemainToSet[$i][0] . ", " . $cellsRemainToSet[$i][1] . ")";
+    }
+
+    return $str;
+}
+
+
+function debugReturnCandidates($row, $column, &$candidates) {
+    $str = "";
+    $n = $candidates[$row - 1][$column - 1][0];
+
+    for ($i = 1; $i <= $n; $i++) {
+        if ($i > 1) {
+            $str .= ", ";
+        }
+
+        $str .= $candidates[$row - 1][$column - 1][$i];
+    }
+
+    return $str;
+}
+
+function debugSort($n, &$v) {
+    for ($i = 0; $i < $n - 1; $i++) {
+        for ($j = $i + 1; $j < $n; $j++) {
+            if ($v[$j] < $v[$i]) {
+                $tmp = $v[$j];
+                $v[$j] = $v[$i];
+                $v[$i] = $tmp;
+            }
+        }
+    }
+}
+
+function debugReturnAllCandidatesSorted(&$candidates, &$v, &$squareCellToRowColumnMapper, $t, $target) {
+    $n = 0;
+    $str = "";
+
+    for ($i = 0; $i < 9; $i++) {
+        switch ($target) {
+            case Target::ROW:
+                $row = $t;
+                $column = $i + 1;
+                break;
+            case Target::COLUMN:
+                $row = $i + 1;
+                $column = $t;
+                break;
+            case Target::SQUARE:
+                $row = $squareCellToRowColumnMapper[$t - 1][$i][0];
+                $column = $squareCellToRowColumnMapper[$t - 1][$i][1];
+                break;
+        }
+
+        if ($candidates[$row - 1][$column - 1][0] > 0) {
+            $c = $candidates[$row - 1][$column - 1][0];
+
+            for ($j = 0; $j < $c; $j++) {
+                $v[$n] = $candidates[$row - 1][$column - 1][1 + $j];
+                $n += 1;
+            }
+        }
+    }
+
+    debugSort($n, $v);
+
+    for ($i = 0; $i < $n; $i++) {
+        if ($i > 0) {
+            $str .= ", ";
+        }
+
+        $str .= $v[$i];
+    }
+
+    if ($n > 0) {
+        $str .= " (a total of $n candidates)";
+    }
+
+    return $str;
+}
+
+function debugReturnInfo(&$sudokuBoard, &$cellsRemainToSet, $numberOfCandidates, &$candidates, &$squareCellToRowColumnMapper) {
+    $v = [];
+
+    for ($i = 0; $i < 81; $i++) {
+        $v[] = 0;
+    }
+
+    $str = "Sudoku board:\r\n" . returnSudokuBoardAsString($sudokuBoard) . "\r\n\r\nCells remain to set (" . count($cellsRemainToSet) . " cells): ";
+    $str .= debugReturnCells($cellsRemainToSet) . "\r\n\r\n";
+    $str .= "Number Of candidates: " . $numberOfCandidates . "\r\n\r\n";
+    $str .= "Candidates (row, column, square, numberOfCandidate):\r\n";
+
+    for ($row = 1; $row <= 9; $row++) {
+        for ($column = 1; $column <= 9; $column++) {
+            $square = 1 + 3 * intdiv($row - 1,  3) + intdiv($column - 1,  3);
+            if ($candidates[$row - 1][$column - 1][0] == -1) {
+                $str .= "(" . $row . ", " . $column . ", " . $square . ", 0): Already set to " . $sudokuBoard[$row - 1][$column - 1] . "\r\n";
+            }
+            else {
+                $str .= "(" . $row . ", " . $column . ", " . $square . ", " . $candidates[$row - 1][$column - 1][0] . "): " . debugReturnCandidates($row, $column, $candidates) . "\r\n";
+            }
+        }
+    }
+
+    $str .= "\r\nCandidates in the rows:\r\n";
+
+    for ($row = 1; $row <= 9; $row++) {
+        $str .= $row . ": " . debugReturnAllCandidatesSorted($candidates, $v, $squareCellToRowColumnMapper, $row, Target::ROW) . "\r\n";
+    }
+
+    $str .= "\r\nCandidates in the columns:\r\n";
+
+    for ($column = 1; $column <= 9; $column++) {
+        $str .= $column . ": " . debugReturnAllCandidatesSorted($candidates, $v, $squareCellToRowColumnMapper, $column, Target::COLUMN) . "\r\n";
+    }
+
+    $str .= "\r\nCandidates in the squares:\r\n";
+
+    for ($square = 1; $square <= 9; $square++) {
+        $str .= $square . ": " . debugReturnAllCandidatesSorted($candidates, $v, $squareCellToRowColumnMapper, $square, Target::SQUARE) . "\r\n";
+    }
+
+    return $str;
 }
 
 
