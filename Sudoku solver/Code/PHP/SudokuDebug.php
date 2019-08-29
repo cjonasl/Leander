@@ -78,8 +78,8 @@ function run(&$args) {
 
             if ($number == 0) {
                 simulateOneNumber($candidates, $cellsRemainToSet, $i, $number, $debugInfo);
-                $row = cellsRemainToSet[$i][0];
-                $column = cellsRemainToSet[$i][1];
+                $row = $cellsRemainToSet[$i][0];
+                $column = $cellsRemainToSet[$i][1];
 
                 if ($certaintySudokuBoard == null) {
                     $certaintySudokuBoard = returnTwoDimensionalDataStructure(9, 9);
@@ -98,7 +98,7 @@ function run(&$args) {
             $debugString .= "Total cells added (" . count($debugTotalCellsAdded) . " cells): " . debugReturnCells($debugTotalCellsAdded) . "\r\n\r\n";
 
             if ($debugCategory[0] == "Simulated") {
-                $debugString .= $debugInfo[0] + "\r\n\r\n";
+                $debugString .= $debugInfo[0] . "\r\n\r\n";
             }
 
             $debugString .= "Data before update:\r\n\r\n" . debugReturnInfo($workingSudokuBoard, $cellsRemainToSet, $numberOfCandidates, $candidates, $squareCellToRowColumnMapper);
@@ -161,7 +161,7 @@ function copyCandidates(&$candidatesFrom, &$candidatesTo) {
     }
 }
 
-function saveState(&$cellsRemainToSet, &$cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, &$cworkingSudokuBoard, &$certaintySudokuBoard, &$candidates, &$candidatesAfterAddedNumbersWithCertainty, &$numberOfCandidatesAfterAddedNumbersWithCertainty) {
+function saveState(&$cellsRemainToSet, &$cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, &$workingSudokuBoard, &$certaintySudokuBoard, &$candidates, &$candidatesAfterAddedNumbersWithCertainty, &$numberOfCandidatesAfterAddedNumbersWithCertainty) {
     copyList($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty);
     copySudokuBoard($workingSudokuBoard, $certaintySudokuBoard);
     copyCandidates($candidates, $candidatesAfterAddedNumbersWithCertainty);
@@ -397,14 +397,6 @@ function returnSudokuBoardAsString(&$sudokuBoard) {
 function simulateOneNumber(&$candidates, &$cellsRemainToSet, &$index, &$number, &$debugInfo) {
     $v = [];
     $minNumberOfCandidates = 9;
-
-    /*
-    $index = 0;
-    $row = $cellsRemainToSet[0][0];
-    $column = $cellsRemainToSet[0][1];
-    $number = $candidates[$row - 1][$column - 1][1];
-    $debugInfo[0] = "abc";
-    return;*/
 
     for ($i = 0; $i < count($cellsRemainToSet); $i++) {
         $row = $cellsRemainToSet[$i][0];

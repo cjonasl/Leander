@@ -68,8 +68,8 @@ function run(&$args) {
 
             if ($number == 0) {
                 simulateOneNumber($candidates, $cellsRemainToSet, $i, $number);
-                $row = cellsRemainToSet[$i][0];
-                $column = cellsRemainToSet[$i][1];
+                $row = $cellsRemainToSet[$i][0];
+                $column = $cellsRemainToSet[$i][1];
 
                 if ($certaintySudokuBoard == null) {
                     $certaintySudokuBoard = returnTwoDimensionalDataStructure(9, 9);
@@ -129,7 +129,7 @@ function copyCandidates(&$candidatesFrom, &$candidatesTo) {
     }
 }
 
-function saveState(&$cellsRemainToSet, &$cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, &$cworkingSudokuBoard, &$certaintySudokuBoard, &$candidates, &$candidatesAfterAddedNumbersWithCertainty, &$numberOfCandidatesAfterAddedNumbersWithCertainty) {
+function saveState(&$cellsRemainToSet, &$cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, &$workingSudokuBoard, &$certaintySudokuBoard, &$candidates, &$candidatesAfterAddedNumbersWithCertainty, &$numberOfCandidatesAfterAddedNumbersWithCertainty) {
     copyList($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty);
     copySudokuBoard($workingSudokuBoard, $certaintySudokuBoard);
     copyCandidates($candidates, $candidatesAfterAddedNumbersWithCertainty);
