@@ -1,2 +1,14 @@
 ﻿Dag 104:
 Torsdag den 29 augusti 2019
+Spelade in en snaggit-video av vad jag gjort i task44
+(LG i PasClientConnect) och sedan mailade jag den till
+Angela och Vijay. Började arbeta med en debug-version
+av mitt sudoku-program i PHP. Intog smörgås, banan och
+kaffe till lunch. Angela kom till min arbetsplats med
+anledning av videon jag mailade till henne och hon bad
+mig lägga till en översikt av antal jobb m.m. i LGs
+huvudsida så jag började arbeta med det. Jag la till
+samma ”Job Summary” panel som finns i ”ShopDirect ClientConnect”.
+Jag avslutade arbetsdagen ca. kl. 17.30 och gick till
+”Tesco Express” och handlade en paj, vatten och vindruvor
+(kostnad: 4 pund) och därefter hem med buss.
