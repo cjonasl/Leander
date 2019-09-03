@@ -32,3 +32,19 @@ User name: admin
 Password: BON84STICKy
 Database directory: D:\CompleteServiceData\JTM (on pg-dur-dbase)
 To get info about database directory you can use tool: D:\DBISAM\Utils\srvadmin\srvadmin.exe (on pg-dur-dbase)
+
+CompleteService for test:
+Terminal server\\PG-DUR-FSERVER\CompleteService\LitmusDemo\bin\ServiceBeta.exe
+
+-------------- Go through files from task39 ------------------------------------------------------
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Controllers\CustomerController.cs,  Need to investigate further
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Models\Customer\CustomerSessionModel.cs, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Process\PredefinedProcess.cs, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Repositories\CustomerRepository.cs, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Services\CustomerService.cs, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\ViewModels\Customer\Customer_SearchModel.cs, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\_CustomerSearchAHeader.cshtml, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\_CustomerSearchHeader.cshtml, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\AdvSearch.cshtml, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Customer\Search.cshtml, OK
+C:\Jonas\SVN\SaediSVN4\CustomerConnectWeb\CallCenterClientConnect\Views\Home\Index.cshtml, OK
