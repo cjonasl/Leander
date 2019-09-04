@@ -1,2 +1,7 @@
 ﻿Dag 106:
 Måndag den 2 september 2019
+Skrev klart applikationen ”InsertLogStatements” och
+arbetade med att lägga in LG i PasClientConnect (task44).
+Vid 13.00-tiden intog jag banan, smörgås och kaffe
+till lunch. Jag avslutade arbetsdagen ca. kl. 17.30 och
+promenerade till Surbiton.
