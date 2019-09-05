@@ -1,11 +1,22 @@
 INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
-VALUES('ShowProductSearch', 0, 'false', 39)
+VALUES('ShowJobSearch', 1, 'true', 39)
 
 INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
-VALUES('ShowCustomerSearch', 0, 'false', 0)
+VALUES('ShowCustomerSearch', 1, 'true', 39)
 
 INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
-VALUES('ShowJobStatuses', 0, 'false', 0)
+VALUES('ShowJobStatuses', 1, 'true',39)
+
+INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
+VALUES('ShowProductSearch', 1, 'true', 0)
+
+
+INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
+VALUES('ShowJobSearch', 1, 'true', 0)
+
+
+
+
 
 
 SELECT * FROM ProcessDetail

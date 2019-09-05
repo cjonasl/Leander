@@ -20,7 +20,7 @@ VALUES(6, 1, 1, 16, 0, 39)
 
 --Customer/Search
 INSERT INTO ProcessDetail(ProcessID, ProcessStep, ExecuteLinkType, ExecuteLinkID, CustomerProcess, ClientId)
-VALUES(28, 1, 1, 69, 0, 39)
+VALUES(34, 1, 1, 74, 0, 39)
 
 --Customer/AdvSearch
 INSERT INTO ProcessDetail(ProcessID, ProcessStep, ExecuteLinkType, ExecuteLinkID, CustomerProcess, ClientId)
