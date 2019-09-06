@@ -1,6 +1,7 @@
 ﻿Dag 107:
 Tisdag den 3 september 2019
 Jag ägnade arbetsdagen åt att lägga in LG i PasClientConnect
-(task44). Vid 13.00-tiden intog jag smörgås och kaffe till
+(task44, Transfer functionality from old PHP ClientConnect
+to new site). Vid 13.00-tiden intog jag smörgås och kaffe till
 lunch. Jag avslutade arbetsdagen kl. 17.30 och promenerade
 hem.

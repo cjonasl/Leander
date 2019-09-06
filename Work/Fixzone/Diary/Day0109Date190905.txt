@@ -1,2 +1,12 @@
 ﻿Dag 109:
 Torsdag den 5 september 2019
+Gick in på Facebook och gratulerade min gamla klasskompis
+Jenny Svensson (f.d. Jenny Sonsson) på 50-årsdagen idag.
+Jag ägnade därefter arbetsdagen åt att skapa en ny version
+av PasClientConnect där även kunden ”LG” kan logga in och
+söka efter sina kunder och jobb. Vid 13.00-tiden intog jag
+banan, smörgås och kaffe till lunch. Jag blev klar med en
+första version av en ny PasClientConnect tillgänglig på
+Internet med address howdenscc.pacificagroup.co.uk. Det var
+en del saker som inte fungerade så jag får titta på det
+imorgon. Jag avslutade arbetsdagen ca. kl. 19.15.

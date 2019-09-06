@@ -3,6 +3,6 @@ Tisdag den 6 augusti 2019
 Jag ägnade arbetsdagen åt task43 (Dashboard ClientConnect) samt
 även implementering av min sudoku-algoritm i Ruby. Började
 förbereda att försöka få in mitt arbete i task43 och även arbetet
-i task39 (Complete customer search cli-ent connect) i produktion.
+i task39 (Complete customer search client connect) i produktion.
 Vid 13.00-tiden intog jag kaffe, banan och smörgås till lunch.
 Jag avslutade arbetsdagen drygt kl. 17.30 och promenerade hem.

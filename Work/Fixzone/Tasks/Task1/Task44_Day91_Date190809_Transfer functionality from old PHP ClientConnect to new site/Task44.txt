@@ -26,6 +26,7 @@ C:\AAAAA4\CallCenterClientConnect\Views\JobStatus\JobStatusList.cshtml
 C:\AAAAA4\CallCenterClientConnect\Views\Shared\_CallCenterLayout.cshtml
 C:\AAAAA4\CallCenterClientConnect\Views\_ViewStart.cshtml
 C:\AAAAA4\CallCenterClientConnect\Global.asax.cs
+C:\AAAAA5\CallCenterClientConnect\Views\Job\JobDetails.cshtml
 
 New files:
 C:\AAAAA4\CallCenterClientConnect\Infrastructure\ClientBusinessRule.cs

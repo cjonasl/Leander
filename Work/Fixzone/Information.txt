@@ -1,4 +1,9 @@
-﻿Test LG in PasClientConnect: http://howdenscc.pacificagroup.co.uk
+﻿exec dbo.GetJobsListByKey 39, 'UnReadClientNotes', 10000, 1
+exec dbo.GetJobsListByKey 39, 'WAQueryAnswered', 10000, 1
+exec dbo.GetJobsListByKey 39, 'WAQueryRaised', 10000, 1
+exec dbo.GetJobsListByKey 39, 'WaitingforApproval', 10000, 1
+
+Test LG in PasClientConnect: http://howdenscc.pacificagroup.co.uk
 
 SELECT
   pd.*, ph.ProcessName, pp.PageURL, pp.PageDescription
