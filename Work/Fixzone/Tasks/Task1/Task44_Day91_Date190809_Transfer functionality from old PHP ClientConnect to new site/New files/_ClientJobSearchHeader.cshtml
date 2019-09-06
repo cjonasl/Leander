@@ -1,0 +1,17 @@
+﻿@model string
+
+<div class="box">
+    <h2>Job Search</h2>
+	    <form action="/Job/ClientFindJobsByClientId">
+            <input type="text" name="JobSearchCriteria" value="@Model" />
+            <button type="submit" class="button bbg">
+                <i class="icon-search"></i>
+            </button>
+
+             @if (ViewData["FromIndex"] != null) {
+                 <input type="hidden" name="fromIndex" value="true" />
+             }
+        </form>
+	<div class="note"> <span aria-hidden="true" class="icon-note"></span>Search for job number, customer name, customer reference, postcode, address, telephone number, or policy number</div>
+<div > <button id="ClientJobAdvSearch" type="button" class="button bbg" >Advanced</buton> </div>
+</div>

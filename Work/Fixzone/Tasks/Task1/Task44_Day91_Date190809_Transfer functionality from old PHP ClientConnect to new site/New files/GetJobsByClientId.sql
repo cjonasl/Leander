@@ -101,7 +101,7 @@ BEGIN
     #TmpTableService tmp
     INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     LEFT JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
-    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
     LEFT JOIN Model m ON ca.MODEL = m.MODEL AND ca.MFR = m.MFR AND ca.APPLIANCECD = m.APPLIANCECD
@@ -142,7 +142,7 @@ BEGIN
     #TmpTableService tmp
     INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     INNER JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
-    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
     LEFT JOIN Model m ON ca.MODEL = m.MODEL AND ca.MFR = m.MFR AND ca.APPLIANCECD = m.APPLIANCECD
@@ -188,7 +188,7 @@ BEGIN
     #TmpTableService tmp
     INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     INNER JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
-    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
     LEFT JOIN Model m ON ca.MODEL = m.MODEL AND ca.MFR = m.MFR AND ca.APPLIANCECD = m.APPLIANCECD
@@ -235,7 +235,7 @@ BEGIN
     #TmpTableService tmp
     INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     INNER JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
-    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
     LEFT JOIN Model m ON ca.MODEL = m.MODEL AND ca.MFR = m.MFR AND ca.APPLIANCECD = m.APPLIANCECD
@@ -283,7 +283,7 @@ BEGIN
     INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     INNER JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
     INNER JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
-    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Model m ON ca.MODEL = m.MODEL AND ca.MFR = m.MFR AND ca.APPLIANCECD = m.APPLIANCECD
    LEFT JOIN [status] st ON s.[STATUSID] = st.Statusid
@@ -328,7 +328,7 @@ BEGIN
     #TmpTableService tmp
     INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     INNER JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
-    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
     LEFT JOIN Model m ON ca.MODEL = m.MODEL AND ca.MFR = m.MFR AND ca.APPLIANCECD = m.APPLIANCECD
@@ -374,7 +374,7 @@ BEGIN
     #TmpTableService tmp
     INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     INNER JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
-    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
     LEFT JOIN Model m ON ca.MODEL = m.MODEL AND ca.MFR = m.MFR AND ca.APPLIANCECD = m.APPLIANCECD

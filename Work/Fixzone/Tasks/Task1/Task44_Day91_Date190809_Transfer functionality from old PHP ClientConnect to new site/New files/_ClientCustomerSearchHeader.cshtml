@@ -1,0 +1,17 @@
+﻿@model string
+
+<div class="box">
+    <h2>Customer Search</h2>
+	    <form action="/Customer/ClientFindCustomersByClientId">
+            <input type="text" name="CustomerSearchCriteria" value="@Model" />
+            <button type="submit" class="button bbg">
+                <i class="icon-search"></i>
+            </button>
+
+             @if (ViewData["FromIndex"] != null) {
+                 <input type="hidden" name="fromIndex" value="true" />
+             }
+        </form>
+	<div class="note"> <span aria-hidden="true" class="icon-note"></span> Search for customer name, customer reference, postcode, address, telephone number, or policy number</div>
+<div> <button id="ClientCustomerAdvSearch" type="button" class="button bbg" >Advanced</buton> </div>
+</div>

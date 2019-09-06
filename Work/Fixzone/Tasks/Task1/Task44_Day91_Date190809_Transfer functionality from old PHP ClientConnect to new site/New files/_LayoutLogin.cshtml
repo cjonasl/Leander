@@ -1,0 +1,68 @@
+﻿@using System.Web.Optimization
+@using ClientConnect.Infrastructure
+@using ClientConnect.Process
+@using ClientConnect.Services
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="author" content="Mark Watts"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Client Connect|@ViewBag.Title</title>
+
+        <!--css-->
+        @Styles.Render("~/css/main-css")
+        @RenderSection("Styles", required: false)
+
+    </head>
+
+    <body class="centered">
+    <div class="header cf" id="header-container">
+        <div class="container cf">	
+            <div class="cols cols3">
+               <h1 style="width:60%">Client Portal</h1>
+                 <div class="hdr" style="position: absolute;top:20px;right:10px">  
+                     <ul>
+                         <li id="auth-info">
+                         @{
+                            Html.RenderAction("AccountWidget", "Account");
+                          }
+                         </li>
+                        <li>Version @VersionInfo.GetApplicationVersionNumber()</li>
+                     </ul>
+                 </div>
+            </div>
+        </div>
+     </div>
+
+    <div class = "hide" id="main-content">
+        @RenderBody()
+    </div>
+
+    <div class="container footer">
+        <div class="cols cols2">
+            <div class="col2">
+               <p style="max-width:100%"> Copyright Fixzone UK Ltd @Functions.GetPresentDate().Year <span style="float:right"> Version @VersionInfo.GetApplicationVersionNumber() <b><span style="color:red"></span></b></span></p>
+            </div>
+        </div>
+    </div>
+
+    @*--- script loading---*@
+    @Scripts.Render("~/scripts/layout-js")
+
+    <script src="../../js/dialog_new2.js"></script>
+    <script src="../../js/dialogs.factory.js"></script>
+    <script src="../../js/diagnostic.new.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".select").bgiframe();
+            ShowElement("#main-content");
+            $(".select").bgiframe();
+        });
+
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

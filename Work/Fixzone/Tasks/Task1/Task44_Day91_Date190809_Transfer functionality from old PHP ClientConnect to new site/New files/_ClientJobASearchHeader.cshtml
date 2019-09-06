@@ -1,0 +1,43 @@
+﻿@model ClientConnect.Jobs.AdvSearchCriteria
+<style >
+    label, legend {
+        font-size: 1.2em;
+    }
+    #AdvSearch {
+        float: right;
+    }
+</style>
+<div class="box">
+    <h2>Job Search</h2>
+    <form action="/Job/AdvSearchByClientId" method="post">   <table>
+        <tr>
+            <td> @Html.LabelFor(model => model.Surname)</td><td>  @Html.EditorFor(model => model.Surname)</td>
+       
+                 <td> @Html.LabelFor(model => model.ClientCustRef)</td><td>  @Html.EditorFor(model => model.ClientCustRef)</td>
+        </tr>
+         <tr>
+            <td> @Html.LabelFor(model => model.Postcode)</td><td>  @Html.EditorFor(model => model.Postcode)</td>
+       
+                  <td> @Html.LabelFor(model => model.Address)</td><td>  @Html.EditorFor(model => model.Address)</td>   
+        </tr>
+         <tr>
+            <td> @Html.LabelFor(model => model.TelNo)</td><td>  @Html.EditorFor(model => model.TelNo)</td>
+       
+             <td> @Html.LabelFor(model => model.PolicyNumber)</td><td>  @Html.EditorFor(model => model.PolicyNumber)</td>
+        </tr> <tr>
+            <td> @Html.LabelFor(model => model.JobId)</td><td>  @Html.EditorFor(model => model.JobId)</td>
+       
+             <td colspan="2"><button id="AdvSearch" type="Submit" class="button bbg right" >Search</buton> </td>
+        </tr>
+    </table>
+	 
+
+   @* <div >
+
+    </div>*@
+
+           
+        </form>
+	
+ 
+</div>

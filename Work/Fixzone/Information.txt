@@ -1,4 +1,17 @@
-﻿Change password when email "Your password will expire in 14 days." comes:
+﻿Test LG in PasClientConnect: http://howdenscc.pacificagroup.co.uk
+
+SELECT
+  pd.*, ph.ProcessName, pp.PageURL, pp.PageDescription
+FROM
+  ProcessDetail pd
+  INNER JOIN ProcessHeader ph ON pd.ProcessID = ph.ProcessID
+  INNER JOIN ProcessPage pp ON pd.ExecuteLinkID = pp.PageID
+WHERE
+  pd.ClientID = 39
+ORDER BY
+  pd.ProcessID, pd.ProcessStep
+
+Change password when email "Your password will expire in 14 days." comes:
 Log in to "Web Mail" (there is a link in the mail) and then follow instructions
 in the mail.
 

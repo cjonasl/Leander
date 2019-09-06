@@ -1,5 +1,47 @@
 ﻿Task44:
 
+Modifed files:
+C:\AAAAA4\CallCenterClientConnect\Controllers\AccountController.cs
+C:\AAAAA4\CallCenterClientConnect\Controllers\CallCenterController.cs
+C:\AAAAA4\CallCenterClientConnect\Controllers\CustomerController.cs
+C:\AAAAA4\CallCenterClientConnect\Controllers\HomeController.cs
+C:\AAAAA4\CallCenterClientConnect\Controllers\JobController.cs
+C:\AAAAA4\CallCenterClientConnect\Controllers\JobStatusController.cs
+C:\AAAAA4\CallCenterClientConnect\Models\Customer\CustomerSessionModel.cs
+C:\AAAAA4\CallCenterClientConnect\Models\Job\Job_SessionModel.cs
+C:\AAAAA4\CallCenterClientConnect\Process\PredefinedProcess.cs
+C:\AAAAA4\CallCenterClientConnect\Repositories\CustomerRepository.cs
+C:\AAAAA4\CallCenterClientConnect\Repositories\JobRepository.cs
+C:\AAAAA4\CallCenterClientConnect\Services\ProcessService.cs
+C:\AAAAA4\CallCenterClientConnect\Services\CustomerService.cs
+C:\AAAAA4\CallCenterClientConnect\Services\JobService.cs
+C:\AAAAA4\CallCenterClientConnect\ViewModels\Home\Job_SearchModel.cs
+C:\AAAAA4\CallCenterClientConnect\Views\Account\SignIn.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Error\Http400.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Error\Http404.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Error\Http500.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Home\Index.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\JobStatus\JobStatuses.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\JobStatus\JobStatusList.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Shared\_CallCenterLayout.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\_ViewStart.cshtml
+C:\AAAAA4\CallCenterClientConnect\Global.asax.cs
+
+New files:
+C:\AAAAA4\CallCenterClientConnect\Infrastructure\ClientBusinessRule.cs
+C:\AAAAA4\CallCenterClientConnect\Views\Customer\_ClientCustomerSearchAHeader.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Customer\_ClientCustomerSearchHeader.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Customer\AdvSearchByClientId.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Customer\FindCustomersByClientId.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Job\_ClientJobASearchHeader.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Job\_ClientJobSearchHeader.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Job\FindJobsByClientId.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Job\AdvSearchByClientId.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Shared\_LayoutLG.cshtml
+C:\AAAAA4\CallCenterClientConnect\Views\Shared\_LayoutLogin.cshtml
+C:\AAAAA4\CallCenterClientConnect\Content\img\LG.png
+
+
 "Tag" is a customer to Pacifica
 
 Test site:

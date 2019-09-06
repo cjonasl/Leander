@@ -1,0 +1,33 @@
+﻿@model ClientConnect.Customer.AdvSearchCriteria
+<style >
+    label, legend {
+        font-size: 1.2em;
+    }
+    #AdvSearch {
+        float: right;
+    }
+</style>
+<div class="box">
+    <h2>Customer Search</h2>
+    <form action="/Customer/AdvSearchByClientId" method="post">
+      <table>
+        <tr>
+            <td> @Html.LabelFor(model => model.Surname)</td><td>  @Html.EditorFor(model => model.Surname)</td>
+       
+                 <td> @Html.LabelFor(model => model.ClientCustRef)</td><td>  @Html.EditorFor(model => model.ClientCustRef)</td>
+        </tr>
+         <tr>
+            <td> @Html.LabelFor(model => model.Postcode)</td><td>  @Html.EditorFor(model => model.Postcode)</td>
+       
+                  <td> @Html.LabelFor(model => model.Address)</td><td>  @Html.EditorFor(model => model.Address)</td>   
+        </tr>
+         <tr>
+            <td> @Html.LabelFor(model => model.TelNo)</td><td>  @Html.EditorFor(model => model.TelNo)</td>
+       
+             <td> @Html.LabelFor(model => model.PolicyNumber)</td><td>  @Html.EditorFor(model => model.PolicyNumber)</td>
+        </tr> <tr>
+            <td colspan="4"><button id="AdvSearch" type="Submit" class="button bbg right" >Search</buton> </td>
+        </tr>
+    </table>
+  </form>
+</div>

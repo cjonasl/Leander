@@ -1,2 +1,8 @@
 ﻿Dag 108:
 Onsdag den 4 september 2019
+Fortsatte arbeta med att anpassa PasClientConnect
+så att en enskild kund/klient kan läggas in i webplatsen
+separerad från ”call center” användare (task44). Vid
+13.00-tiden intog jag kaffe, smörgås och banan till
+lunch. Jag avslutade arbetsdagen knappt kl. 18.00
+och promenerade hem.

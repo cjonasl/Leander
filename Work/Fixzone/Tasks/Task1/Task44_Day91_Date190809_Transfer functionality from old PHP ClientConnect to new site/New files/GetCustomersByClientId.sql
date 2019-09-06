@@ -88,14 +88,14 @@ BEGIN
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
     cu.CLIENTID,
-    cl.ClientName,
+    ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
     ISNULL(cu.CLIENTCUSTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableCustomer cu
-    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
   WHERE
@@ -118,14 +118,14 @@ BEGIN
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
     cu.CLIENTID,
-    cl.ClientName,
+    ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
     ISNULL(cu.CLIENTCUSTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableCustomer cu					
-    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
   WHERE
@@ -154,14 +154,14 @@ BEGIN
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
     cu.CLIENTID,
-    cl.ClientName,
+    ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
     ISNULL(cu.CLIENTCUSTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableCustomer cu					
-    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
   WHERE
@@ -190,14 +190,14 @@ BEGIN
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
     cu.CLIENTID,
-    cl.ClientName,
+    ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
     ISNULL(cu.CLIENTCUSTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableCustomer cu					
-    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
   WHERE
@@ -225,14 +225,14 @@ BEGIN
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
     cu.CLIENTID,
-    cl.ClientName,
+    ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
     ISNULL(cu.CLIENTCUSTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableCustomer cu					
-    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
   WHERE
@@ -260,14 +260,14 @@ BEGIN
     ISNULL(cu.TEL1, ''),
     ISNULL(cu.TEL2, ''),
     cu.CLIENTID,
-    cl.ClientName,
+    ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
     ISNULL(cu.CLIENTCUSTREF, ''),
    ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableCustomer cu					
-    INNER JOIN Client cl ON cu.CLIENTID = cl.ClientID
+    LEFT JOIN Client cl ON cu.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
     LEFT JOIN Custapl ca ON cu.CUSTOMERID = ISNULL(ca.OwnerCustomerID, ca.CUSTOMERID)
   WHERE
