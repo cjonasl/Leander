@@ -64,7 +64,7 @@ BEGIN
   INSERT INTO #TmpTableService(SERVICEID)
   SELECT SERVICEID
   FROM [service]
-  WHERE CLIENTID = @ClientId AND CAST(SERVICEID AS varchar(25)) LIKE @SearchCondition
+  WHERE CLIENTID = @ClientId AND (CAST(SERVICEID AS varchar(25)) LIKE @SearchCondition OR CAST(JOBID AS varchar(25)) LIKE @SearchCondition)
 END
 ELSE
 BEGIN
@@ -109,7 +109,7 @@ BEGIN
     LEFT JOIN RepairProfile r ON s.RepairId = r.RepairID
     LEFT JOIN Enginrs e ON r.RepairBookRepairEngineerID = e.ENGINEERID
   WHERE
-    CAST(s.SERVICEID AS varchar(25)) LIKE @SearchCondition
+    CAST(s.SERVICEID AS varchar(25)) LIKE @SearchCondition OR CAST(JOBID AS varchar(25)) LIKE @SearchCondition
 
   SET @FirstInsertHasBeenDone = 1
 END

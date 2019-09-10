@@ -27,8 +27,12 @@ C:\AAAAA4\CallCenterClientConnect\Views\Shared\_CallCenterLayout.cshtml
 C:\AAAAA4\CallCenterClientConnect\Views\_ViewStart.cshtml
 C:\AAAAA4\CallCenterClientConnect\Global.asax.cs
 C:\AAAAA5\CallCenterClientConnect\Views\Job\JobDetails.cshtml
+C:\AAAAA5\CallCenterClientConnect\Views\Customer\ApplianceList.cshtml
+C:\AAAAA5\CallCenterClientConnect\Controllers\CustProdController.cs
 
 New files:
+GetJobsByClientId.sql
+GetCustomersByClientId.sql
 C:\AAAAA4\CallCenterClientConnect\Infrastructure\ClientBusinessRule.cs
 C:\AAAAA4\CallCenterClientConnect\Views\Customer\_ClientCustomerSearchAHeader.cshtml
 C:\AAAAA4\CallCenterClientConnect\Views\Customer\_ClientCustomerSearchHeader.cshtml
