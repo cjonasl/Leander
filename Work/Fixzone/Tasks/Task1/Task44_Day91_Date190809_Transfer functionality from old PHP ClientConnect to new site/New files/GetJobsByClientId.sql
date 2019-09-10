@@ -6,12 +6,12 @@ GO
 
 CREATE PROCEDURE [dbo].[GetJobsByClientId]
 @ClientId int,
-@Jobid varchar(20),
+@ServiceId varchar(20),
 @Surname varchar(100),
 @Postcode varchar(100),
 @TelNo varchar(100),
 @PolicyNumber varchar(100),
-@ClientCustRef varchar(100),
+@ClientRef varchar(100),
 @Address varchar(100),
 @UseAndInWhereCondition bit,
 @ReturnLines int,
@@ -53,31 +53,42 @@ CREATE TABLE #TmpTableSearchJobs
   RetailClientName varchar(50) NOT NULL,
   RecordCount int NULL,
   POLICYNUMBER varchar(25) NOT NULL,
-  CLIENTCUSTREF varchar(20) NOT NULL,
+  CLIENTREF varchar(20) NOT NULL,
   ADDR1 varchar(60) NOT NULL
 )
 
-SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@Jobid, ''))) + '%'
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@ServiceId, ''))) + '%'
 
 IF (@UseAndInWhereCondition = 1 AND @SearchCondition <> '%%')
 BEGIN
-  INSERT INTO #TmpTableService(SERVICEID)
-  SELECT SERVICEID
-  FROM [service]
-  WHERE CLIENTID = @ClientId AND (CAST(SERVICEID AS varchar(25)) LIKE @SearchCondition OR CAST(JOBID AS varchar(25)) LIKE @SearchCondition)
+  INSERT INTO
+    #TmpTableService(SERVICEID)
+  SELECT
+    SERVICEID
+  FROM
+    [service]
+  WHERE
+    CLIENTID = @ClientId AND
+	(JOBID IS NULL OR (SERVICEID = JOBID)) AND
+	CAST(SERVICEID AS varchar(25)) LIKE @SearchCondition
 END
 ELSE
 BEGIN
-  INSERT INTO #TmpTableService(SERVICEID)
-  SELECT SERVICEID
-  FROM [service]
-  WHERE CLIENTID = @ClientId
+  INSERT INTO
+    #TmpTableService(SERVICEID)
+  SELECT
+    SERVICEID
+  FROM
+    [service]
+  WHERE
+    CLIENTID = @ClientId AND
+	(JOBID IS NULL OR (SERVICEID = JOBID))
 END
 
 IF (@SearchCondition <> '%%')
 BEGIN
   INSERT INTO
-    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
   SELECT
     s.SERVICEID,
     'FZ' + CAST(s.SERVICEID AS char(10)),
@@ -95,7 +106,7 @@ BEGIN
     ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
-    ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(s.CLIENTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
@@ -118,7 +129,7 @@ SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@Surname , ''))) + '%'
 IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
 BEGIN
   INSERT INTO
-    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
   SELECT
     s.SERVICEID,
     'FZ' + CAST(s.SERVICEID AS char(10)),
@@ -136,7 +147,7 @@ BEGIN
     ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
-    ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(s.CLIENTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
@@ -164,7 +175,7 @@ SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@Postcode , ''))) + '%'
 IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
 BEGIN
   INSERT INTO
-    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
   SELECT
     s.SERVICEID,
     'FZ' + CAST(s.SERVICEID AS char(10)),
@@ -182,7 +193,7 @@ BEGIN
     ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
-    ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(s.CLIENTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
@@ -211,7 +222,7 @@ SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@TelNo , ''))) + '%'
 IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
 BEGIN
   INSERT INTO
-    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
   SELECT
     s.SERVICEID,
     'FZ' + CAST(s.SERVICEID AS char(10)),
@@ -229,7 +240,7 @@ BEGIN
     ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
-    ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(s.CLIENTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
@@ -258,7 +269,7 @@ SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@PolicyNumber , ''))) + '%'
 IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
 BEGIN
   INSERT INTO
-    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
   SELECT
     s.SERVICEID,
     'FZ' + CAST(s.SERVICEID AS char(10)),
@@ -276,7 +287,7 @@ BEGIN
     ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
-    ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(s.CLIENTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
@@ -300,11 +311,11 @@ BEGIN
   WHERE POLICYNUMBER NOT LIKE @SearchCondition
 END
 
-SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@ClientCustRef , ''))) + '%'
+SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@ClientRef , ''))) + '%'
 IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
 BEGIN
   INSERT INTO
-    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
   SELECT
     s.SERVICEID,
     'FZ' + CAST(s.SERVICEID AS char(10)),
@@ -322,7 +333,7 @@ BEGIN
     ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
-    ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(s.CLIENTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
@@ -336,21 +347,21 @@ BEGIN
     LEFT JOIN RepairProfile r ON s.RepairId = r.RepairID
     LEFT JOIN Enginrs e ON r.RepairBookRepairEngineerID = e.ENGINEERID
   WHERE
-    cu.CLIENTCUSTREF LIKE @SearchCondition
+    s.CLIENTREF LIKE @SearchCondition
 
   SET @FirstInsertHasBeenDone = 1
 END
 ELSE IF (@SearchCondition  <> '%%')
 BEGIN
   DELETE FROM #TmpTableSearchJobs
-  WHERE CLIENTCUSTREF NOT LIKE @SearchCondition
+  WHERE CLIENTREF NOT LIKE @SearchCondition
 END
 
 SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@Address , ''))) + '%'
 IF (@SearchCondition  <> '%%' AND (@UseAndInWhereCondition = 0 OR @FirstInsertHasBeenDone = 0))
 BEGIN
   INSERT INTO
-    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTCUSTREF, ADDR1)
+    #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
   SELECT
     s.SERVICEID,
     'FZ' + CAST(s.SERVICEID AS char(10)),
@@ -368,7 +379,7 @@ BEGIN
     ISNULL(cl.ClientName, ''),
     ISNULL(rc.RetailClientName, ''),
     ISNULL(ca.POLICYNUMBER, ''),
-    ISNULL(cu.CLIENTCUSTREF, ''),
+	ISNULL(s.CLIENTREF, ''),
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
