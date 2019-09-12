@@ -1,2 +1,12 @@
 ﻿Dag 112:
 Tisdag den 10 september 2019
+Skrev klart min objektorienterad version av Sudoku-algoritmen
+i C#, och sedan ägnade jag resten av arbetsdagen åt task44
+(Transfer functionality from old PHP ClientConnect to new site).
+På eftermiddagen var jag med och lyssnade på ett Skype möte
+med Angela, Vijay och Leanne Starke på Pacifica rörande nya
+PasClientConnect för enskilda kunder/klienter och en del
+modifieringar skulle göras som jag arbetade med samt test/validering
+att det som jag redan utvecklat fungerade som jag hade tänkt.
+Jag intog smörgås och kaffe till lunch. Jag avslutade arbetsdagen
+knappt kl. 20.30.

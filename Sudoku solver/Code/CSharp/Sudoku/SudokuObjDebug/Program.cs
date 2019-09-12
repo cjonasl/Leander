@@ -94,8 +94,8 @@ namespace SudokuObj
 
     class SudokuBoard
     {
-        private int[][] _workingSudokuBoard, _certaintySudokuBoard, _bestSoFarSudokuBoard;
-        private ArrayList _cellsRemainToSet, _cellsRemainToSetAfterAddedNumbersWithCertainty;
+        public int[][] _workingSudokuBoard, _certaintySudokuBoard, _bestSoFarSudokuBoard;
+        public ArrayList _cellsRemainToSet, _cellsRemainToSetAfterAddedNumbersWithCertainty;
 
         public int NumberOfCellsSetInInputSudokuBoard { get; private set; }
         public int NumberOfCellsSetInBestSoFar { get; private set; }
@@ -375,8 +375,8 @@ namespace SudokuObj
 
     class Candidates
     {
-        private int[][][] _candidates, _candidatesAfterAddedNumbersWithCertainty;
-        private int _numberOfCandidates, _numberOfCandidatesAfterAddedNumbersWithCertainty;
+        public int[][][] _candidates, _candidatesAfterAddedNumbersWithCertainty;
+        public int _numberOfCandidates, _numberOfCandidatesAfterAddedNumbersWithCertainty;
         private Random _random;
 
         public bool HasCandidates
@@ -427,7 +427,7 @@ namespace SudokuObj
             }
         }
 
-        public int TryFindNumberToSetInCellWithCertainty(int row, int column)
+        public int TryFindNumberToSetInCellWithCertainty(int row, int column, string[] debugCategory)
         {
             int i, square, numberOfCandidatesInCell, candidate, number = 0;
 
@@ -437,6 +437,7 @@ namespace SudokuObj
             if (numberOfCandidatesInCell == 1)
             {
                 number = _candidates[row - 1][column - 1][1];
+                debugCategory[0] = "Alone in cell";
             }
             else if (numberOfCandidatesInCell > 1)
             {
@@ -445,10 +446,21 @@ namespace SudokuObj
                 {
                     candidate = _candidates[row - 1][column - 1][i];
 
-                    if (CandidateIsAlonePossible(candidate, row, Target.Row) ||
-                        CandidateIsAlonePossible(candidate, column, Target.Column) ||
-                        CandidateIsAlonePossible(candidate, square, Target.Square))
+                    if (CandidateIsAlonePossible(candidate, row, Target.Row))
+                    {
                         number = candidate;
+                        debugCategory[0] = "Alone in row";
+                    }
+                    else if (CandidateIsAlonePossible(candidate, column, Target.Column))
+                    {
+                        number = candidate;
+                        debugCategory[0] = "Alone in column";
+                    }
+                    else if (CandidateIsAlonePossible(candidate, square, Target.Square))
+                    {
+                        number = candidate;
+                        debugCategory[0] = "Alone in square";
+                    }
                     else
                         i++;
                 }
@@ -509,10 +521,11 @@ namespace SudokuObj
             _numberOfCandidates -= totalNumberOfCandidatesRemoved;
         }
 
-        public void SimulateOneNumber(SudokuBoard sudokuBoard, out int row, out int column, out int index, out int number)
+        public void SimulateOneNumber(SudokuBoard sudokuBoard, string[] debugInfo, out int row, out int column, out int index, out int number)
         {
             int tmp, numberOfCandidates, minNumberOfCandidates = 9;
-            ArrayList v;
+            ArrayList v, debugCellsWithMinNumberOfCandidates;
+            string str;
 
             sudokuBoard.ResetList();
             while(sudokuBoard.NextCellInList())
@@ -523,20 +536,48 @@ namespace SudokuObj
                     minNumberOfCandidates = numberOfCandidates;
             }
 
+            str = "minNumberOfCandidates: " + minNumberOfCandidates.ToString() + "\r\n";
+
+            v = new ArrayList();
+            debugCellsWithMinNumberOfCandidates = new ArrayList();
+
             v = new ArrayList();
 
             sudokuBoard.ResetList();
             while (sudokuBoard.NextCellInList())
             {
                 if (_candidates[sudokuBoard.CurrentRow - 1][sudokuBoard.CurrentColumn - 1][0] == minNumberOfCandidates)
+                {
                     v.Add(new int[] { sudokuBoard.CurrentRow, sudokuBoard.CurrentColumn, sudokuBoard.CurrentListIndex });
+                    debugCellsWithMinNumberOfCandidates.Add(new int[] { sudokuBoard.CurrentRow, sudokuBoard.CurrentColumn });
+                }
             }
+
+            str += "Cells with minNumberOfCandidates (" + v.Count.ToString() + " cells): " + DebugReturnCells(debugCellsWithMinNumberOfCandidates);
+            debugInfo[0] = str;
 
             tmp = _random.Next(0, v.Count);
             row = ((int[])v[tmp])[0];
             column = ((int[])v[tmp])[1];
             index = ((int[])v[tmp])[2];
             number = _candidates[row - 1][column - 1][1 + _random.Next(0, minNumberOfCandidates)];
+        }
+
+        private string DebugReturnCells(ArrayList cellsRemainToSet)
+        {
+            string str = "";
+
+            for (int i = 0; i < cellsRemainToSet.Count; i++)
+            {
+                if (i > 0)
+                {
+                    str += " ";
+                }
+
+                str += "(" + ((int[])cellsRemainToSet[i])[0].ToString() + ", " + ((int[])cellsRemainToSet[i])[1].ToString() + ")";
+            }
+
+            return str;
         }
 
         /// <summary>
@@ -638,6 +679,14 @@ namespace SudokuObj
             bool atLeastOneSimulation = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
             SudokuBoard sudokuBoard = new SudokuBoard();
             Candidates candidates = new Candidates();
+            ArrayList debugTotalCellsAdded = new ArrayList();
+            string debugDirectory, debugString, debugFileNameFullPath;
+            string[] debugCategory = new string[1];
+            string[] debugInfo = new string[1];
+            int debugTry, debugAddNumber, debugSquare;
+            int[][][] squareCellToRowColumnMapper;
+
+            squareCellToRowColumnMapper = ReturnSquareCellToRowColumnMapper();
 
             string msg = sudokuBoard.Init(args);
 
@@ -669,8 +718,15 @@ namespace SudokuObj
                 return;
             }
 
+            debugDirectory = DebugCreateAndReturnDebugDirectory();
+            debugTry = 0;
+
             while (numberOfAttemptsToSolveSudoku < maxNumberOfAttemptsToSolveSudoku && !sudokuBoard.SudokuSolved && !numbersAddedWithCertaintyAndThenNoCandidates)
             {
+                debugTry += 1;
+                debugAddNumber = 0;
+                debugTotalCellsAdded.Clear();
+
                 if (numberOfAttemptsToSolveSudoku > 0)
                 {
                     sudokuBoard.RestoreState();
@@ -684,12 +740,12 @@ namespace SudokuObj
 
                     while (number == 0 && sudokuBoard.NextCellInList())
                     {
-                        number = candidates.TryFindNumberToSetInCellWithCertainty(sudokuBoard.CurrentRow, sudokuBoard.CurrentColumn);
+                        number = candidates.TryFindNumberToSetInCellWithCertainty(sudokuBoard.CurrentRow, sudokuBoard.CurrentColumn, debugCategory);
                     }
 
                     if (number == 0)
                     {
-                        candidates.SimulateOneNumber(sudokuBoard, out row, out column, out index, out number);
+                        candidates.SimulateOneNumber(sudokuBoard, debugInfo, out row, out column, out index, out number);
                         atLeastOneSimulation = true;
 
                         if (numberOfAttemptsToSolveSudoku == 0)
@@ -697,6 +753,8 @@ namespace SudokuObj
                             sudokuBoard.SaveState();
                             candidates.SaveState();
                         }
+
+                        debugCategory[0] = "Simulated";
                     }
                     else
                     {
@@ -705,8 +763,27 @@ namespace SudokuObj
                         index = sudokuBoard.CurrentListIndex;
                     }
 
+                    debugTotalCellsAdded.Add(new int[] { row, column });
+
+                    debugSquare = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
+                    debugString = "(row, column, square, number, category) = (" + row.ToString() + ", " + column.ToString() + ", " + debugSquare.ToString() + ", " + number.ToString() + ", " + debugCategory[0] + ")\r\n\r\n";
+                    debugString += "Total cells added (" + debugTotalCellsAdded.Count.ToString() + " cells): " + DebugReturnCells(debugTotalCellsAdded) + "\r\n\r\n";
+
+                    if (debugCategory[0] == "Simulated")
+                    {
+                        debugString += debugInfo[0] + "\r\n\r\n";
+                    }
+
+                    debugString += "Data before update:\r\n\r\n" + DebugReturnInfo(sudokuBoard._workingSudokuBoard, sudokuBoard._cellsRemainToSet, ReturnNumberOfCandidates(candidates._candidates, true, numberOfAttemptsToSolveSudoku, debugAddNumber), candidates._candidates, squareCellToRowColumnMapper);
+
                     sudokuBoard.SetNumber(row, column, index, number);
                     candidates.UpdateCandidates(row, column, number);
+
+                    debugString += "\r\nData after update:\r\n\r\n" + DebugReturnInfo(sudokuBoard._workingSudokuBoard, sudokuBoard._cellsRemainToSet, ReturnNumberOfCandidates(candidates._candidates, false, numberOfAttemptsToSolveSudoku, debugAddNumber), candidates._candidates, squareCellToRowColumnMapper);
+
+                    debugAddNumber += 1;
+                    debugFileNameFullPath = debugDirectory + "\\" + DebugReturnFileName(debugTry, debugAddNumber);
+                    File.WriteAllText(debugFileNameFullPath, debugString);
                 }
 
                 if (!sudokuBoard.SudokuSolved)
@@ -722,6 +799,81 @@ namespace SudokuObj
             }
 
             PrintResult(true, null, args, sudokuBoard);
+        }
+
+        private static int[][][] ReturnThreeDimensionalDataStructure(int l, int m, int n)
+        {
+            int[][][] v;
+            int i, j;
+
+            v = new int[l][][];
+
+            for (i = 0; i < l; i++)
+            {
+                v[i] = new int[m][];
+            }
+
+            for (i = 0; i < l; i++)
+            {
+                for (j = 0; j < m; j++)
+                {
+                    v[i][j] = new int[n];
+                }
+            }
+
+            return v;
+        }
+
+        private static int[][][] ReturnSquareCellToRowColumnMapper()
+        {
+            int[][][] v;
+            int[] index;
+            int i, row, column, square;
+
+            v = ReturnThreeDimensionalDataStructure(9, 9, 2);
+
+            index = new int[9];
+
+            for (i = 0; i < 9; i++)
+            {
+                index[i] = 0;
+            }
+
+            for (row = 1; row <= 9; row++)
+            {
+                for (column = 1; column <= 9; column++)
+                {
+                    square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
+                    v[square - 1][index[square - 1]][0] = row;
+                    v[square - 1][index[square - 1]][1] = column;
+                    index[square - 1]++;
+                }
+            }
+
+            return v;
+        }
+
+        private static int ReturnNumberOfCandidates(int[][][] candidates, bool ch, int a, int b)
+        {
+            int n = 0;
+
+            for(int row = 1; row <= 9; row++)
+            {
+                for (int column = 1; column <= 9; column++)
+                {
+                    if (candidates[row - 1][column - 1][0] != -1)
+                    {
+                        n += candidates[row - 1][column - 1][0];
+                    }
+                }
+            }
+
+            if (ch && a > 0 && b == 0)
+            {
+                int y = n;
+            }
+
+            return n;
         }
 
         private static void PrintSudokuBoard(string[] args, string message, SudokuBoard sudokuBoard)
@@ -762,6 +914,214 @@ namespace SudokuObj
             }
 
             Console.Write(msg);
+        }
+
+        private static string DebugCreateAndReturnDebugDirectory()
+        {
+            string debugDir = "C:\\Sudoku\\Debug\\Run_" + DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff");
+            Directory.CreateDirectory(debugDir);
+            return debugDir;
+        }
+
+        private static string DebugReturnFileName(int debugTry, int debugAddNumber)
+        {
+            string s1, s2;
+
+            if (debugTry < 10)
+                s1 = "00" + debugTry.ToString();
+            else if (debugTry < 100)
+                s1 = "0" + debugTry.ToString();
+            else
+                s1 = debugTry.ToString();
+
+            if (debugAddNumber < 10)
+                s2 = "0" + debugAddNumber.ToString();
+            else
+                s2 = debugAddNumber.ToString();
+
+            return "Try" + s1 + "AddNumber" + s2 + ".txt";
+        }
+
+        private static string DebugReturnCells(ArrayList cellsRemainToSet)
+        {
+            string str = "";
+
+            for (int i = 0; i < cellsRemainToSet.Count; i++)
+            {
+                if (i > 0)
+                {
+                    str += " ";
+                }
+
+                str += "(" + ((int[])cellsRemainToSet[i])[0].ToString() + ", " + ((int[])cellsRemainToSet[i])[1].ToString() + ")";
+            }
+
+            return str;
+        }
+
+        private static string DebugReturnCandidates(int row, int column, int[][][] candidates)
+        {
+            string str = "";
+            int n = candidates[row - 1][column - 1][0];
+
+            for (int i = 1; i <= n; i++)
+            {
+                if (i > 1)
+                {
+                    str += ", ";
+                }
+
+                str += candidates[row - 1][column - 1][i].ToString();
+            }
+
+            return str;
+        }
+
+        private static void DebugSort(int n, int[] v)
+        {
+            int tmp;
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (v[j] < v[i])
+                    {
+                        tmp = v[j];
+                        v[j] = v[i];
+                        v[i] = tmp;
+                    }
+                }
+            }
+        }
+
+        private static string DebugReturnAllCandidatesSorted(int[][][] candidates, int[] v, int[][][] squareCellToRowColumnMapper, int t, Target target)
+        {
+            int i, j, row = 0, column = 0, c, n = 0;
+            string str = "";
+
+            for (i = 0; i < 9; i++)
+            {
+                switch (target)
+                {
+                    case Target.Row:
+                        row = t;
+                        column = i + 1;
+                        break;
+                    case Target.Column:
+                        row = i + 1;
+                        column = t;
+                        break;
+                    case Target.Square:
+                        row = squareCellToRowColumnMapper[t - 1][i][0];
+                        column = squareCellToRowColumnMapper[t - 1][i][1];
+                        break;
+                }
+
+                if (candidates[row - 1][column - 1][0] > 0)
+                {
+                    c = candidates[row - 1][column - 1][0];
+
+                    for (j = 0; j < c; j++)
+                    {
+                        v[n] = candidates[row - 1][column - 1][1 + j];
+                        n += 1;
+                    }
+                }
+            }
+
+            DebugSort(n, v);
+
+            for (i = 0; i < n; i++)
+            {
+                if (i > 0)
+                {
+                    str += ", ";
+                }
+
+                str += v[i].ToString();
+            }
+
+            if (n > 0)
+            {
+                str += " (a total of " + n.ToString() + " candidates)";
+            }
+
+            return str;
+        }
+
+        private static string ReturnSudokuBoardAsString(int[][] sudokuBoard)
+        {
+            int row, column;
+            StringBuilder sb = new StringBuilder();
+
+            for (row = 1; row <= 9; row++)
+            {
+                if (row > 1)
+                    sb.Append("\r\n");
+
+                for (column = 1; column <= 9; column++)
+                {
+                    if (column == 1)
+                        sb.Append(sudokuBoard[row - 1][column - 1].ToString());
+                    else
+                        sb.Append(string.Format(" {0}", sudokuBoard[row - 1][column - 1].ToString()));
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private static string DebugReturnInfo(int[][] sudokuBoard, ArrayList cellsRemainToSet, int numberOfCandidates, int[][][] candidates, int[][][] squareCellToRowColumnMapper)
+        {
+            string str;
+            int row, column, square;
+            int[] v = new int[81];
+
+            str = "Sudoku board:\r\n" + ReturnSudokuBoardAsString(sudokuBoard) + "\r\n\r\nCells remain to set (" + cellsRemainToSet.Count.ToString() + " cells): ";
+            str += DebugReturnCells(cellsRemainToSet) + "\r\n\r\n";
+            str += "Number Of candidates: " + numberOfCandidates.ToString() + "\r\n\r\n";
+            str += "Candidates (row, column, square, numberOfCandidate):\r\n";
+
+            for (row = 1; row <= 9; row++)
+            {
+                for (column = 1; column <= 9; column++)
+                {
+                    square = 1 + (3 * ((row - 1) / 3)) + ((column - 1) / 3);
+
+                    if (candidates[row - 1][column - 1][0] == -1)
+                    {
+                        str += "(" + row.ToString() + ", " + column.ToString() + ", " + square.ToString() + ", 0): Already set to " + sudokuBoard[row - 1][column - 1].ToString() + "\r\n";
+                    }
+                    else
+                    {
+                        str += "(" + row.ToString() + ", " + column.ToString() + ", " + square.ToString() + ", " + candidates[row - 1][column - 1][0].ToString() + "): " + DebugReturnCandidates(row, column, candidates) + "\r\n";
+                    }
+                }
+            }
+
+            str += "\r\nCandidates in the rows:\r\n";
+
+            for (row = 1; row <= 9; row++)
+            {
+                str += row.ToString() + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, row, Target.Row) + "\r\n";
+            }
+
+            str += "\r\nCandidates in the columns:\r\n";
+
+            for (column = 1; column <= 9; column++)
+            {
+                str += column.ToString() + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, column, Target.Column) + "\r\n";
+            }
+
+            str += "\r\nCandidates in the squares:\r\n";
+
+            for (square = 1; square <= 9; square++)
+            {
+                str += square.ToString() + ": " + DebugReturnAllCandidatesSorted(candidates, v, squareCellToRowColumnMapper, square, Target.Square) + "\r\n";
+            }
+
+            return str;
         }
     }
 }
