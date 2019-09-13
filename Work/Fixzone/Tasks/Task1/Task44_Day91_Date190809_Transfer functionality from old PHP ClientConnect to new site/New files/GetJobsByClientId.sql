@@ -4,9 +4,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[GetJobsByClientId]
+ALTER PROCEDURE [dbo].[GetJobsByClientId]
 @ClientId int,
-@ServiceId varchar(20),
+@ServiceId int,
 @Surname varchar(100),
 @Postcode varchar(100),
 @TelNo varchar(100),
@@ -34,6 +34,11 @@ CREATE TABLE #TmpTableService
   SERVICEID int NOT NULL
 )
 
+CREATE TABLE #TmpTableJobId
+(
+  JOBID int NOT NULL
+)
+
 CREATE TABLE #TmpTableSearchJobs
 (
   Id int NOT NULL,
@@ -57,35 +62,36 @@ CREATE TABLE #TmpTableSearchJobs
   ADDR1 varchar(60) NOT NULL
 )
 
-SET @SearchCondition = '%' + LTRIM(RTRIM(ISNULL(@ServiceId, ''))) + '%'
-
-IF (@UseAndInWhereCondition = 1 AND @SearchCondition <> '%%')
+IF (@ServiceId <> 0)
 BEGIN
   INSERT INTO
-    #TmpTableService(SERVICEID)
-  SELECT
-    SERVICEID
+    #TmpTableJobId(JOBID)
+  SELECT DISTINCT
+    JOBID
   FROM
     [service]
   WHERE
     CLIENTID = @ClientId AND
-	(JOBID IS NULL OR (SERVICEID = JOBID)) AND
-	CAST(SERVICEID AS varchar(25)) LIKE @SearchCondition
+    SERVICEID = @ServiceId AND
+    JOBID IS NOT NULL
+END
+
+IF (@UseAndInWhereCondition = 1 AND @ServiceId <> 0)
+BEGIN
+  INSERT INTO #TmpTableService(SERVICEID)
+  SELECT SERVICEID
+  FROM [service]
+  WHERE SERVICEID IN(SELECT JOBID FROM #TmpTableJobId)
 END
 ELSE
 BEGIN
-  INSERT INTO
-    #TmpTableService(SERVICEID)
-  SELECT
-    SERVICEID
-  FROM
-    [service]
-  WHERE
-    CLIENTID = @ClientId AND
-	(JOBID IS NULL OR (SERVICEID = JOBID))
+  INSERT INTO #TmpTableService(SERVICEID)
+  SELECT SERVICEID
+  FROM [service]
+  WHERE CLIENTID = @ClientId
 END
 
-IF (@SearchCondition <> '%%')
+IF (@ServiceId <> 0)
 BEGIN
   INSERT INTO
     #TmpTableSearchJobs(Id, RepairNo, Logged, CustomerName, SURNAME, [Address], [Description], [Status], LeadTime, Postcode, TEL1, TEL2, StoreId, StoreName, RetailClientName, POLICYNUMBER, CLIENTREF, ADDR1)
@@ -110,7 +116,7 @@ BEGIN
     ISNULL(cu.ADDR1, '')
   FROM
     #TmpTableService tmp
-    INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
+	INNER JOIN [service] s ON tmp.SERVICEID = s.SERVICEID
     LEFT JOIN Customer cu ON s.CUSTOMERID = cu.CUSTOMERID
     LEFT JOIN Client cl ON s.CLIENTID = cl.ClientID
     LEFT JOIN RetailClient rc ON cu.RetailClientID = rc.RetailID
@@ -120,7 +126,7 @@ BEGIN
     LEFT JOIN RepairProfile r ON s.RepairId = r.RepairID
     LEFT JOIN Enginrs e ON r.RepairBookRepairEngineerID = e.ENGINEERID
   WHERE
-    CAST(s.SERVICEID AS varchar(25)) LIKE @SearchCondition OR CAST(JOBID AS varchar(25)) LIKE @SearchCondition
+    s.SERVICEID IN(SELECT JOBID FROM #TmpTableJobId)
 
   SET @FirstInsertHasBeenDone = 1
 END

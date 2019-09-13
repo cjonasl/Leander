@@ -635,7 +635,7 @@ namespace SudokuObj
         static void Main(string[] args)
         {
             int row, column, index, number, maxNumberOfAttemptsToSolveSudoku = 100, numberOfAttemptsToSolveSudoku = 0;
-            bool atLeastOneSimulation = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
+            bool atLeastOneSimulation = false, stateHasBeenSaved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
             SudokuBoard sudokuBoard = new SudokuBoard();
             Candidates candidates = new Candidates();
 
@@ -692,10 +692,11 @@ namespace SudokuObj
                         candidates.SimulateOneNumber(sudokuBoard, out row, out column, out index, out number);
                         atLeastOneSimulation = true;
 
-                        if (numberOfAttemptsToSolveSudoku == 0)
+                        if (!stateHasBeenSaved)
                         {
                             sudokuBoard.SaveState();
                             candidates.SaveState();
+                            stateHasBeenSaved = true;
                         }
                     }
                     else
