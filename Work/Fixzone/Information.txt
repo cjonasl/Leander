@@ -1,4 +1,12 @@
-﻿exec dbo.GetJobsListByKey 39, 'UnReadClientNotes', 10000, 1
+﻿Add new client to PasClientConnect: ClientId = 818
+
+Test book job flow:
+Database: fzserver/PasClientConnect
+Use ClientId = 11
+URL OnlineBookingWS: http://litmus.fieldengineer.co.uk/fzonlinebooking/fzonlinebooking.dll/soap/IFzOnlineBooking
+DBISAM test database: Litmus test, K-drive
+
+exec dbo.GetJobsListByKey 39, 'UnReadClientNotes', 10000, 1
 exec dbo.GetJobsListByKey 39, 'WAQueryAnswered', 10000, 1
 exec dbo.GetJobsListByKey 39, 'WAQueryRaised', 10000, 1
 exec dbo.GetJobsListByKey 39, 'WaitingforApproval', 10000, 1
