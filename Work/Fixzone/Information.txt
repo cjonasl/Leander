@@ -1,4 +1,50 @@
-﻿Add new client to PasClientConnect: ClientId = 818
+﻿------ Get info about services in PasClientConnect ------------------
+SELECT
+  at.FirstDateoffered,
+  at.DateChosen,
+  at.CreatedOn,
+  sn.UserId,
+  sn.notes,
+  de.EnterDate,
+  de.EventDate,
+  sv.STATUSID,
+  st.[Status],
+  st.StatusDesc,
+  ca.APPLIANCECD,
+  ca.MODEL,
+  ca.SNO,
+  cm.ClientID,
+  cm.FIRSTNAME,
+  cm.SURNAME,
+  cm.ADDR1,
+  cm.TOWN,
+  cm.POSTCODE
+FROM
+  AppointmentTrack at
+  LEFT OUTER JOIN ServiceNotes sn ON at.ServiceID = sn.serviceId
+  LEFT OUTER JOIN DiaryEnt de ON at.ServiceID = de.TagInteger1
+  LEFT OUTER JOIN [service] sv ON at.ServiceID = sv.SERVICEID
+  LEFT OUTER JOIN [status] st ON sv.STATUSID = st.StatusID
+  LEFT OUTER JOIN Custapl ca ON sv.CUSTAPLID = ca.CUSTAPLID
+  LEFT OUTER JOIN Customer cm ON sv.CUSTOMERID = cm.CUSTOMERID
+WHERE
+  at.CreatedOn > '2019-09-17 00:00:00.000'
+ORDER BY
+  at.CreatedOn desc
+
+------------ Logging PasClientConnect --------------
+SELECT * FROM UserLWeb ORDER BY LockID desc
+SELECT * FROM AppointmentTrack ORDER BY _id desc
+----------------------------------------------------
+
+
+SELECT * FROM [dbo].[ProductView]
+ORDER BY [ProductViewID] desc
+
+http://www.nr2web2.com/Account/SignIn
+http://www.nr2web2.com/Home/Daniel (do not need to be logged in)
+
+Add new client to PasClientConnect: ClientId = 818
 
 Test book job flow:
 Database: fzserver/PasClientConnect

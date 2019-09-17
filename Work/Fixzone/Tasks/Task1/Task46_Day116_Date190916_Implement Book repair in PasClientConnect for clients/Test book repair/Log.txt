@@ -1,0 +1,82 @@
+﻿Application_BeginRequest: /Notification/Processing, GET
+Application_EndRequest: /Notification/Processing, GET
+Application_BeginRequest: /Customer/ClaimConfirmMessage, GET
+An instance of FzOnlineBookingClient is created
+Application_EndRequest: /Customer/ClaimConfirmMessage, GET
+Application_BeginRequest: /Product/BookRepairShow, GET
+Application_EndRequest: /Product/BookRepairShow, GET
+Application_BeginRequest: /Process/Go/24, GET
+ProcessController: Constructor: public ProcessController()
+ProcessController: ActionResult Go(int id), id = 24
+ProcessService: public ProcessDetailsModel StartProcess(int processId), processId = 24
+ProcessService: private ProcessDetailsModel GetNavigationDataFromStep(ProcessDetailsModel stepData)
+ProcessService: private bool IsMainProcess(int processId), processId = 24
+ProcessController: ProcessNavigationResult, navigationResult.PageURL = /BookNewService/CustomerPage
+Application_EndRequest: /Process/Go/24, GET
+Application_BeginRequest: /BookNewService/CustomerPage, GET
+An instance of FzOnlineBookingClient is created
+Application_EndRequest: /BookNewService/CustomerPage, GET
+Application_BeginRequest: /Address/FindAddresses, POST
+Application_EndRequest: /Address/FindAddresses, POST
+Application_BeginRequest: /BookNewService/CustomerPage, POST
+An instance of FzOnlineBookingClient is created
+Application_EndRequest: /BookNewService/CustomerPage, POST
+Application_BeginRequest: /BookNewService/CustomerPage, POST
+An instance of FzOnlineBookingClient is created
+An instance of FzOnlineBookingClient is created
+response = onlineBookingService.AddCustomer(req);
+int NotesId = onlineBookingService.AddServiceNote(note);
+Application_EndRequest: /BookNewService/CustomerPage, POST
+Application_BeginRequest: /Process/NextStep, GET
+ProcessController: Constructor: public ProcessController()
+ProcessController: public ActionResult NextStep()
+ProcessService: public ProcessDetailsModel NextStep()
+ProcessService: private ProcessDetailsModel GetNavigationDataFromStep(ProcessDetailsModel stepData)
+ProcessService: private bool IsMainProcess(int processId), processId = 24
+ProcessController: ProcessNavigationResult, navigationResult.PageURL = /BookNewService/ApplianceDetails
+Application_EndRequest: /Process/NextStep, GET
+Application_BeginRequest: /BookNewService/ApplianceDetails, GET
+An instance of FzOnlineBookingClient is created
+Application_EndRequest: /BookNewService/ApplianceDetails, GET
+Application_BeginRequest: /BookNewService/ApplianceDetails, POST
+An instance of FzOnlineBookingClient is created
+var Result = onlineBookingService.AddCustomerAppliance(appliance);
+int NotesId = onlineBookingService.AddServiceNote(note);
+Application_EndRequest: /BookNewService/ApplianceDetails, POST
+Application_BeginRequest: /Process/NextStep, GET
+ProcessController: Constructor: public ProcessController()
+ProcessController: public ActionResult NextStep()
+ProcessService: public ProcessDetailsModel NextStep()
+ProcessService: private ProcessDetailsModel GetNavigationDataFromStep(ProcessDetailsModel stepData)
+ProcessService: private bool IsMainProcess(int processId), processId = 24
+ProcessController: ProcessNavigationResult, navigationResult.PageURL = /BookNewService/SoftService
+Application_EndRequest: /Process/NextStep, GET
+Application_BeginRequest: /BookNewService/SoftService, GET
+An instance of FzOnlineBookingClient is created
+Application_EndRequest: /BookNewService/SoftService, GET
+Application_BeginRequest: /BookNewService/SaveSoftService, GET
+An instance of FzOnlineBookingClient is created
+Application_EndRequest: /BookNewService/SaveSoftService, GET
+Application_BeginRequest: /Process/NextStep, GET
+ProcessController: Constructor: public ProcessController()
+ProcessController: public ActionResult NextStep()
+ProcessService: public ProcessDetailsModel NextStep()
+ProcessService: private ProcessDetailsModel GetNavigationDataFromStep(ProcessDetailsModel stepData)
+ProcessService: private bool IsMainProcess(int processId), processId = 24
+ProcessController: ProcessNavigationResult, navigationResult.PageURL = /BookNewService/RequestDate
+Application_EndRequest: /Process/NextStep, GET
+Application_BeginRequest: /BookNewService/RequestDate, GET
+An instance of FzOnlineBookingClient is created
+response = onlineBookingService.AppointmentRequest(request);
+Application_EndRequest: /BookNewService/RequestDate, GET
+Application_BeginRequest: /BookNewService/BookNow, POST
+An instance of FzOnlineBookingClient is created
+Response = onlineBookingService.BookNow(request);
+int Notesid = onlineBookingService.AddServiceNote(note);
+Application_EndRequest: /BookNewService/BookNow, POST
+Application_BeginRequest: /BookNewService/BookedJobConfirmation, GET
+An instance of FzOnlineBookingClient is created
+Application_EndRequest: /BookNewService/BookedJobConfirmation, GET
+Application_BeginRequest: /Reports/RepairInstructionReport, GET
+Application_EndRequest: /Reports/RepairInstructionReport, GET
+Application_End

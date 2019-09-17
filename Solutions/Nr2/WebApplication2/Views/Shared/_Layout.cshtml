@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body style="margin: 10px;">
+    @{
+        string logInName, sessionName, isAuthenticated;
+        bool backButtonEnabled = false, forwardButtonEnabled = false;
+
+        logInName = HttpContext.Current.User.Identity.Name;
+
+        if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            isAuthenticated = "true";
+            System.Collections.ArrayList v = (System.Collections.ArrayList)HttpContext.Current.Cache["SignedInUsers"];
+            int index = v.IndexOf(logInName);
+            System.Collections.ArrayList cachedResponses = (System.Collections.ArrayList)HttpContext.Current.Cache["CachedResponses"];
+            CachedResponseWrapper cachedResponseWrapperObj = (CachedResponseWrapper)cachedResponses[index];
+            backButtonEnabled = cachedResponseWrapperObj.BackButtonEnabled;
+            forwardButtonEnabled = cachedResponseWrapperObj.ForwardButtonEnabled;
+        }
+        else
+        {
+            isAuthenticated = "false";
+        }
+
+        sessionName = System.Web.HttpContext.Current.Session["name"] != null ? (string)System.Web.HttpContext.Current.Session["name"] : "";
+    }
+
+    @{
+        if (backButtonEnabled)
+        {
+            <a href="~/Process/GoBackward">Back</a>
+        }
+        else
+        {
+            <a disabled="disabled">Back</a>
+        }
+
+        @:&nbsp;&nbsp;&nbsp;
+
+        if (forwardButtonEnabled)
+        {
+            <a href="~/Process/GoForward">Forward</a>
+        }
+        else
+        {
+            <a disabled="disabled">Forward</a>
+        }
+    }
+
+    <br /><br /><br />
+
+    <a href="~/Account/LogOut">Log out</a><br />
+
+    <h1>Log in name: @logInName</h1>
+    <h1>Session name: @sessionName</h1>
+    <h1>IsAuthenticated: @isAuthenticated</h1>
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
