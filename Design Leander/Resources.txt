@@ -2835,3 +2835,23 @@ Task45_Day94_Date190814_Argos book repair make serial number mandatory field
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+143
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-16 10:14:42
+
+----- New property -----
+
+Task46_Day116_Date190916_Implement Book repair in PasClientConnect for clients
+
+----- New property -----
+
+Task,Fixzone
