@@ -156,7 +156,7 @@ namespace WebApplication2
             CarlJonasLeander.ApplicationEndRequest(HttpContext.Current.Request, this.Context);
             Log("EndRequest URL = " + this.Request.Url.AbsolutePath + ", " + this.Request.HttpMethod);
 
-            if (HttpContext.Current.User.Identity.IsAuthenticated && this.Request.Url.AbsolutePath.IndexOf('.') == -1 && this.Request.Url.AbsolutePath.IndexOf("GoBackward") == -1 && this.Request.Url.AbsolutePath.IndexOf("GoForward") == -1)
+            if (HttpContext.Current.User.Identity.IsAuthenticated && this.Request.Url.AbsolutePath.IndexOf('.') == -1 && this.Request.Url.AbsolutePath.IndexOf("GoBackward") == -1 && this.Request.Url.AbsolutePath.IndexOf("GoForward") == -1 && this.Request.Url.AbsolutePath.IndexOf("Log") == -1)
             {
                 CachedResponseWrapper cachedResponseWrapperObj = CachedResponseWrapper.GetCachedResponseWrapperObj();
 
@@ -165,6 +165,7 @@ namespace WebApplication2
                     CarlJonasLeanderOutputFilterStream filter = (CarlJonasLeanderOutputFilterStream)this.Context.Items["filter"];
                     string response = filter.ReadStream();
                     cachedResponseWrapperObj.CachNewResponse(response);
+                    int returnCode = this.Response.StatusCode;
                 }
             }
         }
@@ -172,8 +173,8 @@ namespace WebApplication2
 
     public class CachedResponseWrapper
     {
-        private ArrayList _v;
-        private int _currentIndex;
+        public ArrayList _v;
+        public int _currentIndex;
 
         public CachedResponseWrapper()
         {
@@ -201,7 +202,9 @@ namespace WebApplication2
         {
             get
             {
-                _currentIndex++;
+                if (_currentIndex < (_v.Count - 1))
+                    _currentIndex++;
+
                 return (string)_v[_currentIndex];
             }
         }
@@ -210,7 +213,9 @@ namespace WebApplication2
         {
             get
             {
-                _currentIndex--;
+                if (_currentIndex > 0)
+                    _currentIndex--;
+
                 return (string)_v[_currentIndex];
             }
         }
@@ -246,6 +251,12 @@ namespace WebApplication2
             {
                 return null;
             }
+        }
+
+        public static string ReturnString(object obj)
+        {
+            string[] v = (string[])obj;
+            return "Log in name: " + v[0] + ", Number of saved responses: " + v[1] + ", Current index: " + v[2];
         }
     }
 }

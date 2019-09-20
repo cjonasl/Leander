@@ -1,4 +1,22 @@
-﻿------ Get info about services in PasClientConnect ------------------
+﻿LG login: https://clients.pacificagroup.co.uk/Account/SignIn
+UserId: admin
+Psw: London19
+
+YPP login: https://clients.pacificagroup.co.uk/Account/SignIn
+UserId: YPPAdmin
+Psw: bigben
+
+--------------------------------------------------------
+If an error happens when book a repair, complete the
+booking in off mode and then look in the table 
+servicebackup for the error message.
+
+select * from servicebackup
+where [SERVICEFailID] = 10018
+--------------------------------------------------------
+
+
+------ Get info about services in PasClientConnect ------------------
 SELECT
   at.FirstDateoffered,
   at.DateChosen,
@@ -79,6 +97,7 @@ SVN source code: https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWe
 Live site: https://pasclientconnect.pacificagroup.co.uk/Callcenter/SignIn
 Live IIS-server: Terminal server (Username: Jonas.Leander, Password: Leeds#6231), then box PG-DUR-WEBSER (Username: Jonas.Leander, Password: Leeds#6231)
 Database server: Use SSMS on "Terminal server": user name: PAS_CC, password: QchK8HZEn4g7rU9u and database name is PAS
+PasClientConnect account: Login name: PAS_CLIENT, Password: TbhUA48H5aiy23Hn (Jonas created 2019-09-18)
 Use solution: C:\AAAAA3\CallCenterClientConnect\ClientConnect.sln
 Toolbar shortcut: PasClientConnect
 

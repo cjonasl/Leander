@@ -2855,3 +2855,23 @@ Task46_Day116_Date190916_Implement Book repair in PasClientConnect for clients
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+144
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-19 15:22:22
+
+----- New property -----
+
+Task47_Day119_Date190919_Argos login error when UserId does not exist in db
+
+----- New property -----
+
+Task,Fixzone

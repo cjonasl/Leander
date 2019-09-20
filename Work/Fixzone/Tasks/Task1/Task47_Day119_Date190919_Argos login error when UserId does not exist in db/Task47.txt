@@ -1,0 +1,7 @@
+﻿Task47:
+
+Metoden SignIn i filen UserController.cs fick felaktigt information
+från stored procedure SignIn om att användare existerade (UserId ej null,
+men alltid ej null eftersom värdet togs ifrån indataparameter istället
+för från select-sats), vilket sedan medförde att “diagnostic” i sidan
+hängde sig.

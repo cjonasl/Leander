@@ -1,0 +1,45 @@
+﻿144
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-19 15:22:22
+
+----- New property -----
+
+Task47_Day119_Date190919_Argos login error when UserId does not exist in db
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task47_Day119_Date190919_Argos login error when UserId does not exist in db
+
+----- New property -----
+
+null

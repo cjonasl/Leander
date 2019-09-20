@@ -19,5 +19,25 @@ namespace WebApplication2.Controllers
             CachedResponseWrapper cachedResponseWrapperObj = CachedResponseWrapper.GetCachedResponseWrapperObj();
             return Content(cachedResponseWrapperObj.GetNextResponse);
         }
+
+        public ActionResult Log()
+        {
+            ArrayList model, signedInUsers, cachedResponses;
+            CachedResponseWrapper cr;
+
+            model = new ArrayList();
+
+            signedInUsers = (ArrayList)HttpContext.Cache["SignedInUsers"];
+            cachedResponses = (ArrayList)HttpContext.Cache["CachedResponses"];
+
+            for (int i = 0; i < signedInUsers.Count; i++) 
+            {
+                cr = (CachedResponseWrapper)cachedResponses[i];
+                model.Add(new string[] {(string)signedInUsers[i], cr._v.Count.ToString(), cr._currentIndex.ToString() });
+            }
+
+            return View(model);
+        }
+
     }
 }

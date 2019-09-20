@@ -30,27 +30,8 @@
         sessionName = System.Web.HttpContext.Current.Session["name"] != null ? (string)System.Web.HttpContext.Current.Session["name"] : "";
     }
 
-    @{
-        if (backButtonEnabled)
-        {
-            <a href="~/Process/GoBackward">Back</a>
-        }
-        else
-        {
-            <a disabled="disabled">Back</a>
-        }
-
-        @:&nbsp;&nbsp;&nbsp;
-
-        if (forwardButtonEnabled)
-        {
-            <a href="~/Process/GoForward">Forward</a>
-        }
-        else
-        {
-            <a disabled="disabled">Forward</a>
-        }
-    }
+    <a href="~/Process/GoBackward">Back</a>&nbsp;&nbsp;&nbsp;
+    <a href="~/Process/GoForward">Forward</a>
 
     <br /><br /><br />
 

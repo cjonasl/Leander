@@ -1,5 +1,18 @@
 ﻿Task46:
 
+Stored procedure "CLC_GetCustomerProductsbyCustomerid" is called to get
+products for a customer. Input parameter is CustomerId
+
+Stored procedure "CLC_GetCustomerAppliance" is called to get
+appliance information. Input parameter is custaplid.
+
+Stored procedure "CLC_RetrieveJobByCustaplid" is called to
+get jobs info for an appliance. Input parameter is custaplid.
+
+If an appliance has more than one associated service then the
+latest is taken (order by serviceId desc):
+model.jobDetailsDto = Appliances.OrderByDescending(x => x.ServiceId).ToList().First(); (file CustomerProductService method GetCustomerAppliance)
+
 ----------------------------- Step 1 --------------------------------------------------------------------------
 ProductController/Details (int modelId, string modelNumber,  bool? AdditionalJob,int CustaplId = 0) is called
 
@@ -25,10 +38,19 @@ An instance of class BookNewServiceService is created
 
 The instance is filled with data via an inject from ProductService.SessionInfo
 
-Redirect to PredefinedProcess.BookRepair:
+Redirect to PredefinedProcess.BookRepair (ProcessID = 24):
 
 ProcessStep 1: /BookNewService/CustomerPage
 ProcessStep 2: /BookNewService/ApplianceDetails
 ProcessStep 3: /BookNewService/SoftService
 ProcessStep 4: /BookNewService/RequestDate
+
+ShopDirect book job (ProcessID = 29):
+ProcessStep 1: /BookNewService/ValidationCheck
+ProcessStep 2: /BookNewService/TheftDetails
+ProcessStep 3: /BookNewService/SoftService
+ProcessStep 4: /BookNewService/CustomerPreviewPage
+ProcessStep 5: /BookNewService/RequestDate
+
+
 
