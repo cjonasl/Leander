@@ -2875,3 +2875,23 @@ Task47_Day119_Date190919_Argos login error when UserId does not exist in db
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+145
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-20 09:27:35
+
+----- New property -----
+
+Task48_Day120_Date190920_Analyze Argos log in
+
+----- New property -----
+
+Task,Fixzone

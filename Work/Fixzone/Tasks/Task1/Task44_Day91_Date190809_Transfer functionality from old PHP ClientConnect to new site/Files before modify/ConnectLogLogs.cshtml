@@ -1,0 +1,116 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model ClientConnect.Models.Logs.ConnectLogsModel
+
+@{
+    ViewBag.Title = "Logs view";
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/jquery.shorten.js")"></script>
+    <script>
+        $(function () {
+            $(".shorten").shorten(
+                {
+                    showChars: '50',
+                    moreText: 'show',
+                    lessText: 'hide'
+                }
+            );
+        });
+    </script>
+}
+<link href="@Url.Content("~/Content/css/tabs.css")" rel="stylesheet" />
+
+
+<div class="ui-tabs ui-widget-content">
+    <div class="cols cols2">
+        <div class="col2">
+            <h2>Logs view</h2>
+            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header" role="tablist">
+                <li class="ui-state-default">
+                    <a href="FileLogs" class="icon-reporting">File log</a>
+                </li>
+                <li class="ui-state-default ui-tabs-active ui-state-active">
+                    <a href="ConnectLogLogs" class="icon-reporting">Connect log</a>
+                </li>
+            </ul> 
+        </div>
+    </div>
+</div>
+
+<div class="cols cols2">
+    <div class="col2">
+        @using (Html.BeginForm("ConnectLogFilter", "Logs", FormMethod.Post))
+        {
+            <table>
+                <thead>
+                    <th colspan="4">Filters:</th>
+                </thead>
+                <tr>
+                    <td>Service id:</td>
+                    <td>@Html.DropDownListFor(x => x.FilterServiceId, Model.FilterServiceIdList, new { @class = "select" })</td>
+                    <td>Other id:</td>
+                    <td>@Html.DropDownListFor(x => x.FilterOtherId, Model.FilterOtherIdList, new { @class = "select" })</td>
+                </tr>
+                <tr>
+                    <td>Events:</td>
+                    <td>@Html.DropDownListFor(x => x.FilterEvent, Model.FilterEventList, new { @class = "select" })</td>
+                    <td>Users:</td>
+                    <td>@Html.DropDownListFor(x => x.FilterUserName, Model.FilterUserNameList, new { @class = "select" })</td>
+                </tr>
+                <footer>
+                    <td colspan="4">
+                        <input type="submit" class="rbg pull-left" value="Filter"/>
+                    </td>
+                </footer>
+            </table>
+        }
+    </div>
+</div>
+
+<div class="cols cols2">
+    <div class="col2">
+        @if (Model.LogRecords.Count > 0)
+        {
+            <table width="100%">
+                <thead>
+                    <th width="15%">Date</th>
+                    <th width="15%">User</th>
+                    <th width="15%">Id</th>
+                    <th width ="20%">Event</th>
+                    <th width ="35%">Result</th>
+                </thead>
+                @foreach (var record in ViewBag.oneLogPage)
+                {
+                    <tr>
+                        <td>@record.CreateDate</td>
+                        <td>@record.UserId</td>
+                        <td>@(
+                                !string.IsNullOrEmpty(record.ServiceId) ? record.ServiceId : record.OtherId)
+                        </td>
+                        <td>@record.Event</td>
+                        <td class="shorten">
+                            @*Short: @(record.Request.Substring(0, Math.Min(record.Request.Length, 200)))*@
+                            
+                            <h4>Request:</h4>
+                            @record.Request 
+                                    
+                            <h4>Response:</h4>
+                            @record.Response 
+                                    
+                            <h4>Error:</h4>
+                            @(record.ErrorCode + " - " +  record.ErrorMessage) 
+                        </td> 
+                    </tr>
+                }
+            </table>
+            @Html.PagedListPager( (IPagedList)ViewBag.oneLogPage, page => Url.Action("ConnectLogLogs", new { page }), options: PagedListRenderOptions.DefaultPlusFirstAndLast )
+        }
+        else
+        {
+            <p class="error">No logs</p>
+        }
+    </div>
+</div>

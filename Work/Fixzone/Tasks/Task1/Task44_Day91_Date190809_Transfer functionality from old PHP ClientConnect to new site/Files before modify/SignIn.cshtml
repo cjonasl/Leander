@@ -1,0 +1,122 @@
+﻿@using System.Web.Optimization
+@model ClientConnect.ViewModels.Account.AccountViewModel
+
+@{
+    ViewBag.Title = "SIGN IN";
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+
+        var noStoreMsg = "@Model.ShowNoStoremMessage";
+        $("#user-no-store").dialog(parameterDialogFactory("store-confirm-dialog"));
+        if ("@Model.ShowNoStoremMessage".toLowerCase() == 'true') {
+            $("#user-no-store").dialog("open");
+        }
+
+        $("#user-different-login").dialog(parameterDialogFactory("store-confirm-dialog"));
+        var diffUserMsg = "@Model.ShowDifferentUserMessage";
+        if ("@Model.ShowDifferentUserMessage".toLowerCase() == 'true') {
+            $("#user-different-login").dialog("open");
+        }
+
+        $("button.btn-yes").click(function () {
+            var diagnosted = "@Model.IsDiagnosted";
+            if (diagnosted.toLowerCase() != 'true') {
+
+                closeAllDialogs();
+                var diagnosticHtml = '<div id="wait-auto-diagnostic-view" class="popup" title="Auto diagnostic">' +
+                    '<span class="msg">Auto diagnostic in progress...</span>' +
+                    '</div>';
+
+                var diagDialog = dialogFactory('diagnostic-dialog', diagnosticHtml);
+                diagDialog.show();
+                setTimeout(autoDiagnostic("@Model.UserId", function () {
+                    diagDialog.close();
+                    $("#IsMessageConfirmed").val("True");
+                    $("form").submit();
+                }), 1000);
+
+            } else {
+                $("#IsMessageConfirmed").val("True");
+                $("form").submit();
+            }
+        });
+
+        $("button.btn-no").click(function () {
+            closeAllDialogs();
+        });
+
+    </script>
+}
+
+<div class="cols cols2">
+    <div class="col box">
+        <h2>Sign in</h2>
+        @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+        {
+            <table class="table-user-sign-in">
+                <tr>
+                    <td>User ID</td>
+                    <td>
+                        @Html.TextBoxFor(x => x.UserId)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(x => x.UserId, null, new { @class = "error" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        @Html.PasswordFor(x => x.Password, new { value = Model.Password })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(x => x.Password, null, new { @class = "error" })
+                    </td>
+                </tr>
+                @* <tr>
+                        <td colspan="2">
+                            <a href="@Url.RouteUrl("ForgottenPassword")">Forgotten password?</a>
+                        </td>
+                    </tr>*@
+                <tr>
+                    <td colspan="2">
+                        <input class="button rbg" type="submit" value="Sign In" id="btn-signin" />
+                        <div>
+                            <span class="error">@ViewBag.userNotAdminMsg</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            @Html.HiddenFor(x => x.ReturnUrl)
+            @Html.HiddenFor(x => x.IsMessageConfirmed)
+        }
+    </div>
+</div>
+
+<div id="user-different-login" title="Notification">
+    <div id="other_login_msg_text">
+        Please Note<br />
+        Client Connect is set to Client <b>@Model.StoreId</b> on this computer. Your login is assigned to <b>@Model.UserStoreName</b>. If you have transferred Client please alert your manager that you need to be transferred from @Model.UserStoreName to @Model.StoreId in Client Connect.
+    </div>
+    <button type="button" class="button rbg btn-yes">Yes</button>
+    <button type="button" class="button bbg btn-no">No</button>
+</div>
+
+<div id="user-no-store" title="Notification">
+    <div id="no_store_msg_text">
+        Set the client for Client Connect.
+        <br />
+        The store has not been set on Client Connect for this computer. Once you login the client you are assigned to <b>@Model.UserStoreName</b> will be set on this computer. If this is not the client you are currently in please click ‘No’ and ask another colleague from the client to login first.<br />
+        Are you in the Client <b>@Model.UserStoreName</b>?
+    </div>
+    <br />
+    <button type="button" class="button rbg btn-yes">Yes</button>
+    <button type="button" class="button bbg btn-no">No</button>
+</div>

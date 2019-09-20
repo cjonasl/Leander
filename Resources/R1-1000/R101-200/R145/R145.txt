@@ -1,0 +1,45 @@
+﻿145
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-20 09:27:35
+
+----- New property -----
+
+Task48_Day120_Date190920_Analyze Argos log in
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task48_Day120_Date190920_Analyze Argos log in
+
+----- New property -----
+
+null

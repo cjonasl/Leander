@@ -1,8 +1,13 @@
+USE [CAST]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SignIn]    Script Date: 19/09/2019 15:58:09 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 ALTER PROCEDURE [dbo].[SignIn]
 @UserId varchar(max),
@@ -26,6 +31,8 @@ DECLARE @PasswordHashed varbinary(20) = CASE WHEN @Password IS NOT NULL THEN HAS
 DECLARE @DateToday datetime = getdate()
 DECLARE @HashedPasswordInDB varbinary(20) = NULL
 DECLARE @NumberOfLogInFailuresUpdateValue int = 0
+DECLARE @UserIdExists bit
+DECLARE @LogInSuccess bit
 
 SELECT
   @UsId = u.Userid,
@@ -58,10 +65,16 @@ BEGIN
     NumberOfLogInFailures = 0
   WHERE
     UPPER(Userid) = UPPER(@UserId)
+
+  SET @UserIdExists = 1
+  SET @LogInSuccess = 1
 END
 
 IF (@Enabled = 1 AND @IsPasswordEmpty = 0 AND @PasswordHashed <> @HashedPasswordInDB) --Handle NumberOfLogInFailures
 BEGIN
+  SET @UserIdExists = 1
+  SET @LogInSuccess = 0
+
   SET @NumberOfLogInFailures = ISNULL(@NumberOfLogInFailures, 0) + 1
 			
   IF (@NumberOfLogInFailures = 3) --Disable user and reset NumberOfLogInFailures to 0
@@ -80,6 +93,15 @@ END
 ELSE
   SET @NumberOfLogInFailures = NULL
 
+IF (@UsId IS NULL)
+BEGIN
+  SET @UserIdExists = 0
+  SET @LogInSuccess = 0
+END
+
+INSERT INTO AnalyzeLogIn(UserId, LogInDate, UserIdExists, LogInSuccess, NumberOfLogInFailures)
+VALUES(@UserId, getdate(), @UserIdExists, @LogInSuccess, @NumberOfLogInFailures)
+
 SELECT
   @ClientId AS 'UserStoreID',
   @UsId AS 'UserId',
@@ -95,6 +117,7 @@ SELECT
   @DateOfBirth AS 'DateOfBirth',
   @Lastacdt AS 'Lastacdt',
   @NumberOfLogInFailures AS 'NumberOfLogInFailures'
+
 GO
 
 

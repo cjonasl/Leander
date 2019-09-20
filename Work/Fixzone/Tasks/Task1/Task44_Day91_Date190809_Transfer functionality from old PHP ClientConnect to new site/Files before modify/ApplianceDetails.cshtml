@@ -1,0 +1,303 @@
+﻿@model ClientConnect.CustomerProduct.CustomerProductModel
+@{
+    ViewBag.Title = "ApplianceDetails";
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/jquery.form.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment.js")"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            DialogInit("#div-btnJobExist", 300, 100, "reveal-modal", true, true, false);
+            DialogInit("#div-btnBookOutofWarranty", 300, 100, "reveal-modal", true, true, false);
+            //DialogInit("#div-btnBookClientModelMissing", 300, 100, "reveal-modal", true, true, false);
+            DialogInit("#div-btnBookExpiredWarranty", 500, 100, "reveal-modal", true, true, false);
+
+            $("#btnBookOutofWarranty").click(function () {
+                DialogShow("#div-btnBookOutofWarranty");
+            });
+
+            $("#btnBookClientModelMissing").click(function (e) {
+                e.preventDefault();
+                $('#divmodelmappingmissing').dialog({
+                    height: 350,
+                    width: 500,
+                    modal: true,
+                    title: "Adviser Instructions:", closeIcon: '',
+                    refreshPageAfterClose: false,
+                    buttons: [{
+                        text: "Next",
+                        "class": "rbg",
+                        click: function () {
+                            $('#divmodelmappingmissing').dialog('close');
+                          
+                            $(".overlay").show();
+                            var url = "@Html.Raw(@Url.Action("ModelMissingBookRepair", "CustProd", new { Custaplid = Model.CustAplId }))";
+                            //alert(url);
+                            window.location.href = url;
+
+                                        }
+                                    }]
+               })
+            });
+            $("#btnBookExpiredWarranty").click(function () {
+                DialogShow("#div-btnBookExpiredWarranty");
+            });
+            if ('@Model.jobDetailsDto.ServiceId' != 0) {
+                DialogShow("#div-btnJobExist");
+            }
+            $("#btnExistingRep").click(function () {
+                DialogClose("#div-btnJobExist");
+            })
+            $("#OutofWarranty").click(function () {
+                DialogClose("#div-btnBookOutofWarranty");
+                $(".overlay").show();
+                $("#div-btnBookOutofWarranty").submit();
+
+            });
+            $("#ExpiredWarranty").click(function () {
+
+
+                $("#div-btnBookExpiredWarranty").submit();
+                $(".overlay").show();
+            });
+            $("#ModelMissingBookRepair").click(function () {
+
+
+                $("#div-tnModelMissingBookRepair").submit();
+                $(".overlay").show();
+            }); 
+            $("#CancelOutofWarranty").click(function () {
+
+                DialogClose("#div-btnBookOutofWarranty");
+            });
+        })
+    </script>
+}
+<div class="cols cols2 ">
+    <div class="col prod-search">
+        <h2>Item details</h2>
+
+
+        <form method="POST" id="div-btnJobExist" class="fill-color-white padding-around text-align-center" title="Advisor Note ">
+
+
+            <div class="text-size-h5 text-align-left text-weight-bold">You cannot arrange a repair while there is a current outstanding repair for this product, please check complete service for existing repair history.</div>
+            <span id="btnExistingRep" class="button rbg btn-yes">OK</span>
+
+            <div class="text-align-center span3">
+            </div>
+        </form>
+        <form action="/CustProd/ManufactureWarrantyBookRepair" method="POST" id="div-btnBookOutofWarranty" class="fill-color-white padding-around text-align-center" title="Advisor comment">
+            <input type="hidden" name="CustAplId" value="@Model.CustAplId" />
+
+            <div class="text-size-h5 text-align-left text-weight-bold">
+                Unfortunately we cannot continue to process your claim as the appliance should still be covered by its manufacturer warranty.
+                <br />
+                If you bear with me a moment
+                 I will transfer you to another team who will be able to help you with your claim. 
+                <br />
+                <strong>Advisor note</strong> – transfer customer to 0800 0929051 opt 5
+            </div>
+            <span id="OutofWarranty" class="button rbg btn-yes">Yes</span>
+            @*<span id="CancelOutofWarranty" class="button rbg btn-no">No</span>*@
+            <div class="text-align-center span3">
+            </div>
+        </form>
+
+        <form action="/CustProd/ExpiredWarrantyBookRepair" method="POST" id="div-btnBookExpiredWarranty" class="fill-color-white padding-around text-align-center" title="Advisor comment">
+            <input type="hidden" name="CustAplId" value="@Model.CustAplId" />
+
+            <div class="text-size-h5 text-align-left text-weight-bold">I am sorry I cannot continue to process your claim as the product warranty  you have provided information for is expired. If the customer believes the product is still on warranty we would need to transfer the customer across to another team by calling 0800 0929051 opt 5 and following our mismatch process. </div>
+            <span id="ExpiredWarranty" class="button rbg btn-yes">OK</span>
+
+            <div class="text-align-center span3">
+            </div>
+        </form>
+
+      @*  <form action="/CustProd/ModelMissingBookRepair" method="POST" id="div-btnModelMissingBookRepair" class="fill-color-white padding-around text-align-center" title="Advisor comment">
+            <input type="hidden" name="CustAplId" value="@Model.CustAplId" />
+
+            <div class="text-size-h5 text-align-left text-weight-bold">I am sorry I cannot continue to process your claim as the product details is missing. If the customer believes the product is still on warranty we would need to transfer the customer across to another team by calling 0800 0929051 opt 5 and following our mismatch process. </div>
+            <span id="ModelMissingBookRepair" class="button rbg btn-yes">OK</span>
+
+            <div class="text-align-center span3">
+            </div>
+        </form>*@
+        <div>
+            <table>
+                <tr>
+                    <th>Model Number</th>
+                    <td>@Model.ItemCode   </td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>@Model.Description</td>
+                </tr>
+
+                <tr>
+                    <th>Serial number</th>
+                    <td>@Model.SerialNumber</td>
+                </tr>
+
+                <tr>
+                    <th>Date of purchase</th>
+                    <td>@(Model.DateofPurchase != null ? (Model.DateofPurchase.Value.ToShortDateString() == "01/01/0001" ? "N/A" : Model.DateofPurchase.Value.ToShortDateString()) : "N/A")</td>
+                </tr>
+                <tr>
+                    <th>Agreement Number</th>
+                    <td>@(null != @Model.PolicyNumber ? @Model.PolicyNumber : "N/A")</td>
+                </tr>
+                <tr>
+                    <th>Warranty Start Date</th>
+                    <td>@(null != @Model.CONTRACTSTART ? @Model.CONTRACTSTART.Value.ToShortDateString() : "N/A")</td>
+                </tr>
+                <tr>
+                    <th>Warranty Expiry Date</th>
+                    <td>@(null != @Model.contractexpires ? @Model.contractexpires.Value.ToShortDateString() : "N/A")</td>
+                </tr>
+                <tr>
+                    <th>Policy type</th>
+                    <td>@{if (Model.PolicyNumber == null || Model.PolicyNumber == "")
+                          { @Html.Raw("No cover")
+                          }
+                          else if ((Model.PolicyNumber.Substring(Model.PolicyNumber.Length - 3) == "ESP"))
+                          {   @Html.Raw("Service Guarantee")
+                          }
+                          else if (Model.PolicyNumber.Substring(Model.PolicyNumber.Length - 3) == "RPG")
+                          {  @Html.Raw("Replacement Guarantee")
+                          }
+                          else if (Model.PolicyNumber.Substring(Model.PolicyNumber.Length - 3) == "MPI")
+                          {  @Html.Raw("Mobile phone Cover ")}
+                          else
+                          {  @Html.Raw("No cover")}
+                    }</td>
+                </tr>
+                @if (Model.PolicyNumber != null && Model.PolicyNumber.Substring(Model.PolicyNumber.Length - 3) == "RPG")
+                {
+
+    
+                    <b>@( "Mechanical Cover Starts")</b>    @Model.MechanicalCoverStarts
+                }
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="col prod-search">
+        <h2>Service details</h2>
+        <div>
+            @if (Model.jobDetailsDto.ServiceId != 0)
+            {
+                <table>
+
+                    <tr>
+                        <th>Service Number   </th>
+                        <td><b>&nbsp;<a href="~/Job/GoToDetails/?id=@Model.jobDetailsDto.ServiceId"> @Model.jobDetailsDto.ServiceId</a></b></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>@Model.jobDetailsDto.StatusText</td>
+                    </tr>
+
+                    <tr>
+                        <th>Engineer assigned</th>
+                        <td>@Model.jobDetailsDto.EngineerDisplayname</td>
+                    </tr>
+                    <tr>
+                        <th>Appointment date</th>
+                        <td>@(null != @Model.jobDetailsDto.VisitDate ? @Model.jobDetailsDto.VisitDate.Value.ToShortDateString() : "N/A") </td>
+                    </tr>
+                    <tr>
+                        <th>Repair Type</th>
+                        <td>@Model.jobDetailsDto.RepairType</td>
+                    </tr>
+
+                </table>
+    
+            }
+            else if (ViewBag.StopBookingClientModelMissing == true)
+            {
+                @Html.ActionLink("Book job", "BookClientModelMissing", "BookNewService", new { @Custaplid = @Model.CustAplId }, new { @class = "button rbg", @id = "btnBookClientModelMissing" })
+            }
+            else if (Model.CONTRACTSTART == null || Model.contractexpires == null || Model.CONTRACTSTART.Value > DateTime.Now || Model.contractexpires.Value < DateTime.Now)
+            {
+                if (ViewBag.BookJobAllWarranty == true) //  book declined jobs even for the expired warranty and manufact warranty
+                {
+@*<b> Job can not be booked .The product is manufacture warranty.</b> ;but accidentaldamage for Mobile phone are covered during manufacture period*@
+                    if (Model.CONTRACTSTART != null && Model.CONTRACTSTART.Value > DateTime.Now && !Model.PolicyNumber.EndsWith("MPI"))
+                    {
+                @Html.ActionLink("Book job", "BookOutofWarranty", "BookNewService", new { @Custaplid = @Model.CustAplId }, new { @class = "button rbg", @id = "btnBookOutofWarranty" })
+                        
+                    }
+                    else if (Model.CONTRACTSTART != null && Model.CONTRACTSTART.Value > DateTime.Now && Model.PolicyNumber.EndsWith("MPI"))
+                    {
+                @Html.ActionLink("Book job", "BookRepairShow", "CustProd", new { @Custaplid = @Model.CustAplId }, new { @class = "button rbg" })
+                    }
+
+                    else
+                    {
+                @Html.ActionLink("Book job", "BookExpiredWarranty", "BookNewService", new { @Custaplid = @Model.CustAplId }, new { @class = "button rbg", @id = "btnBookExpiredWarranty" })
+                    }
+                }
+                else
+                {
+                    if (Model.CONTRACTSTART != null && Model.CONTRACTSTART.Value > DateTime.Now)
+                    {
+                @Html.ActionLink("Book job", "BookOutofWarranty", "BookNewService", new { @Custaplid = @Model.CustAplId }, new { @class = "button rbg", @id = "btnBookOutofWarranty" })
+                    }
+                    else
+                    {
+                <b>Job can not be booked .The product is not in warranty.</b>
+                    }
+
+                }
+
+            }
+            else
+            {
+          
+                @Html.ActionLink("Book job", "BookRepairShow", "CustProd", new { @Custaplid = @Model.CustAplId }, new { @class = "button rbg" })
+            }
+
+        </div>
+    </div>
+
+
+</div>
+@if (@Model.accidentalDamageCA.Count > 0)
+{
+    <div class="cols cols2">
+        <div>
+            <h2>Accidental damage response details</h2>
+            @foreach (var item in @Model.accidentalDamageCA)
+            {
+                <table class="table-job-notes">
+                    <tr>
+                        <td>@item.Username  </td>
+                        <td>@item.Addedon</td>
+                        <td rowspan="2">@item.ADAnswered</td>
+                    </tr>
+
+                </table>
+            }
+        </div>
+    </div>
+}
+<div class="overlay">
+</div>
+<div id="divmodelmappingmissing" style="display: none" class="center">
+
+     <div class="text-size-h5 text-align-left text-weight-bold">I am sorry I cannot continue to process your claim  right now. Please call back us in few minutes<br />
+
+         Advisor note: Please inform fixzone support@fixzone.com that the model mapping is missing for the customer model
+     </div>
+           @* <span id="ModelMissingBookRepair" class="button rbg btn-yes">OK</span>*@
+
+            <div class="text-align-center span3">
+            </div>
+</div>

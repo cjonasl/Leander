@@ -2,30 +2,25 @@
 @using PagedList
 @using PagedList.Mvc
 @model Job_SearchModel
+
 @{
     ViewBag.Title = "Job search.";
 }
 
 <div class="cols cols2">
-    <div class="col2 job-search">
-        @Html.Partial("~/Views/Job/_ClientJobASearchHeader.cshtml", Model.AdvSearchCriteria)
-    </div>
-
-
     <div class="col2">
+        <h2>Not Booked Jobs</h2>
         @if (Model.SearchResults.Count > 0)
         {
             <table>
                 <thead>
-                    <tr>
                     <th>Repair No</th>
                     <th>Logged</th>
                     <th>Customer Name</th>
-                    <th>Address</th>
                     <th>Postcode</th>
                     <th>Description</th>
                     <th>Store №</th>
-                  </tr>
+                    <th>Lead Time</th>
                 </thead>
                 @foreach (var job in Model.SearchResults)
                 {
@@ -33,25 +28,23 @@
                         <td><a href="GoToDetails/@job.Id">@job.RepairNo</a></td>
                         <td>@job.Logged.ToString("dd/MM/yy")</td>
                         <td>@job.CustomerName</td>
-                        <td>@job.Address</td>
                         <td>@job.Postcode</td>
                         <td>@job.Description</td>
-                        <td>@String.Format("{0} {1}", job.StoreName, (job.StoreId == 0) ? "" : ("(" + job.StoreId.ToString() + ")"))</td>
-
+                        <td>@String.Format("{0} {1}", job.StoreName, (job.StoreId == 0) ? "" : ("(" + job.StoreId.ToString() + ")"))"</td>
+                        <td>@job.Address </td>@* .LeadTime*@
                     </tr>
                 }
             </table>
-
+	
             <div class="col2 search-show-items">
+                    
                 Showing items @Model.FirstItemIndex-@Model.LastItemIndex (@Model.TotalRecords) 
-                    @if (ViewBag.OnePageOfJobs != null)
-                    {  <span class="pull-right">
-                        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfJobs, page => Url.Action("AdvSearchByClientId", new { page }), options: PagedListRenderOptions.ClassicPlusFirstAndLast)
-                    </span>
-                    }
+                <span class="pull-right">
+                    @Html.PagedListPager( (IPagedList)ViewBag.OnePageOfJobs, page => Url.Action("FindNotBookedJobs", new { page }), PagedListRenderOptions.DefaultPlusFirstAndLast )
+                </span>
             </div>
         }
-        else if (!string.IsNullOrEmpty(Model.AdvSearchCriteria.Surname) && !string.IsNullOrEmpty(Model.AdvSearchCriteria.Postcode) || !string.IsNullOrEmpty(Model.AdvSearchCriteria.TelNo) || !string.IsNullOrEmpty(Model.AdvSearchCriteria.ServiceId) || !string.IsNullOrEmpty(Model.AdvSearchCriteria.ClientRef) || !string.IsNullOrEmpty(Model.AdvSearchCriteria.Address) || !string.IsNullOrEmpty(Model.AdvSearchCriteria.PolicyNumber))
+        else
         {
             <p class="error">No job match for this criteria</p>
         }

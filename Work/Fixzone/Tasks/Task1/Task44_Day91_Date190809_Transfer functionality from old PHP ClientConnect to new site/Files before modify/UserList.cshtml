@@ -1,0 +1,78 @@
+﻿@using ClientConnect.Process
+@using PagedList
+@using PagedList.Mvc
+
+@model ClientConnect.Models.Account.AccountsList
+@{
+    ViewBag.Title = "Admin.Users list";
+}
+
+<div class="cols cols2">
+	<div class="col2 box">
+
+		<h2>User Maintenance</h2>
+
+		@if (Model.Accounts.Count > 0)
+		{
+            <table>
+                <thead>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Job Role</th>
+                    <th>Last Login</th>
+                    <th>User Created</th>
+                    <th>Enabled</th>
+                </thead>
+                @foreach (var account in Model.Accounts)
+                {
+                    <tr>
+                        <td>
+                            <a href="GoToUserDetails/@account.UserId">@account.UserId</a>
+                        </td>
+                        <td>@account.UserName</td>
+                        <td>
+                            @if (account.UserLevel <= 3 && account.UserLevel > 0)
+                            {
+                                @ViewBag.levels[account.UserLevel - ViewBag.StartLevelValue]
+
+                            }
+                           
+                        </td>@*//*@
+                        <td>
+                            @if (account.LastLogin != DateTime.MinValue)
+                            {
+                                @account.LastLogin.ToString("dd/MM/yyyy")
+                            } 
+                            else
+                            {
+                                @:""
+                            }
+                        </td>
+                        <td>@account.UserCreated.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td class="text-align-center">
+                            @if (Convert.ToBoolean(account.Enabled))
+                            {
+                                <input id="Checkbox1" type="checkbox" disabled="disabled" checked="checked"/>
+                            }
+                            else
+                            {
+                                <input id="Checkbox1" type="checkbox"  disabled="disabled" />
+                            } 
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="col2 search-show-items">
+		        <span class="pull-right">
+		            @Html.PagedListPager( (IPagedList)ViewBag.OnePageOfUsers, page => Url.Action("UserList", new { page }), options: PagedListRenderOptions.DefaultPlusFirstAndLast )
+		        </span>
+		    </div>            
+		}
+		else
+		{
+		    <p>No users</p>
+		}
+        <a class="button rbg pull-left" href="@Url.Process(PredefinedProcess.AddUser)">Add New User</a>
+	@*	<a class="button rbg pull-left" onclick="window.open('/Diagnostic')">Diagnostics</a>*@
+	</div>
+</div>

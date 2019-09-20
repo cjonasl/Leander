@@ -1,0 +1,60 @@
+﻿@model ClientConnect.Jobs.Job_SearchModel
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Repaeted job list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="cols cols2">
+    <div class="col2">
+      
+<h2>Repeated jobs status</h2>
+         
+        
+        
+         @if (Model.SearchResults.Count > 0)
+        {
+            <table>
+                <thead>
+                    <th>Repair No</th>
+                    <th>Logged</th>
+                    <th>Customer Name</th>
+                    <th>Postcode</th>
+                    <th>Description</th>
+                    <th>Store №</th>
+                    <th>Status</th>
+                </thead>
+
+                 @foreach (var job in Model.SearchResults)
+                {
+                    <tr>
+                        <td><a href="GoToDetails/@job.Id">@job.RepairNo</a></td>
+                        <td>@job.Logged.ToString("dd/MM/yy")</td>
+                        <td>@job.CustomerName</td>
+                        <td>@job.Postcode</td>
+                        <td>@job.Description</td>
+                        <td>@String.Format("{0} {1}", job.StoreName, (job.StoreId == 0) ? "" : ("(" + job.StoreId.ToString() + ")"))</td>
+                       <td style="@(job.Status == "Waiting for Approval" ?"color:green": "color:Red" )"> @job.Status</td>
+                    </tr>
+                }
+            </table>
+             
+              <div class="col2 search-show-items">
+                    
+                Showing items @Model.FirstItemIndex-@Model.LastItemIndex (@Model.TotalRecords) 
+                 <span class="pull-right">
+                 @if (ViewBag.OnePageOfJobs != null)
+                        {
+						@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfJobs, page => Url.Action("RepeatedJobs", new { page }), PagedListRenderOptions.DefaultPlusFirstAndLast )
+						}
+                </span>
+            </div>
+        }
+        else
+        {
+            <p class="error">No job match for this criteria</p>
+        }
+    </div>
+</div>
