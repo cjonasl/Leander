@@ -1,2 +1,14 @@
 ﻿Dag 120:
 Fredag den 20 september 2019
+Jag ägnade arbetsdagen åt att gå igenom kod i task44
+(Transfer functionality from old PHP ClientConnect to
+new site) och checka in i SVN. Vijay tittade på ändringar
+som jag hade gjort i de incheckade filerna och klagade
+på att jag använt session-objektet direkt istället för
+att gå via en service samt att man måste sätta in data
+för varje ny kund/klient i ProcessDetail-tabellen istället
+för att använda någon typ av ”override teknink”, så jag
+fick också ägna en del tid åt att ändra på det. Vid
+13.00-tiden intog jag banan, smörgås och kaffe till lunch.
+Jag avslutade arbetsdagen ca. kl. 18.45 och promenerade
+hemåt.

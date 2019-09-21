@@ -1,2 +1,16 @@
 ﻿Dag 119:
 Torsdag den 19 september 2019
+Jag ägnade arbetsdagen mest åt att testa och gå igenom så
+att allt fungerar med nya PasClientConnect (task44). Jag
+fick också titta på en bug vid inloggningen i Argos. Buggen
+inträffar då en användare loggar in med ett användarnamn
+som inte existerar och ”Diagnostic” fastnar då i sidan.
+Felet berodde på att Metoden ”SignIn” i filen ”UserController.cs”
+fick felaktigt information från stored procedure ”SignIn”,
+som jag skrev, om att användaren existerar fastän den inte
+gör det (UserId ej null, men alltid ej null eftersom värdet
+togs ifrån indataparameter istället för från select-sats).
+Jag skapade task47 för buggen, korrigerade den och uppdaterade
+stored procedure ”SignIn” i live databas. Jag avslutade
+arbetsdagen ca. kl. 17.45 och promenerade till Tolworths
+tågstation och tog 18.13-tåget till Wimbledon.
