@@ -291,6 +291,7 @@ Password: The Jj-one
 
 Jira
 https://fixzone.atlassian.net/secure/BrowseProjects.jspa
+Email: jonas.leander@fixzone.com
 Password: The Jj-one
 
 IP-address live SQL-server: 109.69.232.227.1433
