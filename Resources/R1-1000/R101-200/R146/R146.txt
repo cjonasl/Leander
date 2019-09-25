@@ -1,0 +1,45 @@
+﻿146
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-24 12:38:35
+
+----- New property -----
+
+Task49_Day122_Date190924_Cast not logging in SER-1518
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task49_Day122_Date190924_Cast not logging in SER-1518
+
+----- New property -----
+
+null

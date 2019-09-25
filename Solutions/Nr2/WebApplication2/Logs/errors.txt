@@ -1,0 +1,1 @@
+Date: 2019-09-24 15:30:15.990 | Type: INFO  | Controller Home and action Daniel was called. Exception:  Stream Name: 78  

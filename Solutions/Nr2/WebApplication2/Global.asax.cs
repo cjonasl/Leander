@@ -38,6 +38,7 @@ namespace WebApplication2
 
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure();
             Log("Application_Start");
             AreaRegistration.RegisterAllAreas();
             WebApplication1.FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

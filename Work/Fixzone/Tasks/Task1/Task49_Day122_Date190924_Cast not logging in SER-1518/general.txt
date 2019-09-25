@@ -1,0 +1,647 @@
+2019-09-04 11:43:24.655 [22] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-04 12:00:32.623 [91] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-04 12:46:44.293 [80] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-04 14:00:13.117 [83] ERROR CastApplication.MvcApplication - Unhandled error on page :System.ArgumentException: The parameters dictionary contains a null entry for parameter 'statusId' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult UpdateJobStatus(Int32, Int32)' in 'CAST.Controllers.JobController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+   at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) , httpexception  ,InnerException   CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:86) (null) 
+ 
+  
+2019-09-04 15:07:45.851 [19] ERROR CastApplication.MvcApplication - Unhandled error on page :System.NullReferenceException: Object reference not set to an instance of an object.
+   at CAST.Controllers.UserController.CheckDetails() in c:\Jonas\SVN\CASTNew20190814\CastApplication\Controllers\UserController.cs:line 328
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) , httpexception  ,InnerException   CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:86) (null) 
+ 
+  
+2019-09-04 15:37:20.207 [30] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-04 15:42:57.356 [33] ERROR CastApplication.MvcApplication - Unhandled error on page :System.InvalidOperationException: No process is currently active
+   at CAST.Process.ActiveProcessesState.get_CurrentProcessState() in c:\Jonas\SVN\CASTNew20190814\CastApplication\Process\ActiveProcessesState.cs:line 27
+   at CAST.Process.ProcessNavigator.NextStep() in c:\Jonas\SVN\CASTNew20190814\CastApplication\Process\ProcessNavigator.cs:line 83
+   at CAST.Controllers.ProcessController.NextStep() in c:\Jonas\SVN\CASTNew20190814\CastApplication\Controllers\ProcessController.cs:line 50
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) , httpexception  ,InnerException   CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:86) (null) 
+ 
+  
+2019-09-04 16:26:07.066 [17] ERROR CastApplication.MvcApplication - Unhandled error on page :System.NullReferenceException: Object reference not set to an instance of an object.
+   at CAST.Controllers.UserController.CheckDetails() in c:\Jonas\SVN\CASTNew20190814\CastApplication\Controllers\UserController.cs:line 328
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) , httpexception  ,InnerException   CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:86) (null) 
+ 
+  
+2019-09-04 16:26:29.780 [43] ERROR CastApplication.MvcApplication - Unhandled error on page :System.NullReferenceException: Object reference not set to an instance of an object.
+   at CAST.Controllers.UserController.CheckDetails() in c:\Jonas\SVN\CASTNew20190814\CastApplication\Controllers\UserController.cs:line 328
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) , httpexception  ,InnerException   CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:86) (null) 
+ 
+  
+2019-09-04 16:26:32.058 [43] ERROR CastApplication.MvcApplication - Unhandled error on page :System.NullReferenceException: Object reference not set to an instance of an object.
+   at CAST.Controllers.UserController.CheckDetails() in c:\Jonas\SVN\CASTNew20190814\CastApplication\Controllers\UserController.cs:line 328
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) , httpexception  ,InnerException   CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:86) (null) 
+ 
+  
+2019-09-05 13:33:07.963 [56] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-05 13:40:43.377 [54] ERROR CastApplication.MvcApplication - Url https://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-05 13:48:32.503 [41] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-05 14:13:22.609 [30] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-05 14:21:59.643 [68] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-05 15:51:31.725 [59] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-05 16:45:42.440 [59] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-05 17:15:16.827 [35] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-05 17:20:56.285 [51] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-05 18:20:15.651 [26] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-05 19:39:01.763 [36] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-05 19:53:12.827 [66] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-05 20:22:25.280 [36] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-06 08:13:44.705 [53] ERROR CastApplication.MvcApplication - Url http://172.18.224.250/Administration/GoToUserDetailsWID1024 was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-06 09:27:15.895 [60] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-06 09:43:40.564 [57] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-06 10:19:41.675 [83] ERROR CastApplication.MvcApplication - Url http://172.18.224.250/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-06 11:22:44.153 [63] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-06 13:05:42.020 [42] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-06 17:03:41.928 [54] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-06 17:10:53.305 [16] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-06 17:53:57.259 [14] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 09:52:25.489 [25] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 12:32:02.856 [23] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 13:23:06.131 [21] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 13:44:30.925 [48] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 14:39:03.618 [37] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 16:14:53.655 [42] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 16:26:46.042 [14] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 17:50:37.435 [44] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 19:15:06.035 [38] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-07 20:36:23.173 [56] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-08 11:38:50.059 [87] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-08 12:57:34.469 [87] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-08 13:03:59.531 [95] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-08 13:06:26.034 [20] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-08 13:34:36.841 [17] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-08 13:52:23.309 [19] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-08 15:42:57.290 [12] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 10:31:00.199 [30] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 12:01:48.883 [26] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! Conversion failed when converting date and/or time from character string..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 12:06:19.392 [43] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 12:56:27.395 [51] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 13:08:47.271 [19] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 13:23:20.279 [35] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 16:07:35.441 [48] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 16:07:35.644 [51] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 16:07:48.623 [37] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 16:08:01.930 [50] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 16:08:45.549 [36] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 16:10:17.590 [35] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 16:14:29.411 [30] ERROR CastApplication.MvcApplication - Error 600: Error while job is saving! SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM..  CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:106) (null) 
+ 
+  
+2019-09-09 16:17:50.405 [30] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 16:41:41.108 [42] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-09 16:45:19.356 [26] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-10 10:59:03.074 [84] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-11 10:22:06.981 [45] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-11 10:24:14.543 [23] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-11 10:24:47.772 [30] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-11 10:33:54.711 [26] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-11 14:00:03.096 [50] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-11 14:57:47.582 [62] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-11 18:13:47.951 [31] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-12 10:42:51.307 [82] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-12 10:44:13.878 [89] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-12 12:49:59.677 [84] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-12 14:01:34.743 [62] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-12 14:07:49.380 [68] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-12 14:47:34.604 [79] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-12 17:45:57.021 [73] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 12:51:43.452 [81] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 13:50:32.021 [14] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-13 14:00:42.126 [81] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 14:32:01.922 [45] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 14:41:26.615 [55] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 15:46:40.976 [29] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 15:53:34.254 [24] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 17:04:22.411 [24] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-13 17:20:09.976 [58] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-13 17:22:50.080 [36] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-13 17:30:29.207 [26] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-13 18:48:39.006 [69] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 09:45:41.154 [78] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 09:55:27.203 [81] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-14 10:00:41.826 [70] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-14 10:12:39.072 [75] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 10:38:34.433 [68] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 11:06:18.651 [57] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 13:35:52.593 [60] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-14 13:43:45.042 [69] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 15:13:16.001 [42] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 16:02:25.948 [66] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 16:55:12.584 [45] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 18:12:15.704 [60] ERROR CastApplication.MvcApplication - Error : False.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-14 21:08:01.372 [78] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 10:21:08.141 [35] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 11:40:16.166 [32] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 11:58:37.127 [34] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 12:43:02.420 [18] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 13:03:33.018 [32] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 13:29:44.135 [27] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 14:51:11.943 [44] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 15:11:22.370 [18] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-15 15:56:05.634 [18] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 10:52:22.989 [66] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 12:42:30.146 [55] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 13:21:10.458 [55] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/User/ was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-16 13:56:50.605 [63] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 15:05:50.777 [54] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 15:43:50.592 [65] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 17:22:00.534 [63] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 17:33:12.446 [53] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-16 19:52:13.882 [67] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-17 09:55:02.339 [88] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-17 12:46:23.103 [52] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-17 19:02:08.460 [63] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-17 19:13:44.285 [45] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 08:26:56.920 [73] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 09:45:10.499 [82] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 10:49:32.944 [67] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 11:43:36.875 [63] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 11:49:18.736 [73] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 11:52:01.492 [63] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 11:58:50.870 [69] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 13:13:52.451 [76] ERROR CastApplication.MvcApplication - Url http://172.18.224.250/Administration/GoToUserDetailsWOODWASA was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-18 14:12:10.226 [51] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-18 16:05:54.490 [39] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 16:05:55.098 [80] ERROR CastApplication.MvcApplication - Error : False.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 17:13:14.292 [7] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 18:10:32.191 [54] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-18 18:49:06.887 [46] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-19 09:14:42.431 [80] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-19 09:45:44.693 [19] ERROR CastApplication.MvcApplication - Error : False.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-19 12:41:41.452 [46] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-19 14:11:18.043 [27] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-19 14:21:03.202 [83] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 09:44:14.119 [60] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 12:30:23.738 [52] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 12:44:22.399 [80] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 12:51:08.189 [85] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 13:33:50.614 [74] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 13:56:51.410 [45] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 14:26:53.035 [16] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-20 18:57:32.692 [79] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-21 08:35:38.195 [81] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-21 10:15:24.889 [38] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-21 10:30:29.414 [24] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-21 12:56:07.405 [51] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-21 15:40:04.666 [21] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-22 11:03:16.338 [67] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-22 11:46:27.436 [26] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-22 11:46:27.951 [65] ERROR CastApplication.MvcApplication - Error : False.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-22 16:35:10.333 [44] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 09:11:54.323 [69] ERROR CastApplication.MvcApplication - Error : False.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 09:29:06.838 [68] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 10:09:41.249 [84] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/Administration/EditUser was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 10:09:43.480 [87] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/Administration/EditUser was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 10:09:44.930 [67] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/Administration/EditUser was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 10:09:45.570 [84] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/Administration/EditUser was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 10:09:46.740 [84] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/Administration/EditUser was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 10:09:49.626 [81] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/Administration/EditUser was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 10:09:49.798 [76] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/Administration/EditUser was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 11:15:47.435 [76] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 11:42:46.961 [67] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 12:24:18.982 [70] ERROR CastApplication.MvcApplication - Url http://172.18.224.250/Product/ was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-23 13:13:14.254 [89] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 16:02:32.901 [86] ERROR CastApplication.MvcApplication - Exception at FindMyIPadNow() : The server was unable to process the request due to an internal error.  For more information about the error, either turn on IncludeExceptionDetailInFaults (either from ServiceBehaviorAttribute or from the <serviceDebug> configuration behavior) on the server in order to send the exception information back to the client, or turn on tracing as per the Microsoft .NET Framework SDK documentation and inspect the server trace logs. CAST.Services.FMIPActivationService.FindMyIPadNow(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\FMIPService.cs:72) (null) 
+ 
+  
+2019-09-23 16:19:08.927 [61] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 16:19:09.676 [62] ERROR CastApplication.MvcApplication - Error : False.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-23 19:19:10.724 [65] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  
+2019-09-24 09:24:25.155 [51] ERROR CastApplication.MvcApplication - Url http://hrg.fieldengineer.co.uk/browserconfig.xml was not found CastApplication.MvcApplication.Application_Error(c:\Jonas\SVN\CASTNew20190814\CastApplication\Global.asax.cs:99) (null) 
+ 
+  
+2019-09-24 10:28:12.904 [49] ERROR CastApplication.MvcApplication - Error : True.  CAST.Services.BookRepairService.SaveJob(c:\Jonas\SVN\CASTNew20190814\CastApplication\Services\BookRepairService.cs:438) (null) 
+ 
+  

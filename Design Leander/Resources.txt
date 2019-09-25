@@ -2895,3 +2895,23 @@ Task48_Day120_Date190920_Analyze Argos log in
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+146
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-24 12:38:35
+
+----- New property -----
+
+Task49_Day122_Date190924_Cast not logging in SER-1518
+
+----- New property -----
+
+Task,Fixzone

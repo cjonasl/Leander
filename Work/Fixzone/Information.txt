@@ -6,6 +6,10 @@ YPP login: https://clients.pacificagroup.co.uk/Account/SignIn
 UserId: YPPAdmin
 Psw: bigben
 
+Callcenter login: https://clients.pacificagroup.co.uk/Callcenter/SignIn
+UserId: ABC
+Psw: ABC
+
 --------------------------------------------------------
 If an error happens when book a repair, complete the
 booking in off mode and then look in the table 
@@ -260,6 +264,7 @@ Password: BON84STICKy
 Publish folder: C:\Jonas\SVN\Publish
 
 Test site Argos (server hrgweb01)
+Password: spat-X11
 http://hrg.fieldengineer.co.uk:8080/User/SignIn
 
 Tools:

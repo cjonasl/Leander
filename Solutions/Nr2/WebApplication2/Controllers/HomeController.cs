@@ -37,6 +37,9 @@ namespace WebApplication2.Controllers
         [AllowAnonymous]
         public ActionResult Daniel()
         {
+            //OBS!! To work must call: "log4net.Config.XmlConfigurator.Configure();" in Application_Start()
+            Log.File.Info("Controller Home and action Daniel was called.");
+
             return View();
         }
 
