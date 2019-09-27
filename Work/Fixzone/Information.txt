@@ -1,4 +1,7 @@
-﻿LG login: https://clients.pacificagroup.co.uk/Account/SignIn
+﻿Test PasClientConnectClient on Litmus:
+http://litmusClientconnect.fieldengineer.co.uk
+
+LG login: https://clients.pacificagroup.co.uk/Account/SignIn
 UserId: admin
 Psw: London19
 

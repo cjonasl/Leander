@@ -1,2 +1,15 @@
 ﻿Dag 122:
 Tisdag den 24 september 2019
+Jag ägnade arbetsdagen mest åt att testa och fixa
+med nya PasClientConnect (task44). Jag fick även
+bug SER-1518 (Cast not logging in) av Mark. Det gällde
+att ett användarobjekt av någon anledning inte fanns
+tillgänglig i session-objektet i en metod i samband
+med inloggningen fastän det var tilldelat innan. Jag
+antog att man gjorde en paus vid inloggningen och att
+det blev ”session time out” och jag la till kod för
+att kolla om användarobjeket finns tillgänglig och om
+så inte är fallet så görs ”redirect” till ”SignIn” (man
+får börja om helt enkelt). Vid 13.00-tiden intog jag
+kaffe och smörgås till lunch. Jag avslutade arbetsdagen
+ca. kl. 17.30 och promenerade hem. 
