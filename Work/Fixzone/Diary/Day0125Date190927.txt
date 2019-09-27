@@ -1,0 +1,13 @@
+﻿Dag 125:
+Fredag den 27 september 2019
+På förmiddagen arbetade jag med att implementera så att
+en dialog hoppas över då ett jobb annnuleras i nya
+PasClientConnect då DeploymentTarget är ”Clients” (ett
+arbete tillhörande task44). Intog medagen smörgås och
+kaffe till lunch. På eftermiddagen testade jag och ordnade
+med nya PasClientConnect. Jag fick också bug SER-1600
+(Wording on log in page) av Mark. Jag skapade task50 för
+buggen och gjorde den direkt och det gick fort eftersom
+det gällde att bara ta bort en text för ”store users” i
+samband med inloggningen. Jag avslutade arbetsdagen ca.
+kl. 17.30 och promenerade hem.

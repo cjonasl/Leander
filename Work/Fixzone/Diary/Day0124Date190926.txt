@@ -1,2 +1,12 @@
 ﻿Dag 124:
 Torsdag den 26 september 2019
+Jag ägnade arbetsdagen åt att testa och åtgärda
+fel i nya PasClientConnect. Vijay bad mig skapa en
+PasClientConnect testwebplats på ”Litmus test”, vilket
+jag gjorde. Mark började sedan testa där och han
+skickade bilder till mig på Skype på fel som han
+hittade. Vid 13.00-tiden intog jag kaffe och smörgås
+till lunch. Jag avslutade arbetsdagen drygt kl. 19.00
+och gick till ”Tesco Express” och köpte müsli och en
+banan (kostnad: 3.65 pund) och sedan till Surbiton
+med buss.

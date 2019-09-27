@@ -2915,3 +2915,23 @@ Task49_Day122_Date190924_Cast not logging in SER-1518
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+147
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-27 15:44:52
+
+----- New property -----
+
+Task50_Day125_Date190927_Cast Wording on log in page (SER-1600)
+
+----- New property -----
+
+Task,Fixzone

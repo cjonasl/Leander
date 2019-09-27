@@ -1,0 +1,45 @@
+﻿147
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-09-27 15:44:52
+
+----- New property -----
+
+Task50_Day125_Date190927_Cast Wording on log in page (SER-1600)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task50_Day125_Date190927_Cast Wording on log in page (SER-1600)
+
+----- New property -----
+
+null
