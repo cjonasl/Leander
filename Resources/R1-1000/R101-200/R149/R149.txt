@@ -1,0 +1,45 @@
+﻿149
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-14 16:18:33
+
+----- New property -----
+
+Task52_Day126_Date191014_Cast Create a new Super Admin User (AR-25)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task52_Day126_Date191014_Cast Create a new Super Admin User (AR-25)
+
+----- New property -----
+
+null

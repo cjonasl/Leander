@@ -296,6 +296,7 @@ C:\git_cjonasl\Leander\Work\Fixzone\Tasks
 Skype
 Email: jonasleanderfixzone@hotmail.com
 Password: The Jj-one
+Associated email: jonas537@hotmail.com
 
 Jira
 https://fixzone.atlassian.net/secure/BrowseProjects.jspa

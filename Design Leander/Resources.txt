@@ -2935,3 +2935,43 @@ Task50_Day125_Date190927_Cast Wording on log in page (SER-1600)
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+148
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-14 15:43:30
+
+----- New property -----
+
+Task51_Day126_Date191014_Cast logibn error (AR-24)
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+149
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-14 16:18:33
+
+----- New property -----
+
+Task52_Day126_Date191014_Cast Create a new Super Admin User (AR-25)
+
+----- New property -----
+
+Task,Fixzone
