@@ -1,0 +1,11 @@
+﻿Dag 127:
+Tisdag den 15 oktober 2019
+Jag ägnade arbetsdagen intensivt åt att få klart en
+första version av task52 (Cast Create a new Super Admin
+User). Jag blev klar ca. kl. 21.30 och mailade en video
+till Angela och Vijay om hur jag föreslår att uppgiften
+löses. Vid 13.30-tiden intog jag smörgås, banan och kaffe
+till lunch. Drygt kl. 20.00 produktionssatte jag en ny
+version av Cast (bytte ut CAST.dll), vilket Vijay bad mig
+göra. Jag avslutade arbetsdagen drygt kl. 21.30 och tog
+bussen hem.

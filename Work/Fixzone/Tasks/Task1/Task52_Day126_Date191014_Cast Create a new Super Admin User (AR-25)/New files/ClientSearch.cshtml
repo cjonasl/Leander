@@ -1,0 +1,84 @@
+﻿@using CAST.Models.Client
+@using CAST.Process
+
+@{
+    ViewBag.Title = "Client Search";
+    Layout = "~/Views/Shared/_LayoutSuperAdm.cshtml";
+}
+
+@model Client_SearchModel
+
+<div class="fill-color-blue">
+<h2>Search clients</h2>
+</div>
+
+
+<div class="fill-color-blue margin-bottom padding-around-10px">
+  <form action="/Client/ClientSearch" method="post">
+       <div style="font-size: small !important; font-weight: bold !important; margin-left: 1px !important;">
+          <div style="display: inline-block !important;"><input type="radio" name="SearchType" value="AND" @Model.SearchTypeAnd/>&nbsp;AND</div>
+          <div style="display: inline-block !important;"><input type="radio" name="SearchType" value="OR" @Model.SearchTypeOr/>&nbsp;OR</div>&nbsp;&nbsp;&nbsp;between search conditions
+       </div>
+       <br />
+       <table class="table table-bordered margin-bottom">
+          <tr>
+              <td> @Html.LabelFor(model => model.ClientID)</td><td>  @Html.EditorFor(model => model.ClientID)</td>
+              <td> @Html.LabelFor(model => model.Postcode)</td><td>  @Html.EditorFor(model => model.Postcode)</td>
+          </tr>
+          <tr>
+              <td> @Html.LabelFor(model => model.Name)</td><td>  @Html.EditorFor(model => model.Name)</td>
+              <td> @Html.LabelFor(model => model.Contact)</td><td>  @Html.EditorFor(model => model.Contact)</td>
+          </tr>
+          <tr>
+              <td> @Html.LabelFor(model => model.Location)</td><td>  @Html.EditorFor(model => model.Location)</td>
+              <td> @Html.LabelFor(model => model.ClientType)</td>
+              <td>
+                 <div style="display: inline-block !important;"><input type="radio" name="ClientType" value="Callcenter" @Model.ClientTypeCallcenter/>&nbsp;Callcenter</div>
+                 <div style="display: inline-block !important;"><input type="radio" name="ClientType" value="Store" @Model.ClientTypeStore/>&nbsp;Store</div>
+                 <div style="display: inline-block !important;"><input type="radio" name="ClientType" value="Both" @Model.ClientTypeBoth/>&nbsp;Both</div>
+              </td>
+          </tr>
+          <tr>
+            <td colspan="4"><button type="submit" class="btn-argos span1">Search</buton></td>
+          </tr>
+       </table>
+  </form>
+</div>
+
+@if (Model.ClientTable != null && Model.ClientTable.SearchResults.Count > 0)
+{
+    <table class="table table-bordered margin-bottom">
+        <thead>
+            <th>Client ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Postcode</th>
+            <th>Contact</th>
+            <th>Type</th>
+        </thead>
+        @foreach (var client in Model.ClientTable.SearchResults)
+        {
+            <tr>
+                <td><a href="/User/NewClient/@client.ClientID">@client.ClientID</a></td>
+                <td>@client.Name</td>
+                <td>@client.Location</td>
+                <td>@client.Postcode</td>
+                <td>@client.Contact</td>
+                <td>@client.Type</td>
+            </tr>
+        }
+        <tfoot>
+            <tr>
+            <td colspan="6" class="text-align-right">
+                     <div class="pager ">Showing items @Model.ClientTable.StartElem - @Model.ClientTable.EndElem (@Model.ClientTable.ElemCount) 
+                        @Html.PageLinks(Model.ClientTable.PaginatorInfo, m => Url.Action("ClientSearch", new {pageNum = m}))
+                     </div>
+            </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else if (Model.ClientTable != null)
+{
+    <p class="error">No users</p>
+}

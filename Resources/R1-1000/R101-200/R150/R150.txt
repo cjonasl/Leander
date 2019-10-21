@@ -1,0 +1,45 @@
+﻿150
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-18 14:02:29
+
+----- New property -----
+
+Task53_Day130_Date191018_Additional Help guides to be added to the CAST Portal (AR-26)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task53_Day130_Date191018_Additional Help guides to be added to the CAST Portal (AR-26)
+
+----- New property -----
+
+null

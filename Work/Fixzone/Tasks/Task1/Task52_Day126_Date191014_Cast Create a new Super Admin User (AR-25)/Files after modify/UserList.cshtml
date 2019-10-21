@@ -1,0 +1,85 @@
+﻿@using CAST.Models.Administration
+@using CAST.Process
+
+@model User_SearchModel
+
+@{
+    ViewBag.Title = "CAST.Admin.Users list";
+}
+
+<div class="fill-color-blue margin-bottom text-size-h4 text-color-white text-weight-bold padding-around">
+    User Maintenance
+</div>
+@if (Model.SearchResults.Count > 0)
+{
+    <table class="table table-bordered margin-bottom">
+        <thead>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Job Role</th>
+            <th>Last Login</th>
+            <th>User Created</th>
+            <th>Enabled</th>
+        </thead>
+        @foreach (var user in Model.SearchResults)
+        {
+            <tr>
+                <td>
+                    <a href="GoToUserDetails/@user.EmployeeID">@user.EmployeeID</a>
+                </td>
+                <td>@user.name</td>
+                <td>
+                    @if (user.Level < 3 && user.Level >= 0)
+                    {
+                        @ViewBag.levels[user.Level - ViewBag.StartLevelValue]
+                    } 
+                </td>
+                <td>
+                    @if (user.LastLogin != DateTime.MinValue)
+                    {
+                        @user.LastLogin.ToString("dd/MM/yyyy")
+                    } 
+                    else
+                    {
+                        @:""
+                    }
+                </td>
+                <td>@user.UserCreated.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                <td class="text-align-center">
+                    @if (user.Enabled)
+                    {
+                        <input id="Checkbox1" type="checkbox" disabled="disabled" checked="checked"/>
+                    }
+                    else
+                    {
+                        <input id="Checkbox1" type="checkbox"  disabled="disabled" />
+                    } 
+                </td>
+            </tr>
+        }
+        <tfoot>
+            <tr>
+                <td colspan="2">
+                    <a class="btn-argos span2" href="@Url.Process(PredefinedProcess.AddUser)">        
+                        Add new colleague
+                    </a>
+                </td>
+            <td colspan="4" class="text-align-right">
+                     <div class="pager ">Showing items @Model.StartElem - @Model.EndElem (@Model.ElemCount) 
+                        @Html.PageLinks(Model.PaginatorInfo, m => Url.Action("UserList", new {pageNum = m}))
+    
+                     </div>
+            </td>
+            </tr>
+        </tfoot>
+    </table>
+    
+    <div class="margin-top fill-color-blue padding-around">
+        <a class="btn-argos span2" onclick="window.open('/Diagnostic')" >Diagnostic</a>
+    </div>
+    
+}
+else
+{
+    <p class="error">No users</p>
+}

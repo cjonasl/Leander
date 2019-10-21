@@ -1,0 +1,18 @@
+﻿Dag 129:
+Torsdag den 17 oktober 2019
+Jag ägnade arbetsdagen mest åt implementeringen av en
+superadministratör i Cast (task52 och Jirapunkt AR-25).
+Skickade en snaggitvideo till Jemma Cantwell om hur jag
+hade tänk att det ska fungera och hon var nöjd och vi
+bestämde att jag kl. 20.00 denna dag uppdaterar live
+webplats med implementeringen. Vid 13.00-tiden tog jag
+lunch och intog medtagen smörgås och kaffe från Fixzone.
+Jag hade lite tid över och studerade två exempel på
+”Factory pattern” som jag hittade på Internet. Klockan
+17.30 gick jag till restaurang ”Thai Secret” på 110 Ewell
+road och intog lunch (massaman curry kyckling med ris,
+vaniljglass i ”Dragon ball” till efterrätt och till dryck
+två glas rödvin och mineralvatten och det kostade 30.50
+pund). Efteråt gick jag tillbaka till Fixzone och
+produktionssatte superadmin-implementeringen i Cast.
+Jag åkte hem med buss ca. kl. 21.30.

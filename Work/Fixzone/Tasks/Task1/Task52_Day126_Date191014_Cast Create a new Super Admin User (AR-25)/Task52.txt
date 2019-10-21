@@ -1,1 +1,30 @@
 ﻿Task52:
+
+New fles:
+C:\Jonas\SVN\CAST\CastApplication\Controllers\ClientController.cs
+C:\Jonas\SVN\CAST\CastApplication\Holder\SessionHolder.cs
+C:\Jonas\SVN\CAST\CastApplication\Models\Client\Client_SearchModel.cs
+C:\Jonas\SVN\CAST\CastApplication\Models\Client\Client_SessionModel.cs
+C:\Jonas\SVN\CAST\CastApplication\Models\Client\ClientSearchResult.cs
+C:\Jonas\SVN\CAST\CastApplication\Services\Service.cs
+C:\Jonas\SVN\CAST\CastApplication\Services\IService.cs
+C:\Jonas\SVN\CAST\CastApplication\Services\ClientService.cs
+C:\Jonas\SVN\CAST\CastApplication\Views\Client\ClientSearch.cshtml
+C:\Jonas\SVN\CAST\CastApplication\Repositories\ClientRepository.cs
+C:\Jonas\SVN\CAST\CastApplication\Views\Shared\_LayoutSuperAdm.cshtml
+CheckCondition.sql
+ClientList.sql
+Insert new process.sql
+
+Files modified:
+C:\Jonas\SVN\CAST\CastApplication\Controllers\DataController.cs
+C:\Jonas\SVN\CAST\CastApplication\Controllers\UserController.cs
+C:\Jonas\SVN\CAST\CastApplication\Process\PredefinedProcess.cs
+C:\Jonas\SVN\CAST\CastApplication\Roles\CheckStoreFilter.cs
+C:\Jonas\SVN\CAST\CastApplication\Services\UserService.cs
+C:\Jonas\SVN\CAST\CastApplication\ViewModels\User\UserStoreInfo.cs
+C:\Jonas\SVN\CAST\CastApplication\Views\Shared\_Layout.cshtml
+C:\Jonas\SVN\CAST\CastApplication\CastApplication.csproj
+C:\Jonas\SVN\CAST\CastApplication\Views\Administration\UserList.cshtml
+UsersList.sql
+GetUserStoreInfo.sql

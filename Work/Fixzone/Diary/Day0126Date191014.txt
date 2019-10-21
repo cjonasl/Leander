@@ -1,2 +1,16 @@
 ﻿Dag 126:
 Måndag den 14 oktober 2019
+Fick punkt AR-24 av Vijay rörande inloggningsfel i
+Argos. Jag skapade task51 för uppgiften. Det gällde
+fallet då en användare loggar in första gången och
+inga cookies finns och fel lösenord anges. Då ska
+antal misslyckade inloggningsförsök öka från 0 till
+1, men det blir istället direkt till 2, vilket jag
+kunde åtgärda med tillägg av en sats så att inte
+”diagnostic” körs. Vid 13.00-tiden tog jag lunch och
+intog smörgås, banan och kaffe. Jag arbetade sedan
+med AR-25 (skapade task52 för den), vilket gällde
+tillägg av en ”super administrator” i Argos som kan
+”låsa upp” utestängda managers, dvs. sätta om Enabled
+från 0 till 1. Jag avslutade arbetsdagen ca. kl. 17.30
+och promenerade till Surbiton.

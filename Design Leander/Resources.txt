@@ -2975,3 +2975,23 @@ Task52_Day126_Date191014_Cast Create a new Super Admin User (AR-25)
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+150
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-18 14:02:29
+
+----- New property -----
+
+Task53_Day130_Date191018_Additional Help guides to be added to the CAST Portal (AR-26)
+
+----- New property -----
+
+Task,Fixzone
