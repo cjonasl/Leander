@@ -1,0 +1,45 @@
+﻿151
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-21 14:36:59
+
+----- New property -----
+
+Task54_Day131_Date191021_New ClientConnect mark mandatory fields with red star
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task54_Day131_Date191021_New ClientConnect mark mandatory fields with red star
+
+----- New property -----
+
+null

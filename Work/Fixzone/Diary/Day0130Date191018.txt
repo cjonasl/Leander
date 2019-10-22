@@ -1,2 +1,32 @@
 ﻿Dag 130:
 Fredag den 18 oktober 2019
+Jag fick dessvärre veta att live Cast webbplats inte
+fungerade som den skulle efter min produktionssättning
+där igår kväll av superadmin-implementeringen i task52!
+Samtliga användare fick superadmin-rollen!! Jag backade
+genast tillbaka till föregående version och började
+fundera på orsaken till felet och kom ganska snabbt på
+att det berodde på att jag hade glömt att uppdatera stored
+procedure SignIn. Jag uppdaterade den och gjorde
+produktionssättning igen och testade och nu fungerade
+det. Jag skrev ett mail till Argos att det hela nu
+fungerade och berättade vad felet innan berodde på och
+bad om ursäkt. Jemma Cantwell ringde till Mark och
+undrade om man kan återställa ett konto i Cast och Mark
+frågade mig och jag svarade att jag kan undersöka saken
+och sedan skriva ett mail till Jemma. Jag undersökte
+saken och fann att man kan återställa ett konto genom
+att bara sätta lösenordet till blankt, vilket jag skrev
+till Jemma och jag bifogade också en snaggit-video på
+förfarandet. Jag tog lunch ca. kl. 13.00. Kaffet hos
+Fixzone var slut så jag gick till ”Tesco Express” och
+köpte en egen burk samt även en liten stycksak choklad.
+Jag intog därefter medtagen smörgås och banan, kaffe
+samt stycksaken choklad som jag köpte. Fick mail från
+Angela med en ny uppgift att göra, ”Additional Help
+guides to be added to the CAST Portal” (AR-26). Jag
+skapade task53 för uppgiften och gjorde den snabbt (det
+gällde att bara lägga till 12 pdf användardokument i
+Cast portal). I slutet av arbetsdagen repeterade/studerade
+jag ClientConnect-koden. Jag avslutade arbetsdagen ca.
+kl. 17.30 och promenerade hemåt.

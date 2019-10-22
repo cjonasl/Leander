@@ -146,7 +146,7 @@ sudoku.copySudokuBoard = function (sudokuBoardFrom, sudokuBoardTo) {
     }
 }
 
-sudoku.copyCandidates = function(candidatesFrom, candidatesTo) {
+sudoku.copyCandidates = function (candidatesFrom, candidatesTo) {
     for (var row = 1; row <= 9; row++) {
         for (var column = 1; column <= 9; column++) {
             for (var i = 0; i < 10; i++) {

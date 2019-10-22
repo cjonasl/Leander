@@ -25,7 +25,7 @@
     }
 
     .languages > a:hover {
-      color: deeppink;
+      color: deeppink !important;
       text-decoration: underline;
     }
 
@@ -38,7 +38,7 @@
     }
 
     .code {
-      padding: 25px;
+      padding: 20px;
       border: 1px solid black;
       margin-bottom: 50px;
     }
@@ -61,10 +61,6 @@
       float: right;
     }
 
-    img {
-      margin-top: 15px;
-    }
-
     h3 {
       font-family: Arial;
     }
@@ -72,77 +68,118 @@
 
 </head>
 <body style="margin: 0px;">
-  <div class="leftMenu">
-    <h3 style="margin-top: 2px; font-family: Arial;">Methods/functions:</h3>
-    <a href="#h3CopyList">CopyList</a>
-    <a href="#h3CopySudokuBoard">CopySudokuBoard</a>
-    <a href="#h3GetInputSudokuBoard">GetInputSudokuBoard</a>
-    <a href="#h3NumberIsAloneCandidate">NumberIsAloneCandidate</a>
-    <a href="#h3RemoveNumberIfItExists" >RemoveNumberIfItExists</a>
-    <a href="#h3ReturnNumberOfOccurenciesOfNumber" >ReturnNumberOfOccurenciesOfNumber</a>
-    <a href="#h3ReturnTwoDimensionalDataStructure">ReturnTwoDimensionalDataStructure</a>
-    <a href="#h3ReturnThreeDimensionalDataStructure">ReturnThreeDimensionalDataStructure</a>
-    <a href="#h3ReturnSquareCellToRowColumnMapper" >ReturnSquareCellToRowColumnMapper</a>
-    <a href="#h3ReturnSudokuBoardsAsString" >ReturnSudokuBoardsAsString</a>
-    <a href="#h3SimulateOneNumber" >SimulateOneNumber</a>
-    <a href="#h3InitCandidates" >InitCandidates</a>
-    <a href="#h3TryFindNumberToSetInCellWithCertainty" >TryFindNumberToSetInCellWithCertainty</a>
-    <a href="#h3UpdateCandidates" >UpdateCandidates</a>
-    <a href="#h3ValidateSudokuBoard" >ValidateSudokuBoard</a>
-    <a href="#h3PrintSudokuBoard" >PrintSudokuBoard</a>
-    <a href="#h3Run">Run</a>
-  </div>
-  <div class="main">
-    <h3 id="h3CopyList" style="margin-top: 5px;">CopyList</h3>
-    <div id="divCopyList" class="languages" data-active="CSharp">
-      <a id="aCopyListCSharp" href="javascript: setImagePath('CopyList', 'CSharp')" style="color: black; font-weight: bold;  font-family: Arial; text-decoration: none;">C#</a>
-      <a id="aCopyListJavaScript" href="javascript: setImagePath('CopyList', 'JavaScript')">JavaScript</a>
-      <a id="aCopyListPython" href="javascript: setImagePath('CopyList', 'Python')">Python</a>
-    </div> 
-    <div class="code" style="min-height: 170px !important;"><img id="imgCopyList" src="" /></div>
-
-    <h3 id="h3CopySudokuBoard">CopySudokuBoard</h3>
-    <div id="divCopySudokuBoard" class="languages" data-active="CSharp">
-      <a id="aCopySudokuBoardCSharp" href="javascript: setImagePath('CopySudokuBoard', 'CSharp')" style="color: black; font-weight: bold; font-family: Arial; text-decoration: none;">C#</a>
-      <a id="aCopySudokuBoardJavaScript" href="javascript: setImagePath('CopySudokuBoard', 'JavaScript')">JavaScript</a>
-      <a id="aCopySudokuBoardPython" href="javascript: setImagePath('CopySudokuBoard', 'Python')">Python</a>
+    <div id="divLeftMenu" class="leftMenu" data-active="CopyList">
+        <h2 style="margin-top: 2px; font-family: Arial">Functions:</h2>
+        <a id="aLeftMenuCopyList" href="#h3CopyList" onclick="handleLeftMenu('CopyList')" style="color: blue; font-size: larger;">CopyList</a>
+        <a id="aLeftMenuCopySudokuBoard" href="#h3CopySudokuBoard" onclick="handleLeftMenu('CopySudokuBoard')">CopySudokuBoard</a>
+        <a id="aLeftMenuCopyCandidates" href="#h3CopyCandidates" onclick="handleLeftMenu('CopyCandidates')">CopyCandidates</a>
+        <a href="#h3GetInputSudokuBoard">GetInputSudokuBoard</a>
+        <a href="#h3NumberIsAloneCandidate">NumberIsAloneCandidate</a>
+        <a href="#h3RemoveNumberIfItExists">RemoveNumberIfItExists</a>
+        <a href="#h3ReturnNumberOfOccurenciesOfNumber">ReturnNumberOfOccurenciesOfNumber</a>
+        <a href="#h3ReturnTwoDimensionalDataStructure">ReturnTwoDimensionalDataStructure</a>
+        <a href="#h3ReturnThreeDimensionalDataStructure">ReturnThreeDimensionalDataStructure</a>
+        <a href="#h3ReturnSquareCellToRowColumnMapper">ReturnSquareCellToRowColumnMapper</a>
+        <a href="#h3ReturnSudokuBoardsAsString">ReturnSudokuBoardsAsString</a>
+        <a href="#h3SimulateOneNumber">SimulateOneNumber</a>
+        <a href="#h3InitCandidates">InitCandidates</a>
+        <a href="#h3TryFindNumberToSetInCellWithCertainty">TryFindNumberToSetInCellWithCertainty</a>
+        <a href="#h3UpdateCandidates">UpdateCandidates</a>
+        <a href="#h3ValidateSudokuBoard">ValidateSudokuBoard</a>
+        <a href="#h3PrintSudokuBoard">PrintSudokuBoard</a>
+        <a href="#h3Run">Run</a>
     </div>
-    <div class="code" style="min-height: 220px !important;"><img id="imgCopySudokuBoard" src="" /></div>
+    <div class="main">
+        <h3 id="h3CopyList" style="margin-top: 5px;">CopyList</h3>
+        <div id="divCopyList" class="languages" data-active="CSharp">
+            <a id="aCopyListCSharp" href="javascript: setImagePath('CopyList', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aCopyListJavaScript" href="javascript: setImagePath('CopyList', 'JavaScript')">JavaScript</a>
+            <a id="aCopyListPHP" href="javascript: setImagePath('CopyList', 'PHP')">PHP</a>
+            <a id="aCopyListPython" href="javascript: setImagePath('CopyList', 'Python')">Python</a>
+            <a id="aCopyListRuby" href="javascript: setImagePath('CopyList', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 155px; margin-top: 3px;"><img id="imgCopyList" src="" /></div>
+
+        <h3 id="h3CopySudokuBoard">CopySudokuBoard</h3>
+        <div id="divCopySudokuBoard" class="languages" data-active="CSharp">
+            <a id="aCopySudokuBoardCSharp" href="javascript: setImagePath('CopySudokuBoard', 'CSharp')" style="color: #6600ff; font-weight: bold; font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aCopySudokuBoardJavaScript" href="javascript: setImagePath('CopySudokuBoard', 'JavaScript')">JavaScript</a>
+            <a id="aCopySudokuBoardPHP" href="javascript: setImagePath('CopySudokuBoard', 'PHP')">PHP</a>
+            <a id="aCopySudokuBoardPython" href="javascript: setImagePath('CopySudokuBoard', 'Python')">Python</a>
+            <a id="aCopySudokuBoardRuby" href="javascript: setImagePath('CopySudokuBoard', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 200px; margin-top: 3px;"><img id="imgCopySudokuBoard" src="" /></div>
+
+        <h3 id="h3CopyCandidates">CopyCandidates</h3>
+        <div id="divCopyCandidates" class="languages" data-active="CSharp">
+            <a id="aCopyCandidatesCSharp" href="javascript: setImagePath('CopyCandidates', 'CSharp')" style="color: #6600ff; font-weight: bold; font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aCopyCandidatesJavaScript" href="javascript: setImagePath('CopyCandidates', 'JavaScript')">JavaScript</a>
+            <a id="aCopyCandidatesPHP" href="javascript: setImagePath('CopyCandidates', 'PHP')">PHP</a>
+            <a id="aCopyCandidatesPython" href="javascript: setImagePath('CopyCandidates', 'Python')">Python</a>
+            <a id="aCopyCandidatesRuby" href="javascript: setImagePath('CopyCandidates', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 217px; margin-top: 3px;"><img id="imgCopyCandidates" src="" /></div>
 
     </div>
 
   <script src="http://www.sudokusolver.com/jquery-3.4.1.js"></script>
 
   <script>
-    window.sudokoBasePath = "http://www.sudokusolver.com/";
+      window.sudokoBasePath = "http://www.sudokusolver.com/";
+
+      function handleLeftMenu(method) {
+          var currentActive = $("#divLeftMenu").attr("data-active");
+
+          if (method !== currentActive) {
+              $("#aLeftMenu" + currentActive).css(
+                  {
+                      "color": "black",
+                      "font-size": "medium"
+                  }
+              );
+
+              $("#aLeftMenu" + method).css(
+                  {
+                      "color": "blue",
+                      "font-size": "larger"
+                  }
+              );
+
+              $("#divLeftMenu").attr("data-active", method);
+          }
+      }
 
     function setImagePath(method, target) {
       var currentActive = $("#div" + method).attr("data-active");
 
-      $("#a" + method + currentActive).css({
-        "color": "blue",
-        "font-weight": "normal",
-        "font-family": "Times New Roman",
-        "text-decoration": "underline"
-      });
+        if (target !== currentActive) {
+            $("#a" + method + currentActive).css({
+                "color": "blue",
+                "font-weight": "normal",
+                "font-family": "Times New Roman",
+                "text-decoration": "underline",
+                "font-size": "medium"
+            });
 
-      $("#a" + method + target).css({
-        "color": "black",
-        "font-weight": "bold",
-        "font-family": "Arial",
-        "text-decoration": "none"
-      });
+            $("#a" + method + target).css({
+                "color": "#6600ff",
+                "font-weight": "bold",
+                "font-family": "Arial",
+                "text-decoration": "none",
+                "font-size": "larger"
+            });
 
-      $("#img" + method).attr("src", window.sudokoBasePath + target + "/" + method + ".png");
-      $("#div" + method).attr("data-active", target);
+            $("#img" + method).attr("src", window.sudokoBasePath + target + "/" + method + ".png");
+            $("#div" + method).attr("data-active", target);
+        }
     }
 
     $(document).ready(function () {
-      $("#imgCopyList").attr("src", window.sudokoBasePath + "CSharp/CopyList.png");
-      $("#imgCopySudokuBoard").attr("src", window.sudokoBasePath + "CSharp/CopySudokuBoard.png");
+        $("#imgCopyList").attr("src", window.sudokoBasePath + "CSharp/CopyList.png");
+        $("#imgCopySudokuBoard").attr("src", window.sudokoBasePath + "CSharp/CopySudokuBoard.png");
+        $("#imgCopyCandidates").attr("src", window.sudokoBasePath + "CSharp/CopyCandidates.png");
+      });
 
-
-    });
   </script>
 </body>
 </html>

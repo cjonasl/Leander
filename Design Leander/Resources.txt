@@ -2995,3 +2995,23 @@ Task53_Day130_Date191018_Additional Help guides to be added to the CAST Portal (
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+151
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-21 14:36:59
+
+----- New property -----
+
+Task54_Day131_Date191021_New ClientConnect mark mandatory fields with red star
+
+----- New property -----
+
+Task,Fixzone

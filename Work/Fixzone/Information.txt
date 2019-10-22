@@ -1,4 +1,9 @@
-﻿Test PasClientConnectClient on Litmus:
+﻿--COLLATE Database_Default
+SELECT @ID = _id
+FROM SAEDIClient
+WHERE SAEDIID = @SAEDIID COLLATE Database_Default AND ClientType = 'Transfer'
+
+Test PasClientConnectClient on Litmus:
 http://litmusClientconnect.fieldengineer.co.uk
 
 LG login: https://clients.pacificagroup.co.uk/Account/SignIn
