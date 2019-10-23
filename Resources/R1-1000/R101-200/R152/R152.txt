@@ -1,0 +1,45 @@
+﻿152
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-22 15:38:34
+
+----- New property -----
+
+Task55_Day132_Date191022_New ClientConnect remove restriction on amending the Customer Address and Contact Information
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task55_Day132_Date191022_New ClientConnect remove restriction on amending the Customer Address and Contact Information
+
+----- New property -----
+
+null

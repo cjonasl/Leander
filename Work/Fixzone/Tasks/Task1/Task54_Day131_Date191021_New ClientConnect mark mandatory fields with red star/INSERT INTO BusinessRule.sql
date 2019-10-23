@@ -35,10 +35,10 @@ INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
 VALUES('CustomerPage_Country_Is_Mandatory', 0, 'false', -1)
 
 INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
-VALUES('CustomerPage_MobileTel_Is_Mandatory', 1, 'true', -1)
+VALUES('CustomerPage_Tel1_Is_Mandatory', 1, 'true', -1)
 
 INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
-VALUES('CustomerPage_LandlineTel_Is_Mandatory', 1, 'true', -1)
+VALUES('CustomerPage_Tel2_Is_Mandatory', 1, 'true', -1)
 
 INSERT INTO BusinessRule([Key], [Checked], [Value], [Clientid])
 VALUES('CustomerPage_Email_Is_Mandatory', 1, 'true', -1)

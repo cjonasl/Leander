@@ -1,0 +1,1047 @@
+/* ============================================================
+    Colour
+============================================================ */
+
+.rbg {background: #e63517;}
+.rbgmiddle {background: #e63517;}
+
+.bbg {background: #000}
+.gbg {background: #999}
+
+.header,
+.header a { color: #000}
+.disableClick{
+    pointer-events: none;
+}
+.blink_me {
+  animation: blinker 1s linear infinite;
+  color:red;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+/* ============================================================
+    Typography
+============================================================ */
+.clientlogo {
+   height:40px;
+    width: 80px;
+}
+.msg,
+.error {
+	font-size: 1.0em;
+	font-weight: bold;
+	/*white-space: nowrap;*/
+    margin-right: 2em;
+}
+.msg {
+	font-style: italic;
+	color: #999
+}
+
+.error {
+    color: #e63517;
+    margin-right: 0;
+}
+.success {
+	color: green
+}
+.foot-nav {
+	color: #fff
+}
+.footer p {
+	color: #fff;
+	font-size: 1em;
+	padding: 0.5em;
+	margin: 0
+}
+
+/* ============================================================
+    Images
+============================================================ */
+
+.logo img {
+	width: 25%;
+	float: left
+}
+
+/* ============================================================
+    Navigation
+============================================================ */
+
+.nav ul { float: right; font-weight: 600}
+.hdr {
+	float: left;
+	display: inline;
+	width: 33.3%
+}
+.hdr .rbg {
+	float: left;
+	margin-left: 0
+}
+.hdr .button {
+	margin-bottom: 5px;
+}
+.vrsn {
+	color: #999
+}
+
+.showreportlist {
+	width: 50%
+}
+.search-show-items .button {
+	float: right
+}
+
+/* ============================================================
+    Modules
+============================================================ */
+
+.ui-widget-overlay {
+	background: #333;
+    opacity: 0.3;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+.reveal-modal {
+     
+   
+    /*margin:30px auto 0;*/
+   
+    position:absolute;
+    left: 50%;
+  top: 50%;
+  /*margin-left: -400px;
+    margin-top: -40px;*/ 
+}
+.footer .col2 {
+	background: #000;
+}
+.LabelTd {
+    width: 25%;
+}
+.prod-search input,
+.job-search input {
+display: inline;
+float: left;
+}
+.prod-search input[type="text"],
+.prod-search input[type="password"],
+.prod-search input[type="email"],
+.prod-search textarea,
+.prod-search select,
+.job-search input[type="text"],
+.job-search input[type="password"],
+.job-search input[type="email"],
+.job-search textarea,
+.job-search select {
+margin: .2em 1em 1em 1em;
+font-size: 110%;
+}
+.prod-search input[type="text"]:focus,
+.prod-search input[type="password"]:focus,
+.prod-search input[type="email"]:focus,
+.prod-search textarea:focus,
+.prod-search select:focus,
+.job-search input[type="text"]:focus,
+.job-search input[type="password"]:focus,
+.job-search input[type="email"]:focus,
+.job-search textarea:focus,
+.job-search select:focus {
+margin: .2em 1em 1em 1em;
+}
+.prod-search .button,
+.job-search .button {
+display: inline;
+float: left;
+clear: right
+}
+.ui-dialog {
+	background: #fff;
+	border: 2px solid #e63517;
+    padding: 1em;
+}
+	.popup .msg {
+		font-size: 1.618em;
+		color: #e63517;
+		font-weight: 600	
+	}
+.foot-actions .col2 {
+	border-top: 1px solid #999;
+	margin-top: 1.618em;
+	padding-top: 2em;
+}
+.alt-products h2 { background: #000}
+
+.box	{
+	background: #fff;
+	outline: 1px solid #e8e8e8;
+	min-height: 150px;
+	padding-bottom: 2em
+}
+.note	{ 
+	font-size: .9em;
+	margin-left: 1em;
+	margin-right: 1em;
+	display: block;
+	clear: both
+}
+	.note span	{ 
+		color: #e63517
+	}
+.job-status h2 { background: #e63517; margin-bottom: 0}
+.job-status .col2 {margin-bottom: 0}
+.stat-no 	{
+	font-size: 300%;
+	font-weight: 600;
+	display: block;
+	margin-top: .7em
+}
+.status {
+	text-align: center
+}
+.status h2 {
+	text-align: left
+}
+
+/*---tables---*/
+
+.table-jewellery-watch-care-center rbg {
+	float: left
+}
+.table-jewellery-watch-care-center td {
+	width: 50%
+}
+.table-job-detail-info span {
+	/*float: right;*/
+	margin-top: -30px;
+}
+.showreportlist {
+	width: 40%;
+	float: right;
+}
+.table-job-notes input {
+	width:90%
+}
+.table-product-details-services .button {
+	float: left
+}
+.table-user-sign-in td,
+.table-user-detail-info td {
+	border-bottom: 0px
+}
+.customer-info td,
+.contact-info td,
+.product-info td,
+.repair-info td,
+.jewellery-centre td,
+.table-create-job-info td,
+.table-user-detail-info td {
+	font-size: 120%;
+	font-weight: 600
+}
+.table-create-job-info td {
+	width: 33.3%
+}
+.table-create-job-info .wide input {
+	width: 50%
+}
+.table-user-detail-info label,
+.table-user-detail-info span {
+	font-size: 100%
+}
+.table-product-details td {
+	white-space: nowrap
+}
+.table-product-details .title {
+	width: 20%
+}
+.job-status table {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0
+}
+	.job-status td {
+	    border: 0
+	}
+table span {
+	font-size:2.5em;
+	margin-bottom: .3em
+}
+.table-job-status-list tr:nth-child(odd) {
+	background: #f5f5f5;
+	color: #000;
+}
+.table-job-statuses a {
+	font-weight: 600;
+	color: #000;
+	text-transform: uppercase;
+	border: 0;
+	padding: 0
+}
+	.table-job-statuses td {
+		text-align: left;
+	    vertical-align:middle;
+	    font-size: 1.618em;
+	    font-weight: 600;
+	    color: #000;
+	    text-transform: uppercase
+	}
+	.table-job-statuses span {
+		color: #e63517;
+		clear: both;
+		display: block
+	}
+	.table-job-statuses tr {
+		border-bottom: 1px solid #bbb;
+		padding-bottom: 3em
+	}
+.status-count {
+    font-size: 4em!important
+}
+
+/*---report---*/
+.report-window
+{
+    height: 450px;
+    width: 99%;
+    text-align: center;
+    z-index: 1;
+}
+.report-view {
+    width: 100%;
+    text-align: center;
+}
+.report-view iframe {
+    height: 450px;
+    width: 99%;
+    text-align: center;
+}
+.map-view {
+    width: 100%;
+    height: 400px;    
+    text-align: center;
+}
+
+/*---job statuses---*/
+#job-status-info {
+    width: 100%;
+    /*height: 100px;*/
+}
+
+#job-status-info .statuses-list {
+font-size: .45em;
+    width: 95%;
+    border-right: none;
+    border-bottom :none;
+    line-height: 2.5em
+}
+.Reject-button {
+font-size: .5em;
+    width:70%;
+    border-right: none;
+   
+    line-height: 2.5em;border-bottom :none;
+}
+.Query-button {
+font-size: .5em;
+    width:15%;
+    border-right: none; border-bottom:none;
+    line-height: 2.5em
+}
+#job-status-info .cancel-btn {
+    border-left: none;
+    width: 5%;
+}
+#job-status-info .job-status-future, #job-status-info .job-status-passed {        
+    background-position: left top;    
+    background-repeat: no-repeat;
+}
+#job-status-info .job-status-future {    
+    background-image: url('/Content/Icons/chevron_NotFill.png'); 
+}
+#job-status-info .job-status-passed {    
+    font-weight: bold;
+    background-image: url('/Content/Icons/chevron_Fill.png'); 
+}
+#job-status-info .job-chevron-content {
+    behavior: url('/Content/PNGFixForIE6/iepngfix.htc');
+    background-position: left top;
+    position: relative;
+    float: left;
+    width: 110px;
+    height: 55px;
+    top: 5px;
+    white-space: normal;
+}
+#job-status-info .job-chevron-content .status-name {
+    position: absolute;
+    left: 17%;
+    top: 15%;
+    width: 70%;
+    height: 70%;
+}
+#job-status-info .job-status-chevron-0 {        
+    left: 0px;
+}
+#job-status-info .job-status-chevron-1 {
+    left: -15px;
+}
+#job-status-info .job-status-chevron-2 {
+    left: -30px;
+}
+#job-status-info .job-status-chevron-3 {
+    left: -45px;
+}
+#job-status-info .job-status-chevron-4 {
+    left: -60px;
+}
+#job-status-info .job-status-chevron-5 {
+    left: -75px;
+}
+#job-status-info .job-status-chevron-6 {
+    left: -90px;
+}
+#job-status-info .job-status-chevron-7 {
+    left: -105px;
+}
+#job-status-info .job-status-chevron-8 {
+    left: -120px;
+}
+#job-status-info #job-cancel-show-form {
+    position: relative;
+    left: 87%;    
+}
+
+/* ============================================================
+    Forms
+============================================================ */
+ .table-Mobile-job-info input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select {
+        display: inline !important; 
+    }
+	form {
+		margin-bottom: 1em;
+		font-size: 1.218em	
+	 }
+	fieldset {
+		margin-bottom: 1em;
+		padding-bottom: 1em;
+		 }
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select {
+		border: 1px solid #ccc;
+		padding: 6px 4px;
+		outline: none;
+		-moz-border-radius: 2px;
+		-webkit-border-radius: 2px;
+		border-radius: 2px;
+		margin: 0;
+		display: block;
+		margin: 0;
+		background: #fff;
+		width: 70%
+		 }
+	select {
+		/* padding: 0; */ }
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="email"]:focus,
+	textarea:focus {
+		border: 1px solid #aaa;
+ 		color: #000;
+ 		font-size: 110%;
+ 		margin-left: 0;
+ 		-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		box-shadow:  0 0 3px rgba(0,0,0,.2); }
+	textarea {
+		min-height: 60px; }
+	label,
+	legend {
+		display: inline;
+		font-weight: bold;
+		font-size: 0.618em;
+		line-height: 1em;
+		color: #333
+	}
+	select {
+		 }
+	input[type="checkbox"] {
+		display: inline; }
+	label span,
+	legend span {
+		font-weight: normal;
+		}
+
+/* ============================================================
+    Buttons
+============================================================ */
+
+.rbg {
+	float: right;
+	margin-left: 1em
+}
+.rbgmiddle {
+	display: inline-block;
+	/*margin-left: 1em*/
+}
+	a.button,
+	button,
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"] {
+	  padding: 0px 12px;
+	  -webkit-border-radius: 12px;
+      border-radius: 12px;
+      border: 0;
+	  color: #fff;
+	  display: inline-block;
+	  font-size: 11px;
+	  font-weight: bold;
+	  text-decoration: none;
+	  text-transform: uppercase;
+	  cursor: pointer;
+	  margin-bottom: 0;
+	  margin-left: 0;
+	  line-height: 28px;
+	  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	  white-space: nowrap;}
+
+	a.rbg:hover,
+	a.bbg:hover,
+	input[type="submit"]:hover,
+	input[type="reset"]:hover,
+	input[type="button"]:hover {
+		background: #000;
+		opacity: 0.6;
+}
+
+  a.button:active,
+  button:active,
+	input[type="submit"]:active,
+	input[type="reset"]:active,
+	input[type="button"]:active {
+		background: #999;
+	}
+
+.foot-actions .button { margin-left: 1em}
+	
+/* ============================================================
+    Icon fonts
+============================================================ */
+
+.med	{ font-size: 250%}
+.lrg	{ font-size: 500%}
+.arrow {
+    font-size: 1em!important
+}
+
+@font-face {
+	font-family: "ui-icons";
+	src:url("fonts/ui-icons.eot");
+	src:local("ui-icons"),
+		url("/Content/css/fonts/ui-icons.eot") format("opentype"),
+		url("/Content/css/fonts/ui-icons.svg") format("svg"),
+		url("/Content/css/fonts/ui-icons.woff") format("woff"),
+		url("/Content/css/fonts/ui-icons.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: "ui-icons";
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"]:before {
+*/
+.icon-storecontact-centre-activity:before, .icon-book-repair:before, .icon-user:before, .icon-reporting:before, .icon-awaiting-customer-collection:before, .icon-home:before, .icon-search:before, .icon-freespares:before, .icon-contact-centre-activity:before, .icon-repair-centre:before, .icon-edit:before, .icon-print:before, .icon-collection-booked:before, .icon-back:before, .icon-note:before, .icon-call-customer-product-ready:before, .icon-add:before, .icon-chargeable-spares:before, .icon-save:before, .icon-collection-booking-required:before, .icon-textmsg:before, .icon-email:before, .icon-free-spares-enquiry:before, .icon-chargeable-additional-service:before, .icon-cancel:before, .icon-arrow:before, .ui-icon-closethick:before {
+	font-family: 'ui-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	color: inherit
+}
+.icon-storecontact-centre-activity:hover, .icon-book-repair:hover, .icon-user:hover, .icon-reporting:hover, .icon-awaiting-customer-collection:hover, .icon-home:hover, .icon-search:hover, .icon-freespares:hover, .icon-contact-centre-activity:hover, .icon-repair-centre:hover, .icon-edit:hover, .icon-print:hover, .icon-collection-booked:hover, .icon-back:hover, .icon-note:hover, .icon-call-customer-product-ready:hover, .icon-add:hover, .icon-chargeable-spares:hover, .icon-save:hover, .icon-collection-booking-required:hover, .icon-textmsg:hover, .icon-email:hover, .icon-free-spares-enquiry:hover, .icon-chargeable-additional-service:hover, .icon-cancel:hover, .icon-arrow:hover, .ui-icon-closethick:hover {
+	cursor: pointer
+}
+.icon-storecontact-centre-activity:before {
+	content: "\e000";
+}
+.icon-book-repair:before {
+	content: "\e001";
+}
+.icon-user:before {
+	content: "\e002";
+}
+.icon-reporting:before {
+	content: "\e003";
+}
+.icon-awaiting-customer-collection:before {
+	content: "\e004";
+}
+.icon-home:before {
+	content: "\e005";
+}
+.icon-search:before {
+	content: "\e006";
+	color: #fff;
+	font-size: 2em;
+	line-height: 2em
+}
+.icon-freespares:before {
+	content: "\e007";
+}
+.icon-contact-centre-activity:before {
+	content: "\e008";
+}
+.icon-repair-centre:before {
+	content: "\e009";
+}
+.icon-edit:before {
+	content: "\e00a";
+}
+.icon-print:before {
+	content: "\e00b";
+}
+.icon-collection-booked:before {
+	content: "\e00c";
+}
+.icon-back:before {
+	content: "\e00d";
+}
+.icon-note:before {
+	content: "\e00e";
+}
+.icon-call-customer-product-ready:before {
+	content: "\e00f";
+}
+.icon-add:before {
+	content: "\e010";
+}
+.icon-chargeable-spares:before {
+	content: "\e011";
+}
+.icon-save:before {
+	content: "\e012";
+}
+.icon-collection-booking-required:before {
+	content: "\e013";
+}
+.icon-textmsg:before {
+	content: "\e014";
+}
+.icon-email:before {
+	content: "\e015";
+}
+.icon-free-spares-enquiry:before {
+	content: "\e016";
+}
+.icon-chargeable-additional-service:before {
+	content: "\e017";
+}
+.icon-cancel:before {
+	content: "\e018";
+}
+.icon-arrow:before {
+	content: "\e019";
+}
+
+.ui-icon-closethick {
+	float: right;
+	color: #fff
+}
+.ui-icon-closethick:before {
+	content: "\e018";
+	color: #e63517
+}
+
+.hide {
+    display: none !important;
+}
+
+.image-map-size {
+    width: 400px !important;
+    height: 400px !important;
+}
+
+.btn-glyph-search {
+    background-color: #999;
+}
+
+textarea {
+    resize: none !important;
+}
+
+.display-inline-block {
+    display: inline-block !important;
+}
+
+.loading-indicator {
+    width: 400px !important;
+    height: 400px !important;
+    position: absolute !important;
+    top: 33% !important;
+    left: 40% !important;
+    z-index: 10;
+}
+
+#parent_popup {
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#popup { 
+  background: #fff;
+  width: 520px;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border: 10px solid #ddd;
+  position: relative;
+  /*--CSS3 ???? ??? ?????--*/
+  -webkit-box-shadow: 0px 0px 20px #000;
+  -moz-box-shadow: 0px 0px 20px #000;
+  box-shadow: 0px 0px 20px #000;
+  /*--CSS3 ??????????? ????--*/
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+   border-radius: 10px;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.no-wrap {
+    white-space: normal !important;
+}
+
+
+/*---date time picker*/
+.table-job-notes .date {
+    width:15%;
+}
+.table-job-notes .name {
+    width:15%;
+}
+.ui-datepicker {
+	width: 22em;
+	padding: .2em .2em 0;
+	display: none;
+    border: 2px solid #e63517;
+    background-color: #FFFFFF;
+    z-index: 0;
+    position: relative;
+}
+
+.ui-datepicker .ui-state-default, .ui-widget-header .ui-state-default, .ui-datepicker .ui-datepicker-header {
+    border: 1px solid #d3d3d3;
+    background: #CCCCCC;
+    font-weight: normal;
+    color: #555555;
+    font-weight: bold;
+    font-size: 1.8em !Important;
+}
+
+.ui-datepicker .ui-datepicker-current-day .ui-state-active {
+    background-color: #e63517;
+    color: #000000;
+    font-weight: bold;
+}
+.ui-datepicker .ui-datepicker-week-end {
+    color: #e63517;
+}
+
+.ui-datepicker .ui-datepicker-other-month {
+    font-weight: normal;
+    background: #ffffff;
+}
+
+.ui-datepicker .ui-priority-secondary {
+    font-weight: normal;
+    background: #ffffff;
+}
+
+.ui-datepicker .ui-datepicker-next .ui-icon-circle-triangle-e {
+    background-position: center center;
+    background-image: url('/Content/Icons/ui-icons_next.png');
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    top: 40%;
+    left: 40%;
+}
+
+.ui-datepicker .ui-datepicker-prev .ui-icon-circle-triangle-w {
+    background-position: center center;
+    background-image: url('/Content/Icons/ui-icons_prev.png');
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    top: 40%;
+    left: 40%;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    background-color: #000000;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    color: #ffffff;
+}
+.ui-datepicker-title {
+    font-size: .7em !important;
+}
+
+
+
+
+
+.ui-datepicker .ui-datepicker-header {
+	position: relative;
+	padding: .2em 0;
+}
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next { 
+	position: absolute;
+	top: 2px;
+	width: 1.8em;
+	height: 1.8em;
+    border: none;
+ }
+
+.ui-datepicker .ui-datepicker-prev-hover,
+.ui-datepicker .ui-datepicker-next-hover {
+	top: 1px;
+}
+.ui-datepicker .ui-datepicker-prev {
+	left: 2px;
+}
+.ui-datepicker .ui-datepicker-next {
+	right: 2px;
+}
+.ui-datepicker .ui-datepicker-prev-hover {
+	left: 1px;
+}
+.ui-datepicker .ui-datepicker-next-hover {
+	right: 1px;
+}
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+	display: block;
+	position: absolute;
+	left: 50%;
+	margin-left: -8px;
+	top: 50%;
+	margin-top: -8px;
+}
+.ui-datepicker .ui-datepicker-title {
+	margin: 0 2.3em;
+	line-height: 1.8em;
+	text-align: center;
+}
+.ui-datepicker .ui-datepicker-title select {
+	font-size: 1em !important;
+	margin: 1px 0;
+}
+.ui-datepicker select.ui-datepicker-month-year {
+	width: 100%;
+}
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year {
+	width: 49%;
+}
+
+select.ui-datepicker-year {
+    display: inline !important;
+    font-size: .3em !important;
+}
+.ui-datepicker table {
+	width: 100%;
+	font-size: .5em !important;
+	border-collapse: collapse;
+	margin: 0 0 .4em;
+}
+.ui-datepicker th {
+	padding: .7em .3em;
+	text-align: center;
+	font-weight: bold;
+	border: 0;
+}
+.ui-datepicker td {
+	border: 0;
+	padding: 1px;
+}
+.ui-datepicker td span,
+.ui-datepicker td a {
+	display: block;
+	padding: .2em;
+	text-align: right;
+	text-decoration: none;
+}
+.ui-datepicker .ui-datepicker-buttonpane {
+	background-image: none;
+	margin: .7em 0 0 0;
+	padding: 0 .2em;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 0;
+}
+.ui-datepicker .ui-datepicker-buttonpane button {
+	float: right;
+	margin: .5em .2em .4em;
+	cursor: pointer;
+	padding: .2em .6em .3em .6em;
+	width: auto;
+	overflow: visible;
+}
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+	float: left;
+}
+
+.ui-datepicker-trigger {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    left: 10px;
+    top: 5px;
+    display: none;
+}
+
+.icon-calendar {
+    width: 25px !important;
+    height: 25px !important;
+    position: relative;
+    left: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.icon-trigger .readonly {
+    display: none;
+}
+
+.datepicker {
+    display: inline !important;
+}
+
+.ui-dialog-titlebar {
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.ui-dialog-buttonset .ui-button {
+    top: -20px;
+    position: relative;
+	
+}
+
+.ui-dialog-buttonsetaligncenter  {
+    top: 10px !important;
+    position: relative;
+	background: #F00 !important;
+	left:50%;
+}
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.ui-dialog {
+    position: absolute;
+    left: 40%;
+    top: 40%;
+}
+
+.progress-in-backgroung {
+    background-image: url('../Images/loading.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.color-black {
+    color: black;   
+}
+
+.border-bottom-none {
+    border-bottom: none;
+}
+
+.width-150px {
+    width: 150px;
+}
+
+.background-black {
+    background-color: #000000;
+}
+
+.morelink, .morelink .less {
+    font-size: small;
+}
+
+.overlay {
+        background: #e9e9e9 url("/Content/Images/loading.gif") center center no-repeat;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .center {
+        margin: auto;
+        width: 50%;
+      
+        padding: 10px;
+    }
+
+.clientCSS39 img {
+  width: 50%;
+  float: left
+}
+
+.clientCSS818 img {
+  width: 50%;
+  float: left
+}

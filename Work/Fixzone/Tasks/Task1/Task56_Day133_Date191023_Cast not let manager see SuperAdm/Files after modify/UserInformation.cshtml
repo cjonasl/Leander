@@ -1,0 +1,190 @@
+﻿@using System.Web;
+@using System.Web.Optimization
+@using System.Web.Mvc;
+@using System.Collections.Generic;
+@using CAST.Properties;
+@model CAST.Models.Administration.AdministrationUserModel
+@{
+    ViewBag.Title = "CAST. User Details.";
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/user-info-js")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            DialogInit("#confirm-dialog-delete-user", 400, null, null, null, false, false);
+
+            $("#user-delete-confirm-show").click(function () {
+                DialogShow("#confirm-dialog-delete-user");
+            });
+
+            $("#user-detail-edit-activate-btn").click(function () {
+                var form = $("#user-info-form");
+                var inputs = form.find("input,textarea,select");
+                inputs.removeAttr("readonly disabled");
+                inputs.removeClass("readonly");
+                HideElement("#user-delete-confirm-show");
+                HideElement("#user-detail-edit-activate-btn");
+                ShowElement("#user-detail-edit-deactivate-btn");
+                ShowElement("#user-detail-edit-save-btn");
+            });
+
+            $("#user-detail-edit-deactivate-btn").click(function () {
+                RefreshPage();
+            });
+
+            $("#user-detail-edit-save-btn").click(function () {
+                $("#user-info-form").submit();
+            });
+
+            $("#btn-delete-user-no").click(function () {
+                DialogClose("#confirm-dialog-delete-user");
+            });
+
+            $("#btn-delete-user-yes").click(function () {
+                var userid = $("#UserId").val();
+                if (userid != null) {
+                    $.ajax({
+                        url: "/Administration/DeleteUser",
+                        async: false,
+                        type: "POST",
+                        data: { userId: userid },
+                        success: function (data) {
+                            if (data) {
+                                $("#delete-user-success").html("User was deleted.");
+                            }
+                            else {
+                                $("#delete-user-error").html("User was not deleted.");
+                            }
+                            HideElement("#btn-delete-user-yes");
+                            HideElement("#btn-delete-user-no");
+                            ShowElement("#btn-delete-user-ok");
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+    @{
+        if ((ViewBag.IsEditMode != null) && (ViewBag.IsEditMode))
+        {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#user-detail-edit-activate-btn").click();
+            })
+        </script>
+        }
+    }
+}
+@using (Html.BeginForm("UserInformation", "Administration", FormMethod.Post, new { @id = "user-info-form" }))
+{
+    <table class="table table-bordered table-user-detail-info">
+        <thead>
+            <th colspan="2">User Information</th>
+        </thead>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.UserId)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.UserId, new { @class = "input readonly", @readonly = "readonly" })
+                <div class="error">@Html.ValidationMessageFor(model => model.UserId)</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.Name)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.Name, new { @class = "input readonly", @readonly = "readonly" })
+                <div class="error">@Html.ValidationMessageFor(model => model.Name)</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.UserLevel)</td>
+            <td class="field-value">
+                @if (Model.LevelsOfAccess != null)
+                {
+                    if (HttpContext.Current.Session["IsSuperAdm"] == null)
+                    {
+                        IList<SelectListItem> items = new List<SelectListItem>();
+
+                        int count = Settings.Default.StartValueForAccessLevel;
+                        for (int i = 1; i < Settings.Default.LevelsOfAccess.Count; i++)
+                        {
+                            items.Add(new SelectListItem {Value = count.ToString(), Text = Settings.Default.LevelsOfAccess[i]});
+                            count++;
+                        }
+                        Model.LevelsOfAccess = items;
+                    }
+
+                    @Html.DropDownListFor((model => model.UserLevel), (Model.LevelsOfAccess), new { @class = "select readonly text-color-black", @disabled = "disabled" })
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">Enabled</td>
+            <td class="field-value">
+                @Html.CheckBoxFor(model => model.IsEnabled, new { @class = "readonly text-color-black", @disabled = "disabled" })
+            </td>
+        </tr>
+       
+           <tr>
+            <td class="field-name">Password</td>
+            <td class="field-value">
+                <input type="password" class = "input readonly" readonly value="@Model.Password" name="Password"  />
+                <div class="error">@Html.ValidationMessageFor(model => model.Password)</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">Date of Birth</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.Day, new { @class = "input readonly", @readonly = "readonly" })/
+                @Html.TextBoxFor(model => model.Month, new { @class = "input readonly", @readonly = "readonly" })/
+                @Html.TextBoxFor(model => model.Year, new { @class = "input readonly", @readonly = "readonly" })
+                <div class="error">@Html.ValidationMessageFor(model => model.Day)</div>
+                <div class="error">@Html.ValidationMessageFor(model => model.Month)</div>
+                <div class="error">@Html.ValidationMessageFor(model => model.Year)</div>
+            </td>
+        </tr>
+      @* <tr>
+            <td class="field-name">@Html.LabelFor(model => model.ReminderQuestion)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.ReminderQuestion, new { @class = "input readonly", @readonly = "readonly" })
+                <div class="error">@Html.ValidationMessageFor(model => model.ReminderQuestion)</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.ReminderAnswer)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.ReminderAnswer, new { @class = "input readonly", @readonly = "readonly" })
+                <div class="error">@Html.ValidationMessageFor(model => model.ReminderAnswer)</div>
+            </td>
+        </tr>*@
+        @if (ViewBag.resultMsg != null)
+        {
+            <tr>
+                <td colspan="2" class="success">
+                    @(new HtmlString(ViewBag.resultMsg))
+                </td>
+            </tr>
+        }
+        @if (ViewBag.newUserSavedMsg != null)
+        {
+            <tr>
+                <td colspan="2" class="success">
+                    @(new HtmlString(ViewBag.newUserSavedMsg))
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2" class="text-align-center padding-around">
+                <input type="button" value="Save" id="user-detail-edit-save-btn" class="btn-argos span1 text-align-center hide" />
+                <input type="button" value="Edit" id="user-detail-edit-activate-btn" class="btn-argos span1 text-align-center" />
+                <input type="button" value="Cancel" id="user-detail-edit-deactivate-btn" class="btn-argos span1 text-align-center hide" />
+                <input type="button" value="Delete" id="user-delete-confirm-show" class="btn-argos span1 text-align-center" />
+            </td>
+        </tr>
+    </table>
+}
+
+@Html.Partial("/Views/ConfirmDialog/ConfirmDeleteUser.cshtml")

@@ -1,0 +1,239 @@
+﻿@using System.Web.Optimization
+@model ClientConnect.ViewModels.BookNewService.CustomerPageModel
+
+@{
+    ViewBag.Title = "Customer details.";
+}
+
+@section Scripts{
+    @Scripts.Render("~/scripts/addresses-js")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //var btnList = [buttons.back_BtnId, buttons.home_BtnId, buttons.signOut_BtnId];
+            //$.each(btnList, function (indx) {
+            //    $(btnList[indx]).click(function (e) {
+            //        targetUrl = $(btnList[indx]).attr("href");
+            //        e.preventDefault();
+            //        var unsavedInfoDialog = new Dialog(new DefaulDialogSettings().confirmUnsavedInfo);
+
+            //        unsavedInfoDialog.buttons([{
+            //                text: 'Cancel',
+            //                "class": 'bbg',
+            //                click: function() {
+            //                    unsavedInfoDialog.close();
+            //                }
+            //            }, {
+            //                text: 'Ok',
+            //                "class": 'rbg',
+            //                href: '',
+            //                click: function() {
+            //                    window.location.href = targetUrl;
+            //                }
+            //            }]);
+            //        unsavedInfoDialog.show();
+            //    });
+            //});
+
+            
+            
+
+            text_MakeCapitalLetter('input[id="Surname"]');
+            text_MakeCapitalLetter('input[id="Forename"]');
+            text_MakeAllCapitalLetters('input[id="Postcode"]');
+
+            $("#postcode-lookup-btn").click(function() {
+                var postcode = $("#Postcode").val();
+                $.ajax({
+                    url: "/Address/FindAddresses",
+                    async: false,
+                    type: "POST",
+                    data: { postcode: postcode },
+                    success:
+                        function(result) {
+                            $("#organizations-address-list").html(result);
+                        
+                            $("#addresses-list").change();
+                        }
+                });
+            });
+        });
+    </script>
+}
+
+
+@using (Html.BeginForm("CustomerPage", "BookNewService", FormMethod.Post, new { @id = "customer-form" }))
+{
+<div class="cols cols2">
+    <div class="col2 box">
+      
+       <div style="clear: both"> <h5 style="float: right;color:red">@ViewBag.ErrorMessage</h5>
+    <h2 >Book standard repair</h2>
+   
+</div>
+               @if (ViewBag.CustomerLogged != null && ViewBag.CustomerLogged)
+             {<h2 style="background:none;color:black">Please review your address details and update it if it is changed.</h2>
+             }
+        <table class="table-create-job-info">
+            @*---client info---*@
+         @if(Model.RetailClientList.Count>0)
+         { 
+             
+             <tr>
+                <td style="font-weight:800">
+                  <b> Retail Client</b>
+                    
+                </td>
+                <td></td>
+                <td>   @Html.DropDownListFor(x => x.RetailClient, Model.RetailClientList, new { @class = "select", tabindex = 165 })</td>
+
+            </tr>
+         }
+             @if (ViewBag.ShowAccountNumber)
+             {  <tr>
+                <td style="font-weight:800" >@*rowspan="3"*@
+                  <b>  Account number</b>
+                    
+                </td><td></td>
+                <td>  @Html.TextBoxFor(x=>x.CLIENTCUSTREF, new { @class = "input", tabindex =20 , @maxlength="10"}) 
+                      @Html.ValidationMessageFor(x=>x.CLIENTCUSTREF, null, new { @class = "error" })</td>
+
+            </tr>
+             }
+        </table>
+        <table class="table-create-job-info" id="BookTable">
+            @*---customer info---*@
+            @Html.HiddenFor(x=>x.CustomerId)
+            <tr>
+                <td rowspan="3">
+                    Customer
+                    <br/><span class="msg">all fields are mandatory</span>
+                </td>
+                <td>Title</td>
+                <td>
+                    <select id = "Title" name="Title" class = "select">
+                        @foreach (var item in Model.TitleList)
+                        {
+                            <option value="@item.Value" @(Model.Title==item.Text?"selected":"")>@item.Text</option>
+                        }                
+                    </select>
+                    @Html.ValidationMessageFor(x=>x.Title, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Forename</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Forename, new { @class = "input", tabindex =20 })
+                    @Html.ValidationMessageFor(x => x.Forename, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Surname</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Surname, new { @class = "input", tabindex =30 })
+                    @Html.ValidationMessageFor(x => x.Surname, null, new { @class = "error" })
+                </td>
+            </tr>
+            @*---address info---*@
+            <tr>
+                <td rowspan="7">
+                    Address
+                    <br/><span class="msg">all fields are mandatory</span>
+                </td>
+                <td>Postcode</td>
+                <td class="wide">
+                    <button type="button" class="button rbg" id="postcode-lookup-btn" title = "Find addresses by postcode" tabindex =50>Find address</button>
+                    <input type="text" name="Postcode" id="Postcode" value="@(string.IsNullOrEmpty(Model.Postcode)?Model.Postcode:Model.Postcode.Trim())" class="input" tabindex =40/>
+                    <div id="organizations-address-list"></div>
+                    @Html.ValidationMessageFor(x => x.Postcode, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Address line 1</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Addr1, new { @class = "input", @id="address-line1", tabindex =120 })
+                    @Html.ValidationMessageFor(x => x.Addr1, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Address line 2</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Addr2, new { @class = "input", @id="address-line2", tabindex =130 })
+                    @Html.ValidationMessageFor(x => x.Addr2, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Address line 3</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Addr3, new { @class = "input", @id="address-line3", tabindex =140 })
+                    @Html.ValidationMessageFor(x => x.Addr3, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Town</td>
+                <td>
+                    @Html.TextBoxFor(x => x.Town, new { @class = "input", @id = "Town", tabindex =150 })
+                    @Html.ValidationMessageFor(x => x.Town, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>County</td>
+                <td>
+                    @Html.TextBoxFor(x => x.County, new { @class = "input", @id = "County" , tabindex =160})
+                    @Html.ValidationMessageFor(x => x.County, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>
+                    @Html.DropDownListFor(x => x.Country, Model.CountryList, new { @class = "select", tabindex =165 })
+                    @Html.ValidationMessageFor(x => x.Country, null, new { @class = "error" })
+                </td>
+            </tr>
+        
+            @*---contact info---*@
+            <tr>
+                <td rowspan="4">
+                    Contact
+                    <br/><span class="msg">at least one field</span>
+                </td>
+                <td>Mobile number</td>
+                <td>
+                    @Html.TextBoxFor(model => Model.MobileTel, new { @class = "input", tabindex =170 })
+                    @Html.ValidationMessageFor(model => Model.MobileTel, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Landline number</td>
+                <td>@Html.TextBoxFor(model => Model.LandlineTel, new { @class = "input" , tabindex =180})
+                    @Html.ValidationMessageFor(model => Model.LandlineTel, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Email address</td>
+                <td>@Html.TextBoxFor(model => Model.Email, new { @class = "input" , tabindex =190,autocomplete = "off" })
+                 
+                    @Html.ValidationMessageFor(model => Model.Email, null, new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Preferred method</td>
+                <td>
+                    @Html.DropDownListFor(x => x.ContactMethod, Model.ContactMethodList, new { @class = "select", tabindex =10 })
+                  
+
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+               <span  class="error">@ViewBag.ErrorMessage </span>      <input class="button rbg" id="saveCustomerInfo" type="submit" value="Next" title="Save customer info and go to nex step" tabindex =210/>
+                </td>
+            </tr>
+        
+        </table>
+        <input type="hidden" value="@Model.Organization" name="Organization" id="address-organization"/>
+        <input type="hidden" value="@Model.Department" name="Department" id="address-department"/>
+        @Html.HiddenFor(x=>x.CustomerId)
+    </div>
+</div>
+}

@@ -1,1 +1,13 @@
 ﻿Task54:
+
+Modify the file:
+GetBusinessRuleList.sql
+C:\AAAAA5\CallCenterClientConnect\Content\css\custom.css
+C:\AAAAA5\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+C:\AAAAA5\CallCenterClientConnect\Models\Customer\CustomerSessionModel.cs
+C:\AAAAA5\CallCenterClientConnect\Services\BookNewServiceService.cs
+C:\AAAAA5\CallCenterClientConnect\Services\HomeService.cs
+C:\AAAAA5\CallCenterClientConnect\Validation\BookNewService_CustomerPageValdation.cs
+C:\AAAAA5\CallCenterClientConnect\ViewModels\BookNewService\CustomerPageModel.cs
+C:\AAAAA5\CallCenterClientConnect\ViewModels\Home\BusinessRule.cs
+C:\AAAAA5\CallCenterClientConnect\Views\BookNewService\CustomerPage.cshtml

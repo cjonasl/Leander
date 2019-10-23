@@ -1,0 +1,82 @@
+﻿@model CAST.Models.Administration.AdministrationUserModel
+
+@{
+    ViewBag.Title = "CAST. Add new colleague.";
+}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            DialogInit("#confirm-dialog-add-user", 400, null, null, null, false, false);
+        });
+    </script>
+
+@if ((ViewBag.IsSavedSuccess != null) && (ViewBag.IsSavedSuccess))
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            DialogShow("#confirm-dialog-add-user");
+        });
+    </script>
+}
+
+@using (Html.BeginForm("AddColleague", "Administration", FormMethod.Post))
+{
+    <table class="table table-bordered table-user-detail-info">
+        <thead>
+            <td colspan="2">Add Colleague</td>
+        </thead>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.UserId)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.UserId, new {@class = "input"})
+                <div class="error">@Html.ValidationMessageFor(model => model.UserId)</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.Name)</td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.Name, new {@class = "input"})
+                <div class="error">@Html.ValidationMessageFor(model => model.Name)</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="field-name">@Html.LabelFor(model => model.UserLevel)</td>
+            <td class="field-value">
+                @Html.DropDownListFor((model => model.UserLevel), (Model.LevelsOfAccess), new { @class = "select text-color-black" })
+            </td>
+        </tr>
+         <tr>
+            <td class="field-name">Date of Birth <span class="hint textIndent">DD/MM/YYYY</span></td>
+            <td class="field-value">
+                @Html.TextBoxFor(model => model.Day, new {@class = "input"})/
+                @Html.TextBoxFor(model => model.Month, new {@class = "input"})/
+                @Html.TextBoxFor(model => model.Year, new {@class = "input"})
+                <div class="error">@Html.ValidationMessageFor(model => model.Day)</div>
+                <div class="error">@Html.ValidationMessageFor(model => model.Month)</div>
+                <div class="error">@Html.ValidationMessageFor(model => model.Year)</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-align-center">
+                <input type="submit" class="btn-argos span1" id="create-user-btn" value="Create"/>
+            </td>
+        </tr>
+        @if(ViewBag.IsSavedSuccess != null)
+        {
+            if (!ViewBag.IsSavedSuccess)
+            {
+                <tr>
+                    <td colspan="2" class="error">User not saved.</td>
+                </tr>
+            }
+            else
+            {   <tr>
+                    <td colspan="2" class="success">User saved.</td>
+                </tr>
+            }
+        }
+       
+    </table>
+}
+
+@*@Html.Partial("/Views/ConfirmDialog/ConfirmAddUser.cshtml")*@

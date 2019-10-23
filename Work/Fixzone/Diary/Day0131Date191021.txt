@@ -1,2 +1,15 @@
 ﻿Dag 131:
 Måndag den 21 oktober 2019
+Direkt när jag kom in på kontoret meddelade Angela att Vijay var
+sjuk. Dessutom kom inte heller Mark till jobbet idag så jag satt
+ensam i rummet under dagen. Jag ville börja arbeta med hantering
+av obligatoriska fält i nya generiska ClientConnect (jag skapade
+task54 för det), men ”fzserver” var ej tillgänglig så jag kunde
+inte köra lokal ClientConnect eftersom databasen ligger där. Jag
+frågade Kath om ”fzserver” och han svarade att den snart ska vara
+igång igen. Under tiden jag väntade, och det blev hela förmiddagen,
+arbetade jag med min Sudoku-webbplats. Drygt kl. 13.00 tog jag lunch
+och intog smörgås, banan och kaffe, och därefter arbetade jag med
+obligatoriska fält i nya generiska ClientConnect. Jag avslutade
+arbetsdagen ca. kl. 17.45 och gick till M&S och handlade oliver,
+sallad och äpplen (kostnad: 7.25 pund) och sedan promenad hem.

@@ -1,0 +1,195 @@
+﻿@model ClientConnect.ViewModels.BookNewService.CustomerPageModel
+
+@{
+    ViewBag.Title = "Confirm Customer info";
+}
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#updateCustomerInfo').click(function (e) {
+
+
+                e.preventDefault();
+                window.location.href = "/BookNewService/ChangeCustomerAddress";
+            })
+           
+            if('@ViewBag.Collection' == '') {
+                $('#updateCustomerInfo').hide();
+            }
+          @*  if ('@ViewBag.AddressChangeNotAllowed' == 'True') {
+
+                $('#divAddressChange').dialog({
+                    height: 350,
+                    width: 500,
+                    modal: true,
+                    title: "Adviser Instructions:", closeIcon: '',
+                    refreshPageAfterClose: false,
+                    buttons: [{
+                        text: "Next",
+                        "class": "rbg",
+                        click: function () {
+                            $('#divAddressChange').dialog('close');
+
+
+                        }
+                    }]
+                })
+            }*@
+        })
+
+    </script>
+}
+
+@using (Html.BeginForm("CustomerPreviewPage", "BookNewService", FormMethod.Post, new { @id = "customer-form" }))
+{ 
+ 
+    <div class="cols cols2">
+        <div class="col2 box">
+            <h2>Customer Address Confirmation</h2>
+@if(ViewBag.Collection!=null)
+{    <h2 style="background: none; color: black">Please verify the address for collection is as below if not click change address.</h2> 
+    @("Note – this will only be an instruction on where to attend for collection and will not change the customers main address information. ")
+}else
+            {<h2 style="background: none; color: red;font-size:smaller; text-align: center;" >I am sorry we can't change the customer address, Please contact your retailer to change the address .</h2>
+            }
+            <table class="table-create-job-info">
+                @*---client info---*@
+
+                <tr>
+                    <td style="font-weight: 800">@*rowspan="3"*@
+                        <b>Account number</b>
+
+                    </td>
+                    <td></td>
+                    <td>@Model.CLIENTCUSTREF
+                    </td>
+
+                </tr>
+            </table>
+            <table class="table-create-job-info" id="BookTable">
+                @*---customer info---*@
+                @Html.HiddenFor(x => x.CustomerId)
+                <tr>
+                    <td rowspan="3">Customer
+                    <br />
+                        <span class="msg">all fields are mandatory</span>
+                    </td>
+                    <td>Title</td>
+                    <td>
+                        @Model.Title
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Forename</td>
+                    <td>
+                        @Model.Forename
+                    </td>
+                </tr>
+                <tr>
+                    <td>Surname</td>
+                    <td>
+                        @Model.Surname
+                    </td>
+                </tr>
+                @*---address info---*@
+                <tr>
+                    <td rowspan="7">Address
+                    <br />
+                        <span class="msg">all fields are mandatory</span>
+                    </td>
+                    <td>Postcode</td>
+                    <td>
+                        @Model.Postcode
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address line 1</td>
+                    <td>
+                        @Model.Addr1
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address line 2</td>
+                    <td>
+                        @Model.Addr2
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address line 3</td>
+                    <td>
+                        @Model.Addr3
+                    </td>
+                </tr>
+                <tr>
+                    <td>Town</td>
+                    <td>
+                        @Model.Town
+                    </td>
+                </tr>
+                <tr>
+                    <td>County</td>
+                    <td>
+                        @Model.County
+                    </td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>
+                        @Model.Country
+                    </td>
+                </tr>
+
+                @*---contact info---*@
+                <tr>
+                    <td rowspan="4">Contact
+                    <br />
+                        <span class="msg">at least one field</span>
+                    </td>
+                    <td>Mobile number</td>
+                    <td>
+                        @Model.MobileTel
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Landline number</td>
+                    <td>@Model.LandlineTel
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email address</td>
+                    <td>@Model.Email
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Preferred method</td>
+                    <td>
+
+                        @Model.ContactMethodList.SingleOrDefault(x => x.Value == Model.ContactMethod.ToString()).Text
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <span class="error">@ViewBag.ErrorMessage </span>
+                        <input class="button rbg" id="updateCustomerInfo" type="submit" value="Change Address" title="Update customer address" tabindex="210" />
+                        <input class="button rbg" id="saveCustomerInfo" type="submit" value="Next" title="Save customer info and go to next step" tabindex="210" />
+                    </td>
+                </tr>
+
+            </table>
+            <input type="hidden" value="@Model.Organization" name="Organization" id="address-organization"/>
+            <input type="hidden" value="@Model.Department" name="Department" id="address-department"/>
+            @Html.HiddenFor(x => x.CustomerId)
+        </div>
+    </div>
+}
+

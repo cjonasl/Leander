@@ -81,6 +81,8 @@ Database: fzserver/PasClientConnect
 Use ClientId = 11
 URL OnlineBookingWS: http://litmus.fieldengineer.co.uk/fzonlinebooking/fzonlinebooking.dll/soap/IFzOnlineBooking
 DBISAM database: fzserver, F:\DBISAM\dbsys\dbsys.exe
+User name: admin
+Password: BON84STICKy
 
 exec dbo.GetJobsListByKey 39, 'UnReadClientNotes', 10000, 1
 exec dbo.GetJobsListByKey 39, 'WAQueryAnswered', 10000, 1
