@@ -1,1 +1,6 @@
 ﻿Task56:
+
+Modify the following files:
+C:\Jonas\SVN\CASTDeploy20191015\CastApplication\Views\Administration\UserInformation.cshtml
+C:\Jonas\SVN\CASTDeploy20191015\CastApplication\Views\Administration\UserList.cshtml
+C:\Jonas\SVN\CASTDeploy20191015\CastApplication\Views\Administration\AddColleague.cshtml

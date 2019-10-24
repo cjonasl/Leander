@@ -1,0 +1,45 @@
+﻿154
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-23 15:25:12
+
+----- New property -----
+
+Task57_Day133_Date191023_Additional Help guides to be added to the CAST Portal (SER-1993)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task57_Day133_Date191023_Additional Help guides to be added to the CAST Portal (SER-1993)
+
+----- New property -----
+
+null

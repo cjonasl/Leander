@@ -3055,3 +3055,23 @@ Task56_Day133_Date191023_Cast not let manager see SuperAdm
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+154
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-23 15:25:12
+
+----- New property -----
+
+Task57_Day133_Date191023_Additional Help guides to be added to the CAST Portal (SER-1993)
+
+----- New property -----
+
+Task,Fixzone
