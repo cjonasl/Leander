@@ -36,9 +36,12 @@ namespace ClientConnect.Validation
 
             bool retailClientIsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_RetailClient_Is_Mandatory);
             bool cLIENTCUSTREFIsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_CLIENTCUSTREF_Is_Mandatory);
-            bool titleIsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Title_Is_Mandatory);
-            bool forenameIsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Forename_Is_Mandatory);
-            bool surnameIsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Surname_Is_Mandatory);
+
+            //Title, forename and surname should always be mandatory and not possible to change in configuration
+            bool titleIsMandatory = true; //BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Title_Is_Mandatory);
+            bool forenameIsMandatory = true;  //BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Forename_Is_Mandatory);
+            bool surnameIsMandatory = true;  //BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Surname_Is_Mandatory);
+
             bool postcodeIsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Postcode_Is_Mandatory);
             bool addr1IsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Addr1_Is_Mandatory);
             bool addr2IsMandatory = BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Addr2_Is_Mandatory);
@@ -53,29 +56,31 @@ namespace ClientConnect.Validation
             
             CascadeMode = CascadeMode.StopOnFirstFailure;
 
+            const string errorMessageEmptyField = "This field is required";
+
             //RetailClient
             if (retailClientIsMandatory)
             {
-                RuleFor(x => x.RetailClient).NotEmpty().WithMessage("Select retail client");
+                RuleFor(x => x.RetailClient).NotEmpty().WithMessage(errorMessageEmptyField);
             }
 
             //Account number (refers to CLIENTCUSTREF)
             if (cLIENTCUSTREFIsMandatory)
             {
-                RuleFor(x => x.CLIENTCUSTREF).NotEmpty().WithMessage("Input account number");
+                RuleFor(x => x.CLIENTCUSTREF).NotEmpty().WithMessage(errorMessageEmptyField);
             }
 
             //Title
             if (titleIsMandatory)
             {
-                RuleFor(x => x.Title).NotEmpty().WithMessage("Select title");
+                RuleFor(x => x.Title).NotEmpty().WithMessage(errorMessageEmptyField);
             }
 
             //Forename
             if (forenameIsMandatory)
             {
                 RuleFor(x => x.Forename)
-                    .NotEmpty().WithMessage("Input forename")
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 20).WithMessage("Maximum 20 characters");
             }
             else
@@ -87,7 +92,7 @@ namespace ClientConnect.Validation
             if (surnameIsMandatory)
             {
                 RuleFor(x => x.Surname)
-                    .NotEmpty().WithMessage("Input surname")
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 50).WithMessage("Maximum 50 characters");
             }
             else
@@ -99,8 +104,8 @@ namespace ClientConnect.Validation
             if (postcodeIsMandatory)
             {
                 RuleFor(x => x.Postcode)
-                    .NotNull().WithMessage("Input postcode").When(x => x.Country != DefaultValues.IrelandCountryCode)
-                    .NotEmpty().WithMessage("Input postcode").When(x => x.Country != DefaultValues.IrelandCountryCode)
+                    .NotNull().WithMessage(errorMessageEmptyField).When(x => x.Country != DefaultValues.IrelandCountryCode)
+                    .NotEmpty().WithMessage(errorMessageEmptyField).When(x => x.Country != DefaultValues.IrelandCountryCode)
                     .Must(postcode =>
                         {
                             if (postcode.ToString().Trim().Replace(" ", string.Empty).Length > 8)
@@ -144,8 +149,8 @@ namespace ClientConnect.Validation
             if (addr1IsMandatory)
             {
                 RuleFor(x => x.Addr1)
-                    .NotNull().WithMessage("Input address")
-                    .NotEmpty().WithMessage("Input address")
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 60).WithMessage("Maximum 60 characters");
             }
             else
@@ -158,8 +163,8 @@ namespace ClientConnect.Validation
             if (addr2IsMandatory)
             {
                 RuleFor(x => x.Addr2)
-                    .NotNull().WithMessage("Input address")
-                    .NotEmpty().WithMessage("Input address")
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 60).WithMessage("Maximum 60 characters");
             }
             else
@@ -172,8 +177,8 @@ namespace ClientConnect.Validation
             if (addr3IsMandatory)
             {
                 RuleFor(x => x.Addr3)
-                    .NotNull().WithMessage("Input address")
-                    .NotEmpty().WithMessage("Input address")
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 60).WithMessage("Maximum 60 characters");
             }
             else
@@ -186,8 +191,8 @@ namespace ClientConnect.Validation
             if (townIsMandatory)
             {
                 RuleFor(x => x.Town)
-                    .NotNull().WithMessage("Input town")
-                    .NotEmpty().WithMessage("Input town")
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 60).WithMessage("Maximum 60 characters");
             }
             else
@@ -199,24 +204,24 @@ namespace ClientConnect.Validation
             if (countyIsMandatory)
             {
                 RuleFor(x => x.Town)
-                    .NotNull().WithMessage("Input county")
-                    .NotEmpty().WithMessage("Input county");
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField);
             }
 
             //Country
             if (countryIsMandatory)
             {
                 RuleFor(x => x.Town)
-                    .NotNull().WithMessage("Input contry")
-                    .NotEmpty().WithMessage("Input country");
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField);
             }
 
             //Tel1
             if (Tel1IsMandatory)
             {
                 RuleFor(x => x.Tel1)
-                    .NotNull().WithMessage("Please supply telephone")
-                    .NotEmpty().WithMessage("Please supply telephone")
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 20).WithMessage("Maximum 20 characters");
             }
             else
@@ -228,8 +233,8 @@ namespace ClientConnect.Validation
             if (Tel2IsMandatory)
             {
                 RuleFor(x => x.Tel2)
-                    .NotNull().WithMessage("Please supply telephone")
-                    .NotEmpty().WithMessage("Please supply telephone")
+                    .NotNull().WithMessage(errorMessageEmptyField)
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .Length(0, 20).WithMessage("Maximum 20 characters");
             }
             else
@@ -241,7 +246,7 @@ namespace ClientConnect.Validation
             if (emailIsMandatory)
             {
                 RuleFor(x => x.Email)
-                    .NotEmpty().WithMessage("Please supply email address")
+                    .NotEmpty().WithMessage(errorMessageEmptyField)
                     .EmailAddress().WithMessage("A valid email is required")
                     .Length(0, 64).WithMessage("Maximum 64 characters");
             }

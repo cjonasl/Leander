@@ -51,7 +51,7 @@ namespace ClientConnect.ViewModels.BookNewService
         public string Organization { get; set; }
 
         public string Department { get; set; }
-        
+
         public string Tel1 { get; set; }
 
         public bool Tel1IsMobile { get; set; } //true=Mobile, false=Landline
@@ -59,11 +59,11 @@ namespace ClientConnect.ViewModels.BookNewService
         public string Tel2 { get; set; }
 
         public bool Tel2IsMobile { get; set; } //true=Mobile, false=Landline
-        
+
         public string Email { get; set; }
 
         public string MobileTel
-        { 
+        {
             get { return Tel1; }
             set { Tel1 = value; }
         }
@@ -72,8 +72,8 @@ namespace ClientConnect.ViewModels.BookNewService
         {
             get { return Tel2; }
             set { Tel2 = value; }
-        }
-           
+        }   
+        
          [Display(Name = "Customer agrees to receive a survey from Sony after completion of this repair?")]
          public bool Customer_Survey { get; set; }
 

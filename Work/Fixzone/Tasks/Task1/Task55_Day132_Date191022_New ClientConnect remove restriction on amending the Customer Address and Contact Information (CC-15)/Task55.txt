@@ -4,3 +4,5 @@ Modify the files:
 C:\AAAAA5\CallCenterClientConnect\Views\BookNewService\CustomerPreviewPage.cshtml
 C:\AAAAA5\CallCenterClientConnect\Controllers\BookNewServiceController.cs
 C:\AAAAA5\CallCenterClientConnect\ViewModels\Home\BusinessRule.cs
+
+Check in 2019-10-24: SVN revision number 11645

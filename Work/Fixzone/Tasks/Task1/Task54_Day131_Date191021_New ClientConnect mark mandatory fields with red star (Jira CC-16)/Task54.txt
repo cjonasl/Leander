@@ -1,0 +1,15 @@
+﻿Task54:
+
+Modify the file:
+GetBusinessRuleList.sql
+C:\AAAAA2\CallCenterClientConnect\Content\css\custom.css
+C:\AAAAA2\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+C:\AAAAA2\CallCenterClientConnect\Models\Customer\CustomerSessionModel.cs
+C:\AAAAA2\CallCenterClientConnect\Services\HomeService.cs
+C:\AAAAA2\CallCenterClientConnect\Validation\BookNewService_CustomerPageValdation.cs
+C:\AAAAA2\CallCenterClientConnect\ViewModels\BookNewService\CustomerPageModel.cs
+C:\AAAAA2\CallCenterClientConnect\ViewModels\Home\BusinessRule.cs
+C:\AAAAA2\CallCenterClientConnect\Views\BookNewService\CustomerPage.cshtml
+C:\AAAAA2\CallCenterClientConnect\ClientConnect.csproj
+
+Check in 2019-10-24: SVN revision number 11643

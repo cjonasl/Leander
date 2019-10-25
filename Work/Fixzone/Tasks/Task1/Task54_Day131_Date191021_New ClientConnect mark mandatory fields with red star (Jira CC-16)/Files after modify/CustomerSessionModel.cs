@@ -49,6 +49,18 @@ namespace ClientConnect.Models.Customer
 
         public string Tel2 { get; set; }
 
+        public string MobileTel
+        {
+            get { return Tel1; }
+            set { Tel1 = value; }
+        }
+
+        public string LandlineTel
+        {
+            get { return Tel2; }
+            set { Tel2 = value; }
+        }
+
         public string Email { get; set; }
 
         public int ContactMethod { get; set; }

@@ -31,6 +31,10 @@ using System.Text;
 using ClientConnect.Models.BookRepair;
 using ClientConnect.IOnlineSpareParts;
 using System.Xml;
+using ClientConnect.Products;
+using ClientConnect.Jobs;
+using PagedList;
+using System.Text.RegularExpressions;
 
 namespace ClientConnect.Controllers
 {
@@ -82,6 +86,40 @@ namespace ClientConnect.Controllers
         public bool BlockSupplierList { get; set; }
         public bool ShowRegno { get; set; }
         public List<SpecialJob> specialJob;
+
+        //Configuration mandatory fields in CustomerPage
+        public bool RetailClientIsMandatory { get; set; }
+        public bool CLIENTCUSTREFIsMandatory { get; set; }
+        public bool TitleIsMandatory { get; set; }
+        public bool ForenameIsMandatory { get; set; }
+        public bool SurnameIsMandatory { get; set; }
+        public bool PostcodeIsMandatory { get; set; }
+        public bool Addr1IsMandatory { get; set; }
+        public bool Addr2IsMandatory { get; set; }
+        public bool Addr3IsMandatory { get; set; }
+        public bool TownIsMandatory { get; set; }
+        public bool CountyIsMandatory { get; set; }
+        public bool CountryIsMandatory { get; set; }
+        public bool Tel1IsMandatory { get; set; }
+        public bool Tel2IsMandatory { get; set; }
+        public bool EmailIsMandatory { get; set; }
+        public bool ContactMethodIsMandatory { get; set; }
+
+        //Configuration editable fields in CustomerPreviewPage
+        public bool TitleIsEditable { get; set; }
+        public bool ForenameIsEditable { get; set; }
+        public bool SurnameIsEditable { get; set; }
+        public bool PostcodeIsEditable { get; set; }
+        public bool Addr1IsEditable { get; set; }
+        public bool Addr2IsEditable { get; set; }
+        public bool Addr3IsEditable { get; set; }
+        public bool TownIsEditable { get; set; }
+        public bool CountyIsEditable { get; set; }
+        public bool CountryIsEditable { get; set; }
+        public bool Tel1IsEditable { get; set; }
+        public bool Tel2IsEditable { get; set; }
+        public bool EmailIsEditable { get; set; }
+        public bool ContactMethodIsEditable { get; set; }
 
         public BookNewServiceController()
         {
@@ -254,6 +292,46 @@ namespace ClientConnect.Controllers
             {
                 ShowAccountNumber = false;
             }
+
+            //-------------------- Configuration mandatory fields in CustomerPage -----------------------------------------------------
+            RetailClientIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_RetailClient_Is_Mandatory);
+            CLIENTCUSTREFIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_CLIENTCUSTREF_Is_Mandatory);
+            TitleIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Title_Is_Mandatory);
+
+            //Title, forename and surname should always be mandatory and not possible to change in configuration
+            TitleIsMandatory = true; //BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Title_Is_Mandatory);
+            ForenameIsMandatory = true;  //BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Forename_Is_Mandatory);
+            SurnameIsMandatory = true;  //BusinessRule.GetValue(businessRules, BusinessRuleKey.CustomerPage_Surname_Is_Mandatory);
+
+            Addr1IsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Addr1_Is_Mandatory);
+            Addr2IsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Addr2_Is_Mandatory);
+            Addr3IsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Addr3_Is_Mandatory);
+            TownIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Town_Is_Mandatory);
+            CountyIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_County_Is_Mandatory);
+            CountryIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Country_Is_Mandatory);
+            Tel1IsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Tel1_Is_Mandatory);
+            Tel2IsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Tel2_Is_Mandatory);
+            EmailIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_Email_Is_Mandatory);
+            ContactMethodIsMandatory = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPage_ContactMethod_Is_Mandatory);
+            //------------------------------------------------------------------------------------------------------------------------
+
+            //-------------------- Configuration editable fields in CustomerPreviewPage -----------------------------------------------
+            TitleIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Title_Is_Editable);
+            ForenameIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Forename_Is_Editable);
+            SurnameIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Surname_Is_Editable);
+            PostcodeIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Postcode_Is_Editable);
+            Addr1IsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Addr1_Is_Editable);
+            Addr2IsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Addr2_Is_Editable);
+            Addr3IsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Addr3_Is_Editable);
+            TownIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Town_Is_Editable);
+            CountyIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_County_Is_Editable);
+            CountryIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Country_Is_Editable);
+            Tel1IsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Tel1_Is_Editable);
+            Tel2IsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Tel2_Is_Editable);
+            EmailIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_Email_Is_Editable);
+            ContactMethodIsEditable = BusinessRule.GetValue(BusinessRules, BusinessRuleKey.CustomerPreviewPage_ContactMethod_Is_Editable);
+            //-------------------- Configuration editable fields in CustomerPreviewPage ---------------------------------------------------
+
         }
 
         private void GetDropDownListVisitcodesSelectedValue(out string selectedValue, out bool enabled)
@@ -427,6 +505,7 @@ namespace ClientConnect.Controllers
                 return Redirect(Url.ProcessNextStep());
             }
             model.InjectFrom(customer);
+            model.ClientId = storeinfo.StoreId.ToString();
             //if (model.CustomerId == 0)
             //    BookService.SessionInfo.OnlinebookingFailed = false;
             if (BookService.SessionInfo.OnlinebookingFailed)
@@ -439,6 +518,30 @@ namespace ClientConnect.Controllers
             model.ContactMethodList = CustomerService.GetContactMethodList(model.ContactMethod.ToString());
             model.TitleList = CustomerService.GetTitlesList(model.Title);
             ViewBag.CustomerLogged = AdminService.StoreId == 0;
+
+            ViewBag.RetailClientIsMandatory = RetailClientIsMandatory;
+            ViewBag.CLIENTCUSTREFIsMandatory = CLIENTCUSTREFIsMandatory;
+            ViewBag.TitleIsMandatory = TitleIsMandatory;
+            ViewBag.ForenameIsMandatory = ForenameIsMandatory;
+            ViewBag.SurnameIsMandatory = SurnameIsMandatory;
+            ViewBag.PostcodeIsMandatory = PostcodeIsMandatory;
+            ViewBag.Addr1IsMandatory = Addr1IsMandatory;
+            ViewBag.Addr2IsMandatory = Addr2IsMandatory;
+            ViewBag.Addr3IsMandatory = Addr3IsMandatory;
+            ViewBag.TownIsMandatory = TownIsMandatory;
+            ViewBag.CountyIsMandatory = CountyIsMandatory;
+            ViewBag.CountryIsMandatory = CountryIsMandatory;
+            ViewBag.Tel1IsMandatory = Tel1IsMandatory;
+            ViewBag.Tel2IsMandatory = Tel2IsMandatory;
+            ViewBag.EmailIsMandatory = EmailIsMandatory;
+            ViewBag.ContactMethodIsMandatory = ContactMethodIsMandatory;
+            ViewBag.Tel1Mobile = "checked";
+            ViewBag.Tel1Landline = "";
+            ViewBag.Tel2Mobile = "checked";
+            ViewBag.Tel2Landline = "";
+
+            ViewBag.ShowStarMandatoryField = RetailClientIsMandatory || CLIENTCUSTREFIsMandatory || TitleIsMandatory || ForenameIsMandatory || SurnameIsMandatory || PostcodeIsMandatory || Addr1IsMandatory || Addr2IsMandatory || Addr3IsMandatory || TownIsMandatory || CountyIsMandatory || CountryIsMandatory || Tel1IsMandatory || Tel2IsMandatory || EmailIsMandatory || ContactMethodIsMandatory;
+
             return View(model);
         }
 
@@ -451,7 +554,7 @@ namespace ClientConnect.Controllers
 
         public ActionResult CustomerPage(CustomerPageModel model)
         {
-            ModelState.Clear();
+            ModelState.Clear(); //Response.Cookies["CC_StoreNumber"].Value = "0";
             if (!string.IsNullOrEmpty(model.MobileTel)) model.MobileTel = model.MobileTel.Replace(" ", "");
             if (!string.IsNullOrEmpty(model.LandlineTel)) model.LandlineTel = model.LandlineTel.Replace(" ", "");
             ViewBag.ShowAccountNumber = ShowAccountNumber;
@@ -460,11 +563,32 @@ namespace ClientConnect.Controllers
             {
                 ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
             }
+
+            if (!string.IsNullOrEmpty(model.Tel1) && model.Tel1IsMobile && model.Country != DefaultValues.IrelandCountryCode && !(new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel1)))
+            {
+                ModelState.AddModelError("Tel1", "Wrong format");
+            }
+
+            if (!string.IsNullOrEmpty(model.Tel2) && model.Tel2IsMobile && model.Country != DefaultValues.IrelandCountryCode && !(new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel2)))
+            {
+                ModelState.AddModelError("Tel2", "Wrong format");
+            }
+
+            ViewBag.Tel1Mobile = model.Tel1IsMobile ? "checked" : "";
+            ViewBag.Tel1Landline = model.Tel1IsMobile ? "" : "checked";
+            ViewBag.Tel2Mobile = model.Tel2IsMobile ? "checked" : "";
+            ViewBag.Tel2Landline = model.Tel2IsMobile ? "" : "checked";
+
             if (ModelState.IsValid)
             {
                 bool URNExist = CustomerService.CustomerURNExists(model.CLIENTCUSTREF, model.Email);
                 if (URNExist && BookService.SessionInfo.CustomerId == 0 && !ShowAccountNumber)
                     ModelState.AddModelError("CLIENTCUSTREF", "Account number exists already.Please contact support team");
+                if (storeinfo.StoreId == 0)
+                {
+                    ModelState.AddModelError("ClientID", "Sorry unexpectedly selected client information is lost. Please choose again");
+                    ViewBag.ClientMissing = "Sorry unexpectedly selected client information is lost. Please choose again";
+                }
             }
             // If all ok then go to next page
             if (ModelState.IsValid)
@@ -475,6 +599,25 @@ namespace ClientConnect.Controllers
                 CustomerService.SessionInfo.Applianceaddress.InjectFrom(model);
                 // CreateCustomer using Fzonline booking and mark it as added in retailconnect
                 model.ClientId = storeService.StoreId.ToString();
+
+                //Put a mobile number in Tel1 and landline in Tel2 if possible
+                if (!string.IsNullOrEmpty(model.Tel1) && !model.Tel1IsMobile && string.IsNullOrEmpty(model.Tel2))
+                {
+                    model.Tel2 = model.Tel1;
+                    model.Tel1 = "";
+                }
+                else if (!string.IsNullOrEmpty(model.Tel2) && model.Tel2IsMobile && string.IsNullOrEmpty(model.Tel1))
+                {
+                    model.Tel1 = model.Tel2;
+                    model.Tel2 = "";
+                }
+                else if (!string.IsNullOrEmpty(model.Tel1) && !model.Tel1IsMobile && !string.IsNullOrEmpty(model.Tel2) && model.Tel2IsMobile)
+                {
+                    string str = model.Tel1;
+                    model.Tel1 = model.Tel2;
+                    model.Tel2 = str;
+                }
+
                 BookService.SessionInfo.CustomerId = BookService.CreateCustomer(model);//BookService.SessionInfo.CustomerId == 0 ? BookService.CreateCustomer(model) : BookService.SessionInfo.CustomerId;
                 BookService.SessionInfo.CustProd.RetailClientId = model.RetailClient;
                 //   if (BookService.SessionInfo.CustomerId == 0)
@@ -505,9 +648,76 @@ namespace ClientConnect.Controllers
             model.ContactMethodList = CustomerService.GetContactMethodList(model.ContactMethod.ToString());
             model.RetailClientList = CustomerService.GetRetailClientList();
             model.CountryList = CustomerService.GetCountryList(model.Country);
+
+            ViewBag.RetailClientIsMandatory = RetailClientIsMandatory;
+            ViewBag.CLIENTCUSTREFIsMandatory = CLIENTCUSTREFIsMandatory;
+            ViewBag.TitleIsMandatory = TitleIsMandatory;
+            ViewBag.ForenameIsMandatory = ForenameIsMandatory;
+            ViewBag.SurnameIsMandatory = SurnameIsMandatory;
+            ViewBag.PostcodeIsMandatory = PostcodeIsMandatory;
+            ViewBag.Addr1IsMandatory = Addr1IsMandatory;
+            ViewBag.Addr2IsMandatory = Addr2IsMandatory;
+            ViewBag.Addr3IsMandatory = Addr3IsMandatory;
+            ViewBag.TownIsMandatory = TownIsMandatory;
+            ViewBag.CountyIsMandatory = CountyIsMandatory;
+            ViewBag.CountryIsMandatory = CountryIsMandatory;
+            ViewBag.Tel1IsMandatory = Tel1IsMandatory;
+            ViewBag.Tel2IsMandatory = Tel2IsMandatory;
+            ViewBag.EmailIsMandatory = EmailIsMandatory;
+            ViewBag.ContactMethodIsMandatory = ContactMethodIsMandatory;
+
+            ViewBag.ShowStarMandatoryField = RetailClientIsMandatory || CLIENTCUSTREFIsMandatory || TitleIsMandatory || ForenameIsMandatory || SurnameIsMandatory || PostcodeIsMandatory || Addr1IsMandatory || Addr2IsMandatory || Addr3IsMandatory || TownIsMandatory || CountyIsMandatory || CountryIsMandatory || Tel1IsMandatory || Tel2IsMandatory || EmailIsMandatory || ContactMethodIsMandatory;
+
             return View(model);
         }
+        public ActionResult JobAdvSearch()
+        {
+           // AdvSearchCriteria advSearchCriteria = new AdvSearchCriteria();
+            JobService.SessionInfo.PolicyNumber = BookService.SessionInfo.CustProd.PolicyNumber ?? string.Empty;
+            JobService.SessionInfo.Postcode = CustomerService.SessionInfo.Applianceaddress.Postcode;
+            JobService.SessionInfo.Surname = CustomerService.SessionInfo.Applianceaddress.Surname;
+            return Redirect(Url.Process(PredefinedProcess.JobSearch));
+           
+        }
 
+
+        public ActionResult SearchProduct(int? customerid,int? page)
+        {
+            if (customerid.HasValue)
+                BookService.SessionInfo.CustomerId = customerid.Value;
+            ProductResult model = new ProductResult();
+            ProductService.SessionInfo.PageNumber = page.HasValue ? page.Value : 1;
+            model.MFRList = ProductService.GetMFRList(storeService.StoreId);
+            model.AplList = ProductService.GetAppliances(storeService.StoreId);
+            model.SelectedMFR=BookService.SessionInfo.Product_searchMFR==null?"":BookService.SessionInfo.Product_searchMFR;
+            model.SelectedAPL=BookService.SessionInfo.Product_searchApplianceCD==null?"":BookService.SessionInfo.Product_searchApplianceCD;
+            model.SelectedModel = BookService.SessionInfo.Product_searchModel == null ? "" : BookService.SessionInfo.Product_searchModel;
+
+            if (model.SelectedMFR != string.Empty && model.SelectedAPL != string.Empty)
+            {
+                model.ProductResultModel = ProductService.GetModelList(model, storeService.StoreId, page ?? 1);
+                ViewBag.OnePageOfproducts = new StaticPagedList<ProductModel>(model.ProductResultModel.ModelList, ProductService.SessionInfo.PageNumber,
+                 ProductService.SessionInfo.SearchCriteria != "" ? Settings.Default.ProductSearchPageSize : Settings.Default.ProductRestrictedSearchPageSize, model.ProductResultModel.ElemCount);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult SearchProduct(ProductResult model,int? page)
+        {
+            ProductService.SessionInfo.PageNumber = page.HasValue ? page.Value :1 ;
+          
+            ProductResult Searchedmodel = new ProductResult();
+
+            model.MFRList = ProductService.GetMFRList(storeService.StoreId);
+            model.AplList = ProductService.GetAppliances(storeService.StoreId);
+           BookService.SessionInfo.Product_searchMFR= model.SelectedMFR ;
+           BookService.SessionInfo.Product_searchApplianceCD= model.SelectedAPL ;
+           BookService.SessionInfo.Product_searchModel= model.SelectedModel ;
+           model.ProductResultModel = ProductService.GetModelList(model, storeService.StoreId, page??1);
+           ViewBag.OnePageOfproducts = new StaticPagedList<ProductModel>(model.ProductResultModel.ModelList, ProductService.SessionInfo.PageNumber,
+            ProductService.SessionInfo.SearchCriteria != "" ? Settings.Default.ProductSearchPageSize : Settings.Default.ProductRestrictedSearchPageSize, model.ProductResultModel.ElemCount);
+            return View(model);
+        }
         [HttpGet]
         public ActionResult ApplianceDetails()
         {
@@ -515,7 +725,7 @@ namespace ClientConnect.Controllers
             {
                 return Redirect(Url.ProcessPreviousStep());
             }
-
+            
             Log.File.Info(BookService.Msg.GenerateLogMsg("View ApplianceDetails info in booking process.", "Customer id = " + BookService.SessionInfo.CustomerId.ToString()));
             ViewBag.ClientBookingType = storeService.ClientBookingType;
             ViewBag.NOShowWarrantyInfo = NOApplianceWarrantyInfo;
@@ -668,16 +878,272 @@ namespace ClientConnect.Controllers
             model.CountryList = CustomerService.GetCountryList(model.Country);
             model.ContactMethodList = CustomerService.GetContactMethodList(model.ContactMethod.ToString());
             model.TitleList = CustomerService.GetTitlesList(model.Title);
-            if (RestrictedAddressChange && (BookService.SessionInfo.Jobtype == JobType.Collection || BookService.SessionInfo.Jobtype == JobType.MobileCollection))
+
+            ViewBag.TitleIsMandatory = TitleIsMandatory;
+            ViewBag.ForenameIsMandatory = ForenameIsMandatory;
+            ViewBag.SurnameIsMandatory = SurnameIsMandatory;
+            ViewBag.PostcodeIsMandatory = PostcodeIsMandatory;
+            ViewBag.Addr1IsMandatory = Addr1IsMandatory;
+            ViewBag.Addr2IsMandatory = Addr2IsMandatory;
+            ViewBag.Addr3IsMandatory = Addr3IsMandatory;
+            ViewBag.TownIsMandatory = TownIsMandatory;
+            ViewBag.CountyIsMandatory = CountyIsMandatory;
+            ViewBag.CountryIsMandatory = CountryIsMandatory;
+            ViewBag.Tel1IsMandatory = Tel1IsMandatory;
+            ViewBag.Tel2IsMandatory = Tel2IsMandatory;
+            ViewBag.EmailIsMandatory = EmailIsMandatory;
+            ViewBag.ContactMethodIsMandatory = ContactMethodIsMandatory;
+
+            ViewBag.TitleIsEditable = TitleIsEditable;
+            ViewBag.ForenameIsEditable = ForenameIsEditable;
+            ViewBag.SurnameIsEditable = SurnameIsEditable;
+            ViewBag.PostcodeIsEditable = PostcodeIsEditable;
+            ViewBag.Addr1IsEditable = Addr1IsEditable;
+            ViewBag.Addr2IsEditable = Addr2IsEditable;
+            ViewBag.Addr3IsEditable = Addr3IsEditable;
+            ViewBag.TownIsEditable = TownIsEditable;
+            ViewBag.CountyIsEditable = CountyIsEditable;
+            ViewBag.CountryIsEditable = CountryIsEditable;
+            ViewBag.Tel1IsEditable = Tel1IsEditable;
+            ViewBag.Tel2IsEditable = Tel2IsEditable;
+            ViewBag.EmailIsEditable = EmailIsEditable;
+            ViewBag.ContactMethodIsEditable = ContactMethodIsEditable;
+
+            //---------------- Set default values -----------------------------
+            if (Tel1IsEditable)
             {
-                ViewBag.Collection = true;
+                ViewBag.Tel1Mobile = "checked";
+                ViewBag.Tel1Landline = "";
             }
+            else
+            {
+                ViewBag.Tel1Mobile = "";
+            }
+
+            if (Tel2IsEditable)
+            {
+                ViewBag.Tel2Mobile = "checked";
+                ViewBag.Tel2Landline = "";
+            }
+            else
+            {
+                ViewBag.Tel2Mobile = "";
+            }
+            //-----------------------------------------------------------------
+
+            if (!string.IsNullOrEmpty(model.Tel1) && model.Country != DefaultValues.IrelandCountryCode)
+            {
+                if (Tel1IsEditable)
+                {
+                    if ((new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel1)))
+                    {
+                        ViewBag.Tel1Mobile = "checked";
+                        ViewBag.Tel1Landline = "";
+                    }
+                    else
+                    {
+                        ViewBag.Tel1Mobile = "";
+                        ViewBag.Tel1Landline = "checked";
+                    }
+                }
+                else
+                {
+                    if ((new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel1)))
+                    {
+                        ViewBag.Tel1Mobile = " (Mobile)";
+                    }
+                    else
+                    {
+                        ViewBag.Tel1Mobile = " (Landline)";
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(model.Tel2) && model.Country != DefaultValues.IrelandCountryCode)
+            {
+                if (Tel2IsEditable)
+                {
+                    if ((new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel2)))
+                    {
+                        ViewBag.Tel2Mobile = "checked";
+                        ViewBag.Tel2Landline = "";
+                    }
+                    else
+                    {
+                        ViewBag.Tel2Mobile = "";
+                        ViewBag.Tel2Landline = "checked";
+                    }
+                }
+                else
+                {
+                    if ((new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel2)))
+                    {
+                        ViewBag.Tel2Mobile = " (Mobile)";
+                    }
+                    else
+                    {
+                        ViewBag.Tel2Mobile = " (Landline)";
+                    }
+                }
+            }
+
+            ViewBag.ShowStarMandatoryField = (TitleIsMandatory && TitleIsEditable) || (ForenameIsMandatory && ForenameIsEditable) || (SurnameIsMandatory && SurnameIsEditable) || (PostcodeIsMandatory && PostcodeIsEditable) || (Addr1IsMandatory && Addr1IsEditable) || (Addr2IsMandatory && Addr2IsEditable) || (Addr3IsMandatory && Addr3IsEditable) || (TownIsMandatory && TownIsEditable) || (CountyIsMandatory && CountyIsEditable) || (CountryIsMandatory && CountryIsEditable) || (Tel1IsMandatory && Tel1IsEditable) || (Tel2IsMandatory && Tel1IsEditable) || (EmailIsMandatory && EmailIsEditable) || (ContactMethodIsMandatory && ContactMethodIsEditable);
+
             return View(model);
         }
+
         [HttpPost]
         public ActionResult CustomerPreviewPage(CustomerPageModel model)
-        { //RequestDate()
-            return Redirect(Url.ProcessNextStep());
+        {
+            ModelState.Clear();
+            if (!string.IsNullOrEmpty(model.Tel1)) model.Tel1 = model.Tel1.Replace(" ", "");
+            if (!string.IsNullOrEmpty(model.Tel2)) model.Tel2 = model.Tel2.Replace(" ", "");
+
+            foreach (var error in Validator.Validate(model, _ruleSets.defaultRule))
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
+
+            if (!string.IsNullOrEmpty(model.Tel1) && model.Tel1IsMobile && model.Country != DefaultValues.IrelandCountryCode && !(new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel1)))
+            {
+                ModelState.AddModelError("Tel1", "Wrong format");
+            }
+
+            if (!string.IsNullOrEmpty(model.Tel2) && model.Tel2IsMobile && model.Country != DefaultValues.IrelandCountryCode && !(new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel2)))
+            {
+                ModelState.AddModelError("Tel2", "Wrong format");
+            }
+
+            if (ModelState.IsValid)
+            {
+                model.ClientId = storeService.StoreId.ToString();
+
+                //Put a mobile number in Tel1 and landline in Tel2 if possible
+                if (!string.IsNullOrEmpty(model.Tel1) && !model.Tel1IsMobile && string.IsNullOrEmpty(model.Tel2))
+                {
+                    model.Tel2 = model.Tel1;
+                    model.Tel1 = "";
+                }
+                else if (!string.IsNullOrEmpty(model.Tel2) && model.Tel2IsMobile && string.IsNullOrEmpty(model.Tel1))
+                {
+                    model.Tel1 = model.Tel2;
+                    model.Tel2 = "";
+                }
+                else if (!string.IsNullOrEmpty(model.Tel1) && !model.Tel1IsMobile && !string.IsNullOrEmpty(model.Tel2) && model.Tel2IsMobile)
+                {
+                    string str = model.Tel1;
+                    model.Tel1 = model.Tel2;
+                    model.Tel2 = str;
+                }
+
+                BookService.CreateCustomer(model);
+
+                if (BookService.SessionInfo.OnlinebookingFailed)
+                {
+                    ViewBag.ErrorMessage = "Problem on connecting to onlinebooking . Switched to Offline booking mode";
+                    int tempCustomerId = BookService.CreateCustomerBackup(model, BookService.SessionInfo.OnlinebookingFailedReason);
+                    model.CustomerId = tempCustomerId;
+                    BookService.SessionInfo.CustomerId = tempCustomerId;
+
+                    return Redirect(Url.ProcessNextStep());
+                }
+                else
+                {
+                    BookService.SessionInfo.OnlinebookingFailed = false;
+                    BookService.SessionInfo.CustomerCreationFailed = false;
+                    BookService.SaveCustomer(model);
+
+                    return Redirect(Url.ProcessNextStep());
+                }
+            }
+
+
+            if (Tel1IsEditable)
+            {
+                ViewBag.Tel1Mobile = model.Tel1IsMobile ? "checked" : "";
+                ViewBag.Tel1Landline = model.Tel1IsMobile ? "" : "checked";
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(model.Tel1) && model.Country != DefaultValues.IrelandCountryCode)
+                {
+                    if ((new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel1)))
+                    {
+                        ViewBag.Tel1Mobile = " (Mobile)";
+                    }
+                    else
+                    {
+                        ViewBag.Tel1Mobile = " (Landline)";
+                    }
+                }
+                else
+                {
+                    ViewBag.Tel1Mobile = "";
+                }
+            }
+
+            if (Tel2IsEditable)
+            {
+                ViewBag.Tel2Mobile = model.Tel2IsMobile ? "checked" : "";
+                ViewBag.Tel2Landline = model.Tel2IsMobile ? "" : "checked";
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(model.Tel2) && model.Country != DefaultValues.IrelandCountryCode)
+                {
+                    if ((new Regex(new ValidationFormats().MobilePhone).IsMatch(model.Tel2)))
+                    {
+                        ViewBag.Tel2Mobile = " (Mobile)";
+                    }
+                    else
+                    {
+                        ViewBag.Tel2Mobile = " (Landline)";
+                    }
+                }
+                else
+                {
+                    ViewBag.Tel2Mobile = "";
+                }
+            }
+
+            model.RetailClientList = CustomerService.GetRetailClientList();
+            model.CountryList = CustomerService.GetCountryList(model.Country);
+            model.ContactMethodList = CustomerService.GetContactMethodList(model.ContactMethod.ToString());
+            model.TitleList = CustomerService.GetTitlesList(model.Title);
+
+            ViewBag.TitleIsMandatory = TitleIsMandatory;
+            ViewBag.ForenameIsMandatory = ForenameIsMandatory;
+            ViewBag.SurnameIsMandatory = SurnameIsMandatory;
+            ViewBag.PostcodeIsMandatory = PostcodeIsMandatory;
+            ViewBag.Addr1IsMandatory = Addr1IsMandatory;
+            ViewBag.Addr2IsMandatory = Addr2IsMandatory;
+            ViewBag.Addr3IsMandatory = Addr3IsMandatory;
+            ViewBag.TownIsMandatory = TownIsMandatory;
+            ViewBag.CountyIsMandatory = CountyIsMandatory;
+            ViewBag.CountryIsMandatory = CountryIsMandatory;
+            ViewBag.Tel1IsMandatory = Tel1IsMandatory;
+            ViewBag.Tel2IsMandatory = Tel2IsMandatory;
+            ViewBag.EmailIsMandatory = EmailIsMandatory;
+            ViewBag.ContactMethodIsMandatory = ContactMethodIsMandatory;
+
+            ViewBag.TitleIsEditable = TitleIsEditable;
+            ViewBag.ForenameIsEditable = ForenameIsEditable;
+            ViewBag.SurnameIsEditable = SurnameIsEditable;
+            ViewBag.PostcodeIsEditable = PostcodeIsEditable;
+            ViewBag.Addr1IsEditable = Addr1IsEditable;
+            ViewBag.Addr2IsEditable = Addr2IsEditable;
+            ViewBag.Addr3IsEditable = Addr3IsEditable;
+            ViewBag.TownIsEditable = TownIsEditable;
+            ViewBag.CountyIsEditable = CountyIsEditable;
+            ViewBag.CountryIsEditable = CountryIsEditable;
+            ViewBag.Tel1IsEditable = Tel1IsEditable;
+            ViewBag.Tel2IsEditable = Tel2IsEditable;
+            ViewBag.EmailIsEditable = EmailIsEditable;
+            ViewBag.ContactMethodIsEditable = ContactMethodIsEditable;
+
+            ViewBag.ShowStarMandatoryField = (TitleIsMandatory && TitleIsEditable) || (ForenameIsMandatory && ForenameIsEditable) || (SurnameIsMandatory && SurnameIsEditable) || (PostcodeIsMandatory && PostcodeIsEditable) || (Addr1IsMandatory && Addr1IsEditable) || (Addr2IsMandatory && Addr2IsEditable) || (Addr3IsMandatory && Addr3IsEditable) || (TownIsMandatory && TownIsEditable) || (CountyIsMandatory && CountyIsEditable) || (CountryIsMandatory && CountryIsEditable) || (Tel1IsMandatory && Tel1IsEditable) || (Tel2IsMandatory && Tel1IsEditable) || (EmailIsMandatory && EmailIsEditable) || (ContactMethodIsMandatory && ContactMethodIsEditable);
+
+            return View(model);
         }
 
         [HttpGet]
@@ -1379,6 +1845,7 @@ namespace ClientConnect.Controllers
         [HttpGet]
         public ActionResult SoftService()
         {
+           
             //if (!BookService.SessionInfo.CustProd.mobileTheft)
             //{
             if (ProductService.IsBackButtonPressed == true && (ProductService.SessionInfo.TroubleShootId == 0 ))
@@ -1491,7 +1958,17 @@ namespace ClientConnect.Controllers
 
         public ActionResult RequestDate()
         {
-
+            if (BookService.SessionInfo.LoadedAppointmentpage != null && BookService.SessionInfo.LoadedAppointmentpage)
+            {
+                //if (BookService.SessionInfo.ServiceId != null && BookService.SessionInfo.ServiceId > 0)
+                //    return RedirectToAction("BookedJobConfirmation", new { Serviceid = BookService.SessionInfo.ServiceId,engineerid=0,  eventdate =string.Empty});
+                //else
+                //{
+                    ViewBag.DuplicateJob = "Duplicate job is created";
+                //}
+            }
+            //else
+            //    BookService.SessionInfo.LoadedAppointmentpage = true;
             AppointmentModel appointment = new AppointmentModel();
             appointment.InjectFrom(BookService.SessionInfo); List<string> ExcludeVisitType = Settings.Default.ExcludeVisitType.Split(',').ToList();
 
@@ -1558,7 +2035,8 @@ namespace ClientConnect.Controllers
 
                 BookService.SessionInfo.FaultDescr = appointment.FaultDescr;
                 ViewBag.Clientbookingdelaydays = storeinfo.Clientbookingdelaydays;
-                ViewBag.ShowAppointmentreason = true;// ShowAppointmentreason;
+                ViewBag.ShowAppointmentreason = Settings.Default.DeploymentTarget == "Clients" ? false : true;
+                ViewBag.ShowAdditionalSlot = Settings.Default.DeploymentTarget == "Clients" ? false : true;
                 if (!BookService.SessionInfo.OnlinebookingFailed)
                 {
                     response = onlineBookingService.AppointmentRequest(request);
@@ -1633,6 +2111,7 @@ namespace ClientConnect.Controllers
         [HttpPost]
         public ActionResult BookNow(string EventDate, int Engineerid, string faultdesc, string reason = "", JobType type = JobType.Defaulttype)
         {
+            BookService.SessionInfo.LoadedAppointmentpage = true;
             if (type == JobType.Defaulttype)
                 type = BookService.SessionInfo.Jobtype;
             bool tempServiceId = false;
@@ -2296,6 +2775,15 @@ namespace ClientConnect.Controllers
 
         public ActionResult RequestAlterDate(AppointmentModel appointment)
         {
+            if (BookService.SessionInfo.LoadedAppointmentpage != null && BookService.SessionInfo.LoadedAppointmentpage)
+            {
+                if (BookService.SessionInfo.ServiceId != null && BookService.SessionInfo.ServiceId > 0)
+                    return RedirectToAction("BookedJobConfirmation", new { Serviceid = BookService.SessionInfo.ServiceId, engineerid = 0, eventdate = string.Empty });
+                else
+                {
+                    ViewBag.DuplicateJob = "Duplicate job is created";
+                }
+            }
             appointment.Visitcodes = JobService.GetJobTypesList(appointment.Visitcode ?? string.Empty);
             string selectedValue;
             bool dropDownListVisitcodesEnabled;

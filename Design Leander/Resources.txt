@@ -3075,3 +3075,43 @@ Task57_Day133_Date191023_Additional Help guides to be added to the CAST Portal (
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+155
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-24 12:48:52
+
+----- New property -----
+
+Task58_Day134_Date191024_Remove Appointment Reason and Additional Slot from the Book Appointment Page (Jira CC-14)
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+156
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-24 15:51:24
+
+----- New property -----
+
+Task59_Day134_Date191024_Amend message if required date is not available (CC-20)
+
+----- New property -----
+
+Task,Fixzone

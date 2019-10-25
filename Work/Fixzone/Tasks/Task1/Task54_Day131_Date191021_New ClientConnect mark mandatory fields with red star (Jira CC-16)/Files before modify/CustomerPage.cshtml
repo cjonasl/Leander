@@ -9,30 +9,16 @@
     @Scripts.Render("~/scripts/addresses-js")
     <script type="text/javascript">
         $(document).ready(function () {
-            //var btnList = [buttons.back_BtnId, buttons.home_BtnId, buttons.signOut_BtnId];
-            //$.each(btnList, function (indx) {
-            //    $(btnList[indx]).click(function (e) {
-            //        targetUrl = $(btnList[indx]).attr("href");
-            //        e.preventDefault();
-            //        var unsavedInfoDialog = new Dialog(new DefaulDialogSettings().confirmUnsavedInfo);
+            $('.BtnNext').click(function () {
+               
 
-            //        unsavedInfoDialog.buttons([{
-            //                text: 'Cancel',
-            //                "class": 'bbg',
-            //                click: function() {
-            //                    unsavedInfoDialog.close();
-            //                }
-            //            }, {
-            //                text: 'Ok',
-            //                "class": 'rbg',
-            //                href: '',
-            //                click: function() {
-            //                    window.location.href = targetUrl;
-            //                }
-            //            }]);
-            //        unsavedInfoDialog.show();
-            //    });
-            //});
+                $('#Postcode').val($.trim($('#Postcode').val()));
+               
+                $(".overlay").show();
+            });
+            if ('@ViewBag.ClientMissing' != '') {
+                alert('@ViewBag.Collection');
+            }
 
             
             
@@ -226,7 +212,7 @@
 
             <tr>
                 <td colspan="4">
-               <span  class="error">@ViewBag.ErrorMessage </span>      <input class="button rbg" id="saveCustomerInfo" type="submit" value="Next" title="Save customer info and go to nex step" tabindex =210/>
+               <span  class="error">@ViewBag.ErrorMessage </span>      <input class="button BtnNext rbg" id="saveCustomerInfo" type="submit" value="Next" title="Save customer info and go to nex step" tabindex =210/>
                 </td>
             </tr>
         
@@ -236,4 +222,5 @@
         @Html.HiddenFor(x=>x.CustomerId)
     </div>
 </div>
-}
+}<div class="overlay">
+    </div>

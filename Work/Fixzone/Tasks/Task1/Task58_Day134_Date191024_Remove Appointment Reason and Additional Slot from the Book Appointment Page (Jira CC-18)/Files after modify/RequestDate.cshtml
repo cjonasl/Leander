@@ -1,0 +1,496 @@
+﻿@model ClientConnect.ViewModels.BookNewService.AppointmentModel
+@{
+    ViewBag.Title = "Appointment";
+}
+<style>
+    .overlay::after {
+background-color: #563d7c;
+content: "";
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 100%;
+z-index: -1;
+opacity: 0.4;
+}
+</style>
+@section Scripts
+{
+
+    <script type="text/javascript">
+        $(window).bind('beforeunload', function (e) {
+            alert( "Unloading this page may lose data. What do you want to do...");
+            e.preventDefault();
+        });
+        function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
+
+  
+        $(document).ready(function () {
+
+            $('#back-btn').click(function () {
+                $(".overlay").show();
+            });
+   // To disable f5
+   $(document).bind("keydown", disableF5);
+  
+            //  $("#loader").hide();
+            //$("#date-of-CustomerPrefered-datepicker").datepicker({
+            //    beforeShowDay: $.datepicker.noWeekends
+            //});
+   var Duplicatejob = '@ViewBag.DuplicateJob';
+          
+            if (Duplicatejob != '')
+                 var res=confirm(" Browser refresh is not allowed on this page to avoid creating duplicate jobs. If you have already confirmed the appointment request, the service "+
+                    "will be created in complete service. Please use the customer search to confirm the job has been created or search in C/S.")
+            if (res == true) {
+                
+                window.location.href = "/BookNewService/JobAdvSearch";
+            } 
+            var Clientbookingdelaydays = parseInt(@ViewBag.Clientbookingdelaydays);
+            var CustomerPreferedDate = new DatePicker("#date-of-CustomerPrefered-datepicker", "#date-of-CustomerPrefered-datepicker-btn", Clientbookingdelaydays);
+
+            CustomerPreferedDate.setDateSelected('@Model.PreferredVisitDate');
+
+            $("#get-date-info").click(function () {
+
+                ReplaceAction('#RequestDateService-form', "/BookNewService/RequestAlterDate");
+                $('#RequestDateService-form').submit();
+            }
+                );
+            $("#btnRaiseReplace").click(function () {
+                var faultdesc = $("#ReportFault").val();
+                var reason = "";
+
+                var ShowAppointmentReason = '@ViewBag.ShowAppointmentReason';
+                if (ShowAppointmentReason != '') {
+                    if ($("#VisitCode") != null) {
+                        var iVal = $('#VisitCode').val();
+
+                        if (iVal == "")
+
+                            alert('Please select any reason.');
+                        else
+
+                            reason = ival;
+
+                    }
+                }
+                if ($("#ReportFault").val() == "" || faultdesc.length == 0 || faultdesc.trim() == "") {
+                    alert("Please add a fault description and try again.");
+                    return false;
+                }
+                $(".overlay").show();
+                $("#errmsg").html("Attempting to confirm the booking for you...");
+
+                $.ajax({
+                    url: '/BookNewService/BookNow',
+                    type: 'post',
+                    dataType: 'json',
+                    data: { EventDate: "", Engineerid: 0, faultdesc: faultdesc, reason: reason },
+                    success: function (json) {
+                        //  alert(json["success"]);
+                        if (json["success"]) {
+
+                            alert("Your online booking done successfully.");
+                            //alert(json["type"]);
+                            //alert(json["ApplianceType"]);
+                            if (json["type"] == "5" && json["ApplianceType"] == "1")// Mobile replacement
+
+                            {
+
+                                $('#divexcessPayment').dialog({
+                                    height: 350,
+                                    width: 500,
+                                    modal: true,
+                                    title: "Mobile phone excess instruction – advise the customer", closeIcon: '',
+                                    refreshPageAfterClose: false,
+                                    buttons: [{
+                                        text: "Next",
+                                        "class": "rbg",
+                                        click: function () {
+                                            $('#divexcessPayment').dialog('close');
+                                            $('#divReplacement').dialog({
+                                                height: 350,
+                                                width: 500,
+                                                modal: true,
+                                                title: "Adviser Instructions:", closeIcon: '',
+                                                refreshPageAfterClose: false,
+                                                buttons: [{
+                                                    text: "Next",
+                                                    "class": "rbg",
+                                                    click: function () {
+                                                        $('#divReplacement').dialog('close');
+                                                        var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                                                        window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+
+                                                    }
+                                                }]
+                                            })
+                                        }
+                                    }]
+                                })
+                            }
+                            else if (json["type"] == "5")//  replacement
+                            {
+                                $('#divReplacement').dialog({
+                                    height: 350,
+                                    width: 500,
+                                    modal: true,
+                                    title: "Adviser Instructions:", closeIcon: '',
+                                    refreshPageAfterClose: false,
+                                    buttons: [{
+                                        text: "Next",
+                                        "class": "rbg",
+                                        click: function () {
+                                            $('#divReplacement').dialog('close');
+                                            var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                                            window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+
+                                        }
+                                    }]
+                                })
+                            }
+                            else {
+                                var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                                window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+
+
+
+
+                            }
+                    } else {
+                        $(".overlay").hide();
+                            //book call failed
+                        $("#errmsg").html("Your online booking request processed failed - " + json.errormsg);
+
+                    }
+
+                    }
+                });  //end ajax
+
+            })
+          //  $(".AnchorBook").addClass("inactiveLink");
+            $('.AnchorBook').click(function (e) {
+
+                //$(".AnchorBook").off('click');
+                $(".AnchorBook").addClass("inactiveLink");
+                e.preventDefault();
+                var iVal = $('#VisitCode').val();
+                var faultdesc = $("#ReportFault").val();
+                var reason = "";
+
+                if (iVal == "") {
+                    alert('Please select any appointment reason.');
+                    $(".AnchorBook").removeClass("inactiveLink");
+                    return false;
+                }
+                else
+
+                    reason = iVal;
+
+                if ($("#ReportFault").val() == "" || faultdesc.length == 0 || faultdesc.trim() == "") {
+                    alert("Please add a fault description and try again.");
+                    $(".AnchorBook").removeClass("inactiveLink");
+                    return false;
+                }
+
+
+                var Params = $(this).attr('href').split(',');
+                var engineerid = parseInt(Params[1]);
+                var eventDate = Params[0].toString().substring(1, Params[0].toString().length - 2);
+              
+               
+                // var ShowAppointmentReason = '@ViewBag.ShowAppointmentReason';
+                // if (ShowAppointmentReason != '') {
+                //   if ($("#VisitCode") != null) {
+             
+
+                
+
+                //  }
+                //  }
+                //
+
+                var msg = "Do you want to confirm the booking for the date " + eventDate + "?";
+
+                if (confirm(msg)) {
+
+                    $(".overlay").show();
+                    $("#errmsg").html("Attempting to confirm the booking for you...");
+
+                    $.ajax({
+                        url: '/BookNewService/BookNow',
+                        type: 'post',
+                        dataType: 'json',
+                        data: { EventDate: eventDate, Engineerid: engineerid, faultdesc: faultdesc, reason: reason },
+                        success: function (json) {
+                            //  alert(json["success"]);
+                            if (json["success"]) {
+
+                                alert("Your online booking done successfully.");
+                                //alert(json["type"]);
+                                if (json["type"] == "7")//mobile collection
+
+                                {
+                                    $('#divNSI').dialog({
+                                        height: 350,
+                                        width: 550,
+                                        modal: true,
+                                        title: "Advise the customer to:", closeIcon: '',
+                                        refreshPageAfterClose: false,
+                                        buttons: [{
+                                            text: "Next",
+                                            "class": "rbg",
+                                            click: function () {
+                                                $('#divNSI').dialog('close');
+                                                $('#divexcessPayment').dialog({
+                                                    height: 350,
+                                                    width: 500,
+                                                    modal: true,
+                                                    title: "Mobile phone excess instruction – advise the customer", closeIcon: '',
+                                                    refreshPageAfterClose: false,
+                                                    buttons: [{
+                                                        text: "Next",
+                                                        "class": "rbg",
+                                                        click: function () {
+                                                            $('#divexcessPayment').dialog('close');
+                                                            var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                                                            window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+
+                                                        }
+                                                    }]
+                                                })
+                                            }
+                                        }]
+                                    })
+                                }
+
+                                else if (json["type"] == "8")// Mobile replacement
+
+                                {
+
+                                    $('#divexcessPayment').dialog({
+                                        height: 350,
+                                        width: 500,
+                                        modal: true,
+                                        title: "Mobile phone excess instruction – advise the customer", closeIcon: '',
+                                        refreshPageAfterClose: false,
+                                        buttons: [{
+                                            text: "Next",
+                                            "class": "rbg",
+                                            click: function () {
+                                                $('#divexcessPayment').dialog('close');
+                                                $('#divReplacement').dialog({
+                                                    height: 350,
+                                                    width: 500,
+                                                    modal: true,
+                                                    title: "Adviser instructions:", closeIcon: '',
+                                                    refreshPageAfterClose: false,
+                                                    buttons: [{
+                                                        text: "Next",
+                                                        "class": "rbg",
+                                                        click: function () {
+                                                            $('#divReplacement').dialog('close');
+                                                            var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                                                            window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+
+                                                        }
+                                                    }]
+                                                })
+                                            }
+                                        }]
+                                    })
+
+
+                                }
+                                else if (json["type"] == "6" && json["ApplianceType"] == "2")// laptop collection
+                                {
+                                    $('#divNSILaptop').dialog({
+                                        height: 350,
+                                        width: 550,
+                                        modal: true,
+                                        title: "Advise the customer to:", closeIcon: '',
+                                        refreshPageAfterClose: false,
+                                        buttons: [{
+                                            text: "Next",
+                                            "class": "rbg",
+                                            click: function () {
+                                                $('#divNSILaptop').dialog('close');
+
+                                                var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                                                window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+
+
+                                            }
+                                        }]
+                                    })
+                                }
+
+                                else {
+                                    var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                                    window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+
+                                }
+
+                    } else {
+                     //   $(".overlay").hide();
+                                //book call failed
+                        $("#errmsg").html("Your online booking request processed failed - " + json.errormsg);
+
+                    }
+
+                        }
+                    });  //end ajax
+
+        } //end confirm
+            })
+
+
+
+
+        })
+
+    </script>
+}
+
+@using (Html.BeginForm("BookJob", "BookNewService", FormMethod.Post, new { @id = "RequestDateService-form" }))
+{
+    <div class="cols cols2">
+        <div class="col2 box">
+
+            <div style="clear: both"> <h5 style="float: right;color:red">@ViewBag.ErrorMessage</h5>
+    <h2 >Book an appointment</h2>
+   
+</div>  
+
+@if (!ViewBag.ShowAppointmentReason)
+{
+    <input type="hidden" id="VisitCode" name="VisitCode" value="000" />
+}
+
+@if (!ViewBag.ShowAdditionalSlot)
+{
+    <input type="hidden" id="chbAdditionalAppoinment" name="chbAdditionalAppoinment" value="false" />
+}
+
+             <div>
+                <table class="table-create-job-info" id="BookTable">
+                    @*---customer info---*@
+                    @if (ViewBag.ShowAppointmentReason != null)
+                    {
+                        if (ViewBag.ShowAppointmentReason)
+                        {
+                        <tr>
+                            <td>Please enter the appointment reason</td>
+                            <td>@Html.DropDownList("VisitCode", Model.Visitcodes, "Select reason")  </td>
+                        </tr>
+                        }
+                    }  
+                    
+                    @if (ViewBag.ShowAdditionalSlot)
+                    {         
+                       <tr>   
+                        <td  style="color:red">Please use C/S to add additional slot</td>
+                       <td>
+                           <input type="checkbox" id="chbAdditionalAppoinment" name="chbAdditionalAppoinment" value="true"> Need additional slot   
+       
+                             <select class="1-100" style="width:30px">
+                                <option>1</option>
+                                <option>2</option>
+                             </select></td> 
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>Please add a fault description</td>
+                        <td>
+                            @Html.TextAreaFor(x => x.FaultDescr, new { @class = "input", tabindex = 20, @id = "ReportFault" })
+                        </td>
+                    </tr>
+                    @if (ViewBag.Replacement == null)
+                    {     <tr>
+
+
+                        @if (ViewBag.Collection != null)
+                        { <td>Please select the collection date</td>
+                        }
+                        else
+                        {<td>Please select the prefered repair visit date</td>
+                        }
+                        <td>
+
+                            @Html.TextBoxFor(x => x.PreferredVisitDate, new { @class = "input datepicker", @id = "date-of-CustomerPrefered-datepicker" })
+
+                            <img id="date-of-CustomerPrefered-datepicker-btn" class="icon-calendar" src="/Content/Icons/ui-icon-calendar.png" alt="Select date" title="Select date" />
+                            <br />
+
+
+                            <br />
+                            <button type="button" class="rbg" id="get-date-info">Check availability</button>
+                            <p>@Html.ValidationMessageFor(x => x.PreferredVisitDate, null, new { @class = "error" })</p>
+                            <p class="error" id="errmsg">@ViewBag.GetUnitError</p>
+                            <p class="success">@ViewBag.GetUnitSuccess</p>
+                        </td>
+                    </tr>
+                  
+                        <tr>
+                            <td colspan="2">@Html.Partial("~/Views/BookNewService/_RequestDate.cshtml", Model.availabiltyResponseModel)</td>
+                        </tr>
+                    }
+
+                    @if (ViewBag.Replacement != null)
+                    {
+                        <tr>
+                            <td colspan="2">
+                                <button type="button" class="rbg" id="btnRaiseReplace">Raise replacement</button></td>
+                        </tr>
+                    
+                    }
+
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+}
+<div class="overlay">
+  <span  > Attempting to book the service in complete service . Please dont refresh the page and click 'BACK'..Please wait..</span>
+</div>
+<div id="divNSI" style="display: none" class="center">
+    Please take a backup of your data (if possible), remove the SIM and SD cards and, if possible, package the phone, battery and charger in the original box. If the box is not available, it must be securely packaged. 
+  <br />
+    <b>All APPLE products MUST be removed from Icloud prior to collection for repair. If the items is linked into Icloud it will significantly delay the repair whilst we contact you to get it removed.</b><br />
+    You must make the phone available for handover on the agreed date if you will not be available please follow the instruction from the courier text you will receive to change the date.<br />
+    The courier will text you with a collection ETA on the day of the collection. We expect to receive the item within 24 hours of it been collected (excluding weekends) and then we will contact you with any further update and advise if we will be repairing or replacing your item
+</div>
+
+<div id="divexcessPayment" style="display: none" class="center">
+    Please ask the customer how they would like to make this payment either by card payment to you now or by deducting the amount from their credit limit in customer account if they have it? 
+    <ul>
+        <li><b>Card Payment</b> - You now need to enter job number provided in complete service to take an excess payment.</li>
+        <li><b>Credit Account</b> – You now need to follow the process on taking excess payment on the customer’s account in the Shop Direct Connect system </li>
+    </ul>
+
+
+</div>
+
+
+<div id="divReplacement" style="display: none" class="center">
+    You will now need to log onto <a href="www.very.co.uk">www.very.co.uk</a> and source a suitable replacement for the customer following our replacement process. 
+
+    <br/><strong> Note </strong>– The customers product is eligible for replacement only this could be due to the warranty type or could be due to the value of the product . Once you have agreed a suitable replacement with the customer remember to complete the job in complete service.  
+
+</div>
+<div id="divNSILaptop" style="display: none" class="center">
+    Please include the charger with your unit. We always recommend that you back up all your data before sending your unit for repair as there is always a slight risk of data loss occurring during the repair process.<br />
+    All APPLE products MUST be removed from Icloud prior to collection for repair. If the items is linked into Icloud it will significantly delay the repair whilst we contact you to get it removed. If there is a need to install a new hard drive or carry out a system recovery, we will only be able to re-install the original operating system if there is a valid and readable product key sticker on the unit.<p>Please advise customers that it is only the operating system that will be reinstalled with a new hard drive. Any other programs that they have, they  will need to re install from the original disks, (IE ms office, ITunes, etc).</p> 
+</div>
+
+
+

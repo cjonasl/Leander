@@ -1,0 +1,376 @@
+﻿@model ClientConnect.ViewModels.BookNewService.CustomerPageModel
+
+@{
+    ViewBag.Title = "Confirm Customer info";
+}
+
+@using (Html.BeginForm("CustomerPreviewPage", "BookNewService", FormMethod.Post, new { @id = "customer-form" }))
+{ 
+ 
+    <div class="cols cols2">
+        <div class="col2 box">
+            <h2>Customer Confirmation</h2>
+
+            <table class="table-create-job-info">
+                @*---client info---*@
+
+                <tr>
+                    <td style="font-weight: 800">@*rowspan="3"*@
+                        <b>Account number</b>
+                    </td>
+                    <td></td>
+                    <td>@Model.CLIENTCUSTREF</td>
+                </tr>
+            </table>
+            <table class="table-create-job-info" id="BookTable">
+                @*---customer info---*@
+                @Html.HiddenFor(x => x.CustomerId)
+                <tr>
+                    <td rowspan="3">Customer</td>
+
+                    <td>Title</td>
+
+                    <td>
+                      @if (ViewBag.TitleIsEditable)
+                      {
+                        <select id = "Title" name="Title" class = "select">
+                          @foreach (var item in Model.TitleList)
+                          {
+                              <option value="@item.Value" @(Model.Title == item.Text ? "selected" : "")>@item.Text</option>
+                          }                
+                        </select>
+                          
+                        if (ViewBag.TitleIsMandatory)
+                        {
+                           <span style="color: red; font-size: large;">*</span><br />
+                        }
+                        
+                        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "error" })
+                      }
+                      else
+                      {
+                          @Html.HiddenFor(x => x.Title)
+                          @Model.Title
+                      }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Forename</td>
+                    <td>
+                        @if (ViewBag.ForenameIsEditable)
+                        {
+                           @Html.TextBoxFor(x => x.Forename, new { @class = "input2", tabindex = 20 })
+
+                           if (ViewBag.ForenameIsMandatory)
+                           {
+                               <span style="color: red; font-size: large;">*</span><br />
+                           }
+
+                           @Html.ValidationMessageFor(x => x.Forename, null, new { @class = "error" })
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(x => x.Forename)
+                            @Model.Forename
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Surname</td>
+                    <td>
+                        @if (ViewBag.SurnameIsEditable)
+                        {
+                           @Html.TextBoxFor(x => x.Surname, new { @class = "input2", tabindex = 20 })
+
+                           if (ViewBag.SurnameIsMandatory)
+                           {
+                              <span style="color: red; font-size: large;">*</span><br />
+                           }
+
+                           @Html.ValidationMessageFor(x => x.Surname, null, new { @class = "error" })
+                        }
+                        else
+                        {
+                           @Model.Surname
+                           @Html.HiddenFor(x => x.Surname)
+                        }
+                    </td>
+                </tr>
+                @*---address info---*@
+                <tr>
+                    <td rowspan="7">Address</td>
+                    <td>Postcode</td>
+                    @if (ViewBag.PostcodeIsEditable)
+                    {
+                      <td class="wide">
+                        <button type="button" class="button rbg" id="postcode-lookup-btn" title = "Find addresses by postcode" tabindex =50>Find address</button>
+                        <input type="text" name="Postcode" id="Postcode" value="@(string.IsNullOrEmpty(Model.Postcode) ? Model.Postcode : Model.Postcode.Trim())" class="input2" tabindex =40/>
+
+                         @if (ViewBag.PostcodeIsMandatory)
+                         {
+                            <span style="color: red; font-size: large;">*</span>
+                         }
+
+                         <div id="organizations-address-list"></div>
+                         @Html.ValidationMessageFor(x => x.Postcode, null, new { @class = "error" })
+                      </td>
+                    }
+                    else
+                    {
+                      <td>
+                         @Model.Postcode
+                         @Html.HiddenFor(x => x.Postcode)
+                      </td>
+                    }                 
+                </tr>
+                <tr>
+                    <td>Address line 1</td>
+                    <td>
+                       @if (ViewBag.Addr1IsEditable)
+                       {
+                           @Html.TextBoxFor(x => x.Addr1, new { @class = "input2", @id = "address-line1", tabindex = 120 })
+
+                          if (ViewBag.Addr1IsMandatory)
+                          {
+                              <span style="color: red; font-size: large;">*</span><br />
+                          }
+
+                          @Html.ValidationMessageFor(x => x.Addr1, null, new { @class = "error" })
+                       }
+                       else
+                       {                         
+                          @Model.Addr1
+                          @Html.HiddenFor(x => x.Addr1)
+                       }
+                   </td>
+                </tr>
+                <tr>
+                    <td>Address line 2</td>
+                    <td>
+                       @if (ViewBag.Addr2IsEditable)
+                       {
+                           @Html.TextBoxFor(x => x.Addr2, new { @class = "input2", @id = "address-line2", tabindex = 130 })
+
+                          if (ViewBag.Addr2IsMandatory)
+                          {
+                              <span style="color: red; font-size: large;">*</span><br />
+                          }
+
+                          @Html.ValidationMessageFor(x => x.Addr2, null, new { @class = "error" })
+                       }
+                       else
+                       {                         
+                          @Model.Addr2
+                          @Html.HiddenFor(x => x.Addr2)
+                       }
+                   </td>
+                </tr>
+                <tr>
+                    <td>Address line 3</td>
+                    <td>
+                       @if (ViewBag.Addr3IsEditable)
+                       {
+                           @Html.TextBoxFor(x => x.Addr3, new { @class = "input2", @id = "address-line3", tabindex = 140 })
+
+                          if (ViewBag.Addr3IsMandatory)
+                          {
+                              <span style="color: red; font-size: large;">*</span><br />
+                          }
+
+                          @Html.ValidationMessageFor(x => x.Addr3, null, new { @class = "error" })
+                       }
+                       else
+                       {                         
+                          @Model.Addr3
+                          @Html.HiddenFor(x => x.Addr3)
+                       }
+                   </td>
+                </tr>
+                <tr>
+                    <td>Town</td>
+                    <td>
+                       @if (ViewBag.TownIsEditable)
+                       {
+                           @Html.TextBoxFor(x => x.Town, new { @class = "input2", @id = "Town", tabindex = 150 })
+
+                           if (ViewBag.TownIsMandatory)
+                          {
+                              <span style="color: red; font-size: large;">*</span><br />
+                          }
+
+                          @Html.ValidationMessageFor(x => x.Town, null, new { @class = "error" })
+                       }
+                       else
+                       {                         
+                          @Model.Town
+                          @Html.HiddenFor(x => x.Town)
+                       }
+                   </td>
+                </tr>
+                <tr>
+                    <td>County</td>
+                    <td>
+                       @if (ViewBag.CountyIsEditable)
+                       {
+                           @Html.TextBoxFor(x => x.County, new { @class = "input2", @id = "County", tabindex = 160 })
+
+                           if (ViewBag.CountyIsMandatory)
+                          {
+                              <span style="color: red; font-size: large;">*</span><br />
+                          }
+
+                          @Html.ValidationMessageFor(x => x.County, null, new { @class = "error" })
+                       }
+                       else
+                       {                         
+                          @Model.County
+                          @Html.HiddenFor(x => x.County)
+                       }
+                   </td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>
+                       @if (ViewBag.CountryIsEditable)
+                       {
+                          @Html.DropDownListFor(x => x.Country, Model.CountryList, new { @class = "select", tabindex = 165 })
+
+                          if (ViewBag.CountryIsMandatory)
+                          {
+                             <span style="color: red; font-size: large;">*</span><br />
+                          }
+
+                          @Html.ValidationMessageFor(x => x.Country, null, new { @class = "error" })
+                       }
+                       else
+                       {                         
+                          @Model.Country
+                          @Html.HiddenFor(x => x.Country)
+                       }
+                   </td>
+                </tr>
+
+
+                @*---contact info---*@
+                <tr>
+                    <td rowspan="4">Contact</td>
+                    
+                       @if (ViewBag.Tel1IsEditable)
+                       {
+                          <td>Telephone 1&nbsp; <span style="font-size: smaller !important; font-weight: normal !important;"> <input type="radio" name="Tel1IsMobile" value="true" @ViewBag.Tel1Mobile />Mobile &nbsp;<input type="radio" name="Tel1IsMobile" value="false" @ViewBag.Tel1Landline/>Landline</span></td>     
+                          <td>
+                             @Html.TextBoxFor(model => Model.Tel1, new { @class = "input2", tabindex = 170 })
+
+                             @if (ViewBag.Tel1IsMandatory)
+                             {
+                                <span style="color: red; font-size: large;">*</span><br />
+                             }
+
+                             @Html.ValidationMessageFor(model => Model.Tel1, null, new { @class = "error" })
+                          </td>
+                       }
+                       else
+                       {   
+                          <td>Telephone 1&nbsp;@ViewBag.Tel1Mobile</td>
+                           <td>
+                             @Model.Tel1
+                             @Html.HiddenFor(x => x.Tel1)
+                          </td>   
+                       }                
+                </tr>
+                <tr>
+                      @if (ViewBag.Tel2IsEditable)
+                      {
+                          <td>Telephone 2&nbsp; <span style="font-size: smaller !important; font-weight: normal !important;"> <input type="radio" name="Tel2IsMobile" value="true" @ViewBag.Tel2Mobile />Mobile &nbsp;<input type="radio" name="Tel2IsMobile" value="false" @ViewBag.Tel2Landline/>Landline</span></td>     
+                          <td>
+                             @Html.TextBoxFor(model => Model.Tel2, new { @class = "input2", tabindex = 170 })
+
+                             @if (ViewBag.Tel2IsMandatory)
+                             {
+                                <span style="color: red; font-size: large;">*</span><br />
+                             }
+
+                             @Html.ValidationMessageFor(model => Model.Tel2, null, new { @class = "error" })
+                          </td>
+                       }
+                       else
+                       {   
+                          <td>Telephone 2&nbsp; @ViewBag.Tel2Mobile</td>
+                           <td>
+                             @Model.Tel2
+                             @Html.HiddenFor(x => x.Tel2)
+                          </td>   
+                       }
+                </tr>
+                <tr>
+                    <td>Email address</td>
+                    <td>
+                       @if (ViewBag.EmailIsEditable)
+                       {
+                           @Html.TextBoxFor(model => Model.Email, new { @class = "input2", tabindex = 190, autocomplete = "off" })
+
+                           if (ViewBag.EmailIsMandatory)
+                           {
+                              <span style="color: red; font-size: large;">*</span><br />
+                           }
+
+                           @Html.ValidationMessageFor(model => Model.Email, null, new { @class = "error" })
+                       }
+                       else
+                       {
+                           @Model.Email
+                           @Html.HiddenFor(x => x.Email)
+                       }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Preferred method</td>
+                    <td>
+                       @if (ViewBag.ContactMethodIsEditable)
+                       {
+                          @Html.DropDownListFor(x => x.ContactMethod, Model.ContactMethodList, new { @class = "select", tabindex = 10 })
+
+                          if (ViewBag.ContactMethodIsMandatory)
+                          {
+                              <span style="color: red; font-size: large;">*</span><br />
+                          }
+
+                          @Html.ValidationMessageFor(model => Model.ContactMethod, null, new { @class = "error" })
+                       }
+                       else
+                       {
+                          @Model.ContactMethodList.SingleOrDefault(x => x.Value == Model.ContactMethod.ToString()).Text
+                          @Html.HiddenFor(x => x.ContactMethod)
+                       }                  
+                    </td>
+                </tr>
+
+                @if (ViewBag.ShowStarMandatoryField)
+                {
+                    <td style="color: red !important;">* Mandatory Field</td>
+                    <tr>
+                      <td colspan="3">
+                          <span class="error">@ViewBag.ErrorMessage </span>
+                          <input class="button rbg" id="saveCustomerInfo" type="submit" value="Next" title="Save customer info and go to next step" tabindex="210" />
+                      </td>
+                   </tr>
+                }
+                else
+                {
+                   <tr>
+                    <td colspan="4">
+                        <span class="error">@ViewBag.ErrorMessage </span>
+                        <input class="button rbg" id="saveCustomerInfo" type="submit" value="Next" title="Save customer info and go to next step" tabindex="210" />
+                    </td>
+                   </tr>
+                }
+
+
+            </table>
+            <input type="hidden" value="@Model.Organization" name="Organization" id="address-organization"/>
+            <input type="hidden" value="@Model.Department" name="Department" id="address-department"/>
+            @Html.HiddenFor(x => x.CustomerId)
+        </div>
+    </div>
+}
+

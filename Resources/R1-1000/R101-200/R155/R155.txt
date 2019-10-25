@@ -1,0 +1,45 @@
+﻿155
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-24 12:48:52
+
+----- New property -----
+
+Task58_Day134_Date191024_Remove Appointment Reason and Additional Slot from the Book Appointment Page (Jira CC-14)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task58_Day134_Date191024_Remove Appointment Reason and Additional Slot from the Book Appointment Page (Jira CC-14)
+
+----- New property -----
+
+null

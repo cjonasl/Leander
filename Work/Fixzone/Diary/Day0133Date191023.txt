@@ -1,2 +1,16 @@
 ﻿Dag 133:
 Onsdag den 23 oktober 2019
+Mail inkom från Ivo som bad att jag modifierar Cast-koden
+så att inte en vanlig administratör har möjlighet att ändra
+status på en anställd till ”SuperAdm”. Jag skapade task56
+för uppgiften och gjorde den omgående och jag modifierade
+också så att en vanlig administratör inte heller har möjlighet
+att titta på eller uppdatera data för en superadministratör
+efter önskemål om detta från Angela och Vijay. Vid 13.00-tiden
+intog jag banan, smörgås och kaffe till lunch. Gjorde klart
+och testade task55 (New ClientConnect remove restriction on
+amending the Customer Address and Con-tact Information). Fick
+två nya hjälpdokument (i pdf-format) i Argos Cast som skulle
+läggas till i webbplatsen och jag gjorde uppgiften i task57.
+Jag avslutade arbetsdagen drygt kl. 18.00 och gick till M&S
+och handlade för 10.23 pund.

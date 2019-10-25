@@ -1,0 +1,45 @@
+﻿156
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-24 15:51:24
+
+----- New property -----
+
+Task59_Day134_Date191024_Amend message if required date is not available (CC-20)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task59_Day134_Date191024_Amend message if required date is not available (CC-20)
+
+----- New property -----
+
+null

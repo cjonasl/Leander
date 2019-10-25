@@ -9,30 +9,16 @@
     @Scripts.Render("~/scripts/addresses-js")
     <script type="text/javascript">
         $(document).ready(function () {
-            //var btnList = [buttons.back_BtnId, buttons.home_BtnId, buttons.signOut_BtnId];
-            //$.each(btnList, function (indx) {
-            //    $(btnList[indx]).click(function (e) {
-            //        targetUrl = $(btnList[indx]).attr("href");
-            //        e.preventDefault();
-            //        var unsavedInfoDialog = new Dialog(new DefaulDialogSettings().confirmUnsavedInfo);
+            $('.BtnNext').click(function () {
+               
 
-            //        unsavedInfoDialog.buttons([{
-            //                text: 'Cancel',
-            //                "class": 'bbg',
-            //                click: function() {
-            //                    unsavedInfoDialog.close();
-            //                }
-            //            }, {
-            //                text: 'Ok',
-            //                "class": 'rbg',
-            //                href: '',
-            //                click: function() {
-            //                    window.location.href = targetUrl;
-            //                }
-            //            }]);
-            //        unsavedInfoDialog.show();
-            //    });
-            //});
+                $('#Postcode').val($.trim($('#Postcode').val()));
+               
+                $(".overlay").show();
+            });
+            if ('@ViewBag.ClientMissing' != '') {
+                alert('@ViewBag.Collection');
+            }
 
             
             
@@ -107,7 +93,7 @@
 
                     @if (ViewBag.CLIENTCUSTREFIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.CLIENTCUSTREF, null, new { @class = "error" })
@@ -147,7 +133,7 @@
 
                     @if (ViewBag.ForenameIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.Forename, null, new { @class = "error" })
@@ -160,7 +146,7 @@
 
                     @if (ViewBag.SurnameIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.Surname, null, new { @class = "error" })
@@ -192,7 +178,7 @@
 
                     @if (ViewBag.Addr1IsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.Addr1, null, new { @class = "error" })
@@ -205,7 +191,7 @@
 
                     @if (ViewBag.Addr2IsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.Addr2, null, new { @class = "error" })
@@ -218,7 +204,7 @@
 
                     @if (ViewBag.Addr3IsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.Addr3, null, new { @class = "error" })
@@ -231,7 +217,7 @@
 
                     @if (ViewBag.TownIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.Town, null, new { @class = "error" })
@@ -244,7 +230,7 @@
 
                     @if (ViewBag.CountyIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.County, null, new { @class = "error" })
@@ -257,7 +243,7 @@
 
                     @if (ViewBag.CountryIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(x => x.Country, null, new { @class = "error" })
@@ -275,7 +261,7 @@
 
                     @if (ViewBag.Tel1IsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
 
@@ -289,7 +275,7 @@
 
                     @if (ViewBag.Tel2IsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
 
@@ -302,7 +288,7 @@
 
                     @if (ViewBag.EmailIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(model => Model.Email, null, new { @class = "error" })
@@ -315,7 +301,7 @@
 
                     @if (ViewBag.ContactMethodIsMandatory)
                     {
-                        <span style="color: red; font-size: large;">*</span>
+                        <span style="color: red; font-size: large;">*</span><br />
                     }
 
                     @Html.ValidationMessageFor(model => Model.ContactMethod, null, new { @class = "error" })
@@ -345,3 +331,4 @@
     </div>
 </div>
 }
+<div class="overlay"></div>

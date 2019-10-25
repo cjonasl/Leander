@@ -1,0 +1,1794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1CD997C8-F604-40AB-B23D-892840C365F0}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClientConnect</RootNamespace>
+    <AssemblyName>ClientConnect</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\ErrorsDescription.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorsDescription.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\_3CService_MessageInspectorBehavior.cs" />
+    <Compile Include="Configuration\UserRoles.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
+    <Compile Include="Controllers\AdminJobStatusController.cs" />
+    <Compile Include="Controllers\BookNewServiceController.cs" />
+    <Compile Include="Controllers\CallCenterController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CustProdController.cs" />
+    <Compile Include="Controllers\DesignController.cs" />
+    <Compile Include="Controllers\DiagnosticController.cs" />
+    <Compile Include="Controllers\EngravingController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\FunctionsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobType.cs" />
+    <Compile Include="Controllers\LogsController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\JobStatusController.cs" />
+    <Compile Include="Controllers\ProcessController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\TemplateController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\ViewController.cs" />
+    <Compile Include="Infrastructure\AllowedFileExtensions.cs" />
+    <Compile Include="Infrastructure\ClientBusinessRule.cs" />
+    <Compile Include="Infrastructure\CookiesKeys.cs" />
+    <Compile Include="Infrastructure\DefaultValues.cs" />
+    <Compile Include="Infrastructure\DynamicLibrary.cs" />
+    <Compile Include="Infrastructure\LogFields.cs" />
+    <Compile Include="Infrastructure\RuleSetKeys.cs" />
+    <Compile Include="Infrastructure\ValidationFormats.cs" />
+    <Compile Include="Configuration\Ioc.cs" />
+    <Compile Include="Configuration\IocRetailerConnectModule.cs" />
+    <Compile Include="Infrastructure\ValidationRuleSets.cs" />
+    <Compile Include="Logging\Logger_ConnectLog.cs" />
+    <Compile Include="Logging\Logger_File.cs" />
+    <Compile Include="Models\3C\Send\3CRegisterResult.cs" />
+    <Compile Include="Models\3C\Send\AddAttachmentResultModel.cs" />
+    <Compile Include="Models\3C\Send\AddressInfo.cs" />
+    <Compile Include="Models\3C\Send\AttachmentModel.cs" />
+    <Compile Include="Models\3C\Send\CreateAEPSwapModelResultModel.cs" />
+    <Compile Include="Models\3C\Send\EventRegResponseEventInfo.cs" />
+    <Compile Include="Models\3C\Send\GetUnitInfoResultModel.cs" />
+    <Compile Include="Models\3C\Send\PremiumServicesInfo.cs" />
+    <Compile Include="Models\3C\Send\RegisterServiceEventResultModel.cs" />
+    <Compile Include="Models\3C\Send\RegisterUnitResultModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_AEPSwapModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_CustomerInfoModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_DeliveryInfoModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_InfoModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_RegisterUnit.cs" />
+    <Compile Include="Models\3C\Send\Registration_SendModel.cs" />
+    <Compile Include="Models\3C\Send\Registration_UnitInfoModel.cs" />
+    <Compile Include="Models\Account\AccountDetailsModel.cs" />
+    <Compile Include="Models\Account\CookiesStoredInfo.cs" />
+    <Compile Include="Models\Account\SessionModel.cs" />
+    <Compile Include="Models\Administration\AccountsInfoModel.cs" />
+    <Compile Include="Models\Administration\Administration_SessionModel.cs" />
+    <Compile Include="Models\Administration\CCUser.cs" />
+    <Compile Include="Models\Aep\AepResultModel.cs" />
+    <Compile Include="Models\Aep\AepSessionModel.cs" />
+    <Compile Include="Models\Appliance\ApplianceInfoModel.cs" />
+    <Compile Include="Models\Appliance\TroubleshootModel.cs" />
+    <Compile Include="Models\BookNewService\BookNewServiceSessionModel.cs" />
+    <Compile Include="Models\BookNewService\CustomValidation.cs" />
+    <Compile Include="Models\Customer\CustCheckWorkFlowModel.cs" />
+    <Compile Include="Models\Customer\CustCheckWorkFlowSessionModel.cs" />
+    <Compile Include="Models\BookNewService\SonyAuthSessionModel.cs" />
+    <Compile Include="Models\Client\ClientModel.cs" />
+    <Compile Include="Models\CustomerProduct\AccidentalDamageCA.cs" />
+    <Compile Include="Models\CustomerProduct\CustomerProduct_SessionModel.cs" />
+    <Compile Include="Models\Customer\CustomerModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Customer\CustomerProductSessionModel.cs" />
+    <Compile Include="Models\Customer\CustomerSessionModel.cs" />
+    <Compile Include="Models\Customer\Customer_CountriesModel.cs" />
+    <Compile Include="Models\Customer\FailureReasonResultModel.cs" />
+    <Compile Include="Models\Diagnostic\Diagnostic_ResultsModel.cs" />
+    <Compile Include="Models\Engineer\EngineerChoiceModel.cs" />
+    <Compile Include="Models\Engineer\EngineerModel.cs" />
+    <Compile Include="Models\Errors\Errors_SessionModel.cs" />
+    <Compile Include="Models\Files\ImportedFileModel.cs" />
+    <Compile Include="Models\Files\ImportedResult.cs" />
+    <Compile Include="Models\Files\ImportedRow.cs" />
+    <Compile Include="Models\Job\AdditionalJob.cs" />
+    <Compile Include="Models\Job\CallPart.cs" />
+    <Compile Include="Models\Job\RejectedJobsModel.cs" />
+    <Compile Include="Models\Job\ConditionIrisCodesModel.cs" />
+    <Compile Include="Models\Job\PartAction.cs" />
+    <Compile Include="Models\Job\ServiceModel.cs" />
+    <Compile Include="Models\Job\TransactionItem.cs" />
+    <Compile Include="Models\Part\CallPart.cs" />
+    <Compile Include="Models\Product\MobileAccidentClaim.cs" />
+    <Compile Include="Models\Product\RepeatHistory.cs" />
+    <Compile Include="Models\Product\RepeatRepairResult.cs" />
+    <Compile Include="Models\Job\DieryEntInfoModel.cs" />
+    <Compile Include="Models\Job\FieldsFromDB.cs" />
+    <Compile Include="Models\Job\FieldsFromDBAnswerModel.cs" />
+    <Compile Include="Models\Job\FieldsFromDBSessionModel.cs" />
+    <Compile Include="Models\Job\FileTypeCategoryModel.cs" />
+    <Compile Include="Models\Job\GetUnitInfoModel.cs" />
+    <Compile Include="Models\Job\JobInfoModel.cs" />
+    <Compile Include="Models\Job\RetailerModel.cs" />
+    <Compile Include="Models\Job\SaveServiceResult.cs" />
+    <Compile Include="Models\Job\ServiceInfoModel.cs" />
+    <Compile Include="Models\Job\SymptomIrisCodesModel.cs" />
+    <Compile Include="Models\Logs\ConnectLogsModel.cs" />
+    <Compile Include="Models\Logs\LogsSessionModel.cs" />
+    <Compile Include="Models\Logs\FileLogsModel.cs" />
+    <Compile Include="Models\Process\ProcessDetailsModel.cs" />
+    <Compile Include="Models\Process\ProcessesStack.cs" />
+    <Compile Include="Models\Repository\QueryResultModel.cs" />
+    <Compile Include="Models\Store\ClosestStoreInfoSessionModel.cs" />
+    <Compile Include="Models\Template\Template_SessionModel.cs" />
+    <Compile Include="Models\UploadedFile\UploadedFileModel.cs" />
+    <Compile Include="Models\User\UserConfidentialModel.cs" />
+    <Compile Include="OpenJobs.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\AccountRepository.cs" />
+    <Compile Include="Repositories\ApplianceRepository.cs" />
+    <Compile Include="Repositories\Customer_suppliersModel.cs" />
+    <Compile Include="Repositories\JobTypesRepository.cs" />
+    <Compile Include="Repositories\CustCheckWorkFlowRepository.cs" />
+    <Compile Include="Repositories\CustomerProductRepository.cs" />
+    <Compile Include="Repositories\EngineerRepository.cs" />
+    <Compile Include="Repositories\Extensions.cs" />
+    <Compile Include="Repositories\FileRepository.cs" />
+    <Compile Include="Repositories\JobPartsRepository.cs" />
+    <Compile Include="Repositories\LogsRepository.cs" />
+    <Compile Include="Repositories\ProcessRepository.cs" />
+    <Compile Include="Repositories\RepeatedJob.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\StatusesRepository.cs" />
+    <Compile Include="Repositories\TemplateRepository.cs" />
+    <Compile Include="Services\CustCheckWorkFlowService.cs" />
+    <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\JobUserSessionInfo.cs" />
+    <Compile Include="Services\TemplateService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\BookNewService_ApplianceDetailsValidation.cs" />
+    <Compile Include="Validation\MobilePhoneTheftValidation.cs" />
+    <Compile Include="ViewModels\BookNewService\DPACheck.cs" />
+    <Compile Include="ViewModels\BookNewService\JobBookingModel.cs" />
+    <Compile Include="ViewModels\BookNewService\MobileAccidentClaimModel.cs" />
+    <Compile Include="ViewModels\Customer\Customer_SearchModel.cs" />
+    <Compile Include="ViewModels\Customer\Customer_SearchResult.cs" />
+    <Compile Include="ViewModels\Home\BusinessRule.cs" />
+    <Compile Include="ViewModels\JobStatuses\RejectedJobsM.cs" />
+    <Compile Include="ViewModels\JobStatuses\Status_Model.cs" />
+    <Compile Include="Roles\AuthorizeUser.cs" />
+    <Compile Include="Roles\LogsViewRoleAttribute.cs" />
+    <Compile Include="Service References\AscServiceSync\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FzOnlineBooking\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\3CService.cs" />
+    <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\ApplianceService.cs" />
+    <Compile Include="Services\AvailableRequestDetails.cs" />
+    <Compile Include="Services\BookNewServiceService.cs" />
+    <Compile Include="Services\OnlineBookCustomerDetails.cs" />
+    <Compile Include="Services\OnlineBookingService.cs" />
+    <Compile Include="Services\CustomerProductService.cs" />
+    <Compile Include="Services\CustomerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\EngineerService.cs" />
+    <Compile Include="Services\ErrorsService.cs" />
+    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\Functions.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\LogsService.cs" />
+    <Compile Include="Services\OnlineBookRequestDetails.cs" />
+    <Compile Include="Services\ProcessService.cs" />
+    <Compile Include="Holder\CacheHolder.cs" />
+    <Compile Include="Validation\Account\AccountConfidentialInfoValidation.cs" />
+    <Compile Include="Validation\Account\AccountDetailsValidation.cs" />
+    <Compile Include="Validation\AddressValidation.cs" />
+    <Compile Include="Validation\Administration\AccountValidation.cs" />
+    <Compile Include="Validation\Administration\UserInfoEditValidation.cs" />
+    <Compile Include="Validation\BookNewService_CustomerPageValdation.cs" />
+    <Compile Include="Validation\BookNewService_JobPageValdation.cs" />
+    <Compile Include="Validation\CustomerValidation.cs" />
+    <Compile Include="Validation\FieldsFromDBValidation.cs" />
+    <Compile Include="Validation\ImportFile\ImportedRowValidator.cs" />
+    <Compile Include="Validation\ValidatorFactory.cs" />
+    <Compile Include="Validation\Job\AdditionalJobValidation.cs" />
+    <Compile Include="Validation\Job\ContactsValidation.cs" />
+    <Compile Include="Validation\Job\CustomerValidation.cs" />
+    <Compile Include="Validation\Job\ProductValidation.cs" />
+    <Compile Include="Validation\Job\RepairInfoValidator.cs" />
+    <Compile Include="Validation\ProcessValidation.cs" />
+    <Compile Include="Validation\ProductDetails_Validator.cs" />
+    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="ViewModels\Account\AccountConfidentialInfo.cs" />
+    <Compile Include="ViewModels\Account\AccountViewModel.cs" />
+    <Compile Include="ViewModels\Account\AccountsList.cs" />
+    <Compile Include="ViewModels\Administration\AccountDetails.cs" />
+    <Compile Include="ViewModels\BookNewService\AepModel.cs" />
+    <Compile Include="ViewModels\BookNewService\AcceptAepModel.cs" />
+    <Compile Include="ViewModels\BookNewService\Appointment.cs" />
+    <Compile Include="ViewModels\BookNewService\ConfirmInfoModel.cs" />
+    <Compile Include="ViewModels\BookNewService\CustomerPageModel.cs" />
+    <Compile Include="ViewModels\BookNewService\EngineerListModel.cs" />
+    <Compile Include="ViewModels\BookNewService\JobPageModel.cs" />
+    <Compile Include="ViewModels\CustomerProduct\CustomerProductModel.cs" />
+    <Compile Include="Models\General\General_SessionModel.cs" />
+    <Compile Include="Models\JobStatuses\JobStatus_SessionModel.cs" />
+    <Compile Include="Models\Job\Guarantee_Model.cs" />
+    <Compile Include="Models\FieldsFromDB\FieldsFromDB_SessionModel.cs" />
+    <Compile Include="Models\Job\Job_RepairTypesModel.cs" />
+    <Compile Include="Models\Job\Job_SessionModel.cs" />
+    <Compile Include="Models\Product\Product_SessionModel.cs" />
+    <Compile Include="Models\FieldsFromDB\InspectFieldsModel.cs" />
+    <Compile Include="Models\FieldsFromDB\InspectFields_SessionModel.cs" />
+    <Compile Include="Models\FieldsFromDB\ListOfAnswersModel.cs" />
+    <Compile Include="Models\Job\Job_AdditionalInfo.cs" />
+    <Compile Include="Models\Job\Job_WarrantyModel.cs" />
+    <Compile Include="Models\Question\QuestionSessionModel.cs" />
+    <Compile Include="Models\Store\Store_CookiesModel.cs" />
+    <Compile Include="Models\User\User_SessionModel.cs" />
+    <Compile Include="Repositories\FieldsFromDBRepository.cs" />
+    <Compile Include="Roles\AdminRoleAttribute.cs" />
+    <Compile Include="Infrastructure\ContactMethod.cs" />
+    <Compile Include="Infrastructure\LetterCodes.cs" />
+    <Compile Include="Infrastructure\LetterGroupCodes.cs" />
+    <Compile Include="Infrastructure\ServiceUsageTypes.cs" />
+    <Compile Include="Infrastructure\VersionInfo.cs" />
+    <Compile Include="Logging\DatabaseLogger.cs" />
+    <Compile Include="Logging\Logger_Job.cs" />
+    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Logging\Logger_ProductView.cs" />
+    <Compile Include="Logging\Logger_SignIn.cs" />
+    <Compile Include="ViewModels\Administration\Administration_UserModel.cs" />
+    <Compile Include="Models\Administration\Administration_UsersSearchResult.cs" />
+    <Compile Include="ViewModels\Administration\AccountsList.cs" />
+    <Compile Include="Models\Job\Job_DetailsDto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Job\Job_NoteDto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Job\Job_NoteModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Job\Job_TrackingStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Reports\ReportListModel.cs" />
+    <Compile Include="Models\Reports\ReportsModel.cs" />
+    <Compile Include="Models\Store\StoreInfoModel.cs" />
+    <Compile Include="Notifications\Notifications_JobInfo.cs" />
+    <Compile Include="Notifications\Notifications_Sender.cs" />
+    <Compile Include="Process\ProcessDataHolder.cs" />
+    <Compile Include="Process\ProcessNavigator.cs" />
+    <Compile Include="Process\ProcessNavigationResult.cs" />
+    <Compile Include="Process\ProcessStepDetailsDto.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\AdministrationRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\DiagnosticRepository.cs" />
+    <Compile Include="Repositories\EngravingRepository.cs" />
+    <Compile Include="Repositories\HomeRepository.cs" />
+    <Compile Include="Repositories\JobRepository.cs" />
+    <Compile Include="Repositories\JobStatusesRepository.cs" />
+    <Compile Include="Repositories\LoggerRepository.cs" />
+    <Compile Include="Repositories\NotificationsRepository.cs" />
+    <Compile Include="Repositories\QuestionsRepository.cs" />
+    <Compile Include="Repositories\ReportsRepository.cs" />
+    <Compile Include="Repositories\StoreRepository.cs" />
+    <Compile Include="Senders\EmailSender.cs" />
+    <Compile Include="Senders\SmsSender.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\AdministrationService.cs" />
+    <Compile Include="Services\DiagnosticService.cs" />
+    <Compile Include="Services\EngravingService.cs" />
+    <Compile Include="Models\Engraving\Engraving_SessionModel.cs" />
+    <Compile Include="Services\FieldsFromDBService.cs" />
+    <Compile Include="Services\GeneralService.cs" />
+    <Compile Include="Services\HomeService.cs" />
+    <Compile Include="Services\JobService.cs" />
+    <Compile Include="Services\JobStatusesService.cs" />
+    <Compile Include="Services\LoggerService.cs" />
+    <Compile Include="Services\MsgService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\QuestionService.cs" />
+    <Compile Include="Services\ReportsService.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\StoreService.cs" />
+    <Compile Include="Holder\CookiesHolder.cs" />
+    <Compile Include="Holder\SessionHolder.cs" />
+    <Compile Include="Roles\CheckStoreFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Store\StoreInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\Job_DetailsModel_Validator.cs" />
+    <Compile Include="Validation\PasswordValidation.cs" />
+    <Compile Include="Validation\Postcode_Validation.cs" />
+    <Compile Include="Models\Address\AddressModel.cs" />
+    <Compile Include="ViewModels\Customer\Contact_InfoModel.cs" />
+    <Compile Include="ViewModels\Customer\Customer_InfoModel.cs" />
+    <Compile Include="Models\Customer\Customer_TitlesModel.cs" />
+    <Compile Include="ViewModels\EngravingPlaces\SpecificEngravingPlaces_Model.cs" />
+    <Compile Include="ViewModels\EngravingPlaces\SpecificEngravingPlaces_Result.cs" />
+    <Compile Include="ViewModels\FieldsFromDb\AdditionalFieldsModel.cs" />
+    <Compile Include="ViewModels\FieldsFromDb\AepFieldsModel.cs" />
+    <Compile Include="ViewModels\Home\Home_AdditionalLinksResult.cs" />
+    <Compile Include="ViewModels\JobStatuses\AdminJobStatus_Model .cs" />
+    <Compile Include="ViewModels\JobStatuses\AdminJobStatus_SearchModel .cs" />
+    <Compile Include="ViewModels\JobStatuses\JobStatus_Search.cs" />
+    <Compile Include="ViewModels\JobStatuses\JobStatus_SearchModel.cs" />
+    <Compile Include="ViewModels\JobStatuses\JobStatus_Model.cs" />
+    <Compile Include="ViewModels\JobStatuses\WebRejection.cs" />
+    <Compile Include="ViewModels\Job\CallPart.cs" />
+    <Compile Include="ViewModels\Job\CallPartCostModel.cs" />
+    <Compile Include="ViewModels\Job\ContactInfoModel.cs" />
+    <Compile Include="ViewModels\Job\CustomerInfoModel.cs" />
+    <Compile Include="ViewModels\Job\JobDetailsModel.cs" />
+    <Compile Include="ViewModels\Job\JobFaultInfo.cs" />
+    <Compile Include="ViewModels\Job\JobStatusHistory.cs" />
+    <Compile Include="ViewModels\Job\Job_AppliananceModel.cs" />
+    <Compile Include="ViewModels\Job\Job_NoteDtoShop.cs" />
+    <Compile Include="ViewModels\Job\LinkedJobs.cs" />
+    <Compile Include="ViewModels\Job\Media.cs" />
+    <Compile Include="ViewModels\Job\NewServiceJobPage.cs" />
+    <Compile Include="ViewModels\Job\Job_StatusModel.cs" />
+    <Compile Include="ViewModels\Job\Job_DetailsModel.cs" />
+    <Compile Include="ViewModels\Job\Job_SearchModel.cs" />
+    <Compile Include="ViewModels\Job\Job_SearchResult.cs" />
+    <Compile Include="ViewModels\Job\NoteRecordModel.cs" />
+    <Compile Include="ViewModels\Job\NoteRecordModelShop.cs" />
+    <Compile Include="ViewModels\Job\ProductInfoModel.cs" />
+    <Compile Include="ViewModels\Job\RepairInfoModel.cs" />
+    <Compile Include="ViewModels\Job\Repair_InfoModel.cs" />
+    <Compile Include="ViewModels\Product\Product_AdditServiceModel.cs" />
+    <Compile Include="ViewModels\Product\Product_DetailModel.cs" />
+    <Compile Include="ViewModels\Product\Product_InfoModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Product\Product_SearchModel.cs" />
+    <Compile Include="ViewModels\Product\Product_SearchResult.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\DataContext.cs" />
+    <Compile Include="Infrastructure\SqlMapper.cs" />
+    <Compile Include="Process\ActiveProcessesState.cs" />
+    <Compile Include="Process\ProcessData.cs" />
+    <Compile Include="Process\ProcessNavigationData.cs" />
+    <Compile Include="Process\ProcessesStateHolder.cs" />
+    <Compile Include="Process\ProcessState.cs" />
+    <Compile Include="Process\ProcessUrlHelper.cs" />
+    <Compile Include="Process\PredefinedProcess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Service References\PostcodeService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SmsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="Validation\LandlinePhoneValidation.cs" />
+    <Compile Include="ViewModels\Product\UpdateProductInfoCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Question\Question_Model.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Template\SpecificTemplate_Model.cs" />
+    <Compile Include="ViewModels\Template\SpecificTemplate_Result.cs" />
+    <Compile Include="Web References\IOnlineSpareParts\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SparePartsServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\MIModel.xml" />
+    <Content Include="bundler\bundler.js" />
+    <Content Include="bundler\node.exe" />
+    <Content Include="bundler\node_modules\clean-css\index.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\clean.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\colors\hsl-to-hex.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\colors\long-to-short-hex.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\colors\rgb-to-hex.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\colors\shortener.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\images\url-rebase.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\images\url-rewriter.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\imports\inliner.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\properties\optimizer.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\properties\override-compactor.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\properties\processable.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\properties\scanner.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\properties\shorthand-compactor.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\properties\token.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\properties\validator.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\selectors\empty-removal.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\selectors\optimizer.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\selectors\tokenizer.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\text\comments.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\text\escape-store.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\text\expressions.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\text\free.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\text\name-quotes.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\text\quote-scanner.js" />
+    <Content Include="bundler\node_modules\clean-css\lib\text\urls.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\browser.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\cake.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\coffee-script.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\command.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\grammar.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\helpers.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\index.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\lexer.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\nodes.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\optparse.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\parser.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\register.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\repl.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\rewriter.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\scope.js" />
+    <Content Include="bundler\node_modules\coffee-script\lib\coffee-script\sourcemap.js" />
+    <Content Include="bundler\node_modules\debug\browser.js" />
+    <Content Include="bundler\node_modules\debug\debug.js" />
+    <Content Include="bundler\node_modules\debug\node.js" />
+    <Content Include="bundler\node_modules\debug\node_modules\ms\index.js" />
+    <Content Include="bundler\node_modules\less\lib\less\browser.js" />
+    <Content Include="bundler\node_modules\less\lib\less\colors.js" />
+    <Content Include="bundler\node_modules\less\lib\less\encoder.js" />
+    <Content Include="bundler\node_modules\less\lib\less\env.js" />
+    <Content Include="bundler\node_modules\less\lib\less\extend-visitor.js" />
+    <Content Include="bundler\node_modules\less\lib\less\fs.js" />
+    <Content Include="bundler\node_modules\less\lib\less\functions.js" />
+    <Content Include="bundler\node_modules\less\lib\less\import-visitor.js" />
+    <Content Include="bundler\node_modules\less\lib\less\index.js" />
+    <Content Include="bundler\node_modules\less\lib\less\join-selector-visitor.js" />
+    <Content Include="bundler\node_modules\less\lib\less\lessc_helper.js" />
+    <Content Include="bundler\node_modules\less\lib\less\parser.js" />
+    <Content Include="bundler\node_modules\less\lib\less\rhino.js" />
+    <Content Include="bundler\node_modules\less\lib\less\source-map-output.js" />
+    <Content Include="bundler\node_modules\less\lib\less\to-css-visitor.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\alpha.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\anonymous.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\assignment.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\call.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\color.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\comment.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\condition.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\detached-ruleset.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\dimension.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\directive.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\element.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\expression.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\extend.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\import.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\javascript.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\keyword.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\media.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\mixin.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\negative.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\operation.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\paren.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\quoted.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\rule.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\ruleset-call.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\ruleset.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\selector.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\unicode-descriptor.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\url.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\value.js" />
+    <Content Include="bundler\node_modules\less\lib\less\tree\variable.js" />
+    <Content Include="bundler\node_modules\less\lib\less\visitor.js" />
+    <Content Include="bundler\node_modules\lib\parse-js.js" />
+    <Content Include="bundler\node_modules\lib\process.js" />
+    <Content Include="bundler\node_modules\lib\squeeze-more.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\ast.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\browser.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\command.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\grammar.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\index.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\lang-ls.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\lexer.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\livescript.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\mode-ls.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\node.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\optparse.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\parser.js" />
+    <Content Include="bundler\node_modules\LiveScript\lib\slake.js" />
+    <Content Include="bundler\node_modules\nib\iconic\demo.html" />
+    <Content Include="bundler\node_modules\nib\iconic\iconic.css" />
+    <Content Include="bundler\node_modules\nib\iconic\iconic_stroke.svg" />
+    <Content Include="bundler\node_modules\nib\lib\nib.js" />
+    <Content Include="bundler\node_modules\nib\lib\nodes\color-image.js" />
+    <Content Include="bundler\node_modules\nib\lib\nodes\gradient.js" />
+    <Content Include="bundler\node_modules\nib\lib\nodes\vendor-helpers.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\bm.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\browserify.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\colors.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\convert\css.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\errors.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\functions\image.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\functions\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\functions\resolver.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\functions\url.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\lexer.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\middleware.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\arguments.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\binop.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\block.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\boolean.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\call.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\charset.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\comment.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\each.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\expression.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\extend.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\fontface.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\function.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\group.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\hsla.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\ident.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\if.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\import.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\jsliteral.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\keyframes.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\literal.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\media.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\mozdocument.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\node.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\null.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\page.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\params.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\property.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\return.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\rgba.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\root.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\selector.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\string.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\ternary.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\unaryop.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\nodes\unit.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\parser.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\renderer.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\stack\frame.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\stack\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\stack\scope.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\stylus.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\token.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\units.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\utils.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\visitor\compiler.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\visitor\evaluator.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\visitor\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\lib\visitor\normalizer.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\clone.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSFontFaceRule.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSImportRule.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSKeyframeRule.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSKeyframesRule.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSMediaRule.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSRule.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSStyleDeclaration.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSStyleRule.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\CSSStyleSheet.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\MediaList.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\parse.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\cssom\lib\StyleSheet.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\examples\pow.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\chmod.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\clobber.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\mkdirp.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\perm.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\perm_sync.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\race.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\rel.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\return.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\return_sync.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\root.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\sync.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\umask.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\mkdirp\test\umask_sync.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\big-not-pretty.xml" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\example.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\get-products.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\hello-world.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\not-pretty.xml" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\pretty-print.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\shopping.xml" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\test.html" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\examples\test.xml" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\lib\sax.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\LICENSE-W3C.html" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\attribute-name.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\attribute-no-space.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\buffer-overrun.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\case.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\cdata-chunked.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\cdata-end-split.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\cdata-fake-end.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\cdata-multiple.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\cdata.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\cyrillic.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\duplicate-attribute.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\end_empty_stream.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\entities.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\entity-mega.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\flush.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\index.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\issue-23.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\issue-30.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\issue-35.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\issue-47.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\issue-49.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\issue-84.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\parser-position.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\script-close-better.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\script.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\self-closing-child-strict.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\self-closing-child.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\self-closing-tag.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\stray-ending.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\trailing-attribute-no-value.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\trailing-non-whitespace.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\unclosed-root.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\unquoted.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\utf8-split.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-as-tag-name.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-issue-41.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-rebinding.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-strict.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-unbound-element.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-unbound.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-ns.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-prefix-attribute.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-prefix.js" />
+    <Content Include="bundler\node_modules\nib\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-redefine.js" />
+    <Content Include="bundler\node_modules\node-sass\build.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\middleware.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\bin\cmd.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\bin\usage.txt" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\examples\pow.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\index.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\example\parse.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\index.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\dash.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\default_bool.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\dotted.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\long.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\parse.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\parse_modified.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\short.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\node_modules\minimist\test\whitespace.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\chmod.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\clobber.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\mkdirp.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\opts_fs.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\opts_fs_sync.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\perm.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\perm_sync.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\race.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\rel.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\return.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\return_sync.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\root.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\sync.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\umask.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\node-sass-middleware\node_modules\mkdirp\test\umask_sync.js" />
+    <Content Include="bundler\node_modules\node-sass\node_modules\object-assign\object-assign.js" />
+    <Content Include="bundler\node_modules\node-sass\sass.js" />
+    <Content Include="bundler\node_modules\step\lib\step.js" />
+    <Content Include="bundler\node_modules\stylus\index.js" />
+    <Content Include="bundler\node_modules\stylus\lib\browserify.js" />
+    <Content Include="bundler\node_modules\stylus\lib\cache\fs.js" />
+    <Content Include="bundler\node_modules\stylus\lib\cache\index.js" />
+    <Content Include="bundler\node_modules\stylus\lib\cache\memory.js" />
+    <Content Include="bundler\node_modules\stylus\lib\cache\null.js" />
+    <Content Include="bundler\node_modules\stylus\lib\colors.js" />
+    <Content Include="bundler\node_modules\stylus\lib\convert\css.js" />
+    <Content Include="bundler\node_modules\stylus\lib\errors.js" />
+    <Content Include="bundler\node_modules\stylus\lib\functions\image.js" />
+    <Content Include="bundler\node_modules\stylus\lib\functions\index.js" />
+    <Content Include="bundler\node_modules\stylus\lib\functions\resolver.js" />
+    <Content Include="bundler\node_modules\stylus\lib\functions\url.js" />
+    <Content Include="bundler\node_modules\stylus\lib\lexer.js" />
+    <Content Include="bundler\node_modules\stylus\lib\middleware.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\arguments.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\atblock.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\atrule.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\binop.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\block.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\boolean.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\call.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\charset.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\comment.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\each.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\expression.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\extend.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\function.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\group.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\hsla.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\ident.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\if.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\import.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\index.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\keyframes.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\literal.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\media.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\member.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\namespace.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\node.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\null.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\object.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\params.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\property.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\query-expression.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\query-list.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\query.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\return.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\rgba.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\root.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\selector.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\string.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\ternary.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\unaryop.js" />
+    <Content Include="bundler\node_modules\stylus\lib\nodes\unit.js" />
+    <Content Include="bundler\node_modules\stylus\lib\parser.js" />
+    <Content Include="bundler\node_modules\stylus\lib\renderer.js" />
+    <Content Include="bundler\node_modules\stylus\lib\stack\frame.js" />
+    <Content Include="bundler\node_modules\stylus\lib\stack\index.js" />
+    <Content Include="bundler\node_modules\stylus\lib\stack\scope.js" />
+    <Content Include="bundler\node_modules\stylus\lib\stylus.js" />
+    <Content Include="bundler\node_modules\stylus\lib\token.js" />
+    <Content Include="bundler\node_modules\stylus\lib\units.js" />
+    <Content Include="bundler\node_modules\stylus\lib\utils.js" />
+    <Content Include="bundler\node_modules\stylus\lib\visitor\compiler.js" />
+    <Content Include="bundler\node_modules\stylus\lib\visitor\deps-resolver.js" />
+    <Content Include="bundler\node_modules\stylus\lib\visitor\evaluator.js" />
+    <Content Include="bundler\node_modules\stylus\lib\visitor\index.js" />
+    <Content Include="bundler\node_modules\stylus\lib\visitor\normalizer.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\css-parse\index.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\examples\g.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\examples\usr-local.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\glob.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\inherits\inherits.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\inherits\inherits_browser.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\inherits\test.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\minimatch.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\lib\lru-cache.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\test\basic.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\test\foreach.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\test\memory-leak.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\node_modules\sigmund\bench.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\node_modules\sigmund\sigmund.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\node_modules\sigmund\test\basic.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\test\basic.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\test\brace-expand.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\test\caching.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\test\defaults.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\node_modules\minimatch\test\extglob-ending-with-state-char.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\00-setup.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\bash-comparison.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\cwd-test.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\globstar-match.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\mark.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\new-glob-optional-options.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\nocase-nomagic.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\pause-resume.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\readme-issue.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\root-nomount.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\root.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\stat.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\glob\test\zz-cleanup.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\examples\pow.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\index.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\chmod.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\clobber.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\mkdirp.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\perm.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\perm_sync.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\race.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\rel.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\return.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\return_sync.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\root.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\sync.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\umask.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\mkdirp\test\umask_sync.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\big-not-pretty.xml" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\example.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\get-products.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\hello-world.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\not-pretty.xml" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\pretty-print.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\shopping.xml" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\test.html" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\examples\test.xml" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\lib\sax.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\LICENSE-W3C.html" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\attribute-name.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\attribute-no-space.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\buffer-overrun.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\case.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\cdata-chunked.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\cdata-end-split.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\cdata-fake-end.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\cdata-multiple.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\cdata.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\cyrillic.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\duplicate-attribute.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\end_empty_stream.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\entities.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\entity-mega.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\flush.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\index.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\issue-23.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\issue-30.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\issue-35.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\issue-47.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\issue-49.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\issue-84.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\parser-position.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\script-close-better.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\script.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\self-closing-child-strict.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\self-closing-child.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\self-closing-tag.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\stray-ending.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\trailing-attribute-no-value.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\trailing-non-whitespace.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\unclosed-root.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\unquoted.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\utf8-split.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-as-tag-name.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-issue-41.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-rebinding.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-strict.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-unbound-element.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-unbound.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-ns.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-prefix-attribute.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-prefix.js" />
+    <Content Include="bundler\node_modules\stylus\node_modules\sax\test\xmlns-xml-default-redefine.js" />
+    <Content Include="bundler\node_modules\uglify-js.js" />
+    <Content Include="Content\AdditionalServicesGraphics\SCN_0014.jpg" />
+    <Content Include="Content\AdditionalServicesGraphics\SCN_0015.jpg" />
+    <Content Include="Content\AdditionalServicesGraphics\SCN_0016.jpg" />
+    <Content Include="Content\css\base.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\BootstrapOverride.css" />
+    <Content Include="Content\css\cookieconsent.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\dtree.css" />
+    <Content Include="Content\css\fonts\ui-icons.dev.svg" />
+    <Content Include="Content\css\fonts\ui-icons.svg" />
+    <Content Include="Content\css\RepSite.css" />
+    <Content Include="Content\css\tabs.css" />
+    <Content Include="Content\css\jquery.ui.tabs.css" />
+    <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\lte-ie7.js" />
+    <Content Include="Content\css\PagedList.css" />
+    <Content Include="Content\Files\diagnostic_image.jpg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Icons\chevron_Fill.png" />
+    <Content Include="Content\Icons\chevron_NotFill.png" />
+    <Content Include="Content\Icons\CustomerMarker.png" />
+    <Content Include="Content\Icons\StoreMarker.png" />
+    <Content Include="Content\Icons\ui-icon-calendar.png" />
+    <Content Include="Content\Icons\ui-icons_next.png" />
+    <Content Include="Content\Icons\ui-icons_prev.png" />
+    <Content Include="Content\Images\DiagnosticImage.jpg" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\loading_animation.gif" />
+    <Content Include="Content\Images\loading_indicator.gif" />
+    <Content Include="Content\Images\photo_not_available.png" />
+    <Content Include="Content\Images\Tree\empty.gif" />
+    <Content Include="Content\Images\Tree\folder.gif" />
+    <Content Include="Content\Images\Tree\folderopen.gif" />
+    <Content Include="Content\Images\Tree\join.gif" />
+    <Content Include="Content\Images\Tree\joinbottom.gif" />
+    <Content Include="Content\Images\Tree\line.gif" />
+    <Content Include="Content\Images\Tree\minus.gif" />
+    <Content Include="Content\Images\Tree\minusbottom.gif" />
+    <Content Include="Content\Images\Tree\nolines_minus.gif" />
+    <Content Include="Content\Images\Tree\nolines_plus.gif" />
+    <Content Include="Content\Images\Tree\plus.gif" />
+    <Content Include="Content\Images\Tree\plusbottom.gif" />
+    <Content Include="Content\Images\Tree\report.gif" />
+    <Content Include="Content\img\Callcenter.png" />
+    <Content Include="Content\img\littlewoods-logo.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\LogoClientId0.png" />
+    <Content Include="Content\img\LogoClientId39.png" />
+    <Content Include="Content\img\LogoClientId818.png" />
+    <Content Include="Content\img\shell.png" />
+    <Content Include="Content\img\shlogo.png" />
+    <Content Include="Content\img\sony.jpg" />
+    <Content Include="Content\img\very-logo.png" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\CookieConsent.js" />
+    <Content Include="Content\js\npm.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico.png" />
+    <Content Include="Global.asax" />
+    <Content Include="js\angular\app.js" />
+    <Content Include="js\angular\controllers.js" />
+    <Content Include="js\angular\directives.js" />
+    <Content Include="js\angular\filters.js" />
+    <Content Include="js\angular\services.js" />
+    <Content Include="js\dialogs.factory.js" />
+    <Content Include="js\dialog_new2.js" />
+    <Content Include="js\functions2.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.form.min.js.map" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="README.jQuery.vsdoc.txt" />
+    <Content Include="README.txt" />
+    <Content Include="Scripts\addresses.js" />
+    <Content Include="Scripts\alternativeProductsList.js" />
+    <Content Include="Scripts\authenticatedInfo.js" />
+    <Content Include="Scripts\buttons.js" />
+    <Content Include="Scripts\configuration.js" />
+    <Content Include="Scripts\datepicker.js" />
+    <Content Include="Scripts\dialogs.js" />
+    <Content Include="Scripts\dtree.js" />
+    <Content Include="Scripts\EditToolbar.js" />
+    <Content Include="Scripts\fileUpload.js" />
+    <Content Include="Scripts\job-status-edit.js" />
+    <Content Include="Scripts\job-details.js" />
+    <Content Include="Scripts\jquery-ui-1.9.0.js" />
+    <Content Include="Scripts\diagnostic.js" />
+    <Content Include="Scripts\functions.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery.bgiframe.js" />
+    <Content Include="Scripts\jquery.idletimeout.js" />
+    <Content Include="Scripts\jquery.idletimer.js" />
+    <Content Include="Scripts\jquery.shorten.js" />
+    <Content Include="Scripts\jquery.validate.min.1.9.js" />
+    <Content Include="Scripts\notifications.js" />
+    <Content Include="Scripts\ProgressBarPopUpMenu.js" />
+    <Content Include="Scripts\reports.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\Selector.js" />
+    <Content Include="Scripts\trackingSessionState.js" />
+    <Content Include="Content\Reports\ProductDetailsReport.mrt" />
+    <Content Include="Content\Reports\RepairAgentAddressLS.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces.mrt" />
+    <Content Include="Content\Reports\RepairAgentAddressDefault.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces4HeartRing.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces4StoneRing.mrt" />
+    <Content Include="Content\Reports\EngravingPlaces6StoneRing.mrt" />
+    <Content Include="Content\Reports\ClosestStoreMap.mrt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Documents\Training Manual - Retail Connect.pdf" />
+    <Content Include="Content\Documents\Retail Connect - user guide.pdf" />
+    <Content Include="Content\Documents\Import xls template.xls" />
+    <Content Include="Content\Reports\errorReport.mrt" />
+    <Content Include="Content\Files\diagnostic_file.pdf" />
+    <Content Include="js\diagnostic.new.js" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\css\fonts\ui-icons.eot" />
+    <Content Include="Content\css\fonts\ui-icons.ttf" />
+    <Content Include="Content\css\fonts\ui-icons.woff" />
+    <Content Include="Content\ReportTemplates\SimpleList.mrt" />
+    <Content Include="Content\ReportTemplates\SimpleList1.mrt" />
+    <Content Include="Content\ReportTemplates\SimpleList2.mrt" />
+    <Content Include="license.key" />
+    <None Include="Properties\PublishProfiles\Sony.pubxml" />
+    <None Include="Service References\AscServiceSync\AscServiceSync1.wsdl" />
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TAppointmentResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TAvailableResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TCustomer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TCustomerContact.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TFollowOnAvailableResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TOnlineBookFollowOnResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TOnlineBookResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TRepeatRepairResult1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TResponseDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.UpdateServiceEventReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FzOnlineBooking\ClientConnect.FzOnlineBooking.TRepeatRepairResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.AEPSwapModelReservationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.AttachmentReturn.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.EventRegistrationReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.EventStatusUpdateReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.GetCtoSpecsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.NewServiceEventsReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.PartConsumptionReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.ServiceEventStatusReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.SolutionRegistrationReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.SolutionRqstStatusReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.UnitInformationResponseInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.UpdateCustomerAndUnitReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\AscServiceSync\ClientConnect.AscServiceSync.UpdateServiceEventReturnInfo1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PostcodeService\ClientConnect.PostcodeService.AddressData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PostcodeService\ClientConnect.PostcodeService.AddressData1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\FzOnlineBooking\IFzOnlineBookingservice.wsdl" />
+    <None Include="Service References\PostcodeService\PostcodeLookupService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PostcodeService\service.wsdl" />
+    <None Include="Service References\PostcodeService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PostcodeService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\SmsService\ClientConnect.SmsService.TfzSMSMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SmsService\ClientConnect.SmsService.TfzSMSMessage1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SmsService\ClientConnect.SmsService.TfzSMSMessage2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\SmsService\configuration91.svcinfo" />
+    <None Include="Service References\SmsService\configuration.svcinfo" />
+    <None Include="Service References\SmsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\PostcodeService\configuration91.svcinfo" />
+    <None Include="Service References\PostcodeService\configuration.svcinfo" />
+    <None Include="Service References\PostcodeService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\visibility.js" />
+    <None Include="Service References\AscServiceSync\configuration91.svcinfo" />
+    <None Include="Service References\AscServiceSync\configuration.svcinfo" />
+    <None Include="Service References\AscServiceSync\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FzOnlineBooking\configuration91.svcinfo" />
+    <None Include="Service References\FzOnlineBooking\configuration.svcinfo" />
+    <None Include="Service References\FzOnlineBooking\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\BookNewService\ConfirmPage.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Administration\AddColleague.cshtml" />
+    <Content Include="Views\Administration\AccountInfo.cshtml" />
+    <Content Include="Views\Product\_ProductDetailsServiceAvailable.cshtml" />
+    <Content Include="Views\Error\Unhandled.cshtml" />
+    <Content Include="Views\Diagnostic\Index.cshtml" />
+    <Content Include="Views\Job\_AcceptJob.cshtml" />
+    <Content Include="Views\Engraving\SpecificEngravingPlaces.cshtml" />
+    <Content Include="Views\Product\_AlternativeProducts.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Book_JobPageFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Book_AEPPageFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EnginnerChoice_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AdditionalFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateJob_JobPageFields_Template.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Job_StatusModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Contact_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Customer_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Job_AdditionalInfo.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Product_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Repair_InfoModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateJob_AEPPageFields_Template.cshtml" />
+    <Content Include="Views\Address\_AddressesList.cshtml" />
+    <Content Include="Views\Address\_WrongPostcode.cshtml" />
+    <Content Include="Views\Address\_CollectAddressesList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AepFields_Template.cshtml" />
+    <Content Include="Views\Notification\UnsavedInfo.cshtml" />
+    <Content Include="Views\Job\CustomerInfo.cshtml" />
+    <Content Include="Views\Job\CustomerInfoEdit.cshtml" />
+    <Content Include="Views\Job\ContactInfoEdit.cshtml" />
+    <Content Include="Views\Job\ContactInfo.cshtml" />
+    <Content Include="Views\Job\ProductInfoEdit.cshtml" />
+    <Content Include="Views\Job\ProductInfo.cshtml" />
+    <Content Include="Views\Job\RepairInfoEdit.cshtml" />
+    <Content Include="Views\Job\RepairInfo.cshtml" />
+    <Content Include="Views\Job\AdditionalJobInfo.cshtml" />
+    <Content Include="Views\Job\AdditionalJobEdit.cshtml" />
+    <Content Include="Views\Notification\Wait.cshtml" />
+    <Content Include="Views\Notification\AutoDiagnostic.cshtml" />
+    <Content Include="Views\Administration\AccountEdit.cshtml" />
+    <Content Include="Views\Administration\DeleteUser.cshtml" />
+    <Content Include="Views\Administration\AddCollegueSuccess.cshtml" />
+    <Content Include="Views\Product\SendSmsNotification.cshtml" />
+    <Content Include="Views\Product\SendEmailNotification.cshtml" />
+    <Content Include="Views\Notification\SessionTimeOut.cshtml" />
+    <Content Include="Views\Notification\SonyAuthorisation.cshtml" />
+    <Content Include="Views\Job\EngineerDetails.cshtml" />
+    <Content Include="Views\Notification\UploadDop.cshtml" />
+    <Content Include="Views\Error\Http404.cshtml" />
+    <Content Include="Views\Error\Http400.cshtml" />
+    <Content Include="Views\Error\Http500.cshtml" />
+    <Content Include="Views\Job\FindNotBookedJobs.cshtml" />
+    <Content Include="Views\Job\SearchNotBookedJobs.cshtml" />
+    <Content Include="Views\BookNewService\CustomerPage.cshtml" />
+    <Content Include="Views\BookNewService\JobPage.cshtml" />
+    <Content Include="Views\File\ImportFile.cshtml" />
+    <Content Include="Views\BookNewService\AepIndex.cshtml" />
+    <Content Include="Views\BookNewService\EngineerChoice.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\JobAdditionalFields_Template.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\JobAdditionalFieldsHidden_Template.cshtml" />
+    <Content Include="Views\BookNewService\AcceptDop.cshtml" />
+    <Content Include="Views\BookNewService\UploadDop.cshtml" />
+    <Content Include="Views\BookNewService\AcceptAep.cshtml" />
+    <Content Include="Views\BookNewService\ReportPage.cshtml" />
+    <Content Include="Views\Product\ProductDetailsReportPage.cshtml" />
+    <Content Include="Views\Job\ReportPage.cshtml" />
+    <Content Include="Views\Logs\FileLogs.cshtml" />
+    <Content Include="Views\Logs\ConnectLogLogs.cshtml" />
+    <Content Include="Views\Account\AccountWidget.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ConfidentialDetails.cshtml" />
+    <Content Include="Views\Account\DateOfBirthCheck.cshtml" />
+    <Content Include="Views\Account\InputUserId.cshtml" />
+    <Content Include="Views\Account\ReminderAnswer.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Account\AccessDenied.cshtml" />
+    <Content Include="Views\BookNewService\RepeatJob.cshtml" />
+    <Content Include="Views\BookNewService\RegisterRepeatJob.cshtml" />
+    <Content Include="Views\Job\AwaitingForApproval.cshtml" />
+    <Content Include="Views\Job\RepeatedJobs.cshtml" />
+    <Content Include="Views\Job\RejectReason.cshtml" />
+    <Content Include="Views\Job\ApprovedJobs.cshtml" />
+    <Content Include="Views\Job\RejectedJobs.cshtml" />
+    <Content Include="Views\Customer\_FindCustomerSearch.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Job\_JobNotesShop.cshtml" />
+    <Content Include="Views\BookNewService\SoftService.cshtml" />
+    <Content Include="Views\BookNewService\ValidationCheck.cshtml" />
+    <Content Include="Views\BookNewService\CustomerService.cshtml" />
+    <Content Include="Views\BookNewService\ContactDetails.cshtml" />
+    <Content Include="Views\BookNewService\ManufactInstr.cshtml" />
+    <Content Include="Views\BookNewService\ManufactureContact.cshtml" />
+    <Content Include="Views\Customer\ClaimConfirmMessage.cshtml" />
+    <Content Include="Views\Job\_AdditionalJobInfo.cshtml" />
+    <Content Include="Views\Job\_JobNotesShopALL.cshtml" />
+    <Content Include="Views\Notification\Processing.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\BookNewService\IssueCorrected.cshtml" />
+    <Content Include="Views\BookNewService\AddressConfirmation.cshtml" />
+    <Content Include="Views\BookNewService\RequestDate.cshtml" />
+    <Content Include="Views\BookNewService\_RequestDate.cshtml" />
+    <Content Include="Views\JobStatus\JobStatusesChart.cshtml" />
+    <Content Include="Views\BookNewService\CustomerRegister.cshtml" />
+    <Content Include="Views\Job\QueryJob.cshtml" />
+    <Content Include="Views\Job\_JobStatusHistory.cshtml" />
+    <Content Include="Views\Job\FaultInformation.cshtml" />
+    <Content Include="Views\BookNewService\ApplianceDetails.cshtml" />
+    <Content Include="Web References\SparePartsServer\IOnlineSparePartsservice.wsdl" />
+    <Content Include="Web References\SparePartsServer\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Job\StockPartsInfo.cshtml" />
+    <Content Include="Views\Job\VanPartsInfo.cshtml" />
+    <Content Include="Views\Job\ServiceDates.cshtml" />
+    <Content Include="Views\Job\PartsInfo.cshtml" />
+    <Content Include="Views\Job\CancelReason.cshtml" />
+    <Content Include="Views\Job\PolicyInfo.cshtml" />
+    <Content Include="Views\Job\PartsCostInfo.cshtml" />
+    <Content Include="Views\JobStatus\JobStatusList.cshtml" />
+    <Content Include="Views\Job\ApproveJob.cshtml" />
+    <Content Include="Views\BookNewService\CustomerReportPage.cshtml" />
+    <Content Include="Views\Job\EmailReportPage.cshtml" />
+    <Content Include="Views\AdminJobStatus\AdminJobsStatistics.cshtml" />
+    <Content Include="Views\Home\EasyQuery.cshtml" />
+    <Content Include="Views\View\Reports.cshtml" />
+    <Content Include="Views\Design\Reports.cshtml" />
+    <Content Include="Views\Shared\_ReportLayout.cshtml" />
+    <Content Include="Views\Customer\Search.cshtml" />
+    <Content Include="Views\Customer\_CustomerSearchHeader.cshtml" />
+    <Content Include="Views\Customer\ApplianceList.cshtml" />
+    <Content Include="Views\Customer\_Customer_InfoModel.cshtml" />
+    <Content Include="Views\Customer\_ApplianceList.cshtml" />
+    <Content Include="Views\CustProd\ApplianceDetails.cshtml" />
+    <Content Include="Views\BookNewService\CustomerPreviewPage.cshtml" />
+    <Content Include="Views\BookNewService\ChangeCustomerAddress.cshtml" />
+    <Content Include="Views\Template\SpecificTemplate.cshtml" />
+    <Content Include="Views\Job\InspectionData.cshtml" />
+    <Content Include="Views\Customer\_OwnerApplianceList.cshtml" />
+    <Content Include="Views\BookNewService\DPACheck.cshtml" />
+    <Content Include="Views\BookNewService\AddressChange.cshtml" />
+    <Content Include="Views\BookNewService\TheftDetails.cshtml" />
+    <Content Include="Views\Job\Media.cshtml" />
+    <Content Include="Views\Customer\DPAVerification.cshtml" />
+    <Content Include="Views\Customer\DPAVerificationflow.cshtml" />
+    <Content Include="Views\Customer\VerificationResult.cshtml" />
+    <Content Include="Views\BookNewService\MobileCover.cshtml" />
+    <Content Include="Views\BookNewService\MobileCoverDecline.cshtml" />
+    <Content Include="Views\BookNewService\MobileDetails.cshtml" />
+    <Content Include="Views\Customer\DPACheckApplianceList.cshtml" />
+    <Content Include="Views\Customer\DPACheckOwnerApplianceList.cshtml" />
+    <Content Include="Views\Question\ShowPostRepairQuestion.cshtml" />
+    <Content Include="Views\BookNewService\BookPartOrderJob.cshtml" />
+    <Content Include="Web References\IOnlineSpareParts\IOnlineSparePartsservice.wsdl" />
+    <Content Include="Web References\IOnlineSpareParts\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CallCenter\Index.cshtml" />
+    <Content Include="Views\CallCenter\SignIn.cshtml" />
+    <Content Include="Views\Shared\_CallCenterLayout.cshtml" />
+    <Content Include="Views\Account\CallCenterAccountWidget.cshtml" />
+    <Content Include="Views\Customer\SearchinDetail.cshtml" />
+    <Content Include="Views\Customer\_CustomerSearchAHeader.cshtml" />
+    <Content Include="Views\Job\_JobASearchHeader.cshtml" />
+    <Content Include="Views\Job\AdvSearch.cshtml" />
+    <Content Include="Views\Customer\AdvSearch.cshtml" />
+    <Content Include="Views\Job\AdditionalJobList.cshtml" />
+    <Content Include="Views\Job\RequestDate.cshtml" />
+    <Content Include="Views\Job\LinkedJobs.cshtml" />
+    <Content Include="Views\Customer\_ClientCustomerSearchAHeader.cshtml" />
+    <Content Include="Views\Customer\AdvSearchByClientId.cshtml" />
+    <Content Include="Views\Job\_ClientJobASearchHeader.cshtml" />
+    <Content Include="Views\Job\AdvSearchByClientId.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Customer\FindCustomersByClientId.cshtml" />
+    <Content Include="Views\Job\FindJobsByClientId.cshtml" />
+    <Content Include="Views\Job\_ClientJobSearchHeader.cshtml" />
+    <Content Include="Views\Customer\_ClientCustomerSearchHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Job\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Job\_JobSearchHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Product\_ProductSearchHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\ShowDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Reports\ProductRepairInstruction.mrt" />
+    <Content Include="Content\Reports\ProductRepairOutcome.mrt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Reports\RepairNote.mrt" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Job\JobDetails.cshtml" />
+    <Content Include="Views\Job\_JobNotes.cshtml" />
+    <Content Include="Views\Job\_EditToolbar.cshtml" />
+    <Content Include="Views\Administration\UserList.cshtml" />
+    <Content Include="Views\Question\Show.cshtml" />
+    <Content Include="Views\JobStatus\JobList.cshtml" />
+    <Content Include="Views\JobStatus\JobStatuses.cshtml" />
+    <None Include="Service References\SmsService\IfzSmsservice.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AscServiceSync\" />
+    <WCFMetadataStorage Include="Service References\FzOnlineBooking\" />
+    <WCFMetadataStorage Include="Service References\PostcodeService\" />
+    <WCFMetadataStorage Include="Service References\SmsService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ErrorsDescription.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ErrorsDescription.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=5.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\FluentValidation.5.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc, Version=5.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\FluentValidation.MVC3.5.0.0.3\lib\Net40\FluentValidation.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation.resources">
+      <HintPath>..\..\..\CustomerConnect\packages\FluentValidation.4.0.0.1\lib\Net40\de\FluentValidation.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <!--  <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>-->
+    <Reference Include="MiniProfiler, Version=2.0.2.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>packages\NPOI.1.2.5\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>packages\NPOI.2.4.0\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>packages\NPOI.2.4.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>packages\NPOI.2.4.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=1.6.30117.9648, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Omu.ValueInjecter, Version=2.3.3.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
+      <HintPath>packages\ValueInjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2014.1.1900.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\StimulSoft\2017\Stimulsoft.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report, Version=2014.1.1900.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\StimulSoft\2017\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Mvc, Version=2014.1.1900.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\StimulSoft\2017\Stimulsoft.Report.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Web, Version=2014.1.1900.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\StimulSoft\2017\Stimulsoft.Report.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.WebDesign, Version=2014.1.1900.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\StimulSoft\2017\Stimulsoft.Report.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Web.Optimization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Web.Optimization.0.0.8\lib\net40\Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.10.10.35/OSPJtm/SparePartsServerCGI.exe/wsdl/IOnlineSpareParts">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SparePartsServer\</RelPath>
+      <UpdateFromURL>http://10.10.10.35/OSPJtm/SparePartsServerCGI.exe/wsdl/IOnlineSpareParts</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CAST_SparePartsServer_IOnlineSparePartsservice</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://litmus.fieldengineer.co.uk/OSP/SparePartsServerCGI.exe/wsdl/IOnlineSpareParts">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\IOnlineSpareParts\</RelPath>
+      <UpdateFromURL>http://litmus.fieldengineer.co.uk/OSP/SparePartsServerCGI.exe/wsdl/IOnlineSpareParts</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CAST_IOnlineSpareParts_IOnlineSparePartsservice</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>61800</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

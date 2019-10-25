@@ -17,7 +17,12 @@
   animation: blinker 1s linear infinite;
   color:red;
 }
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+}
 
+   
 @keyframes blinker {  
   50% { opacity: 0; }
 }
@@ -1046,7 +1051,6 @@ select.ui-datepicker-year {
   float: left
 }
 
-.input2
- {
-	display: inline !important;
+.input2 {
+  display: inline !important;
 }
