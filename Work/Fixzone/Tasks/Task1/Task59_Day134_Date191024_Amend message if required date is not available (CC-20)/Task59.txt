@@ -1,1 +1,9 @@
 ﻿Task59:
+
+Modify the following files:
+C:\AAAAA3\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+C:\AAAAA3\CallCenterClientConnect\Services\AvailableRequestDetails.cs
+C:\AAAAA3\CallCenterClientConnect\Views\BookNewService\RequestDate.cshtml
+C:\AAAAA3\CallCenterClientConnect\Views\BookNewService\_RequestDate.cshtml
+
+Check in 2019-10-25: SVN revision number 11649

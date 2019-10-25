@@ -1,0 +1,45 @@
+﻿158
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-25 14:49:27
+
+----- New property -----
+
+Task61_Day135_Date191025_Generic ClientConnect hardcode mandatory fields
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task61_Day135_Date191025_Generic ClientConnect hardcode mandatory fields
+
+----- New property -----
+
+null

@@ -1,0 +1,7 @@
+﻿Task62:
+
+Modify the files:
+C:\AAAAA\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+C:\AAAAA\CallCenterClientConnect\ViewModels\Home\BusinessRule.cs
+
+Check in 2019-10-25: SVN revision number 11659

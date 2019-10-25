@@ -3115,3 +3115,63 @@ Task59_Day134_Date191024_Amend message if required date is not available (CC-20)
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+157
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-25 11:51:19
+
+----- New property -----
+
+Task60_Day135_Date191025_Amend the Date Selected information on the Job Notes (CC-21)
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+158
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-25 14:49:27
+
+----- New property -----
+
+Task61_Day135_Date191025_Generic ClientConnect hardcode mandatory fields
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+159
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-25 15:34:18
+
+----- New property -----
+
+Task62_Day135_Date191025_Categorize editable customer fields
+
+----- New property -----
+
+Task,Fixzone

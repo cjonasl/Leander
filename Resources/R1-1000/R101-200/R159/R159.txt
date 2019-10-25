@@ -1,0 +1,45 @@
+﻿159
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-25 15:34:18
+
+----- New property -----
+
+Task62_Day135_Date191025_Categorize editable customer fields
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task62_Day135_Date191025_Categorize editable customer fields
+
+----- New property -----
+
+null

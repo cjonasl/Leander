@@ -1,0 +1,42 @@
+﻿@model ClientConnect.Services.ResponseDetails
+            
+@if(Model.BookingOptionResult.Count>0 && Model.ShowHeading)
+{
+    @:Please select one of the available date from below
+}
+<table class="table-create-job-info">
+   @if (Model.BookingOptionResult.Count == 0)
+   {
+       <tr>
+
+           <td>
+             @Html.Label("No Availability", new { style = "color:#ff0000"})  
+           </td>
+       </tr>
+   }
+
+@if (Model.FirstBookingOptionResult != null)
+{
+   <tr>
+    <td> @Model.FirstBookingOptionResult.EngineerName</td> 
+    <td> @String.Format("{0:dddd , dd MMM yyyy }", Model.FirstBookingOptionResult.EventDate)</td>
+    <td>
+        <a href="@String.Format("'{0}' ,{1}" , Model.FirstBookingOptionResult.EventDate.ToShortDateString(), Model.FirstBookingOptionResult.EngineerID)" class = "button rbg AnchorBook BtnAppointment">Book This Date</a> 
+    </td>  
+  </tr>
+}
+else
+{
+  foreach (var item in Model.BookingOptionResult)
+  { 
+     <tr>
+    <td> @item.EngineerName</td> 
+       <td> @String.Format("{0:dddd , dd MMM yyyy }", item.EventDate)</td> 
+    <td>
+        <a href="@String.Format("'{0}' ,{1}" , item.EventDate.ToShortDateString(),item.EngineerID)" class = "button rbg AnchorBook BtnAppointment">Book This Date</a> 
+    </td>   
+  </tr>
+  }
+}
+
+</table>

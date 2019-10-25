@@ -1,0 +1,9 @@
+﻿Task61:
+
+Modify the files:
+C:\AAAAA\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+C:\AAAAA\CallCenterClientConnect\ViewModels\Home\BusinessRule.cs
+C:\AAAAA\CallCenterClientConnect\Validation\BookNewService_CustomerPageValdation.cs
+C:\AAAAA\CallCenterClientConnect\Validation\CustomerValidation.cs
+
+Check in 2019-10-25: SVN revision number 11658
