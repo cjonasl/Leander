@@ -1,0 +1,45 @@
+﻿160
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-29 10:07:01
+
+----- New property -----
+
+Task63_Day137_Date191029_Add pop-up regarding the PNC fields on the Add Appliance Page (CC-26)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task63_Day137_Date191029_Add pop-up regarding the PNC fields on the Add Appliance Page (CC-26)
+
+----- New property -----
+
+null

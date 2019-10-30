@@ -1,2 +1,17 @@
 ﻿Dag 136:
 Måndag den 28 oktober 2019
+Mark hade fått mail om att det fortfarande går att
+skapa superadministratörer i ”Argos Cast”, vilket
+jag skulle ha korrigerat i task56. Jag kollade upp
+det hela och fann att jag hade tagit bort ”superadministratör”
+i dropdownlist där nivå på kontot väljs, men jag hade
+glömt att justera själva värderna i select-elementen
+så valde man ”manager” så blev det istället ”superadministratör”
+och valde man ”vanlig anställd” så blev det istället
+”manager”. Jag korrigerade och uppdaterade produktionswebbplatsen.
+Jag ägnade därefter arbetsdagen mest åt att synkronisera
+tillägg som Vijay gjort i sök av kund till min version
+av sök av kund för enskilda kunder/klienter i generiska
+ClientConnect. Vid 13.00-tiden intog jag smörgås, banan
+och kaffe till lunch. Jag avslutade arbetsdagen ca. kl.
+17.30 och promenerade hem.

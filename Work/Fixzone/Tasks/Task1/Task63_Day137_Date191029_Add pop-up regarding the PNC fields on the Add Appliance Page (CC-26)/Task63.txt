@@ -1,0 +1,8 @@
+﻿Task63:
+
+Modify the files:
+C:\AAAAA2\CallCenterClientConnect\Views\BookNewService\ApplianceDetails.cshtml
+C:\AAAAA2\CallCenterClientConnect\Services\ProductService.cs
+C:\AAAAA2\CallCenterClientConnect\Repositories\ProductRepository.cs
+C:\AAAAA2\CallCenterClientConnect\Models\BookNewService\BookNewServiceSessionModel.cs
+C:\AAAAA2\CallCenterClientConnect\Controllers\BookNewServiceController.cs

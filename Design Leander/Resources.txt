@@ -3175,3 +3175,23 @@ Task62_Day135_Date191025_Categorize editable customer fields
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+160
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-29 10:07:01
+
+----- New property -----
+
+Task63_Day137_Date191029_Add pop-up regarding the PNC fields on the Add Appliance Page (CC-26)
+
+----- New property -----
+
+Task,Fixzone
