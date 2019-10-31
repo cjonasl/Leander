@@ -1,0 +1,129 @@
+﻿@using ClientConnect.Infrastructure
+@using ClientConnect.Process
+@{
+    ViewBag.Title = "Main page";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $('#AdvSearch').click(function (e) {
+            e.preventDefault();
+            window.location.href = '@Url.Action("AdvSearch", "Job")';
+        });
+
+        $('#ClientJobAdvSearch').click(function (e) {
+            e.preventDefault();
+            window.location.href = '@Url.Action("StartAdvSearchByClientId", "Job")';
+        });
+
+        $('#ClientCustomerAdvSearch').click(function (e) {
+            e.preventDefault();
+            window.location.href = '@Url.Action("StartAdvSearchByClientId", "Customer")';
+        });
+
+        $('#CustomerAdvSearch').click(function (e) {
+            e.preventDefault();
+            window.location.href = '@Url.Action("AdvCustomerSearch", "Customer")';
+        });
+    </script>
+
+}
+
+@{
+    var data = new ViewDataDictionary();
+    data["FromIndex"] = true;
+
+    bool productSearchIsVisible, jobSearchIsVisible, customerSearchIsVisible, jobStatusesIsVisible, isAdm = false, isSuperAdm, showReports;
+    int clientId;
+    string cols;
+
+    ClientConnect.Infrastructure.ClientBusinessRule.GetVisibility(HttpContext.Current.Session, out productSearchIsVisible, out jobSearchIsVisible, out customerSearchIsVisible, out jobStatusesIsVisible, out clientId, out isAdm, out isSuperAdm, out cols, out showReports);
+}
+
+<div class="cols @cols">
+ @*   @if (productSearchIsVisible)
+    {
+        <div class="col prod-search">
+            @Html.Partial("~/Views/Product/_ProductSearchHeader.cshtml")
+        </div>
+    }*@
+
+    @if (clientId == 0 && jobSearchIsVisible)
+    {
+        <div class="col prod-search">
+            @Html.Partial("~/Views/Job/_JobSearchHeader.cshtml")
+        </div>
+    }
+
+    @if (clientId != 0 && jobSearchIsVisible)
+    {
+        <div class="col prod-search">
+            @Html.Partial("~/Views/Job/_ClientJobSearchHeader.cshtml", "", data)
+        </div>
+    }
+
+@if (clientId == 0 && customerSearchIsVisible)
+           {
+             <div class="col job-search">
+                 @Html.Partial("~/Views/Customer/_CustomerSearchHeader.cshtml")
+             </div>
+      }
+
+    @if (clientId != 0 && customerSearchIsVisible)
+    {
+        <div class="col job-search">
+            @Html.Partial("~/Views/Customer/_ClientCustomerSearchHeader.cshtml", "", data)
+        </div>
+    }
+</div>
+
+@if (jobStatusesIsVisible)
+{
+    @Html.Partial("~/Views/JobStatus/JobStatuses.cshtml", (ClientConnect.ViewModels.JobStatuses.JobStatus_Model)ViewBag.JobStatus)
+}
+
+<div class="cols cols2">
+    <div class="col prod-search">
+    </div>
+
+    @* <div class="col job-search">
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+         
+        { 
+            if(!(ViewBag.SuperAdmin==true) )
+        {<a class="button bbg " style="float: left;      position: relative;      left: 35%;" href="/Job/RepeatedJobs">Unapproved jobs</a>
+            <a class="button bbg pull-right" href="/Job/FindNotBookedJobs">Unconfirmed Jobs</a>
+            }
+        }
+    </div>*@
+</div>
+
+@if (clientId == 0 && HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <div class="cols cols2 foot-actions">
+        <div class="col2">
+            <a class="button bbg" href="@Url.Process(PredefinedProcess.Administration)">Administration</a>
+            @*   <a class="button bbg" href="/AdminJobStatus/AdminJobsStatistics">Jobs Statistics</a>
+          <a class="button bbg" href="/View/Reports" target="_blank">MI Reports</a>
+           <a class="button bbg" href="#">Import file</a>*@
+        </div>
+    </div>
+}
+
+@if (clientId != 0 && (isAdm || isSuperAdm))
+{
+ <div class="cols cols2 foot-actions">
+     <div class="col2">
+         <a class="button bbg" href="@Url.Process(PredefinedProcess.Administration)">Administration</a>
+         @if (showReports)
+         {        
+             <text>&nbsp;</text><a class="button bbg" href="~/Reports/Dashboards" target="_blank">Reports</a>
+             
+             if (isSuperAdm)
+             {
+                 <text>&nbsp;</text><a class="button bbg" href="~/Dashboard/Index" target="_blank">Report dashboard</a>
+             }
+         }
+     </div>
+ </div>
+}

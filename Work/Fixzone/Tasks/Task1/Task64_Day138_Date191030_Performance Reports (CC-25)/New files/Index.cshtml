@@ -1,0 +1,25 @@
+﻿@using Stimulsoft.Report.Mvc
+@using System.Web.Optimization
+
+@Styles.Render("~/Content/Stimulsoft-css")
+
+@{
+    ViewBag.Title = "Report dashboard";
+}
+
+@{
+    Layout = Layout = "~/Views/Dashboard/_DashboardLayout.cshtml";
+}
+
+@Html.Stimulsoft().StiMvcDesigner(new StiMvcDesignerOptions()
+    {
+        Actions =
+        {
+            GetReport = "GetReport",
+            SaveReport = "SaveReport",
+            SaveReportAs = "SaveReportAs",
+            OpenReport = "OpenReport",
+            CreateReport = "CreateReport",
+            DesignerEvent = "DesignerEvent"
+        }
+    })

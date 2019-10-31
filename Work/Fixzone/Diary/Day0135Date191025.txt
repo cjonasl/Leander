@@ -12,7 +12,7 @@ och Vijay ville att jag skulle ändra så att obligatoriska
 fält för en kund i nya generiska ClientConnect blir
 hårdkodade istället för att tas ifrån en tabell som
 jag hade implementerat det hela och jag ändrade (lite
-motvilligt) enligt de-ras önskemål och jag dokumenterade
+motvilligt) enligt deras önskemål och jag dokumenterade
 i task61. Vijay ville också att jag ändrar så att
 konfigurering av redigerbar fält för en kund delas in
 i tre kategorier (kund, adress och kontakt) istället

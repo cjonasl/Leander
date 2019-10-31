@@ -1,0 +1,20 @@
+﻿Task64:
+
+New files:
+C:\AAAAA2\CallCenterClientConnect\Content\css\dashboard.css
+C:\AAAAA2\CallCenterClientConnect\Controllers\DashboardController.cs
+C:\AAAAA2\CallCenterClientConnect\Views\Dashboard\_DashboardLayout.cshtml
+C:\AAAAA2\CallCenterClientConnect\Views\Dashboard\Index.cshtml
+C:\AAAAA2\CallCenterClientConnect\Views\Reports\_StimulsoftReportLayout.cshtml
+C:\AAAAA2\CallCenterClientConnect\Views\Reports\Dashboards.cshtml
+
+Modified files:
+C:\AAAAA2\CallCenterClientConnect\App_Start\BundleConfig.cs
+C:\AAAAA2\CallCenterClientConnect\ClientConnect.csproj
+C:\AAAAA2\CallCenterClientConnect\Controllers\AccountController.cs
+C:\AAAAA2\CallCenterClientConnect\Controllers\ReportsController.cs
+C:\AAAAA2\CallCenterClientConnect\Infrastructure\ClientBusinessRule.cs
+C:\AAAAA2\CallCenterClientConnect\Models\Account\SessionModel.cs
+C:\AAAAA2\CallCenterClientConnect\ViewModels\Home\BusinessRule.cs
+C:\AAAAA2\CallCenterClientConnect\Views\Home\Index.cshtml
+C:\AAAAA2\CallCenterClientConnect\Views\Web.config

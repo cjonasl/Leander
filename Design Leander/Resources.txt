@@ -3195,3 +3195,23 @@ Task63_Day137_Date191029_Add pop-up regarding the PNC fields on the Add Applianc
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+161
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-10-30 10:59:24
+
+----- New property -----
+
+Task64_Day138_Date191030_Performance Reports (CC-25)
+
+----- New property -----
+
+Task,Fixzone

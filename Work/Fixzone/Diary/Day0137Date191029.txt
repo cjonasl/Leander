@@ -1,2 +1,19 @@
 ﻿Dag 137:
 Tisdag den 29 oktober 2019
+På förmiddagen gjorde jag task63 (Add pop-up regarding
+the PNC fields on the Add Appliance Page, CC-26). Jag
+tog lunch vid 13.00-tiden och intog smörgås, banan och
+kaffe. På eftermiddagen repeterade jag vad jag hade gjort
+rörande ”Dashboard” i task43 för att kunna göra CC-25
+(Performance Reports). Dessvärre upptäckte jag att jag
+hade raderat den solution i C:\AAAAA\CallCenterClientConnect
+som jag då arbetade i och att denna fadäs innebar att
+modifierade cs-filer (BundleConfig.cs och Reports-Controller.cs)
+hade gått förlorade (som tur var hade jag sparat nya filer
+i task43). Jag hade lagt en testwebbplats på ”Terminal server
+/PG-DUR-WEBSERV” och där fanns ClientConnect.dll som jag
+kunde ”disassemble” med hjälp av Red Gate ”.NET reflector
+10.1” som jag laddade ner och installerade (en provversion
+i en vecka) så jag hade möjlighet att återställa cs-filerna.
+Jag avslutade arbetsdagen ca. kl. 18.15. Jag var sist ifrån
+kontoret så jag fick sätta på larmet och låsa.

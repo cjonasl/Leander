@@ -6,3 +6,8 @@ C:\AAAAA2\CallCenterClientConnect\Services\ProductService.cs
 C:\AAAAA2\CallCenterClientConnect\Repositories\ProductRepository.cs
 C:\AAAAA2\CallCenterClientConnect\Models\BookNewService\BookNewServiceSessionModel.cs
 C:\AAAAA2\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+
+2019-10-30:
+Vijay asked me to update such that ModelId is sent
+to stored procedure ProductNumberCodeIsMandatory
+instead of Model.

@@ -1,0 +1,36 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Connect | @ViewBag.Title</title>
+     @Styles.Render("~/Content/Stimulsoft-css")
+</head>
+<body>
+    <table class="main" border="0">
+        <tr>
+            <td class="menu">
+                <h3>Dashboards List</h3>
+                <div class="separator"></div>
+                <div class="main">
+                    @if (@ViewBag.FileNames != null)
+                    {
+                        foreach (string name in @ViewBag.FileNames)
+                        {
+                            @Html.ActionLink(name, "Dashboards", "Reports", new { fileName = name }, new { @class = ViewBag.CurrentFileName == name ? "current" : ""})
+                        }
+                    }
+                </div>
+            </td>
+            <td class="line" rowspan="2">
+                <div class="line"></div>
+            </td>
+            <td class="viewer" rowspan="2">
+                @RenderBody()
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

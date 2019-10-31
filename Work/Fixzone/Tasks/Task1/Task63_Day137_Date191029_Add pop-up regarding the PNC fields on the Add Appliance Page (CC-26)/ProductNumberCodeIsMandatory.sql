@@ -1,5 +1,5 @@
-ALTER PROCEDURE ProductNumberCodeIsMandatory
-@Model varchar(25)
+CREATE PROCEDURE [dbo].[ProductNumberCodeIsMandatory]
+@ModelId int
 AS
 BEGIN
 DECLARE
@@ -13,7 +13,7 @@ IF EXISTS
     Model mdl
 	INNER JOIN PNCMandatory pnc ON mdl.MFR = pnc.MFR
    WHERE
-     mdl.MODEL = @Model AND
+     mdl.MODELID = @ModelId AND
 	 pnc.Active = 1
 )
   SET @Mandatory = 1
@@ -22,3 +22,4 @@ ELSE
 
 SELECT @Mandatory
 END
+GO
