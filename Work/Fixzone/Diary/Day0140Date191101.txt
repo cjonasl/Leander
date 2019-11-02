@@ -1,0 +1,9 @@
+﻿Dag 140:
+Fredag den 1 november 2019
+Arbetsdagen var hektisk och bestod i att ordna med
+och korrigera fel i den uppdaterade testwebplatsen
+för generiska ClientConnect som jag gjorde igår kväll.
+Vi skapade CC-27 för det i Jira. Skrev ett mail och
+gratulerade Daniel på 24-årsdagen idag. Vid 13.00-tiden
+intog jag smörgås, banan och kaffe till lunch. Jag
+avslutade arbetsdagen ca. kl. 18.00.
