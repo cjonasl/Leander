@@ -1,0 +1,12 @@
+Ordande AppleID 2019-11-03
+Email: jonas5669@outlook.com
+Password: lovnas#69A
+
+Security question 1: Name of first pet?
+Answer: Sara
+
+Security question 2: What is your dream job?
+Answer: Programmer
+
+Security question 3: What is the name of the street where you grew up?
+Answer: Lindersv
