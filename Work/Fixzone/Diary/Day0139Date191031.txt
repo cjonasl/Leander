@@ -1,2 +1,22 @@
 ﻿Dag 139:
 Torsdag den 31 oktober 2019
+Arbetade med att i task64 skapa en rapport i
+Stimulsoft över antal jobb i olika status och
+det var inte lätt och jag blev en aning frustrerad,
+men jag lyckades till slut få till en acceptabel
+tabell. Hade ett utvecklingssamtal med Angela
+och HR-chef Vikki Weston från huvudkontoret, som
+var på besök, som var en uppföljning på utveck-
+lingssamtalet med Vikki och Paul jag hade för ca.
+tre månader sedan (man ska tydligen ha ett utveck-
+lingssamtal var tredje månad). Intog smörgås,
+banan och kaffe till lunch. Skrev ett program,
+”HandleTwoFolders”, i solution C:\git_cjonasl\-
+Leander\Solutions\Nr3\Nr3.sln för att jämföra och
+uppdatera filer och sedan använde jag det programmet
+för att uppdatera testwebbplatsen för generiska
+ClientConnect. Jag blev klar vid 20.30-tiden och
+skrev ett mail till Jon Negri, Angela och Vijay
+att testwebbplatsen var uppdaterad med senaste
+implementeringen, och sedan avslutade jag arbets-
+dagen och tog bussen till Surbiton.
