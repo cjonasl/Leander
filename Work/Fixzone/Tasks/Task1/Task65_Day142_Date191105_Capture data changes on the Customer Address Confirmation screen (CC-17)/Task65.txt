@@ -1,0 +1,7 @@
+﻿Task65:
+
+Modify the files:
+C:\AAAAA3\CallCenterClientConnect\Controllers\BookNewServiceController.cs
+C:\AAAAA3\CallCenterClientConnect\ViewModels\BookNewService\CustomerPageModel.cs
+
+Checked also in Sony.pubxml by mistake

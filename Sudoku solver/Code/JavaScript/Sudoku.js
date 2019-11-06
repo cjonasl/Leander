@@ -5,9 +5,9 @@ sudoku.target = {
     ROW: "row",
     COLUMN: "column",
     SQUARE: "square"
-}
+};
 
-sudoku.run = function(args) {
+sudoku.run = function (args) {
     var number, i;
     var certaintySudokuBoard = null;
     var bestSoFarSudokuBoard = null, workingSudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
@@ -23,7 +23,7 @@ sudoku.run = function(args) {
 
     msg = sudoku.getInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet);
 
-    if (msg != null) {
+    if (msg !== null) {
         sudoku.printResult(false, msg);
         return;
     }
@@ -31,12 +31,12 @@ sudoku.run = function(args) {
     squareCellToRowColumnMapper = sudoku.returnSquareCellToRowColumnMapper();
     msg = sudoku.validateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
 
-    if (msg != null) {
+    if (msg !== null) {
         sudoku.printResult(false, msg);
         return;
     }
 
-    if (cellsRemainToSet.length == 0) {
+    if (cellsRemainToSet.length === 0) {
         sudoku.printResult(false, "A complete sudoku was given as input. There is nothing to solve.");
         return;
     }
@@ -44,7 +44,7 @@ sudoku.run = function(args) {
     candidates = sudoku.returnThreeDimensionalDataStructure(9, 9, 10);
     numberOfCandidates[0] = sudoku.initCandidates(workingSudokuBoard, squareCellToRowColumnMapper, candidates);
 
-    if (numberOfCandidates[0] == 0) {
+    if (numberOfCandidates[0] === 0) {
         sudoku.printResult(false, "It is not possible to add any number to the sudoku.");
         return;
     }
@@ -64,10 +64,10 @@ sudoku.run = function(args) {
                 row = cellsRemainToSet[i][0];
                 column = cellsRemainToSet[i][1];
                 number = sudoku.tryFindNumberToSetInCellWithCertainty(row, column, candidates, squareCellToRowColumnMapper);
-                i = (number == 0) ? i + 1 : i;
+                i = (number === 0) ? i + 1 : i;
             }
 
-            if (number == 0) {
+            if (number === 0) {
                 sudoku.simulateOneNumber(candidates, cellsRemainToSet, indexNumber);
                 i = indexNumber[0];
                 number = indexNumber[1];
@@ -87,15 +87,15 @@ sudoku.run = function(args) {
             numberOfCandidates[0] -= sudoku.updateCandidates(candidates, squareCellToRowColumnMapper, row, column, number);
         }
 
-        if (cellsRemainToSet.length == 0) {
+        if (cellsRemainToSet.length === 0) {
             sudokuSolved = true;
         }
-        else if (certaintySudokuBoard == null) {
+        else if (certaintySudokuBoard === null) {
             numbersAddedWithCertaintyAndThenNoCandidates = true;
             numberOfCellsSetInBestSoFar = 81 - cellsRemainToSet.Count;
         }
         else {
-            if (bestSoFarSudokuBoard == null)
+            if (bestSoFarSudokuBoard === null)
                 bestSoFarSudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
 
             numberOfCellsSetInBestSoFar = sudoku.checkIfCanUpdateBestSoFarSudokuBoard(numberOfCellsSetInBestSoFar, cellsRemainToSet, workingSudokuBoard, bestSoFarSudokuBoard);
@@ -104,39 +104,39 @@ sudoku.run = function(args) {
     }
 
     sudoku.printResult(true, null, args, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
-}
+};
 
-sudoku.sourceExists = function(source, isFile) {
-  try {
-     fs.lstatSync(source);
+sudoku.sourceExists = function (source, isFile) {
+    try {
+        fs.lstatSync(source);
 
-     try {
-       fs.readFileSync(source);
+        try {
+            fs.readFileSync(source);
 
-       if (isFile)
-           return true;
-       else
-           return false;
-     }
-      catch (err) {
-       if (isFile)
-           return false;
-       else
-           return true;
+            if (isFile)
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            if (isFile)
+                return false;
+            else
+                return true;
+        }
     }
-  }
-  catch (err) {
-    return false;
-  }
-}
+    catch (err) {
+        return false;
+    }
+};
 
-sudoku.copyList = function (from, to)  {
+sudoku.copyList = function (from, to) {
     to.splice(0, to.length);
 
     for (var i = 0; i < from.length; i++) {
         to.push(from[i]);
     }
-}
+};
 
 sudoku.copySudokuBoard = function (sudokuBoardFrom, sudokuBoardTo) {
     for (var row = 1; row <= 9; row++) {
@@ -144,7 +144,7 @@ sudoku.copySudokuBoard = function (sudokuBoardFrom, sudokuBoardTo) {
             sudokuBoardTo[row - 1][column - 1] = sudokuBoardFrom[row - 1][column - 1];
         }
     }
-}
+};
 
 sudoku.copyCandidates = function (candidatesFrom, candidatesTo) {
     for (var row = 1; row <= 9; row++) {
@@ -154,27 +154,27 @@ sudoku.copyCandidates = function (candidatesFrom, candidatesTo) {
             }
         }
     }
-}
+};
 
-sudoku.saveState = function(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidates, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numberOfCandidatesAfterAddedNumbersWithCertainty) {
+sudoku.saveState = function(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidates, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numOfCandidatesAfterAddedNumbersWithCert) {
     sudoku.copyList(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty);
     sudoku.copySudokuBoard(workingSudokuBoard, certaintySudokuBoard);
     sudoku.copyCandidates(candidates, candidatesAfterAddedNumbersWithCertainty);
-    numberOfCandidatesAfterAddedNumbersWithCertainty[0] = numberOfCandidates[0];
-}
+    numOfCandidatesAfterAddedNumbersWithCert[0] = numberOfCandidates[0];
+};
 
-sudoku.restoreState = function(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidatesAfterAddedNumbersWithCertainty, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numberOfCandidates) {
+sudoku.restoreState = function(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numOfCandidatesAfterAddedNumWithCert, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numOfCandidates) {
     sudoku.copyList(cellsRemainToSetAfterAddedNumbersWithCertainty, cellsRemainToSet);
     sudoku.copySudokuBoard(certaintySudokuBoard, workingSudokuBoard);
     sudoku.copyCandidates(candidatesAfterAddedNumbersWithCertainty, candidates);
-    numberOfCandidates[0] = numberOfCandidatesAfterAddedNumbersWithCertainty[0];
-}
+    numOfCandidates[0] = numOfCandidatesAfterAddedNumWithCert[0];
+};
 
-sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
+sudoku.getInputSudokuBoard = function (args, sudokuBoard, cellsRemainToSet) {
     var rows, columns, sudokuBoardString;
     var row, column, n;
 
-    if (args.length == 0) {
+    if (args.length === 0) {
         return "An input file is not given to the program (first parameter)!";
     }
     else if (args.length > 2) {
@@ -183,7 +183,7 @@ sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
     else if (!sudoku.sourceExists(args[0], true)) {
         return "The given input file in first parameter does not exist!";
     }
-    else if (args.length == 2 && !sudoku.sourceExists(args[1], false)) {
+    else if (args.length === 2 && !sudoku.sourceExists(args[1], false)) {
         return "The directory given in second parameter does not exist!";
     }
 
@@ -191,14 +191,14 @@ sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
 
     rows = sudokuBoardString.split("\n");
 
-    if (rows.length != 9) {
+    if (rows.length !== 9) {
         return "Number of rows in input file are not 9 as expected!";
     }
 
     for (row = 1; row <= 9; row++) {
         columns = rows[row - 1].split(' ');
 
-        if (columns.length != 9) {
+        if (columns.length !== 9) {
             return "Number of columns in input file in row " + row + " are not 9 as expected!";
         }
 
@@ -206,7 +206,7 @@ sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
             n = Number(columns[column - 1]);
 
             if (isNaN(n) || (Math.trunc(n) != n)) {
-                return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " +  column + " in input file is not a valid integer!";
+                return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " + column + " in input file is not a valid integer!";
             }
 
             if (n < 0 || n > 9) {
@@ -215,14 +215,14 @@ sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
 
             sudokuBoard[row - 1][column - 1] = n;
 
-            if (n == 0) {
+            if (n === 0) {
                 cellsRemainToSet.push([row, column]);
             }
         }
     }
 
     return null;
-}
+};
 
 sudoku.candidateIsAlonePossible = function(number, candidates, squareCellToRowColumnMapper, t, target) {
     var row = 0, column = 0, n, i, j, numberOfOccurenciesOfNumber = 0;

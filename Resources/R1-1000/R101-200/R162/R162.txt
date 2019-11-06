@@ -1,0 +1,45 @@
+﻿162
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-05 11:11:19
+
+----- New property -----
+
+Task65_Day142_Date191105_Capture data changes on the Customer Address Confirmation screen (CC-17)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task65_Day142_Date191105_Capture data changes on the Customer Address Confirmation screen (CC-17)
+
+----- New property -----
+
+null

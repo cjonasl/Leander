@@ -1,0 +1,45 @@
+﻿163
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-05 15:18:54
+
+----- New property -----
+
+Task66_Day142_Date191105_Do not pre-populate Preferred date (CC-19)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task66_Day142_Date191105_Do not pre-populate Preferred date (CC-19)
+
+----- New property -----
+
+null

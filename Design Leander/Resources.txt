@@ -3215,3 +3215,43 @@ Task64_Day138_Date191030_Performance Reports (CC-25)
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+162
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-05 11:11:19
+
+----- New property -----
+
+Task65_Day142_Date191105_Capture data changes on the Customer Address Confirmation screen (CC-17)
+
+----- New property -----
+
+Task,Fixzone
+
+---------- New resource ----------
+
+163
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-05 15:18:54
+
+----- New property -----
+
+Task66_Day142_Date191105_Do not pre-populate Preferred date (CC-19)
+
+----- New property -----
+
+Task,Fixzone

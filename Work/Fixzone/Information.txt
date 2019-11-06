@@ -1,4 +1,7 @@
-﻿Log in to computer: Leeds#6231
+﻿CompleteService Test:
+K:\LitmusTest\bin\Service.exe
+
+Log in to computer: Leeds#6231
 hrg.fieldengineer.co.uk password: spat-X11
 Terminal server password: Snovit%69
 
@@ -148,6 +151,7 @@ Password: toothblue
 
 K:\Service\DBISAM\dbsys\dbsys.exe (Terminal Server)
 Log in DBISAM database:
+Database: Sales Demo
 User name: admin
 Password: BON84STICKy
 
