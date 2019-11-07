@@ -130,7 +130,7 @@ sudoku.sourceExists = function (source, isFile) {
     }
 };
 
-sudoku.copyList = function (from, to) {
+sudoku.copyList = function(from, to) {
     to.splice(0, to.length);
 
     for (var i = 0; i < from.length; i++) {
@@ -138,7 +138,7 @@ sudoku.copyList = function (from, to) {
     }
 };
 
-sudoku.copySudokuBoard = function (sudokuBoardFrom, sudokuBoardTo) {
+sudoku.copySudokuBoard = function(sudokuBoardFrom, sudokuBoardTo) {
     for (var row = 1; row <= 9; row++) {
         for (var column = 1; column <= 9; column++) {
             sudokuBoardTo[row - 1][column - 1] = sudokuBoardFrom[row - 1][column - 1];
@@ -146,7 +146,7 @@ sudoku.copySudokuBoard = function (sudokuBoardFrom, sudokuBoardTo) {
     }
 };
 
-sudoku.copyCandidates = function (candidatesFrom, candidatesTo) {
+sudoku.copyCandidates = function(candidatesFrom, candidatesTo) {
     for (var row = 1; row <= 9; row++) {
         for (var column = 1; column <= 9; column++) {
             for (var i = 0; i < 10; i++) {
@@ -170,7 +170,7 @@ sudoku.restoreState = function(cellsRemainToSet, cellsRemainToSetAfterAddedNumbe
     numOfCandidates[0] = numOfCandidatesAfterAddedNumWithCert[0];
 };
 
-sudoku.getInputSudokuBoard = function (args, sudokuBoard, cellsRemainToSet) {
+sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {
     var rows, columns, sudokuBoardString;
     var row, column, n;
 
@@ -205,7 +205,7 @@ sudoku.getInputSudokuBoard = function (args, sudokuBoard, cellsRemainToSet) {
         for (column = 1; column <= 9; column++) {
             n = Number(columns[column - 1]);
 
-            if (isNaN(n) || (Math.trunc(n) != n)) {
+            if (isNaN(n) || Math.trunc(n) !== n) {
                 return "The value \"" + columns[column - 1] + "\" in row " + row + " and column " + column + " in input file is not a valid integer!";
             }
 
@@ -247,7 +247,7 @@ sudoku.candidateIsAlonePossible = function(number, candidates, squareCellToRowCo
 
         if (n > 0) {
             for (j = 0; j < n; j++) {
-                if (candidates[row - 1][column - 1][1 + j] == number) {
+                if (candidates[row - 1][column - 1][1 + j] === number) {
                     numberOfOccurenciesOfNumber++;
 
                     if (numberOfOccurenciesOfNumber > 1)
@@ -258,15 +258,15 @@ sudoku.candidateIsAlonePossible = function(number, candidates, squareCellToRowCo
     }
 
     return true;
-}
+};
 
 sudoku.removeNumberIfItExists = function(v, number) {
     var i, n, index = -1, returnValue = 0;
 
     n = v[0];
     i = 1;
-    while (i <= n && index == -1) {
-        if (v[i] == number) {
+    while (i <= n && index === -1) {
+        if (v[i] === number) {
             index = i;
             returnValue = 1;
         }
@@ -274,7 +274,7 @@ sudoku.removeNumberIfItExists = function(v, number) {
             i++;
     }
 
-    if (index != -1) {
+    if (index !== -1) {
         while (index + 1 <= n) {
             v[index] = v[index + 1];
             index++;
@@ -284,13 +284,12 @@ sudoku.removeNumberIfItExists = function(v, number) {
     }
 
     return returnValue;
-}
+};
 
 sudoku.returnNumberOfOccurenciesOfNumber = function(sudokuBoard, squareCellToRowColumnMapper, number, t, target) { //t refers to a row, column or square
     var row = 0, column = 0, n = 0;
 
-    for (var i = 0; i < 9; i++)
-    {
+    for (var i = 0; i < 9; i++) {
         switch (target) {
             case sudoku.target.ROW:
                 row = t;
@@ -306,12 +305,12 @@ sudoku.returnNumberOfOccurenciesOfNumber = function(sudokuBoard, squareCellToRow
                 break;
         }
 
-        if (sudokuBoard[row - 1][column - 1] == number)
+        if (sudokuBoard[row - 1][column - 1] === number)
             n++;
     }
 
     return n;
-}
+};
 
 sudoku.returnTwoDimensionalDataStructure = function(m, n) {
     var i, j, v = [];
@@ -322,9 +321,9 @@ sudoku.returnTwoDimensionalDataStructure = function(m, n) {
     for (i = 0; i < m; i++)
         for (j = 0; j < n; j++)
             v[i].push(0);
- 
+
     return v;
-}
+};
 
 sudoku.returnThreeDimensionalDataStructure = function(l, m, n) {
     var i, j, k, v = [];
@@ -342,7 +341,7 @@ sudoku.returnThreeDimensionalDataStructure = function(l, m, n) {
                 v[i][j].push(0);
 
     return v;
-}
+};
 
 sudoku.returnSquareCellToRowColumnMapper = function() {
     var v, index, i, row, column, square;

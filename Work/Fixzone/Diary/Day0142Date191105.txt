@@ -1,2 +1,9 @@
 ﻿Dag 142:
 Tisdag den 5 november 2019
+Arbetsdagen ägnade jag åt att korrigera fel i nya
+generiska ClientConnect. Jag arbetade bl.a. med
+punkterna CC-17 (Capture data changes on the Customer
+Address Confirmation screen) och CC-19 (Do not
+prepopulate Preferred date). Vid 13.00-tiden intog
+jag smörgås, banan och kaffe till lunch. Jag avslutade
+arbetsdagen ca. kl. 17.30 och promenerade hem.

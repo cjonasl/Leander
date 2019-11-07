@@ -1,4 +1,7 @@
-﻿CompleteService Test:
+﻿Stimulsoft report:
+Use application on server fix-rdp-1
+
+CompleteService Test:
 K:\LitmusTest\bin\Service.exe
 
 Log in to computer: Leeds#6231
