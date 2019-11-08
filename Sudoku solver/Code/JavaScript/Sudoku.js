@@ -360,7 +360,7 @@ sudoku.returnSquareCellToRowColumnMapper = function() {
     }
 
     return v;
-}
+};
 
 sudoku.returnSudokuBoardAsString = function(sudokuBoard) {
     var row, column, sb = "";
@@ -370,7 +370,7 @@ sudoku.returnSudokuBoardAsString = function(sudokuBoard) {
             sb += "\r\n";
 
         for (column = 1; column <= 9; column++) {
-            if (column == 1)
+            if (column === 1)
                 sb += sudokuBoard[row - 1][column - 1];
             else
                 sb += (" " + sudokuBoard[row - 1][column - 1]);
@@ -378,16 +378,16 @@ sudoku.returnSudokuBoardAsString = function(sudokuBoard) {
     }
 
     return sb;
-}
+};
 
-sudoku.returnIntegerRandomNumber = function (minIncluded, maxExcluded) {
+sudoku.returnIntegerRandomNumber = function(minIncluded, maxExcluded) {
     var n = minIncluded + Math.round(Math.random() * (maxExcluded - minIncluded));
 
-    if (n === maxExcluded) 
+    if (n === maxExcluded)
         n = minIncluded;
 
     return n;
-}
+};
 
 sudoku.simulateOneNumber = function(candidates, cellsRemainToSet, indexNumber) {
     var v = [], tmp, row, column, i, numberOfCandidates, minNumberOfCandidates = 9;
@@ -405,7 +405,7 @@ sudoku.simulateOneNumber = function(candidates, cellsRemainToSet, indexNumber) {
         row = cellsRemainToSet[i][0];
         column = cellsRemainToSet[i][1];
 
-        if (candidates[row - 1][column - 1][0] == minNumberOfCandidates)
+        if (candidates[row - 1][column - 1][0] === minNumberOfCandidates)
             v.push(i);
     }
 
@@ -414,7 +414,7 @@ sudoku.simulateOneNumber = function(candidates, cellsRemainToSet, indexNumber) {
     row = cellsRemainToSet[indexNumber[0]][0];
     column = cellsRemainToSet[indexNumber[0]][1];
     indexNumber[1] = candidates[row - 1][column - 1][1 + sudoku.returnIntegerRandomNumber(0, minNumberOfCandidates)];
-}
+};
 
 sudoku.checkIfCanUpdateBestSoFarSudokuBoard = function(numberOfCellsSetInBestSoFar, cellsRemainToSet, workingSudokuBoard, bestSoFarSudokuBoard) {
     var retVal = numberOfCellsSetInBestSoFar; //Default
@@ -425,7 +425,7 @@ sudoku.checkIfCanUpdateBestSoFarSudokuBoard = function(numberOfCellsSetInBestSoF
     }
 
     return retVal;
-}
+};
 
 sudoku.initCandidates = function(sudokuBoard, squareCellToRowColumnMapper, candidates) {
     var row, column, square, number, numberOfCandidates = 0, n;
@@ -434,7 +434,7 @@ sudoku.initCandidates = function(sudokuBoard, squareCellToRowColumnMapper, candi
         for (column = 1; column <= 9; column++) {
             square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
 
-            if (sudokuBoard[row - 1][column - 1] != 0) {
+            if (sudokuBoard[row - 1][column - 1] !== 0) {
                 candidates[row - 1][column - 1][0] = -1; //Indicates that the cell is set already
             }
             else {
@@ -443,9 +443,9 @@ sudoku.initCandidates = function(sudokuBoard, squareCellToRowColumnMapper, candi
 
                 for (number = 1; number <= 9; number++) {
                     if (
-                        (sudoku.returnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, row, "row") == 0) &&
-                        (sudoku.returnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, column, "column") == 0) &&
-                        (sudoku.returnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, square, "square") == 0)
+                        (sudoku.returnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, row, "row") === 0) &&
+                        (sudoku.returnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, column, "column") === 0) &&
+                        (sudoku.returnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, square, "square") === 0)
                     ) {
                         n++;
                         candidates[row - 1][column - 1][0] = n;
@@ -458,7 +458,7 @@ sudoku.initCandidates = function(sudokuBoard, squareCellToRowColumnMapper, candi
     }
 
     return numberOfCandidates;
-}
+};
 
 sudoku.tryFindNumberToSetInCellWithCertainty = function(row, column, candidates, squareCellToRowColumnMapper) {
     var i, square, numberOfCandidatesInCell, candidate, number = 0;
@@ -466,11 +466,11 @@ sudoku.tryFindNumberToSetInCellWithCertainty = function(row, column, candidates,
     square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
     numberOfCandidatesInCell = candidates[row - 1][column - 1][0];
 
-    if (numberOfCandidatesInCell == 1) 
+    if (numberOfCandidatesInCell == 1)
         number = candidates[row - 1][column - 1][1];
     else {
         i = 1;
-        while (i <= numberOfCandidatesInCell && number == 0) {
+        while (i <= numberOfCandidatesInCell && number === 0) {
             candidate = candidates[row - 1][column - 1][i];
 
             if (sudoku.candidateIsAlonePossible(candidate, candidates, squareCellToRowColumnMapper, row, "row") ||
@@ -483,7 +483,7 @@ sudoku.tryFindNumberToSetInCellWithCertainty = function(row, column, candidates,
     }
 
     return number;
-}
+};
 
 sudoku.updateCandidates = function(candidates, squareCellToRowColumnMapper, row, column, number) {
     var i, r, c, square, totalNumberOfCandidatesRemoved;
@@ -494,13 +494,13 @@ sudoku.updateCandidates = function(candidates, squareCellToRowColumnMapper, row,
     square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
 
     for (c = 1; c <= 9; c++) {
-        if (c != column && candidates[row - 1][c - 1][0] > 0) {
+        if (c !== column && candidates[row - 1][c - 1][0] > 0) {
             totalNumberOfCandidatesRemoved += sudoku.removeNumberIfItExists(candidates[row - 1][c - 1], number);
         }
     }
 
     for (r = 1; r <= 9; r++) {
-        if (r != row && candidates[r - 1][column - 1][0] > 0) {
+        if (r !== row && candidates[r - 1][column - 1][0] > 0) {
             totalNumberOfCandidatesRemoved += sudoku.removeNumberIfItExists(candidates[r - 1][column - 1], number);
         }
     }
@@ -509,13 +509,13 @@ sudoku.updateCandidates = function(candidates, squareCellToRowColumnMapper, row,
         r = squareCellToRowColumnMapper[square - 1][i][0];
         c = squareCellToRowColumnMapper[square - 1][i][1];
 
-        if (r != row && c != column && candidates[r - 1][c - 1][0] > 0) {
+        if (r !== row && c !== column && candidates[r - 1][c - 1][0] > 0) {
             totalNumberOfCandidatesRemoved += sudoku.removeNumberIfItExists(candidates[r - 1][c - 1], number);
         }
     }
 
     return totalNumberOfCandidatesRemoved;
-}
+};
 
 sudoku.validateSudokuBoard = function(sudokuBoard, squareCellToRowColumnMapper) {
     var row, column, square, number;
@@ -525,7 +525,7 @@ sudoku.validateSudokuBoard = function(sudokuBoard, squareCellToRowColumnMapper) 
             square = 1 + (3 * Math.trunc((row - 1) / 3)) + Math.trunc((column - 1) / 3);
             number = sudokuBoard[row - 1][column - 1];
 
-            if (number != 0) {
+            if (number !== 0) {
                 if (sudoku.returnNumberOfOccurenciesOfNumber(sudokuBoard, squareCellToRowColumnMapper, number, row, "row") > 1) {
                     return "The input sudoku is incorrect! The number " + number + " occurs more than once in row " + row;
                 }
@@ -540,14 +540,14 @@ sudoku.validateSudokuBoard = function(sudokuBoard, squareCellToRowColumnMapper) 
     }
 
     return null;
-}
+};
 
-sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
+sudoku.printSudokuBoard = function(solved, args, message, sudokuBoard) {
     var file, fileName, fileNameFullPath, d, yearStr, month, date, hour, minute, second, millisecond, str, c;
     var suffix, monthStr, dateStr, hourStr, minuteStr, secondStr, millisecondStr, fileContent;
     var index1, index2;
 
-    d  = new Date();
+    d = new Date();
 
     yearStr = d.getFullYear().toString();
     month = 1 + d.getMonth();
@@ -574,10 +574,10 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
     else
         suffix = "__Partially_solved_" + yearStr + "." + monthStr + "." + dateStr + "." + hourStr + "." + minuteStr + "." + secondStr + "." + millisecondStr + ".txt";
 
-    if (args.length == 2) {
+    if (args.length === 2) {
         str = args[1].trim();
         c = str[str.length - 1];
-        fileNameFullPath = args[1].trim() + ((c == '\\') ? "" : "\\") + fileName + suffix;
+        fileNameFullPath = args[1].trim() + ((c === '\\') ? "" : "\\") + fileName + suffix;
     }
     else
         fileNameFullPath = args[0].trim() + suffix;
@@ -587,7 +587,7 @@ sudoku.printSudokuBoard =  function(solved, args, message, sudokuBoard) {
     file = fs.openSync(fileNameFullPath, "w");
     fs.writeFileSync(file, fileContent, { encoding: 'ascii' });
     fs.closeSync(file);
-}
+};
 
 sudoku.printResult = function(initialSudokuBoardHasCandidates, msg, args, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard) {
     var tmp1, tmp2;
@@ -603,7 +603,7 @@ sudoku.printResult = function(initialSudokuBoardHasCandidates, msg, args, sudoku
             msg = "The sudoku was partially solved. " + tmp1 + " number(s) added to the original " + numberOfCellsSetInInputSudokuBoard + ". Unable to set " + tmp2 + " number(s).";
         }
 
-        if (sudokuSolved || bestSoFarSudokuBoard == null) {
+        if (sudokuSolved || bestSoFarSudokuBoard === null) {
             sudoku.printSudokuBoard(sudokuSolved, args, msg, workingSudokuBoard);
         }
         else {
@@ -612,7 +612,7 @@ sudoku.printResult = function(initialSudokuBoardHasCandidates, msg, args, sudoku
     }
 
     console.log(msg);
-}
+};
 
 
 var args = [];

@@ -3255,3 +3255,23 @@ Task66_Day142_Date191105_Do not pre-populate Preferred date (CC-19)
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+164
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-07 12:08:10
+
+----- New property -----
+
+Task67_Day144_Date191107_Improve speed of stored procedure Report_WorkInProgressReport
+
+----- New property -----
+
+Task,Fixzone

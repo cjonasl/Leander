@@ -1,2 +1,8 @@
 ﻿Dag 143:
 Onsdag den 6 november 2019
+Jag ägnade arbetsdagen åt generiska ClientConnect, framför
+allt åt att få det att fungera efter uppdatering av ”target
+framework” från 4.0 till 4.5 efter att Vijay lagt till
+senaste versionen av ”Stimulsof dashboard”. Vid 13.00-tiden
+intog jag kaffe, smörgås och banan till lunch. Jag avslutade
+arbetsdagen drygt kl. 17.30 och promenerade hem.

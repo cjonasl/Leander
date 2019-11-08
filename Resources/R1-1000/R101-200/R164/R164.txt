@@ -1,0 +1,45 @@
+﻿164
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-07 12:08:10
+
+----- New property -----
+
+Task67_Day144_Date191107_Improve speed of stored procedure Report_WorkInProgressReport
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task67_Day144_Date191107_Improve speed of stored procedure Report_WorkInProgressReport
+
+----- New property -----
+
+null
