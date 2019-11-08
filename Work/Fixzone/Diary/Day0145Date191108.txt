@@ -1,0 +1,23 @@
+﻿Dag 145:
+Fredag den 8 november 2019
+Till att börja med hade jag inget direkt att göra
+så jag ägnade mig åt min sudoku-hemsida som jag tänkt
+att så småningom publicera. Efter ett tag bad Vijay
+mig att hjälpa till med Dashboard-arbetet i generiska
+ClientConnect. Jag undersökte bl.a. hur man ska kunna
+exportera samtliga kolumner i en tabell, men bara visa
+ett urval av dem, men jag kom inte fram till någon lösning.
+Vid 13.15-tiden gick jag ut för att ringa rekryterare
+Dominic Levy som hade sökt mig. Jag gick först till en
+ATM utanför M&S och tog ut 30 pund och sedan till
+Tolworth bibliotek och ringde Dominic Levy, men han
+svarade inte. Köpte en banan och en ostsmörgås på ”Tesco
+Express” för 1.45 pund och därefter tillbaka till Fixzone
+och intog det jag hade samt också en kopp kaffe. Fick i
+uppgift av Vijay att skapa systemstöd i generiska
+ClientConnect för konfigurering av rapporter. Jag skapade
+Jira ticket CC-28 för det samt task68 och sedan började
+jag arbeta med uppgiften. Gjorde ett online test rörande
+C# och T-SQL som en rekryterare hade skickat till mig och
+det tog drygt en timme. Jag avslutade arbetsdagen ca. kl.
+19.50.

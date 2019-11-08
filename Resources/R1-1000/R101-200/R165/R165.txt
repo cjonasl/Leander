@@ -1,0 +1,45 @@
+﻿165
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-08 15:31:01
+
+----- New property -----
+
+Task68_Day145_Date191108_Generic ClientConnect create ReportSetting table
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task68_Day145_Date191108_Generic ClientConnect create ReportSetting table
+
+----- New property -----
+
+null

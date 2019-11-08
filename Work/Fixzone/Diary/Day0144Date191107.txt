@@ -1,2 +1,9 @@
 ﻿Dag 144:
 Torsdag den 7 november 2019
+Jag ägnade arbetsdagen åt nya generiska ClientConnect.
+Jag tittade bl.a. på arbetet som Vijay hade gjort med
+”Stimulsoft Dashboard” och försökte lösa problemet med
+att det tar väldigt lång tid att ladda mrt-rapporterna,
+men jag lyckades inte. Vid 13.00-tiden intog jag banan,
+kaffe och smörgåx till lunch. Jag avslutade arbetsdagen
+drygt kl. 17.30 och promenerade hem.

@@ -60,7 +60,7 @@ sudoku.run = function (args) {
             number = 0;
             i = 0;
 
-            while (i < cellsRemainToSet.length && number == 0) {
+            while (i < cellsRemainToSet.length && number === 0) {
                 row = cellsRemainToSet[i][0];
                 column = cellsRemainToSet[i][1];
                 number = sudoku.tryFindNumberToSetInCellWithCertainty(row, column, candidates, squareCellToRowColumnMapper);
@@ -74,7 +74,7 @@ sudoku.run = function (args) {
                 row = cellsRemainToSet[i][0];
                 column = cellsRemainToSet[i][1];
 
-                if (certaintySudokuBoard == null) {
+                if (certaintySudokuBoard === null) {
                     certaintySudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
                     cellsRemainToSetAfterAddedNumbersWithCertainty = [];
                     candidatesAfterAddedNumbersWithCertainty = sudoku.returnThreeDimensionalDataStructure(9, 9, 10);
@@ -380,7 +380,7 @@ sudoku.returnSudokuBoardAsString = function(sudokuBoard) {
     return sb;
 };
 
-sudoku.returnIntegerRandomNumber = function(minIncluded, maxExcluded) {
+sudoku.returnIntegerRandomNumber = function (minIncluded, maxExcluded) {
     var n = minIncluded + Math.round(Math.random() * (maxExcluded - minIncluded));
 
     if (n === maxExcluded)

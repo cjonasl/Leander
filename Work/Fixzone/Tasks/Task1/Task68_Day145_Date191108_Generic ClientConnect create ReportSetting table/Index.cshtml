@@ -1,0 +1,59 @@
+﻿@using Stimulsoft.Report.Web;
+@using Stimulsoft.Report.Mvc;
+@using System.Web.UI.WebControls;
+@{
+	ViewData["Title"] = "WIP.mrt - Viewer";
+   
+}
+@{
+    Layout = Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+
+@model string[]
+<table>
+    <tr>
+        <td>@Html.ActionLink("Print to PDF", "PrintPdf")</td><td>@Html.ActionLink("Print", "PrintHtml")</td><td></td><td></td>
+        
+        <td>@Html.ActionLink("Export to PDF", "ExportPdf")</td><td>@Html.ActionLink("Export", "ExportHtml")</td><td>@Html.ActionLink("Export Xls", "ExportXls")</td><td>@Html.ActionLink("Export CSV", "ExportCSV")</td>
+    </tr>
+</table>
+
+    
+
+<table>
+    <tr>
+        <td class="reports" valign="top">
+            <div style="width: 100px; background-color:lightgray">
+               @foreach (string item in Model)
+               { 
+                 @Html.ActionLink(item, "Index", new { fileName = item })
+            
+
+                <br /><br />
+               }
+              
+               
+
+                
+            </div>
+        </td>
+        <td style="width: 100%;" valign="top">
+@Html.Stimulsoft().StiMvcViewer("MvcViewer1", new StiMvcViewerOptions()
+{
+	Actions =
+	{
+		GetReport = "GetReport",
+		ViewerEvent = "ViewerEvent"
+	}, Appearance =
+    {
+        BackgroundColor = System.Drawing.Color.FromArgb(0xe8, 0xe8, 0xe8),
+        ScrollbarsMode = true
+    },
+    Toolbar =
+    {
+        DisplayMode = StiToolbarDisplayMode.Separated,
+        ShowDesignButton = false
+    }
+}) </td>
+    </tr>
+</table>

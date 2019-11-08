@@ -3275,3 +3275,23 @@ Task67_Day144_Date191107_Improve speed of stored procedure Report_WorkInProgress
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+165
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-08 15:31:01
+
+----- New property -----
+
+Task68_Day145_Date191108_Generic ClientConnect create ReportSetting table
+
+----- New property -----
+
+Task,Fixzone
