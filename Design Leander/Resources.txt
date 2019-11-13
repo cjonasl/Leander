@@ -3295,3 +3295,23 @@ Task68_Day145_Date191108_Generic ClientConnect create ReportSetting table
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+166
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-13 09:15:05
+
+----- New property -----
+
+Task69_Day148_Date191113_Treeview for reports (CC-30)
+
+----- New property -----
+
+Task,Fixzone

@@ -1,4 +1,8 @@
-﻿Stimulsoft report:
+﻿Make a tree view:
+https://www.youtube.com/watch?v=mEYwDumGLnM
+http://www.dotnetawesome.com/2014/06/how-to-create-treeview-with-database-data-mvc4-aspnet.html
+
+Stimulsoft report:
 Use application on server fix-rdp-1
 
 CompleteService Test:
@@ -118,7 +122,9 @@ ORDER BY
 
 Change password when email "Your password will expire in 14 days." comes:
 Log in to "Web Mail" (there is a link in the mail) and then follow instructions
-in the mail.
+in the mail:
+User name: Jonas.Leander
+Password: Sotnos%69
 
 PAS client connect project, call center:
 SVN source code: https://svn.fieldengineer.co.uk:8443/svn/main/CustomerConnectWeb/CallCenterClientConnect
