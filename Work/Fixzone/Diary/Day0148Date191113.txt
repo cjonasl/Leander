@@ -1,2 +1,9 @@
 ﻿Dag 148:
 Onsdag den 13 november 2019
+Jag ägnade arbetsdagen åt att implementera en
+meny i form av en trädstruktur för rapporterna
+i nya generiska ClientConnect (jag skapade task69
+för uppgiften). Jag gick till ”Tesco Express”
+och köpte lunchmat (banan och ostsmörgås och det
+kostade 1.45 pund). Jag avslutade arbetsdagen
+knappt kl. 18.30 och tog buss till Surbiton.

@@ -306,6 +306,7 @@ Sage:
 https://ssm.pacificagroup.co.uk/SelfService/snowweb.dll/DisplayLogin
 Username: 1199
 Password: Your national insurance number with the last letter lowercase (SZ526264a)
+New password from 2019-11-14: Sotnos%69
 
 connectionString database "cast_demo":
 <add name="Database" connectionString="server=109.69.232.227,1433;Initial Catalog=cast_demo;User ID=sa;password=Ukraine344;" providerName="System.Data.SqlClient" />
