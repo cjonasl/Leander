@@ -1,0 +1,45 @@
+﻿167
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-18 10:53:23
+
+----- New property -----
+
+Task70_Day151_Date191118_Client List in Call Centre Connect (CC-31)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task70_Day151_Date191118_Client List in Call Centre Connect (CC-31)
+
+----- New property -----
+
+null

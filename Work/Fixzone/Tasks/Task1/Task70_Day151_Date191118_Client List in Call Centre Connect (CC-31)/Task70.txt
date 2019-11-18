@@ -1,0 +1,4 @@
+﻿Task70:
+
+Client table:
+Columns ClientOnStopFg and ClientDisabled

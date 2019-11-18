@@ -3315,3 +3315,23 @@ Task69_Day148_Date191113_Treeview for reports (CC-30)
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+167
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-18 10:53:23
+
+----- New property -----
+
+Task70_Day151_Date191118_Client List in Call Centre Connect (CC-31)
+
+----- New property -----
+
+Task,Fixzone
