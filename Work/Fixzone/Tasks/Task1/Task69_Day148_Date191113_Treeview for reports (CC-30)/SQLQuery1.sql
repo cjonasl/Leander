@@ -1,8 +1,13 @@
+DROP TABLE [dbo].[ReportSetting]
+GO
+
 CREATE TABLE [dbo].[ReportSetting](
 	[_id] [int] IDENTITY(1,1) NOT NULL,
 	[ReportName] [varchar](100) NOT NULL,
 	[Category] [varchar](100) NOT NULL,
 	[File] [varchar](200) NOT NULL,
+	[CategoryDisplayOrder] [int] NOT NULL,
+	[ReportDisplayOrder] [int] NOT NULL,
 	[AllClient] [bit] NULL,
 	[ClientId] [int] NULL,
 	[PrintOptionPdf] [bit] NULL,
@@ -24,6 +29,8 @@ INSERT INTO ReportSetting
 	[ReportName],
 	[Category],
 	[File],
+	[CategoryDisplayOrder],
+	[ReportDisplayOrder],
 	[AllClient],
 	[ClientId],
 	[PrintOptionPdf],
@@ -36,9 +43,11 @@ INSERT INTO ReportSetting
 )
 VALUES
 (
-	'All open jobs',
+	'WIP',
 	'Job',
-	'Content\DashBoardReports\Job\All open jobs.mrt',
+	'Content\DashBoardReports\Job\WIP.mrt',
+	1,
+	1,
 	1,
 	NULL,
 	1,
@@ -56,6 +65,8 @@ INSERT INTO ReportSetting
 	[ReportName],
 	[Category],
 	[File],
+	[CategoryDisplayOrder],
+	[ReportDisplayOrder],
 	[AllClient],
 	[ClientId],
 	[PrintOptionPdf],
@@ -68,9 +79,47 @@ INSERT INTO ReportSetting
 )
 VALUES
 (
-	'WIP',
+	'All open jobs',
 	'Job',
-	'Content\DashBoardReports\Job\WIP.mrt',
+	'Content\DashBoardReports\Job\All open jobs.mrt',
+	1,
+	2,
+	1,
+	NULL,
+	0,
+	0,
+	0,
+	1,
+	0,
+	0,
+	'png'
+)
+GO
+
+INSERT INTO ReportSetting
+(
+	[ReportName],
+	[Category],
+	[File],
+	[CategoryDisplayOrder],
+	[ReportDisplayOrder],
+	[AllClient],
+	[ClientId],
+	[PrintOptionPdf],
+	[PrintOptionHtml],
+	[ExportOptionExcel],
+	[ExportOptionCsv],
+	[ExportOptionPdf],
+	[ExportOptionHtml],
+	[ExportOptionImage]
+)
+VALUES
+(
+	'By time in system',
+	'Customer',
+	'Content\DashBoardReports\Customer\Customers by time in system.mrt',
+	2,
+	1,
 	1,
 	NULL,
 	1,

@@ -3,11 +3,11 @@ ALTER PROCEDURE GetReportList
 AS
 BEGIN
 
-SELECT [_id], [ReportName], [Category], [File], [PrintOptionPdf], [PrintOptionHtml], [ExportOptionExcel], [ExportOptionCsv], [ExportOptionPdf], [ExportOptionHtml], [ExportOptionImage]
+SELECT [_id], [ReportName], [Category], [File], [CategoryDisplayOrder], [ReportDisplayOrder], [PrintOptionPdf], [PrintOptionHtml], [ExportOptionExcel], [ExportOptionCsv], [ExportOptionPdf], [ExportOptionHtml], [ExportOptionImage]
 FROM [dbo].[ReportSetting]
 WHERE [AllClient] = 1
 UNION
-SELECT [_id], [ReportName], [Category], [File], [PrintOptionPdf], [PrintOptionHtml], [ExportOptionExcel], [ExportOptionCsv], [ExportOptionPdf], [ExportOptionHtml], [ExportOptionImage]
+SELECT [_id], [ReportName], [Category], [File], [CategoryDisplayOrder], [ReportDisplayOrder], [PrintOptionPdf], [PrintOptionHtml], [ExportOptionExcel], [ExportOptionCsv], [ExportOptionPdf], [ExportOptionHtml], [ExportOptionImage]
 FROM [dbo].[ReportSetting]
 WHERE [AllClient] = @ClientId
 END

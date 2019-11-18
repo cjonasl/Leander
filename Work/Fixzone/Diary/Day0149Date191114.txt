@@ -1,2 +1,11 @@
 ﻿Dag 149:
 Torsdag den 14 november 2019
+Jag ägnade arbetsdagen åt task69 (Treeview for reports,
+CC-30). Vijay arbetade hemifrån så jag kunde i lugn och
+ro arbeta med uppgiften. Vid 13.00-tiden gick jag till
+”Tesco Express” och köpte ostsmörgås och bulle (kostnad:
+1.35 pund) som jag sedan intog till lunch framför datorn
+tillsammans med en medtagen banan och kaffe. Framåt
+eftermiddagen blev jag klar med en första version av task69
+och jag checkade in i SVN och uppdaterade live site. Jag
+avslutade arbetsdagen ca. kl. 18.15.
