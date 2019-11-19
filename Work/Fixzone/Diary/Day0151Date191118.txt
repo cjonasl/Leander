@@ -1,2 +1,13 @@
 ﻿Dag 151:
 Måndag den 18 november 2019
+Jag hade fått ett mail från Paul med uppgift att
+göra det möjligt att i call center ClientConnect
+även se klienter med flaggan ClientOnStopFg satt.
+Han hade skapat Jira punkt CC-31 för uppgiften och
+jag skapade en motsvarande task70 och sedan började
+jag arbeta med den. Knappt kl. 14.00 tog jag lunch
+och intog smörgås, ba-nan och kaffe. Jag blev klar
+med task70 ca. kl. 15.00 och skickade en video till
+Paul, Angela och Vijay på min implementering. Jag
+avslutade arbetsdagen ca. kl. 17.30 och promenerade
+till YMCA gym i Surbiton.

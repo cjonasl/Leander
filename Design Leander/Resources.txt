@@ -3335,3 +3335,23 @@ Task70_Day151_Date191118_Client List in Call Centre Connect (CC-31)
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+168
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-19 14:53:43
+
+----- New property -----
+
+Task71_Day152_Date191119_Create job report
+
+----- New property -----
+
+Task,Fixzone

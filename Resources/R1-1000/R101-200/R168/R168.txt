@@ -1,0 +1,45 @@
+﻿168
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-19 14:53:43
+
+----- New property -----
+
+Task71_Day152_Date191119_Create job report
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task71_Day152_Date191119_Create job report
+
+----- New property -----
+
+null
