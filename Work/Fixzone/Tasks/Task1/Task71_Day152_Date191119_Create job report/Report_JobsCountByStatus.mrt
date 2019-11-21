@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>w1LPCcZWo6TzTM3ETgilM9Vu3YnGW9n1axWhgOkA9nLfyN3CyFRrmWlNucxhEGk/w1TRiE5WC4VpQbWYauyo/9xUgQLIGOOFb0TVgGNMd0o=</ConnectionStringEncrypted>
+        <Name>Connection</Name>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <DataSource1 Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>DataSource1</Alias>
+        <Columns isList="true" count="4">
+          <value>StatusId,System.Int16</value>
+          <value>Status,System.String</value>
+          <value>Work_x0020_in_x0020_progress,System.String</value>
+          <value>Count,System.Int32</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>8a272cc8f0af466d9064930449d58a19</Key>
+        <Name>DataSource1</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>exec dbo.Report_GetJobsCountByStatus @ClientId</SqlCommand>
+      </DataSource1>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,ClientId,ClientId,,System.Int32,_x0038_18,False,False,False,False,,,True</value>
+      <value>,BaseUrl,BaseUrl,,System.String,http:_x002F__x002F_localhost:61949,False,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>07ddcbf7a0d4496d9f7e597390e4a380</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Dashboard1 Ref="4" type="Stimulsoft.Dashboard.Components.StiDashboard" isKey="true">
+      <BackColor>Transparent</BackColor>
+      <Components isList="true" count="1">
+        <TableDataSource1 Ref="5" type="Stimulsoft.Dashboard.Components.Table.StiTableElement" isKey="true">
+          <BackColor>Transparent</BackColor>
+          <ClientRectangle>0,0,540,600</ClientRectangle>
+          <Columns isList="true" count="4">
+            <Item5 Ref="6" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>DataSource1.StatusId</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <HorAlignment>Center</HorAlignment>
+              <HyperlinkPattern>/ViewDash/ExportJobs?statusId={Value}</HyperlinkPattern>
+              <Key>28777687c5fe4142946198275f0483f6</Key>
+              <Label>StatusId</Label>
+              <ShowHyperlink>True</ShowHyperlink>
+              <TextFormat Ref="7" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+            </Item5>
+            <Item6 Ref="8" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>DataSource1.Status</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <Key>820c0c2b094c47c995c98aeaa45a8a84</Key>
+              <Label>Status</Label>
+            </Item6>
+            <Item7 Ref="9" type="Stimulsoft.Dashboard.Components.Table.StiDimensionColumn" isKey="true">
+              <Expression>[DataSource1.Work in progress]</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <HorAlignment>Center</HorAlignment>
+              <Key>ee4b206eaa7f41708d8e35428fec58bb</Key>
+              <Label>Work in progress</Label>
+            </Item7>
+            <Item8 Ref="10" type="Stimulsoft.Dashboard.Components.Table.StiMeasureColumn" isKey="true">
+              <Expression>Sum(DataSource1.Count)</Expression>
+              <ForeColor>Transparent</ForeColor>
+              <HorAlignment>Right</HorAlignment>
+              <Key>e407eb0ad0a14d75a785d3f8c8191e25</Key>
+              <Label>Count</Label>
+              <TextFormat Ref="11" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+            </Item8>
+          </Columns>
+          <DataFilters isList="true" count="0" />
+          <Font>Arial,10</Font>
+          <FooterFont>Arial,10</FooterFont>
+          <FooterForeColor>Transparent</FooterForeColor>
+          <ForeColor>Transparent</ForeColor>
+          <Guid>d8eea0e32540449ab2eda3e750639895</Guid>
+          <HeaderFont>Arial,12,Bold</HeaderFont>
+          <HeaderForeColor>Transparent</HeaderForeColor>
+          <Margin>3,3,3,3</Margin>
+          <Name>TableDataSource1</Name>
+          <Padding>5,5,5,5</Padding>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Title Ref="12" type="Stimulsoft.Dashboard.Components.StiTitle" isKey="true">
+            <BackColor>Transparent</BackColor>
+            <Font>Arial,11</Font>
+            <ForeColor>Transparent</ForeColor>
+            <Text>  Click on StatusId to export job data to csv</Text>
+          </Title>
+          <TransformActions isList="true" count="0" />
+          <TransformFilters isList="true" count="0" />
+          <TransformSorts isList="true" count="0" />
+          <UserFilters isList="true" count="0" />
+          <UserSorts isList="true" count="0" />
+        </TableDataSource1>
+      </Components>
+      <Guid>2833030a752244b6b1428db4d1832d18</Guid>
+      <Name>Dashboard1</Name>
+      <Report isRef="0" />
+    </Dashboard1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>11/20/2019 4:26:07 PM</ReportChanged>
+  <ReportCreated>11/20/2019 2:39:51 PM</ReportCreated>
+  <ReportFile>C:\Reports\JobsCountByStatus.mrt</ReportFile>
+  <ReportGuid>b7840dfc78c8492f954d06ae33f6fb75</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2019.4.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>
