@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuObj", "SudokuObj\Sudo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuObjDebug", "SudokuObjDebug\SudokuObjDebug.csproj", "{7B4BBB63-4B69-42B1-80B7-3125418D29FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateEvilSudokus", "GenerateEvilSudokus\GenerateEvilSudokus.csproj", "{35A1C4E4-2931-43F3-B893-94D891CB7EC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7B4BBB63-4B69-42B1-80B7-3125418D29FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B4BBB63-4B69-42B1-80B7-3125418D29FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B4BBB63-4B69-42B1-80B7-3125418D29FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A1C4E4-2931-43F3-B893-94D891CB7EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A1C4E4-2931-43F3-B893-94D891CB7EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A1C4E4-2931-43F3-B893-94D891CB7EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A1C4E4-2931-43F3-B893-94D891CB7EC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
