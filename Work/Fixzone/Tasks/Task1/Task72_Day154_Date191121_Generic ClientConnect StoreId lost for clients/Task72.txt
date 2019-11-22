@@ -1,0 +1,7 @@
+﻿Task72:
+
+Created Jira ticket CC-34 for this task.
+
+Modify files:
+C:\ClientConnect2\CallCenterClientConnect\Controllers\AccountController.cs
+C:\ClientConnect2\CallCenterClientConnect\Services\AccountService.cs

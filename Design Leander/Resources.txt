@@ -3355,3 +3355,23 @@ Task71_Day152_Date191119_Create job report
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+169
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-21 11:08:14
+
+----- New property -----
+
+Task72_Day154_Date191121_Generic ClientConnect StoreId lost for clients
+
+----- New property -----
+
+Task,Fixzone

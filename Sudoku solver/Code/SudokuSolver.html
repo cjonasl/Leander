@@ -41,6 +41,7 @@
       padding: 20px;
       border: 1px solid black;
       margin-bottom: 50px;
+      min-width: 2000px;
     }
 
     .leftMenu {
@@ -70,24 +71,28 @@
 <body style="margin: 0px;">
     <div id="divLeftMenu" class="leftMenu" data-active="CopyList">
         <h2 style="margin-top: 2px; font-family: Arial">Functions:</h2>
-        <a id="aLeftMenuCopyList" href="#h3CopyList" onclick="handleLeftMenu('CopyList')" style="color: blue; font-size: larger;">CopyList</a>
-        <a id="aLeftMenuCopySudokuBoard" href="#h3CopySudokuBoard" onclick="handleLeftMenu('CopySudokuBoard')">CopySudokuBoard</a>
-        <a id="aLeftMenuCopyCandidates" href="#h3CopyCandidates" onclick="handleLeftMenu('CopyCandidates')">CopyCandidates</a>
-        <a href="#h3GetInputSudokuBoard">GetInputSudokuBoard</a>
-        <a href="#h3NumberIsAloneCandidate">NumberIsAloneCandidate</a>
-        <a href="#h3RemoveNumberIfItExists">RemoveNumberIfItExists</a>
-        <a href="#h3ReturnNumberOfOccurenciesOfNumber">ReturnNumberOfOccurenciesOfNumber</a>
-        <a href="#h3ReturnTwoDimensionalDataStructure">ReturnTwoDimensionalDataStructure</a>
-        <a href="#h3ReturnThreeDimensionalDataStructure">ReturnThreeDimensionalDataStructure</a>
-        <a href="#h3ReturnSquareCellToRowColumnMapper">ReturnSquareCellToRowColumnMapper</a>
-        <a href="#h3ReturnSudokuBoardsAsString">ReturnSudokuBoardsAsString</a>
-        <a href="#h3SimulateOneNumber">SimulateOneNumber</a>
-        <a href="#h3InitCandidates">InitCandidates</a>
-        <a href="#h3TryFindNumberToSetInCellWithCertainty">TryFindNumberToSetInCellWithCertainty</a>
-        <a href="#h3UpdateCandidates">UpdateCandidates</a>
-        <a href="#h3ValidateSudokuBoard">ValidateSudokuBoard</a>
-        <a href="#h3PrintSudokuBoard">PrintSudokuBoard</a>
-        <a href="#h3Run">Run</a>
+        <a href="#h3CopyList" onclick="handleLeftMenu('CopyList')" style="color: blue; font-size: larger;">CopyList</a>
+        <a href="#h3CopySudokuBoard" onclick="handleLeftMenu('CopySudokuBoard')">CopySudokuBoard</a>
+        <a href="#h3CopyCandidates" onclick="handleLeftMenu('CopyCandidates')">CopyCandidates</a>
+        <a href="#h3SaveState" onclick="handleLeftMenu('SaveState')">SaveState</a>
+        <a href="#h3RestoreState" onclick="handleLeftMenu('RestoreState')">RestoreState</a>
+        <a href="#h3GetInputSudokuBoard" onclick="handleLeftMenu('GetInputSudokuBoard')">GetInputSudokuBoard</a>
+        <a href="#h3CandidateIsAlonePossible" onclick="handleLeftMenu('CandidateIsAlonePossible')">CandidateIsAlonePossible</a>
+        <a href="#h3RemoveNumberIfItExists" onclick="handleLeftMenu('RemoveNumberIfItExists')">RemoveNumberIfItExists</a>
+        <a href="#h3ReturnNumberOfOccurenciesOfNumber" onclick="handleLeftMenu('ReturnNumberOfOccurenciesOfNumber')">ReturnNumberOfOccurenciesOfNumber</a>
+        <a href="#h3ReturnTwoDimensionalDataStructure" onclick="handleLeftMenu('ReturnTwoDimensionalDataStructure')">ReturnTwoDimensionalDataStructure</a>
+        <a href="#h3ReturnThreeDimensionalDataStructure" onclick="handleLeftMenu('ReturnThreeDimensionalDataStructure')">ReturnThreeDimensionalDataStructure</a>
+        <a href="#h3ReturnSquareCellToRowColumnMapper" onclick="handleLeftMenu('ReturnSquareCellToRowColumnMapper')">ReturnSquareCellToRowColumnMapper</a>
+        <a href="#h3ReturnSudokuBoardAsString" onclick="handleLeftMenu('ReturnSudokuBoardAsString')">ReturnSudokuBoardAsString</a>
+        <a href="#h3SimulateOneNumber" onclick="handleLeftMenu('SimulateOneNumber')">SimulateOneNumber</a>
+        <a href="#h3CheckIfCanUpdateBestSoFarSudokuBoard" onclick="handleLeftMenu('CheckIfCanUpdateBestSoFarSudokuBoard')">CheckIfCanUpdateBestSoFarSudokuBoard</a>
+        <a href="#h3InitCandidates" onclick="handleLeftMenu('InitCandidates')">InitCandidates</a>
+        <a href="#h3TryFindNumberToSetInCellWithCertainty" onclick="handleLeftMenu('TryFindNumberToSetInCellWithCertainty')">TryFindNumberToSetInCellWithCertainty</a>
+        <a href="#h3UpdateCandidates" onclick="handleLeftMenu('UpdateCandidates')">UpdateCandidates</a>
+        <a href="#h3ValidateSudokuBoard" onclick="handleLeftMenu('ValidateSudokuBoard')">ValidateSudokuBoard</a>
+        <a href="#h3PrintSudokuBoard" onclick="handleLeftMenu('PrintSudokuBoard')">PrintSudokuBoard</a>
+        <a href="#h3PrintResult" onclick="handleLeftMenu('PrintResult')">PrintResult</a>
+        <a href="#h3Run" onclick="handleLeftMenu('Run')">Run</a>
     </div>
     <div class="main">
         <h3 id="h3CopyList" style="margin-top: 5px;">CopyList</h3>
@@ -98,28 +103,217 @@
             <a id="aCopyListPython" href="javascript: setImagePath('CopyList', 'Python')">Python</a>
             <a id="aCopyListRuby" href="javascript: setImagePath('CopyList', 'Ruby')">Ruby</a>
         </div>
-        <div class="code" style="min-height: 155px; margin-top: 3px;"><img id="imgCopyList" src="" /></div>
+        <div class="code" style="min-height: 149px; margin-top: 3px;"><img id="imgCopyList" src="" /></div>
 
         <h3 id="h3CopySudokuBoard">CopySudokuBoard</h3>
         <div id="divCopySudokuBoard" class="languages" data-active="CSharp">
-            <a id="aCopySudokuBoardCSharp" href="javascript: setImagePath('CopySudokuBoard', 'CSharp')" style="color: #6600ff; font-weight: bold; font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aCopySudokuBoardCSharp" href="javascript: setImagePath('CopySudokuBoard', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
             <a id="aCopySudokuBoardJavaScript" href="javascript: setImagePath('CopySudokuBoard', 'JavaScript')">JavaScript</a>
             <a id="aCopySudokuBoardPHP" href="javascript: setImagePath('CopySudokuBoard', 'PHP')">PHP</a>
             <a id="aCopySudokuBoardPython" href="javascript: setImagePath('CopySudokuBoard', 'Python')">Python</a>
             <a id="aCopySudokuBoardRuby" href="javascript: setImagePath('CopySudokuBoard', 'Ruby')">Ruby</a>
         </div>
-        <div class="code" style="min-height: 200px; margin-top: 3px;"><img id="imgCopySudokuBoard" src="" /></div>
+        <div class="code" style="min-height: 194px; margin-top: 3px;"><img id="imgCopySudokuBoard" src="" /></div>
 
         <h3 id="h3CopyCandidates">CopyCandidates</h3>
         <div id="divCopyCandidates" class="languages" data-active="CSharp">
-            <a id="aCopyCandidatesCSharp" href="javascript: setImagePath('CopyCandidates', 'CSharp')" style="color: #6600ff; font-weight: bold; font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aCopyCandidatesCSharp" href="javascript: setImagePath('CopyCandidates', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
             <a id="aCopyCandidatesJavaScript" href="javascript: setImagePath('CopyCandidates', 'JavaScript')">JavaScript</a>
             <a id="aCopyCandidatesPHP" href="javascript: setImagePath('CopyCandidates', 'PHP')">PHP</a>
             <a id="aCopyCandidatesPython" href="javascript: setImagePath('CopyCandidates', 'Python')">Python</a>
             <a id="aCopyCandidatesRuby" href="javascript: setImagePath('CopyCandidates', 'Ruby')">Ruby</a>
         </div>
-        <div class="code" style="min-height: 217px; margin-top: 3px;"><img id="imgCopyCandidates" src="" /></div>
+        <div class="code" style="min-height: 211px; margin-top: 3px;"><img id="imgCopyCandidates" src="" /></div>
 
+        <h3 id="h3SaveState">SaveState</h3>
+        <div id="divSaveState" class="languages" data-active="CSharp">
+            <a id="aSaveStateCSharp" href="javascript: setImagePath('SaveState', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aSaveStateJavaScript" href="javascript: setImagePath('SaveState', 'JavaScript')">JavaScript</a>
+            <a id="aSaveStatePHP" href="javascript: setImagePath('SaveState', 'PHP')">PHP</a>
+            <a id="aSaveStatePython" href="javascript: setImagePath('SaveState', 'Python')">Python</a>
+            <a id="aSaveStateRuby" href="javascript: setImagePath('SaveState', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 129px; margin-top: 3px;"><img id="imgSaveState" src="" /></div>
+
+        <h3 id="h3RestoreState">RestoreState</h3>
+        <div id="divRestoreState" class="languages" data-active="CSharp">
+            <a id="aRestoreStateCSharp" href="javascript: setImagePath('RestoreState', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aRestoreStateJavaScript" href="javascript: setImagePath('RestoreState', 'JavaScript')">JavaScript</a>
+            <a id="aRestoreStatePHP" href="javascript: setImagePath('RestoreState', 'PHP')">PHP</a>
+            <a id="aRestoreStatePython" href="javascript: setImagePath('RestoreState', 'Python')">Python</a>
+            <a id="aRestoreStateRuby" href="javascript: setImagePath('RestoreState', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 130px; margin-top: 3px;"><img id="imgRestoreState" src="" /></div>
+
+        <h3 id="h3GetInputSudokuBoard">GetInputSudokuBoard</h3>
+        <div id="divGetInputSudokuBoard" class="languages" data-active="CSharp">
+            <a id="aGetInputSudokuBoardCSharp" href="javascript: setImagePath('GetInputSudokuBoard', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aGetInputSudokuBoardJavaScript" href="javascript: setImagePath('GetInputSudokuBoard', 'JavaScript')">JavaScript</a>
+            <a id="aGetInputSudokuBoardPHP" href="javascript: setImagePath('GetInputSudokuBoard', 'PHP')">PHP</a>
+            <a id="aGetInputSudokuBoardPython" href="javascript: setImagePath('GetInputSudokuBoard', 'Python')">Python</a>
+            <a id="aGetInputSudokuBoardRuby" href="javascript: setImagePath('GetInputSudokuBoard', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 925px; margin-top: 3px;"><img id="imgGetInputSudokuBoard" src="" /></div>
+
+        <h3 id="h3CandidateIsAlonePossible">CandidateIsAlonePossible</h3>
+        <div id="divCandidateIsAlonePossible" class="languages" data-active="CSharp">
+            <a id="aCandidateIsAlonePossibleCSharp" href="javascript: setImagePath('CandidateIsAlonePossible', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aCandidateIsAlonePossibleJavaScript" href="javascript: setImagePath('CandidateIsAlonePossible', 'JavaScript')">JavaScript</a>
+            <a id="aCandidateIsAlonePossiblePHP" href="javascript: setImagePath('CandidateIsAlonePossible', 'PHP')">PHP</a>
+            <a id="aCandidateIsAlonePossiblePython" href="javascript: setImagePath('CandidateIsAlonePossible', 'Python')">Python</a>
+            <a id="aCandidateIsAlonePossibleRuby" href="javascript: setImagePath('CandidateIsAlonePossible', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 661px; margin-top: 3px;"><img id="imgCandidateIsAlonePossible" src="" /></div>
+
+        <h3 id="h3RemoveNumberIfItExists">RemoveNumberIfItExists</h3>
+        <div id="divRemoveNumberIfItExists" class="languages" data-active="CSharp">
+            <a id="aRemoveNumberIfItExistsCSharp" href="javascript: setImagePath('RemoveNumberIfItExists', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aRemoveNumberIfItExistsJavaScript" href="javascript: setImagePath('RemoveNumberIfItExists', 'JavaScript')">JavaScript</a>
+            <a id="aRemoveNumberIfItExistsPHP" href="javascript: setImagePath('RemoveNumberIfItExists', 'PHP')">PHP</a>
+            <a id="aRemoveNumberIfItExistsPython" href="javascript: setImagePath('RemoveNumberIfItExists', 'Python')">Python</a>
+            <a id="aRemoveNumberIfItExistsRuby" href="javascript: setImagePath('RemoveNumberIfItExists', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 486px; margin-top: 3px;"><img id="imgRemoveNumberIfItExists" src="" /></div>
+
+        <h3 id="h3ReturnNumberOfOccurenciesOfNumber">ReturnNumberOfOccurenciesOfNumber</h3>
+        <div id="divReturnNumberOfOccurenciesOfNumber" class="languages" data-active="CSharp">
+            <a id="aReturnNumberOfOccurenciesOfNumberCSharp" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aReturnNumberOfOccurenciesOfNumberJavaScript" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'JavaScript')">JavaScript</a>
+            <a id="aReturnNumberOfOccurenciesOfNumberPHP" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'PHP')">PHP</a>
+            <a id="aReturnNumberOfOccurenciesOfNumberPython" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'Python')">Python</a>
+            <a id="aReturnNumberOfOccurenciesOfNumberRuby" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 465px; margin-top: 3px;"><img id="imgReturnNumberOfOccurenciesOfNumber" src="" /></div>
+
+        <h3 id="h3ReturnTwoDimensionalDataStructure">ReturnTwoDimensionalDataStructure</h3>
+        <div id="divReturnTwoDimensionalDataStructure" class="languages" data-active="CSharp">
+            <a id="aReturnTwoDimensionalDataStructureCSharp" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aReturnTwoDimensionalDataStructureJavaScript" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'JavaScript')">JavaScript</a>
+            <a id="aReturnTwoDimensionalDataStructurePHP" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'PHP')">PHP</a>
+            <a id="aReturnTwoDimensionalDataStructurePython" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'Python')">Python</a>
+            <a id="aReturnTwoDimensionalDataStructureRuby" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 239px; margin-top: 3px;"><img id="imgReturnTwoDimensionalDataStructure" src="" /></div>
+
+        <h3 id="h3ReturnThreeDimensionalDataStructure">ReturnThreeDimensionalDataStructure</h3>
+        <div id="divReturnThreeDimensionalDataStructure" class="languages" data-active="CSharp">
+            <a id="aReturnThreeDimensionalDataStructureCSharp" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aReturnThreeDimensionalDataStructureJavaScript" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'JavaScript')">JavaScript</a>
+            <a id="aReturnThreeDimensionalDataStructurePHP" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'PHP')">PHP</a>
+            <a id="aReturnThreeDimensionalDataStructurePython" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'Python')">Python</a>
+            <a id="aReturnThreeDimensionalDataStructureRuby" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 367px; margin-top: 3px;"><img id="imgReturnThreeDimensionalDataStructure" src="" /></div>
+
+        <h3 id="h3ReturnSquareCellToRowColumnMapper">ReturnSquareCellToRowColumnMapper</h3>
+        <div id="divReturnSquareCellToRowColumnMapper" class="languages" data-active="CSharp">
+            <a id="aReturnSquareCellToRowColumnMapperCSharp" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aReturnSquareCellToRowColumnMapperJavaScript" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'JavaScript')">JavaScript</a>
+            <a id="aReturnSquareCellToRowColumnMapperPHP" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'PHP')">PHP</a>
+            <a id="aReturnSquareCellToRowColumnMapperPython" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'Python')">Python</a>
+            <a id="aReturnSquareCellToRowColumnMapperRuby" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 451px; margin-top: 3px;"><img id="imgReturnSquareCellToRowColumnMapper" src="" /></div>
+
+        <h3 id="h3ReturnSudokuBoardAsString">ReturnSudokuBoardAsString</h3>
+        <div id="divReturnSudokuBoardAsString" class="languages" data-active="CSharp">
+            <a id="aReturnSudokuBoardAsStringCSharp" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aReturnSudokuBoardAsStringJavaScript" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'JavaScript')">JavaScript</a>
+            <a id="aReturnSudokuBoardAsStringPHP" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'PHP')">PHP</a>
+            <a id="aReturnSudokuBoardAsStringPython" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'Python')">Python</a>
+            <a id="aReturnSudokuBoardAsStringRuby" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 338px; margin-top: 3px;"><img id="imgReturnSudokuBoardAsString" src="" /></div>
+
+        <h3 id="h3SimulateOneNumber">SimulateOneNumber</h3>
+        <div id="divSimulateOneNumber" class="languages" data-active="CSharp">
+            <a id="aSimulateOneNumberCSharp" href="javascript: setImagePath('SimulateOneNumber', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aSimulateOneNumberJavaScript" href="javascript: setImagePath('SimulateOneNumber', 'JavaScript')">JavaScript</a>
+            <a id="aSimulateOneNumberPHP" href="javascript: setImagePath('SimulateOneNumber', 'PHP')">PHP</a>
+            <a id="aSimulateOneNumberPython" href="javascript: setImagePath('SimulateOneNumber', 'Python')">Python</a>
+            <a id="aSimulateOneNumberRuby" href="javascript: setImagePath('SimulateOneNumber', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 579px; margin-top: 3px;"><img id="imgSimulateOneNumber" src="" /></div>
+
+        <h3 id="h3CheckIfCanUpdateBestSoFarSudokuBoard">CheckIfCanUpdateBestSoFarSudokuBoard</h3>
+        <div id="divCheckIfCanUpdateBestSoFarSudokuBoard" class="languages" data-active="CSharp">
+            <a id="aCheckIfCanUpdateBestSoFarSudokuBoardCSharp" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aCheckIfCanUpdateBestSoFarSudokuBoardJavaScript" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'JavaScript')">JavaScript</a>
+            <a id="aCheckIfCanUpdateBestSoFarSudokuBoardPHP" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'PHP')">PHP</a>
+            <a id="aCheckIfCanUpdateBestSoFarSudokuBoardPython" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'Python')">Python</a>
+            <a id="aCheckIfCanUpdateBestSoFarSudokuBoardRuby" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 195px; margin-top: 3px;"><img id="imgCheckIfCanUpdateBestSoFarSudokuBoard" src="" /></div>
+
+        <h3 id="h3InitCandidates">InitCandidates</h3>
+        <div id="divInitCandidates" class="languages" data-active="CSharp">
+            <a id="aInitCandidatesCSharp" href="javascript: setImagePath('InitCandidates', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aInitCandidatesJavaScript" href="javascript: setImagePath('InitCandidates', 'JavaScript')">JavaScript</a>
+            <a id="aInitCandidatesPHP" href="javascript: setImagePath('InitCandidates', 'PHP')">PHP</a>
+            <a id="aInitCandidatesPython" href="javascript: setImagePath('InitCandidates', 'Python')">Python</a>
+            <a id="aInitCandidatesRuby" href="javascript: setImagePath('InitCandidates', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 658px; margin-top: 3px;"><img id="imgInitCandidates" src="" /></div>
+
+        <h3 id="h3TryFindNumberToSetInCellWithCertainty">TryFindNumberToSetInCellWithCertainty</h3>
+        <div id="divTryFindNumberToSetInCellWithCertainty" class="languages" data-active="CSharp">
+            <a id="aTryFindNumberToSetInCellWithCertaintyCSharp" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aTryFindNumberToSetInCellWithCertaintyJavaScript" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'JavaScript')">JavaScript</a>
+            <a id="aTryFindNumberToSetInCellWithCertaintyPHP" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'PHP')">PHP</a>
+            <a id="aTryFindNumberToSetInCellWithCertaintyPython" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'Python')">Python</a>
+            <a id="aTryFindNumberToSetInCellWithCertaintyRuby" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 479px; margin-top: 3px;"><img id="imgTryFindNumberToSetInCellWithCertainty" src="" /></div>
+
+        <h3 id="h3UpdateCandidates">UpdateCandidates</h3>
+        <div id="divUpdateCandidates" class="languages" data-active="CSharp">
+            <a id="aUpdateCandidatesCSharp" href="javascript: setImagePath('UpdateCandidates', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aUpdateCandidatesJavaScript" href="javascript: setImagePath('UpdateCandidates', 'JavaScript')">JavaScript</a>
+            <a id="aUpdateCandidatesPHP" href="javascript: setImagePath('UpdateCandidates', 'PHP')">PHP</a>
+            <a id="aUpdateCandidatesPython" href="javascript: setImagePath('UpdateCandidates', 'Python')">Python</a>
+            <a id="aUpdateCandidatesRuby" href="javascript: setImagePath('UpdateCandidates', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 612px; margin-top: 3px;"><img id="imgUpdateCandidates" src="" /></div>
+
+        <h3 id="h3ValidateSudokuBoard">ValidateSudokuBoard</h3>
+        <div id="divValidateSudokuBoard" class="languages" data-active="CSharp">
+            <a id="aValidateSudokuBoardCSharp" href="javascript: setImagePath('ValidateSudokuBoard', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aValidateSudokuBoardJavaScript" href="javascript: setImagePath('ValidateSudokuBoard', 'JavaScript')">JavaScript</a>
+            <a id="aValidateSudokuBoardPHP" href="javascript: setImagePath('ValidateSudokuBoard', 'PHP')">PHP</a>
+            <a id="aValidateSudokuBoardPython" href="javascript: setImagePath('ValidateSudokuBoard', 'Python')">Python</a>
+            <a id="aValidateSudokuBoardRuby" href="javascript: setImagePath('ValidateSudokuBoard', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 499px; margin-top: 3px;"><img id="imgValidateSudokuBoard" src="" /></div>
+
+        <h3 id="h3PrintSudokuBoard">PrintSudokuBoard</h3>
+        <div id="divPrintSudokuBoard" class="languages" data-active="CSharp">
+            <a id="aPrintSudokuBoardCSharp" href="javascript: setImagePath('PrintSudokuBoard', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aPrintSudokuBoardJavaScript" href="javascript: setImagePath('PrintSudokuBoard', 'JavaScript')">JavaScript</a>
+            <a id="aPrintSudokuBoardPHP" href="javascript: setImagePath('PrintSudokuBoard', 'PHP')">PHP</a>
+            <a id="aPrintSudokuBoardPython" href="javascript: setImagePath('PrintSudokuBoard', 'Python')">Python</a>
+            <a id="aPrintSudokuBoardRuby" href="javascript: setImagePath('PrintSudokuBoard', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 738px; margin-top: 3px;"><img id="imgPrintSudokuBoard" src="" /></div>
+
+        <h3 id="h3PrintResult">PrintResult</h3>
+        <div id="divPrintResult" class="languages" data-active="CSharp">
+            <a id="aPrintResultCSharp" href="javascript: setImagePath('PrintResult', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aPrintResultJavaScript" href="javascript: setImagePath('PrintResult', 'JavaScript')">JavaScript</a>
+            <a id="aPrintResultPHP" href="javascript: setImagePath('PrintResult', 'PHP')">PHP</a>
+            <a id="aPrintResultPython" href="javascript: setImagePath('PrintResult', 'Python')">Python</a>
+            <a id="aPrintResultRuby" href="javascript: setImagePath('PrintResult', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 435px; margin-top: 3px;"><img id="imgPrintResult" src="" /></div>
+
+        <h3 id="h3Run">Run</h3>
+        <div id="divRun" class="languages" data-active="CSharp">
+            <a id="aRunCSharp" href="javascript: setImagePath('Run', 'CSharp')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+            <a id="aRunJavaScript" href="javascript: setImagePath('Run', 'JavaScript')">JavaScript</a>
+            <a id="aRunPHP" href="javascript: setImagePath('Run', 'PHP')">PHP</a>
+            <a id="aRunPython" href="javascript: setImagePath('Run', 'Python')">Python</a>
+            <a id="aRunRuby" href="javascript: setImagePath('Run', 'Ruby')">Ruby</a>
+        </div>
+        <div class="code" style="min-height: 1595px; margin-top: 3px;"><img id="imgRun" src="" /></div>
     </div>
 
   <script src="http://www.sudokusolver.com/jquery-3.4.1.js"></script>
@@ -127,10 +321,10 @@
   <script>
       window.sudokoBasePath = "http://www.sudokusolver.com/";
 
-      function handleLeftMenu(method) {
+      function handleLeftMenu(fcn) {
           var currentActive = $("#divLeftMenu").attr("data-active");
 
-          if (method !== currentActive) {
+          if (fcn !== currentActive) {
               $("#aLeftMenu" + currentActive).css(
                   {
                       "color": "black",
@@ -138,14 +332,14 @@
                   }
               );
 
-              $("#aLeftMenu" + method).css(
+              $("#aLeftMenu" + fcn).css(
                   {
                       "color": "blue",
                       "font-size": "larger"
                   }
               );
 
-              $("#divLeftMenu").attr("data-active", method);
+              $("#divLeftMenu").attr("data-active", fcn);
           }
       }
 
@@ -178,6 +372,25 @@
         $("#imgCopyList").attr("src", window.sudokoBasePath + "CSharp/CopyList.png");
         $("#imgCopySudokuBoard").attr("src", window.sudokoBasePath + "CSharp/CopySudokuBoard.png");
         $("#imgCopyCandidates").attr("src", window.sudokoBasePath + "CSharp/CopyCandidates.png");
+        $("#imgSaveState").attr("src", window.sudokoBasePath + "CSharp/SaveState.png");
+        $("#imgRestoreState").attr("src", window.sudokoBasePath + "CSharp/RestoreState.png");
+        $("#imgGetInputSudokuBoard").attr("src", window.sudokoBasePath + "CSharp/GetInputSudokuBoard.png");
+        $("#imgCandidateIsAlonePossible").attr("src", window.sudokoBasePath + "CSharp/CandidateIsAlonePossible.png");
+        $("#imgRemoveNumberIfItExists").attr("src", window.sudokoBasePath + "CSharp/RemoveNumberIfItExists.png");
+        $("#imgReturnNumberOfOccurenciesOfNumber").attr("src", window.sudokoBasePath + "CSharp/ReturnNumberOfOccurenciesOfNumber.png");
+        $("#imgReturnTwoDimensionalDataStructure").attr("src", window.sudokoBasePath + "CSharp/ReturnTwoDimensionalDataStructure.png");
+        $("#imgReturnThreeDimensionalDataStructure").attr("src", window.sudokoBasePath + "CSharp/ReturnThreeDimensionalDataStructure.png");
+        $("#imgReturnSquareCellToRowColumnMapper").attr("src", window.sudokoBasePath + "CSharp/ReturnSquareCellToRowColumnMapper.png");
+        $("#imgReturnSudokuBoardAsString").attr("src", window.sudokoBasePath + "CSharp/ReturnSudokuBoardAsString.png");
+        $("#imgSimulateOneNumber").attr("src", window.sudokoBasePath + "CSharp/SimulateOneNumber.png");
+        $("#imgCheckIfCanUpdateBestSoFarSudokuBoard").attr("src", window.sudokoBasePath + "CSharp/CheckIfCanUpdateBestSoFarSudokuBoard.png");
+        $("#imgInitCandidates").attr("src", window.sudokoBasePath + "CSharp/InitCandidates.png");
+        $("#imgTryFindNumberToSetInCellWithCertainty").attr("src", window.sudokoBasePath + "CSharp/TryFindNumberToSetInCellWithCertainty.png");
+        $("#imgUpdateCandidates").attr("src", window.sudokoBasePath + "CSharp/UpdateCandidates.png");
+        $("#imgValidateSudokuBoard").attr("src", window.sudokoBasePath + "CSharp/ValidateSudokuBoard.png");
+        $("#imgPrintSudokuBoard").attr("src", window.sudokoBasePath + "CSharp/PrintSudokuBoard.png");
+        $("#imgPrintResult").attr("src", window.sudokoBasePath + "CSharp/PrintResult.png");
+        $("#imgRun").attr("src", window.sudokoBasePath + "CSharp/Run.png");
       });
 
   </script>

@@ -1,0 +1,45 @@
+﻿169
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-11-21 11:08:14
+
+----- New property -----
+
+Task72_Day154_Date191121_Generic ClientConnect StoreId lost for clients
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task72_Day154_Date191121_Generic ClientConnect StoreId lost for clients
+
+----- New property -----
+
+null
