@@ -1,9 +1,13 @@
-CREATE PROCEDURE [dbo].[Report_GetClosedJobs]
-@ClientId int,
-@StartDate date,
-@EndDate date
+CREATE PROCEDURE [dbo].[Report_GetClosedJobs_Export]
+@ClientId int
 AS
 BEGIN
+DECLARE
+@StartDate date,
+@EndDate date
+
+SET @EndDate = CAST(getdate() as date)
+SET @StartDate = DATEADD(month, -1, @EndDate)
 
 DECLARE @TmpTableService1 TABLE
 (
@@ -160,16 +164,24 @@ FROM
 WHERE
   d.EventDate IS NOT NULL
 
-
 SELECT
+  dbo.fn_Help1GetValue(c.[TITLE]) AS Title,
   dbo.fn_Help1GetValue(c.[SURNAME]) AS Surname,
   CAST(s1.SERVICEID AS varchar(20)) AS JobNumber,
   dbo.fn_Help1GetValue(cap.[APPLIANCECD]) AS ApplianceCategory,
+  dbo.fn_Help1GetValue(cap.[MFR]) AS Brand,
   dbo.fn_Help1GetValue(cap.[MODEL]) AS Model,
+  dbo.fn_Help2GetValue(a.[FirstDateoffered]) AS FirstDateOffered,
+  dbo.fn_Help2GetValue(a.[DateChosen]) AS CustomerSelectedDate,
   dbo.fn_Help2GetValue(d2.[EventDate]) AS DateOfFirstVisit,
   dbo.fn_Help2GetValue(d4.[EventDate]) AS DateOfSecondVisit,
+  dbo.fn_Help2GetValue(d6.[EventDate]) AS DateOfThirdVisit,
   dbo.fn_Help1GetValue(s.[Status]) AS JobStatus,
-  dbo.fn_Help2GetValue(s1.CLOSEDDATE) AS ClosedDate
+  dbo.fn_Help2GetValue(s1.CLOSEDDATE) AS ClosedDate,
+  dbo.fn_Help1GetValue(cap.[SNO]) AS SerialNumber,
+  dbo.fn_Help1GetValue(s1.[CLIENTREF]) AS ClientReferenceNumber,
+  dbo.fn_Help1GetValue(cap.[POLICYNUMBER]) AS PolicyNumber
+
 FROM 
   @TmpTableService3 s1
   INNER JOIN Customer c ON s1.CUSTOMERID = c.CUSTOMERID
@@ -203,7 +215,7 @@ FROM
 WHERE
   s1.SERVICEID = s1.JOBID
 ORDER BY
-  s1.SERVICEID
+  s1.SERVICEID desc
 
 OPTION(RECOMPILE)
 END

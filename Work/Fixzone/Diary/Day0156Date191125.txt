@@ -1,2 +1,10 @@
 ﻿Dag 156:
 Måndag den 25 november 2019
+Jag ägnade arbetsdagen åt en rapport med avslutade
+jobb (task 71), först med stored procedure ”Report_-
+GetClosedJobsBetweenTwoDates” för rapporten och
+därefter med rapporten i Stimulsoft skakiga och
+frustrerande verktyg. Jag tog lunch ca. kl. 13.00
+och intog kaffe, smörgås och banan framför datorn.
+Jag avslutade arbetsdagen ca. kl. 17.30 och
+promenerade hem.
