@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenerateEvilSudokus
+namespace GenerateSudokuBoards
 {
     public static class Utility
     {
@@ -17,10 +17,17 @@ namespace GenerateEvilSudokus
             {
                 for (int column = 1; column <= 9; column++)
                 {
-                    if (column == 9)
-                        sb.Append(str[9 * (row - 1) + (column - 1)] + "\r\n");
+                    if (row == 9 && column == 9)
+                    {
+                        sb.Append(str[80]);
+                    }
                     else
-                        sb.Append(str[9 * (row - 1) + (column - 1)] + " ");
+                    {
+                        if (column == 9)
+                            sb.Append(str[9 * (row - 1) + (column - 1)] + "\r\n");
+                        else
+                            sb.Append(str[9 * (row - 1) + (column - 1)] + " ");
+                    }
                 }
             }
 
@@ -81,7 +88,7 @@ namespace GenerateEvilSudokus
                                 result = AddSudokuBoard(initialSudokuBoards[i - 11], solvedSudokoBoard, result, i);
                             }
 
-                            if (result.StartsWith("ERROR"))
+                            if (result != null && result.StartsWith("ERROR"))
                             {
                                 Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
                                 errorFound = true;
@@ -111,9 +118,6 @@ namespace GenerateEvilSudokus
             {
                 Log(start, args[0], null, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
             }
-
-            //int n = 3;
-            //string str = n.ToString().PadLeft(3, '0');
         }
 
         private static ArrayList ReturnExistingFullSudokuBoards()
@@ -262,7 +266,7 @@ namespace GenerateEvilSudokus
             }
             else
             {
-                w.WriteLine(string.Format("{0}\t{1}\t[2}\t{3}", runString, solvedInitialEmptySudokuBoard.ToString(), newFullSudokuBoards.ToString(), existedAlreadyFullSudokuBoards.ToString()));
+                w.WriteLine(string.Format("{0}\t{1}\t{2}\t{3}", runString, solvedInitialEmptySudokuBoard.ToString(), newFullSudokuBoards.ToString(), existedAlreadyFullSudokuBoards.ToString()));
             }
 
             w.Flush();

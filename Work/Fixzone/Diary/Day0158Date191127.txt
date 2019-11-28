@@ -1,2 +1,15 @@
 ﻿Dag 158:
 Onsdag den 27 november 2019
+Fixade lite med ClientConnect site (Vijay påtalade
+att dashboard hade blivit betydligt smalare efter
+min uppdatering igår så jag rullade tillbaka vilket
+dock medförde att jag förlorade min fix att knappar
+och textboxar för indata till rapport ”ClosedJobs.mrt”
+blev väldigt breda och fula, men jag lät det vara så
+nu). Repeterade lite vad jag hade gjort i Task21
+(Shipmate). Hade inget direkt att göra så jag programmerade
+i projekt GenerateSudokuBoards.csproj. Vid 13.00-tiden
+gick jag till ”Tesco Express” och köpte en ostsmörgås
+och bulle för 2.05 pund som jag åt till lunch samt
+kaffe från Fixzone. Jag avslutade arbetsdagen ca.
+kl. 15.45 och gick till Tolworth station.

@@ -35,10 +35,8 @@ namespace Sudoku
                 {
                     v[numberOfSimulations]++;
                 }
-                else
-                {
-                    i++;
-                }
+
+                i++;        
             }
 
             if (str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard)
@@ -61,7 +59,7 @@ namespace Sudoku
             {
                 if (v[i] != 0)
                 {
-                    sb.Append(string.Format("[{0}][{1}]", i.ToString(), v[i].ToString()));
+                    sb.Append(string.Format("[{0},{1}]", i.ToString(), v[i].ToString()));
                 }
             }
 
@@ -277,7 +275,17 @@ namespace Sudoku
                         if (random == null)
                             random = new Random((int)(DateTime.Now.Ticks % 64765L));
 
-                        SimulateOneNumber(candidates, random, cellsRemainToSet, out i, out number);
+                        numberOfNumbersInSudokuBoard = ReturnNumberOfNumbersInSudokuBoard(workingSudokuBoard);
+
+                        if (numberOfNumbersInSudokuBoard < 35)
+                        {
+                            SimulateANumber(candidates, random, numberOfCandidates, cellsRemainToSet, out i, out number);
+                        }
+                        else
+                        {
+                            SimulateOneNumber(candidates, random, cellsRemainToSet, out i, out number);
+                        }
+
                         row = ((int[])cellsRemainToSet[i])[0];
                         column = ((int[])cellsRemainToSet[i])[1];
 
@@ -661,6 +669,67 @@ namespace Sudoku
             row = ((int[])cellsRemainToSet[index])[0];
             column = ((int[])cellsRemainToSet[index])[1];
             number = candidates[row - 1][column - 1][1 + random.Next(0, minNumberOfCandidates)];
+        }
+
+        private static void SimulateANumber(int[][][] candidates, Random random, int numberOfCandidates, ArrayList cellsRemainToSet, out int index, out int number)
+        {
+            int n = random.Next(0, numberOfCandidates);
+            int row, column, nc, i, r, c,  k = -1;
+            bool found = false;
+
+            index = 0;
+            number = 0;
+
+            row = 1;
+            
+            while (!found && row <= 9)
+            {
+                column = 1;
+
+                while (!found && column <= 9)
+                {
+                    nc = candidates[row - 1][column - 1][0];
+
+                    if (nc != -1)
+                    {
+                        i = 1;
+
+                        while (!found && i <= nc)
+                        {
+                            k++;
+
+                            if (n == k)
+                            {
+                                found = true;
+                                number = candidates[row - 1][column - 1][i];
+
+                                r = c = -1;
+                                i = 0;
+
+                                while (r != row || c != column)
+                                {
+                                    r = ((int[])cellsRemainToSet[i])[0];
+                                    c = ((int[])cellsRemainToSet[i])[1];
+
+                                    if (r == row && c == column)
+                                    {
+                                        index = i;
+                                    }
+
+                                    i++;
+                                }
+                            }
+
+                            i++;
+                        }
+                    }
+
+                    column++;
+                }
+
+                row++;
+            }
+
         }
 
         private static int CheckIfCanUpdateBestSoFarSudokuBoard(int numberOfCellsSetInBestSoFar, ArrayList cellsRemainToSet, int[][] workingSudokuBoard, int[][] bestSoFarSudokuBoard)
