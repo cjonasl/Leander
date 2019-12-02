@@ -1,2 +1,17 @@
 ﻿Dag 159:
 Torsdag den 28 november 2019
+Jag hade inte så mycket att göra idag så jag
+ägnade en stor del av arbetsdagen åt att läsa
+om funktionell programmering och F#. Vid 13.00-
+tiden gick jag ut och tog ut 30 pund i en ATM
+utanför ”Tesco Express” och sedan gick jag in
+på ”Tesco Express” och köpte en ostsmörgås för
+1.07 pund. Tillbaka till kontoret och drack kaffe
+från Fixzone och åt ostsmörgåsen jag köpte samt
+två medtagna bananer. Vijay påtalade att någon
+kodändring jag hade gjort i Cast så att inte
+”diagnostics” körs om inlogg-ningen misslyckas
+inte fungerade riktigt och jag tittade på det.
+Jag hade missat lite där och korrigerade felen
+och checkade in. Jag avslutade arbetsdagen ca.
+kl. 17.50 och promenerade hem.
