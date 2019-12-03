@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{35A1C4E4-2931-43F3-B893-94D891CB7EC1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GenerateEvilSudokus</RootNamespace>
-    <AssemblyName>GenerateEvilSudokus</AssemblyName>
+    <RootNamespace>GenerateSudokuBoards</RootNamespace>
+    <AssemblyName>GenerateSudokuBoards</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,6 +46,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sudoku.cs" />
+    <Compile Include="SudokuBoardReduceNumberOfNumbers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

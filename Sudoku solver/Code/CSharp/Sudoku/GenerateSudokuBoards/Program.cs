@@ -38,6 +38,8 @@ namespace GenerateSudokuBoards
 
     class Program
     {
+        private static string _basePath = "C:\\git_cjonasl\\Leander\\Sudoku solver\\";
+
         static void Main(string[] args)
         {
             DateTime start, end;
@@ -46,7 +48,7 @@ namespace GenerateSudokuBoards
             bool errorFound = false;
             string solvedSudokoBoard, result;
             int solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards, n = 0, i;
-            string[] initialSudokuBoards = new string[50];
+            string[] initialSudokuBoards = new string[30];
             ArrayList listFullSudokuBoards;
 
             solvedInitialEmptySudokuBoard = 0;
@@ -79,19 +81,24 @@ namespace GenerateSudokuBoards
 
                         i = 11;
 
-                        while (i <= 60 && !errorFound)
+                        while (i <= 40 && !errorFound)
                         {
                             result = Sudoku.Sudoku.GetSolveStat(initialSudokuBoards[i - 11].ToSudokuBoard(), solvedSudokoBoard);
 
-                            if (result != null && !result.StartsWith("ERROR"))
+                            if (result != null)
                             {
-                                result = AddSudokuBoard(initialSudokuBoards[i - 11], solvedSudokoBoard, result, i);
-                            }
+                                if (!result.StartsWith("ERROR"))
+                                {
+                                    result = AddSudokuBoard(initialSudokuBoards[i - 11], solvedSudokoBoard, result, i);
 
-                            if (result != null && result.StartsWith("ERROR"))
-                            {
-                                Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
-                                errorFound = true;
+                                    if (result.StartsWith("ERROR"))
+                                        errorFound = true;
+                                }
+                                else
+                                {
+                                    Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
+                                    errorFound = true;
+                                }
                             }
 
                             i++;
@@ -126,13 +133,13 @@ namespace GenerateSudokuBoards
             StreamReader r;
             string[] strArray;
 
-            if (!File.Exists("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\FullSudokuBoards.txt"))
+            if (!File.Exists(string.Format("{0}{1}", _basePath, "Sudoku boards\\FullSudokuBoards.txt")))
             {
                 return new ArrayList();
             }
             else
             {
-                f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\Log.txt", FileMode.Open, FileAccess.Read);
+                f = new FileStream(string.Format("{0}{1}", _basePath, "Sudoku boards\\FullSudokuBoards.txt"), FileMode.Open, FileAccess.Read);
                 r = new StreamReader(f, Encoding.ASCII);
                 strArray = r.ReadToEnd().Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 return new ArrayList(strArray);
@@ -144,9 +151,9 @@ namespace GenerateSudokuBoards
             FileStream f;
             StreamWriter w;
 
-            string c, fileNameFullPath;
+            string c, fileNameFullPath1, fileNameFullPath2;
 
-            if (solveStat == "[0,100]")
+            if (solveStat == "O")
             {
                 c = "O"; //Only ordinary methods needed
             }
@@ -155,23 +162,23 @@ namespace GenerateSudokuBoards
                 c = "S"; //At least one simulation needed
             }
 
-            fileNameFullPath = string.Format("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\SudokuBoards_{0}_{1}.txt", c, numberOfIntegers.ToString());
+            fileNameFullPath1 = string.Format("{0}Sudoku boards\\SudokuBoardsMethod1_{1}_{2}.txt", _basePath, c, numberOfIntegers.ToString());
+            fileNameFullPath2 = string.Format("{0}Sudoku boards\\SudokuBoardsMethod2_{1}_{2}.txt", _basePath, c, numberOfIntegers.ToString());
 
-            if (!File.Exists(fileNameFullPath))
+            if (File.Exists(fileNameFullPath1) && SudokuBoardExistsAlready(sudokuBoard, fileNameFullPath1, c))
             {
-                f = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);
+                return "ERROR!! Was about to add a sudoku board in file " + fileNameFullPath1 + ", but it exist already in that file, which it should not";
             }
+
+            if (File.Exists(fileNameFullPath2) && (SudokuBoardExistsAlready(sudokuBoard, fileNameFullPath2, c)))
+            {
+                return "Success";
+            }
+
+            if (!File.Exists(fileNameFullPath1))
+                f = new FileStream(fileNameFullPath1, FileMode.Create, FileAccess.Write);
             else
-            {
-                if (SudokuBoardExistsAlready(sudokuBoard, fileNameFullPath))
-                {
-                    return "ERROR!! Was about to add a sudoku board in file " + fileNameFullPath + ", but it exist already in that file, which it should not";
-                }
-                else
-                {
-                    f = new FileStream(fileNameFullPath, FileMode.Append, FileAccess.Write);
-                }             
-            }
+                f = new FileStream(fileNameFullPath1, FileMode.Append, FileAccess.Write);
 
             w = new StreamWriter(f, Encoding.ASCII);
 
@@ -187,10 +194,10 @@ namespace GenerateSudokuBoards
             w.Close();
             f.Close();
 
-            return "";
+            return "Success";
         }
 
-        private static bool SudokuBoardExistsAlready(string sudokuBoard, string fileNameFullPath)
+        private static bool SudokuBoardExistsAlready(string sudokuBoard, string fileNameFullPath, string c)
         {
             FileStream f;
             StreamReader r;
@@ -205,11 +212,33 @@ namespace GenerateSudokuBoards
 
             a = new ArrayList();
 
-            for(int i = 0; i < v.Length; i++)
+            if (c == "O") //Only ordinary methods
             {
-                if ((i % 2) == 0)
+                for (int i = 0; i < v.Length; i++)
                 {
-                    a.Add(v[i]);
+                    if ((i % 2) == 0)
+                    {
+                        a.Add(v[i]);
+                    }
+                }
+            }
+            else //At least one simulation
+            {
+                string[] strArray;
+
+                for (int i = 0; i < v.Length; i++)
+                {
+                    if ((i % 2) == 0)
+                    {
+                        strArray = v[i].Split(' ');
+
+                        if (strArray.Length != 2)
+                        {
+                            throw new Exception("(strArray.Length != 2) in SudokuBoardExistsAlready");
+                        }
+
+                        a.Add(strArray[1]);
+                    }
                 }
             }
 
@@ -220,18 +249,14 @@ namespace GenerateSudokuBoards
         {
             FileStream f;
             StreamWriter w;
+            string fileNameFullPath = string.Format("{0}{1}", _basePath, "Sudoku boards\\FullSudokuBoards.txt");
 
-            if (!File.Exists("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\FullSudokuBoards.txt"))
-            {
-                f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\FullSudokuBoards.txt", FileMode.Create, FileAccess.Write);
-                w = new StreamWriter(f, Encoding.ASCII);
-            }
-            else
-            {
-                f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\FullSudokuBoards.txt", FileMode.Append, FileAccess.Write);
-                w = new StreamWriter(f, Encoding.ASCII);
-            }
+            if (!File.Exists(fileNameFullPath))     
+                f = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);       
+            else        
+                f = new FileStream(fileNameFullPath, FileMode.Append, FileAccess.Write);
 
+            w = new StreamWriter(f, Encoding.ASCII);
             w.WriteLine(sudokuBoard);
 
             w.Flush();
@@ -244,21 +269,24 @@ namespace GenerateSudokuBoards
         {
             FileStream f;
             StreamWriter w;
+            string fileNameFullPath;
             string runString = string.Format("{0}__{1}", start.ToString("yyyy-MM-dd_HH.mm.ss.fff"), numberOfSecondsToRun);
+            bool addHeader = false;
 
-            if (!File.Exists("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\Log.txt"))
+            fileNameFullPath = string.Format("{0}{1}", _basePath, "Sudoku boards\\Log.txt");
+
+            if (!File.Exists(fileNameFullPath))
             {
                 f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\Log.txt", FileMode.Create, FileAccess.Write);
-                w = new StreamWriter(f, Encoding.ASCII);
-                w.WriteLine("Run\tSolvedInitialEmptySudokuBoard\tNewFullSudokuBoards\tExistedAlreadyFullSudokuBoards");
-                w.Flush();
-                f.Flush();
-                w.Close();
-                f.Close();
+                addHeader = true;
             }
+            else
+                f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\Log.txt", FileMode.Append, FileAccess.Write);
 
-            f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\Log.txt", FileMode.Append, FileAccess.Write);
             w = new StreamWriter(f, Encoding.ASCII);
+
+            if (addHeader)
+                w.WriteLine("Run\tSolvedInitialEmptySudokuBoard\tNewFullSudokuBoards\tExistedAlreadyFullSudokuBoards");
 
             if (errorMessage != null)
             {

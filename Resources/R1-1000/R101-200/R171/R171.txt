@@ -1,0 +1,45 @@
+﻿171
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-12-02 11:16:41
+
+----- New property -----
+
+Task74_Day161_Date191202_Finish RoutingOnMap project (CC-39)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task74_Day161_Date191202_Finish RoutingOnMap project (CC-39)
+
+----- New property -----
+
+null

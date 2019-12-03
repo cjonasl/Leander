@@ -14,11 +14,19 @@ namespace Sudoku
 
     public class Sudoku
     {
+
+        /*
+         Returns:
+         1. Null if initialSudokoBoard can't be solved uniquely
+         2. O (= only ordinary methods), if initialSudokoBoard can be solved uniquely without simulation
+         3. [1,a][2,b],... if initialSudokoBoard can be solved uniquely, but with simulation
+        */
         public static string GetSolveStat(string initialSudokoBoard, string solvedSudokoBoard)
         {
             int i, numberOfSimulations;
             int[] v = new int[81];
             string str1 = "The sudoku was solved.", solveStat = null, str2 = solvedSudokoBoard;
+            bool canBeSolvedUniquelyWithoutSimulation = false;
 
             for (i = 0; i < 81; i++)
             {
@@ -27,11 +35,15 @@ namespace Sudoku
 
             i = 0;
 
-            while (i < 100 && str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard)
+            while (i < 100 && str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
             {
                 str1 = Solve(initialSudokoBoard, out str2, out numberOfSimulations);
 
-                if (str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard)
+                if (numberOfSimulations == 0)
+                {
+                    canBeSolvedUniquelyWithoutSimulation = true;
+                }
+                else if (str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard)
                 {
                     v[numberOfSimulations]++;
                 }
@@ -39,13 +51,17 @@ namespace Sudoku
                 i++;        
             }
 
-            if (str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard)
+            if (str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
             {
                 solveStat = ReturnSolveStat(v);
             }
             else if (!str1.StartsWith("The sudoku was solved."))
             {
                 solveStat = "ERROR!! Can not solve " + initialSudokoBoard + ". " + str1;
+            }
+            else
+            {
+                solveStat = "O";
             }
 
             return solveStat;
@@ -304,7 +320,7 @@ namespace Sudoku
 
                     numberOfNumbersInSudokuBoard = ReturnNumberOfNumbersInSudokuBoard(workingSudokuBoard);
 
-                    if (numberOfNumbersInSudokuBoard >= 11 && numberOfNumbersInSudokuBoard <= 60)
+                    if (numberOfNumbersInSudokuBoard >= 11 && numberOfNumbersInSudokuBoard <= 40)
                     {
                         initialSudokuBoards[numberOfNumbersInSudokuBoard - 11] = GetSudokuBoardString(workingSudokuBoard);
                     }

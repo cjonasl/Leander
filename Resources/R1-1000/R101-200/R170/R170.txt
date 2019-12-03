@@ -1,0 +1,45 @@
+﻿170
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-12-02 11:16:23
+
+----- New property -----
+
+Task73_Day161_Date191202_ClientConnect for clients possible to view readonly job page without being authenticated (CC-38)
+
+----- New property -----
+
+12,29
+
+----- New property -----
+
+null
+
+----- New property -----
+
+0
+
+----- New property -----
+
+0
+
+----- New property -----
+
+null
+
+----- New property -----
+
+null
+
+----- New property -----
+
+C:\git_cjonasl\Leander\Work\Fixzone\Tasks\Task1\Task73_Day161_Date191202_ClientConnect for clients possible to view readonly job page without being authenticated (CC-38)
+
+----- New property -----
+
+null
