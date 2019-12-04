@@ -10,7 +10,6 @@ namespace GenerateSudokuBoards
     {
         private int[][] _sudokuBoard;
         private int[][] _possibleNumbersToRemoveFromSudokuBoard;
-        private int _row, _column;
         private int _cellsRemainToSet;
         private Random _random;
 
@@ -19,13 +18,101 @@ namespace GenerateSudokuBoards
             get { return _cellsRemainToSet; }
         }
 
-        public SudokuBoardReduceNumberOfNumbers(string sudokuBoardString)
+        public SudokuBoardReduceNumberOfNumbers()
         {
             _sudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
             _possibleNumbersToRemoveFromSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
+            _random = new Random((int)(DateTime.Now.Ticks % 62866L));
+        }
+
+        public void Init(string sudokuBoardString)
+        {
             GetInputSudokuBoard(sudokuBoardString, _sudokuBoard, out _cellsRemainToSet);
             CopySudokuBoard(_sudokuBoard, _possibleNumbersToRemoveFromSudokuBoard);
-            _random = new Random((int)(DateTime.Now.Ticks % 62866L));
+        }
+
+        public void Reduce(int row, int column)
+        {
+            _sudokuBoard[row - 1][column - 1] = 0;
+            CopySudokuBoard(_sudokuBoard, _possibleNumbersToRemoveFromSudokuBoard);
+            _cellsRemainToSet++;
+        }
+
+        public string ReturnReducedSudokuBoard(out int row, out int column)
+        {
+            int r, c, numberOfStepsBackwards, numberOfStepsForward, numbersInSudokuBoardNotZero;
+            int rowBackwards, columnBackwards, rowForward, columnForward;
+            bool foundBackwards, foundForward;
+            string reducedSudokuBoardAsString;
+
+            row = column = 0;
+
+            r = _random.Next(1, 10);
+            c = _random.Next(1, 10);
+
+            numbersInSudokuBoardNotZero = GetNumberOfNumbersInSudokuBoardNotZero(_possibleNumbersToRemoveFromSudokuBoard);
+
+            if (numbersInSudokuBoardNotZero == 0)
+                return null;
+
+            if (_possibleNumbersToRemoveFromSudokuBoard[r - 1][c - 1] != 0)
+            {
+                row = r;
+                column = c;
+                _possibleNumbersToRemoveFromSudokuBoard[r - 1][c - 1] = 0;
+            }
+            else
+            {
+                GoBackwards(r, c, out numberOfStepsBackwards, out rowBackwards, out columnBackwards, out foundBackwards);
+                GoForward(r, c, out numberOfStepsForward, out rowForward, out columnForward, out foundForward);
+
+                if (foundBackwards && !foundForward)
+                {
+                    row = rowBackwards;
+                    column = columnBackwards;
+                }
+                else if (!foundBackwards && foundForward)
+                {
+                    row = rowForward;
+                    column = columnForward;
+                }
+                else if (foundBackwards && foundForward)
+                {
+                    if (numberOfStepsBackwards < numberOfStepsForward)
+                    {
+                        row = rowBackwards;
+                        column = columnBackwards;
+                    }
+                    else if (numberOfStepsBackwards > numberOfStepsForward)
+                    {
+                        row = rowForward;
+                        column = columnForward;
+                    }
+                    else
+                    {
+                        int n = _random.Next(0, 2);
+
+                        if (n == 0)
+                        {
+                            row = rowBackwards;
+                            column = columnBackwards;
+                        }
+                        else
+                        {
+                            row = rowForward;
+                            column = columnForward;
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Can not find row and column in ReturnReducedSudokuBoard!!");
+                }
+            }
+
+            reducedSudokuBoardAsString = ReturnSudokuBoardAsString(_sudokuBoard, row, column);
+
+            return reducedSudokuBoardAsString;
         }
 
         private string GetInputSudokuBoard(string sudokuBoardString, int[][] sudokuBoard, out int cellsRemainToSet)
@@ -101,23 +188,54 @@ namespace GenerateSudokuBoards
             }
         }
 
-        private void SimulateRowColumnToExclude()
+        private int GetNumberOfNumbersInSudokuBoardNotZero(int[][] sudokuBoard)
         {
-            int row, column, r, c, numberOfStepsBackwards, numberOfStepsForward, foundBackwards, foundForward;
+            int n = 0;
 
-            row = _random.Next(1, 10);
-            column = _random.Next(1, 10);
-
-            if (_possibleNumbersToRemoveFromSudokuBoard[row - 1][column - 1] != 0)
+            for (int row = 1; row <= 9; row++)
             {
-                _row = row;
-                _column = column;
-                _possibleNumbersToRemoveFromSudokuBoard[row - 1][column - 1] = 0;
+                for (int column = 1; column <= 9; column++)
+                {
+                    if (sudokuBoard[row - 1][column - 1] != 0)
+                    {
+                        n++;
+                    }
+                }
             }
-            else
-            {
 
+            return n;
+        }
+
+        private string ReturnSudokuBoardAsString(int[][] sudokuBoard, int r, int c)
+        {
+            int row, column, n;
+            StringBuilder sb = new StringBuilder();
+
+            for (row = 1; row <= 9; row++)
+            {
+                if (row > 1)
+                    sb.Append("\r\n");
+
+                for (column = 1; column <= 9; column++)
+                {
+                    if (row == r && column == c)
+                    {
+                        n = 0;
+                    }
+                    else
+                    {
+                        n = sudokuBoard[row - 1][column - 1];
+                    }
+
+
+                    if (column == 1)
+                        sb.Append(n.ToString());
+                    else
+                        sb.Append(string.Format(" {0}", n.ToString()));
+                }
             }
+
+            return sb.ToString();
         }
 
         private void GoBackwards(int row, int column, out int numberOfSteps, out int r, out int c, out bool found)

@@ -38,24 +38,30 @@ namespace GenerateSudokuBoards
 
     class Program
     {
-        private static string _basePath = "C:\\git_cjonasl\\Leander\\Sudoku solver\\";
+        private static string _basePath;
 
         static void Main(string[] args)
         {
             DateTime start, end;
             TimeSpan ts;
             double numberOfSecondsToRun = int.Parse(args[0]);
-            bool errorFound = false;
-            string solvedSudokoBoard, result;
+            bool errorFound = false, continueProcessSolvedSudokoBoard, solvedWithOnlyOrdinaryMethodsFound;
+            string solvedSudokoBoard, result, testSudoKuBoard;
             int solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards, n = 0, i;
+            int row, column, rowO, columnO, rowS, columnS, numberOfNumbersSetInSudokuBoard;
             string[] initialSudokuBoards = new string[30];
             ArrayList listFullSudokuBoards;
+            SudokuBoardReduceNumberOfNumbers sudokuBoardReduceNumberOfNumbers;
+
+            _basePath = args[0];
 
             solvedInitialEmptySudokuBoard = 0;
             newFullSudokuBoards = 0;
             existedAlreadyFullSudokuBoards = 0;
 
             listFullSudokuBoards = ReturnExistingFullSudokuBoards();
+
+            sudokuBoardReduceNumberOfNumbers = new SudokuBoardReduceNumberOfNumbers();
 
             start = DateTime.Now;
             end = DateTime.Now;
@@ -89,10 +95,13 @@ namespace GenerateSudokuBoards
                             {
                                 if (!result.StartsWith("ERROR"))
                                 {
-                                    result = AddSudokuBoard(initialSudokuBoards[i - 11], solvedSudokoBoard, result, i);
+                                    result = AddSudokuBoard(initialSudokuBoards[i - 11], solvedSudokoBoard, result, i, true);
 
                                     if (result.StartsWith("ERROR"))
+                                    {
+                                        Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
                                         errorFound = true;
+                                    }
                                 }
                                 else
                                 {
@@ -103,12 +112,80 @@ namespace GenerateSudokuBoards
 
                             i++;
                         }
+
+                        sudokuBoardReduceNumberOfNumbers.Init(solvedSudokoBoard.ToSudokuBoard());
+
+                        continueProcessSolvedSudokoBoard = true;
+
+                        while (continueProcessSolvedSudokoBoard)
+                        {
+                            testSudoKuBoard = sudokuBoardReduceNumberOfNumbers.ReturnReducedSudokuBoard(out row, out column);
+
+                            solvedWithOnlyOrdinaryMethodsFound = false;
+                            rowO = columnO = rowS = columnS = 0;
+
+                            while (testSudoKuBoard != null && !solvedWithOnlyOrdinaryMethodsFound)
+                            {
+                                result = Sudoku.Sudoku.GetSolveStat(testSudoKuBoard, solvedSudokoBoard);
+
+                                if (result != null)
+                                {
+                                    if (result == "O")
+                                    {
+                                        solvedWithOnlyOrdinaryMethodsFound = true;
+                                        rowO = row;
+                                        columnO = column;
+                                    }
+                                    else
+                                    {
+                                        if (rowS == 0)
+                                        {
+                                            rowS = row;
+                                            columnS = column;
+                                        }
+                                    }
+                                }
+
+                                if (!solvedWithOnlyOrdinaryMethodsFound)
+                                    testSudoKuBoard = sudokuBoardReduceNumberOfNumbers.ReturnReducedSudokuBoard(out row, out column);
+                            }                 
+
+                            if (solvedWithOnlyOrdinaryMethodsFound || rowS != 0)
+                            {
+                                numberOfNumbersSetInSudokuBoard = 81 - sudokuBoardReduceNumberOfNumbers.CellsRemainToSet;
+
+                                if (numberOfNumbersSetInSudokuBoard <= 40)
+                                {
+                                    result = AddSudokuBoard(testSudoKuBoard.Replace("\r\n", "").Replace(" ", ""), solvedSudokoBoard, result, numberOfNumbersSetInSudokuBoard, false);
+
+                                    if (result.StartsWith("ERROR"))
+                                    {
+                                        Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
+                                        errorFound = true;
+                                        continueProcessSolvedSudokoBoard = false;
+                                    }
+                                }
+
+                                if (solvedWithOnlyOrdinaryMethodsFound)
+                                {
+                                    sudokuBoardReduceNumberOfNumbers.Reduce(rowO, columnO);
+                                }
+                                else
+                                {
+                                    sudokuBoardReduceNumberOfNumbers.Reduce(rowS, columnS);
+                                }
+                            }
+                            else
+                            {
+                                continueProcessSolvedSudokoBoard = false;
+                            }
+                        }
                     }
                     else
                     {
                         existedAlreadyFullSudokuBoards++;
                     }
-
+                
                     n++;
 
                     if ((n % 25) == 0)
@@ -146,12 +223,12 @@ namespace GenerateSudokuBoards
             }
         }
 
-        private static string AddSudokuBoard(string sudokuBoard, string solvedSudokoBoard, string solveStat, int numberOfIntegers)
+        private static string AddSudokuBoard(string sudokuBoard, string solvedSudokoBoard, string solveStat, int numberOfIntegers, bool isMethod1)
         {
             FileStream f;
             StreamWriter w;
 
-            string c, fileNameFullPath1, fileNameFullPath2;
+            string c, fileNameFullPath, fileNameFullPath1, fileNameFullPath2;
 
             if (solveStat == "O")
             {
@@ -165,20 +242,25 @@ namespace GenerateSudokuBoards
             fileNameFullPath1 = string.Format("{0}Sudoku boards\\SudokuBoardsMethod1_{1}_{2}.txt", _basePath, c, numberOfIntegers.ToString());
             fileNameFullPath2 = string.Format("{0}Sudoku boards\\SudokuBoardsMethod2_{1}_{2}.txt", _basePath, c, numberOfIntegers.ToString());
 
+            if (isMethod1)
+                fileNameFullPath = fileNameFullPath1;
+            else
+                fileNameFullPath = fileNameFullPath2;
+
             if (File.Exists(fileNameFullPath1) && SudokuBoardExistsAlready(sudokuBoard, fileNameFullPath1, c))
             {
-                return "ERROR!! Was about to add a sudoku board in file " + fileNameFullPath1 + ", but it exist already in that file, which it should not";
+                return "ERROR!! Was about to add a sudoku board in file " + fileNameFullPath + ", but it exist already in that file " + fileNameFullPath1 + ", which it should not";
             }
 
             if (File.Exists(fileNameFullPath2) && (SudokuBoardExistsAlready(sudokuBoard, fileNameFullPath2, c)))
             {
-                return "Success";
+                return "ERROR!! Was about to add a sudoku board in file " + fileNameFullPath + ", but it exist already in that file " + fileNameFullPath2 + ", which it should not";
             }
 
-            if (!File.Exists(fileNameFullPath1))
-                f = new FileStream(fileNameFullPath1, FileMode.Create, FileAccess.Write);
+            if (!File.Exists(fileNameFullPath))
+                f = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);
             else
-                f = new FileStream(fileNameFullPath1, FileMode.Append, FileAccess.Write);
+                f = new FileStream(fileNameFullPath, FileMode.Append, FileAccess.Write);
 
             w = new StreamWriter(f, Encoding.ASCII);
 

@@ -1,2 +1,0 @@
-Run	SolvedInitialEmptySudokuBoard	NewFullSudokuBoards	ExistedAlreadyFullSudokuBoards
-2019-11-28_14.28.39.184__60	498	498	0

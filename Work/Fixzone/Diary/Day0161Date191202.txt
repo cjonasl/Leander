@@ -1,2 +1,22 @@
 ﻿Dag 161:
 Måndag den 2 december 2019
+Fick en ny uppgift av Vijay att ordna så att
+en vanlig kund i generiska ClientConnect kan
+läsa en ”read only” version av jobbsidan för
+kundens egen produkt genom att ange ServiceId
+och postnummer i ”Query string” (postnumret måste
+överensstämma med kundens registrerade postnummer
+i databasen). Jag skapade en Jira-punkt för
+uppgiften som fick nummer CC-38 och en motsvarande
+task som fick nummer 73. Jag fick dessutom
+ytterligare en uppgift av Vijay att slutföra
+någon uppgift, ” RoutingOn-Map” som Mary hade
+arbetat med. Under arbetsdagen ägnade jag mig
+sedan åt CC-38 samt även lite åt att programmera
+i GenerateSudokuBoards.csproj. Vid 13.00-tiden
+tog jag lunch och intog medtagen smörgås och banan
+samt kaffe från Fixzone. Kom överens med en man,
+Mina Asaad, på spareroom.co.uk att kl. 19.30 titta
+på ett rum för uthyrning på ”Isle of Dogs”. Jag
+avslutade arbetsdagen ca. kl. 17.30 och tog bussen
+till Surbiton där jag tog tåget till Waterloo.

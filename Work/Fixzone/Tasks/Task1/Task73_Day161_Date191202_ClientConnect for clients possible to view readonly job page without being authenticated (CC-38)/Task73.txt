@@ -1,1 +1,12 @@
 ﻿Task73:
+
+Modify the files:
+C:\ClientConnect4\CallCenterClientConnect\ClientConnect.csproj
+C:\ClientConnect4\CallCenterClientConnect\Views\Job\JobDetails.cshtml
+C:\ClientConnect4\CallCenterClientConnect\Controllers\JobController.cs
+C:\ClientConnect4\CallCenterClientConnect\Repositories\JobRepository.cs
+C:\ClientConnect4\CallCenterClientConnect\Services\JobService.cs
+
+New files:
+C:\ClientConnect4\CallCenterClientConnect\Views\Job\CustomerJobViewError.cshtml
+CustomerViewJob.sql

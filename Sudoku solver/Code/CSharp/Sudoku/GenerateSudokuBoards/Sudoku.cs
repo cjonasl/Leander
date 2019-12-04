@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Text;
+using GenerateSudokuBoards;
 
 namespace Sudoku
 {
@@ -25,7 +26,7 @@ namespace Sudoku
         {
             int i, numberOfSimulations;
             int[] v = new int[81];
-            string str1 = "The sudoku was solved.", solveStat = null, str2 = solvedSudokoBoard;
+            string result = "The sudoku was solved.", solveStat = null, solvedSudokoBoardTest = solvedSudokoBoard;
             bool canBeSolvedUniquelyWithoutSimulation = false;
 
             for (i = 0; i < 81; i++)
@@ -35,33 +36,33 @@ namespace Sudoku
 
             i = 0;
 
-            while (i < 100 && str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
+            while (i < 100 && result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
             {
-                str1 = Solve(initialSudokoBoard, out str2, out numberOfSimulations);
+                result = Solve(initialSudokoBoard, out solvedSudokoBoardTest, out numberOfSimulations);
 
-                if (numberOfSimulations == 0)
+                if (result.StartsWith("The sudoku was solved.") && numberOfSimulations == 0)
                 {
                     canBeSolvedUniquelyWithoutSimulation = true;
                 }
-                else if (str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard)
+                else if (result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard)
                 {
                     v[numberOfSimulations]++;
                 }
 
-                i++;        
+                i++;
             }
 
-            if (str1.StartsWith("The sudoku was solved.") && str2 == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
+            if (canBeSolvedUniquelyWithoutSimulation)
+            {
+                solveStat = "O";
+            }
+            else if (result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
             {
                 solveStat = ReturnSolveStat(v);
             }
-            else if (!str1.StartsWith("The sudoku was solved."))
+            else if (!result.StartsWith("The sudoku was solved."))
             {
-                solveStat = "ERROR!! Can not solve " + initialSudokoBoard + ". " + str1;
-            }
-            else
-            {
-                solveStat = "O";
+                solveStat = "ERROR!! Can not solve " + initialSudokoBoard + ". " + result;
             }
 
             return solveStat;
@@ -349,21 +350,6 @@ namespace Sudoku
             return PrintResult(true, null, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
         }
 
-        private static string GetSudokuBoardString(int[][] sudokuBoard)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            for (int row = 1; row <= 9; row++)
-            {
-                for (int column = 1; column <= 9; column++)
-                {
-                    sb.Append(sudokuBoard[row - 1][column - 1].ToString());
-                }
-            }
-
-            return sb.ToString();
-        }
-
         private static void CopyList(ArrayList from, ArrayList to)
         {
             to.Clear();
@@ -383,6 +369,21 @@ namespace Sudoku
                     sudokuBoardTo[row - 1][column - 1] = sudokuBoardFrom[row - 1][column - 1];
                 }
             }
+        }
+
+        private static string GetSudokuBoardString(int[][] sudokuBoard)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int row = 1; row <= 9; row++)
+            {
+                for (int column = 1; column <= 9; column++)
+                {
+                    sb.Append(sudokuBoard[row - 1][column - 1].ToString());
+                }
+            }
+
+            return sb.ToString();
         }
 
         private static void CopyCandidates(int[][][] candidatesFrom, int[][][] candidatesTo)

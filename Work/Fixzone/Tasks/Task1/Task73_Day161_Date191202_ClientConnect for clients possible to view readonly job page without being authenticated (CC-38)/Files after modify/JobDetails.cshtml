@@ -1,0 +1,752 @@
+﻿@using System.Web.Optimization
+@using ClientConnect.Jobs
+@model ClientConnect.ViewModels.Job.JobDetailsModel
+@{
+    ViewBag.Title = "Job details.";
+}
+
+@section Scripts{
+    @*@Scripts.Render("~/scripts/job-details-js")
+ <script src="@Url.Content("~/Scripts/jquery.form.js"></script>*@
+    @Scripts.Render("~/bundles/jobreport-details-js")
+    <script src="@Url.Content("~/Scripts/jquery.form.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var errorElementId = '#error-msg';
+            function doAction(action) {
+                var results;
+                $.ajax({
+                    url: action,
+                    async: false,
+                    type: 'POST',
+                    success: function (result) {
+                        results = result;
+                    }
+                });
+                return results;
+            }
+
+            //register unit
+
+            function DOfollowoncall(Optionid) {
+            //    alert(Optionid);
+                return doAction('/Job/FollowOnCall?Optionid=' + Optionid);
+            }
+
+            var Appointmentdate = $("#HiddenVisitDate").val();
+            var VisitCD = $("#HiddenVisitCd").val();
+            //alert(Appointmentdate);
+            //alert(VisitCD); 
+            var momentDate = moment(Appointmentdate.substring(0, 10));
+            var jobclosed = '@Model.JobClosed';
+            if (jobclosed == 'True') {
+           
+                $('.REDButton').hide();
+
+            }
+
+            var now1 = new Date().setHours(0, 0, 0, 0);
+
+            if (now1 >= momentDate) {
+
+                $("#CancelJob").css('visibility', 'hidden');
+            }
+
+            if ($("#QuoteRemainder").val() != undefined && $("#PartsCost") != undefined) {
+
+                $("#PartsCost").text('Query cost limit over £' + $("#QuoteRemainder").val());
+
+            }
+
+            DialogInit("#email-address", 300, 100, "reveal-modal", true, true, false);
+            $("#show-notification-email").click(function () {
+                DialogShow("#email-address");
+            });
+            $("#RejectJob").click(function (event) {
+                //  alert("ddfd");
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: '250',
+                    width: '800',
+                    title: 'Reason for rejection...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/RejectReason',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("RejectJob", "Job")';
+
+                            encoded_url = url + '?Id=' + $('#Id').val() + '&RejectionReason=' + encodeURIComponent($('#Id option:selected').text()) + '&notes=' + encodeURIComponent($('#comments').val());
+
+                            window.location.href = encoded_url;
+                        }
+                    }, {
+                        text: "Cancel", "class": "bbg",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+               
+                dialog.show();
+            });
+            $("#BtnAdditionalJob").click(function () {
+                var serviceid = '@Model.RepairInformation.ServiceId';
+                //window.location.href = '@Url.Action("FindProduct", "Product")?productSearchCriteria=&serviceid=' + serviceid + '&AdditionalJob=true';
+                //  window.location.href = '@Url.Action("Search", "Product")?AdditionalJob=true';
+
+
+                //event.preventDefault();
+
+
+                var dialog = new Dialog({
+                    height: '250',
+                    width: '800',
+                    title: 'Book new job...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/AdditionalJob',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("CancelJob", "Job")';
+
+                            encoded_url = url + '?SubStatusId=' + $('#SubStatusId').val() + '&notes=' + encodeURIComponent($('#comments').val());
+
+                            window.location.href = encoded_url;
+                        }
+                    }, {
+                        text: "Cancel", "class": "bbg",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            });
+
+            function cancelAppointment() {
+                var canceldialog = new Dialog({
+                    height: '350',
+                    width: '800',
+                    title: 'CANCEL job...',
+                    containerId: '#edit-form1',
+                    contentPath: '/Job/CancelReason',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("CancelJob", "Job")';
+
+                                             encoded_url = url + '?SubStatusId=' + $('#SubStatusId').val() + '&notes=' + encodeURIComponent($('#comments').val());
+                                             $.ajax({
+                                                 url: encoded_url,
+                                                 async: false,
+                                                 type: 'Post',
+                                                 dataType: 'json',
+                                                 //data: $('#RequestDateService-form').serialize(),
+                                                 success: function (json) {
+                                                     // alert(json["success"]);
+                                                     if (json["success"]) {
+                                                         canceldialog.close();
+                                                         window.location.href = '@Url.Action("JobDetails", "Job")';
+                                                    }
+                                                    else {
+                                                        // alert(json["errorMessage"]);
+                                                        canceldialog.close();
+                                                        $('#Errormes').text(json["errorMessage"]);
+                                                        $('#Errormes').dialog({
+                                                            height: 250,
+                                                            width: 700,
+                                                            modal: true,
+                                                            title: "Error on cancelling job", closeIcon: '',
+                                                            refreshPageAfterClose: false,
+                                                            buttons: [{
+                                                                text: "OK",
+                                                                "class": "rbg",
+                                                                click: function () {
+                                                                    $('#Errormes').dialog('close');
+                                                                }
+                                                            }]
+                                                        })
+                                                    }
+
+                                                }
+                                            })
+                                             // window.location.href = encoded_url;
+                                         }
+                                   }, {
+                                       text: "Cancel",
+                                       "class": "rbg",
+                                       click: function () {
+
+                                           canceldialog.close();
+                                       }
+                                   }],
+                                    refreshPageAfterClose: false
+                                });
+                                var options = {
+
+                                    target: '#edit-form1'
+                                };
+
+                                $('#edit-form1 form').ajaxForm(options);
+                                canceldialog.show();
+            }
+
+            $("#CancelJob").click(function (event) {
+
+                event.preventDefault();
+                var logDialog = new Dialog(new DefaulDialogSettings().SonyAuthorisation);
+
+                var dialog = new Dialog({
+                    height: '350',
+                    width: '800',
+                    title: 'CANCEL job...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/AdditionalJobList',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var selectedOrderTypeVal = $('[name=JobCancelOptionSelectedId]:checked').val();
+                            //alert(selectedOrderTypeVal);
+                            if (selectedOrderTypeVal == "1")// cancel appointment
+                            {
+                                dialog.close();
+                                cancelAppointment();
+                            }
+                            else {
+                                dialog.close(); //alert("next step");
+                                FollowonCall(selectedOrderTypeVal);
+                            }
+                        }
+                    }
+                            , {
+                                text: "Cancel",
+                                "class": "rbg",
+                                click: function () {
+                                    dialog.close();
+                                }
+                            }], refreshPageAfterClose: false
+                });
+
+                var options = {
+                    modal: true,
+                    target: '#edit-form'
+                    //    , beforeSend: function () {
+                    //        logDialog.show();
+                    //},
+                    //complete: function (response) {
+                    //    logDialog.close();
+                    //}
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            });
+
+            $("#CancelJobClients").click(function (event) {
+                event.preventDefault();
+                cancelAppointment();
+            });
+
+            function FollowonCall(selectedOrderTypeVal)
+            {
+               // alert(selectedOrderTypeVal);
+                var logDialog = new Dialog(new DefaulDialogSettings().SonyAuthorisation);
+                logDialog.show();
+                setTimeout(function () {
+                    var result = DOfollowoncall(selectedOrderTypeVal);
+                    if (!result.success) {
+                        logDialog.close();
+                       
+                        $('#Errormes').text(result.errorMessgae);
+                        $('#Errormes').dialog({
+                            height: 250,
+                            width: 700,
+                            modal: true,
+                            title: "Error on processing", closeIcon: '',
+                            refreshPageAfterClose: false,
+                            buttons: [{
+                                text: "OK",
+                                "class": "rbg",
+                                click: function () {
+                                    $('#Errormes').dialog('close');
+                                }
+                            }]
+                        })
+                    }
+                    else {
+                        if (result.CancelAlertNeeeded) {
+                            alert("You are attempting to reschedule an appointment that may have parts allocated after a pick run has taken place. If parts are required on this job please ensure you access complete service to reorder parts failure to do so may result in the engineer attending without parts. To check go to the notes field in the parts tab and select the pick tab – if the comments advised parts picked then you must reorder all parts and quantities on the rebooked visit – if there are no comments advising a pick has been run then you do not need to reorder the parts – please check with your line manager for clarification");
+                        }
+
+                       
+                        if (result.showForm) { 
+                            logDialog.close();
+                            var Clientbookingdelaydays = parseInt(@ViewBag.Clientbookingdelaydays);
+                            var CustomerPreferedDate = new DatePicker("#date-of-CustomerPrefered-datepicker", "#date-of-CustomerPrefered-datepicker-btn", Clientbookingdelaydays);
+                            CustomerPreferedDate.setDateSelected(new Date(2008, 9, 03));
+                            
+                            var appointmentdialog = new Dialog({
+                                height: '700',
+                                width: '800',
+                                model:true,
+                                title: 'Select appointment...',
+                                containerId: '#edit-form1',
+                                contentPath:'/Job/RequestDate',
+                                closeIcon: '', 
+                                buttons: [
+                                    {
+                                       text: "Cancel",
+                                       "class": "rbg",
+                                       click: function () {
+                                           appointmentdialog.close();
+                                       }
+                                   }],
+                                refreshPageAfterClose: false
+                            });
+                                 var options = {
+
+                                     target: '#edit-form1'
+                                 };
+                                 $('#edit-form1 form').ajaxForm(options);
+                                 if ($('input#RequestSuccess').val() == "False")
+                                     alert("Unfortunately we cannot reschedule this appointment at this time.  You will need to go to Complete Service to complete this task.");
+                            else
+                                 appointmentdialog.show();
+                        }
+                    }
+                }, 1000);
+               
+            }
+
+            $("#edit-form1").on('load',  function () {
+                var Clientbookingdelaydays = 3;// parseInt(@ViewBag.Clientbookingdelaydays);
+                var CustomerPreferedDate = new DatePicker("#date-of-CustomerPrefered-datepicker", "#date-of-CustomerPrefered-datepicker-btn", Clientbookingdelaydays);
+
+                CustomerPreferedDate.setDateSelected( new Date(2008,9,03));
+
+            })
+            $("#edit-form1").on('click', '#get-date-info', function () {
+               
+                alert($("#date-of-CustomerPrefered-datepicker").val());
+                var logDialog = new Dialog(new DefaulDialogSettings().SonyAuthorisation);
+                logDialog.show();
+                   setTimeout(function () {
+                var results;
+                $.ajax({
+                    url: "/Job/GetAvailability",
+                    async: false,
+                    type: 'POST',
+                    data: $('#RequestDateService-form').serialize(),
+                    success: function (result) {
+                        results = result; $('#edit-form1').html(results);
+                        logDialog.close();
+                    }
+                });
+                
+                var options = {
+
+                    target: '#edit-form1'
+                };
+                
+
+            },1000)
+            }
+            );
+            $("#edit-form1").on('click', '.BtnAppointment', function (e) {
+                event.preventDefault();// alert("fg");
+                var logDialog = new Dialog(new DefaulDialogSettings().SonyAuthorisation);
+                logDialog.show();
+                
+                //if($('input#RequestSuccess').val()=="False")
+                //    {
+                //    var msg = "Job is going to offline booking mode. If you want to continue, please click ok  or cancel to try later.";
+
+                //    if (!confirm(msg)) {
+                //        window.location.reload(true);
+                //    }
+                //    }
+                var Params = $(this).attr('href').split(',');
+                var engineerid = parseInt(Params[1]);
+                var eventDate = Params[0].toString().substring(1, Params[0].toString().length - 2);
+                var faultdesc = $("#ReportFault").val();
+                //alert(engineerid);
+                //alert(eventDate);
+                //alert(faultdesc);
+                if ($("#ReportFault").val() == "" || faultdesc.length == 0 || faultdesc.trim() == "") {
+                    logDialog.close();
+                    alert("Please add a fault description and try again.");
+                    return false;
+                }
+                var reason = "";
+                var iVal = $('#VisitCode').val();
+
+                if (iVal == "") {
+                    logDialog.close();
+                    alert('Please select any appointment reason.');
+                    return false;
+                }
+                else
+
+                    reason = iVal;
+                var msg = "Do you want to confirm the booking for the date " + eventDate + "?";
+                setTimeout(function () {
+                $.ajax({
+                    url: '/Job/BookNow',
+                    type: 'post',
+                    dataType: 'json',
+                    data: { EventDate: eventDate, Engineerid: engineerid, faultdesc: faultdesc, reason: reason },
+                    success: function (json) {
+                        //  alert(json["success"]);
+                        if (json["success"]) {
+                            logDialog.close();
+                            alert("Your online booking done successfully."); var url = "@Html.Raw(@Url.Action("BookedJobConfirmation", "BookNewService", new { Serviceid = "__Serviceid__", engineerid = "__engineerid__", eventdate = "__eventdate__" }))";
+                            window.location.href = json["FormPath"];// url.replace('__Serviceid__', json["serviceid"]).replace('__engineerid__', engineerid).replace('__eventdate__', eventDate);
+                        }
+                        else {
+                           
+                            alert("JOB was booked in Offline mode. Please contact Fixzone to confirm.");
+                            window.location.href = json["FormPath"];
+                        }
+                    }
+
+                })
+            },1000)
+            })
+
+
+            $("#QueryJob").click(function (event) {
+
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: '250',
+                    width: '800',
+                    title: 'Adding query...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/QueryJob',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("HighCostQueryJob", "Job")';
+                            //   alert($('#Querynotes').val());
+                            encoded_url = url + '?notes=' + encodeURIComponent($('#Querynotes').val());
+                            window.location.href = encoded_url;
+                        }
+                    }, {
+                        text: "Cancel", "class": "bbg",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                //  alert($('#edit-form form'));
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+
+
+            $("#ApproveJob").click(function (event) {
+
+                event.preventDefault();
+
+                var dialog = new Dialog({
+                    height: '250',
+                    width: '800',
+                    title: 'Adding notes for approval...',
+                    containerId: '#edit-form',
+                    contentPath: '/Job/ApproveJob',
+                    closeIcon: '',
+                    buttons: [{
+                        text: "OK",
+                        "class": "rbg",
+                        click: function () {
+                            var url = '@Url.Action("ApproveJobNotes", "Job")';
+                            //   alert($('#Querynotes').val());
+                            encoded_url = url + '?notes=' + encodeURIComponent($('#Approvenotes').val());
+                            window.location.href = encoded_url;
+                        }
+                    }, {
+                        text: "Cancel", "class": "bbg",
+                        click: function () {
+
+                            var url = "/Job/JobDetails";
+                            window.location.href = url;
+                        }
+
+                    }],
+                    refreshPageAfterClose: false
+                });
+
+                var options = {
+                    target: '#edit-form'
+                };
+                $('#edit-form form').ajaxForm(options);
+                dialog.show();
+            })
+
+
+
+
+            var repairAgentDialog = new Dialog();
+            repairAgentDialog.setAsCloseDialog({
+                height: '700',
+                width: '800',
+                title: 'Repair agent details',
+                containerId: '#repair-agent-details',
+                closeIcon: '',
+                Buttontext: "OK"
+            });
+
+
+            $("#show-repair-agent-details").click(function () {
+                repairAgentDialog.show();
+            });
+
+            var customerViewJob = '@ViewBag.CustomerViewJob';
+
+            if (customerViewJob === 'True') {
+                $(".hdr").hide();
+                $("input").prop("disabled", true);
+                $("button, input[type='button'], input[type='submit']").hide();
+                $("a.button").hide();
+                $("a").removeAttr("href");
+            }
+        });
+
+        $("#email-btn-send").click(function () {
+
+
+            var isValid = EmailValidate();
+
+            if (isValid == true) $("#email-address").submit();
+        });
+        $("#print-report-btn").click(function () {
+            $("#print-report-form").submit();
+        });
+
+        function EmailValidate() {
+
+            $("#email-address").validate({
+                rules: {
+                    notificationEmailAddress: {
+                        required: true,
+                        maxlength: 64,
+                        email: true
+                    }
+                },
+                messages: {
+                    notificationEmailAddress: {
+                        required: function () {
+                            $("#email-validation-error")[0].innerHTML = "Enter email address";
+                        },
+                        maxlength: function () {
+                            $("#email-validation-error")[0].innerHTML = "Maximum 64 digits";
+                        },
+                        email: function () {
+                            $("#email-validation-error")[0].innerHTML = "Invalid email format";
+                        }
+                    }
+                }
+            });
+
+            return $("#email-address").valid();
+        }
+    </script>
+}
+
+<div class="cols cols2">
+
+
+    <div class="col2">
+
+        <h2>
+            <div class="cols cols2">
+                <div class="col" style="width: 50%;">@(string.Format("Job Page {0} \t {1}({2})", Model.RepairInformation.ServiceId, Model.StoreName, Model.StoreId))
+
+
+                </div>
+                <div class="col" style="width: 15%;">
+                @*    <input type="button" class="button rbg" id="BtnAdditionalJob" value="Create Additional Job" />*@
+                </div>
+                <div class="col" style="width: 13%;">
+                    <input type="button" class="button rbg" onclick="$('#notes')[0].focus()" value="Job Notes" />
+                </div>
+
+                <div class="col" style="width: 14%;">
+                    <span id="show-notification-email" class="cursor-pointer">
+                        <input type="button" class="button rbg no-btn" value="Email Job Sheet" />
+
+                    </span>
+
+                    <form action="/Job/EmailJobSheet" method="POST" id="email-address" class="fill-color-white padding-around text-align-center" title="Email notification">
+                        <input type="hidden" name="modelId" value="@Model.ProductInformation.ModelId" />
+                        <input type="hidden" name="ServiceId" value="@Model.RepairInformation.ServiceId" />
+                        <input type="hidden" name="emailTo" value="@Model.NotificationEmailAddress"  />
+                        @* <input type="hidden" name="HiddenVisitCd" value="@Model.RepairInformation.VisitCd" /> *@
+                        @Html.TextBoxFor(model => model.RepairInformation.VISITCD, htmlAttributes: new { @type = "hidden", @id = "HiddenVisitCd" })
+                        @Html.TextBoxFor(model => model.RepairInformation.VisitDate, "{0:yyyy/MM/dd}", htmlAttributes: new { @type = "hidden", @id = "HiddenVisitDate" })
+                        <div class="text-size-h5 text-align-left text-weight-bold">Email address</div>
+                        <input type="text" name ="notificationEmailAddress" class="span3" style="width:100%" value="@Model.NotificationEmailAddress"/><span id="email-btn-send" class="button rbg btn-yes">Send</span>
+                        <div class="error" id="email-validation-error"></div>
+                        <div class="text-align-center span3">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </h2>
+        @Html.Raw(ViewBag.JobAccessMessage)
+    </div>
+
+
+</div>
+
+<div class="cols cols2">
+    <div class="col2 box">
+        
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            <div class="error" id="error-msg1">Error on updating the job : @ViewBag.Error</div>
+        }
+        @((Model.StatusId != 10) ? (Model.IsAccepted ? Html.DisplayFor(x => x.Status) : Html.Partial("_AcceptJob", Model)) : Html.DisplayFor(x => x.Status))
+    </div> 
+    <div class="col2  LinkedJobs">
+        @{
+            Html.RenderPartial("LinkedJobs", Model.LinkedJobs);
+        }
+
+    </div>
+    <div class="col box ">
+        @{
+            Html.RenderPartial("CustomerInfo", Model.CustomerInformation);
+        }
+    </div>
+
+    <div class="col box">
+        @{
+            Html.RenderPartial("ContactInfo", Model.ContactInformation);
+        }
+        @{
+            Html.RenderPartial("ServiceDates", Model);
+           
+        }
+
+    </div>
+
+
+
+    <div class="col box">
+
+        @{
+            Html.RenderPartial("ProductInfo", Model.ProductInformation);
+        }
+    </div>
+
+    <div class="col box">
+        @{
+            Html.RenderPartial("RepairInfo", Model.RepairInformation);
+        }
+
+        @{
+            Html.RenderPartial("PolicyInfo", Model.ProductInformation);
+        }
+    </div>
+
+    <div class="col2 box">
+        @{
+            Html.RenderPartial("FaultInformation", Model.JobFaultInfo);
+        }
+
+    </div>
+    @*  <div class="col2 box">
+       {
+            Html.RenderPartial("AdditionalJobInfo", Model.JobAdditionalInfo);
+        }
+    </div>*@
+    <div class="col2 box">
+        @{
+            Html.RenderPartial("PartsInfo", Model.Parts);
+        }
+        @*   @if (Model.Parts.stockPart.Count > 0 || Model.Parts.vanparts.Count > 0)*@
+        @* {
+
+            Html.RenderPartial("PartsCostInfo", Model);
+
+        }*@
+    </div>
+    @if (Model.Media.ToList().Count > 0)
+    {
+        <div class="col2 box">
+            Html.RenderPartial("Media", Model.Media);
+       
+        </div> }
+    <div class="col2 box">
+        @{
+            Html.RenderPartial("InspectionData", Model.InspectionData);
+        }
+    </div>
+    <div class="col2 box" id="notes" tabindex="-1">
+        @*   @Html.Partial("_JobNotesShop", Model.JobNotesShop)*@
+
+        @*     @Html.Partial("_JobNotesShop", Model.JobNotes)*@
+
+        @Html.Partial("_JobNotes", Model.JobNotes)
+    </div>
+
+</div>
+
+<div id="edit-form"></div>
+<div id="edit-form1"></div>
+<div id="Errormes" style="display: none;color:Red" class="center">
+    
+</div>
+<div id="divFollowOnForm">
+   
+
+</div>
+<div id="divREFITALERTForm" style="display: none" class="center">
+    Job cant be cancelled. please cancel from complete service or reorder the parts
+    <br />
+
+
+
+
+</div>
