@@ -1,2 +1,24 @@
 ﻿Dag 162:
 Tisdag den 3 december 2019
+Läste nyheter på Internet och kollade mail. Jag
+hade bl.a. fått ett ganska långt mail från Daniel.
+Gjorde det sista på task73 (ClientConnect for
+clients possible to view readonly job page without
+being authenticated) och checkade in i SVN.
+Programmerade i mitt eget projekt GenerateSudokuBoards.csproj.
+Knappt kl. 13.00 tog jag lunch och gick till
+”Tesco Express” och köpte en ostsmörgås och bulle
+för två pund, och därefter tillbaka till kontoret
+och intog det jag hade köpt samt medtagen banan
+och kaffe från Fixzone. Framåt eftermiddagen
+bad Vijay mig att titta på stored procedure
+SearchCustomers som inte lyckades returnera
+ett result för ett specifikt postnummer och
+adress som jag fick av Vijay på Skype (dvs.
+det blev ”timeout”). Det var Vijays T-sql kod
+för sök av kund och jag provade med min kod
+i GetCustomersByClientId (med en liten modifiering)
+och då fungerade det och jag uppdaterade
+SearchCustomers med den i produktionsdatabasen.
+Jag dokumenterade i task75. Jag avslutade
+arbetsdagen ca. kl. 17.30 och promenerade hem. 
