@@ -23,7 +23,7 @@ def run(args):
     cells_remain_to_set = []
     cells_remain_to_set_after_added_numbers_with_certainty = None
     number_of_candidates = [0]
-    number_of_candidates_after_added_numbers_with_certainty = [0];
+    number_of_candidates_after_added_numbers_with_certainty = [0]
     index_number = [0, 0]
 
     msg = get_input_sudoku_board(args, working_sudoku_board, cells_remain_to_set)
@@ -77,7 +77,7 @@ def run(args):
                 if certainty_sudoku_board == None:
                     certainty_sudoku_board = return_two_dimensional_data_structure(9, 9)
                     cells_remain_to_set_after_added_numbers_with_certainty = []
-                    candidates_after_added_numbers_with_certainty = return_three_dimensional_data_structure(9, 9, 10);
+                    candidates_after_added_numbers_with_certainty = return_three_dimensional_data_structure(9, 9, 10)
                     save_state(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty)
 
             working_sudoku_board[row - 1][column - 1] = number

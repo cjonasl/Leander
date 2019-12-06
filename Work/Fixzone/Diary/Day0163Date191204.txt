@@ -1,2 +1,14 @@
 ﻿Dag 163:
 Onsdag den 4 december 2019
+Programmerade i projekt GenerateSudokuBoards.csproj.
+Vid 13.00-tiden tog jag lunch och gick jag till ”Tesco
+Express” och köpte en banan och ett wienerbröd för
+1.05 pund. Tillbaka till kontoret och intog det jag
+hade köpt framför datorn samt kaffe från Fixzone och
+två medtagna smörgåsar. Började titta lite på task74
+(Finish RoutingOnMap project, CC-39), men jag visste
+inte vad jag skulle göra (jag hade bara fått en solution
+av Vijay). Fyllde i ett formulär med val av förrätt,
+huvudrätt och efterrätt på restaurang ”Al Forno” inför
+julmiddag där nästa fredag. Jag avslutade arbetsdagen
+ca. kl. 17.30 och promenerade hem.

@@ -4,7 +4,15 @@ import datetime
 from enum import Enum
 from random import randrange
 
-def forStatement():
+#Semicolon is optional in an expression
+def Expression():
+    a = 0
+    b = 1;
+
+    print(a)
+    print(b);
+
+def forLoop():
     sumInteger1To10 = 0
 
     for i in range(1, 11): #From inclusive and to exclusive
@@ -34,7 +42,7 @@ def readWriteTextFromFile():
     fs.close()
     print(s);
 
-def whileStatement():
+def whileLoop():
     sumInteger1To10 = 0
 
     i = 1
@@ -45,7 +53,7 @@ def whileStatement():
     print(sumInteger1To10)
 
     i = 1
-    while i <= 10:
+    while i <= 10: #Works with the parentheses as well
         if i == 1:  #Works with the parentheses as well
             sumInteger1To10 = 0
         sumInteger1To10 += i  #Same indentation for the block, i.e. this line belongs to same block as the if-statement
@@ -53,6 +61,8 @@ def whileStatement():
 
     print(sumInteger1To10)
 
-forStatement()
+
+Expression()
+forLoop()
 readWriteTextFromFile()
-whileStatement()
+whileLoop()

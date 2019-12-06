@@ -7,21 +7,39 @@ using System.Threading.Tasks;
 namespace LangCSharp
 {
     /*
-     ForStatement
+     Expression
+     Statement
+     ForLoop
      ReadWriteTextFromFile
-     WhileStatement
+     WhileLoop
     */
     class Program
     {
         static void Main(string[] args)
         {
-            ForStatement();
+            Expression();
+            Console.WriteLine(Statement());
+            ForLoop();
             ReadWriteTextFromFile();
-            WhileStatement();
+            WhileLoop();
             string str = Console.ReadLine();
         }
 
-        private static void ForStatement()
+        private static void Expression()
+        {
+            int a;
+
+            //An expression must be terminated by a semicolon
+            a = 2;
+            Console.WriteLine(a);
+        }
+
+        private static double Statement()
+        {
+            return 3.14; //A statement must be terminated by a semicolon
+        }
+
+        private static void ForLoop()
         {
             int i, sumInteger1To10 = 0;
 
@@ -32,16 +50,16 @@ namespace LangCSharp
 
             Console.WriteLine(sumInteger1To10);
 
-            //or (curly braces optioinal if only one statement for-body)
+            //Curly braces are optioinal if only one expression/statement
             sumInteger1To10 = 0;
             for (i = 1; i <= 10; i++)
                 sumInteger1To10 += i;
 
             Console.WriteLine(sumInteger1To10);
 
-            for (i = 1; i <= 10; i++) //For several statements then must have curly braces
+            for (i = 1; i <= 10; i++) //Must have curly braces when several expressions/statements
             {
-                if (i == 1)
+                if (i == 1) //Does not work without the parentheses
                     sumInteger1To10 = 0;
 
                 sumInteger1To10 += i;
@@ -59,18 +77,18 @@ namespace LangCSharp
             Console.WriteLine(s);
         }
 
-        private static void WhileStatement()
+        private static void WhileLoop()
         {
             int i = 0, sumInteger1To10 = 0;
 
-            while (++i <= 10)
+            while (++i <= 10)  //Does not work without the parentheses
             {
                 sumInteger1To10 += i;
             }
 
             Console.WriteLine(sumInteger1To10);
 
-            //or (curly braces optioinal if only one statement in while-body)
+            //Curly braces are optioinal if only one expression/statement
             i = 0;
             sumInteger1To10 = 0;
             while (++i <= 10)
@@ -80,7 +98,7 @@ namespace LangCSharp
 
             i = 1;
             sumInteger1To10 = 0;
-            while (i <= 10) //For several statements then must have curly braces
+            while (i <= 10) //Must have curly braces when several expressions/statements
             {
                 sumInteger1To10 += i;
                 i++;

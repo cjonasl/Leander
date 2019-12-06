@@ -1,7 +1,22 @@
-var fs = require('fs');
-langJavaScript = {};
+"use strict";
 
-langJavaScript.forStatement = function() {
+var fs = require('fs');
+var langJavaScript = {};
+
+
+langJavaScript.Expression = function () {
+    var a;
+
+    //An expression should be terminated by a semicolon (works without also)
+    a = 2;
+    console.log(a);
+};
+
+langJavaScript.Statement = function () {
+    return 3.14; //A statement should be terminated by a semicolon (works without also)
+};
+
+langJavaScript.forLoop = function () {
     var i, sumInteger1To10 = 0;
 
     for (i = 1; i <= 10; i++) {
@@ -10,25 +25,27 @@ langJavaScript.forStatement = function() {
 
     console.log(sumInteger1To10);
 
-    //or (curly braces optioinal if only one statement for-body)
+    //Curly braces are optioinal if only one expression/statement
     sumInteger1To10 = 0;
     for (i = 1; i <= 10; i++)
         sumInteger1To10 += i;
 
     console.log(sumInteger1To10);
 
-    for (i = 1; i <= 10; i++) { //For several statements then must have curly braces
-        if (i == 1)
+    for (i = 1; i <= 10; i++) { //Must have curly braces when several expressions/statements
+        if (i === 1) //Does not work without the parentheses
             sumInteger1To10 = 0;
 
         sumInteger1To10 += i;
     }
 
     console.log(sumInteger1To10);
-}
+};
 
 langJavaScript.readWriteTextFromFile = function () {
-    var s = fs.readFileSync("C:\\tmp\\tmp.txt", { encoding: 'ascii' });
+    var s, f;
+
+    s = fs.readFileSync("C:\\tmp\\tmp.txt", { encoding: 'ascii' });
     console.log(s);
 
     f = fs.openSync("C:\\tmp\\tmp.txt", "w");
@@ -37,18 +54,18 @@ langJavaScript.readWriteTextFromFile = function () {
 
     s = fs.readFileSync("C:\\tmp\\tmp.txt", { encoding: 'ascii' });
     console.log(s);
-}
+};
 
-langJavaScript.whileStatement = function() {
+langJavaScript.whileLoop = function () {
     var i = 0, sumInteger1To10 = 0;
 
-    while (++i <= 10) {
+    while (++i <= 10) { //Does not work without the parentheses
         sumInteger1To10 += i;
     }
 
     console.log(sumInteger1To10);
 
-    //or (curly braces optioinal if only one statement in while-body)
+    //Curly braces are optioinal if only one expression/statement
     i = 0;
     sumInteger1To10 = 0;
     while (++i <= 10)
@@ -58,14 +75,16 @@ langJavaScript.whileStatement = function() {
 
     i = 1;
     sumInteger1To10 = 0;
-    while (i <= 10) { //For several statements then must have curly braces
+    while (i <= 10) { //Must have curly braces when several expressions/statements
         sumInteger1To10 += i;
         i++;
     }
 
     console.log(sumInteger1To10);
-}
+};
 
-langJavaScript.forStatement();
+langJavaScript.Expression();
+console.log(langJavaScript.Statement());
+langJavaScript.forLoop();
 langJavaScript.readWriteTextFromFile();
-langJavaScript.whileStatement();
+langJavaScript.whileLoop();
