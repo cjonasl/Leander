@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetMaxImageHeight", "GetMin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandleTwoFolders", "HandleTwoFolders\HandleTwoFolders.csproj", "{A76F9462-1CC8-4431-A85E-2ED4B2795FCD}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FunctionalProgamming1", "FunctionalProgamming1\FunctionalProgamming1.fsproj", "{AE497176-685F-4329-8890-1B8E2BF1110D}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FunctionalProgamming1", "FunctionalProgamming1\FunctionalProgamming1.fsproj", "{AE497176-685F-4329-8890-1B8E2BF1110D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adhoc", "Adhoc\Adhoc.csproj", "{EE1A4680-12F9-42C8-8654-CCD276791882}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{AE497176-685F-4329-8890-1B8E2BF1110D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE497176-685F-4329-8890-1B8E2BF1110D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE497176-685F-4329-8890-1B8E2BF1110D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE1A4680-12F9-42C8-8654-CCD276791882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE1A4680-12F9-42C8-8654-CCD276791882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE1A4680-12F9-42C8-8654-CCD276791882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE1A4680-12F9-42C8-8654-CCD276791882}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

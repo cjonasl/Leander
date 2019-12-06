@@ -1,5 +1,7 @@
 ﻿Task21:
 
+Log in with user: 3CCH23DE (password: CH24)
+
 It remains to exchange Part.aspx and in file C:\Jonas\SVN\SaediSVN3\MobilePortal\MobilePortal\MobilePortal\Parts.aspx.cs
 1. Change BtnBookCourier_Click_New to BtnBookCourier_Click
 2. Change BtnBookCourier_Click to BtnBookCourier_Click_old
@@ -126,8 +128,6 @@ C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\Parts.aspx.cs
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal\PartStock.aspx.cs
-
-Log in with user: 3CCH23DE (password: CH24)
 
 Use solution:
 C:\Jonas\SVN\SaediSVN\MobilePortal\MobilePortal\MobilePortal.sln

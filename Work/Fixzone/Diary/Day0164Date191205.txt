@@ -1,2 +1,21 @@
 ﻿Dag 164:
 Torsdag den 5 december 2019
+Tidsredovisade. Vijay bad mig ändra en logik jag införde
+i generiska ClientConnect för clients i samband med
+bokning av service där jag valde att bara visa bokningsknapp
+för valt datum då ingenjör finns tillgänglig det datumet.
+Vijay ville att jag även visar bokningsknappar för
+ytterligare datum efter valt datum som kommer med i
+serviceanropet. Jag gjorde det arbetet i task59 (Amend
+message if required date is not available, CC-20) och
+repeterade koden lite och sedan gjorde jag ändringen
+(det räcke med att ta bort lite kod i vyn ”_RequestDate.cshtml”
+och jag la sedan in den vyn i live site direkt). Skrev
+klart ett svar på ett mail från Daniel i tisdags som
+jag började med igår och därefter skickade jag det
+till honom. Vid 13.00-tiden gick jag till ”Tesco Express”
+och köpte ett wienerbröd för 80 pence. Intog medtagen
+smörgås och banan, kaffe från Fixzone och wienerbrödet
+jag köpte till lunch. Arbetade med mina sudoku-program.
+Jag avslutade arbetsdagen ca. kl. 17.30 och promenerade
+till Surbiton.
