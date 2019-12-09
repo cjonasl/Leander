@@ -3435,3 +3435,23 @@ Task75_Day162_Date191203_Improve execution time of sp SearchCustomers
 ----- New property -----
 
 Task,Fixzone
+
+---------- New resource ----------
+
+173
+
+----- New property -----
+
+Self
+
+----- New property -----
+
+2019-12-09 13:34:59
+
+----- New property -----
+
+Task76_Day166_Date191209_Correct error in sp GetJobsByClientId
+
+----- New property -----
+
+Task,Fixzone

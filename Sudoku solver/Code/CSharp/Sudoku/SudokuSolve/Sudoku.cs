@@ -35,10 +35,10 @@ namespace Sudoku
            UpdateCandidates (Dependent on RemoveNumberIfItExists)
            ValidateSudokuBoard (Dependent on ReturnNumberOfOccurenciesOfNumber)
            PrintSudokuBoard (Dependent on ReturnSudokuBoardAsString)
-           PrintResult (Dependent on PrintSudokuBoard)
+           ProcessResult
            Run (Dependent on GetInputSudokuBoard, ValidateSudokuBoard, ReturnTwoDimensionalDataStructure, SimulateOneNumber, ReturnThreeDimensionalDataStructure, ReturnSquareCellToRowColumnMapper, InitCandidates, TryFindNumberToSetInCellWithCertainty, CopyList, CopySudokuBoard, UpdateCandidates, PrintSudokuBoard)
         */
-        public static string Run(string[] args, int index, string[] sudokuArray)
+        public static string Run(int index, string[] sudokuArray)
         {
             int row = 0, column = 0, number, i;
             int[][] certaintySudokuBoard = null;
@@ -52,11 +52,11 @@ namespace Sudoku
             string msg;
             ArrayList cellsRemainToSet = new ArrayList(), cellsRemainToSetAfterAddedNumbersWithCertainty = null;
 
-            msg = GetInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet, index, sudokuArray);
+            msg = GetInputSudokuBoard(workingSudokuBoard, cellsRemainToSet, index, sudokuArray);
 
             if (msg != null)
             {
-                return PrintResult(false, msg, index, sudokuArray);
+                return msg;
             }
 
             squareCellToRowColumnMapper = ReturnSquareCellToRowColumnMapper();
@@ -64,12 +64,12 @@ namespace Sudoku
 
             if (msg != null)
             {
-                return PrintResult(false, msg, index, sudokuArray);
+                return msg;
             }
 
             if (cellsRemainToSet.Count == 0)
             {
-                return PrintResult(false, "A complete sudoku was given as input. There is nothing to solve.", index, sudokuArray);
+                return "A complete sudoku was given as input. There is nothing to solve.";
             }
 
             candidates = ReturnThreeDimensionalDataStructure(9, 9, 10);
@@ -77,7 +77,7 @@ namespace Sudoku
 
             if (numberOfCandidates == 0)
             {
-                return PrintResult(false, "It is not possible to add any number to the sudoku.", index, sudokuArray);
+                return "It is not possible to add any number to the sudoku.";
             }
 
             numberOfCellsSetInInputSudokuBoard = 81 - cellsRemainToSet.Count;
@@ -144,7 +144,7 @@ namespace Sudoku
                 }
             }
 
-            return PrintResult(true, null, index, sudokuArray, args, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+            return ProcessResult(index, sudokuArray, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
         }
 
         private static void CopyList(ArrayList from, ArrayList to)
@@ -198,27 +198,10 @@ namespace Sudoku
             numberOfCandidates = numberOfCandidatesAfterAddedNumbersWithCertainty;
         }
 
-        private static string GetInputSudokuBoard(string[] args, int[][] sudokuBoard, ArrayList cellsRemainToSet, int index, string[] sudokuArray)
+        private static string GetInputSudokuBoard(int[][] sudokuBoard, ArrayList cellsRemainToSet, int index, string[] sudokuArray)
         {
             string[] rows, columns;
             int row, column, n;
-
-            if (args.Length == 0)
-            {
-                return "An input file is not given to the program (first parameter)!";
-            }
-            else if (args.Length > 2)
-            {
-                return "At most two parameters may be given to the program!";
-            }
-            else if (!File.Exists(args[0]))
-            {
-                return "The given input file in first parameter does not exist!";
-            }
-            else if (args.Length == 2 && !Directory.Exists(args[1]))
-            {
-                return "The directory given in second parameter does not exist!";
-            }
 
             string sudokuBoardString = sudokuArray[index].Replace("\r\n", "\n");
 
@@ -645,32 +628,26 @@ namespace Sudoku
             return null;
         }
 
-        private static void PrintSudokuBoard(bool solved, string[] args, string message, int[][] sudokuBoard, int index, string[] sudokuArray)
+        private static string ProcessResult(int index, string[] sudokuArray, bool sudokuSolved, int numberOfCellsSetInInputSudokuBoard, int numberOfCellsSetInBestSoFar, int[][] workingSudokuBoard, int[][] bestSoFarSudokuBoard)
         {
-            sudokuArray[index] = ReturnSudokuBoardAsString(sudokuBoard);
-        }
-
-        private static string PrintResult(bool initialSudokuBoardHasCandidates, string msg, int index, string[] sudokuArray, string[] args = null, bool sudokuSolved = false, int numberOfCellsSetInInputSudokuBoard = 0, int numberOfCellsSetInBestSoFar = 0, int[][] workingSudokuBoard = null, int[][] bestSoFarSudokuBoard = null)
-        {
-            if (initialSudokuBoardHasCandidates)
+            var msg;
+            
+            if (sudokuSolved)
             {
-                if (sudokuSolved)
-                {
-                    msg = string.Format("The sudoku was solved. {0} number(s) added to the original {1}.", 81 - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard);
-                }
-                else
-                {
-                    msg = string.Format("The sudoku was partially solved. {0} number(s) added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
-                }
+                msg = "S";
+            }
+            else
+            {
+                msg = string.Format("The sudoku was partially solved. {0} number(s) added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
+            }
 
-                if (sudokuSolved || bestSoFarSudokuBoard == null)
-                {
-                    PrintSudokuBoard(sudokuSolved, args, msg, workingSudokuBoard, index, sudokuArray);
-                }
-                else
-                {
-                    PrintSudokuBoard(sudokuSolved, args, msg, bestSoFarSudokuBoard, index, sudokuArray);
-                }
+            if (sudokuSolved || bestSoFarSudokuBoard == null)
+            {
+                sudokuArray[index] = ReturnSudokuBoardAsString(workingSudokuBoard);
+            }
+            else
+            {
+                sudokuArray[index] = ReturnSudokuBoardAsString(bestSoFarSudokuBoard);
             }
 
             return msg;

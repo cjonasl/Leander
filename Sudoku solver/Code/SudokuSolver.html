@@ -2,10 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+
     <title>Sudoku solver</title>
 
     <style>
-        .leftMenu > a:link, .leftMenu > a:visited, .leftMenu > a:active {
+        .leftMenuSourceCodeInDifferentLanguage > a:link, .leftMenuSourceCodeInDifferentLanguage > a:visited, .leftMenuSourceCodeInDifferentLanguage > a:active {
             text-decoration: none;
             font-weight: bold;
             font-size: small;
@@ -76,7 +81,7 @@
             min-width: 2000px;
         }
 
-        .leftMenu {
+        .leftMenuSourceCodeInDifferentLanguage {
             min-height: 20000px;
             min-width: 15%;
             max-width: 15%;
@@ -84,6 +89,19 @@
             padding: 10px;
             position: fixed;
             border-right: 1px solid black;
+            top: 72px;
+            overflow: hidden;
+        }
+
+        .leftMenu {
+            min-height: 20000px;
+            min-width: 4%;
+            max-width: 4%;
+            background-color: #ccffcc;
+            padding: 10px;
+            position: fixed;
+            border-right: 1px solid black;
+            top: 72px;
             overflow: hidden;
         }
 
@@ -112,6 +130,24 @@
             .headMenu li {
                 display: inline-block;
             }
+
+        .sudokuCells {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            font-family: 'Courier New';
+            font-size: x-large;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .startInteger {
+            color: mediumvioletred;
+        }
+
+        .greyFontColor {
+            color: grey;
+        }
     </style>
 
 </head>
@@ -120,6 +156,7 @@
         <ul id="listOfMenuItems" class="ulHead" data-active="SudokuSolver" style="position: relative; top: 8px;">
             <li><a id="aHeadMenuItemSudokuSolver" href="javascript: changePage('SudokuSolver')" class="activeHeadMenuItem">Sudoku solver</a></li>
             <li><a id="aHeadMenuItemDescriptionOfTheAlgorithm" href="javascript: changePage('DescriptionOfTheAlgorithm')">Description of the algorithm</a></li>
+            <li><a id="aHeadMenuItemDownloadSourceCode" href="javascript: changePage('DownloadSourceCode')">Download source code</a></li>
             <li><a id="aHeadMenuItemExecutionTimes" href="javascript: changePage('ExecutionTimes')">Execution times</a></li>
             <li><a id="aHeadMenuItemSudokusToSolve" href="javascript: changePage('SudokusToSolve')">Sudokus to solve</a></li>
             <li><a id="aHeadMenuItemSourceCodeInDifferentLanguage" href="javascript: changePage('SourceCodeInDifferentLanguage')">Source code in different languages</a></li>
@@ -127,8 +164,35 @@
         </ul>
     </div>
 
-    <div id="SourceCodeInDifferentLanguage">
-        <div id="divLeftMenu" class="leftMenu" data-active="CopyList" style="position: fixed; top: 72px;">
+    <div id="divSudokuSolver" style="margin-top: 80px; font-family: 'Times New Roman'">
+        <div class="leftMenu"></div>
+        <p style="position: absolute; left: 120px; top: 75px; font-family: 'Times New Roman'; font-weight: bold;">Enter start integers (between 1 and 9) in the sudoku board below and press "Solve".</p>
+        <button id="solveButton" style="position: absolute; left: 120px; top: 125px; font-family: Arial; font-weight: bold;" onclick="window.sudoku.solveSudoku()">Solve</button>
+        <button id="newSudokuButton" disabled="disabled" style="position: absolute; left: 185px; top: 125px; font-family: Arial; font-weight: bold;" class="greyFontColor" onclick="window.sudoku.newSudoku()">New</button>
+    </div>
+
+    <div id="divDescriptionOfTheAlgorithm" style="position: relative; display: none; top: 100px; left: 100px;">
+        divDescriptionOfTheAlgorithm
+    </div>
+
+    <div id="divDownloadSourceCode" style="position: relative; display: none; top: 100px; left: 100px;">
+        divDownloadSourceCode
+    </div>
+
+    <div id="divExecutionTimes" style="position: relative; display: none; top: 100px; left: 100px;">
+        divExecutionTimes
+    </div>
+
+    <div id="divSudokusToSolve" style="position: relative; display: none; top: 100px; left: 100px;">
+        divSudokusToSolve
+    </div>
+
+    <div id="divCompareLanguages" style="position: relative; display: none; top: 100px; left: 100px;">
+        divCompareLanguages
+    </div>
+
+    <div id="divSourceCodeInDifferentLanguage" style="display: none;">
+        <div id="divLeftMenu" class="leftMenuSourceCodeInDifferentLanguage" data-active="CopyList">
             <h2 style="margin-top: -8px;">Set a language for all functions:</h2>
             <div style="font-family: 'Times New Roman'; margin-bottom: 10px; border-bottom: 1px solid black;">
                 <ul style="position: relative; left: -42px; top: -10px;">
@@ -412,6 +476,7 @@
     </div>
 
     <script src="http://www.sudokusolver.com/jquery-3.4.1.js"></script>
+    <script src="http://www.sudokusolver.com/sudoku.js"></script>
 
     <script>
         window.sudokoBasePath = "http://www.sudokusolver.com/";
@@ -424,6 +489,8 @@
                 $("#aHeadMenuItem" + currentActive).toggleClass("activeHeadMenuItem ");
                 $("#aHeadMenuItem" + menuItem).toggleClass("activeHeadMenuItem ");
                 $("#listOfMenuItems").attr("data-active", menuItem);
+                $("#div" + currentActive).hide();
+                $("#div" + menuItem).show();
             }
         }
 
@@ -492,6 +559,8 @@
             $("#imgPrintSudokuBoard").attr("src", window.sudokoBasePath + "CSharp/PrintSudokuBoard.png");
             $("#imgPrintResult").attr("src", window.sudokoBasePath + "CSharp/PrintResult.png");
             $("#imgRun").attr("src", window.sudokoBasePath + "CSharp/Run.png");
+
+            window.sudoku.makeSudokuBoard();
         });
 
     </script>

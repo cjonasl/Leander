@@ -9,25 +9,23 @@ namespace SudokuSolve
         static void Main(string[] args)
         {
             DateTime dt = DateTime.Now;
-            string start, end, result = "The sudoku was solved.";
+            string start, end, result = "S";
             StringBuilder sb;
-            string[] v;
+            string[] sudokuArray;
             int i, n;
 
             start = string.Format("{0},{1},{2},{3},{4},{5}\r\n", dt.Year.ToString(), dt.Month.ToString(), dt.Day.ToString(), dt.Hour, dt.Minute.ToString(), dt.Second.ToString());
 
-            v = File.ReadAllText("C:\\Sudoku\\Solve\\StartSudokuBoards.txt").Split(new string[] { "\r\n-- New sudoku --\r\n" }, StringSplitOptions.None);
-
-            args = new string[] { "C:\\Sudoku\\Solve\\DummySudoku.txt" };
+            sudokuArray = File.ReadAllText("C:\\Sudoku\\Solve\\StartSudokuBoards.txt").Split(new string[] { "\r\n-- New sudoku --\r\n" }, StringSplitOptions.None);
 
             i = 0;
-            n = v.Length;
+            n = sudokuArray.Length;
 
-            while (i < n && result.StartsWith("The sudoku was solved."))
+            while (i < n && result == "S")
             {
-                result = Sudoku.Sudoku.Run(args, i, v);
+                result = Sudoku.Sudoku.Run(i, sudokuArray);
 
-                if ((i % 25) == 0)
+                if ((i % 500) == 0)
                 {
                     Console.Write("\r" + i.ToString());
                 }
@@ -35,7 +33,7 @@ namespace SudokuSolve
                 i++;
             }
 
-            if (!result.StartsWith("The sudoku was solved."))
+            if (result != "S")
             {
                 File.WriteAllText("C:\\Sudoku\\Solve\\Error.txt", result);
             }
@@ -50,9 +48,9 @@ namespace SudokuSolve
                 for(i = 0; i < n; i++)
                 {
                     if (i == (n - 1))
-                        sb.Append(v[i]);
+                        sb.Append(sudokuArray[i]);
                     else
-                        sb.Append(v[i] + "\r\n-- New sudoku --\r\n");
+                        sb.Append(sudokuArray[i] + "\r\n-- New sudoku --\r\n");
                 }
 
                 File.WriteAllText("C:\\Sudoku\\Solve\\SolveResult.txt", sb.ToString());
