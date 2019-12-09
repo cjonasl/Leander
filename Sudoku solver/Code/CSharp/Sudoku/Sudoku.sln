@@ -13,7 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuObj", "SudokuObj\Sudo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuObjDebug", "SudokuObjDebug\SudokuObjDebug.csproj", "{7B4BBB63-4B69-42B1-80B7-3125418D29FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateEvilSudokus", "GenerateSudokuBoards\GenerateSudokuBoards.csproj", "{35A1C4E4-2931-43F3-B893-94D891CB7EC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateSudokuBoards", "GenerateSudokuBoards\GenerateSudokuBoards.csproj", "{35A1C4E4-2931-43F3-B893-94D891CB7EC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateSudokuBoards", "CreateSudokuBoards\CreateSudokuBoards.csproj", "{90B60C4A-C243-4195-8361-A4F6DD9A35DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuSolve", "SudokuSolve\SudokuSolve.csproj", "{D3FB2DEA-61D5-4E27-9088-8A8F28F031A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckSolveResult", "CheckSolveResult\CheckSolveResult.csproj", "{D3B8E0BF-D354-46C7-9122-E6AB0DFF68AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetSolveStat", "GetSolveStat\GetSolveStat.csproj", "{F1029513-FD52-4DB9-8F4F-ED13E906238D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +53,22 @@ Global
 		{35A1C4E4-2931-43F3-B893-94D891CB7EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A1C4E4-2931-43F3-B893-94D891CB7EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A1C4E4-2931-43F3-B893-94D891CB7EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90B60C4A-C243-4195-8361-A4F6DD9A35DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90B60C4A-C243-4195-8361-A4F6DD9A35DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90B60C4A-C243-4195-8361-A4F6DD9A35DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90B60C4A-C243-4195-8361-A4F6DD9A35DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3FB2DEA-61D5-4E27-9088-8A8F28F031A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FB2DEA-61D5-4E27-9088-8A8F28F031A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3FB2DEA-61D5-4E27-9088-8A8F28F031A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3FB2DEA-61D5-4E27-9088-8A8F28F031A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3B8E0BF-D354-46C7-9122-E6AB0DFF68AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3B8E0BF-D354-46C7-9122-E6AB0DFF68AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3B8E0BF-D354-46C7-9122-E6AB0DFF68AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3B8E0BF-D354-46C7-9122-E6AB0DFF68AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1029513-FD52-4DB9-8F4F-ED13E906238D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1029513-FD52-4DB9-8F4F-ED13E906238D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1029513-FD52-4DB9-8F4F-ED13E906238D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1029513-FD52-4DB9-8F4F-ED13E906238D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

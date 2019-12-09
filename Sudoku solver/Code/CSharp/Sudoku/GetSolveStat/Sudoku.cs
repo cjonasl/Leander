@@ -14,7 +14,6 @@ namespace Sudoku
 
     public class Sudoku
     {
-        private static Random _random = new Random((int)(DateTime.Now.Ticks % 64765L));
 
         /*
          Returns:
@@ -22,12 +21,27 @@ namespace Sudoku
          2. O (= only ordinary methods), if initialSudokoBoard can be solved uniquely without simulation
          3. [1,a][2,b],... if initialSudokoBoard can be solved uniquely, but with simulation
         */
-        public static string GetSolveStat(string initialSudokoBoard, string solvedSudokoBoard)
+        public static string GetSolveStat(string initialSudokoBoard, int numberOfTimesToSolve)
         {
             int i, numberOfSimulations;
             int[] v = new int[81];
-            string result = "The sudoku was solved.", solveStat = null, solvedSudokoBoardTest = solvedSudokoBoard;
+            string result, solvedSudokoBoard, solvedSudokoBoardTest, solveStat = null;
             bool canBeSolvedUniquelyWithoutSimulation = false;
+
+            result = Solve(initialSudokoBoard, out solvedSudokoBoardTest, out numberOfSimulations);
+
+            if (!result.StartsWith("The sudoku was solved."))
+            {
+                return ("ERROR!! Can not solve " + initialSudokoBoard + ". " + result);
+            }
+            else if (numberOfSimulations == 0)
+            {
+                return "O";
+            }
+            else
+            {
+                solvedSudokoBoard = solvedSudokoBoardTest;
+            }
 
             for (i = 0; i < 81; i++)
             {
@@ -36,7 +50,7 @@ namespace Sudoku
 
             i = 0;
 
-            while (i < 1000 && result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
+            while (i < numberOfTimesToSolve && result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
             {
                 result = Solve(initialSudokoBoard, out solvedSudokoBoardTest, out numberOfSimulations);
 
@@ -93,6 +107,7 @@ namespace Sudoku
             int numberOfCellsSetInInputSudokuBoard = 0, numberOfCellsSetInBestSoFar = 0, numberOfCandidates;
             int numberOfCandidatesAfterAddedNumbersWithCertainty = 0;
             bool sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
+            Random random = null;
             string msg;
             ArrayList cellsRemainToSet = new ArrayList(), cellsRemainToSetAfterAddedNumbersWithCertainty = null;
 
@@ -153,7 +168,10 @@ namespace Sudoku
 
                     if (number == 0)
                     {
-                        SimulateOneNumber(candidates, cellsRemainToSet, out i, out number);
+                        if (random == null)
+                            random = new Random((int)(DateTime.Now.Ticks % 64765L));
+
+                        SimulateOneNumber(candidates, random, cellsRemainToSet, out i, out number);
                         row = ((int[])cellsRemainToSet[i])[0];
                         column = ((int[])cellsRemainToSet[i])[1];
 
@@ -224,6 +242,7 @@ namespace Sudoku
             int numberOfCellsSetInInputSudokuBoard = 0, numberOfCellsSetInBestSoFar = 0, numberOfCandidates;
             int numberOfCandidatesAfterAddedNumbersWithCertainty = 0;
             bool sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
+            Random random = null;
             string msg;
             ArrayList cellsRemainToSet = new ArrayList(), cellsRemainToSetAfterAddedNumbersWithCertainty = null;
             int numberOfNumbersInSudokuBoard;
@@ -284,15 +303,18 @@ namespace Sudoku
 
                     if (number == 0)
                     {
+                        if (random == null)
+                            random = new Random((int)(DateTime.Now.Ticks % 64765L));
+
                         numberOfNumbersInSudokuBoard = ReturnNumberOfNumbersInSudokuBoard(workingSudokuBoard);
 
                         if (numberOfNumbersInSudokuBoard < 35)
                         {
-                            SimulateANumber(candidates, numberOfCandidates, cellsRemainToSet, out i, out number);
+                            SimulateANumber(candidates, random, numberOfCandidates, cellsRemainToSet, out i, out number);
                         }
                         else
                         {
-                            SimulateOneNumber(candidates, cellsRemainToSet, out i, out number);
+                            SimulateOneNumber(candidates, random, cellsRemainToSet, out i, out number);
                         }
 
                         row = ((int[])cellsRemainToSet[i])[0];
@@ -647,7 +669,7 @@ namespace Sudoku
             return sb.ToString();
         }
 
-        private static void SimulateOneNumber(int[][][] candidates, ArrayList cellsRemainToSet, out int index, out int number)
+        private static void SimulateOneNumber(int[][][] candidates, Random random, ArrayList cellsRemainToSet, out int index, out int number)
         {
             int tmp, row, column, i, numberOfCandidates, minNumberOfCandidates = 9;
             ArrayList v;
@@ -673,16 +695,16 @@ namespace Sudoku
                     v.Add(i);
             }
 
-            tmp = _random.Next(0, v.Count);
+            tmp = random.Next(0, v.Count);
             index = (int)v[tmp];
             row = ((int[])cellsRemainToSet[index])[0];
             column = ((int[])cellsRemainToSet[index])[1];
-            number = candidates[row - 1][column - 1][1 + _random.Next(0, minNumberOfCandidates)];
+            number = candidates[row - 1][column - 1][1 + random.Next(0, minNumberOfCandidates)];
         }
 
-        private static void SimulateANumber(int[][][] candidates, int numberOfCandidates, ArrayList cellsRemainToSet, out int index, out int number)
+        private static void SimulateANumber(int[][][] candidates, Random random, int numberOfCandidates, ArrayList cellsRemainToSet, out int index, out int number)
         {
-            int n = _random.Next(0, numberOfCandidates);
+            int n = random.Next(0, numberOfCandidates);
             int row, column, nc, i, r, c,  k = -1;
             bool found = false;
 

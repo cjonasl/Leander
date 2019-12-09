@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GenerateSudokuBoards
 {
@@ -131,8 +129,8 @@ namespace GenerateSudokuBoards
             double numberOfSecondsToRun = int.Parse(args[0]);
             bool errorFound = false, continueProcessSolvedSudokoBoard, solvedWithOnlyOrdinaryMethodsFound;
             string solvedSudokoBoard, result, testSudoKuBoard, simulatedTestSudoKuBoard = "", simulatedSolveStat = "";
-            int solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards, n = 0, i;
-            int row, column, rowO, columnO, rowS, columnS, numberOfNumbersSetInSudokuBoard;
+            int solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards, i;
+            int row, column, rowO, columnO, rowS, columnS, numberOfNumbersSetInSudokuBoard, prc;
             string[] initialSudokuBoards = new string[30];
             ArrayList listFullSudokuBoards;
             SudokuBoardReduceNumberOfNumbers sudokuBoardReduceNumberOfNumbers;
@@ -147,7 +145,7 @@ namespace GenerateSudokuBoards
             listFullSudokuBoards = ReturnExistingFullSudokuBoards();
 
             sudokuBoardReduceNumberOfNumbers = new SudokuBoardReduceNumberOfNumbers();
-            logCreationSudokuBoardsMethod2 = new LogCreationSudokuBoardsMethod2("C:\\C");
+            logCreationSudokuBoardsMethod2 = new LogCreationSudokuBoardsMethod2("C:\\Sudoku\\Log");
 
             start = DateTime.Now;
             end = DateTime.Now;
@@ -165,6 +163,9 @@ namespace GenerateSudokuBoards
                 else
                 {
                     solvedInitialEmptySudokuBoard++;
+                    prc = Convert.ToInt32(100.0 * (ts.TotalSeconds / numberOfSecondsToRun));
+
+                    Console.WriteLine(string.Format("solvedInitialEmptySudokuBoard nr. {0} {1}%", solvedInitialEmptySudokuBoard.ToString(), prc.ToString()));
 
                     if (listFullSudokuBoards.IndexOf(solvedSudokoBoard) == -1)
                     {
@@ -175,6 +176,8 @@ namespace GenerateSudokuBoards
 
                         while (i <= 40 && !errorFound)
                         {
+                            Console.Write("\rSolve stat method 1 " + i.ToString());
+
                             result = Sudoku.Sudoku.GetSolveStat(initialSudokuBoards[i - 11].ToSudokuBoard(), solvedSudokoBoard);
 
                             if (result != null)
@@ -199,105 +202,110 @@ namespace GenerateSudokuBoards
                             i++;
                         }
 
-                        logCreationSudokuBoardsMethod2.NewFullSudokuBoard(solvedSudokoBoard);
-
-                        for (i = 0; i < 10; i++)
+                        if (!errorFound)
                         {
-                            logCreationSudokuBoardsMethod2.NewSimulation();
-                            sudokuBoardReduceNumberOfNumbers.Init(solvedSudokoBoard.ToSudokuBoard());
-                            continueProcessSolvedSudokoBoard = true;
+                            Console.WriteLine("\r\nStart with method 2");
 
-                            while (continueProcessSolvedSudokoBoard)
+                            logCreationSudokuBoardsMethod2.NewFullSudokuBoard(solvedSudokoBoard);
+
+                            for (i = 0; i < 10; i++)
                             {
-                                testSudoKuBoard = sudokuBoardReduceNumberOfNumbers.ReturnReducedSudokuBoard(out row, out column);
+                                Console.Write("\rReduce sudoku board " + (i + 1).ToString());
+                                logCreationSudokuBoardsMethod2.NewSimulation();
+                                sudokuBoardReduceNumberOfNumbers.Init(solvedSudokoBoard.ToSudokuBoard());
+                                continueProcessSolvedSudokoBoard = true;
 
-                                solvedWithOnlyOrdinaryMethodsFound = false;
-                                rowO = columnO = rowS = columnS = 0;
-
-                                while (testSudoKuBoard != null && !solvedWithOnlyOrdinaryMethodsFound)
+                                while (continueProcessSolvedSudokoBoard)
                                 {
-                                    result = Sudoku.Sudoku.GetSolveStat(testSudoKuBoard, solvedSudokoBoard);
+                                    testSudoKuBoard = sudokuBoardReduceNumberOfNumbers.ReturnReducedSudokuBoard(out row, out column);
 
-                                    if (result != null)
+                                    solvedWithOnlyOrdinaryMethodsFound = false;
+                                    rowO = columnO = rowS = columnS = 0;
+
+                                    while (testSudoKuBoard != null && !solvedWithOnlyOrdinaryMethodsFound)
                                     {
-                                        if (result == "O")
+                                        result = Sudoku.Sudoku.GetSolveStat(testSudoKuBoard, solvedSudokoBoard);
+
+                                        if (result != null && result.StartsWith("ERROR"))
                                         {
-                                            solvedWithOnlyOrdinaryMethodsFound = true;
-                                            rowO = row;
-                                            columnO = column;
+                                            Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
+                                            return;
+                                        }
+
+                                        if (result != null)
+                                        {
+                                            if (result == "O")
+                                            {
+                                                solvedWithOnlyOrdinaryMethodsFound = true;
+                                                rowO = row;
+                                                columnO = column;
+                                            }
+                                            else
+                                            {
+                                                if (rowS == 0)
+                                                {
+                                                    rowS = row;
+                                                    columnS = column;
+                                                    simulatedTestSudoKuBoard = testSudoKuBoard;
+                                                    simulatedSolveStat = result;
+                                                }
+                                            }
+                                        }
+
+                                        if (!solvedWithOnlyOrdinaryMethodsFound)
+                                            testSudoKuBoard = sudokuBoardReduceNumberOfNumbers.ReturnReducedSudokuBoard(out row, out column);
+                                    }
+
+                                    if (solvedWithOnlyOrdinaryMethodsFound || rowS != 0)
+                                    {
+                                        if (!solvedWithOnlyOrdinaryMethodsFound)
+                                        {
+                                            testSudoKuBoard = simulatedTestSudoKuBoard;
+                                            result = simulatedSolveStat;
+                                        }
+
+                                        numberOfNumbersSetInSudokuBoard = 81 - sudokuBoardReduceNumberOfNumbers.CellsRemainToSet;
+
+                                        if (numberOfNumbersSetInSudokuBoard <= 40)
+                                        {
+                                            result = AddSudokuBoard(testSudoKuBoard.Replace("\r\n", "").Replace(" ", ""), solvedSudokoBoard, result, numberOfNumbersSetInSudokuBoard, false);
+
+                                            if (result == "Added")
+                                            {
+                                                logCreationSudokuBoardsMethod2.Log(numberOfNumbersSetInSudokuBoard);
+                                            }
+                                            else if (result.StartsWith("ERROR"))
+                                            {
+                                                Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
+                                                errorFound = true;
+                                                continueProcessSolvedSudokoBoard = false;
+                                            }
+                                        }
+
+                                        if (solvedWithOnlyOrdinaryMethodsFound)
+                                        {
+                                            sudokuBoardReduceNumberOfNumbers.Reduce(rowO, columnO);
                                         }
                                         else
                                         {
-                                            if (rowS == 0)
-                                            {
-                                                rowS = row;
-                                                columnS = column;
-                                                simulatedTestSudoKuBoard = testSudoKuBoard;
-                                                simulatedSolveStat = result;
-                                            }
+                                            sudokuBoardReduceNumberOfNumbers.Reduce(rowS, columnS);
                                         }
-                                    }
-
-                                    if (!solvedWithOnlyOrdinaryMethodsFound)
-                                        testSudoKuBoard = sudokuBoardReduceNumberOfNumbers.ReturnReducedSudokuBoard(out row, out column);
-                                }
-
-                                if (solvedWithOnlyOrdinaryMethodsFound || rowS != 0)
-                                {
-                                    if (!solvedWithOnlyOrdinaryMethodsFound)
-                                    {
-                                        testSudoKuBoard = simulatedTestSudoKuBoard;
-                                        result = simulatedSolveStat;
-                                    }
-
-                                    numberOfNumbersSetInSudokuBoard = 81 - sudokuBoardReduceNumberOfNumbers.CellsRemainToSet;
-
-                                    if (numberOfNumbersSetInSudokuBoard <= 40)
-                                    {
-                                        result = AddSudokuBoard(testSudoKuBoard.Replace("\r\n", "").Replace(" ", ""), solvedSudokoBoard, result, numberOfNumbersSetInSudokuBoard, false);
-
-                                        if (result == "Added")
-                                        {
-                                            logCreationSudokuBoardsMethod2.Log(numberOfNumbersSetInSudokuBoard);
-                                        }
-                                        else if (result.StartsWith("ERROR"))
-                                        {
-                                            Log(start, args[0], result, solvedInitialEmptySudokuBoard, newFullSudokuBoards, existedAlreadyFullSudokuBoards);
-                                            errorFound = true;
-                                            continueProcessSolvedSudokoBoard = false;
-                                        }
-                                    }
-
-                                    if (solvedWithOnlyOrdinaryMethodsFound)
-                                    {
-                                        sudokuBoardReduceNumberOfNumbers.Reduce(rowO, columnO);
                                     }
                                     else
                                     {
-                                        sudokuBoardReduceNumberOfNumbers.Reduce(rowS, columnS);
+                                        continueProcessSolvedSudokoBoard = false;
                                     }
                                 }
-                                else
-                                {
-                                    continueProcessSolvedSudokoBoard = false;
-                                }
+
+                                logCreationSudokuBoardsMethod2.CreateLogString();
                             }
 
-                            logCreationSudokuBoardsMethod2.CreateLogString();
+                            logCreationSudokuBoardsMethod2.Print();
                         }
-
-                        logCreationSudokuBoardsMethod2.Print();
                     }
                     else
                     {
                         existedAlreadyFullSudokuBoards++;
-                    }
-                
-                    n++;
-
-                    if ((n % 25) == 0)
-                    {
-                        Console.WriteLine(solvedInitialEmptySudokuBoard.ToString() + "\t" + newFullSudokuBoards.ToString() + "\t" + existedAlreadyFullSudokuBoards.ToString());
                     }
 
                     end = DateTime.Now;
@@ -326,6 +334,8 @@ namespace GenerateSudokuBoards
                 f = new FileStream(string.Format("{0}\\{1}", _basePath, "Sudoku boards\\FullSudokuBoards.txt"), FileMode.Open, FileAccess.Read);
                 r = new StreamReader(f, Encoding.ASCII);
                 strArray = r.ReadToEnd().Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                r.Close();
+                f.Close();
                 return new ArrayList(strArray);
             }
         }
@@ -404,10 +414,12 @@ namespace GenerateSudokuBoards
             StreamReader r;
             string[] v;
             ArrayList a;
+            string str;
           
             f = new FileStream(fileNameFullPath, FileMode.Open, FileAccess.Read);
             r = new StreamReader(f, Encoding.ASCII);
-            v = r.ReadToEnd().Trim().Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            str = r.ReadToEnd().Trim();
+            v = str.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             r.Close();
             f.Close();
 
@@ -435,7 +447,9 @@ namespace GenerateSudokuBoards
 
                         if (strArray.Length != 2)
                         {
-                            throw new Exception("(strArray.Length != 2) in SudokuBoardExistsAlready");
+                            File.WriteAllText("C:\\Sudoku\\abc.txt", str);
+
+                            throw new Exception("(strArray.Length != 2) in SudokuBoardExistsAlready.");
                         }
 
                         a.Add(strArray[1]);
@@ -478,11 +492,12 @@ namespace GenerateSudokuBoards
 
             if (!File.Exists(fileNameFullPath))
             {
-                f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\Log.txt", FileMode.Create, FileAccess.Write);
+
+                f = new FileStream(fileNameFullPath, FileMode.Create, FileAccess.Write);
                 addHeader = true;
             }
             else
-                f = new FileStream("C:\\git_cjonasl\\Leander\\Sudoku solver\\Sudoku boards\\Log.txt", FileMode.Append, FileAccess.Write);
+                f = new FileStream(fileNameFullPath, FileMode.Append, FileAccess.Write);
 
             w = new StreamWriter(f, Encoding.ASCII);
 
@@ -491,7 +506,7 @@ namespace GenerateSudokuBoards
 
             if (errorMessage != null)
             {
-                w.WriteLine(string.Format("{0}\t{1}\t[2}\t{3}\r\n{4}", runString, solvedInitialEmptySudokuBoard.ToString(), newFullSudokuBoards.ToString(), existedAlreadyFullSudokuBoards.ToString(), errorMessage));
+                w.WriteLine(string.Format("{0}\t{1}\t{2}\t{3}\r\n{4}", runString, solvedInitialEmptySudokuBoard.ToString(), newFullSudokuBoards.ToString(), existedAlreadyFullSudokuBoards.ToString(), errorMessage));
             }
             else
             {

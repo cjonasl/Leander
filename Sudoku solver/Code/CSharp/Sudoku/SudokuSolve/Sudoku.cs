@@ -14,76 +14,31 @@ namespace Sudoku
 
     public class Sudoku
     {
-        private static Random _random = new Random((int)(DateTime.Now.Ticks % 64765L));
-
-        /*
-         Returns:
-         1. Null if initialSudokoBoard can't be solved uniquely
-         2. O (= only ordinary methods), if initialSudokoBoard can be solved uniquely without simulation
-         3. [1,a][2,b],... if initialSudokoBoard can be solved uniquely, but with simulation
+        /* A total of 22 static methods in the class:
+           CopyList
+           CopySudokuBoard
+           CopyCandidates
+           SaveState
+           RestoreState
+           GetInputSudokuBoard
+           CandidateIsAlonePossible
+           RemoveNumberIfItExists
+           ReturnNumberOfOccurenciesOfNumber
+           ReturnTwoDimensionalDataStructure
+           ReturnThreeDimensionalDataStructure
+           ReturnSquareCellToRowColumnMapper
+           ReturnSudokuBoardAsString
+           SimulateOneNumber
+           CheckIfCanUpdateBestSoFarSudokuBoard (CopySudokuBoard)
+           InitCandidates (Dependent on ReturnNumberOfOccurenciesOfNumber)
+           TryFindNumberToSetInCellWithCertainty (Dependent on CandidateIsAlonePossible)
+           UpdateCandidates (Dependent on RemoveNumberIfItExists)
+           ValidateSudokuBoard (Dependent on ReturnNumberOfOccurenciesOfNumber)
+           PrintSudokuBoard (Dependent on ReturnSudokuBoardAsString)
+           PrintResult (Dependent on PrintSudokuBoard)
+           Run (Dependent on GetInputSudokuBoard, ValidateSudokuBoard, ReturnTwoDimensionalDataStructure, SimulateOneNumber, ReturnThreeDimensionalDataStructure, ReturnSquareCellToRowColumnMapper, InitCandidates, TryFindNumberToSetInCellWithCertainty, CopyList, CopySudokuBoard, UpdateCandidates, PrintSudokuBoard)
         */
-        public static string GetSolveStat(string initialSudokoBoard, string solvedSudokoBoard)
-        {
-            int i, numberOfSimulations;
-            int[] v = new int[81];
-            string result = "The sudoku was solved.", solveStat = null, solvedSudokoBoardTest = solvedSudokoBoard;
-            bool canBeSolvedUniquelyWithoutSimulation = false;
-
-            for (i = 0; i < 81; i++)
-            {
-                v[i] = 0;
-            }
-
-            i = 0;
-
-            while (i < 1000 && result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
-            {
-                result = Solve(initialSudokoBoard, out solvedSudokoBoardTest, out numberOfSimulations);
-
-                if (result.StartsWith("The sudoku was solved.") && numberOfSimulations == 0)
-                {
-                    canBeSolvedUniquelyWithoutSimulation = true;
-                }
-                else if (result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard)
-                {
-                    v[numberOfSimulations]++;
-                }
-
-                i++;
-            }
-
-            if (canBeSolvedUniquelyWithoutSimulation)
-            {
-                solveStat = "O";
-            }
-            else if (result.StartsWith("The sudoku was solved.") && solvedSudokoBoardTest == solvedSudokoBoard && !canBeSolvedUniquelyWithoutSimulation)
-            {
-                solveStat = ReturnSolveStat(v);
-            }
-            else if (!result.StartsWith("The sudoku was solved."))
-            {
-                solveStat = "ERROR!! Can not solve " + initialSudokoBoard + ". " + result;
-            }
-
-            return solveStat;
-        }
-
-        private static string ReturnSolveStat(int[] v)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            for(int i = 0; i < 81; i++)
-            {
-                if (v[i] != 0)
-                {
-                    sb.Append(string.Format("[{0},{1}]", i.ToString(), v[i].ToString()));
-                }
-            }
-
-            return sb.ToString();
-        }
-
-        private static string Solve(string sudokuBoardString, out string solvedSudokoBoard, out int numberOfSimulations)
+        public static string Run(string[] args, int index, string[] sudokuArray)
         {
             int row = 0, column = 0, number, i;
             int[][] certaintySudokuBoard = null;
@@ -93,17 +48,15 @@ namespace Sudoku
             int numberOfCellsSetInInputSudokuBoard = 0, numberOfCellsSetInBestSoFar = 0, numberOfCandidates;
             int numberOfCandidatesAfterAddedNumbersWithCertainty = 0;
             bool sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
+            Random random = null;
             string msg;
             ArrayList cellsRemainToSet = new ArrayList(), cellsRemainToSetAfterAddedNumbersWithCertainty = null;
 
-            solvedSudokoBoard = null;
-            numberOfSimulations = 0;
-
-            msg = GetInputSudokuBoard(sudokuBoardString, workingSudokuBoard, cellsRemainToSet);
+            msg = GetInputSudokuBoard(args, workingSudokuBoard, cellsRemainToSet, index, sudokuArray);
 
             if (msg != null)
             {
-                return msg;
+                return PrintResult(false, msg, index, sudokuArray);
             }
 
             squareCellToRowColumnMapper = ReturnSquareCellToRowColumnMapper();
@@ -111,12 +64,12 @@ namespace Sudoku
 
             if (msg != null)
             {
-                return msg;
+                return PrintResult(false, msg, index, sudokuArray);
             }
 
             if (cellsRemainToSet.Count == 0)
             {
-                return "A complete sudoku was given as input. There is nothing to solve.";
+                return PrintResult(false, "A complete sudoku was given as input. There is nothing to solve.", index, sudokuArray);
             }
 
             candidates = ReturnThreeDimensionalDataStructure(9, 9, 10);
@@ -124,140 +77,7 @@ namespace Sudoku
 
             if (numberOfCandidates == 0)
             {
-                return "It is not possible to add any number to the sudoku.";
-            }
-
-            numberOfCellsSetInInputSudokuBoard = 81 - cellsRemainToSet.Count;
-
-            while (numberOfAttemptsToSolveSudoku < maxNumberOfAttemptsToSolveSudoku && !sudokuSolved && !numbersAddedWithCertaintyAndThenNoCandidates)
-            {
-                numberOfSimulations = 0;
-
-                if (numberOfAttemptsToSolveSudoku > 0)
-                {
-                    RestoreState(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidatesAfterAddedNumbersWithCertainty, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, out numberOfCandidates);
-                }
-
-                while (numberOfCandidates > 0)
-                {
-                    number = 0;
-                    i = 0;
-
-                    while (i < cellsRemainToSet.Count && number == 0)
-                    {
-                        row = ((int[])cellsRemainToSet[i])[0];
-                        column = ((int[])cellsRemainToSet[i])[1];
-                        number = TryFindNumberToSetInCellWithCertainty(row, column, candidates, squareCellToRowColumnMapper);
-                        i = (number == 0) ? i + 1 : i;
-                    }
-
-                    if (number == 0)
-                    {
-                        SimulateOneNumber(candidates, cellsRemainToSet, out i, out number);
-                        row = ((int[])cellsRemainToSet[i])[0];
-                        column = ((int[])cellsRemainToSet[i])[1];
-
-                        if (certaintySudokuBoard == null)
-                        {
-                            certaintySudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
-                            cellsRemainToSetAfterAddedNumbersWithCertainty = new ArrayList();
-                            candidatesAfterAddedNumbersWithCertainty = ReturnThreeDimensionalDataStructure(9, 9, 10);
-                            SaveState(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidates, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, out numberOfCandidatesAfterAddedNumbersWithCertainty);
-                        }
-
-                        numberOfSimulations++;
-                    }
-
-                    workingSudokuBoard[row - 1][column - 1] = number;
-                    cellsRemainToSet.RemoveAt(i);
-                    numberOfCandidates -= UpdateCandidates(candidates, squareCellToRowColumnMapper, row, column, number);
-                }
-
-                if (cellsRemainToSet.Count == 0)
-                {
-                    sudokuSolved = true;
-                }
-                else if (certaintySudokuBoard == null)
-                {
-                    numbersAddedWithCertaintyAndThenNoCandidates = true;
-                    numberOfCellsSetInBestSoFar = 81 - cellsRemainToSet.Count;
-                }
-                else
-                {
-                    if (bestSoFarSudokuBoard == null)
-                        bestSoFarSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
-
-                    numberOfCellsSetInBestSoFar = CheckIfCanUpdateBestSoFarSudokuBoard(numberOfCellsSetInBestSoFar, cellsRemainToSet, workingSudokuBoard, bestSoFarSudokuBoard);
-                    numberOfAttemptsToSolveSudoku++;
-                }
-            }
-
-            solvedSudokoBoard = GetSudokuBoardString(workingSudokuBoard);
-            return PrintResult(true, null, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
-        }
-
-        private static int ReturnNumberOfNumbersInSudokuBoard(int[][] sudokuBoard)
-        {
-            int numberOfNumbersInSudokuBoard = 0;
-
-            for (int row = 1; row <= 9; row++)
-            {
-                for (int column = 1; column <= 9; column++)
-                {
-                    if (sudokuBoard[row - 1][column - 1] != 0)
-                    {
-                        numberOfNumbersInSudokuBoard++;
-                    }
-                }
-            }
-
-            return numberOfNumbersInSudokuBoard;
-        }
-
-        public static string SolveInitialEmptySudokuBoard(out string solvedSudokoBoard, string[] initialSudokuBoards)
-        {
-            int row = 0, column = 0, number, i;
-            int[][] certaintySudokuBoard = null;
-            int[][] bestSoFarSudokuBoard = null, workingSudokuBoard = ReturnTwoDimensionalDataStructure(9, 9);
-            int[][][] candidates, squareCellToRowColumnMapper, candidatesAfterAddedNumbersWithCertainty = null;
-            int maxNumberOfAttemptsToSolveSudoku = 100, numberOfAttemptsToSolveSudoku = 0;
-            int numberOfCellsSetInInputSudokuBoard = 0, numberOfCellsSetInBestSoFar = 0, numberOfCandidates;
-            int numberOfCandidatesAfterAddedNumbersWithCertainty = 0;
-            bool sudokuSolved = false, numbersAddedWithCertaintyAndThenNoCandidates = false;
-            string msg;
-            ArrayList cellsRemainToSet = new ArrayList(), cellsRemainToSetAfterAddedNumbersWithCertainty = null;
-            int numberOfNumbersInSudokuBoard;
-
-            solvedSudokoBoard = null;
-
-            string sudokuBoardString = "0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0\r\n0 0 0 0 0 0 0 0 0";
-
-            msg = GetInputSudokuBoard(sudokuBoardString, workingSudokuBoard, cellsRemainToSet);
-
-            if (msg != null)
-            {
-                return msg;
-            }
-
-            squareCellToRowColumnMapper = ReturnSquareCellToRowColumnMapper();
-            msg = ValidateSudokuBoard(workingSudokuBoard, squareCellToRowColumnMapper);
-
-            if (msg != null)
-            {
-                return msg;
-            }
-
-            if (cellsRemainToSet.Count == 0)
-            {
-                return "A complete sudoku was given as input. There is nothing to solve.";
-            }
-
-            candidates = ReturnThreeDimensionalDataStructure(9, 9, 10);
-            numberOfCandidates = InitCandidates(workingSudokuBoard, squareCellToRowColumnMapper, candidates);
-
-            if (numberOfCandidates == 0)
-            {
-                return "It is not possible to add any number to the sudoku.";
+                return PrintResult(false, "It is not possible to add any number to the sudoku.", index, sudokuArray);
             }
 
             numberOfCellsSetInInputSudokuBoard = 81 - cellsRemainToSet.Count;
@@ -284,17 +104,10 @@ namespace Sudoku
 
                     if (number == 0)
                     {
-                        numberOfNumbersInSudokuBoard = ReturnNumberOfNumbersInSudokuBoard(workingSudokuBoard);
+                        if (random == null)
+                            random = new Random((int)(DateTime.Now.Ticks % 64765L));
 
-                        if (numberOfNumbersInSudokuBoard < 35)
-                        {
-                            SimulateANumber(candidates, numberOfCandidates, cellsRemainToSet, out i, out number);
-                        }
-                        else
-                        {
-                            SimulateOneNumber(candidates, cellsRemainToSet, out i, out number);
-                        }
-
+                        SimulateOneNumber(candidates, random, cellsRemainToSet, out i, out number);
                         row = ((int[])cellsRemainToSet[i])[0];
                         column = ((int[])cellsRemainToSet[i])[1];
 
@@ -310,13 +123,6 @@ namespace Sudoku
                     workingSudokuBoard[row - 1][column - 1] = number;
                     cellsRemainToSet.RemoveAt(i);
                     numberOfCandidates -= UpdateCandidates(candidates, squareCellToRowColumnMapper, row, column, number);
-
-                    numberOfNumbersInSudokuBoard = ReturnNumberOfNumbersInSudokuBoard(workingSudokuBoard);
-
-                    if (numberOfNumbersInSudokuBoard >= 11 && numberOfNumbersInSudokuBoard <= 40)
-                    {
-                        initialSudokuBoards[numberOfNumbersInSudokuBoard - 11] = GetSudokuBoardString(workingSudokuBoard);
-                    }
                 }
 
                 if (cellsRemainToSet.Count == 0)
@@ -338,8 +144,7 @@ namespace Sudoku
                 }
             }
 
-            solvedSudokoBoard = GetSudokuBoardString(workingSudokuBoard);
-            return PrintResult(true, null, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
+            return PrintResult(true, null, index, sudokuArray, args, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
         }
 
         private static void CopyList(ArrayList from, ArrayList to)
@@ -361,21 +166,6 @@ namespace Sudoku
                     sudokuBoardTo[row - 1][column - 1] = sudokuBoardFrom[row - 1][column - 1];
                 }
             }
-        }
-
-        private static string GetSudokuBoardString(int[][] sudokuBoard)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            for (int row = 1; row <= 9; row++)
-            {
-                for (int column = 1; column <= 9; column++)
-                {
-                    sb.Append(sudokuBoard[row - 1][column - 1].ToString());
-                }
-            }
-
-            return sb.ToString();
         }
 
         private static void CopyCandidates(int[][][] candidatesFrom, int[][][] candidatesTo)
@@ -408,12 +198,31 @@ namespace Sudoku
             numberOfCandidates = numberOfCandidatesAfterAddedNumbersWithCertainty;
         }
 
-        private static string GetInputSudokuBoard(string sudokuBoardString, int[][] sudokuBoard, ArrayList cellsRemainToSet)
+        private static string GetInputSudokuBoard(string[] args, int[][] sudokuBoard, ArrayList cellsRemainToSet, int index, string[] sudokuArray)
         {
             string[] rows, columns;
             int row, column, n;
 
-            rows = sudokuBoardString.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            if (args.Length == 0)
+            {
+                return "An input file is not given to the program (first parameter)!";
+            }
+            else if (args.Length > 2)
+            {
+                return "At most two parameters may be given to the program!";
+            }
+            else if (!File.Exists(args[0]))
+            {
+                return "The given input file in first parameter does not exist!";
+            }
+            else if (args.Length == 2 && !Directory.Exists(args[1]))
+            {
+                return "The directory given in second parameter does not exist!";
+            }
+
+            string sudokuBoardString = sudokuArray[index].Replace("\r\n", "\n");
+
+            rows = sudokuBoardString.Split(new string[] { "\n" }, StringSplitOptions.None);
 
             if (rows.Length != 9)
             {
@@ -647,7 +456,7 @@ namespace Sudoku
             return sb.ToString();
         }
 
-        private static void SimulateOneNumber(int[][][] candidates, ArrayList cellsRemainToSet, out int index, out int number)
+        private static void SimulateOneNumber(int[][][] candidates, Random random, ArrayList cellsRemainToSet, out int index, out int number)
         {
             int tmp, row, column, i, numberOfCandidates, minNumberOfCandidates = 9;
             ArrayList v;
@@ -673,72 +482,11 @@ namespace Sudoku
                     v.Add(i);
             }
 
-            tmp = _random.Next(0, v.Count);
+            tmp = random.Next(0, v.Count);
             index = (int)v[tmp];
             row = ((int[])cellsRemainToSet[index])[0];
             column = ((int[])cellsRemainToSet[index])[1];
-            number = candidates[row - 1][column - 1][1 + _random.Next(0, minNumberOfCandidates)];
-        }
-
-        private static void SimulateANumber(int[][][] candidates, int numberOfCandidates, ArrayList cellsRemainToSet, out int index, out int number)
-        {
-            int n = _random.Next(0, numberOfCandidates);
-            int row, column, nc, i, r, c,  k = -1;
-            bool found = false;
-
-            index = 0;
-            number = 0;
-
-            row = 1;
-            
-            while (!found && row <= 9)
-            {
-                column = 1;
-
-                while (!found && column <= 9)
-                {
-                    nc = candidates[row - 1][column - 1][0];
-
-                    if (nc != -1)
-                    {
-                        i = 1;
-
-                        while (!found && i <= nc)
-                        {
-                            k++;
-
-                            if (n == k)
-                            {
-                                found = true;
-                                number = candidates[row - 1][column - 1][i];
-
-                                r = c = -1;
-                                i = 0;
-
-                                while (r != row || c != column)
-                                {
-                                    r = ((int[])cellsRemainToSet[i])[0];
-                                    c = ((int[])cellsRemainToSet[i])[1];
-
-                                    if (r == row && c == column)
-                                    {
-                                        index = i;
-                                    }
-
-                                    i++;
-                                }
-                            }
-
-                            i++;
-                        }
-                    }
-
-                    column++;
-                }
-
-                row++;
-            }
-
+            number = candidates[row - 1][column - 1][1 + random.Next(0, minNumberOfCandidates)];
         }
 
         private static int CheckIfCanUpdateBestSoFarSudokuBoard(int numberOfCellsSetInBestSoFar, ArrayList cellsRemainToSet, int[][] workingSudokuBoard, int[][] bestSoFarSudokuBoard)
@@ -897,31 +645,13 @@ namespace Sudoku
             return null;
         }
 
-        private static void PrintSudokuBoard(bool solved, string[] args, string message, int[][] sudokuBoard)
+        private static void PrintSudokuBoard(bool solved, string[] args, string message, int[][] sudokuBoard, int index, string[] sudokuArray)
         {
-            string suffix, fileNameFullpath;
-            char c;
-
-            if (solved)
-                suffix = string.Format("__Solved_{0}.txt", DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff"));
-            else
-                suffix = string.Format("__Partially_solved_{0}.txt", DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss.fff"));
-
-            if (args.Length == 2)
-            {
-                c = args[1].Trim()[args[1].Trim().Length - 1];
-                fileNameFullpath = args[1].Trim() + ((c == '\\') ? "" : "\\") + (new FileInfo(args[0])).Name + suffix;
-            }
-            else
-                fileNameFullpath = args[0] + suffix;
-
-            File.WriteAllText(fileNameFullpath, message + "\r\n\r\n" + ReturnSudokuBoardAsString(sudokuBoard));
+            sudokuArray[index] = ReturnSudokuBoardAsString(sudokuBoard);
         }
 
-        private static string PrintResult(bool initialSudokuBoardHasCandidates, string[] args = null, bool sudokuSolved = false, int numberOfCellsSetInInputSudokuBoard = 0, int numberOfCellsSetInBestSoFar = 0, int[][] workingSudokuBoard = null, int[][] bestSoFarSudokuBoard = null)
+        private static string PrintResult(bool initialSudokuBoardHasCandidates, string msg, int index, string[] sudokuArray, string[] args = null, bool sudokuSolved = false, int numberOfCellsSetInInputSudokuBoard = 0, int numberOfCellsSetInBestSoFar = 0, int[][] workingSudokuBoard = null, int[][] bestSoFarSudokuBoard = null)
         {
-            string msg = "";
-
             if (initialSudokuBoardHasCandidates)
             {
                 if (sudokuSolved)
@@ -931,6 +661,15 @@ namespace Sudoku
                 else
                 {
                     msg = string.Format("The sudoku was partially solved. {0} number(s) added to the original {1}. Unable to set {2} number(s).", numberOfCellsSetInBestSoFar - numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInInputSudokuBoard, 81 - numberOfCellsSetInBestSoFar);
+                }
+
+                if (sudokuSolved || bestSoFarSudokuBoard == null)
+                {
+                    PrintSudokuBoard(sudokuSolved, args, msg, workingSudokuBoard, index, sudokuArray);
+                }
+                else
+                {
+                    PrintSudokuBoard(sudokuSolved, args, msg, bestSoFarSudokuBoard, index, sudokuArray);
                 }
             }
 
