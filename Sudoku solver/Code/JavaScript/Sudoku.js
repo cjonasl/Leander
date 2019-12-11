@@ -1,5 +1,7 @@
-﻿var fs = require('fs');
-sudoku = {};
+﻿"use strict";
+
+var fs = require('fs');
+var sudoku = {};
 
 sudoku.target = {
     ROW: "row",
@@ -8,7 +10,7 @@ sudoku.target = {
 };
 
 sudoku.run = function (args) {
-    var number, i;
+    var row, column, number, i;
     var certaintySudokuBoard = null;
     var bestSoFarSudokuBoard = null, workingSudokuBoard = sudoku.returnTwoDimensionalDataStructure(9, 9);
     var candidates, squareCellToRowColumnMapper, candidatesAfterAddedNumbersWithCertainty = null;
@@ -156,18 +158,18 @@ sudoku.copyCandidates = function(candidatesFrom, candidatesTo) {
     }
 };
 
-sudoku.saveState = function(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidates, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numOfCandidatesAfterAddedNumbersWithCert) {
+sudoku.saveState = function (cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidates, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numberOfCandidatesAfterAddedNumbersWithCertainty) {
     sudoku.copyList(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty);
     sudoku.copySudokuBoard(workingSudokuBoard, certaintySudokuBoard);
     sudoku.copyCandidates(candidates, candidatesAfterAddedNumbersWithCertainty);
-    numOfCandidatesAfterAddedNumbersWithCert[0] = numberOfCandidates[0];
+    numberOfCandidatesAfterAddedNumbersWithCertainty[0] = numberOfCandidates[0];
 };
 
-sudoku.restoreState = function(cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numOfCandidatesAfterAddedNumWithCert, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numOfCandidates) {
+sudoku.restoreState = function (cellsRemainToSet, cellsRemainToSetAfterAddedNumbersWithCertainty, numberOfCandidatesAfterAddedNumbersWithCertainty, workingSudokuBoard, certaintySudokuBoard, candidates, candidatesAfterAddedNumbersWithCertainty, numOfCandidates) {
     sudoku.copyList(cellsRemainToSetAfterAddedNumbersWithCertainty, cellsRemainToSet);
     sudoku.copySudokuBoard(certaintySudokuBoard, workingSudokuBoard);
     sudoku.copyCandidates(candidatesAfterAddedNumbersWithCertainty, candidates);
-    numOfCandidates[0] = numOfCandidatesAfterAddedNumWithCert[0];
+    numOfCandidates[0] = numberOfCandidatesAfterAddedNumbersWithCertainty[0];
 };
 
 sudoku.getInputSudokuBoard = function(args, sudokuBoard, cellsRemainToSet) {

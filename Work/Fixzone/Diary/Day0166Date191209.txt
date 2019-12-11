@@ -1,2 +1,16 @@
 ﻿Dag 166:
 Måndag den 9 december 2019
+Jag hade inget direkt att göra så jag ägnade
+arbetsdagen mest åt mina sudoku-program. Vid
+13.00-tiden intog jag smörgås, banan och kaffe
+till lunch. Vijay bad mig undersöka en sökning
+efter jobb i nya generiska ClientConnect som
+returnerade tre rader för samma jobb. Jag
+undersökte saken och felet visade sig bero på
+en bug i min stored procedure GetJobsByClientId.
+Jag skapade task76 för det hela och rättade
+felet som berodde på felaktig ”ON-villkor” mellan
+tabellerna Customer och Custapl (jag hade tagit
+så som villkoret ser ut i GetCustomersByClientId).
+Jag avslutade arbetsdagen ca. kl. 17.30 och tog
+bussen hem.

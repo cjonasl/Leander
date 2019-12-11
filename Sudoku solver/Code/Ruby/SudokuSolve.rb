@@ -6,7 +6,7 @@ end
 
 class Sudoku
 
-def Sudoku.run(index, sudokuArray)
+def Sudoku.run(sudokuArray)
     certainty_sudoku_board = nil
     working_sudoku_board = return_two_dimensional_data_structure(9, 9)
     best_so_far_sudoku_board = nil
@@ -22,85 +22,86 @@ def Sudoku.run(index, sudokuArray)
     number_of_candidates = [0]
     number_of_candidates_after_added_numbers_with_certainty = [0];
     index_number = [0, 0]
-
-    msg = get_input_sudoku_board(working_sudoku_board, cells_remain_to_set, index, sudokuArray)
-
-    if msg != nil
-        return msg
-    end
+    result = "S"
+    saveStateDone = false
+    currentSudokuToSolve = 1
+    numberOfSudokusToSolve = sudokuArray.size
 
     square_cell_to_row_column_mapper = return_square_cell_to_row_column_mapper()
-    msg = validate_sudoku_board(working_sudoku_board, square_cell_to_row_column_mapper)
-
-    if msg != nil
-        return msg
-    end
-
-    if cells_remain_to_set.size == 0
-        return "A complete sudoku was given as input. There is nothing to solve."
-    end
-
     candidates = return_three_dimensional_data_structure(9, 9, 10)
-    number_of_candidates[0] = init_candidates(working_sudoku_board, square_cell_to_row_column_mapper, candidates)
+    certainty_sudoku_board = return_two_dimensional_data_structure(9, 9)
+    cells_remain_to_set_after_added_numbers_with_certainty = []
+    candidates_after_added_numbers_with_certainty = return_three_dimensional_data_structure(9, 9, 10);
+    best_so_far_sudoku_board = return_two_dimensional_data_structure(9, 9)
 
-    if number_of_candidates[0] == 0
-        return "It is not possible to add any number to the sudoku."
-    end
+    while currentSudokuToSolve <= numberOfSudokusToSolve and result == "S"
+        cells_remain_to_set.clear()
+        cells_remain_to_set_after_added_numbers_with_certainty.clear()
+        number_of_attempts_to_solve_sudoku = 0
+        number_of_cells_set_in_best_so_far = 0
+        sudoku_solved = false
+        numbers_added_with_certainty_and_then_no_candidates = false
+        saveStateDone = false
 
-    number_of_cells_set_in_input_sudoku_board = 81 - cells_remain_to_set.size
+        get_input_sudoku_board(working_sudoku_board, cells_remain_to_set, currentSudokuToSolve - 1, sudokuArray)
+        number_of_candidates[0] = init_candidates(working_sudoku_board, square_cell_to_row_column_mapper, candidates)
+        number_of_cells_set_in_input_sudoku_board = 81 - cells_remain_to_set.size
 
-    while number_of_attempts_to_solve_sudoku < max_number_of_attempts_to_solve_sudoku and not sudoku_solved and not numbers_added_with_certainty_and_then_no_candidates
-        if number_of_attempts_to_solve_sudoku > 0
-            restore_state(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates)
-        end
-
-        while number_of_candidates[0] > 0
-            number = 0
-            i = 0
-
-            while i < cells_remain_to_set.size and number == 0
-                row = cells_remain_to_set[i][0]
-                column = cells_remain_to_set[i][1]
-                number = try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper)
-                i = (number == 0) ? i + 1 : i
+        while number_of_attempts_to_solve_sudoku < max_number_of_attempts_to_solve_sudoku and not sudoku_solved and not numbers_added_with_certainty_and_then_no_candidates
+            if number_of_attempts_to_solve_sudoku > 0
+                restore_state(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates)
             end
 
-            if number == 0
-                simulate_one_number(candidates, cells_remain_to_set, index_number)
-                i = index_number[0]
-                number = index_number[1]
-                row = cells_remain_to_set[i][0]
-                column = cells_remain_to_set[i][1]
+            while number_of_candidates[0] > 0
+                number = 0
+                i = 0
 
-                if certainty_sudoku_board == nil
-                    certainty_sudoku_board = return_two_dimensional_data_structure(9, 9)
-                    cells_remain_to_set_after_added_numbers_with_certainty = []
-                    candidates_after_added_numbers_with_certainty = return_three_dimensional_data_structure(9, 9, 10);
-                    save_state(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty)
+                while i < cells_remain_to_set.size and number == 0
+                    row = cells_remain_to_set[i][0]
+                    column = cells_remain_to_set[i][1]
+                    number = try_find_number_to_set_in_cell_with_certainty(row, column, candidates, square_cell_to_row_column_mapper)
+                    i = (number == 0) ? i + 1 : i
                 end
+
+                if number == 0
+                    simulate_one_number(candidates, cells_remain_to_set, index_number)
+                    i = index_number[0]
+                    number = index_number[1]
+                    row = cells_remain_to_set[i][0]
+                    column = cells_remain_to_set[i][1]
+
+                    if not saveStateDone
+                        save_state(cells_remain_to_set, cells_remain_to_set_after_added_numbers_with_certainty, number_of_candidates, working_sudoku_board, certainty_sudoku_board, candidates, candidates_after_added_numbers_with_certainty, number_of_candidates_after_added_numbers_with_certainty)
+                        saveStateDone = true
+                    end
+                end
+
+                working_sudoku_board[row - 1][column - 1] = number
+                cells_remain_to_set.delete_at(i)
+                number_of_candidates[0] -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
             end
 
-            working_sudoku_board[row - 1][column - 1] = number
-            cells_remain_to_set.delete_at(i)
-            number_of_candidates[0] -= update_candidates(candidates, square_cell_to_row_column_mapper, row, column, number)
-        end
-
-        if cells_remain_to_set.size == 0
-            sudoku_solved = true
-        elsif certainty_sudoku_board == nil
-            numbers_added_with_certainty_and_then_no_candidates = true
-            number_of_cells_set_in_best_so_far = 81 - cells_remain_to_set.size
-        else
-            if best_so_far_sudoku_board == nil
-                best_so_far_sudoku_board = return_two_dimensional_data_structure(9, 9)
+            if cells_remain_to_set.size == 0
+                sudoku_solved = true
+            elsif not saveStateDone
+                numbers_added_with_certainty_and_then_no_candidates = true
+                number_of_cells_set_in_best_so_far = 81 - cells_remain_to_set.size
+            else
+                number_of_cells_set_in_best_so_far = check_if_can_update_best_so_far_sudoku_board(number_of_cells_set_in_best_so_far, cells_remain_to_set, working_sudoku_board, best_so_far_sudoku_board)
+                number_of_attempts_to_solve_sudoku += 1
             end
-
-            number_of_cells_set_in_best_so_far = check_if_can_update_best_so_far_sudoku_board(number_of_cells_set_in_best_so_far, cells_remain_to_set, working_sudoku_board, best_so_far_sudoku_board)
-            number_of_attempts_to_solve_sudoku += 1
         end
+
+        result = print_result(currentSudokuToSolve - 1, sudokuArray, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+
+        if (currentSudokuToSolve % 500) == 0
+            print(currentSudokuToSolve)
+        end
+
+        currentSudokuToSolve += 1
     end
 
-    return print_result(index, sudokuArray, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
+    return result
 end
 
 def Sudoku.copy_list(list_from, list_to)
@@ -474,27 +475,6 @@ def Sudoku.update_candidates(candidates, square_cell_to_row_column_mapper, row, 
     return total_number_of_candidates_removed
 end
 
-def Sudoku.validate_sudoku_board(sudoku_board, square_cell_to_row_column_mapper)
-    for row in 1..9
-        for column in 1..9
-            square = 1 + (3 * ((row - 1) / 3)) + (column - 1) / 3
-            number = sudoku_board[row - 1][column - 1]
-
-            if number != 0
-                if return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, row, Target::ROW) > 1
-                    return "The input sudoku is incorrect! The number " + number.to_s + " occurs more than once in row " + row.to_s
-                elsif return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, column, Target::COLUMN) > 1
-                    return "The input sudoku is incorrect! The number " + number.to_s + " occurs more than once in column " + column.to_s
-                elsif return_number_of_occurencies_of_number(sudoku_board, square_cell_to_row_column_mapper, number, square, Target::SQUARE) > 1
-                    return "The input sudoku is incorrect! The number " + number.to_s + " occurs more than once in square " + square.to_s
-                end
-            end
-        end
-    end
-
-    return nil
-end
-
 def Sudoku.print_sudoku_board(solved, args, message, sudoku_board)
     index = 1 + args[0].rindex("\\")
     fileName = args[0][index, args[0].size - index]
@@ -545,5 +525,39 @@ end
 
 end
 
+current_date_time = Time.now
+start = current_date_time.strftime("%Y,%m,%d,%H,%M,%S") + "\n"
 
-Sudoku.run(ARGV)
+fs = open("C:\\Sudoku\\Solve\\StartSudokuBoards.txt", "rt")
+s = fs.read()
+fs.close()
+
+sudokuArray = s.split("\n-- New sudoku --\n")
+
+result = Sudoku.run(sudokuArray)
+
+if result == "S"
+    current_date_time = Time.now
+    e = current_date_time.strftime("%Y,%m,%d,%H,%M,%S")
+    s = start + e
+    fs = open("C:\\Sudoku\\Solve\\StartEnd.txt", "wt")
+    fs.write(s)
+    fs.close()
+
+    n = sudokuArray.size
+    fs = open("C:\\Sudoku\\Solve\\SolveResult.txt", "wt")
+
+    for i in 0..n
+        fs.write(sudokuArray[i])
+
+        if i < (n - 1)
+            fs.write("\n-- New sudoku --\n")
+        end
+    end
+
+    fs.close()
+else
+    fs = open("C:\\Sudoku\\Solve\\Error.txt", "wt")
+    fs.write(result)
+    fs.close()
+end

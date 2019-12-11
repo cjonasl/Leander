@@ -75,7 +75,7 @@ function run(&$args) {
                     $certaintySudokuBoard = returnTwoDimensionalDataStructure(9, 9);
                     $cellsRemainToSetAfterAddedNumbersWithCertainty = [];
                     $candidatesAfterAddedNumbersWithCertainty = returnThreeDimensionalDataStructure(9, 9, 10);
-                    $saveState($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, $workingSudokuBoard, $certaintySudokuBoard, $candidates, $candidatesAfterAddedNumbersWithCertainty, $numberOfCandidatesAfterAddedNumbersWithCertainty);
+                    saveState($cellsRemainToSet, $cellsRemainToSetAfterAddedNumbersWithCertainty, $numberOfCandidates, $workingSudokuBoard, $certaintySudokuBoard, $candidates, $candidatesAfterAddedNumbersWithCertainty, $numberOfCandidatesAfterAddedNumbersWithCertainty);
                 }
             }
 
@@ -398,7 +398,7 @@ function checkIfCanUpdateBestSoFarSudokuBoard($numberOfCellsSetInBestSoFar, &$ce
         copySudokuBoard($workingSudokuBoard, $bestSoFarSudokuBoard);
     }
 
-    return retVal;
+    return $retVal;
 }
 
 function initCandidates(&$sudokuBoard, &$squareCellToRowColumnMapper, &$candidates) {

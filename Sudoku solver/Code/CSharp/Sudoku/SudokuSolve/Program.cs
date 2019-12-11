@@ -9,7 +9,7 @@ namespace SudokuSolve
         static void Main(string[] args)
         {
             DateTime dt = DateTime.Now;
-            string start, end, result = "S";
+            string start, end, result;
             StringBuilder sb;
             string[] sudokuArray;
             int i, n;
@@ -21,17 +21,7 @@ namespace SudokuSolve
             i = 0;
             n = sudokuArray.Length;
 
-            while (i < n && result == "S")
-            {
-                result = Sudoku.Sudoku.Run(i, sudokuArray);
-
-                if ((i % 500) == 0)
-                {
-                    Console.Write("\r" + i.ToString());
-                }
-
-                i++;
-            }
+            result = Sudoku.Sudoku.Run(sudokuArray);
 
             if (result != "S")
             {
