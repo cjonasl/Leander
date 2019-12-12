@@ -264,7 +264,7 @@ namespace GenerateSudokuBoards
                                             result = simulatedSolveStat;
                                         }
 
-                                        numberOfNumbersSetInSudokuBoard = 81 - sudokuBoardReduceNumberOfNumbers.CellsRemainToSet;
+                                        numberOfNumbersSetInSudokuBoard = 81 - (sudokuBoardReduceNumberOfNumbers.CellsRemainToSet + 1); //+1 because sudokuBoardReduceNumberOfNumbers.CellsRemainToSet will be increased by one in the call sudokuBoardReduceNumberOfNumbers.Reduce below
 
                                         if (numberOfNumbersSetInSudokuBoard <= 40)
                                         {
