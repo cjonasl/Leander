@@ -1,2 +1,11 @@
 ﻿Dag 168:
 Onsdag den 11 december 2019
+Jag hade inget att göra så jag ägnade arbetsdagen
+åt sudoku (ordna med program i C#, JavaScript, PHP,
+Python och Ruby som löser många sudokus i syfte att
+jämföra exekveringstider). Vid 13.00-tiden tog jag
+lunch och intog smörgås, banan och kaffe. Jag avslutade
+arbetsdagen ca. kl. 17.30 och promenerade till Surbiton.
+Fick mail från ” Vitapoint Property Management” att de
+accepterar mig som ny hyresgäst i rummet på ”44 Capsan
+Square”.

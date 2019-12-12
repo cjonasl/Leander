@@ -92,7 +92,7 @@ function run(&$sudokuArray) {
         $result = processResult($currentSudokuToSolve - 1, $sudokuArray, $sudokuSolved, $numberOfCellsSetInInputSudokuBoard, $numberOfCellsSetInBestSoFar, $workingSudokuBoard, $bestSoFarSudokuBoard);
 
         if (($currentSudokuToSolve % 500) == 0) {
-            print("\r" . $currentSudokuToSolve);
+            print($currentSudokuToSolve);
         }
 
         $currentSudokuToSolve++;

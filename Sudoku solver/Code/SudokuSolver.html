@@ -32,7 +32,7 @@
         .activeLeftMenuItem {
             color: blue !important;
             font-size: larger !important;
-            cursor: not-allowed;
+            cursor: none;
         }
 
         .activeHeadMenuItem {
@@ -40,7 +40,7 @@
             font-weight: bolder !important;
             text-decoration: none !important;
             font-size: larger !important;
-            cursor: not-allowed;
+            cursor: none;
         }
 
         .languages > a:link, .languages > a:visited, .languages > a:active {
@@ -58,7 +58,7 @@
             font-family: Arial !important;
             text-decoration: none !important;
             font-size: large !important;
-            cursor: not-allowed;
+            cursor: none;
         }
 
         .languages > a:hover, .ulHead > li > a:hover {
@@ -128,9 +128,11 @@
             border-bottom: 1px solid black;
         }
 
-            .headMenu li {
-                display: inline-block;
-            }
+        #listOfMenuItems > li {
+            display: inline-block;
+            border-right: 1px solid black;
+            margin-right: 3px;
+        }
 
         .sudokuCells {
             position: absolute;
@@ -149,27 +151,50 @@
         .greyFontColor {
             color: grey;
         }
+
+        .inlineList > li {
+            display: inline-block;
+        }
     </style>
 
 </head>
 <body style="margin: 0px;">
     <div class="headMenu">
-        <ul id="listOfMenuItems" class="ulHead" data-active="SudokuSolver" style="position: relative; top: 8px;">
-            <li><a id="aHeadMenuItemSudokuSolver" href="javascript: changePage('SudokuSolver')" class="activeHeadMenuItem">Sudoku solver</a></li>
-            <li><a id="aHeadMenuItemDescriptionOfTheAlgorithm" href="javascript: changePage('DescriptionOfTheAlgorithm')">Description of the algorithm</a></li>
-            <li><a id="aHeadMenuItemDownloadSourceCode" href="javascript: changePage('DownloadSourceCode')">Download source code</a></li>
-            <li><a id="aHeadMenuItemExecutionTimes" href="javascript: changePage('ExecutionTimes')">Execution times</a></li>
-            <li><a id="aHeadMenuItemSudokusToSolve" href="javascript: changePage('SudokusToSolve')">Sudokus to solve</a></li>
-            <li><a id="aHeadMenuItemSourceCodeInDifferentLanguage" href="javascript: changePage('SourceCodeInDifferentLanguage')">Source code in different languages</a></li>
-            <li><a id="aHeadMenuItemCompareLanguages" href="javascript: changePage('CompareLanguages')">Compare languages</a></li>
+        <ul id="listOfMenuItems" class="ulHead" data-active="SudokuSolver" data-subactive="Solve" style="position: relative; top: 8px;">
+            <li><a id="aHeadMenuItemSudokuSolverSolve" href="javascript: changePage('SudokuSolver', 'Solve')" class="activeHeadMenuItem">Sudoku solver</a></li>
+            <li><a id="aHeadMenuItemDescriptionOfTheAlgorithm" href="javascript: changePage('DescriptionOfTheAlgorithm', '')">Description of the algorithm</a></li>
+            <li><a id="aHeadMenuItemDownloadSourceCode" href="javascript: changePage('DownloadSourceCode', '')">Download source code</a></li>
+            <li><a id="aHeadMenuItemExecutionTimes" href="javascript: changePage('ExecutionTimes', '')">Execution times</a></li>
+            <li><a id="aHeadMenuItemSudokuSolverSudokusToSolve" href="javascript: changePage('SudokuSolver', 'SudokusToSolve')">Sudokus to solve</a></li>
+            <li><a id="aHeadMenuItemSourceCodeInDifferentLanguage" href="javascript: changePage('SourceCodeInDifferentLanguage', '')">Source code in different languages</a></li>
+            <li style="border-right-color: #e0e0eb;"><a id="aHeadMenuItemCompareLanguages" href="javascript: changePage('CompareLanguages', '')">Compare languages</a></li>
         </ul>
     </div>
 
     <div id="divSudokuSolver" style="margin-top: 80px; font-family: 'Times New Roman'">
         <div class="leftMenu"></div>
-        <p style="position: absolute; left: 120px; top: 75px; font-family: 'Times New Roman'; font-weight: bold;">Enter start integers (between 1 and 9) in the sudoku board below and press "Solve".</p>
-        <button id="solveButton" style="position: absolute; left: 120px; top: 125px; font-family: Arial; font-weight: bold;" onclick="window.sudoku.solveSudoku()">Solve</button>
-        <button id="newSudokuButton" disabled="disabled" style="position: absolute; left: 185px; top: 125px; font-family: Arial; font-weight: bold;" class="greyFontColor" onclick="window.sudoku.newSudoku()">New</button>
+        <div id="divSolve" data-subactive = 1>
+            <p style="position: absolute; left: 120px; top: 75px; font-family: 'Times New Roman'; font-weight: bold;">Enter start integers (between 1 and 9) in the sudoku board below and press "Solve".</p>
+            <button id="solveButton" style="position: absolute; left: 120px; top: 125px; font-family: Arial; font-weight: bold;" onclick="window.sudoku.solveSudoku()">Solve</button>
+            <button id="newSudokuButton" disabled="disabled" style="position: absolute; left: 185px; top: 125px; font-family: Arial; font-weight: bold;" class="greyFontColor" onclick="window.sudoku.newSudoku()">New</button>
+        </div>
+        <div id="divSudokusToSolve" style="display: none;">
+            <p style="position: absolute; left: 120px; top: 78px; font-family: 'Times New Roman'; font-weight: bold;">Choose level:</p>
+            <p style="position: absolute; left: 568px; top: 78px; font-family: 'Times New Roman'; font-weight: bold;">(higher level more difficult)</p>
+            <button style="position: absolute; left: 120px; top: 130px; font-family: Arial; font-weight: bold; font-size: small;" onclick="getSudoku()">Get sudoku</button>
+                <ul class="inlineList" style="position: absolute; left: 180px; top: 78px; font-family: 'Times New Roman'; font-weight: bold; margin-right: 4px;">
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(1)" />1</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(2)" />2</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(3)" />3</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(4)" />4</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(5)" />5</li>
+                    <li><input type="radio" name="sudokuLevel" checked onchange="setSudokuLevel(6)" />6</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(7)" />7</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(8)" />8</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(9)" />9</li>
+                    <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(10)" />10</li>
+                </ul>        
+        </div>
     </div>
 
     <div id="divDescriptionOfTheAlgorithm" style="position: relative; display: none; top: 100px; left: 100px;">
@@ -184,10 +209,6 @@
         divExecutionTimes
     </div>
 
-    <div id="divSudokusToSolve" style="position: relative; display: none; top: 100px; left: 100px;">
-        divSudokusToSolve
-    </div>
-
     <div id="divCompareLanguages" style="position: relative; display: none; top: 100px; left: 100px;">
         divCompareLanguages
     </div>
@@ -196,12 +217,12 @@
         <div id="divLeftMenu" class="leftMenuSourceCodeInDifferentLanguage" data-active="CopyList">
             <h2 style="margin-top: -8px;">Set a language for all functions:</h2>
             <div style="font-family: 'Times New Roman'; margin-bottom: 10px; border-bottom: 1px solid black;">
-                <ul style="position: relative; left: -42px; top: -10px;">
-                    <li style="display:inline-block;"><input id="langCSharp" type="radio" name="langForAllFunctions" checked onchange="setLanguage('CSharp')" />C#</li>
-                    <li style="display:inline-block;"><input id="langJavaScript" type="radio" name="langForAllFunctions" onchange="setLanguage('JavaScript')" />JavaScript</li>
-                    <li style="display:inline-block;"><input id="langPHP" type="radio" name="langForAllFunctions" onchange="setLanguage('PHP')" />PHP</li>
-                    <li style="display:inline-block;"><input id="lanfPython" type="radio" name="langForAllFunctions" onchange="setLanguage('Python')" />Python</li>
-                    <li style="display:inline-block;"><input id="langRuby" type="radio" name="langForAllFunctions" onchange="setLanguage('Ruby')" />Ruby</li>
+                <ul class="inlineList" style="position: relative; left: -42px; top: -10px;">
+                    <li><input id="langCSharp" type="radio" name="langForAllFunctions" checked onchange="setLanguage('CSharp')" />C#</li>
+                    <li><input id="langJavaScript" type="radio" name="langForAllFunctions" onchange="setLanguage('JavaScript')" />JavaScript</li>
+                    <li><input id="langPHP" type="radio" name="langForAllFunctions" onchange="setLanguage('PHP')" />PHP</li>
+                    <li><input id="lanfPython" type="radio" name="langForAllFunctions" onchange="setLanguage('Python')" />Python</li>
+                    <li><input id="langRuby" type="radio" name="langForAllFunctions" onchange="setLanguage('Ruby')" />Ruby</li>
                 </ul>
             </div>
 
@@ -481,17 +502,43 @@
 
     <script>
         window.sudokoBasePath = "http://www.sudokusolver.com/";
-        window.AllLangOn = true;
+        window.allLangOn = true;
+        window.currentSudokuLevel = 6;
+        window.currentRandomNumber = -1;
 
-        function changePage(menuItem) {
-            var currentActive = $("#listOfMenuItems").attr("data-active");
+        function changePage(menuItem, subItem) {
+            var m = $("#listOfMenuItems").attr("data-active");
+            var s = $("#listOfMenuItems").attr("data-subactive");
+            $("#aHeadMenuItem" + m + s).toggleClass("activeHeadMenuItem");
+            $("#aHeadMenuItem" + menuItem + subItem).toggleClass("activeHeadMenuItem");
 
-            if (menuItem !== currentActive) {
-                $("#aHeadMenuItem" + currentActive).toggleClass("activeHeadMenuItem ");
-                $("#aHeadMenuItem" + menuItem).toggleClass("activeHeadMenuItem ");
-                $("#listOfMenuItems").attr("data-active", menuItem);
-                $("#div" + currentActive).hide();
+            if (m != menuItem) {
+                $("#div" + m).hide();
                 $("#div" + menuItem).show();
+                $("#listOfMenuItems").attr("data-active", menuItem);
+            }
+
+            if (s) {
+                $("#div" + s).hide();
+            }
+
+            if (subItem) {
+                $("#div" + subItem).show();
+
+                if (subItem === "Solve" || subItem === "SudokusToSolve") {
+                    window.sudoku.newSudoku();
+
+                    if (subItem === "Solve") {
+                        $("#divSudokuSolver input[type='text']").prop("readonly", false);
+                    }
+                    else {
+                        $("#divSudokuSolver input[type='text']").prop("readonly", true);
+                    }
+                }
+            }
+
+            if (s != subItem) {
+                $("#listOfMenuItems").attr("data-subactive", subItem);
             }
         }
 
@@ -509,12 +556,12 @@
 
             var v = ['CSharp', 'JavaScript', 'PHP', 'Python', 'Ruby'];
 
-            if (window.AllLangOn && uncheckRadioButtons === undefined) {
+            if (window.allLangOn && uncheckRadioButtons === undefined) {
                 for (var i = 0; i < 5; i++) {
                     $("#lang" + v[i]).prop("checked", false);
                 }
 
-                window.AllLangOn = false;
+                window.allLangOn = false;
             }
 
             var currentActive = $("#div" + method).attr("data-active");
@@ -534,7 +581,35 @@
                 setImagePath(v[i], lang, false);
             }
 
-            window.AllLangOn = true;
+            window.allLangOn = true;
+        }
+
+        function setNumbersInSudokuBoard(n) {
+            var row, column;
+
+            for (row = 1; row <= 9; row++) {
+                for (column = 1; column <= 9; column++) {
+                    if (window.sudoku.boards[window.currentSudokuLevel - 1][n][9 * (row - 1) + column - 1] === "0")
+                        $("#cell" + row.toString() + column.toString()).val("");
+                    else
+                        $("#cell" + row.toString() + column.toString()).val(window.sudoku.boards[window.currentSudokuLevel - 1][n][9 * (row - 1) + column - 1]);
+                }
+            }
+        }
+
+        function getSudoku() {
+            var n = window.sudoku.returnIntegerRandomNumber(0, 50);
+
+            while (n === window.currentRandomNumber) {
+                n = window.sudoku.returnIntegerRandomNumber(0, 50);
+            }
+
+            setNumbersInSudokuBoard(n)
+        }
+
+        function setSudokuLevel(level) {
+            window.currentSudokuLevel = level;
+            getSudoku();
         }
 
         $(document).ready(function () {

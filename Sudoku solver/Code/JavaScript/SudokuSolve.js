@@ -98,7 +98,7 @@ sudoku.run = function (sudokuArray) {
         result = sudoku.ProcessResult(currentSudokuToSolve - 1, sudokuArray, sudokuSolved, numberOfCellsSetInInputSudokuBoard, numberOfCellsSetInBestSoFar, workingSudokuBoard, bestSoFarSudokuBoard);
 
         if ((currentSudokuToSolve % 500) == 0) {
-            console.log("\r" + currentSudokuToSolve);
+            console.log(currentSudokuToSolve);
         }
 
         currentSudokuToSolve++;
@@ -548,6 +548,12 @@ var result = sudoku.run(sudokuArray);
 
 if (result === "S") {
     d = new Date();
+    yearStr = d.getFullYear().toString();
+    month = 1 + d.getMonth();
+    date = d.getDate();
+    hour = d.getHours();
+    minute = d.getMinutes();
+    second = d.getSeconds();
     end = yearStr + "," + month + "," + date + "," + hour + "," + minute + "," + second;
     str = start + end;
 
