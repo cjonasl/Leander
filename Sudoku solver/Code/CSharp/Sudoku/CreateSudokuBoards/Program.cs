@@ -124,7 +124,7 @@ namespace CreateSudokuBoards
             }
 
             //numberOfSudokusToPrintInFile = startSudokuBoards.Count;
-            numberOfSudokusToPrintInFile = 100000;
+            numberOfSudokusToPrintInFile = 5000;
 
             sb = new StringBuilder();
 

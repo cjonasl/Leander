@@ -209,6 +209,10 @@
         divExecutionTimes
     </div>
 
+    <div id="divCompareLanguages" style="position: relative; display: none; top: 100px; left: 100px;">
+        divCompareLanguages
+    </div>
+
     <div id="divSourceCodeInDifferentLanguage" style="display: none;">
         <div id="divLeftMenuSCIDL" class="leftMenuSourceCodeInDifferentLanguage" data-active="CopyList">
             <h2 style="margin-top: -8px;">Set a language for all functions:</h2>
@@ -223,27 +227,27 @@
             </div>
 
             <a id="aLeftMenuCopyList" href="#scrollCopyList" onclick="handleLeftMenu('CopyList', 'SCIDL')" class="activeLeftMenuItem">CopyList</a>
-            <a id="aLeftMenuCopySudokuBoard" href="#scrollCopySudokuBoard" onclick="handleLeftMenu('CopySudokuBoard', 'SCIDL')">CopySudokuBoard</a>
-            <a id="aLeftMenuCopyCandidates" href="#scrollCopyCandidates" onclick="handleLeftMenu('CopyCandidates', 'SCIDL')">CopyCandidates</a>
-            <a id="aLeftMenuSaveState" href="#scrollSaveState" onclick="handleLeftMenu('SaveState', 'SCIDL')">SaveState</a>
-            <a id="aLeftMenuRestoreState" href="#scrollRestoreState" onclick="handleLeftMenu('RestoreState', 'SCIDL')">RestoreState</a>
-            <a id="aLeftMenuGetInputSudokuBoard" href="#scrollGetInputSudokuBoard" onclick="handleLeftMenu('GetInputSudokuBoard', 'SCIDL')">GetInputSudokuBoard</a>
-            <a id="aLeftMenuCandidateIsAlonePossible" href="#scrollCandidateIsAlonePossible" onclick="handleLeftMenu('CandidateIsAlonePossible', 'SCIDL')">CandidateIsAlonePossible</a>
-            <a id="aLeftMenuRemoveNumberIfItExists" href="#scrollRemoveNumberIfItExists" onclick="handleLeftMenu('RemoveNumberIfItExists', 'SCIDL')">RemoveNumberIfItExists</a>
-            <a id="aLeftMenuReturnNumberOfOccurenciesOfNumber" href="#scrollReturnNumberOfOccurenciesOfNumber" onclick="handleLeftMenu('ReturnNumberOfOccurenciesOfNumber', 'SCIDL')">ReturnNumberOfOccurenciesOfNumber</a>
-            <a id="aLeftMenuReturnTwoDimensionalDataStructure" href="#scrollReturnTwoDimensionalDataStructure" onclick="handleLeftMenu('ReturnTwoDimensionalDataStructure', 'SCIDL')">ReturnTwoDimensionalDataStructure</a>
-            <a id="aLeftMenuReturnThreeDimensionalDataStructure" href="#scrollReturnThreeDimensionalDataStructure" onclick="handleLeftMenu('ReturnThreeDimensionalDataStructure', 'SCIDL')">ReturnThreeDimensionalDataStructure</a>
-            <a id="aLeftMenuReturnSquareCellToRowColumnMapper" href="#scrollReturnSquareCellToRowColumnMapper" onclick="handleLeftMenu('ReturnSquareCellToRowColumnMapper', 'SCIDL')">ReturnSquareCellToRowColumnMapper</a>
-            <a id="aLeftMenuReturnSudokuBoardAsString" href="#scrollReturnSudokuBoardAsString" onclick="handleLeftMenu('ReturnSudokuBoardAsString', 'SCIDL')">ReturnSudokuBoardAsString</a>
-            <a id="aLeftMenuSimulateOneNumber" href="#scrollSimulateOneNumber" onclick="handleLeftMenu('SimulateOneNumber', 'SCIDL')">SimulateOneNumber</a>
-            <a id="aLeftMenuCheckIfCanUpdateBestSoFarSudokuBoard" href="#scrollCheckIfCanUpdateBestSoFarSudokuBoard" onclick="handleLeftMenu('CheckIfCanUpdateBestSoFarSudokuBoard', 'SCIDL')">CheckIfCanUpdateBestSoFarSudokuBoard</a>
-            <a id="aLeftMenuInitCandidates" href="#scrollInitCandidates" onclick="handleLeftMenu('InitCandidates', 'SCIDL')">InitCandidates</a>
-            <a id="aLeftMenuTryFindNumberToSetInCellWithCertainty" href="#scrollTryFindNumberToSetInCellWithCertainty" onclick="handleLeftMenu('TryFindNumberToSetInCellWithCertainty', 'SCIDL')">TryFindNumberToSetInCellWithCertainty</a>
-            <a id="aLeftMenuUpdateCandidates" href="#scrollUpdateCandidates" onclick="handleLeftMenu('UpdateCandidates', 'SCIDL')">UpdateCandidates</a>
-            <a id="aLeftMenuValidateSudokuBoard" href="#scrollValidateSudokuBoard" onclick="handleLeftMenu('ValidateSudokuBoard', 'SCIDL')">ValidateSudokuBoard</a>
-            <a id="aLeftMenuPrintSudokuBoard" href="#scrollPrintSudokuBoard" onclick="handleLeftMenu('PrintSudokuBoard', 'SCIDL')">PrintSudokuBoard</a>
-            <a id="aLeftMenuPrintResult" href="#scrollPrintResult" onclick="handleLeftMenu('PrintResult', 'SCIDL')">PrintResult</a>
-            <a id="aLeftMenuRun" href="#scrollRun" onclick="handleLeftMenu('Run', 'SCIDL')">Run</a>
+            <a id="aLeftMenuCopySudokuBoard" href="#scrollCopySudokuBoard" onclick="handleLeftMenu('CopySudokuBoard', 'SCIDL')" class="activeLeftMenuItem">CopySudokuBoard</a>
+            <a id="aLeftMenuCopyCandidates" href="#scrollCopyCandidates" onclick="handleLeftMenu('CopyCandidates', 'SCIDL')" class="activeLeftMenuItem">CopyCandidates</a>
+            <a id="aLeftMenuSaveState" href="#scrollSaveState" onclick="handleLeftMenu('SaveState', 'SCIDL')" class="activeLeftMenuItem">SaveState</a>
+            <a id="aLeftMenuRestoreState" href="#scrollRestoreState" onclick="handleLeftMenu('RestoreState', 'SCIDL')" class="activeLeftMenuItem">RestoreState</a>
+            <a id="aLeftMenuGetInputSudokuBoard" href="#scrollGetInputSudokuBoard" onclick="handleLeftMenu('GetInputSudokuBoard', 'SCIDL')" class="activeLeftMenuItem">GetInputSudokuBoard</a>
+            <a id="aLeftMenuCandidateIsAlonePossible" href="#scrollCandidateIsAlonePossible" onclick="handleLeftMenu('CandidateIsAlonePossible', 'SCIDL')" class="activeLeftMenuItem">CandidateIsAlonePossible</a>
+            <a id="aLeftMenuRemoveNumberIfItExists" href="#scrollRemoveNumberIfItExists" onclick="handleLeftMenu('RemoveNumberIfItExists', 'SCIDL')" class="activeLeftMenuItem">RemoveNumberIfItExists</a>
+            <a id="aLeftMenuReturnNumberOfOccurenciesOfNumber" href="#scrollReturnNumberOfOccurenciesOfNumber" onclick="handleLeftMenu('ReturnNumberOfOccurenciesOfNumber', 'SCIDL')" class="activeLeftMenuItem">ReturnNumberOfOccurenciesOfNumber</a>
+            <a id="aLeftMenuReturnTwoDimensionalDataStructure" href="#scrollReturnTwoDimensionalDataStructure" onclick="handleLeftMenu('ReturnTwoDimensionalDataStructure', 'SCIDL')" class="activeLeftMenuItem">ReturnTwoDimensionalDataStructure</a>
+            <a id="aLeftMenuReturnThreeDimensionalDataStructure" href="#scrollReturnThreeDimensionalDataStructure" onclick="handleLeftMenu('ReturnThreeDimensionalDataStructure', 'SCIDL')" class="activeLeftMenuItem">ReturnThreeDimensionalDataStructure</a>
+            <a id="aLeftMenuReturnSquareCellToRowColumnMapper" href="#scrollReturnSquareCellToRowColumnMapper" onclick="handleLeftMenu('ReturnSquareCellToRowColumnMapper', 'SCIDL')" class="activeLeftMenuItem">ReturnSquareCellToRowColumnMapper</a>
+            <a id="aLeftMenuReturnSudokuBoardAsString" href="#scrollReturnSudokuBoardAsString" onclick="handleLeftMenu('ReturnSudokuBoardAsString', 'SCIDL')" class="activeLeftMenuItem">ReturnSudokuBoardAsString</a>
+            <a id="aLeftMenuSimulateOneNumber" href="#scrollSimulateOneNumber" onclick="handleLeftMenu('SimulateOneNumber', 'SCIDL')" class="activeLeftMenuItem">SimulateOneNumber</a>
+            <a id="aLeftMenuCheckIfCanUpdateBestSoFarSudokuBoard" href="#scrollCheckIfCanUpdateBestSoFarSudokuBoard" onclick="handleLeftMenu('CheckIfCanUpdateBestSoFarSudokuBoard', 'SCIDL')" class="activeLeftMenuItem">CheckIfCanUpdateBestSoFarSudokuBoard</a>
+            <a id="aLeftMenuInitCandidates" href="#scrollInitCandidates" onclick="handleLeftMenu('InitCandidates', 'SCIDL')" class="activeLeftMenuItem">InitCandidates</a>
+            <a id="aLeftMenuTryFindNumberToSetInCellWithCertainty" href="#scrollTryFindNumberToSetInCellWithCertainty" onclick="handleLeftMenu('TryFindNumberToSetInCellWithCertainty', 'SCIDL')" class="activeLeftMenuItem">TryFindNumberToSetInCellWithCertainty</a>
+            <a id="aLeftMenuUpdateCandidates" href="#scrollUpdateCandidates" onclick="handleLeftMenu('UpdateCandidates', 'SCIDL')" class="activeLeftMenuItem">UpdateCandidates</a>
+            <a id="aLeftMenuValidateSudokuBoard" href="#scrollValidateSudokuBoard" onclick="handleLeftMenu('ValidateSudokuBoard', 'SCIDL')" class="activeLeftMenuItem">ValidateSudokuBoard</a>
+            <a id="aLeftMenuPrintSudokuBoard" href="#scrollPrintSudokuBoard" onclick="handleLeftMenu('PrintSudokuBoard', 'SCIDL')" class="activeLeftMenuItem">PrintSudokuBoard</a>
+            <a id="aLeftMenuPrintResult" href="#scrollPrintResult" onclick="handleLeftMenu('PrintResult', 'SCIDL')" class="activeLeftMenuItem">PrintResult</a>
+            <a id="aLeftMenuRun" href="#scrollRun" onclick="handleLeftMenu('Run', 'SCIDL')" class="activeLeftMenuItem">Run</a>
         </div>
         <div class="main">
             <div id="scrollCopyList">&nbsp;&nbsp;&nbsp;</div><div>&nbsp;&nbsp;&nbsp;</div><div>&nbsp;&nbsp;&nbsp;</div>
@@ -491,10 +495,6 @@
             </div>
             <div class="code" style="min-height: 1595px; margin-top: 3px;"><img id="imgRun" src="" /></div>
         </div>
-    </div>"
-
-    <div id="divCompareLanguages" style="position: relative; display: none; top: 100px; left: 100px;">
-        divCompareLanguages
     </div>
 
     <script src="http://www.sudokusolver.com/jquery-3.4.1.js"></script>
@@ -502,8 +502,7 @@
 
     <script>
         window.sudokoBasePath = "http://www.sudokusolver.com/";
-        window.allLangOnSCIDL = true;
-        window.allLangOnCL = true;
+        window.allLangOn = true;
         window.currentSudokuLevel = 6;
         window.currentRandomNumber = -1;
 
@@ -544,7 +543,7 @@
         }
 
         function handleLeftMenu(fcn, suffix) {
-            var currentActive = $("#divLeftMenu" + suffix).attr("data-active");
+            var currentActive = $("#divLeftMenu").attr("data-active");
 
             if (fcn !== currentActive) {
                 $("#aLeftMenu" + currentActive).toggleClass("activeLeftMenuItem");
@@ -557,19 +556,23 @@
             var v = ['CSharp', 'JavaScript', 'PHP', 'Python', 'Ruby'];
             var n = v.length;
 
-            if (suffix === "SCIDL" && window.allLangOnSCIDL && uncheckRadioButtons === undefined) {
-                for (var i = 0; i < n; i++) {
-                    $("#lang" + v[i] + "SCIDL").prop("checked", false);
-                }
+            if (suffix === "SCIDL") {
+                if (window.allLangOnSCIDL && uncheckRadioButtons === undefined) {
+                    for (var i = 0; i < n; i++) {
+                        $("#lang" + v[i] + "SCIDL").prop("checked", false);
+                    }
 
-                window.allLangOnSCIDL = false;
+                    window.allLangOnSCIDL = false;
+                }
             }
-            else if (suffix === "CL" && window.allLangOnCL && uncheckRadioButtons === undefined) {
-                for (var i = 0; i < n; i++) {
-                    $("#lang" + v[i] + "CL").prop("checked", false);
-                }
+            else {
+                if (window.allLangOnCL && uncheckRadioButtons === undefined) {
+                    for (var i = 0; i < n; i++) {
+                        $("#lang" + v[i] + "CL").prop("checked", false);
+                    }
 
-                window.allLangOnCL = false;
+                    window.allLangOnCL = false;
+                }
             }
 
             var currentActive = $("#div" + fcn).attr("data-active");
@@ -587,7 +590,7 @@
             var n = v.length;
 
             for (var i = 0; i < n; i++) {
-                setImagePath(v[i], lang, "SCIDL", false);
+                setImagePath(v[i], lang, 'SCIDL', false);
             }
 
             window.allLangOnSCIDL = true;
