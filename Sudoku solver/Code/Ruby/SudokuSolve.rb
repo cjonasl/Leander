@@ -95,7 +95,7 @@ def Sudoku.run(sudokuArray)
         result = print_result(currentSudokuToSolve - 1, sudokuArray, sudoku_solved, number_of_cells_set_in_input_sudoku_board, number_of_cells_set_in_best_so_far, working_sudoku_board, best_so_far_sudoku_board)
 
         if (currentSudokuToSolve % 500) == 0
-            print(currentSudokuToSolve)
+            print("\r" + currentSudokuToSolve.to_s)
         end
 
         currentSudokuToSolve += 1

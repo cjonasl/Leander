@@ -123,8 +123,8 @@ namespace CreateSudokuBoards
                 throw new Exception("startSudokuBoards.Count != solvedSudokuBoards.Count");
             }
 
-            numberOfSudokusToPrintInFile = startSudokuBoards.Count;
-            //numberOfSudokusToPrintInFile = 1000;
+            //numberOfSudokusToPrintInFile = startSudokuBoards.Count;
+            numberOfSudokusToPrintInFile = 100000;
 
             sb = new StringBuilder();
 

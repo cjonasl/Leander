@@ -1,0 +1,12 @@
+﻿Dag 170:
+Fredag den 13 december 2019
+Jag kämpade hela arbetsdagen med att ta emot ett
+nytt svar i Cast från en web service. Svaret kom
+i en ”ExtensibleDataObject” så det gällde att med
+”reflection” kunna ta emot variablerna. Jag lyckades
+nästan, men inte riktigt så jag var lite irriterad.
+Jag får försöka igen på måndag. Intog smörgås, banan
+och kaffe till lunch ca. kl. 13.00. Jag avslutade
+arbetsdagen ca. kl. 17.30 och tog bussen hem för att
+ta emot en person, ”Saron”, kl. 18.00 som ville titta
+på mitt rum för att eventuellt hyra det. 
