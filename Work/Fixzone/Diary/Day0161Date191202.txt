@@ -10,7 +10,7 @@ i databasen). Jag skapade en Jira-punkt för
 uppgiften som fick nummer CC-38 och en motsvarande
 task som fick nummer 73. Jag fick dessutom
 ytterligare en uppgift av Vijay att slutföra
-någon uppgift, ” RoutingOn-Map” som Mary hade
+någon uppgift, ”RoutingOn-Map” som Mary hade
 arbetat med. Under arbetsdagen ägnade jag mig
 sedan åt CC-38 samt även lite åt att programmera
 i GenerateSudokuBoards.csproj. Vid 13.00-tiden

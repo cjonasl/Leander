@@ -9,59 +9,59 @@ namespace SudokuesToSolve
     {
         static void Main(string[] args)
         {
-            int i, j, n, maxNumberOfSudokus = 50;
+            int i, j, n, maxNumberOfSudokus = 100;
             string str;
             StringBuilder sb = new StringBuilder();
 
+            ArrayList randSampl;
             ArrayList sudokus = new ArrayList();
             ArrayList files = new ArrayList();
 
-            for(i = 0; i < 10; i++)
+            RandomSample randomSample = new RandomSample();
+
+
+            for (i = 0; i < 10; i++)
             {
                 files.Add(new ArrayList());
             }
 
             //Level 1
-            ((ArrayList)files[0]).Add("SudokuBoardsMethod2_O_39.txt");
+            ((ArrayList)files[0]).Add("SudokuBoardsMethod1_O_40.txt");
             ((ArrayList)files[0]).Add("SudokuBoardsMethod2_O_40.txt");
 
             //Level 2
-            ((ArrayList)files[1]).Add("SudokuBoardsMethod2_O_37.txt");
+            ((ArrayList)files[1]).Add("SudokuBoardsMethod1_O_38.txt");
             ((ArrayList)files[1]).Add("SudokuBoardsMethod2_O_38.txt");
 
             //Level 3
-            ((ArrayList)files[2]).Add("SudokuBoardsMethod2_O_35.txt");
+            ((ArrayList)files[2]).Add("SudokuBoardsMethod1_O_36.txt");
             ((ArrayList)files[2]).Add("SudokuBoardsMethod2_O_36.txt");
 
             //Level 4
-            ((ArrayList)files[3]).Add("SudokuBoardsMethod2_O_33.txt");
+            ((ArrayList)files[3]).Add("SudokuBoardsMethod1_O_34.txt");
             ((ArrayList)files[3]).Add("SudokuBoardsMethod2_O_34.txt");
 
             //Level 5
-            ((ArrayList)files[4]).Add("SudokuBoardsMethod2_O_30.txt");
-            ((ArrayList)files[4]).Add("SudokuBoardsMethod2_O_31.txt");
             ((ArrayList)files[4]).Add("SudokuBoardsMethod2_O_32.txt");
 
             //Level 6
             ((ArrayList)files[5]).Add("SudokuBoardsMethod2_O_30.txt");
-            ((ArrayList)files[5]).Add("SudokuBoardsMethod2_O_31.txt");
 
             //Level 7
-            ((ArrayList)files[6]).Add("SudokuBoardsMethod2_S_29.txt");
-            ((ArrayList)files[6]).Add("SudokuBoardsMethod2_O_28.txt");
+            ((ArrayList)files[6]).Add("SudokuBoardsMethod2_S_26.txt");
+            ((ArrayList)files[6]).Add("SudokuBoardsMethod2_S_27.txt");
+            ((ArrayList)files[6]).Add("SudokuBoardsMethod2_S_28.txt");
 
             //Level 8
-            ((ArrayList)files[7]).Add("SudokuBoardsMethod2_S_27.txt");
-            ((ArrayList)files[7]).Add("SudokuBoardsMethod2_S_28.txt");
+            ((ArrayList)files[7]).Add("SudokuBoardsMethod2_S_25.txt");
 
             //Level 9
-            ((ArrayList)files[8]).Add("SudokuBoardsMethod2_S_25.txt");
-            ((ArrayList)files[8]).Add("SudokuBoardsMethod2_S_26.txt");
+            ((ArrayList)files[8]).Add("SudokuBoardsMethod2_S_24.txt");
 
             //Level 10
+            ((ArrayList)files[9]).Add("SudokuBoardsMethod2_S_21.txt");
             ((ArrayList)files[9]).Add("SudokuBoardsMethod2_S_22.txt");
-            ((ArrayList)files[9]).Add("SudokuBoardsMethod2_S_23.txt");
-            ((ArrayList)files[9]).Add("SudokuBoardsMethod2_S_24.txt");
+            ((ArrayList)files[9]).Add("SudokuBoardsMethod2_S_23__Reduced_number_of_rows.txt");
 
             for (i = 0; i < 10; i++)
             {
@@ -71,9 +71,11 @@ namespace SudokuesToSolve
                 n = Math.Min(sudokus.Count, maxNumberOfSudokus);
                 Console.WriteLine(n);
 
+                randSampl = randomSample.ReturnRandomSample(sudokus, maxNumberOfSudokus);
+
                 for (j = 0; j < n; j++)
                 { 
-                    sb.Append(string.Format("window.sudoku.boards[{0}].push('{1}');\r\n", i.ToString(), (string)sudokus[j]));
+                    sb.Append(string.Format("window.sudoku.boards[{0}].push('{1}');\r\n", i.ToString(), (string)randSampl[j]));
                 }
             }
 

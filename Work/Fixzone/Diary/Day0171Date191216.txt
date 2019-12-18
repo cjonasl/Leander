@@ -1,2 +1,15 @@
 ﻿Dag 171:
 Måndag den 16 december 2019
+Fortsatte från i fredags med att försöka ta emot ett
+nytt svar i Cast från en web service. Jag satt hela
+förmiddagen och kämpade och till sist lyckades jag!
+Vid 13.00-tiden tog jag lunch och intog smörgås, banan
+och kaffe till lunch. Efter lunch arbetade jag med
+att programmera i C# projektet GetMaxImageHeight.csproj
+som automatiskt genererar kod för sidan ”Source code
+in different languages” (samt senare också för sidan
+”Compare languages”) i min kommande sudoku-webapplikation
+(namnet på projektet är nu lite missvisande då det blev
+att jag la till mycket mer än att bara beräkna maximala
+höjd på bilderna). Jag avslutade arbetsdagen ca. kl. 17.30
+och tog bussen till Surbiton.
