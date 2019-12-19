@@ -2,10 +2,10 @@
 Tisdag den 17 december 2019
 Checkade in ett arbete jag hade gjort i Cast de senaste
 arbetsdagarna rörande att ta emot en ny svarsstruktur från
-en webservice. Jag uppdate-rade sedan live site, testade
+en webservice. Jag uppdaterade sedan live site, testade
 och fixade så att det fungerade. Mail inkom från Angela med
 6 punkter som inte fungerar i demo site för nya generiska
-ClientConnect och resten av arbets-dagen ägnade jag att gå
+ClientConnect och resten av arbetsdagen ägnade jag att gå
 igenom de punkterna. Vid 13.00-tiden intog jag smörgås,
 banan och kaffe till lunch. Jag avslutade arbetsdagen ca.
 kl. 17.30 och tog buss till Surbiton, och sedan tåg till

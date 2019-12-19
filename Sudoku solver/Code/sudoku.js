@@ -1507,7 +1507,7 @@ window.sudoku.processResult = function (sudokuBoardFinalResult) {
 
     for (row = 1; row <= 9; row++) {
         for (column = 1; column <= 9; column++) {
-            element = $("#cell" + row.toString() + column.toString());
+            element = $("#SsCell" + row.toString() + column.toString());
             if (sudokuBoardFinalResult[row - 1][column - 1] !== 0 && !element.hasClass("startInteger"))
                 element.val(sudokuBoardFinalResult[row - 1][column - 1].toString());
         }
@@ -1543,10 +1543,8 @@ window.sudoku.returnResult = function(sudokuSolved, numberOfCellsSetInInputSudok
     return msg;
 };
 
-window.sudoku.makeSudokuBoard = function () {
-    var element, r, c, oc, or, l, t, str1, str2, sudokuSquareWidth = 42, offset = 5;
-
-    element = $("#divSudokuSolver");
+window.sudoku.makeSudokuBoard = function (element, prefix) {
+    var c, oc, or, l, t, str1, str2, sudokuSquareWidth = 42, offset = 5;
 
     for (r = 1; r <= 9; r++) {
         for (c = 1; c <= 9; c++) {
@@ -1574,7 +1572,7 @@ window.sudoku.makeSudokuBoard = function () {
             t = sudokuSquareWidth * (r - 1) + 170 + or;
             str1 = l.toString();
             str2 = t.toString();
-            str3 = "<input type='text' id='cell" + r.toString() + c.toString() + "' class='sudokuCells' style='left: " + str1 + "px; top: " + str2 + "px;' />";
+            str3 = "<input type='text' id='" + prefix + "Cell" + r.toString() + c.toString() + "' class='sudokuCells' style='left: " + str1 + "px; top: " + str2 + "px;' />";
             element.append(str3);
         }
     }
@@ -1590,7 +1588,7 @@ window.sudoku.readInputIntegers = function () {
     while (r <= 9 && !errorMessage) {
         c = 1;
         while (c <= 9 && !errorMessage) {
-            element = $("#cell" + r.toString() + c.toString());
+            element = $("#SsCell" + r.toString() + c.toString());
             str = element.val().trim();
 
             if (str === "") {
