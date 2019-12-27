@@ -1,2 +1,17 @@
 ﻿Dag 174:
 Torsdag den 19 december 2019
+Gick in på Facebook och gratulerade min gamla klasskompis
+Malin Sjölin som fyller 50 år idag. Lite senare svarade
+hon och skrev ett det var roligt att jag hörde av mig.
+Uppdaterade ClientConnects demo webb-plats med en del
+korrigeringar som jag hade gjort efter ett mail med fel
+från Jon Negri. Klockan 13.00 tog jag lunch och intog
+medtagen smörgås och banan samt kaffe från Fixzone. Mark
+laddade ner EngineerConnect från SVN och fick kompileringsfel,
+bl.a. pga. mitt arbete med Shipmate så jag tittade på det.
+Det berodde på att designerfilen för sidan ShipmatePage.aspx
+hade på något sätt försvunnit och inte blivit incheckad
+så jag skapade den och checkade in. Svarade på frågor i
+telefon från en man från personalavdelningen om min
+anställning hos Fixzone. Jag avslutade den sista arbetsdagen
+hos Fixzone ca. kl. 17.00 och promenerade hem.

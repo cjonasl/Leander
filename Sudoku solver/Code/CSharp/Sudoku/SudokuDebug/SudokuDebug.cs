@@ -354,11 +354,9 @@ namespace SudokuDebug
         /// </summary>
         private static int RemoveNumberIfItExists(int[] v, int number)
         {
-            int i, n, index = -1, returnValue = 0;
+            int i = 1, n = v[0], index = -1, currentLargestNumber = 0, returnValue = 0;
 
-            n = v[0];
-            i = 1;
-            while (i <= n && index == -1)
+            while (i <= n && number >= currentLargestNumber && index == -1) //The numbers in v are in increasing order
             {
                 if (v[i] == number)
                 {
@@ -366,7 +364,10 @@ namespace SudokuDebug
                     returnValue = 1;
                 }
                 else
+                {
+                    currentLargestNumber = v[i];
                     i++;
+                }
             }
 
             if (index != -1)

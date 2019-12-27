@@ -1,4 +1,17 @@
 ﻿Dag 173:
 Onsdag den 18 december 2019
-
-GetJobsListByKey
+Skickade ett mail till Angela och berättade vad
+jag hade gjort igår med 6 punkter som inte fungerar
+i demo site för nya generiska ClientConnect. Gjorde
+stored procedure "GetJobsListByKey" snabbare så
+att det inte skulle bli "time out" i gränssnittet.
+Jag arbetade sedan med en uppgift jag fick av Paul
+förra veckan att undersöka om det går att använda
+Stimulsofts kartkomponent för Storbritanniens
+postnummer. Vid 13.30-tiden gick jag till ”Tesco
+Express” och köpte en smörgås och ett wienerbröd
+för 2 pund som jag sedan intog till lunch till-
+sammans med kaffe från Fixzone. Efter arbetet
+med Stimulsofts kartkomponent ägnade jag mig åt
+min kommande Sudoku webbplats. Jag avslutade
+arbetsdagen ca. kl. 17.30 och tog bussen hem.
