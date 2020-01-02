@@ -249,11 +249,9 @@ sudoku.candidateIsAlonePossible = function(number, candidates, squareCellToRowCo
 };
 
 sudoku.removeNumberIfItExists = function(v, number) {
-    var i, n, index = -1, returnValue = 0;
+    var i = 1, index = -1, returnValue = 0;
 
-    n = v[0];
-    i = 1;
-    while (i <= n && index === -1) {
+    while (i <= v[0] && number >= v[i] && index === -1) { //The numbers in v are in increasing order
         if (v[i] === number) {
             index = i;
             returnValue = 1;
@@ -263,7 +261,7 @@ sudoku.removeNumberIfItExists = function(v, number) {
     }
 
     if (index !== -1) {
-        while (index + 1 <= n) {
+        while (index + 1 <= v[0]) {
             v[index] = v[index + 1];
             index++;
         }

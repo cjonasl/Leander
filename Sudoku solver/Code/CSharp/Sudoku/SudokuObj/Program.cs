@@ -544,9 +544,9 @@ namespace SudokuObj
         /// </summary>
         private int RemoveNumberIfItExists(int[] v, int number)
         {
-            int i = 1, n = v[0], index = -1, currentLargestNumber = 0, returnValue = 0;
+            int i = 1, index = -1, returnValue = 0;
 
-            while (i <= n && number >= currentLargestNumber && index == -1) //The numbers in v are in increasing order
+            while (i <= v[0] && number >= v[i] && index == -1) //The numbers in v are in increasing order
             {
                 if (v[i] == number)
                 {
@@ -554,15 +554,12 @@ namespace SudokuObj
                     returnValue = 1;
                 }
                 else
-                {
-                    currentLargestNumber = v[i];
                     i++;
-                }
             }
 
             if (index != -1)
             {
-                while (index + 1 <= n)
+                while (index + 1 <= v[0])
                 {
                     v[index] = v[index + 1];
                     index++;

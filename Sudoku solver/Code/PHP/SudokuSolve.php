@@ -226,10 +226,9 @@ function candidateIsAlonePossible($number, &$candidates, &$squareCellToRowColumn
 function removeNumberIfItExists(&$v, $number) {
     $returnValue = 0;
     $index = -1;
-
-    $n = $v[0];
     $i = 1;
-    while ($i <= $n && $index == -1) {
+
+    while ($i <= $v[0] && $number >= $v[$i] && $index == -1) { //The numbers in v are in increasing order
         if ($v[$i] == $number) {
             $index = $i;
             $returnValue = 1;
@@ -239,7 +238,7 @@ function removeNumberIfItExists(&$v, $number) {
     }
 
     if ($index != -1) {
-        while ($index + 1 <= $n) {
+        while ($index + 1 <= $v[0]) {
             $v[$index] = $v[$index + 1];
             $index++;
         }

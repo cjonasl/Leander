@@ -23,12 +23,12 @@ namespace GetMaxImageHeight
 
             string basePath = "C:\\git_cjonasl\\Leander\\Sudoku solver\\Code\\";
 
-            divElement = "divSourceCodeInDifferentLanguage"; // "divCompareLanguages"
+            divElement = "divSourceCodeInDifferentLanguages"; // "divCompareLanguages"
 
-            if (divElement == "divSourceCodeInDifferentLanguage")
+            if (divElement == "divSourceCodeInDifferentLanguages")
             {
                 suffix = "SCIDL";
-                title = "Study the functions/ procedures in the algorithm";
+                title = "Study the functions/procedures in the algorithm";
 
                 functions = new string[]
                 {
@@ -83,7 +83,7 @@ namespace GetMaxImageHeight
             maxHeight = new int[functions.Length];
 
             sb.Append(string.Format("    <div id=\"{0}\" style=\"display: none;\">\r\n", divElement));
-            sb.Append(string.Format("        <div id=\"divLeftMenu{0}\" class=\"leftMenuSourceCodeInDifferentLanguage\" data-active=\"{1}\">\r\n", suffix, functions[0]));
+            sb.Append(string.Format("        <div id=\"divLeftMenu{0}\" class=\"leftMenuListOfFunctions\" data-active=\"{1}\">\r\n", suffix, functions[0]));
             sb.Append("            <h2 style=\"margin-top: -8px;\">Set a language for all functions:</h2>\r\n");
             sb.Append("            <div style=\"font-family: 'Times New Roman'; margin-bottom: 10px; border-bottom: 1px solid black;\">\r\n");
             sb.Append("                <ul class=\"inlineList\" style=\"position: relative; left: -42px; top: -10px;\">\r\n");
@@ -210,7 +210,7 @@ namespace GetMaxImageHeight
         private static string ReturnAElement(string fcn, string lang, string suffix)
         {
             if (lang == "CSharp")
-                return string.Format("                <a id=\"a{0}CSharp\" href=\"javascript: setImagePath('{0}', 'CSharp', '{1}')\" style=\"color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;\">C#</a>\r\n", fcn, suffix);
+                return string.Format("                <a id=\"a{0}CSharp\" href=\"javascript: setImagePath('{0}', 'CSharp', '{1}')\" class=\"activeLang\">C#</a>\r\n", fcn, suffix);
             else
                 return string.Format("                <a id=\"a{0}{1}\" href=\"javascript: setImagePath('{0}', '{1}', '{2}')\">{1}</a>\r\n", fcn, lang, suffix);
         }

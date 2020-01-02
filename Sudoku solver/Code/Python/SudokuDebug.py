@@ -227,20 +227,17 @@ def candidate_is_alone_possible(number, candidates, square_cell_to_row_column_ma
 def remove_number_if_it_exists(v, number):
     index = -1
     returnValue = 0
-    n = v[0]
     i = 1
-    current_largest_number = 0
 
-    while i <= n and number >= current_largest_number and index == -1:
+    while i <= v[0] and number >= v[i] and index == -1: #The numbers in v are in increasing order
         if v[i] == number:
             index = i
             returnValue = 1
         else:
-            current_largest_number = v[i]
             i += 1
 
     if index != -1:
-        while index + 1 <= n:
+        while index + 1 <= v[0]:
             v[index] = v[index + 1]
             index += 1
 

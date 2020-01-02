@@ -264,10 +264,9 @@ end
 def Sudoku.remove_number_if_it_exists(v, number)
     index = -1
     returnValue = 0
-    n = v[0]
     i = 1
 
-    while i <= n and index == -1
+    while i <= v[0] and number >= v[i] and index == -1 #The numbers in v are in increasing order
         if v[i] == number
             index = i
             returnValue = 1
@@ -277,7 +276,7 @@ def Sudoku.remove_number_if_it_exists(v, number)
     end
 
     if index != -1
-        while index + 1 <= n
+        while index + 1 <= v[0]
             v[index] = v[index + 1]
             index += 1
         end

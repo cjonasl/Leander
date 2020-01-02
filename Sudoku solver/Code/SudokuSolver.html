@@ -10,7 +10,7 @@
     <title>Sudoku solver</title>
 
     <style>
-        .leftMenuSourceCodeInDifferentLanguage > a:link, .leftMenuSourceCodeInDifferentLanguage > a:visited, .leftMenuSourceCodeInDifferentLanguage > a:active {
+        .leftMenuListOfFunctions > a:link, .leftMenuListOfFunctions > a:visited, .leftMenuListOfFunctions > a:active {
             text-decoration: none;
             font-weight: bold;
             font-size: small;
@@ -81,7 +81,7 @@
             min-width: 2000px;
         }
 
-        .leftMenuSourceCodeInDifferentLanguage {
+        .leftMenuListOfFunctions {
             min-height: 20000px;
             min-width: 15%;
             max-width: 15%;
@@ -90,7 +90,7 @@
             position: fixed;
             border-right: 1px solid black;
             top: 71px;
-            overflow: hidden;
+            overflow: scroll;
         }
 
         .leftMenu {
@@ -160,13 +160,13 @@
 </head>
 <body style="margin: 0px;">
     <div class="headMenu">
-        <ul id="listOfMenuItems" class="ulHead" style="position: relative; top: 8px;" data-active="SudokuSolver">
+        <ul id="listOfMenuItems" class="ulHead" style="position: relative; top: 8px; left: -25px;" data-active="SudokuSolver">
             <li><a id="aHeadMenuItemSudokuSolver" href="javascript: changePage('SudokuSolver')" class="activeHeadMenuItem">Sudoku solver</a></li>
             <li><a id="aHeadMenuItemDescriptionOfTheAlgorithm" href="javascript: changePage('DescriptionOfTheAlgorithm')">Description of the algorithm</a></li>
             <li><a id="aHeadMenuItemDownloadSourceCode" href="javascript: changePage('DownloadSourceCode')">Download source code</a></li>
             <li><a id="aHeadMenuItemExecutionTimes" href="javascript: changePage('ExecutionTimes')">Execution times</a></li>
             <li><a id="aHeadMenuItemSudokusToSolve" href="javascript: changePage('SudokusToSolve')">Sudokus to solve</a></li>
-            <li><a id="aHeadMenuItemSourceCodeInDifferentLanguage" href="javascript: changePage('SourceCodeInDifferentLanguage')">Source code in different languages</a></li>
+            <li><a id="aHeadMenuItemSourceCodeInDifferentLanguages" href="javascript: changePage('SourceCodeInDifferentLanguages')">Source code in different languages</a></li>
             <li style="border-right-color: #e0e0eb;"><a id="aHeadMenuItemCompareLanguages" href="javascript: changePage('CompareLanguages')">Compare languages</a></li>
         </ul>
     </div>
@@ -199,7 +199,7 @@
             <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(1)" />1&nbsp;</li>
             <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(2)" />2&nbsp;</li>
             <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(3)" />3&nbsp;</li>
-            <li><input type="radio" name="sudokuLevel" checked  onchange="setSudokuLevel(4)" />4&nbsp;</li>
+            <li><input type="radio" name="sudokuLevel" checked onchange="setSudokuLevel(4)" />4&nbsp;</li>
             <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(5)" />5&nbsp;</li>
             <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(6)" />6&nbsp;</li>
             <li><input type="radio" name="sudokuLevel" onchange="setSudokuLevel(7)" />7&nbsp;</li>
@@ -209,8 +209,8 @@
         </ul>
     </div>
 
-    <div id="divSourceCodeInDifferentLanguage" style="display: none;">
-        <div id="divLeftMenuSCIDL" class="leftMenuSourceCodeInDifferentLanguage" data-active="CopyList">
+        <div id="divSourceCodeInDifferentLanguages" style="display: none;">
+        <div id="divLeftMenuSCIDL" class="leftMenuListOfFunctions" data-active="CopyList">
             <h2 style="margin-top: -8px;">Set a language for all functions:</h2>
             <div style="font-family: 'Times New Roman'; margin-bottom: 10px; border-bottom: 1px solid black;">
                 <ul class="inlineList" style="position: relative; left: -42px; top: -10px;">
@@ -247,12 +247,12 @@
         </div>
         <div class="main">
             <div id="scrollCopyList">&nbsp;&nbsp;&nbsp;</div><div>&nbsp;&nbsp;&nbsp;</div><div>&nbsp;&nbsp;&nbsp;</div>
-            <h1 style="font-family: 'Times New Roman';">Study the functions/ procedures in the algorithm</h1>
+            <h1 style="font-family: 'Times New Roman';">Study the functions/procedures in the algorithm</h1>
             <div>&nbsp;&nbsp;&nbsp;</div><div>&nbsp;&nbsp;&nbsp;</div><div>&nbsp;&nbsp;&nbsp;</div>
 
             <h3 id="h3CopyList">CopyList</h3>
             <div id="divCopyList" class="languages" data-active="CSharp">
-                <a id="aCopyListCSharp" href="javascript: setImagePath('CopyList', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aCopyListCSharp" href="javascript: setImagePath('CopyList', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aCopyListJavaScript" href="javascript: setImagePath('CopyList', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aCopyListPHP" href="javascript: setImagePath('CopyList', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aCopyListPython" href="javascript: setImagePath('CopyList', 'Python', 'SCIDL')">Python</a>
@@ -263,7 +263,7 @@
 
             <h3 id="h3CopySudokuBoard">CopySudokuBoard</h3>
             <div id="divCopySudokuBoard" class="languages" data-active="CSharp">
-                <a id="aCopySudokuBoardCSharp" href="javascript: setImagePath('CopySudokuBoard', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aCopySudokuBoardCSharp" href="javascript: setImagePath('CopySudokuBoard', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aCopySudokuBoardJavaScript" href="javascript: setImagePath('CopySudokuBoard', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aCopySudokuBoardPHP" href="javascript: setImagePath('CopySudokuBoard', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aCopySudokuBoardPython" href="javascript: setImagePath('CopySudokuBoard', 'Python', 'SCIDL')">Python</a>
@@ -274,7 +274,7 @@
 
             <h3 id="h3CopyCandidates">CopyCandidates</h3>
             <div id="divCopyCandidates" class="languages" data-active="CSharp">
-                <a id="aCopyCandidatesCSharp" href="javascript: setImagePath('CopyCandidates', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aCopyCandidatesCSharp" href="javascript: setImagePath('CopyCandidates', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aCopyCandidatesJavaScript" href="javascript: setImagePath('CopyCandidates', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aCopyCandidatesPHP" href="javascript: setImagePath('CopyCandidates', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aCopyCandidatesPython" href="javascript: setImagePath('CopyCandidates', 'Python', 'SCIDL')">Python</a>
@@ -285,7 +285,7 @@
 
             <h3 id="h3SaveState">SaveState</h3>
             <div id="divSaveState" class="languages" data-active="CSharp">
-                <a id="aSaveStateCSharp" href="javascript: setImagePath('SaveState', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aSaveStateCSharp" href="javascript: setImagePath('SaveState', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aSaveStateJavaScript" href="javascript: setImagePath('SaveState', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aSaveStatePHP" href="javascript: setImagePath('SaveState', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aSaveStatePython" href="javascript: setImagePath('SaveState', 'Python', 'SCIDL')">Python</a>
@@ -296,7 +296,7 @@
 
             <h3 id="h3RestoreState">RestoreState</h3>
             <div id="divRestoreState" class="languages" data-active="CSharp">
-                <a id="aRestoreStateCSharp" href="javascript: setImagePath('RestoreState', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aRestoreStateCSharp" href="javascript: setImagePath('RestoreState', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aRestoreStateJavaScript" href="javascript: setImagePath('RestoreState', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aRestoreStatePHP" href="javascript: setImagePath('RestoreState', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aRestoreStatePython" href="javascript: setImagePath('RestoreState', 'Python', 'SCIDL')">Python</a>
@@ -307,7 +307,7 @@
 
             <h3 id="h3GetInputSudokuBoard">GetInputSudokuBoard</h3>
             <div id="divGetInputSudokuBoard" class="languages" data-active="CSharp">
-                <a id="aGetInputSudokuBoardCSharp" href="javascript: setImagePath('GetInputSudokuBoard', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aGetInputSudokuBoardCSharp" href="javascript: setImagePath('GetInputSudokuBoard', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aGetInputSudokuBoardJavaScript" href="javascript: setImagePath('GetInputSudokuBoard', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aGetInputSudokuBoardPHP" href="javascript: setImagePath('GetInputSudokuBoard', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aGetInputSudokuBoardPython" href="javascript: setImagePath('GetInputSudokuBoard', 'Python', 'SCIDL')">Python</a>
@@ -318,7 +318,7 @@
 
             <h3 id="h3CandidateIsAlonePossible">CandidateIsAlonePossible</h3>
             <div id="divCandidateIsAlonePossible" class="languages" data-active="CSharp">
-                <a id="aCandidateIsAlonePossibleCSharp" href="javascript: setImagePath('CandidateIsAlonePossible', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aCandidateIsAlonePossibleCSharp" href="javascript: setImagePath('CandidateIsAlonePossible', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aCandidateIsAlonePossibleJavaScript" href="javascript: setImagePath('CandidateIsAlonePossible', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aCandidateIsAlonePossiblePHP" href="javascript: setImagePath('CandidateIsAlonePossible', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aCandidateIsAlonePossiblePython" href="javascript: setImagePath('CandidateIsAlonePossible', 'Python', 'SCIDL')">Python</a>
@@ -329,7 +329,7 @@
 
             <h3 id="h3RemoveNumberIfItExists">RemoveNumberIfItExists</h3>
             <div id="divRemoveNumberIfItExists" class="languages" data-active="CSharp">
-                <a id="aRemoveNumberIfItExistsCSharp" href="javascript: setImagePath('RemoveNumberIfItExists', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aRemoveNumberIfItExistsCSharp" href="javascript: setImagePath('RemoveNumberIfItExists', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aRemoveNumberIfItExistsJavaScript" href="javascript: setImagePath('RemoveNumberIfItExists', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aRemoveNumberIfItExistsPHP" href="javascript: setImagePath('RemoveNumberIfItExists', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aRemoveNumberIfItExistsPython" href="javascript: setImagePath('RemoveNumberIfItExists', 'Python', 'SCIDL')">Python</a>
@@ -340,7 +340,7 @@
 
             <h3 id="h3ReturnNumberOfOccurenciesOfNumber">ReturnNumberOfOccurenciesOfNumber</h3>
             <div id="divReturnNumberOfOccurenciesOfNumber" class="languages" data-active="CSharp">
-                <a id="aReturnNumberOfOccurenciesOfNumberCSharp" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aReturnNumberOfOccurenciesOfNumberCSharp" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aReturnNumberOfOccurenciesOfNumberJavaScript" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aReturnNumberOfOccurenciesOfNumberPHP" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aReturnNumberOfOccurenciesOfNumberPython" href="javascript: setImagePath('ReturnNumberOfOccurenciesOfNumber', 'Python', 'SCIDL')">Python</a>
@@ -351,7 +351,7 @@
 
             <h3 id="h3ReturnTwoDimensionalDataStructure">ReturnTwoDimensionalDataStructure</h3>
             <div id="divReturnTwoDimensionalDataStructure" class="languages" data-active="CSharp">
-                <a id="aReturnTwoDimensionalDataStructureCSharp" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aReturnTwoDimensionalDataStructureCSharp" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aReturnTwoDimensionalDataStructureJavaScript" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aReturnTwoDimensionalDataStructurePHP" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aReturnTwoDimensionalDataStructurePython" href="javascript: setImagePath('ReturnTwoDimensionalDataStructure', 'Python', 'SCIDL')">Python</a>
@@ -362,7 +362,7 @@
 
             <h3 id="h3ReturnThreeDimensionalDataStructure">ReturnThreeDimensionalDataStructure</h3>
             <div id="divReturnThreeDimensionalDataStructure" class="languages" data-active="CSharp">
-                <a id="aReturnThreeDimensionalDataStructureCSharp" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aReturnThreeDimensionalDataStructureCSharp" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aReturnThreeDimensionalDataStructureJavaScript" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aReturnThreeDimensionalDataStructurePHP" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aReturnThreeDimensionalDataStructurePython" href="javascript: setImagePath('ReturnThreeDimensionalDataStructure', 'Python', 'SCIDL')">Python</a>
@@ -373,7 +373,7 @@
 
             <h3 id="h3ReturnSquareCellToRowColumnMapper">ReturnSquareCellToRowColumnMapper</h3>
             <div id="divReturnSquareCellToRowColumnMapper" class="languages" data-active="CSharp">
-                <a id="aReturnSquareCellToRowColumnMapperCSharp" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aReturnSquareCellToRowColumnMapperCSharp" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aReturnSquareCellToRowColumnMapperJavaScript" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aReturnSquareCellToRowColumnMapperPHP" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aReturnSquareCellToRowColumnMapperPython" href="javascript: setImagePath('ReturnSquareCellToRowColumnMapper', 'Python', 'SCIDL')">Python</a>
@@ -384,7 +384,7 @@
 
             <h3 id="h3ReturnSudokuBoardAsString">ReturnSudokuBoardAsString</h3>
             <div id="divReturnSudokuBoardAsString" class="languages" data-active="CSharp">
-                <a id="aReturnSudokuBoardAsStringCSharp" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aReturnSudokuBoardAsStringCSharp" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aReturnSudokuBoardAsStringJavaScript" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aReturnSudokuBoardAsStringPHP" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aReturnSudokuBoardAsStringPython" href="javascript: setImagePath('ReturnSudokuBoardAsString', 'Python', 'SCIDL')">Python</a>
@@ -395,7 +395,7 @@
 
             <h3 id="h3SimulateOneNumber">SimulateOneNumber</h3>
             <div id="divSimulateOneNumber" class="languages" data-active="CSharp">
-                <a id="aSimulateOneNumberCSharp" href="javascript: setImagePath('SimulateOneNumber', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aSimulateOneNumberCSharp" href="javascript: setImagePath('SimulateOneNumber', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aSimulateOneNumberJavaScript" href="javascript: setImagePath('SimulateOneNumber', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aSimulateOneNumberPHP" href="javascript: setImagePath('SimulateOneNumber', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aSimulateOneNumberPython" href="javascript: setImagePath('SimulateOneNumber', 'Python', 'SCIDL')">Python</a>
@@ -406,7 +406,7 @@
 
             <h3 id="h3CheckIfCanUpdateBestSoFarSudokuBoard">CheckIfCanUpdateBestSoFarSudokuBoard</h3>
             <div id="divCheckIfCanUpdateBestSoFarSudokuBoard" class="languages" data-active="CSharp">
-                <a id="aCheckIfCanUpdateBestSoFarSudokuBoardCSharp" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aCheckIfCanUpdateBestSoFarSudokuBoardCSharp" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aCheckIfCanUpdateBestSoFarSudokuBoardJavaScript" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aCheckIfCanUpdateBestSoFarSudokuBoardPHP" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aCheckIfCanUpdateBestSoFarSudokuBoardPython" href="javascript: setImagePath('CheckIfCanUpdateBestSoFarSudokuBoard', 'Python', 'SCIDL')">Python</a>
@@ -417,7 +417,7 @@
 
             <h3 id="h3InitCandidates">InitCandidates</h3>
             <div id="divInitCandidates" class="languages" data-active="CSharp">
-                <a id="aInitCandidatesCSharp" href="javascript: setImagePath('InitCandidates', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aInitCandidatesCSharp" href="javascript: setImagePath('InitCandidates', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aInitCandidatesJavaScript" href="javascript: setImagePath('InitCandidates', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aInitCandidatesPHP" href="javascript: setImagePath('InitCandidates', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aInitCandidatesPython" href="javascript: setImagePath('InitCandidates', 'Python', 'SCIDL')">Python</a>
@@ -428,7 +428,7 @@
 
             <h3 id="h3TryFindNumberToSetInCellWithCertainty">TryFindNumberToSetInCellWithCertainty</h3>
             <div id="divTryFindNumberToSetInCellWithCertainty" class="languages" data-active="CSharp">
-                <a id="aTryFindNumberToSetInCellWithCertaintyCSharp" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aTryFindNumberToSetInCellWithCertaintyCSharp" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aTryFindNumberToSetInCellWithCertaintyJavaScript" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aTryFindNumberToSetInCellWithCertaintyPHP" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aTryFindNumberToSetInCellWithCertaintyPython" href="javascript: setImagePath('TryFindNumberToSetInCellWithCertainty', 'Python', 'SCIDL')">Python</a>
@@ -439,7 +439,7 @@
 
             <h3 id="h3UpdateCandidates">UpdateCandidates</h3>
             <div id="divUpdateCandidates" class="languages" data-active="CSharp">
-                <a id="aUpdateCandidatesCSharp" href="javascript: setImagePath('UpdateCandidates', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aUpdateCandidatesCSharp" href="javascript: setImagePath('UpdateCandidates', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aUpdateCandidatesJavaScript" href="javascript: setImagePath('UpdateCandidates', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aUpdateCandidatesPHP" href="javascript: setImagePath('UpdateCandidates', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aUpdateCandidatesPython" href="javascript: setImagePath('UpdateCandidates', 'Python', 'SCIDL')">Python</a>
@@ -450,7 +450,7 @@
 
             <h3 id="h3ValidateSudokuBoard">ValidateSudokuBoard</h3>
             <div id="divValidateSudokuBoard" class="languages" data-active="CSharp">
-                <a id="aValidateSudokuBoardCSharp" href="javascript: setImagePath('ValidateSudokuBoard', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aValidateSudokuBoardCSharp" href="javascript: setImagePath('ValidateSudokuBoard', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aValidateSudokuBoardJavaScript" href="javascript: setImagePath('ValidateSudokuBoard', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aValidateSudokuBoardPHP" href="javascript: setImagePath('ValidateSudokuBoard', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aValidateSudokuBoardPython" href="javascript: setImagePath('ValidateSudokuBoard', 'Python', 'SCIDL')">Python</a>
@@ -461,7 +461,7 @@
 
             <h3 id="h3PrintSudokuBoard">PrintSudokuBoard</h3>
             <div id="divPrintSudokuBoard" class="languages" data-active="CSharp">
-                <a id="aPrintSudokuBoardCSharp" href="javascript: setImagePath('PrintSudokuBoard', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aPrintSudokuBoardCSharp" href="javascript: setImagePath('PrintSudokuBoard', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aPrintSudokuBoardJavaScript" href="javascript: setImagePath('PrintSudokuBoard', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aPrintSudokuBoardPHP" href="javascript: setImagePath('PrintSudokuBoard', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aPrintSudokuBoardPython" href="javascript: setImagePath('PrintSudokuBoard', 'Python', 'SCIDL')">Python</a>
@@ -472,7 +472,7 @@
 
             <h3 id="h3PrintResult">PrintResult</h3>
             <div id="divPrintResult" class="languages" data-active="CSharp">
-                <a id="aPrintResultCSharp" href="javascript: setImagePath('PrintResult', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aPrintResultCSharp" href="javascript: setImagePath('PrintResult', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aPrintResultJavaScript" href="javascript: setImagePath('PrintResult', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aPrintResultPHP" href="javascript: setImagePath('PrintResult', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aPrintResultPython" href="javascript: setImagePath('PrintResult', 'Python', 'SCIDL')">Python</a>
@@ -483,7 +483,7 @@
 
             <h3 id="h3Run">Run</h3>
             <div id="divRun" class="languages" data-active="CSharp">
-                <a id="aRunCSharp" href="javascript: setImagePath('Run', 'CSharp', 'SCIDL')" style="color: #6600ff; font-weight: bold;  font-family: Arial; text-decoration: none; font-size: larger;">C#</a>
+                <a id="aRunCSharp" href="javascript: setImagePath('Run', 'CSharp', 'SCIDL')" class="activeLang">C#</a>
                 <a id="aRunJavaScript" href="javascript: setImagePath('Run', 'JavaScript', 'SCIDL')">JavaScript</a>
                 <a id="aRunPHP" href="javascript: setImagePath('Run', 'PHP', 'SCIDL')">PHP</a>
                 <a id="aRunPython" href="javascript: setImagePath('Run', 'Python', 'SCIDL')">Python</a>
@@ -491,7 +491,7 @@
             </div>
             <div class="code" style="min-height: 1595px; margin-top: 3px;"><img id="imgRun" src="" /></div>
         </div>
-    </div>"
+    </div>
 
     <div id="divCompareLanguages" style="position: relative; display: none; top: 100px; left: 100px;">
         divCompareLanguages
@@ -526,7 +526,7 @@
             }
         }
 
-        function setImagePath(fcn, target, suffix, uncheckRadioButtons) {
+        function setImagePath(fcn, lang, suffix, uncheckRadioButtons) {
             var v = ['CSharp', 'JavaScript', 'PHP', 'Python', 'Ruby'];
             var n = v.length;
 
@@ -545,13 +545,13 @@
                 window.allLangOnCL = false;
             }
 
-            var currentActive = $("#div" + fcn).attr("data-active");
+            var currentActiveLang = $("#div" + fcn).attr("data-active");
 
-            if (target !== currentActive) {
-                $("#a" + fcn + currentActive).toggleClass("activeLang");
-                $("#a" + fcn + target).toggleClass("activeLang");
-                $("#img" + fcn).attr("src", window.sudokoBasePath + target + "/" + fcn + ".png");
-                $("#div" + fcn).attr("data-active", target);
+            if (lang !== currentActiveLang) {
+                $("#a" + fcn + currentActiveLang).toggleClass("activeLang");
+                $("#a" + fcn + lang).toggleClass("activeLang");
+                $("#img" + fcn).attr("src", window.sudokoBasePath + lang + "/" + fcn + ".png");
+                $("#div" + fcn).attr("data-active", lang);
             }
         }
 
